@@ -1,0 +1,16 @@
+=== PrizePicks Raw Schema Dump ===
+Top-level keys: ['data', 'included', 'links', 'meta']
+
+data[0] keys: ['attributes', 'id', 'relationships', 'type']
+data[0].attributes keys (26): ['adjusted_odds', 'board_time', 'custom_image', 'description', 'end_time', 'event_type', 'flash_sale_line_score', 'game_id', 'group_key', 'hr_20', 'in_game', 'is_live', 'is_live_scored', 'is_promo', 'line_score', 'odds_type', 'projection_type', 'rank', 'refundable', 'start_time', 'stat_display_name', 'stat_type', 'status', 'today', 'tv_channel', 'updated_at']
+data[0].relationships keys (7): ['duration', 'game', 'league', 'new_player', 'projection_type', 'score', 'stat_type']
+
+included type counts: {'new_player': 155, 'stat_type': 12, 'team': 46, 'game': 23, 'duration': 1, 'projection_type': 2, 'league': 1}
+
+[included type=duration] attributes keys (1): ['name']
+[included type=game] attributes keys (8): ['created_at', 'end_time', 'external_game_id', 'is_live', 'metadata', 'start_time', 'status', 'updated_at']
+[included type=league] attributes keys (13): ['active', 'f2p_enabled', 'has_live_projections', 'icon', 'image_url', 'last_five_games_enabled', 'league_icon_id', 'name', 'parent_id', 'parent_name', 'projections_count', 'rank', 'show_trending']
+[included type=new_player] attributes keys (11): ['combo', 'display_name', 'image_url', 'jersey_number', 'league', 'league_id', 'market', 'name', 'position', 'team', 'team_name']
+[included type=projection_type] attributes keys (1): ['name']
+[included type=stat_type] attributes keys (3): ['lfg_ignored_leagues', 'name', 'rank']
+[included type=team] attributes keys (6): ['abbreviation', 'market', 'name', 'primary_color', 'secondary_color', 'tertiary_color']
