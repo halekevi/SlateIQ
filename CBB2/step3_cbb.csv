@@ -1,0 +1,542 @@
+proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_team,pp_opp_team,pos,prop_type,prop_norm,pick_type,line,start_time,pp_game_id,league_id,team,stat_type,odds_type,team_id,espn_athlete_id,status
+9985133,301622,gus yalden|UVM,Gus Yalden,gus yalden,UVM,UMBC,UVM,UMBC,F,Points,pts,Standard,15.5,2026-02-19T18:00:00.000-05:00,128578,20,UVM,Points,standard,261,,NO_ATHLETE_MATCH
+9985135,126384,tj hurley|UVM,TJ Hurley,tj hurley,UVM,UMBC,UVM,UMBC,G,Points,pts,Standard,15.0,2026-02-19T18:00:00.000-05:00,128578,20,UVM,Points,standard,261,,NO_ATHLETE_MATCH
+9985130,285758,dj armstrong|UMBC,DJ Armstrong,dj armstrong,UMBC,UVM,UMBC,UVM,G-F,Points,pts,Standard,12.5,2026-02-19T18:00:00.000-05:00,128578,20,UMBC,Points,standard,2378,,NO_ATHLETE_MATCH
+9985131,285760,jah likai king|UMBC,Jah'Likai King,jah likai king,UMBC,UVM,UMBC,UVM,G,Points,pts,Standard,12.5,2026-02-19T18:00:00.000-05:00,128578,20,UMBC,Points,standard,2378,,NO_ATHLETE_MATCH
+9985128,301619,ace valentine|UMBC,Ace Valentine,ace valentine,UMBC,UVM,UMBC,UVM,G,Points,pts,Standard,11.0,2026-02-19T18:00:00.000-05:00,128578,20,UMBC,Points,standard,2378,,NO_ATHLETE_MATCH
+9985129,301620,caden diggs|UMBC,Caden Diggs,caden diggs,UMBC,UVM,UMBC,UVM,F,Points,pts,Standard,11.0,2026-02-19T18:00:00.000-05:00,128578,20,UMBC,Points,standard,2378,,NO_ATHLETE_MATCH
+9985134,301623,sean blake|UVM,Sean Blake,sean blake,UVM,UMBC,UVM,UMBC,G,Points,pts,Standard,10.0,2026-02-19T18:00:00.000-05:00,128578,20,UVM,Points,standard,261,,NO_ATHLETE_MATCH
+9985136,177495,tj long|UVM,TJ Long,tj long,UVM,UMBC,UVM,UMBC,G,Points,pts,Standard,9.5,2026-02-19T18:00:00.000-05:00,128578,20,UVM,Points,standard,261,,NO_ATHLETE_MATCH
+9985132,301621,josh odunowo|UMBC,Josh Odunowo,josh odunowo,UMBC,UVM,UMBC,UVM,F,Points,pts,Standard,8.0,2026-02-19T18:00:00.000-05:00,128578,20,UMBC,Points,standard,2378,,NO_ATHLETE_MATCH
+9985139,301622,gus yalden|UVM,Gus Yalden,gus yalden,UVM,UMBC,UVM,UMBC,F,Rebounds,reb,Standard,6.0,2026-02-19T18:00:00.000-05:00,128578,20,UVM,Rebounds,standard,261,,NO_ATHLETE_MATCH
+9985138,301621,josh odunowo|UMBC,Josh Odunowo,josh odunowo,UMBC,UVM,UMBC,UVM,F,Rebounds,reb,Standard,5.0,2026-02-19T18:00:00.000-05:00,128578,20,UMBC,Rebounds,standard,2378,,NO_ATHLETE_MATCH
+9985141,177495,tj long|UVM,TJ Long,tj long,UVM,UMBC,UVM,UMBC,G,Rebounds,reb,Standard,5.0,2026-02-19T18:00:00.000-05:00,128578,20,UVM,Rebounds,standard,261,,NO_ATHLETE_MATCH
+9985140,301623,sean blake|UVM,Sean Blake,sean blake,UVM,UMBC,UVM,UMBC,G,Rebounds,reb,Standard,4.5,2026-02-19T18:00:00.000-05:00,128578,20,UVM,Rebounds,standard,261,,NO_ATHLETE_MATCH
+9985137,301623,sean blake|UVM,Sean Blake,sean blake,UVM,UMBC,UVM,UMBC,G,Assists,ast,Standard,4.0,2026-02-19T18:00:00.000-05:00,128578,20,UVM,Assists,standard,261,,NO_ATHLETE_MATCH
+9987587,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Standard,21.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,standard,235,,NO_ATHLETE_MATCH
+9986710,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Points,pts,Standard,10.0,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,standard,235,,NO_ATHLETE_MATCH
+9987650,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Rebs+Asts,ra,Standard,5.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebs+Asts,standard,235,,NO_ATHLETE_MATCH
+9986760,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Assists,ast,Standard,4.0,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,standard,235,,NO_ATHLETE_MATCH
+9987924,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Fantasy Score,fantasy,Standard,33.0,2026-02-19T19:00:00.000-05:00,128583,20,USF,Fantasy Score,standard,58,,NO_ATHLETE_MATCH
+9987637,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Demon,27.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987962,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Demon,26.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,demon,235,,NO_ATHLETE_MATCH
+9989188,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Demon,26.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987609,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Demon,25.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987639,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Demon,25.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987925,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Fantasy Score,fantasy,Standard,25.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Fantasy Score,standard,58,,NO_ATHLETE_MATCH
+9991172,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Pts+Rebs+Asts,pra,Goblin,25.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,goblin,58,,NO_ATHLETE_MATCH
+9987961,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Demon,24.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,demon,235,,NO_ATHLETE_MATCH
+9989186,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Demon,24.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987923,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Fantasy Score,fantasy,Standard,24.0,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Fantasy Score,standard,235,,NO_ATHLETE_MATCH
+9987608,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Demon,23.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987641,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Standard,23.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,standard,58,,NO_ATHLETE_MATCH
+9987921,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Fantasy Score,fantasy,Standard,23.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Fantasy Score,standard,235,,NO_ATHLETE_MATCH
+9986598,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,demon,235,,NO_ATHLETE_MATCH
+9987578,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Points,pts,Demon,22.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9987951,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,demon,235,,NO_ATHLETE_MATCH
+9987963,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,demon,235,,NO_ATHLETE_MATCH
+9989187,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987610,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Demon,21.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987630,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Points,pts,Demon,21.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9987640,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Goblin,21.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,goblin,58,,NO_ATHLETE_MATCH
+9987959,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Points,pts,Demon,21.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9986596,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Rebs+Asts,pra,Demon,20.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,demon,235,,NO_ATHLETE_MATCH
+9987576,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Points,pts,Demon,20.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9987612,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Standard,20.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,standard,58,,NO_ATHLETE_MATCH
+9987636,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Pts+Rebs,pr,Standard,20.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs,standard,58,,NO_ATHLETE_MATCH
+9987699,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Standard,20.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,standard,235,,NO_ATHLETE_MATCH
+9987950,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Demon,20.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,demon,235,,NO_ATHLETE_MATCH
+9987971,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Goblin,20.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,goblin,58,,NO_ATHLETE_MATCH
+9989185,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Standard,20.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,standard,58,,NO_ATHLETE_MATCH
+9987553,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Rebs,pr,Standard,19.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs,standard,235,,NO_ATHLETE_MATCH
+9987603,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Points,pts,Demon,19.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9987631,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Points,pts,Demon,19.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9987635,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Pts+Asts,pa,Standard,19.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Asts,standard,58,,NO_ATHLETE_MATCH
+9987957,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Points,pts,Demon,19.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9988058,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Goblin,19.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,goblin,235,,NO_ATHLETE_MATCH
+9986597,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Rebs+Asts,pra,Demon,18.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,demon,235,,NO_ATHLETE_MATCH
+9986801,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Standard,18.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,standard,235,,NO_ATHLETE_MATCH
+9987577,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Points,pts,Demon,18.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9987607,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Pts+Rebs,pr,Standard,18.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs,standard,58,,NO_ATHLETE_MATCH
+9987964,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Goblin,18.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,goblin,235,,NO_ATHLETE_MATCH
+9988057,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Goblin,18.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,goblin,58,,NO_ATHLETE_MATCH
+9989184,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Goblin,18.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,goblin,58,,NO_ATHLETE_MATCH
+9987549,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Pts+Asts,pa,Standard,17.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Asts,standard,58,,NO_ATHLETE_MATCH
+9987601,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Points,pts,Demon,17.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9987611,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Pts+Rebs+Asts,pra,Goblin,17.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs+Asts,goblin,58,,NO_ATHLETE_MATCH
+9987958,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Points,pts,Demon,17.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9989181,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Points,pts,Demon,17.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9989182,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Pts+Asts,pa,Standard,17.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Asts,standard,58,,NO_ATHLETE_MATCH
+9991508,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Goblin,17.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,goblin,235,,NO_ATHLETE_MATCH
+9986593,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Points,pts,Demon,16.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9986595,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Rebs,pr,Standard,16.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs,standard,235,,NO_ATHLETE_MATCH
+9986613,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Points,pts,Demon,16.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9986800,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Rebs+Asts,pra,Standard,16.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,standard,235,,NO_ATHLETE_MATCH
+9987548,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Pts+Asts,pa,Standard,16.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Asts,standard,235,,NO_ATHLETE_MATCH
+9987606,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Pts+Asts,pa,Standard,16.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Asts,standard,58,,NO_ATHLETE_MATCH
+9987634,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Points,pts,Standard,16.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,standard,58,,NO_ATHLETE_MATCH
+9987953,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Goblin,16.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,goblin,235,,NO_ATHLETE_MATCH
+9987602,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Points,pts,Demon,15.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9987651,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Points,pts,Standard,15.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,standard,235,,NO_ATHLETE_MATCH
+9989179,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Points,pts,Demon,15.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9989183,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Pts+Rebs,pr,Standard,15.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Pts+Rebs,standard,58,,NO_ATHLETE_MATCH
+9991507,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Pts+Rebs+Asts,pra,Goblin,15.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,goblin,235,,NO_ATHLETE_MATCH
+9986592,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Points,pts,Demon,14.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9986599,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Rebs+Asts,pra,Goblin,14.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,goblin,235,,NO_ATHLETE_MATCH
+9986611,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Points,pts,Demon,14.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9986616,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Pts+Rebs,pr,Standard,14.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs,standard,235,,NO_ATHLETE_MATCH
+9986729,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Rebs+Asts,pra,Goblin,14.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,goblin,235,,NO_ATHLETE_MATCH
+9987547,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Pts+Asts,pa,Standard,14.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Asts,standard,235,,NO_ATHLETE_MATCH
+9987562,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Rebs+Asts,pra,Goblin,14.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Rebs+Asts,goblin,235,,NO_ATHLETE_MATCH
+9987580,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Points,pts,Standard,14.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,standard,58,,NO_ATHLETE_MATCH
+9987589,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Rebounds,reb,Demon,14.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9987970,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Points,pts,Goblin,14.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,goblin,58,,NO_ATHLETE_MATCH
+9990540,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Points,pts,Goblin,14.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9987960,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Points,pts,Goblin,13.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9989180,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Points,pts,Demon,13.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,demon,58,,NO_ATHLETE_MATCH
+9986591,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Points,pts,Demon,12.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9986612,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Points,pts,Demon,12.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,demon,235,,NO_ATHLETE_MATCH
+9987588,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Rebounds,reb,Demon,12.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9987605,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Points,pts,Standard,12.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,standard,58,,NO_ATHLETE_MATCH
+9987604,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Points,pts,Goblin,11.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,goblin,58,,NO_ATHLETE_MATCH
+9987899,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Points,pts,Standard,11.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,standard,58,,NO_ATHLETE_MATCH
+9990539,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Points,pts,Goblin,11.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9990597,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Points,pts,Goblin,11.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,goblin,58,,NO_ATHLETE_MATCH
+9990598,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Points,pts,Goblin,11.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,goblin,58,,NO_ATHLETE_MATCH
+9986807,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Rebs+Asts,ra,Standard,11.0,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebs+Asts,standard,58,,NO_ATHLETE_MATCH
+9986614,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Points,pts,Standard,10.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,standard,235,,NO_ATHLETE_MATCH
+9987945,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Pts+Asts,pa,Standard,10.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Pts+Asts,standard,235,,NO_ATHLETE_MATCH
+9989199,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Rebs+Asts,ra,Standard,10.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebs+Asts,standard,58,,NO_ATHLETE_MATCH
+9987897,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Points,pts,Standard,9.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,standard,235,,NO_ATHLETE_MATCH
+9989178,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Points,pts,Goblin,9.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,goblin,58,,NO_ATHLETE_MATCH
+9989922,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Points,pts,Goblin,9.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Points,goblin,58,,NO_ATHLETE_MATCH
+9986594,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Points,pts,Goblin,8.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9986602,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Rebounds,reb,Demon,8.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9986615,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Points,pts,Goblin,8.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9986728,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Points,pts,Goblin,8.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9986735,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Points,pts,Goblin,8.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9987561,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Points,pts,Goblin,8.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9987566,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Points,pts,Goblin,8.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Points,goblin,235,,NO_ATHLETE_MATCH
+9987591,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Rebounds,reb,Standard,8.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,standard,58,,NO_ATHLETE_MATCH
+9989194,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Rebs+Asts,ra,Standard,8.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebs+Asts,standard,58,,NO_ATHLETE_MATCH
+9986600,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Rebounds,reb,Demon,7.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9987967,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Rebounds,reb,Demon,7.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9989177,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Assists,ast,Demon,7.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9989921,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Rebounds,reb,Goblin,7.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,goblin,58,,NO_ATHLETE_MATCH
+9986806,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Rebs+Asts,ra,Standard,7.0,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebs+Asts,standard,235,,NO_ATHLETE_MATCH
+9986601,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Rebounds,reb,Demon,6.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9986805,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Rebs+Asts,ra,Standard,6.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebs+Asts,standard,235,,NO_ATHLETE_MATCH
+9986809,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Rebs+Asts,ra,Standard,6.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebs+Asts,standard,58,,NO_ATHLETE_MATCH
+9987615,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,6.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9987617,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Rebs+Asts,ra,Demon,6.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebs+Asts,demon,58,,NO_ATHLETE_MATCH
+9987644,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,6.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9987948,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Assists,ast,Demon,6.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,demon,235,,NO_ATHLETE_MATCH
+9987966,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Rebounds,reb,Demon,6.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9989175,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Assists,ast,Demon,6.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9989193,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,6.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9986762,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Rebounds,reb,Standard,6.0,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,standard,235,,NO_ATHLETE_MATCH
+9986808,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Rebs+Asts,ra,Standard,6.0,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebs+Asts,standard,58,,NO_ATHLETE_MATCH
+9986604,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Rebounds,reb,Goblin,5.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,goblin,235,,NO_ATHLETE_MATCH
+9986618,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Rebounds,reb,Demon,5.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9987613,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,5.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9987642,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,5.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9987947,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Assists,ast,Demon,5.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,demon,235,,NO_ATHLETE_MATCH
+9987965,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Rebounds,reb,Demon,5.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9989176,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Assists,ast,Demon,5.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9989192,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,5.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9991494,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,3-PT Made,3pm,Demon,5.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,demon,58,,NO_ATHLETE_MATCH
+9986603,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Rebounds,reb,Goblin,4.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,goblin,235,,NO_ATHLETE_MATCH
+9986617,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Rebounds,reb,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9986730,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Rebounds,reb,Goblin,4.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,goblin,235,,NO_ATHLETE_MATCH
+9986736,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Rebounds,reb,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,demon,235,,NO_ATHLETE_MATCH
+9987596,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,3-PT Made,3pm,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,demon,58,,NO_ATHLETE_MATCH
+9987614,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9987622,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,3-PT Made,3pm,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,demon,58,,NO_ATHLETE_MATCH
+9987628,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Assists,ast,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9987643,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9987700,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Rebounds,reb,Standard,4.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,standard,235,,NO_ATHLETE_MATCH
+9987946,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Assists,ast,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,demon,235,,NO_ATHLETE_MATCH
+9989174,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Assists,ast,Goblin,4.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,goblin,58,,NO_ATHLETE_MATCH
+9989191,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Rebounds,reb,Demon,4.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,demon,58,,NO_ATHLETE_MATCH
+9986763,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Rebounds,reb,Standard,4.0,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,standard,58,,NO_ATHLETE_MATCH
+9986621,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Steals,stl,Demon,3.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,demon,235,,NO_ATHLETE_MATCH
+9987593,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Steals,stl,Demon,3.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,demon,58,,NO_ATHLETE_MATCH
+9987595,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,3-PT Made,3pm,Demon,3.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,demon,58,,NO_ATHLETE_MATCH
+9987599,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Assists,ast,Demon,3.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9987616,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Rebounds,reb,Goblin,3.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,goblin,58,,NO_ATHLETE_MATCH
+9987626,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Assists,ast,Demon,3.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9987646,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Rebounds,reb,Goblin,3.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,goblin,58,,NO_ATHLETE_MATCH
+9987695,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Assists,ast,Standard,3.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,standard,235,,NO_ATHLETE_MATCH
+9987968,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Rebounds,reb,Goblin,3.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,goblin,235,,NO_ATHLETE_MATCH
+9989173,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Assists,ast,Goblin,3.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,goblin,58,,NO_ATHLETE_MATCH
+9989190,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Rebounds,reb,Standard,3.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,standard,58,,NO_ATHLETE_MATCH
+9986609,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,3-PT Made,3pm,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,demon,235,,NO_ATHLETE_MATCH
+9986619,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Rebounds,reb,Goblin,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,goblin,235,,NO_ATHLETE_MATCH
+9986620,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Steals,stl,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,demon,235,,NO_ATHLETE_MATCH
+9986737,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Rebounds,reb,Goblin,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,goblin,235,,NO_ATHLETE_MATCH
+9986738,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Steals,stl,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,demon,235,,NO_ATHLETE_MATCH
+9987567,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Rebounds,reb,Goblin,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Rebounds,goblin,235,,NO_ATHLETE_MATCH
+9987571,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Assists,ast,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9987573,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Blocked Shots,blk,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Blocked Shots,demon,58,,NO_ATHLETE_MATCH
+9987592,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Steals,stl,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,demon,58,,NO_ATHLETE_MATCH
+9987597,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,3-PT Made,3pm,Goblin,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,goblin,58,,NO_ATHLETE_MATCH
+9987598,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Assists,ast,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9987619,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Steals,stl,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,demon,58,,NO_ATHLETE_MATCH
+9987624,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,3-PT Made,3pm,Goblin,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,goblin,58,,NO_ATHLETE_MATCH
+9987627,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Assists,ast,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9987645,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Rebounds,reb,Goblin,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,goblin,58,,NO_ATHLETE_MATCH
+9987648,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Steals,stl,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,demon,58,,NO_ATHLETE_MATCH
+9987900,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,3-PT Made,3pm,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,demon,235,,NO_ATHLETE_MATCH
+9987949,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Assists,ast,Goblin,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,goblin,235,,NO_ATHLETE_MATCH
+9987955,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Assists,ast,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,demon,235,,NO_ATHLETE_MATCH
+9989172,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,3-PT Made,3pm,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,demon,58,,NO_ATHLETE_MATCH
+9989189,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Rebounds,reb,Goblin,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Rebounds,goblin,58,,NO_ATHLETE_MATCH
+9989197,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Steals,stl,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,demon,58,,NO_ATHLETE_MATCH
+9991171,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Turnovers,tov,Demon,2.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Turnovers,demon,235,,NO_ATHLETE_MATCH
+9986587,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Assists,ast,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,demon,235,,NO_ATHLETE_MATCH
+9986589,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Blocked Shots,blk,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Blocked Shots,demon,235,,NO_ATHLETE_MATCH
+9986605,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Steals,stl,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,demon,235,,NO_ATHLETE_MATCH
+9986607,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Turnovers,tov,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Turnovers,goblin,235,,NO_ATHLETE_MATCH
+9986608,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,3-PT Made,3pm,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,demon,235,,NO_ATHLETE_MATCH
+9986622,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Steals,stl,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,goblin,235,,NO_ATHLETE_MATCH
+9986725,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Assists,ast,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,demon,235,,NO_ATHLETE_MATCH
+9986727,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Blocked Shots,blk,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Blocked Shots,demon,235,,NO_ATHLETE_MATCH
+9986731,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Steals,stl,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,demon,235,,NO_ATHLETE_MATCH
+9986732,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Turnovers,tov,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Turnovers,goblin,235,,NO_ATHLETE_MATCH
+9986733,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,3-PT Made,3pm,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,demon,235,,NO_ATHLETE_MATCH
+9986739,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Steals,stl,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,goblin,235,,NO_ATHLETE_MATCH
+9987558,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Assists,ast,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,demon,235,,NO_ATHLETE_MATCH
+9987560,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Blocked Shots,blk,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Blocked Shots,demon,235,,NO_ATHLETE_MATCH
+9987563,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Steals,stl,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,demon,235,,NO_ATHLETE_MATCH
+9987564,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Turnovers,tov,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Turnovers,goblin,235,,NO_ATHLETE_MATCH
+9987568,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,Steals,stl,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,goblin,235,,NO_ATHLETE_MATCH
+9987570,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Assists,ast,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,demon,58,,NO_ATHLETE_MATCH
+9987574,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Blocked Shots,blk,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Blocked Shots,demon,58,,NO_ATHLETE_MATCH
+9987594,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Steals,stl,Standard,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,standard,58,,NO_ATHLETE_MATCH
+9987600,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Assists,ast,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,goblin,58,,NO_ATHLETE_MATCH
+9987618,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Steals,stl,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,demon,58,,NO_ATHLETE_MATCH
+9987621,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Turnovers,tov,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Turnovers,goblin,58,,NO_ATHLETE_MATCH
+9987629,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Assists,ast,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,goblin,58,,NO_ATHLETE_MATCH
+9987647,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Steals,stl,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,demon,58,,NO_ATHLETE_MATCH
+9987697,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,3-PT Made,3pm,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,demon,235,,NO_ATHLETE_MATCH
+9987698,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Assists,ast,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,demon,235,,NO_ATHLETE_MATCH
+9987702,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Turnovers,tov,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Turnovers,goblin,235,,NO_ATHLETE_MATCH
+9987898,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,3-PT Made,3pm,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,demon,58,,NO_ATHLETE_MATCH
+9987969,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Steals,stl,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,demon,235,,NO_ATHLETE_MATCH
+9989196,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Steals,stl,Demon,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,demon,58,,NO_ATHLETE_MATCH
+9989198,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Turnovers,tov,Goblin,1.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Turnovers,goblin,58,,NO_ATHLETE_MATCH
+9986586,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,3-PT Made,3pm,Demon,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,demon,235,,NO_ATHLETE_MATCH
+9986588,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Assists,ast,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,goblin,235,,NO_ATHLETE_MATCH
+9986590,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Blocked Shots,blk,Standard,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Blocked Shots,standard,235,,NO_ATHLETE_MATCH
+9986606,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Steals,stl,Standard,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,standard,235,,NO_ATHLETE_MATCH
+9986610,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,3-PT Made,3pm,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,goblin,235,,NO_ATHLETE_MATCH
+9986724,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,3-PT Made,3pm,Demon,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,demon,235,,NO_ATHLETE_MATCH
+9986726,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Assists,ast,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,goblin,235,,NO_ATHLETE_MATCH
+9986734,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,3-PT Made,3pm,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,goblin,235,,NO_ATHLETE_MATCH
+9987557,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,3-PT Made,3pm,Demon,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,demon,235,,NO_ATHLETE_MATCH
+9987559,278348,aaron bradshaw|MEM,Aaron Bradshaw,aaron bradshaw,MEM,USF,MEM,USF,F,Assists,ast,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,goblin,235,,NO_ATHLETE_MATCH
+9987565,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,USF,MEM,USF,G,3-PT Made,3pm,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,goblin,235,,NO_ATHLETE_MATCH
+9987569,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,3-PT Made,3pm,Demon,0.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,3-PT Made,demon,58,,NO_ATHLETE_MATCH
+9987572,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Assists,ast,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Assists,goblin,58,,NO_ATHLETE_MATCH
+9987575,281155,izaiyah nelson|USF,Izaiyah Nelson,izaiyah nelson,USF,MEM,USF,MEM,F,Blocked Shots,blk,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Blocked Shots,goblin,58,,NO_ATHLETE_MATCH
+9987620,281156,joseph pinion|USF,Joseph Pinion,joseph pinion,USF,MEM,USF,MEM,G,Steals,stl,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,goblin,58,,NO_ATHLETE_MATCH
+9987649,296284,wes enis|USF,Wes Enis,wes enis,USF,MEM,USF,MEM,G,Steals,stl,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,goblin,58,,NO_ATHLETE_MATCH
+9987701,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Steals,stl,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Steals,goblin,235,,NO_ATHLETE_MATCH
+9987954,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,3-PT Made,3pm,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,3-PT Made,goblin,235,,NO_ATHLETE_MATCH
+9987956,279010,sincere parker|MEM,Sincere Parker,sincere parker,MEM,USF,MEM,USF,G,Assists,ast,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,MEM,Assists,goblin,235,,NO_ATHLETE_MATCH
+9989195,226787,cj brown|USF,CJ Brown,cj brown,USF,MEM,USF,MEM,G,Steals,stl,Goblin,0.5,2026-02-19T19:00:00.000-05:00,128583,20,USF,Steals,goblin,58,,NO_ATHLETE_MATCH
+9991499,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Fantasy Score,fantasy,Standard,30.0,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Fantasy Score,standard,2655,,NO_ATHLETE_MATCH
+9991497,279544,je shawn stevenson|UNT,Je'Shawn Stevenson,je shawn stevenson,UNT,TULN,UNT,TULN,G,Fantasy Score,fantasy,Standard,28.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Fantasy Score,standard,249,,NO_ATHLETE_MATCH
+9991496,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Fantasy Score,fantasy,Standard,27.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Fantasy Score,standard,249,,NO_ATHLETE_MATCH
+9991331,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Pts+Rebs+Asts,pra,Standard,26.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Rebs+Asts,standard,2655,,NO_ATHLETE_MATCH
+9990609,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Pts+Rebs+Asts,pra,Demon,24.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Rebs+Asts,demon,2655,,NO_ATHLETE_MATCH
+9991330,279544,je shawn stevenson|UNT,Je'Shawn Stevenson,je shawn stevenson,UNT,TULN,UNT,TULN,G,Pts+Rebs+Asts,pra,Standard,23.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Pts+Rebs+Asts,standard,249,,NO_ATHLETE_MATCH
+9990457,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Pts+Rebs,pr,Standard,22.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Rebs,standard,2655,,NO_ATHLETE_MATCH
+9990607,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Rebs+Asts,demon,2655,,NO_ATHLETE_MATCH
+9990620,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Points,pts,Demon,22.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,demon,2655,,NO_ATHLETE_MATCH
+9991329,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Pts+Rebs+Asts,pra,Standard,21.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Pts+Rebs+Asts,standard,249,,NO_ATHLETE_MATCH
+9991470,279544,je shawn stevenson|UNT,Je'Shawn Stevenson,je shawn stevenson,UNT,TULN,UNT,TULN,G,Pts+Rebs,pr,Standard,21.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Pts+Rebs,standard,249,,NO_ATHLETE_MATCH
+9990608,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Pts+Rebs+Asts,pra,Demon,20.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Rebs+Asts,demon,2655,,NO_ATHLETE_MATCH
+9990619,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Points,pts,Demon,20.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,demon,2655,,NO_ATHLETE_MATCH
+9991473,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Pts+Asts,pa,Standard,20.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Asts,standard,2655,,NO_ATHLETE_MATCH
+9991498,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Fantasy Score,fantasy,Standard,20.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Fantasy Score,standard,2655,,NO_ATHLETE_MATCH
+9990011,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Points,pts,Demon,19.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Points,demon,249,,NO_ATHLETE_MATCH
+9991472,279544,je shawn stevenson|UNT,Je'Shawn Stevenson,je shawn stevenson,UNT,TULN,UNT,TULN,G,Pts+Asts,pa,Standard,19.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Pts+Asts,standard,249,,NO_ATHLETE_MATCH
+9990451,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Pts+Rebs+Asts,pra,Standard,18.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Rebs+Asts,standard,2655,,NO_ATHLETE_MATCH
+9990605,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Points,pts,Demon,18.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,demon,2655,,NO_ATHLETE_MATCH
+9990621,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Points,pts,Demon,18.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,demon,2655,,NO_ATHLETE_MATCH
+9990009,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Points,pts,Demon,17.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Points,demon,249,,NO_ATHLETE_MATCH
+9990012,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Pts+Rebs,pr,Standard,17.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Pts+Rebs,standard,249,,NO_ATHLETE_MATCH
+9991322,279544,je shawn stevenson|UNT,Je'Shawn Stevenson,je shawn stevenson,UNT,TULN,UNT,TULN,G,Points,pts,Standard,17.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Points,standard,249,,NO_ATHLETE_MATCH
+9991471,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Pts+Asts,pa,Standard,17.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Pts+Asts,standard,249,,NO_ATHLETE_MATCH
+9990450,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Pts+Rebs,pr,Standard,16.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Rebs,standard,2655,,NO_ATHLETE_MATCH
+9990456,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Points,pts,Standard,16.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,standard,2655,,NO_ATHLETE_MATCH
+9990603,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Points,pts,Demon,16.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,demon,2655,,NO_ATHLETE_MATCH
+9990610,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Pts+Rebs+Asts,pra,Goblin,16.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Rebs+Asts,goblin,2655,,NO_ATHLETE_MATCH
+9990010,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Points,pts,Demon,15.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Points,demon,249,,NO_ATHLETE_MATCH
+9990449,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Pts+Asts,pa,Standard,14.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Pts+Asts,standard,2655,,NO_ATHLETE_MATCH
+9990604,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Points,pts,Demon,14.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,demon,2655,,NO_ATHLETE_MATCH
+9990622,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Points,pts,Goblin,14.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,goblin,2655,,NO_ATHLETE_MATCH
+9990008,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Points,pts,Standard,13.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Points,standard,249,,NO_ATHLETE_MATCH
+9990448,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Points,pts,Standard,12.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,standard,2655,,NO_ATHLETE_MATCH
+9990007,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Points,pts,Goblin,11.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Points,goblin,249,,NO_ATHLETE_MATCH
+9990606,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Points,pts,Goblin,10.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Points,goblin,2655,,NO_ATHLETE_MATCH
+9991475,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Rebs+Asts,ra,Standard,9.0,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebs+Asts,standard,2655,,NO_ATHLETE_MATCH
+9990625,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Rebounds,reb,Demon,8.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,demon,2655,,NO_ATHLETE_MATCH
+9991474,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Rebs+Asts,ra,Standard,8.0,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Rebs+Asts,standard,249,,NO_ATHLETE_MATCH
+9990624,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Rebounds,reb,Demon,7.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,demon,2655,,NO_ATHLETE_MATCH
+9990017,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Rebounds,reb,Demon,6.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Rebounds,demon,249,,NO_ATHLETE_MATCH
+9990613,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Rebounds,reb,Demon,6.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,demon,2655,,NO_ATHLETE_MATCH
+9990623,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Rebounds,reb,Demon,6.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,demon,2655,,NO_ATHLETE_MATCH
+9990015,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Rebounds,reb,Demon,5.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Rebounds,demon,249,,NO_ATHLETE_MATCH
+9990452,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Rebs+Asts,ra,Standard,5.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebs+Asts,standard,2655,,NO_ATHLETE_MATCH
+9990458,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Rebounds,reb,Standard,5.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,standard,2655,,NO_ATHLETE_MATCH
+9990612,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Rebounds,reb,Demon,5.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,demon,2655,,NO_ATHLETE_MATCH
+9990016,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Rebounds,reb,Demon,4.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Rebounds,demon,249,,NO_ATHLETE_MATCH
+9990611,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Rebounds,reb,Demon,4.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,demon,2655,,NO_ATHLETE_MATCH
+9990626,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Rebounds,reb,Goblin,4.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,goblin,2655,,NO_ATHLETE_MATCH
+9990014,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Rebounds,reb,Goblin,3.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Rebounds,goblin,249,,NO_ATHLETE_MATCH
+9990020,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Steals,stl,Demon,3.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Steals,demon,249,,NO_ATHLETE_MATCH
+9990602,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Assists,ast,Demon,3.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Assists,demon,2655,,NO_ATHLETE_MATCH
+9990013,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Rebounds,reb,Goblin,2.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Rebounds,goblin,249,,NO_ATHLETE_MATCH
+9990019,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Steals,stl,Demon,2.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Steals,demon,249,,NO_ATHLETE_MATCH
+9990454,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Turnovers,tov,Demon,2.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Turnovers,demon,2655,,NO_ATHLETE_MATCH
+9990460,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Turnovers,tov,Standard,2.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Turnovers,standard,2655,,NO_ATHLETE_MATCH
+9990600,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,3-PT Made,3pm,Demon,2.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,3-PT Made,demon,2655,,NO_ATHLETE_MATCH
+9990601,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Assists,ast,Demon,2.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Assists,demon,2655,,NO_ATHLETE_MATCH
+9990614,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Rebounds,reb,Goblin,2.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Rebounds,goblin,2655,,NO_ATHLETE_MATCH
+9990615,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Steals,stl,Demon,2.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Steals,demon,2655,,NO_ATHLETE_MATCH
+9990617,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,3-PT Made,3pm,Demon,2.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,3-PT Made,demon,2655,,NO_ATHLETE_MATCH
+9990627,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Steals,stl,Demon,2.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Steals,demon,2655,,NO_ATHLETE_MATCH
+9990018,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Steals,stl,Standard,1.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Steals,standard,249,,NO_ATHLETE_MATCH
+9990021,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,Turnovers,tov,Goblin,1.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,Turnovers,goblin,249,,NO_ATHLETE_MATCH
+9990447,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Assists,ast,Standard,1.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Assists,standard,2655,,NO_ATHLETE_MATCH
+9990453,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Steals,stl,Demon,1.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Steals,demon,2655,,NO_ATHLETE_MATCH
+9990455,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,3-PT Made,3pm,Demon,1.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,3-PT Made,demon,2655,,NO_ATHLETE_MATCH
+9990459,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Steals,stl,Demon,1.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Steals,demon,2655,,NO_ATHLETE_MATCH
+9990599,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,3-PT Made,3pm,Demon,1.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,3-PT Made,demon,2655,,NO_ATHLETE_MATCH
+9990006,280035,david terrell|UNT,David Terrell,david terrell,UNT,TULN,UNT,TULN,G,3-PT Made,3pm,Demon,0.5,2026-02-19T21:00:00.000-05:00,128878,20,UNT,3-PT Made,demon,249,,NO_ATHLETE_MATCH
+9990446,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,3-PT Made,3pm,Goblin,0.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,3-PT Made,goblin,2655,,NO_ATHLETE_MATCH
+9990616,231616,asher woods|TULN,Asher Woods,asher woods,TULN,UNT,TULN,UNT,G,Steals,stl,Goblin,0.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Steals,goblin,2655,,NO_ATHLETE_MATCH
+9990618,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,3-PT Made,3pm,Goblin,0.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,3-PT Made,goblin,2655,,NO_ATHLETE_MATCH
+9990628,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,UNT,TULN,UNT,G,Steals,stl,Goblin,0.5,2026-02-19T21:00:00.000-05:00,128878,20,TULN,Steals,goblin,2655,,NO_ATHLETE_MATCH
+9991369,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Pts+Rebs,pr,Standard,30.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs,standard,150,,NO_ATHLETE_MATCH
+9992036,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Demon,29.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9992034,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Demon,27.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9991366,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Points,pts,Demon,26.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9992011,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Demon,26.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9992035,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Demon,25.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9991364,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Points,pts,Demon,24.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991984,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Pts+Rebs+Asts,pra,Demon,24.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9992010,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Demon,24.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9992038,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Standard,23.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,standard,130,,NO_ATHLETE_MATCH
+9991365,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Points,pts,Demon,22.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991453,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9991983,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9992009,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9991420,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Pts+Rebs+Asts,pra,Demon,21.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9992033,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Pts+Rebs,pr,Standard,21.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs,standard,130,,NO_ATHLETE_MATCH
+9992037,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Goblin,21.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,goblin,130,,NO_ATHLETE_MATCH
+9990475,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Points,pts,Standard,20.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,standard,150,,NO_ATHLETE_MATCH
+9991419,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Pts+Rebs+Asts,pra,Demon,20.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9991451,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Pts+Rebs+Asts,pra,Demon,20.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9991982,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Pts+Rebs+Asts,pra,Demon,20.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,demon,130,,NO_ATHLETE_MATCH
+9992013,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Standard,20.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,standard,130,,NO_ATHLETE_MATCH
+9991413,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Demon,19.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991421,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Pts+Rebs+Asts,pra,Demon,19.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9991432,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Points,pts,Demon,19.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9991464,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Points,pts,Demon,19.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9992008,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Pts+Rebs,pr,Standard,19.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs,standard,130,,NO_ATHLETE_MATCH
+9991352,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Pts+Rebs+Asts,pra,Demon,18.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9991367,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Points,pts,Goblin,18.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991412,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Demon,18.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991452,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Pts+Rebs+Asts,pra,Demon,18.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9991986,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Pts+Rebs+Asts,pra,Standard,18.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,standard,130,,NO_ATHLETE_MATCH
+9992012,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Pts+Rebs+Asts,pra,Goblin,18.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,goblin,130,,NO_ATHLETE_MATCH
+9991418,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Pts+Rebs+Asts,pra,Standard,17.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,standard,150,,NO_ATHLETE_MATCH
+9992030,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Points,pts,Demon,17.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9991351,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Pts+Rebs+Asts,pra,Demon,16.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9991411,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Demon,16.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991417,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Pts+Rebs,pr,Standard,16.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs,standard,150,,NO_ATHLETE_MATCH
+9991423,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Pts+Rebs+Asts,pra,Goblin,16.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,goblin,150,,NO_ATHLETE_MATCH
+9991450,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Pts+Rebs+Asts,pra,Standard,16.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,standard,150,,NO_ATHLETE_MATCH
+9991981,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Pts+Rebs,pr,Standard,16.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs,standard,130,,NO_ATHLETE_MATCH
+9991985,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Pts+Rebs+Asts,pra,Goblin,16.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Rebs+Asts,goblin,130,,NO_ATHLETE_MATCH
+9991422,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Pts+Rebs+Asts,pra,Goblin,15.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,goblin,150,,NO_ATHLETE_MATCH
+9992032,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Pts+Asts,pa,Standard,15.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Asts,standard,130,,NO_ATHLETE_MATCH
+9991332,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Points,pts,Demon,14.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9991350,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Pts+Rebs+Asts,pra,Demon,14.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,demon,150,,NO_ATHLETE_MATCH
+9991401,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Points,pts,Demon,14.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9991454,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Pts+Rebs+Asts,pra,Goblin,14.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,goblin,150,,NO_ATHLETE_MATCH
+9991463,281170,trey mckenney|MICH,Trey McKenney,trey mckenney,MICH,DUKE,MICH,DUKE,G,Points,pts,Demon,14.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9992001,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Pts+Asts,pa,Standard,14.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Asts,standard,130,,NO_ATHLETE_MATCH
+9990476,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Standard,13.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,standard,150,,NO_ATHLETE_MATCH
+9990481,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Points,pts,Standard,13.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,standard,130,,NO_ATHLETE_MATCH
+9992006,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Points,pts,Demon,13.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9991349,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Pts+Rebs+Asts,pra,Standard,12.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,standard,150,,NO_ATHLETE_MATCH
+9991371,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Rebounds,reb,Demon,12.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991415,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Goblin,12.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991445,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Points,pts,Demon,12.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991977,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Points,pts,Demon,12.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9991997,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Points,pts,Demon,12.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9992007,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Pts+Asts,pa,Standard,12.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Asts,standard,130,,NO_ATHLETE_MATCH
+9990477,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Points,pts,Standard,11.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,standard,130,,NO_ATHLETE_MATCH
+9991370,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Rebounds,reb,Demon,11.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991435,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Demon,11.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9991444,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Points,pts,Demon,11.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991468,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Demon,11.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9991503,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Goblin,11.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991978,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Points,pts,Demon,11.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9991980,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Pts+Asts,pa,Standard,11.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Pts+Asts,standard,130,,NO_ATHLETE_MATCH
+9991998,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Points,pts,Demon,11.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9992021,281170,trey mckenney|MICH,Trey McKenney,trey mckenney,MICH,DUKE,MICH,DUKE,G,Points,pts,Demon,11.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9992031,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Points,pts,Goblin,11.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,goblin,130,,NO_ATHLETE_MATCH
+9991343,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Points,pts,Demon,10.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991348,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Pts+Rebs,pr,Standard,10.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs,standard,150,,NO_ATHLETE_MATCH
+9991353,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Pts+Rebs+Asts,pra,Goblin,10.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs+Asts,goblin,150,,NO_ATHLETE_MATCH
+9991372,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Rebounds,reb,Demon,10.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991446,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Points,pts,Demon,10.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991448,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Pts+Asts,pa,Standard,10.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Asts,standard,150,,NO_ATHLETE_MATCH
+9992020,281170,trey mckenney|MICH,Trey McKenney,trey mckenney,MICH,DUKE,MICH,DUKE,G,Points,pts,Demon,10.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,demon,130,,NO_ATHLETE_MATCH
+9990473,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Points,pts,Standard,9.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,standard,130,,NO_ATHLETE_MATCH
+9990479,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Points,pts,Standard,9.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,standard,150,,NO_ATHLETE_MATCH
+9991334,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Rebounds,reb,Demon,9.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9991342,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Points,pts,Demon,9.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991347,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Pts+Asts,pa,Standard,9.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Asts,standard,150,,NO_ATHLETE_MATCH
+9991379,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,MICH,DUKE,MICH,G,Points,pts,Demon,9.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991414,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Goblin,9.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991433,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Points,pts,Goblin,9.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,goblin,130,,NO_ATHLETE_MATCH
+9991434,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Demon,9.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9991466,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Points,pts,Goblin,9.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,goblin,130,,NO_ATHLETE_MATCH
+9991467,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Demon,9.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9992000,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Points,pts,Standard,9.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,standard,130,,NO_ATHLETE_MATCH
+9992041,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Rebs+Asts,ra,Goblin,9.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebs+Asts,goblin,130,,NO_ATHLETE_MATCH
+9990480,281170,trey mckenney|MICH,Trey McKenney,trey mckenney,MICH,DUKE,MICH,DUKE,G,Points,pts,Standard,8.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,standard,130,,NO_ATHLETE_MATCH
+9991344,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Points,pts,Demon,8.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991373,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Rebounds,reb,Goblin,8.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,goblin,150,,NO_ATHLETE_MATCH
+9991378,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,MICH,DUKE,MICH,G,Points,pts,Demon,8.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991389,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Demon,8.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991392,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Pts+Rebs,pr,Standard,8.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Pts+Rebs,standard,150,,NO_ATHLETE_MATCH
+9991447,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Points,pts,Goblin,8.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991457,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Rebounds,reb,Demon,8.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991979,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Points,pts,Goblin,8.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,goblin,130,,NO_ATHLETE_MATCH
+9991987,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Rebounds,reb,Demon,8.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9991995,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Assists,ast,Demon,8.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9991999,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Points,pts,Goblin,8.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,goblin,130,,NO_ATHLETE_MATCH
+9992014,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Demon,8.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9992016,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Rebs+Asts,ra,Standard,8.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebs+Asts,standard,130,,NO_ATHLETE_MATCH
+9992039,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Demon,8.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9990478,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Standard,7.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,standard,130,,NO_ATHLETE_MATCH
+9990482,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Standard,7.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,standard,130,,NO_ATHLETE_MATCH
+9991088,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Points,pts,Standard,7.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,standard,150,,NO_ATHLETE_MATCH
+9991333,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Rebounds,reb,Demon,7.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,demon,130,,NO_ATHLETE_MATCH
+9991374,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Rebounds,reb,Goblin,7.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,goblin,150,,NO_ATHLETE_MATCH
+9991380,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,MICH,DUKE,MICH,G,Points,pts,Demon,7.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991387,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Demon,7.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991455,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Rebounds,reb,Demon,7.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991460,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Rebs+Asts,ra,Standard,7.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebs+Asts,standard,150,,NO_ATHLETE_MATCH
+9991994,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Assists,ast,Demon,7.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9992022,281170,trey mckenney|MICH,Trey McKenney,trey mckenney,MICH,DUKE,MICH,DUKE,G,Points,pts,Goblin,7.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Points,goblin,130,,NO_ATHLETE_MATCH
+9990474,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Rebounds,reb,Standard,6.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,standard,130,,NO_ATHLETE_MATCH
+9991089,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,MICH,DUKE,MICH,G,Points,pts,Standard,6.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,standard,150,,NO_ATHLETE_MATCH
+9991346,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Points,pts,Goblin,6.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991388,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Demon,6.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,demon,150,,NO_ATHLETE_MATCH
+9991396,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Rebounds,reb,Demon,6.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991456,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Rebounds,reb,Demon,6.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991993,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Assists,ast,Demon,6.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9992015,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Goblin,6.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,goblin,130,,NO_ATHLETE_MATCH
+9992040,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Goblin,6.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,goblin,130,,NO_ATHLETE_MATCH
+9991335,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Rebounds,reb,Goblin,5.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,goblin,130,,NO_ATHLETE_MATCH
+9991345,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Points,pts,Goblin,5.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991356,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Rebounds,reb,Demon,5.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991381,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,MICH,DUKE,MICH,G,Points,pts,Goblin,5.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991395,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Rebounds,reb,Demon,5.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991436,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Goblin,5.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,goblin,130,,NO_ATHLETE_MATCH
+9991469,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Rebounds,reb,Goblin,5.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Rebounds,goblin,130,,NO_ATHLETE_MATCH
+9991354,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Rebounds,reb,Demon,4.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991391,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Goblin,4.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991394,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Rebounds,reb,Demon,4.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991404,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,3-PT Made,3pm,Demon,4.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991425,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Rebounds,reb,Demon,4.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991458,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Rebounds,reb,Goblin,4.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,goblin,150,,NO_ATHLETE_MATCH
+9991996,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Assists,ast,Goblin,4.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,goblin,130,,NO_ATHLETE_MATCH
+9992028,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Assists,ast,Demon,4.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9991340,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Assists,ast,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,demon,150,,NO_ATHLETE_MATCH
+9991355,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Rebounds,reb,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991390,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Points,pts,Goblin,3.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Points,goblin,150,,NO_ATHLETE_MATCH
+9991393,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Rebounds,reb,Standard,3.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,standard,150,,NO_ATHLETE_MATCH
+9991403,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,3-PT Made,3pm,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991424,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Rebounds,reb,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,demon,150,,NO_ATHLETE_MATCH
+9991440,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Assists,ast,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,demon,150,,NO_ATHLETE_MATCH
+9991459,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Rebounds,reb,Goblin,3.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,goblin,150,,NO_ATHLETE_MATCH
+9991972,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Assists,ast,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9991975,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Blocked Shots,blk,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Blocked Shots,demon,130,,NO_ATHLETE_MATCH
+9991992,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,3-PT Made,3pm,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,3-PT Made,demon,130,,NO_ATHLETE_MATCH
+9992027,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Assists,ast,Demon,3.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9991337,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,3-PT Made,3pm,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991339,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Assists,ast,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,demon,150,,NO_ATHLETE_MATCH
+9991357,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Rebounds,reb,Goblin,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,goblin,150,,NO_ATHLETE_MATCH
+9991362,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,3-PT Made,3pm,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991376,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Steals,stl,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,demon,150,,NO_ATHLETE_MATCH
+9991383,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,3-PT Made,3pm,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991397,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Rebounds,reb,Goblin,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,goblin,150,,NO_ATHLETE_MATCH
+9991402,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,3-PT Made,3pm,Standard,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,standard,150,,NO_ATHLETE_MATCH
+9991407,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Assists,ast,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,demon,150,,NO_ATHLETE_MATCH
+9991428,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Steals,stl,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,demon,150,,NO_ATHLETE_MATCH
+9991439,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Assists,ast,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,demon,150,,NO_ATHLETE_MATCH
+9991442,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Blocked Shots,blk,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Blocked Shots,demon,150,,NO_ATHLETE_MATCH
+9991971,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Assists,ast,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9991974,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Blocked Shots,blk,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Blocked Shots,demon,130,,NO_ATHLETE_MATCH
+9991991,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,3-PT Made,3pm,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,3-PT Made,demon,130,,NO_ATHLETE_MATCH
+9992003,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Turnovers,tov,Standard,2.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Turnovers,standard,130,,NO_ATHLETE_MATCH
+9992024,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,3-PT Made,3pm,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,3-PT Made,demon,130,,NO_ATHLETE_MATCH
+9992026,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Assists,ast,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9992043,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Steals,stl,Demon,2.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Steals,demon,130,,NO_ATHLETE_MATCH
+9991336,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,3-PT Made,3pm,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991341,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Assists,ast,Goblin,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,goblin,150,,NO_ATHLETE_MATCH
+9991360,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,demon,150,,NO_ATHLETE_MATCH
+9991361,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,3-PT Made,3pm,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991375,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,demon,150,,NO_ATHLETE_MATCH
+9991382,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,3-PT Made,3pm,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991386,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Blocked Shots,blk,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Blocked Shots,demon,150,,NO_ATHLETE_MATCH
+9991398,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,demon,150,,NO_ATHLETE_MATCH
+9991400,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Turnovers,tov,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Turnovers,demon,150,,NO_ATHLETE_MATCH
+9991405,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,3-PT Made,3pm,Goblin,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,goblin,150,,NO_ATHLETE_MATCH
+9991406,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Assists,ast,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,demon,150,,NO_ATHLETE_MATCH
+9991410,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Blocked Shots,blk,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Blocked Shots,demon,150,,NO_ATHLETE_MATCH
+9991426,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Rebounds,reb,Goblin,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Rebounds,goblin,150,,NO_ATHLETE_MATCH
+9991427,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,demon,150,,NO_ATHLETE_MATCH
+9991430,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Turnovers,tov,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Turnovers,demon,150,,NO_ATHLETE_MATCH
+9991438,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Assists,ast,Standard,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,standard,150,,NO_ATHLETE_MATCH
+9991441,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Blocked Shots,blk,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Blocked Shots,demon,150,,NO_ATHLETE_MATCH
+9991461,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,demon,150,,NO_ATHLETE_MATCH
+9991462,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Turnovers,tov,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Turnovers,demon,150,,NO_ATHLETE_MATCH
+9991529,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,Turnovers,tov,Standard,1.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Turnovers,standard,150,,NO_ATHLETE_MATCH
+9991973,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Assists,ast,Goblin,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,goblin,130,,NO_ATHLETE_MATCH
+9991976,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Blocked Shots,blk,Goblin,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Blocked Shots,goblin,130,,NO_ATHLETE_MATCH
+9991989,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Steals,demon,130,,NO_ATHLETE_MATCH
+9991990,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Turnovers,tov,Standard,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Turnovers,standard,130,,NO_ATHLETE_MATCH
+9992002,278918,elliot cadeau|MICH,Elliot Cadeau,elliot cadeau,MICH,DUKE,MICH,DUKE,G,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Steals,demon,130,,NO_ATHLETE_MATCH
+9992004,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Assists,ast,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,demon,130,,NO_ATHLETE_MATCH
+9992017,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Steals,demon,130,,NO_ATHLETE_MATCH
+9992019,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Turnovers,tov,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Turnovers,demon,130,,NO_ATHLETE_MATCH
+9992023,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,3-PT Made,3pm,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,3-PT Made,demon,130,,NO_ATHLETE_MATCH
+9992029,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Assists,ast,Goblin,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,goblin,130,,NO_ATHLETE_MATCH
+9992042,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Steals,stl,Demon,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Steals,demon,130,,NO_ATHLETE_MATCH
+9992045,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Turnovers,tov,Goblin,1.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Turnovers,goblin,130,,NO_ATHLETE_MATCH
+9991338,218054,caleb foster|DUKE,Caleb Foster,caleb foster,DUKE,MICH,DUKE,MICH,G,3-PT Made,3pm,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,goblin,150,,NO_ATHLETE_MATCH
+9991363,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,3-PT Made,3pm,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,goblin,150,,NO_ATHLETE_MATCH
+9991377,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,MICH,DUKE,MICH,F,Steals,stl,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,goblin,150,,NO_ATHLETE_MATCH
+9991384,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,3-PT Made,3pm,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,goblin,150,,NO_ATHLETE_MATCH
+9991385,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Blocked Shots,blk,Demon,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Blocked Shots,demon,150,,NO_ATHLETE_MATCH
+9991399,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,MICH,DUKE,MICH,G-F,Steals,stl,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,goblin,150,,NO_ATHLETE_MATCH
+9991408,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Assists,ast,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Assists,goblin,150,,NO_ATHLETE_MATCH
+9991409,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Blocked Shots,blk,Demon,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Blocked Shots,demon,150,,NO_ATHLETE_MATCH
+9991429,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,MICH,DUKE,MICH,G-F,Steals,stl,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Steals,goblin,150,,NO_ATHLETE_MATCH
+9991437,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,3-PT Made,3pm,Demon,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,3-PT Made,demon,150,,NO_ATHLETE_MATCH
+9991443,274124,patrick ngongba|DUKE,Patrick Ngongba,patrick ngongba,DUKE,MICH,DUKE,MICH,C,Blocked Shots,blk,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,DUKE,Blocked Shots,goblin,150,,NO_ATHLETE_MATCH
+9991988,280048,aday mara|MICH,Aday Mara,aday mara,MICH,DUKE,MICH,DUKE,C,Steals,stl,Demon,0.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Steals,demon,130,,NO_ATHLETE_MATCH
+9992005,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Assists,ast,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Assists,goblin,130,,NO_ATHLETE_MATCH
+9992018,279175,morez johnson|MICH,Morez Johnson,morez johnson,MICH,DUKE,MICH,DUKE,F,Steals,stl,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Steals,goblin,130,,NO_ATHLETE_MATCH
+9992025,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,3-PT Made,3pm,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,3-PT Made,goblin,130,,NO_ATHLETE_MATCH
+9992044,276719,yaxel lendeborg|MICH,Yaxel Lendeborg,yaxel lendeborg,MICH,DUKE,MICH,DUKE,F,Steals,stl,Goblin,0.5,2026-02-21T18:30:00.000-05:00,129452,20,MICH,Steals,goblin,130,,NO_ATHLETE_MATCH

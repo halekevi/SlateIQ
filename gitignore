@@ -1,0 +1,34 @@
+# Intermediate pipeline data files
+step1_*.csv
+step2_*.csv
+step3_*.csv
+step4_*.csv
+step5_*.csv
+step6_*.csv
+step7_*.csv
+step8_*.csv
+step9_*.csv
+step1_*.json
+step0_pp_raw.json
+pp_devtools_payload.json
+
+# Large output files (regenerated each run)
+step7_ranked_props.xlsx
+step8_all_direction.csv
+step8_all_direction_clean.xlsx
+props_clean.xlsx
+
+# Cache directories
+_nba_cache/
+__pycache__/
+*.pyc
+
+# Old result files
+*_graded.csv
+*_results_*.xlsx
+*_results_*.csv
+
+# OS/editor
+.DS_Store
+Thumbs.db
+*.swp
