@@ -77,7 +77,7 @@ if ($RunCBB) {
         Run-Step "Step 3 - Attach ESPN IDs"       $CBBDir ".\step5_attach_espn_ids.py --input step2_cbb.csv --output step3_cbb.csv"
         Run-Step "Step 4 - Attach Boxscore Stats" $CBBDir ".\cbb_step5b_attach_boxscore_stats.py --input step3_cbb.csv --output step5b_cbb.csv"
         Run-Step "Step 5 - Rank Props"            $CBBDir ".\cbb_step6_rank_props.py --input step5b_cbb.csv --output step6_ranked_cbb.xlsx"
-        Run-Step "Step 6 - Build Tickets"         $CBBDir ".\cbb_step7_build_tickets.py --input step6_ranked_cbb.xlsx --output cbb_tickets.xlsx"
+        Run-Step "Step 6 - Build Tickets" $CBBDir ".\cbb_step7_build_tickets.py --input step6_ranked_cbb.xlsx --output cbb_tickets.xlsx --legs 3,4,5,6"
         Copy-Item "$CBBDir\step6_ranked_cbb.xlsx" "$OutDir\cbb_ranked_$Date.xlsx" -Force -ErrorAction SilentlyContinue
         Copy-Item "$CBBDir\cbb_tickets.xlsx"      "$OutDir\cbb_tickets_$Date.xlsx" -Force -ErrorAction SilentlyContinue
         Write-Host ""

@@ -241,7 +241,7 @@ def main():
     ap.add_argument('--min_hit_rate', type=float, default=0.7,
                     help='CBB default 0.7 (lower than NBA 0.8 due to smaller sample)')
     ap.add_argument('--max_tickets',  type=int,   default=10)
-    ap.add_argument('--legs',         default='2,3,4')
+    ap.add_argument('--legs',         default='3,4,5,6')
     ap.add_argument('--no_fantasy',   action='store_true', default=True)
     args = ap.parse_args()
 
