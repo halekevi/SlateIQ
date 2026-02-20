@@ -12,7 +12,7 @@ Fix:
 - Keeps downstream CSV deterministic and avoids dtype churn.
 
 Recommended run:
-  py -3.14 step4_attach_player_stats.py --input step3_with_defense.csv --output step4_with_stats.csv --season 2025-26 --cache-dir .\_nba_cache --timeout 120 --retries 6 --sleep 0.8
+  py -3.14 step4_attach_player_stats.py --input step3_with_defense.csv --output step4_with_stats.csv --season 2025-26 --cache-dir .\\_nba_cache --timeout 120 --retries 6 --sleep 0.8
 """
 
 from __future__ import annotations
@@ -183,6 +183,14 @@ def _read_player_log(
 
             gl = playergamelog.PlayerGameLog(player_id=player_id, season=season, timeout=timeout_s)
             raw = gl.get_data_frames()[0]
+
+            # Empty response = invalid/inactive player — skip immediately, don't retry
+            if raw is None or len(raw) == 0:
+                print(f"⚠️ player_id={player_id}: empty response (invalid/inactive player) — skipping")
+                empty = pd.DataFrame()
+                mem_cache[key] = empty
+                return empty
+
             df = raw.copy()
             for c in df.columns:
                 df[c] = df[c].astype(str)
@@ -204,13 +212,29 @@ def _read_player_log(
             mem_cache[key] = df
             return df
 
+        except (requests.exceptions.ReadTimeout, requests.exceptions.ConnectTimeout) as e:
+            last_err = e
+            # After 2 timeouts assume the ID is dead/invalid — bail early
+            if attempt >= 2:
+                print(f"⚠️ player_id={player_id}: timeout x{attempt} — likely invalid ID, skipping")
+                empty = pd.DataFrame()
+                mem_cache[key] = empty
+                return empty
+            backoff = min(30.0, (2 ** (attempt - 1)) * 1.5) + random.random()
+            print(f"⚠️ playergamelog error for player_id={player_id} attempt {attempt}/{retries}: {type(e).__name__} — retrying in {backoff:.1f}s")
+            time.sleep(backoff)
+
         except (requests.exceptions.RequestException, Exception) as e:
             last_err = e
             backoff = min(60.0, (2 ** (attempt - 1)) * 1.5) + random.random()
             print(f"⚠️ playergamelog error for player_id={player_id} attempt {attempt}/{retries}: {type(e).__name__} — retrying in {backoff:.1f}s")
             time.sleep(backoff)
 
-    raise RuntimeError(f"❌ Failed fetching playergamelog for {player_id} after {retries} retries. Last error: {last_err}")
+    # All retries exhausted — skip instead of crashing the pipeline
+    print(f"⚠️ Skipping player_id={player_id} after {retries} retries. Last error: {last_err}")
+    empty = pd.DataFrame()
+    mem_cache[key] = empty
+    return empty
 
 
 def _combo_aligned_sum(logs: List[pd.DataFrame], prop_norm: str) -> pd.DataFrame:
@@ -301,10 +325,15 @@ def main() -> None:
     unique_ids = sorted(list(dict.fromkeys([i for i in all_ids if isinstance(i, int)])))
 
     print(f"→ Unique NBA player ids to fetch: {len(unique_ids)}")
+    failed_ids = set()
     for i, pid in enumerate(unique_ids, start=1):
-        _read_player_log(pid, args.season, cache_dir, mem_cache, args.sleep, args.timeout, args.retries)
+        try:
+            _read_player_log(pid, args.season, cache_dir, mem_cache, args.sleep, args.timeout, args.retries)
+        except Exception as e:
+            print(f"⚠️ Skipping player_id={pid} after all retries failed: {e}")
+            failed_ids.add(pid)
         if i % 25 == 0:
-            print(f"  fetched {i}/{len(unique_ids)}")
+            print(f"  fetched {i}/{len(unique_ids)} ({len(failed_ids)} skipped)")
 
     N = int(args.n)
     stat_cols = [f"stat_g{i}" for i in range(1, N + 1)]
@@ -329,6 +358,11 @@ def main() -> None:
 
         if not ids:
             df.at[idx, "stat_status"] = "NO_NBA_ID"
+            continue
+
+        # Skip players that failed all retries during prefetch
+        if any(i in failed_ids for i in ids):
+            df.at[idx, "stat_status"] = "FETCH_FAILED"
             continue
 
         if len(ids) == 1:

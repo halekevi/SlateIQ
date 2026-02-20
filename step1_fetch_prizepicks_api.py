@@ -20,13 +20,6 @@ NEW (Rate-limit robust):
     * after 2 cooldowns total, STOP pagination early and continue pipeline
   Key principle: do not let Step1 block the whole run.
 
-NEW (403 handling):
-- On HTTP 403 (Forbidden / bot-detection):
-    * rotate to a new User-Agent and re-warm the session
-    * sleep with exponential backoff + jitter
-    * retry the same page up to max_403_retries times
-    * after exhausting retries, stop pagination early and continue pipeline
-
 HOTFIX (Pagination + Dupes):
 - Uses PrizePicks pagination parameters: page[number] and page[size]
 - Stops pagination early if a page returns 0 new projection IDs
@@ -53,25 +46,31 @@ WARMUP_URL = "https://api.prizepicks.com/leagues"
 
 # Rotate through realistic Chrome user-agents
 USER_AGENTS = [
+    # Keep UA + Client Hints consistent (Chromium on Windows).
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
 ]
 
+def _ua_chrome_major(ua: str) -> str:
+    m = re.search(r"Chrome/(\d+)", ua)
+    return m.group(1) if m else "122"
+
+
 def _make_headers(ua: str) -> dict:
-    """Build realistic browser headers that match what Chrome actually sends."""
+    """Build browser-like headers with consistent UA + Client Hints."""
+    major = _ua_chrome_major(ua)
     return {
         "User-Agent": ua,
         "Accept": "application/json, text/plain, */*",
         "Accept-Language": "en-US,en;q=0.9",
-        "Accept-Encoding": "gzip, deflate, br",
+        # Let requests negotiate encoding; avoid 'br' (brotli) to reduce decode issues.
         "Origin": "https://app.prizepicks.com",
         "Referer": "https://app.prizepicks.com/board",
-        "Sec-Ch-Ua": '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"',
+        # Client hints: keep aligned with Chrome UA
+        "Sec-Ch-Ua": f'\"Chromium\";v=\"{major}\", \"Not(A:Brand\";v=\"24\", \"Google Chrome\";v=\"{major}\"',
         "Sec-Ch-Ua-Mobile": "?0",
-        "Sec-Ch-Ua-Platform": '"Windows"',
+        "Sec-Ch-Ua-Platform": "\"Windows\"",
         "Sec-Fetch-Dest": "empty",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Site": "same-site",
@@ -79,6 +78,7 @@ def _make_headers(ua: str) -> dict:
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
     }
+
 
 def _warm_session(session: requests.Session, ua: str) -> None:
     """
@@ -141,8 +141,6 @@ def fetch_pages(
     cooldown_seconds: float,
     max_cooldowns: int,
     jitter_seconds: float,
-    max_403_retries: int = 3,
-    forbidden_backoff_base: float = 15.0,
 ) -> Tuple[List[dict], List[dict], List[dict]]:
 
     all_data: List[dict] = []
@@ -150,7 +148,6 @@ def fetch_pages(
     raw_pages: List[dict] = []
 
     cooldowns_used = 0
-    forbidden_retries_used = 0
     stop_paging = False
 
     seen_projection_ids: Set[str] = set()
@@ -170,11 +167,10 @@ def fetch_pages(
         if stop_paging:
             break
 
-        params = {
+                params = {
             "league_id": str(league_id),
             "game_mode": str(game_mode),
-            "per_page": int(per_page),
-            "page": int(page),
+            # Use JSON:API style pagination only (avoid redundant param combos)
             "page[number]": int(page),
             "page[size]": int(per_page),
         }
@@ -211,41 +207,36 @@ def fetch_pages(
                 time.sleep(sleep_s)
                 continue
 
-            # ---- 403 handling (bot-detection / Forbidden) ----
-            if r.status_code == 403:
-                forbidden_retries_used += 1
-
-                if forbidden_retries_used > max_403_retries:
-                    print(
-                        f"🛑 403 Forbidden persists after {max_403_retries} retries. "
-                        f"Stopping pagination early and continuing pipeline."
-                    )
-                    stop_paging = True
-                    break
-
-                # Exponential backoff + jitter, then rotate UA and re-warm session
-                sleep_s = (forbidden_backoff_base * (2 ** (forbidden_retries_used - 1))
-                           + random.uniform(3.0, 10.0))
-                print(
-                    f"🚫 403 Forbidden (attempt {forbidden_retries_used}/{max_403_retries}) "
-                    f"on page {page} → rotating UA + re-warming session, "
-                    f"sleeping {sleep_s:.1f}s..."
-                )
-                time.sleep(sleep_s)
-
-                # Rotate to a different User-Agent
-                new_ua = random.choice([a for a in USER_AGENTS if a != ua] or USER_AGENTS)
-                ua = new_ua
-                headers = _make_headers(ua)
-                # Re-warm the session with the new identity
-                _warm_session(session, ua)
-                continue
-
             # ---- 5xx backoff ----
             if r.status_code in (500, 502, 503, 504):
                 wait = (2.0 ** (attempt - 1)) + 0.5
                 print(f"  ⏳ page {page} attempt {attempt} → status {r.status_code}, retrying in {wait:.1f}s")
                 time.sleep(wait)
+                continue
+
+
+            # ---- 403 / 401 handling (WAF / forbidden) ----
+            if r.status_code in (401, 403):
+                # Treat as a soft-block: back off, optionally re-warm and downgrade page size.
+                wait = (2.0 ** (attempt - 1)) + random.uniform(1.0, 3.0)
+                print(f"  🚫 page {page} attempt {attempt} → status {r.status_code} (forbidden). Backing off {wait:.1f}s...")
+                time.sleep(wait)
+
+                # After a couple tries, re-create session + UA (looks like a fresh browser)
+                if attempt in (2, 4):
+                    try:
+                        session.close()
+                    except Exception:
+                        pass
+                    session = requests.Session()
+                    ua = random.choice(USER_AGENTS)
+                    headers = _make_headers(ua)
+                    _warm_session(session, ua)
+
+                # Gradually lower page size (less aggressive)
+                if params.get("page[size]", per_page) > 100:
+                    params["page[size]"] = max(100, int(params["page[size]"]) - 50)
+
                 continue
 
             r.raise_for_status()
@@ -306,7 +297,7 @@ def main():
     # League + paging
     ap.add_argument("--league_id", default="7")          # NBA = 7
     ap.add_argument("--game_mode", default="pickem")     # props live in pickem
-    ap.add_argument("--per_page", type=int, default=250)
+    ap.add_argument("--per_page", type=int, default=150)
     ap.add_argument("--max_pages", type=int, default=80)
     ap.add_argument("--sleep", type=float, default=1.2)
 
@@ -317,12 +308,6 @@ def main():
                     help="Max number of 429 cooldown cycles before stopping pagination early.")
     ap.add_argument("--jitter_seconds", type=float, default=7.0,
                     help="Random jitter added to cooldown sleep (0..jitter_seconds).")
-
-    # 403 handling controls
-    ap.add_argument("--max_403_retries", type=int, default=3,
-                    help="Max retries on HTTP 403 (bot-detection) before stopping pagination early.")
-    ap.add_argument("--forbidden_backoff_base", type=float, default=15.0,
-                    help="Base sleep seconds for 403 exponential backoff (doubles each retry).")
 
     # Back-compat: allow overriding url, but still default to API_URL
     ap.add_argument("--url", default="")
@@ -337,7 +322,7 @@ def main():
 
     # If custom URL is used, do a single fetch without pagination (safety).
     if url_used != API_URL:
-        r = requests.get(url_used, headers=HEADERS, timeout=30)
+        r = requests.get(url_used, headers=headers, timeout=30)
         r.raise_for_status()
         j = r.json()
         data = j.get("data") or []
@@ -354,8 +339,6 @@ def main():
             cooldown_seconds=float(args.cooldown_seconds),
             max_cooldowns=int(args.max_cooldowns),
             jitter_seconds=float(args.jitter_seconds),
-            max_403_retries=int(args.max_403_retries),
-            forbidden_backoff_base=float(args.forbidden_backoff_base),
         )
 
     if args.raw_json:
