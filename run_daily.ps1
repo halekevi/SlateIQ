@@ -49,7 +49,7 @@ if ($RunNBA) {
         Run-Step "Step 1 - Fetch PrizePicks" $NBADir ".\step1_fetch_prizepicks_api.py --league_id 7 --game_mode pickem --per_page 250 --max_pages 5 --sleep 2.0 --cooldown_seconds 90 --max_cooldowns 3 --jitter_seconds 10.0 --output step1_pp_props_today.csv"
         Run-Step "Step 2 - Attach Pick Types"  $NBADir ".\step2_attach_picktypes.py --input step1_pp_props_today.csv --output step2_with_picktypes.csv"
         Run-Step "Step 3 - Attach Defense"     $NBADir ".\step3_attach_defense.py --input step2_with_picktypes.csv --defense .\defense_team_summary.csv --output step3_with_defense.csv"
-        Run-Step "Step 4 - Attach Player Stats" $NBADir ".\step4_attach_player_stats.py --input step3_with_defense.csv --output step4_with_stats.csv"
+        Run-Step "Step 4 - Attach Player Stats" $NBADir ".\step4_attach_player_stats.py --input step3_with_defense.csv --output step4_with_stats.csv --season 2025-26 --cache-dir .\_nba_cache --timeout 120 --retries 6 --sleep 3.0"
         Run-Step "Step 5 - Line Hit Rates"     $NBADir ".\step5_add_line_hit_rates.py --input step4_with_stats.csv --output step5_with_hit_rates.csv"
         Run-Step "Step 6 - Team Role Context"  $NBADir ".\step6_team_role_context.py --input step5_with_hit_rates.csv --output step6_with_team_role_context.csv"
         Run-Step "Step 7 - Rank Props"         $NBADir ".\step7_rank_props.py --input step6_with_team_role_context.csv --output step7_ranked_props.xlsx"

@@ -214,13 +214,14 @@ def _read_player_log(
 
         except (requests.exceptions.ReadTimeout, requests.exceptions.ConnectTimeout) as e:
             last_err = e
-            # After 2 timeouts assume the ID is dead/invalid — bail early
-            if attempt >= 2:
-                print(f"⚠️ player_id={player_id}: timeout x{attempt} — likely invalid ID, skipping")
+            # Only short-circuit truly bogus IDs (real NBA IDs are always 6+ digits)
+            if player_id < 10000 and attempt >= 2:
+                print(f"⚠️ player_id={player_id}: timeout x{attempt} + invalid ID format — skipping")
                 empty = pd.DataFrame()
                 mem_cache[key] = empty
                 return empty
-            backoff = min(30.0, (2 ** (attempt - 1)) * 1.5) + random.random()
+            # For valid players, use longer backoff to let the API recover from rate-limiting
+            backoff = min(90.0, (2 ** (attempt - 1)) * 3.0) + random.uniform(1.0, 5.0)
             print(f"⚠️ playergamelog error for player_id={player_id} attempt {attempt}/{retries}: {type(e).__name__} — retrying in {backoff:.1f}s")
             time.sleep(backoff)
 

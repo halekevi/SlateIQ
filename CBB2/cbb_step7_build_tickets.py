@@ -30,12 +30,29 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
-PRIZEPICKS_PAYOUTS = {
-    'Standard': {2: 3.0,  3: 5.0,  4: 10.0, 5: 20.0},
-    'Goblin':   {2: 1.25, 3: 1.7,  4: 2.5,  5: 3.5},
-    'Demon':    {2: 1.85, 3: 3.0,  4: 5.5,  5: 10.0},
-    'Best Mix': {2: 3.0,  3: 5.0,  4: 10.0, 5: 20.0},
+# ── Payout Tables ─────────────────────────────────────────────────────────────
+# Base Power Play payouts (all correct) — Standard lines only
+POWER_PLAY_BASE = {2: 3.0, 3: 6.0, 4: 10.0, 5: 20.0, 6: 37.5}
+
+# Base Flex Play payouts — Standard lines only
+# Format: {n_legs: {n_correct: multiplier}}
+FLEX_PLAY_BASE = {
+    2: {2: 3.0},
+    3: {3: 3.0,  2: 1.0},
+    4: {4: 6.0,  3: 1.5},
+    5: {5: 10.0, 4: 2.0,  3: 0.4},
+    6: {6: 25.0, 5: 2.0,  4: 0.4},
 }
+
+# Goblin deviation multipliers on Power Play top payout (6-leg observed, extrapolated for others)
+# Key = deviation level (1=closest to standard, 3=furthest)
+# Each Goblin in ticket compounds: multiply modifiers together
+GOBLIN_POWER_MOD = {1: 0.840, 2: 0.747, 3: 0.707}   # 31.5/37.5, 28/37.5, 26.5/37.5
+GOBLIN_FLEX_MOD  = {1: 0.800, 2: 0.720, 3: 0.600}   # 20/25, 18/25, 15/25
+
+# Demon deviation multipliers on Power Play top payout (6-leg observed)
+DEMON_POWER_MOD  = {1: 1.627, 2: 2.400, 3: 2.720}   # 61/37.5, 90/37.5, 102/37.5
+DEMON_FLEX_MOD   = {1: 1.600, 2: 1.520, 3: 1.560}   # 40/25, 38/25, 39/25
 
 COLORS = {
     'Standard': '2874A6',
@@ -48,13 +65,67 @@ DIR_OVER  = 'C8F7C5'
 DIR_UNDER = 'F7C5C5'
 
 
+def _deviation_level(pick_type: str, line: float, standard_line: float = None) -> int:
+    """Estimate deviation level (1-3) for Goblin/Demon lines.
+    Without a known standard line we default to level 1 (conservative).
+    If standard_line is provided, compute deviation buckets.
+    """
+    if standard_line is None or standard_line == 0:
+        return 1
+    diff = abs(line - standard_line)
+    pct  = diff / abs(standard_line) if standard_line != 0 else 0
+    if pct < 0.10:   return 1
+    elif pct < 0.20: return 2
+    else:            return 3
+
+
+def calc_ticket_payout(ticket: list, n_legs: int, play_type: str = 'power') -> dict:
+    """
+    Calculate realistic payout for a mixed ticket.
+    ticket: list of row dicts with 'pick_type' and optionally 'line'
+    play_type: 'power' or 'flex'
+    Returns dict with top_payout, partial payouts for flex, stake_to_win_100
+    """
+    base_top = POWER_PLAY_BASE.get(n_legs, 37.5) if play_type == 'power' else FLEX_PLAY_BASE.get(n_legs, {}).get(n_legs, 25.0)
+
+    power_mod = 1.0
+    flex_mod  = 1.0
+
+    for row in ticket:
+        pt = str(row.get('pick_type', 'Standard')).strip().lower()
+        dev = 1  # default — we don't have standard_line reference in most cases
+        if 'gob' in pt:
+            power_mod *= GOBLIN_POWER_MOD.get(dev, 0.840)
+            flex_mod  *= GOBLIN_FLEX_MOD.get(dev, 0.800)
+        elif 'dem' in pt:
+            power_mod *= DEMON_POWER_MOD.get(dev, 1.627)
+            flex_mod  *= DEMON_FLEX_MOD.get(dev, 1.600)
+
+    if play_type == 'power':
+        top = round(base_top * power_mod, 2)
+        stake = round(100 / top, 2) if top > 0 else 0
+        return {'top_payout': top, 'stake_to_win_100': stake, 'play_type': 'Power Play'}
+    else:
+        flex_base = FLEX_PLAY_BASE.get(n_legs, {})
+        partials = {}
+        for n_correct, mult in flex_base.items():
+            if n_correct == n_legs:
+                partials[n_correct] = round(mult * flex_mod, 2)
+            else:
+                partials[n_correct] = round(mult, 2)  # partial payouts unchanged by deviation
+        top = partials.get(n_legs, 25.0)
+        stake = round(100 / top, 2) if top > 0 else 0
+        return {'top_payout': top, 'stake_to_win_100': stake, 'play_type': 'Flex Play', 'partials': partials}
+
+
 def get_payout(pick_label: str, n_legs: int) -> float:
-    table = PRIZEPICKS_PAYOUTS.get(pick_label, PRIZEPICKS_PAYOUTS['Standard'])
-    return table.get(n_legs, 1.0)
+    """Legacy function — returns base Power Play payout for pure pick type pools."""
+    return POWER_PLAY_BASE.get(n_legs, 37.5)
 
 
 def stake_to_win(target: float, pick_label: str, n_legs: int) -> float:
-    return round(target / get_payout(pick_label, n_legs), 2)
+    base = POWER_PLAY_BASE.get(n_legs, 37.5)
+    return round(target / base, 2)
 
 
 def thin_border():
@@ -99,10 +170,9 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets: int, used_legs: 
         game_key = tuple(sorted([t, o]))
         game_counts[game_key] = 1
 
-        used_players = {anchor['player']}
         for _, row in pool.iterrows():
             if len(ticket) >= n_legs: break
-            if row['player'] in used_players: continue
+            if row['player'] == anchor['player']: continue
             lk2 = (row['player'], row['prop_type'], float(row['line']))
             if lk2 in used_legs: continue
             rt = str(row.get(team_col, '')).strip()
@@ -111,7 +181,6 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets: int, used_legs: 
             if game_counts.get(gk, 0) >= max_per_game:
                 continue
             ticket.append(row)
-            used_players.add(row['player'])
             game_counts[gk] = game_counts.get(gk, 0) + 1
 
         if len(ticket) == n_legs:
@@ -147,13 +216,20 @@ def write_tickets_sheet(wb, sheet_name, tickets, n_legs, pick_label):
     for t_idx, ticket in enumerate(tickets, 1):
         avg_score = sum(float(r['rank_score']) for r in ticket) / len(ticket)
         avg_hr    = sum(float(r['line_hit_rate']) for r in ticket if pd.notna(r.get('line_hit_rate'))) / max(1, sum(1 for r in ticket if pd.notna(r.get('line_hit_rate'))))
-        stake     = stake_to_win(100, pick_label, n_legs)
+
+        # Calculate deviation-aware payouts for both play types
+        ticket_dicts = [r._asdict() if hasattr(r, '_asdict') else dict(r) for r in ticket]
+        pp_info   = calc_ticket_payout(ticket_dicts, n_legs, 'power')
+        flex_info = calc_ticket_payout(ticket_dicts, n_legs, 'flex')
+        pp_top    = pp_info['top_payout']
+        flex_top  = flex_info['top_payout']
+        pp_stake  = pp_info['stake_to_win_100']
 
         ws.merge_cells(start_row=cur, start_column=1, end_row=cur, end_column=len(cols))
         hcell = ws.cell(row=cur, column=1,
             value=(f"  Ticket #{t_idx}  ·  {n_legs}-Leg {pick_label}"
-                   f"  ·  Payout: {payout}x"
-                   f"  ·  ${stake:.0f} to win $100"
+                   f"  ·  Power: {pp_top}x (${pp_stake:.0f} to win $100)"
+                   f"  ·  Flex: {flex_top}x"
                    f"  ·  Avg Hit Rate: {avg_hr:.0%}"
                    f"  ·  Est Win Prob: {avg_hr**n_legs:.0%}"
                    f"  ·  Avg Score: {avg_score:.2f}"))
@@ -208,10 +284,10 @@ def write_tickets_sheet(wb, sheet_name, tickets, n_legs, pick_label):
 
 def write_summary_sheet(wb, all_ticket_sets):
     ws = wb.create_sheet('SUMMARY', 0)
-    headers = ['Sheet', 'Ticket #', 'Legs', 'Type', 'Payout',
-               '$? to win $100', 'Avg Hit Rate', 'Est Win %', 'Avg Score', 'Players']
-    widths  = [20,      10,        6,      12,     9,
-               14,              13,            12,          13,          60]
+    headers = ['Sheet', 'Ticket #', 'Legs', 'Type', 'Power Payout',
+               '$? to win $100', 'Flex Payout', 'Avg Hit Rate', 'Est Win %', 'Avg Score', 'Players']
+    widths  = [20,      10,        6,      12,   13,
+               14,              12,           13,            12,          13,          60]
 
     for ci, (h, w) in enumerate(zip(headers, widths), 1):
         c = ws.cell(row=1, column=ci, value=h)
@@ -225,15 +301,18 @@ def write_summary_sheet(wb, all_ticket_sets):
 
     row = 2
     for sheet_name, tickets, n_legs, pick_label in all_ticket_sets:
-        payout = get_payout(pick_label, n_legs)
-        stake  = stake_to_win(100, pick_label, n_legs)
         for t_idx, ticket in enumerate(tickets, 1):
-            avg_score = sum(float(r['rank_score']) for r in ticket) / len(ticket)
-            avg_hr    = sum(float(r['line_hit_rate']) for r in ticket if pd.notna(r.get('line_hit_rate'))) / max(1, sum(1 for r in ticket if pd.notna(r.get('line_hit_rate'))))
-            players   = ' | '.join(f"{r['player']} {r.get('final_bet_direction','OVER')} {r['prop_type']} {r['line']}" for r in ticket)
+            avg_score   = sum(float(r['rank_score']) for r in ticket) / len(ticket)
+            avg_hr      = sum(float(r['line_hit_rate']) for r in ticket if pd.notna(r.get('line_hit_rate'))) / max(1, sum(1 for r in ticket if pd.notna(r.get('line_hit_rate'))))
+            ticket_dicts = [r._asdict() if hasattr(r, '_asdict') else dict(r) for r in ticket]
+            pp_info     = calc_ticket_payout(ticket_dicts, n_legs, 'power')
+            flex_info   = calc_ticket_payout(ticket_dicts, n_legs, 'flex')
+            players     = ' | '.join(f"{r['player']} {r.get('final_bet_direction','OVER')} {r['prop_type']} {r['line']}" for r in ticket)
 
-            vals = [sheet_name, t_idx, n_legs, pick_label, f"{payout}x",
-                    f"${stake:.0f}", f"{avg_hr:.0%}", f"{avg_hr**n_legs:.0%}",
+            vals = [sheet_name, t_idx, n_legs, pick_label,
+                    f"{pp_info['top_payout']}x", f"${pp_info['stake_to_win_100']:.0f}",
+                    f"{flex_info['top_payout']}x",
+                    f"{avg_hr:.0%}", f"{avg_hr**n_legs:.0%}",
                     round(avg_score, 2), players]
 
             for ci, val in enumerate(vals, 1):
@@ -319,12 +398,10 @@ def main():
         lambda r: float(r['rank_score']) + (0.25 if r['pick_type'] == 'Standard' else 0.0), axis=1)
     mix_df = mix_df.sort_values('rank_score_mix', ascending=False)
 
-    # Keep best prop per player (by rank_score) but allow the pool to have all players
-    # Do NOT dedupe to 1 row per player — that kills 4+ leg ticket building
-    std_pool = std_df.sort_values('rank_score', ascending=False)
-    gob_pool = gob_df.sort_values('rank_score', ascending=False)
-    dem_pool = dem_df.sort_values('rank_score', ascending=False)
-    all_pool = mix_df.sort_values('rank_score_mix', ascending=False)
+    std_pool = std_df.drop_duplicates(subset=['player'])
+    gob_pool = gob_df.drop_duplicates(subset=['player'])
+    dem_pool = dem_df.drop_duplicates(subset=['player'])
+    all_pool = mix_df.drop_duplicates(subset=['player'])
 
     # For ticket building rank_score, use rank_score_mix for Best Mix
     all_pool = all_pool.copy()
@@ -349,25 +426,6 @@ def main():
             write_tickets_sheet(wb, sheet_name, tickets, n_legs, pick_label)
             all_ticket_sets.append((sheet_name, tickets, n_legs, pick_label))
             print(f"  {sheet_name}: {len(tickets)} tickets")
-
-    # Standard-first fill: build tickets starting with Standard props,
-    # filling remaining legs with best Goblin props when Standard pool runs short
-    if len(std_pool) >= 1 and len(gob_pool) >= 1:
-        std_fill_pool = pd.concat([
-            std_pool.assign(_pref=0),
-            gob_pool.assign(_pref=1),
-        ]).sort_values(['_pref', 'rank_score'], ascending=[True, False]).drop('_pref', axis=1)
-
-        used_legs_fill: set = set()
-        for n_legs in leg_counts:
-            if n_legs < 4: continue  # 3-leg already covered above
-            if len(std_fill_pool) < n_legs: continue
-            tickets = build_tickets(std_fill_pool.copy(), n_legs, args.max_tickets, used_legs_fill)
-            if tickets:
-                sheet_name = f"Std+Gob Fill {n_legs}-Leg"
-                write_tickets_sheet(wb, sheet_name, tickets, n_legs, 'Best Mix')
-                all_ticket_sets.append((sheet_name, tickets, n_legs, 'Best Mix'))
-                print(f"  {sheet_name}: {len(tickets)} tickets (Standard-first, Goblin fill)")
 
     write_summary_sheet(wb, all_ticket_sets)
     wb.save(args.output)
