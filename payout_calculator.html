@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PrizePicks Payout Calculator</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#030712;color:#f1f5f9;font-family:'Courier New',monospace;min-height:100vh}
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-track{background:#0f172a}
+  ::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
+
+  .header{background:#0a0f1e;border-bottom:1px solid #1e293b;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .header-title{font-size:20px;font-weight:bold;letter-spacing:1px;color:#f8fafc}
+  .header-sub{font-size:11px;color:#475569;margin-top:2px;letter-spacing:2px}
+  .stake-wrap{display:flex;align-items:center;gap:8px}
+  .stake-label{color:#64748b;font-size:12px}
+  .stake-input{width:90px;background:#0f172a;color:#f8fafc;border:1px solid #334155;border-radius:6px;padding:6px 10px;font-size:14px;font-family:'Courier New',monospace;outline:none}
+
+  .tabs{display:flex;border-bottom:1px solid #1e293b;background:#070d1a;padding:0 28px}
+  .tab-btn{background:none;border:none;border-bottom:2px solid transparent;color:#475569;padding:12px 18px;cursor:pointer;font-size:12px;font-weight:bold;letter-spacing:1.5px;font-family:'Courier New',monospace;transition:all 0.15s}
+  .tab-btn.active{border-bottom-color:#3b82f6;color:#f8fafc}
+
+  .content{max-width:920px;margin:0 auto;padding:24px 20px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+  .section-label{font-size:10px;color:#475569;letter-spacing:3px;margin-bottom:14px}
+
+  .leg-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:rgba(255,255,255,0.03);border-radius:8px;padding:8px 10px;border:1px solid #1e293b;transition:border-color 0.2s}
+  .leg-emoji{font-size:16px;width:24px;text-align:center}
+  .leg-num{color:#475569;font-size:11px;width:48px;flex-shrink:0}
+  .leg-select{flex:1;background:#0f172a;border:1px solid #334155;border-radius:6px;padding:5px 8px;font-size:12px;cursor:pointer;outline:none;font-weight:bold;font-family:'Courier New',monospace}
+  .leg-remove{background:rgba(239,68,68,0.12);color:#ef4444;border:none;border-radius:5px;padding:3px 9px;cursor:pointer;font-size:15px;font-weight:bold}
+  .add-leg-btn{width:100%;padding:9px;background:rgba(59,130,246,0.07);border:1px dashed #3b82f655;border-radius:8px;color:#3b82f6;cursor:pointer;font-size:12px;font-weight:bold;letter-spacing:1px;margin-top:4px;font-family:'Courier New',monospace}
+
+  .badges{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+  .badge{border-radius:20px;padding:3px 12px;font-size:11px;font-weight:bold}
+
+  .result-card{border-radius:12px;padding:16px 18px;margin-bottom:14px}
+  .result-card.power{background:linear-gradient(135deg,#0c1a3a,#071020);border:1px solid #2563eb33}
+  .result-card.flex{background:linear-gradient(135deg,#1a0a3a,#0f0620);border:1px solid #7c3aed33}
+  .card-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+  .card-tag{border-radius:4px;padding:2px 9px;font-size:10px;color:#fff;font-weight:bold;letter-spacing:1.5px}
+  .card-tag.pp{background:#2563eb}
+  .card-tag.fl{background:#7c3aed}
+  .card-sub{color:#475569;font-size:11px}
+  .metrics{display:grid;gap:10px}
+  .metric-box{background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;text-align:center}
+  .metric-label{color:#475569;font-size:9px;letter-spacing:2px;margin-bottom:4px}
+  .metric-val{font-size:22px;font-weight:bold}
+
+  .partials-wrap{border-top:1px solid #7c3aed22;padding-top:10px;margin-top:12px}
+  .partials-label{color:#475569;font-size:9px;letter-spacing:2px;margin-bottom:8px}
+  .partials-row{display:flex;gap:8px;flex-wrap:wrap}
+  .partial-box{background:rgba(124,58,237,0.1);border:1px solid #7c3aed33;border-radius:8px;padding:8px 12px;text-align:center}
+  .partial-nc{color:#a78bfa;font-size:10px;margin-bottom:2px}
+  .partial-mult{color:#f8fafc;font-size:16px;font-weight:bold}
+  .partial-win{color:#10b981;font-size:10px;margin-top:2px}
+
+  .mod-bar{margin-top:10px;background:rgba(255,255,255,0.02);border-radius:8px;padding:8px 12px}
+  .mod-text{color:#475569;font-size:10px;letter-spacing:1px}
+
+  .empty-state{color:#475569;text-align:center;margin-top:80px;font-size:13px}
+
+  /* Table tab */
+  .leg-count-bar{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .lc-label{color:#475569;font-size:11px;letter-spacing:2px}
+  .lc-btn{background:rgba(255,255,255,0.05);color:#64748b;border:none;border-radius:6px;padding:5px 14px;cursor:pointer;font-size:12px;font-weight:bold;letter-spacing:1px;font-family:'Courier New',monospace;transition:all 0.15s}
+  .lc-btn.active{background:#3b82f6;color:#fff}
+  .ref-table{width:100%;border-collapse:collapse;font-size:12px}
+  .ref-table th{padding:10px 14px;text-align:center;color:#334155;border-bottom:1px solid #1e293b;font-size:10px;letter-spacing:2px;white-space:nowrap}
+  .ref-table td{padding:11px 14px;border-bottom:1px solid #0f172a}
+  .ref-table tr:nth-child(even){background:rgba(255,255,255,0.02)}
+
+  .flex-ref{margin-top:28px}
+  .flex-ref-label{font-size:10px;color:#475569;letter-spacing:3px;margin-bottom:14px}
+  .flex-cards{display:flex;gap:14px;flex-wrap:wrap}
+  .flex-card{background:rgba(255,255,255,0.03);border:1px solid #1e293b;border-radius:10px;padding:14px 18px;min-width:120px}
+  .flex-card-title{color:#3b82f6;font-weight:bold;margin-bottom:10px;font-size:13px}
+  .flex-card-row{display:flex;justify-content:space-between;margin-bottom:6px;gap:16px}
+  .flex-card-k{color:#64748b;font-size:11px}
+  .flex-card-v{color:#f8fafc;font-weight:bold;font-size:11px}
+
+  @media(max-width:600px){.grid2{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">🎯 PRIZEPICKS PAYOUT CALCULATOR</div>
+    <div class="header-sub">POWER PLAY · FLEX · STANDARD · GOBLIN · DEMON</div>
+  </div>
+  <div class="stake-wrap">
+    <span class="stake-label">STAKE $</span>
+    <input class="stake-input" type="number" id="stakeInput" value="10" min="1" max="100000" oninput="render()"/>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" id="tab-builder" onclick="switchTab('builder')">🏗 BUILDER</button>
+  <button class="tab-btn" id="tab-table" onclick="switchTab('table')">📊 REFERENCE</button>
+</div>
+
+<div class="content">
+  <div id="view-builder">
+    <div class="grid2">
+      <div>
+        <div class="section-label" id="leg-count-label">TICKET · 3 LEGS</div>
+        <div id="legs-container"></div>
+        <button class="add-leg-btn" onclick="addLeg()">+ ADD LEG</button>
+        <div class="badges" id="badges"></div>
+      </div>
+      <div id="results-panel">
+        <div class="empty-state">Add at least 2 legs to see payouts</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="view-table" style="display:none">
+    <div class="leg-count-bar">
+      <span class="lc-label">LEG COUNT:</span>
+      <button class="lc-btn" id="lc-3" onclick="setTableLegs(3)">3-LEG</button>
+      <button class="lc-btn active" id="lc-4" onclick="setTableLegs(4)">4-LEG</button>
+      <button class="lc-btn" id="lc-5" onclick="setTableLegs(5)">5-LEG</button>
+      <button class="lc-btn" id="lc-6" onclick="setTableLegs(6)">6-LEG</button>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="ref-table" id="ref-table">
+        <thead><tr>
+          <th>LEG TYPE</th><th>POWER</th><th id="th-pp-win">WIN $10 (PP)</th>
+          <th>$ TO WIN $100</th><th>FLEX</th><th id="th-fl-win">WIN $10 (FL)</th>
+        </tr></thead>
+        <tbody id="ref-tbody"></tbody>
+      </table>
+    </div>
+    <div class="flex-ref">
+      <div class="flex-ref-label">FLEX PARTIAL PAYOUTS — STANDARD LINES</div>
+      <div class="flex-cards" id="flex-cards"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────────
+const POWER_BASE = {2:3.0, 3:6.0, 4:10.0, 5:20.0, 6:37.5};
+const FLEX_BASE  = {
+  2:{2:3.0},
+  3:{3:3.0, 2:1.0},
+  4:{4:6.0, 3:1.5},
+  5:{5:10.0, 4:2.0, 3:0.4},
+  6:{6:25.0, 5:2.0, 4:0.4},
+};
+const GOBLIN_POWER = {1:0.840, 2:0.747, 3:0.707};
+const GOBLIN_FLEX  = {1:0.800, 2:0.720, 3:0.600};
+const DEMON_POWER  = {1:1.627, 2:2.400, 3:2.720};
+const DEMON_FLEX   = {1:1.600, 2:1.520, 3:1.560};
+
+const LEG_TYPES = ["Standard","Goblin -1","Goblin -2","Goblin -3","Demon +1","Demon +2","Demon +3"];
+
+function legColor(t) {
+  if (t.startsWith("Goblin")) return "#7c3aed";
+  if (t.startsWith("Demon"))  return "#dc2626";
+  return "#2563eb";
+}
+function legEmoji(t) {
+  if (t.startsWith("Goblin")) return "👺";
+  if (t.startsWith("Demon"))  return "😈";
+  return "⭐";
+}
+function classify(t) {
+  if (t.startsWith("Goblin")) return {kind:"goblin", dev:parseInt(t.split("-")[1])};
+  if (t.startsWith("Demon"))  return {kind:"demon",  dev:parseInt(t.split("+")[1])};
+  return {kind:"standard", dev:0};
+}
+function calcPayouts(legs) {
+  const n = legs.length;
+  if (n < 2) return null;
+  let pm=1, fm=1;
+  for (const leg of legs) {
+    const {kind,dev} = classify(leg);
+    if (kind==="goblin") { pm *= GOBLIN_POWER[dev]||0.840; fm *= GOBLIN_FLEX[dev]||0.800; }
+    else if (kind==="demon") { pm *= DEMON_POWER[dev]||1.627; fm *= DEMON_FLEX[dev]||1.600; }
+  }
+  const powerTop = Math.round((POWER_BASE[n]||37.5)*pm*100)/100;
+  const fb = FLEX_BASE[n]||{};
+  const flexTop  = Math.round(((fb[n]||25)*fm)*100)/100;
+  const partials = Object.entries(fb).filter(([k])=>parseInt(k)<n).map(([k,v])=>({correct:parseInt(k),mult:v}));
+  return {n, powerTop, flexTop, partials, pm, fm};
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let legs = ["Standard","Standard","Standard"];
+let tableLegs = 4;
+let activeTab = "builder";
+
+function getStake() { return Math.max(1, parseFloat(document.getElementById("stakeInput").value)||10); }
+
+// ── Tab switching ─────────────────────────────────────────────────────────────
+function switchTab(t) {
+  activeTab = t;
+  document.getElementById("view-builder").style.display = t==="builder"?"block":"none";
+  document.getElementById("view-table").style.display   = t==="table"?"block":"none";
+  document.getElementById("tab-builder").className = "tab-btn"+(t==="builder"?" active":"");
+  document.getElementById("tab-table").className   = "tab-btn"+(t==="table"?" active":"");
+  if (t==="table") renderTable();
+}
+
+// ── Leg management ────────────────────────────────────────────────────────────
+function addLeg() {
+  if (legs.length < 6) { legs.push("Standard"); render(); }
+}
+function removeLeg(i) {
+  if (legs.length > 2) { legs.splice(i,1); render(); }
+}
+function changeLeg(i, val) {
+  legs[i] = val; render();
+}
+
+// ── Builder render ────────────────────────────────────────────────────────────
+function render() {
+  const stake = getStake();
+  document.getElementById("leg-count-label").textContent = `TICKET · ${legs.length} LEGS`;
+
+  // Legs
+  const cont = document.getElementById("legs-container");
+  cont.innerHTML = "";
+  legs.forEach((leg,i) => {
+    const color = legColor(leg);
+    const div = document.createElement("div");
+    div.className = "leg-row";
+    div.style.borderColor = color+"33";
+    div.innerHTML = `
+      <span class="leg-emoji">${legEmoji(leg)}</span>
+      <span class="leg-num">LEG ${i+1}</span>
+      <select class="leg-select" style="color:${color};border-color:${color}55" onchange="changeLeg(${i},this.value)">
+        ${LEG_TYPES.map(t=>`<option value="${t}" ${t===leg?"selected":""}>${legEmoji(t)} ${t}</option>`).join("")}
+      </select>
+      <button class="leg-remove" onclick="removeLeg(${i})">×</button>
+    `;
+    cont.appendChild(div);
+  });
+
+  // Add leg button visibility
+  document.querySelector(".add-leg-btn").style.display = legs.length >= 6 ? "none" : "block";
+
+  // Badges
+  const comp = legs.reduce((a,l)=>{
+    const k=l.startsWith("Goblin")?"Goblin":l.startsWith("Demon")?"Demon":"Standard";
+    a[k]=(a[k]||0)+1; return a;
+  },{});
+  const badgeColors = {Goblin:["#7c3aed22","#7c3aed44","#a78bfa"],Demon:["#dc262622","#dc262644","#f87171"],Standard:["#2563eb22","#2563eb44","#60a5fa"]};
+  document.getElementById("badges").innerHTML = Object.entries(comp).map(([k,v])=>{
+    const [bg,border,color] = badgeColors[k];
+    return `<div class="badge" style="background:${bg};border:1px solid ${border};color:${color}">${v}× ${k}</div>`;
+  }).join("");
+
+  // Results
+  const result = calcPayouts(legs);
+  const panel = document.getElementById("results-panel");
+  if (!result) {
+    panel.innerHTML = `<div class="empty-state">Add at least 2 legs to see payouts</div>`;
+    return;
+  }
+
+  const partialsHtml = result.partials.length ? `
+    <div class="partials-wrap">
+      <div class="partials-label">PARTIAL PAYOUTS</div>
+      <div class="partials-row">
+        ${result.partials.sort((a,b)=>b.correct-a.correct).map(({correct,mult})=>`
+          <div class="partial-box">
+            <div class="partial-nc">${correct}/${result.n}</div>
+            <div class="partial-mult">${mult}x</div>
+            <div class="partial-win">$${(stake*mult).toFixed(2)}</div>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  ` : "";
+
+  const modHtml = result.pm !== 1.0 ? `
+    <div class="mod-bar">
+      <div class="mod-text">MOD: Power ${result.pm.toFixed(3)}x base · Flex ${result.fm.toFixed(3)}x base</div>
+    </div>
+  ` : "";
+
+  panel.innerHTML = `
+    <div class="section-label">RESULTS · $${stake} STAKE</div>
+
+    <div class="result-card power">
+      <div class="card-header">
+        <div class="card-tag pp">POWER PLAY</div>
+        <span class="card-sub">All ${result.n} correct</span>
+      </div>
+      <div class="metrics" style="grid-template-columns:1fr 1fr 1fr">
+        <div class="metric-box">
+          <div class="metric-label">MULTIPLIER</div>
+          <div class="metric-val" style="color:#3b82f6">${result.powerTop}x</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">WIN ON $${stake}</div>
+          <div class="metric-val" style="color:#10b981">$${(stake*result.powerTop).toFixed(2)}</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">TO WIN $100</div>
+          <div class="metric-val" style="color:#f59e0b;font-size:18px">$${(100/result.powerTop).toFixed(2)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-card flex">
+      <div class="card-header">
+        <div class="card-tag fl">FLEX PLAY</div>
+        <span class="card-sub">Partial wins allowed</span>
+      </div>
+      <div class="metrics" style="grid-template-columns:1fr 1fr">
+        <div class="metric-box">
+          <div class="metric-label">${result.n}/${result.n} CORRECT</div>
+          <div class="metric-val" style="color:#7c3aed">${result.flexTop}x</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">WIN ON $${stake}</div>
+          <div class="metric-val" style="color:#10b981">$${(stake*result.flexTop).toFixed(2)}</div>
+        </div>
+      </div>
+      ${partialsHtml}
+    </div>
+    ${modHtml}
+  `;
+}
+
+// ── Table render ──────────────────────────────────────────────────────────────
+function setTableLegs(n) {
+  tableLegs = n;
+  [3,4,5,6].forEach(x => {
+    document.getElementById(`lc-${x}`).className = "lc-btn"+(x===n?" active":"");
+  });
+  renderTable();
+}
+
+function renderTable() {
+  const stake = getStake();
+  document.getElementById("th-pp-win").textContent = `WIN $${stake} (PP)`;
+  document.getElementById("th-fl-win").textContent = `WIN $${stake} (FL)`;
+
+  const rows = ["Standard","Goblin -1","Goblin -2","Goblin -3","Demon +1","Demon +2","Demon +3"];
+  const tbody = document.getElementById("ref-tbody");
+  tbody.innerHTML = rows.map((row,i) => {
+    const legs = Array(tableLegs).fill(row);
+    const p = calcPayouts(legs);
+    if (!p) return "";
+    const color = legColor(row);
+    const bg = i%2===0?"rgba(255,255,255,0.02)":"transparent";
+    return `<tr style="background:${bg}">
+      <td style="color:${color};font-weight:bold">${legEmoji(row)} ${row}</td>
+      <td style="text-align:center;color:#60a5fa;font-weight:bold">${p.powerTop}x</td>
+      <td style="text-align:center;color:#10b981;font-weight:bold">$${(stake*p.powerTop).toFixed(2)}</td>
+      <td style="text-align:center;color:#f59e0b">$${(100/p.powerTop).toFixed(2)}</td>
+      <td style="text-align:center;color:#a78bfa;font-weight:bold">${p.flexTop}x</td>
+      <td style="text-align:center;color:#10b981">$${(stake*p.flexTop).toFixed(2)}</td>
+    </tr>`;
+  }).join("");
+
+  // Flex partial reference cards
+  const cards = document.getElementById("flex-cards");
+  cards.innerHTML = [3,4,5,6].map(n => {
+    const fb = FLEX_BASE[n]||{};
+    const rows2 = Object.entries(fb).sort((a,b)=>b[0]-a[0]).map(([k,v])=>`
+      <div class="flex-card-row">
+        <span class="flex-card-k">${k}/${n}</span>
+        <span class="flex-card-v">${v}x</span>
+      </div>
+    `).join("");
+    return `<div class="flex-card">
+      <div class="flex-card-title">${n}-LEG FLEX</div>
+      ${rows2}
+    </div>`;
+  }).join("");
+}
+
+// Init
+render();
+renderTable();
+</script>
+</body>
+</html>
