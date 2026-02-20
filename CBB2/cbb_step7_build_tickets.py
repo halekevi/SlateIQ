@@ -78,6 +78,14 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets: int, used_legs: 
     team_col = 'team_abbr' if 'team_abbr' in pool.columns else 'team'
     opp_col  = 'opp_team_abbr' if 'opp_team_abbr' in pool.columns else 'opp_team'
 
+    # Allow more players per game as leg count increases
+    if n_legs <= 3:
+        max_per_game = 1
+    elif n_legs <= 5:
+        max_per_game = 2
+    else:
+        max_per_game = 3
+
     for _, anchor in pool.iterrows():
         lk = (anchor['player'], anchor['prop_type'], float(anchor['line']))
         if lk in used_legs:
@@ -86,19 +94,25 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets: int, used_legs: 
         ticket = [anchor]
         t = str(anchor.get(team_col, '')).strip()
         o = str(anchor.get(opp_col,  '')).strip()
-        used_games = {(t, o), (o, t)}
+        # Track how many players per game key
+        game_counts = {}
+        game_key = tuple(sorted([t, o]))
+        game_counts[game_key] = 1
 
+        used_players = {anchor['player']}
         for _, row in pool.iterrows():
             if len(ticket) >= n_legs: break
-            if row['player'] == anchor['player']: continue
+            if row['player'] in used_players: continue
             lk2 = (row['player'], row['prop_type'], float(row['line']))
             if lk2 in used_legs: continue
             rt = str(row.get(team_col, '')).strip()
             ro = str(row.get(opp_col,  '')).strip()
-            g  = (rt, ro)
-            if g in used_games or (g[1], g[0]) in used_games: continue
+            gk = tuple(sorted([rt, ro]))
+            if game_counts.get(gk, 0) >= max_per_game:
+                continue
             ticket.append(row)
-            used_games.update([g, (g[1], g[0])])
+            used_players.add(row['player'])
+            game_counts[gk] = game_counts.get(gk, 0) + 1
 
         if len(ticket) == n_legs:
             tkey = frozenset((r['player'], r['prop_type'], str(r['line'])) for r in ticket)
@@ -305,10 +319,12 @@ def main():
         lambda r: float(r['rank_score']) + (0.25 if r['pick_type'] == 'Standard' else 0.0), axis=1)
     mix_df = mix_df.sort_values('rank_score_mix', ascending=False)
 
-    std_pool = std_df.drop_duplicates(subset=['player'])
-    gob_pool = gob_df.drop_duplicates(subset=['player'])
-    dem_pool = dem_df.drop_duplicates(subset=['player'])
-    all_pool = mix_df.drop_duplicates(subset=['player'])
+    # Keep best prop per player (by rank_score) but allow the pool to have all players
+    # Do NOT dedupe to 1 row per player — that kills 4+ leg ticket building
+    std_pool = std_df.sort_values('rank_score', ascending=False)
+    gob_pool = gob_df.sort_values('rank_score', ascending=False)
+    dem_pool = dem_df.sort_values('rank_score', ascending=False)
+    all_pool = mix_df.sort_values('rank_score_mix', ascending=False)
 
     # For ticket building rank_score, use rank_score_mix for Best Mix
     all_pool = all_pool.copy()
@@ -333,6 +349,25 @@ def main():
             write_tickets_sheet(wb, sheet_name, tickets, n_legs, pick_label)
             all_ticket_sets.append((sheet_name, tickets, n_legs, pick_label))
             print(f"  {sheet_name}: {len(tickets)} tickets")
+
+    # Standard-first fill: build tickets starting with Standard props,
+    # filling remaining legs with best Goblin props when Standard pool runs short
+    if len(std_pool) >= 1 and len(gob_pool) >= 1:
+        std_fill_pool = pd.concat([
+            std_pool.assign(_pref=0),
+            gob_pool.assign(_pref=1),
+        ]).sort_values(['_pref', 'rank_score'], ascending=[True, False]).drop('_pref', axis=1)
+
+        used_legs_fill: set = set()
+        for n_legs in leg_counts:
+            if n_legs < 4: continue  # 3-leg already covered above
+            if len(std_fill_pool) < n_legs: continue
+            tickets = build_tickets(std_fill_pool.copy(), n_legs, args.max_tickets, used_legs_fill)
+            if tickets:
+                sheet_name = f"Std+Gob Fill {n_legs}-Leg"
+                write_tickets_sheet(wb, sheet_name, tickets, n_legs, 'Best Mix')
+                all_ticket_sets.append((sheet_name, tickets, n_legs, 'Best Mix'))
+                print(f"  {sheet_name}: {len(tickets)} tickets (Standard-first, Goblin fill)")
 
     write_summary_sheet(wb, all_ticket_sets)
     wb.save(args.output)
