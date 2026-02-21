@@ -10,6 +10,7 @@ Usage:
 """
 
 import argparse
+import re
 import requests
 import pandas as pd
 import time

@@ -56,13 +56,18 @@ def main():
     # Basic tiers (already in Step5 stats)
     # -----------------------------------
 
-    df["min_player_avg"] = pd.to_numeric(df.get("stat_last5_avg"), errors="coerce")
-    df["fga_player_avg"] = pd.to_numeric(df.get("stat_last5_avg"), errors="coerce")
-    df["pts_player_avg"] = pd.to_numeric(df.get("stat_last5_avg"), errors="coerce")
-
-    df["minutes_tier"] = df["min_player_avg"].apply(tier_minutes)
-    df["shot_role"] = df["fga_player_avg"].apply(tier_shots)
-    df["usage_role"] = df["pts_player_avg"].apply(tier_usage)
+    # Collect all new columns into a dict and concat once to avoid
+    # DataFrame fragmentation warnings on wide DataFrames (95+ cols)
+    last5 = pd.to_numeric(df.get("stat_last5_avg"), errors="coerce")
+    new_cols = pd.DataFrame({
+        "min_player_avg": last5,
+        "fga_player_avg": last5,
+        "pts_player_avg": last5,
+        "minutes_tier":   last5.apply(tier_minutes),
+        "shot_role":      last5.apply(tier_shots),
+        "usage_role":     last5.apply(tier_usage),
+    }, index=df.index)
+    df = pd.concat([df, new_cols], axis=1).copy()
 
     # -----------------------------------
     # Merge Team Roles (Step10)

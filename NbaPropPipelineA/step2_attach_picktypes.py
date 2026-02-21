@@ -326,6 +326,58 @@ def main() -> None:
                 df.at[idx, "nba_player_id"] = ""
                 df.at[idx, "id_status"] = "UNRESOLVED_COMBO"
 
+    # ---- STANDARD LINE + DEVIATION LEVEL ---- #
+    # For each (player, prop_norm) group, find the Standard pick_type line as reference.
+    # deviation_level = rank position away from standard (1 = closest, 2 = next, etc.)
+    #   0  = Standard row (or no standard reference found)
+    #   1  = closest goblin/demon option to standard
+    #   2  = second closest
+    #   3+ = further out
+    # Goblins are ranked ascending by line (closest to standard = highest goblin line)
+    # Demons are ranked ascending by line (closest to standard = lowest demon line)
+    # Number of tiers varies per player+prop — some may have only 1, others 3+
+
+    df["line_num"] = pd.to_numeric(df["line"], errors="coerce")
+
+    # Build standard line lookup: (player, prop_norm) -> standard_line
+    std_df = df[(df["pick_type"] == "Standard") & df["line_num"].notna()]
+    std_lookup: dict = (
+        std_df.groupby(["player", "prop_norm"])["line_num"]
+        .first()
+        .to_dict()
+    )
+
+    df["standard_line"] = df.apply(
+        lambda r: std_lookup.get((r["player"], r["prop_norm"]), None), axis=1
+    )
+
+    # Build rank lookup for goblins and demons per (player, prop_norm)
+    # Goblin: sort lines DESCENDING (highest = closest to standard) → rank 1, 2, 3...
+    # Demon:  sort lines ASCENDING  (lowest  = closest to standard) → rank 1, 2, 3...
+    rank_lookup: dict = {}  # (player, prop_norm, pick_type, line_num) -> rank
+
+    for (player, prop_norm, pick_type), grp in df[
+        df["pick_type"].isin(["Goblin", "Demon"])
+    ].groupby(["player", "prop_norm", "pick_type"]):
+        lines_sorted = sorted(grp["line_num"].dropna().unique(),
+                              reverse=(pick_type == "Goblin"))
+        for rank, line_val in enumerate(lines_sorted, start=1):
+            rank_lookup[(player, prop_norm, pick_type, line_val)] = rank
+
+    def get_deviation_level(row):
+        if row["pick_type"] == "Standard":
+            return 0
+        if pd.isna(row["line_num"]):
+            return 0
+        return rank_lookup.get(
+            (row["player"], row["prop_norm"], row["pick_type"], row["line_num"]), 0
+        )
+
+    df["deviation_level"] = df.apply(get_deviation_level, axis=1)
+
+    # Clean up helper column
+    df.drop(columns=["line_num"], inplace=True)
+
     # Output ordering (keep all Step1 columns in middle)
     desired_front = [
         "nba_player_id",
@@ -337,6 +389,8 @@ def main() -> None:
         "prop_type",
         "prop_norm",
         "pick_type",
+        "standard_line",
+        "deviation_level",
     ]
     front = [c for c in desired_front if c in df.columns]
     tail = ["is_combo_player"]

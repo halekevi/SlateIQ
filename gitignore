@@ -1,32 +1,41 @@
-# Intermediate pipeline data files
-step1_*.csv
-step2_*.csv
-step3_*.csv
-step4_*.csv
-step5_*.csv
-step6_*.csv
-step7_*.csv
-step8_*.csv
-step9_*.csv
-step1_*.json
+notepad .gitignore
+```
+
+Replace the entire contents with:
+```
+# Intermediate pipeline CSVs (regenerated daily)
+**/step1_*.csv
+**/step2_*.csv
+**/step3_*.csv
+**/step4_*.csv
+**/step5_*.csv
+**/step6_*.csv
+**/step7_*.csv
+**/step8_*.csv
+**/step9_*.csv
+**/step1_*.json
 step0_pp_raw.json
 pp_devtools_payload.json
 
-# Large output files (regenerated each run)
-step7_ranked_props.xlsx
-step8_all_direction.csv
-step8_all_direction_clean.xlsx
-props_clean.xlsx
+# Large outputs (regenerated)
+**/step7_ranked_props.xlsx
+**/step8_all_direction*.xlsx
+**/step8_all_direction*.csv
+combined_slate_tickets_*.xlsx
+actuals_*.csv
+nba_graded_*.xlsx
+cbb_graded_*.xlsx
+outputs/
 
-# Cache directories
-_nba_cache/
+# Cache
+**/_nba_cache/
+NbaPropPipelineA/NbaPropPipelineA/
 __pycache__/
 *.pyc
 
-# Old result files
-*_graded.csv
-*_results_*.xlsx
-*_results_*.csv
+# Tickets/slates (daily outputs)
+CBB2/cbb_tickets.xlsx
+CBB2/step6_ranked_cbb.xlsx
 
 # OS/editor
 .DS_Store
