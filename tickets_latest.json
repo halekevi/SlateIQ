@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-22 21:46:52 UTC",
+  "generated_at": "2026-02-22 21:54:55 UTC",
   "date": "2026-02-22",
   "filters": {
     "tiers": "A,B",
@@ -18,9 +18,37 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 5.390000000000001,
+          "avg_rank_score": 5.133333333333334,
           "est_win_prob": 1.0,
           "legs": [
+            {
+              "sport": "NBA",
+              "player": "Baylor Scheierman",
+              "team": "BOS",
+              "opp": "LAL",
+              "prop_type": "Rebounds",
+              "pick_type": "Standard",
+              "direction": "OVER",
+              "line": 4.0,
+              "edge": 2.49,
+              "hit_rate": 1.0,
+              "rank_score": 4.63,
+              "game_time": "2026-02-22 18:30:00-05:00"
+            },
+            {
+              "sport": "NBA",
+              "player": "Jarrett Allen",
+              "team": "CLE",
+              "opp": "OKC",
+              "prop_type": "Points",
+              "pick_type": "Standard",
+              "direction": "OVER",
+              "line": 14.5,
+              "edge": 5.8,
+              "hit_rate": 1.0,
+              "rank_score": 4.31,
+              "game_time": "2026-02-22 13:00:00-05:00"
+            },
             {
               "sport": "NBA",
               "player": "Danny Wolf",
@@ -76,34 +104,6 @@
               "hit_rate": 1.0,
               "rank_score": 5.31,
               "game_time": "2026-02-22 19:00:00-05:00"
-            },
-            {
-              "sport": "NBA",
-              "player": "Jarrett Allen",
-              "team": "CLE",
-              "opp": "OKC",
-              "prop_type": "Points",
-              "pick_type": "Goblin",
-              "direction": "OVER",
-              "line": 9.5,
-              "edge": 10.8,
-              "hit_rate": 1.0,
-              "rank_score": 5.24,
-              "game_time": "2026-02-22 13:00:00-05:00"
-            },
-            {
-              "sport": "NBA",
-              "player": "Kon Knueppel",
-              "team": "CHA",
-              "opp": "WAS",
-              "prop_type": "Points",
-              "pick_type": "Goblin",
-              "direction": "OVER",
-              "line": 14.5,
-              "edge": 6.43,
-              "hit_rate": 1.0,
-              "rank_score": 5.24,
-              "game_time": "2026-02-22 18:00:00-05:00"
             }
           ]
         }
@@ -118,9 +118,37 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 5.42,
+          "avg_rank_score": 5.098000000000001,
           "est_win_prob": 1.0,
           "legs": [
+            {
+              "sport": "NBA",
+              "player": "Baylor Scheierman",
+              "team": "BOS",
+              "opp": "LAL",
+              "prop_type": "Rebounds",
+              "pick_type": "Standard",
+              "direction": "OVER",
+              "line": 4.0,
+              "edge": 2.49,
+              "hit_rate": 1.0,
+              "rank_score": 4.63,
+              "game_time": "2026-02-22 18:30:00-05:00"
+            },
+            {
+              "sport": "NBA",
+              "player": "Jarrett Allen",
+              "team": "CLE",
+              "opp": "OKC",
+              "prop_type": "Points",
+              "pick_type": "Standard",
+              "direction": "OVER",
+              "line": 14.5,
+              "edge": 5.8,
+              "hit_rate": 1.0,
+              "rank_score": 4.31,
+              "game_time": "2026-02-22 13:00:00-05:00"
+            },
             {
               "sport": "NBA",
               "player": "Danny Wolf",
@@ -162,34 +190,6 @@
               "hit_rate": 1.0,
               "rank_score": 5.44,
               "game_time": "2026-02-22 15:30:00-05:00"
-            },
-            {
-              "sport": "NBA",
-              "player": "Joel Embiid",
-              "team": "PHI",
-              "opp": "MIN",
-              "prop_type": "Points",
-              "pick_type": "Goblin",
-              "direction": "OVER",
-              "line": 19.5,
-              "edge": 12.65,
-              "hit_rate": 1.0,
-              "rank_score": 5.31,
-              "game_time": "2026-02-22 19:00:00-05:00"
-            },
-            {
-              "sport": "NBA",
-              "player": "Jarrett Allen",
-              "team": "CLE",
-              "opp": "OKC",
-              "prop_type": "Points",
-              "pick_type": "Goblin",
-              "direction": "OVER",
-              "line": 9.5,
-              "edge": 10.8,
-              "hit_rate": 1.0,
-              "rank_score": 5.24,
-              "game_time": "2026-02-22 13:00:00-05:00"
             }
           ]
         }
@@ -204,9 +204,23 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 5.516666666666667,
+          "avg_rank_score": 5.246666666666667,
           "est_win_prob": 1.0,
           "legs": [
+            {
+              "sport": "NBA",
+              "player": "Baylor Scheierman",
+              "team": "BOS",
+              "opp": "LAL",
+              "prop_type": "Rebounds",
+              "pick_type": "Standard",
+              "direction": "OVER",
+              "line": 4.0,
+              "edge": 2.49,
+              "hit_rate": 1.0,
+              "rank_score": 4.63,
+              "game_time": "2026-02-22 18:30:00-05:00"
+            },
             {
               "sport": "NBA",
               "player": "Danny Wolf",
@@ -234,29 +248,29 @@
               "hit_rate": 1.0,
               "rank_score": 5.46,
               "game_time": "2026-02-22 18:30:00-05:00"
-            },
-            {
-              "sport": "NBA",
-              "player": "Day'Ron Sharpe",
-              "team": "BKN",
-              "opp": "ATL",
-              "prop_type": "Rebounds",
-              "pick_type": "Goblin",
-              "direction": "OVER",
-              "line": 4.5,
-              "edge": 3.62,
-              "hit_rate": 1.0,
-              "rank_score": 5.44,
-              "game_time": "2026-02-22 15:30:00-05:00"
             }
           ]
         },
         {
           "ticket_no": 2,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 5.403333333333333,
+          "avg_rank_score": 5.07,
           "est_win_prob": 1.0,
           "legs": [
+            {
+              "sport": "NBA",
+              "player": "Jarrett Allen",
+              "team": "CLE",
+              "opp": "OKC",
+              "prop_type": "Points",
+              "pick_type": "Standard",
+              "direction": "OVER",
+              "line": 14.5,
+              "edge": 5.8,
+              "hit_rate": 1.0,
+              "rank_score": 4.31,
+              "game_time": "2026-02-22 13:00:00-05:00"
+            },
             {
               "sport": "NBA",
               "player": "Neemias Queta",
@@ -284,20 +298,6 @@
               "hit_rate": 1.0,
               "rank_score": 5.44,
               "game_time": "2026-02-22 15:30:00-05:00"
-            },
-            {
-              "sport": "NBA",
-              "player": "Joel Embiid",
-              "team": "PHI",
-              "opp": "MIN",
-              "prop_type": "Points",
-              "pick_type": "Goblin",
-              "direction": "OVER",
-              "line": 19.5,
-              "edge": 12.65,
-              "hit_rate": 1.0,
-              "rank_score": 5.31,
-              "game_time": "2026-02-22 19:00:00-05:00"
             }
           ]
         }

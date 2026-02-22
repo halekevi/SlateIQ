@@ -21,7 +21,7 @@ from openpyxl.utils import get_column_letter
 import argparse
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
 # ── Color palette ─────────────────────────────────────────────────────────────
 C = {
@@ -52,7 +52,8 @@ def side(color='CCCCCC'):
 def hc(ws, r, c, v, bg=None, fc='FFFFFF', bold=True, sz=9, align='center'):
     cell = ws.cell(row=r, column=c, value=v)
     cell.font = Font(bold=bold, color=fc, name='Arial', size=sz)
-    if bg: cell.fill = PatternFill('solid', start_color=bg)
+    if bg:
+        cell.fill = PatternFill('solid', start_color=bg)
     cell.alignment = Alignment(horizontal=align, vertical='center', wrap_text=True)
     cell.border = side()
     return cell
@@ -63,7 +64,8 @@ def dc(ws, r, c, v, bg=None, bold=False, sz=9, align='center', fc='000000', fmt=
     cell.fill = PatternFill('solid', start_color=bg or C['white'])
     cell.alignment = Alignment(horizontal=align, vertical='center')
     cell.border = side()
-    if fmt: cell.number_format = fmt
+    if fmt:
+        cell.number_format = fmt
     return cell
 
 def sw(ws, widths):
@@ -77,9 +79,12 @@ def pt_bg(pt):
     return {'Goblin': C['goblin'], 'Demon': C['demon'], 'Standard': C['standard']}.get(pt, C['white'])
 
 def hr_bg(v):
-    if v is None or (isinstance(v, float) and np.isnan(v)): return 'DDDDDD'
-    if v >= 0.65: return C['hit']
-    if v >= 0.50: return C['push']
+    if v is None or (isinstance(v, float) and np.isnan(v)):
+        return 'DDDDDD'
+    if v >= 0.65:
+        return C['hit']
+    if v >= 0.50:
+        return C['push']
     return C['miss']
 
 def pct_cell(ws, r, c, val):
@@ -95,7 +100,7 @@ def win_prob(hit_rates, n):
     vals = []
     for h in hit_rates:
         try:
-            if h is None: 
+            if h is None:
                 continue
             if isinstance(h, float) and np.isnan(h):
                 continue
@@ -121,7 +126,7 @@ def _safe_float(x):
 
 def ticket_groups_to_payload(all_ticket_groups, date_str, thresholds):
     payload = {
-        "generated_at": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC"),
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
         "date": date_str,
         "filters": thresholds,
         "groups": []
@@ -453,6 +458,123 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets=20, require_mix=F
     tickets.sort(key=lambda x: (-x['avg_rank_score'], -x['avg_hit_rate']))
     return tickets[:max_tickets]
 
+# ──────────────────────────────────────────────────────────────────────────────
+# FINAL web groups (ONLY the ticket sets you want) + ENFORCED Std/Gob mix
+# ──────────────────────────────────────────────────────────────────────────────
+def build_mixed_picktype_tickets(pool_df: pd.DataFrame, n_legs: int, max_tickets: int, min_standard: int) -> list:
+    """
+    Deterministic ticket builder that enforces a minimum number of Standard legs,
+    while allowing remaining legs from Standard+Goblin pool.
+
+    - Avoids duplicate players
+    - Uses rank_score descending
+    - Generates variety by sliding a start offset window
+    """
+    pool_df = pool_df.copy()
+    if 'rank_score' not in pool_df.columns:
+        return []
+
+    std = pool_df[pool_df["pick_type"] == "Standard"].sort_values("rank_score", ascending=False, na_position="last")
+    gob = pool_df[pool_df["pick_type"] == "Goblin"].sort_values("rank_score", ascending=False, na_position="last")
+
+    if len(std) < min_standard:
+        # Not enough Standard legs to satisfy constraint
+        return []
+
+    tickets = []
+    std_start = 0
+    gob_start = 0
+    attempts = 0
+    max_attempts = max_tickets * 50
+
+    while len(tickets) < max_tickets and attempts < max_attempts:
+        attempts += 1
+        legs = []
+        used_players = set()
+
+        # 1) Required Standards first
+        for _, r in std.iloc[std_start:].iterrows():
+            if sum(1 for x in legs if str(x.get("pick_type","")) == "Standard") >= min_standard:
+                break
+            p = str(r.get("player","")).strip().lower()
+            if p and p not in used_players:
+                legs.append(r)
+                used_players.add(p)
+
+        # 2) Fill remaining legs by best rank_score from (gob slice + std slice)
+        combined_ranked = pd.concat([gob.iloc[gob_start:], std.iloc[std_start:]], ignore_index=True)
+        combined_ranked = combined_ranked.sort_values("rank_score", ascending=False, na_position="last")
+
+        for _, r in combined_ranked.iterrows():
+            if len(legs) >= n_legs:
+                break
+            p = str(r.get("player","")).strip().lower()
+            if p and p not in used_players:
+                legs.append(r)
+                used_players.add(p)
+
+        if len(legs) == n_legs:
+            std_count = sum(1 for x in legs if str(x.get("pick_type","")) == "Standard")
+            if std_count >= min_standard:
+                hrs = [float(x.get("hit_rate", 0.5) or 0.5) for x in legs]
+                rss = [float(x.get("rank_score", 0) or 0) for x in legs]
+                avg_hr = float(np.mean(hrs)) if hrs else 0.0
+                avg_rs = float(np.mean(rss)) if rss else 0.0
+                ep = win_prob(hrs, n_legs)
+                pout = PAYOUT.get(n_legs, {'power': 0, 'flex': 0})
+
+                key = frozenset((str(x.get("player","")) + "|" + str(x.get("prop_type",""))).strip() for x in legs)
+                if key not in [t["key"] for t in tickets]:
+                    tickets.append({
+                        "key": key,
+                        "rows": legs,
+                        "avg_hit_rate": avg_hr,
+                        "avg_rank_score": avg_rs,
+                        "est_win_prob": ep,
+                        "power_payout": pout["power"],
+                        "flex_payout": pout["flex"],
+                        "n_legs": n_legs
+                    })
+
+        # Slide window to create different combos
+        if len(std) > 0:
+            std_start = min(std_start + 1, max(len(std) - 1, 0))
+        if len(gob) > 0:
+            gob_start = min(gob_start + 1, max(len(gob) - 1, 0))
+
+    tickets.sort(key=lambda x: (-x['avg_rank_score'], -x['avg_hit_rate']))
+    return tickets[:max_tickets]
+
+def build_final_web_ticket_groups(nba_pool: pd.DataFrame):
+    mix_pool = nba_pool[nba_pool['pick_type'].isin(['Standard', 'Goblin'])].copy()
+    std_pool = nba_pool[nba_pool['pick_type'].isin(['Standard'])].copy()
+
+    groups = []
+
+    # Enforced mix rules:
+    # 6-leg: >=2 Standard
+    # 5-leg: >=2 Standard
+    # 3-leg mix: >=1 Standard
+    if len(mix_pool) >= 6:
+        t6 = build_mixed_picktype_tickets(mix_pool, 6, max_tickets=1, min_standard=2)
+        if t6:
+            groups.append(("FINAL 6-Leg (NBA Std+Gob)", t6, None))
+
+    if len(mix_pool) >= 5:
+        t5 = build_mixed_picktype_tickets(mix_pool, 5, max_tickets=1, min_standard=2)
+        if t5:
+            groups.append(("FINAL 5-Leg (NBA Std+Gob)", t5, None))
+
+    if len(mix_pool) >= 3:
+        t3 = build_mixed_picktype_tickets(mix_pool, 3, max_tickets=2, min_standard=1)
+        if t3:
+            groups.append(("FINAL 3-Leg MIX x2 (NBA Std+Gob)", t3, None))
+
+    if len(std_pool) >= 3:
+        groups.append(("FINAL 3-Leg STANDARD ONLY (NBA)", build_tickets(std_pool, 3, max_tickets=1), None))
+
+    return groups
+
 # ── Write slate sheet ──────────────────────────────────────────────────────────
 SLATE_COLS = ['sport','tier','rank_score','player','team','opp','prop_type','pick_type',
               'line','direction','edge','projection','hit_rate','l5_avg','season_avg',
@@ -476,13 +598,17 @@ def write_slate_sheet(wb, df, sheet_name, bg_hdr, sport_label=''):
     for ri, row in enumerate(df[cols].itertuples(index=False), 2):
         bg = C['alt'] if ri % 2 == 0 else C['white']
         sp = getattr(row, 'sport', '')
-        if sp == 'NBA': bg_row = C['nba'] if ri % 2 == 0 else C['white']
-        elif sp == 'CBB': bg_row = C['cbb'] if ri % 2 == 0 else C['white']
-        else: bg_row = bg
+        if sp == 'NBA':
+            bg_row = C['nba'] if ri % 2 == 0 else C['white']
+        elif sp == 'CBB':
+            bg_row = C['cbb'] if ri % 2 == 0 else C['white']
+        else:
+            bg_row = bg
 
         for ci, col in enumerate(cols, 1):
             val = getattr(row, col, '')
-            if val is None or (isinstance(val, float) and np.isnan(val)): val = ''
+            if val is None or (isinstance(val, float) and np.isnan(val)):
+                val = ''
             if col == 'tier':
                 dc(ws, ri, ci, val, bg=tier_bg(val), bold=True, align='center')
             elif col == 'pick_type':
@@ -556,8 +682,10 @@ def write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=''):
         for leg_i, row in enumerate(ticket['rows'], 1):
             bg = C['alt'] if leg_i % 2 == 0 else C['white']
             sp = row.get('sport', '')
-            if sp == 'NBA': bg = C['nba']
-            elif sp == 'CBB': bg = C['cbb']
+            if sp == 'NBA':
+                bg = C['nba']
+            elif sp == 'CBB':
+                bg = C['cbb']
 
             def gv(field):
                 return row.get(field, '')
@@ -631,7 +759,8 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
         dc(ws, r, 1, label, bg=bg, align='left', bold=True)
         dc(ws, r, 2, total, bg=bg)
         dc(ws, r, 3, elig, bg=bg)
-        for ci in range(4, 10): dc(ws, r, ci, '', bg=bg)
+        for ci in range(4, 10):
+            dc(ws, r, ci, '', bg=bg)
         return r + 1
 
     row = sec(row, '📊 SLATE OVERVIEW', C['hdr_sum'])
@@ -672,30 +801,9 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
         pct_cell(ws, row, 6, avg_wp)
         dc(ws, row, 7, round(avg_rs, 2), bg=bg)
         dc(ws, row, 8, f'{pout}x', bg=bg)
-        sample = ' | '.join(
-            f"{r.get('player','')}"
-            for r in tickets[0]['rows'][:3]
-        ) + ('...' if n > 3 else '')
+        sample = ' | '.join(f"{r.get('player','')}" for r in tickets[0]['rows'][:3]) + ('...' if n > 3 else '')
         dc(ws, row, 9, sample, bg=bg, align='left', sz=8)
         row += 1
-
-# ──────────────────────────────────────────────────────────────────────────────
-# FINAL web groups (ONLY the ticket sets you want)
-# ──────────────────────────────────────────────────────────────────────────────
-def build_final_web_ticket_groups(nba_pool: pd.DataFrame):
-    mix_pool = nba_pool[nba_pool['pick_type'].isin(['Standard', 'Goblin'])].copy()
-    std_pool = nba_pool[nba_pool['pick_type'].isin(['Standard'])].copy()
-
-    groups = []
-    if len(mix_pool) >= 6:
-        groups.append(("FINAL 6-Leg (NBA Std+Gob)", build_tickets(mix_pool, 6, max_tickets=1), None))
-    if len(mix_pool) >= 5:
-        groups.append(("FINAL 5-Leg (NBA Std+Gob)", build_tickets(mix_pool, 5, max_tickets=1), None))
-    if len(mix_pool) >= 3:
-        groups.append(("FINAL 3-Leg MIX x2 (NBA Std+Gob)", build_tickets(mix_pool, 3, max_tickets=2), None))
-    if len(std_pool) >= 3:
-        groups.append(("FINAL 3-Leg STANDARD ONLY (NBA)", build_tickets(std_pool, 3, max_tickets=1), None))
-    return groups
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
