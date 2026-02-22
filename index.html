@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>NBA Ticket Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #111;
+      color: #fff;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      background: #00c853;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .card {
+      background: #1e1e1e;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .leg {
+      padding: 5px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .leg:last-child {
+      border-bottom: none;
+    }
+
+    .copy-btn {
+      background: #2962ff;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>NBA Ticket Generator</h1>
+<p>Paste your generated slips below and click Render.</p>
+
+<textarea id="input" rows="10" placeholder="Example:
+
+6-Leg Mix
+- Goblin | Player A | PTS 24.5 | OVER | Tier A
+- Standard | Player B | REB 8.5 | UNDER | Tier B
+
+3-Leg Standard Only
+- Standard | Player C | AST 6.5 | OVER | Tier A
+"></textarea>
+
+<br>
+<button onclick="render()">Render Tickets</button>
+<button class="copy-btn" onclick="copyAll()">Copy All</button>
+
+<div id="output"></div>
+
+<script>
+function render() {
+  const raw = document.getElementById("input").value;
+  const lines = raw.split("\n").filter(l => l.trim() !== "");
+  const out = document.getElementById("output");
+  out.innerHTML = "";
+
+  let currentCard = null;
+
+  lines.forEach(line => {
+    if (!line.startsWith("-")) {
+      currentCard = document.createElement("div");
+      currentCard.className = "card";
+      currentCard.innerHTML = "<h3>" + line + "</h3>";
+      out.appendChild(currentCard);
+    } else {
+      const leg = document.createElement("div");
+      leg.className = "leg";
+      leg.innerText = line;
+      currentCard.appendChild(leg);
+    }
+  });
+}
+
+function copyAll() {
+  const text = document.getElementById("input").value;
+  navigator.clipboard.writeText(text);
+  alert("Tickets copied to clipboard!");
+}
+</script>
+
+</body>
+</html>
