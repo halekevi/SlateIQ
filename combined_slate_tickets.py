@@ -335,6 +335,34 @@ def write_web_outputs(payload, outdir: str):
     json_path = os.path.join(outdir, "tickets_latest.json")
     html_path = os.path.join(outdir, "tickets_latest.html")
 
+    def fmt_pct(x) -> str:
+        try:
+            if x is None:
+                return ""
+            return f"{float(x) * 100:.2f}%"
+        except Exception:
+            return ""
+
+    def fmt_2(x) -> str:
+        try:
+            if x is None:
+                return ""
+            return f"{float(x):.2f}"
+        except Exception:
+            return ""
+
+    def fmt_line(x) -> str:
+        # keep lines readable (avoid 5.5000000003)
+        try:
+            if x is None:
+                return ""
+            xf = float(x)
+            if abs(xf - round(xf)) < 1e-9:
+                return str(int(round(xf)))
+            return f"{xf:.2f}".rstrip("0").rstrip(".")
+        except Exception:
+            return str(x) if x is not None else ""
+
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
 
@@ -397,9 +425,9 @@ def write_web_outputs(payload, outdir: str):
             html.append("<div class='ticket'>")
             html.append(f"<h3>Ticket #{t.get('ticket_no','')}</h3>")
             html.append(
-                f"<div class='muted'>Avg hit rate: {avg_hr if avg_hr is not None else ''} | "
-                f"Est win prob: {wp if wp is not None else ''} | "
-                f"Avg rank: {avg_rs if avg_rs is not None else ''}</div>"
+                f"<div class='muted'>Avg hit rate: {fmt_pct(avg_hr)} | "
+                f"Est win prob: {fmt_pct(wp)} | "
+                f"Avg rank: {fmt_2(avg_rs)}</div>"
             )
 
             html.append(
@@ -437,12 +465,12 @@ def write_web_outputs(payload, outdir: str):
                     f"<td>{leg.get('sport','')}</td>"
                     f"<td>{player_cell}</td>"
                     f"<td>{leg.get('prop_type','')}</td>"
-                    f"<td>{'' if leg.get('line') is None else leg.get('line')}</td>"
+                    f"<td>{fmt_line(leg.get('line'))}</td>"
                     f"<td>{leg.get('pick_type','')}</td>"
                     f"<td>{dir_span}</td>"
-                    f"<td>{'' if leg.get('hit_rate') is None else leg.get('hit_rate')}</td>"
-                    f"<td>{'' if leg.get('edge') is None else leg.get('edge')}</td>"
-                    f"<td>{'' if leg.get('rank_score') is None else leg.get('rank_score')}</td>"
+                    f"<td>{fmt_pct(leg.get('hit_rate')) if leg.get('hit_rate') is not None else ''}</td>"
+                    f"<td>{fmt_2(leg.get('edge')) if leg.get('edge') is not None else ''}</td>"
+                    f"<td>{fmt_2(leg.get('rank_score')) if leg.get('rank_score') is not None else ''}</td>"
                     "</tr>"
                 )
 
