@@ -2,11 +2,17 @@
 """
 Combined NBA + CBB Slate & Ticket Generator
 Merges NBA (step8_all_direction_clean.xlsx) and CBB (step6_ranked_cbb.xlsx ELIGIBLE)
-Outputs: combined_slate_tickets_YYYY-MM-DD.xlsx
-  Sheets: SUMMARY, Full Slate, NBA Slate, CBB Slate,
-          NBA 3/4/5/6-Leg tickets (Goblin/Standard/Demon/Mix),
-          CBB 3/4/5/6-Leg tickets, Combined 3/4/5/6-Leg tickets
+Outputs:
+  - combined_slate_tickets_YYYY-MM-DD.xlsx
+  - tickets_latest.json / tickets_latest.html (web-friendly, static)
+  - docs/tickets_latest.json / docs/tickets_latest.html (for GitHub Pages /docs)
+
+Sheets: SUMMARY, Full Slate, NBA Slate, CBB Slate,
+        NBA 3/4/5/6-Leg tickets (Goblin/Standard/Demon/Mix),
+        CBB 3/4/5/6-Leg tickets, Combined 3/4/5/6-Leg tickets,
+        Cross-sport Standard Mix, Cross-sport Goblin Mix
 """
+
 import pandas as pd
 import numpy as np
 from openpyxl import Workbook
@@ -14,8 +20,8 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 import argparse
 import os
+import json
 from datetime import datetime
-from itertools import combinations
 
 # ── Color palette ─────────────────────────────────────────────────────────────
 C = {
@@ -38,6 +44,7 @@ PAYOUT = {
     6:  {'power': 40.0, 'flex': 16.0},
 }
 
+# ── Excel style helpers ───────────────────────────────────────────────────────
 def side(color='CCCCCC'):
     s = Side(style='thin', color=color)
     return Border(left=s, right=s, top=s, bottom=s)
@@ -85,7 +92,184 @@ def pct_cell(ws, r, c, val):
     return cell
 
 def win_prob(hit_rates, n):
-    return float(np.prod([h for h in hit_rates if not np.isnan(h)]))
+    vals = []
+    for h in hit_rates:
+        try:
+            if h is None: 
+                continue
+            if isinstance(h, float) and np.isnan(h):
+                continue
+            vals.append(float(h))
+        except:
+            continue
+    if not vals:
+        return 0.0
+    return float(np.prod(vals))
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Web outputs (static HTML + JSON)
+# ──────────────────────────────────────────────────────────────────────────────
+def _safe_float(x):
+    try:
+        if x is None:
+            return None
+        if isinstance(x, float) and np.isnan(x):
+            return None
+        return float(x)
+    except:
+        return None
+
+def ticket_groups_to_payload(all_ticket_groups, date_str, thresholds):
+    payload = {
+        "generated_at": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC"),
+        "date": date_str,
+        "filters": thresholds,
+        "groups": []
+    }
+
+    for group_name, tickets, _bg in all_ticket_groups:
+        if not tickets:
+            continue
+
+        group = {
+            "group_name": str(group_name),
+            "n_legs": int(tickets[0].get("n_legs", 0) or 0),
+            "power_payout": _safe_float(tickets[0].get("power_payout")),
+            "flex_payout": _safe_float(tickets[0].get("flex_payout")),
+            "tickets": []
+        }
+
+        for ti, t in enumerate(tickets, start=1):
+            rows = t.get("rows", [])
+            slip = {
+                "ticket_no": ti,
+                "avg_hit_rate": _safe_float(t.get("avg_hit_rate")),
+                "avg_rank_score": _safe_float(t.get("avg_rank_score")),
+                "est_win_prob": _safe_float(t.get("est_win_prob")),
+                "legs": []
+            }
+
+            for row in rows:
+                def gv(field):
+                    return row.get(field, '') if isinstance(row, dict) else getattr(row, field, '')
+
+                slip["legs"].append({
+                    "sport": str(gv("sport") or ""),
+                    "player": str(gv("player") or ""),
+                    "team": str(gv("team") or ""),
+                    "opp": str(gv("opp") or ""),
+                    "prop_type": str(gv("prop_type") or ""),
+                    "pick_type": str(gv("pick_type") or ""),
+                    "direction": str(gv("direction") or ""),
+                    "line": _safe_float(gv("line")),
+                    "edge": _safe_float(gv("edge")),
+                    "hit_rate": _safe_float(gv("hit_rate")),
+                    "rank_score": _safe_float(gv("rank_score")),
+                    "game_time": str(gv("game_time") or ""),
+                })
+
+            group["tickets"].append(slip)
+
+        payload["groups"].append(group)
+
+    return payload
+
+def write_web_outputs(payload, outdir):
+    os.makedirs(outdir, exist_ok=True)
+    json_path = os.path.join(outdir, "tickets_latest.json")
+    html_path = os.path.join(outdir, "tickets_latest.html")
+
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, ensure_ascii=False)
+
+    html = []
+    html.append("<!doctype html><html><head><meta charset='utf-8'/>")
+    html.append("<meta name='viewport' content='width=device-width, initial-scale=1'/>")
+    html.append("<title>Latest Tickets</title>")
+    html.append("<style>")
+    html.append("body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:18px;}")
+    html.append("a{color:#1a5276;text-decoration:none} a:hover{text-decoration:underline}")
+    html.append(".top{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}")
+    html.append(".pill{background:#f2f3f4;border:1px solid #ddd;border-radius:999px;padding:6px 10px;font-size:13px;}")
+    html.append(".group{border:1px solid #ddd;border-radius:12px;padding:14px;margin:14px 0;}")
+    html.append(".ticket{border:1px solid #eee;border-radius:10px;padding:12px;margin:10px 0;background:#fff;}")
+    html.append("h1{margin:4px 0 10px 0;font-size:22px}")
+    html.append("h2{margin:0 0 6px 0;font-size:18px}")
+    html.append("h3{margin:0 0 8px 0;font-size:15px}")
+    html.append(".muted{color:#666;font-size:13px}")
+    html.append("table{width:100%;border-collapse:collapse;margin-top:8px;}")
+    html.append("th,td{padding:8px;border-bottom:1px solid #eee;text-align:left;font-size:13px;}")
+    html.append("th{background:#1c1c1c;color:#fff;}")
+    html.append(".dir-over{background:#d6eaf8;padding:2px 6px;border-radius:6px;font-weight:600}")
+    html.append(".dir-under{background:#fdebd0;padding:2px 6px;border-radius:6px;font-weight:600}")
+    html.append("</style></head><body>")
+
+    html.append("<div class='top'>")
+    html.append("<h1>🎟️ Latest Generated Tickets</h1>")
+    html.append("</div>")
+
+    html.append(f"<div class='muted'>Generated: {payload.get('generated_at','')} | Date: {payload.get('date','')}</div>")
+    html.append("<div class='top' style='margin-top:10px'>")
+    html.append("<span class='pill'>Outputs are static (GitHub Pages friendly)</span>")
+    html.append("<a class='pill' href='tickets_latest.json'>Download JSON</a>")
+    html.append("<a class='pill' href='index.html'>Home</a>")
+    html.append("</div>")
+
+    filters = payload.get("filters", {})
+    html.append("<div style='margin-top:10px' class='pill'>")
+    html.append(f"Filters → tiers: {filters.get('tiers','ALL')} | min_hit_rate: {filters.get('min_hit_rate',0)} | "
+                f"min_edge: {filters.get('min_edge',0)} | min_rank: {filters.get('min_rank','None')} | "
+                f"pick_types: {filters.get('pick_types','ALL')}")
+    html.append("</div>")
+
+    for g in payload.get("groups", []):
+        html.append("<div class='group'>")
+        html.append(f"<h2>{g.get('group_name','Group')}</h2>")
+        html.append(f"<div class='muted'>Legs: {g.get('n_legs','')} | Power: {g.get('power_payout','')}x | Flex: {g.get('flex_payout','')}x</div>")
+
+        for t in g.get("tickets", []):
+            avg_hr = t.get("avg_hit_rate")
+            avg_rs = t.get("avg_rank_score")
+            wp = t.get("est_win_prob")
+            html.append("<div class='ticket'>")
+            html.append(f"<h3>Ticket #{t.get('ticket_no','')}</h3>")
+            html.append(f"<div class='muted'>Avg hit rate: {avg_hr if avg_hr is not None else ''} | "
+                        f"Est win prob: {wp if wp is not None else ''} | "
+                        f"Avg rank: {avg_rs if avg_rs is not None else ''}</div>")
+
+            html.append("<table><thead><tr>"
+                        "<th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th>"
+                        "<th>Pick</th><th>Dir</th><th>HitRate</th><th>Edge</th><th>Rank</th>"
+                        "</tr></thead><tbody>")
+
+            for i, leg in enumerate(t.get("legs", []), start=1):
+                dirv = (leg.get("direction") or "").upper()
+                dir_span = f"<span class='dir-over'>OVER</span>" if dirv == "OVER" else f"<span class='dir-under'>{dirv or ''}</span>"
+                html.append("<tr>"
+                            f"<td>{i}</td>"
+                            f"<td>{leg.get('sport','')}</td>"
+                            f"<td>{leg.get('player','')}</td>"
+                            f"<td>{leg.get('prop_type','')}</td>"
+                            f"<td>{'' if leg.get('line') is None else leg.get('line')}</td>"
+                            f"<td>{leg.get('pick_type','')}</td>"
+                            f"<td>{dir_span}</td>"
+                            f"<td>{'' if leg.get('hit_rate') is None else leg.get('hit_rate')}</td>"
+                            f"<td>{'' if leg.get('edge') is None else leg.get('edge')}</td>"
+                            f"<td>{'' if leg.get('rank_score') is None else leg.get('rank_score')}</td>"
+                            "</tr>")
+
+            html.append("</tbody></table>")
+            html.append("</div>")  # ticket
+
+        html.append("</div>")  # group
+
+    html.append("</body></html>")
+
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(html))
+
+    print(f"✅ Web JSON  -> {json_path}")
+    print(f"✅ Web HTML  -> {html_path}")
 
 # ── Load & normalize NBA ───────────────────────────────────────────────────────
 def load_nba(path: str) -> pd.DataFrame:
@@ -98,15 +282,16 @@ def load_nba(path: str) -> pd.DataFrame:
         'Hit Rate (5g)': 'hit_rate', 'Rank Score': 'rank_score', 'Tier': 'tier',
         'Projection': 'projection', 'Team': 'team', 'Opp': 'opp',
         'Game Time': 'game_time', 'Def Tier': 'def_tier', 'Min Tier': 'min_tier',
-        'L5 Avg': 'l5_avg', 'Season Avg': 'season_avg',
+        'Last 5 Avg': 'l5_avg', 'Season Avg': 'season_avg',
         'L5 Over': 'l5_over', 'L5 Under': 'l5_under', 'Pos': 'pos',
         'Def Rank': 'def_rank', 'Shot Role': 'shot_role', 'Usage Role': 'usage_role',
         'Void Reason': 'void_reason',
     })
     df['sport'] = 'NBA'
-    df['direction'] = df['direction'].str.upper()
-    df['tier'] = df['tier'].astype(str).str.upper()
-    # drop void rows
+    if 'direction' in df.columns:
+        df['direction'] = df['direction'].astype(str).str.upper()
+    if 'tier' in df.columns:
+        df['tier'] = df['tier'].astype(str).str.upper()
     if 'void_reason' in df.columns:
         df = df[df['void_reason'].isna() | (df['void_reason'].astype(str).str.strip() == '')]
     return df
@@ -114,20 +299,26 @@ def load_nba(path: str) -> pd.DataFrame:
 # ── Load & normalize CBB ───────────────────────────────────────────────────────
 def load_cbb(path: str) -> pd.DataFrame:
     xl = pd.ExcelFile(path, engine='openpyxl')
-    sheet = 'ELIGIBLE' if 'ELIGIBLE' in xl.sheet_names else 'ALL'
+    sheet = 'ELIGIBLE' if 'ELIGIBLE' in xl.sheet_names else ('ALL' if 'ALL' in xl.sheet_names else xl.sheet_names[0])
     df = pd.read_excel(path, sheet_name=sheet, engine='openpyxl')
     df = df.rename(columns={
-        'prop_type': 'prop_type', 'final_bet_direction': 'direction',
+        'prop_type': 'prop_type',
+        'final_bet_direction': 'direction',
         'opp_team_abbr': 'opp',
-        'start_time': 'game_time', 'line_hit_rate': 'hit_rate',
-        'stat_last5_avg': 'l5_avg', 'stat_season_avg': 'season_avg',
-        'line_hits_over_5': 'l5_over', 'line_hits_under_5': 'l5_under',
+        'start_time': 'game_time',
+        'line_hit_rate': 'hit_rate',
+        'stat_last5_avg': 'l5_avg',
+        'stat_season_avg': 'season_avg',
+        'line_hits_over_5': 'l5_over',
+        'line_hits_under_5': 'l5_under',
     })
     if 'direction' not in df.columns and 'bet_direction' in df.columns:
         df['direction'] = df['bet_direction']
     df['sport'] = 'CBB'
-    df['direction'] = df['direction'].str.upper()
-    df['tier'] = df['tier'].astype(str).str.upper()
+    if 'direction' in df.columns:
+        df['direction'] = df['direction'].astype(str).str.upper()
+    if 'tier' in df.columns:
+        df['tier'] = df['tier'].astype(str).str.upper()
     if 'void_reason' in df.columns:
         df = df[df['void_reason'].isna() | (df['void_reason'].astype(str).str.strip() == '')]
     return df
@@ -141,91 +332,107 @@ def build_combined_slate(nba: pd.DataFrame, cbb: pd.DataFrame) -> pd.DataFrame:
         df = df.loc[:, ~df.columns.duplicated()].copy()
         return df[[c for c in cols if c in df.columns]].copy()
     combined = pd.concat([safe_keep(nba, keep), safe_keep(cbb, keep)], ignore_index=True)
-    combined['rank_score'] = pd.to_numeric(combined['rank_score'], errors='coerce')
-    combined['hit_rate']   = pd.to_numeric(combined['hit_rate'],   errors='coerce')
-    combined['edge']       = pd.to_numeric(combined['edge'],       errors='coerce')
-    combined = combined.sort_values('rank_score', ascending=False).reset_index(drop=True)
+    if 'rank_score' in combined.columns:
+        combined['rank_score'] = pd.to_numeric(combined['rank_score'], errors='coerce')
+    if 'hit_rate' in combined.columns:
+        combined['hit_rate'] = pd.to_numeric(combined['hit_rate'], errors='coerce')
+    if 'edge' in combined.columns:
+        combined['edge'] = pd.to_numeric(combined['edge'], errors='coerce')
+    combined = combined.sort_values('rank_score', ascending=False, na_position='last').reset_index(drop=True)
     return combined
 
 # ── Filter eligible props for tickets ─────────────────────────────────────────
 def filter_eligible(df: pd.DataFrame, min_hit_rate=0.0, min_edge=0.0, min_rank=None,
                     tiers=None, pick_types=None) -> pd.DataFrame:
     mask = pd.Series([True] * len(df), index=df.index)
-    if min_hit_rate > 0:
+    if min_hit_rate > 0 and 'hit_rate' in df.columns:
         mask &= df['hit_rate'].fillna(0) >= min_hit_rate
-    if min_edge > 0:
+    if min_edge > 0 and 'edge' in df.columns:
         mask &= df['edge'].fillna(0) >= min_edge
-    if min_rank is not None:
+    if min_rank is not None and 'rank_score' in df.columns:
         mask &= df['rank_score'].fillna(-99) >= min_rank
-    if tiers:
+    if tiers and 'tier' in df.columns:
         mask &= df['tier'].isin([t.upper() for t in tiers])
-    if pick_types:
+    if pick_types and 'pick_type' in df.columns:
         mask &= df['pick_type'].isin(pick_types)
     return df[mask].copy()
 
 # ── Build tickets ──────────────────────────────────────────────────────────────
 def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets=20, require_mix=False) -> list:
-    """Build top tickets of n_legs from pool, sorted by avg rank score.
-    If require_mix=True, each ticket must contain at least 1 NBA and 1 CBB leg."""
+    """
+    Build top tickets of n_legs from pool, sorted by avg rank score.
+    If require_mix=True, each ticket must contain at least 1 NBA and 1 CBB leg.
+    """
     pool = pool.copy().reset_index(drop=True)
     tickets = []
 
     has_sport_col = 'sport' in pool.columns
-    sports_available = pool['sport'].unique().tolist() if has_sport_col else []
+    sports_available = pool['sport'].dropna().unique().tolist() if has_sport_col else []
     can_mix = require_mix and has_sport_col and len(sports_available) >= 2
 
-    eligible = pool.sort_values('rank_score', ascending=False).reset_index(drop=True)
+    eligible = pool.sort_values('rank_score', ascending=False, na_position='last').reset_index(drop=True)
 
     for _ in range(max_tickets * 5):
-        if len(tickets) >= max_tickets: break
+        if len(tickets) >= max_tickets:
+            break
+
         ticket_rows = []
         ticket_players = set()
         sports_in_ticket = set()
 
         if can_mix:
-            # Step 1: seed with best prop from each sport first
             for sport in sports_available:
                 sport_pool = eligible[eligible['sport'] == sport]
                 for _, row in sport_pool.iterrows():
-                    player = row.get('player', '')
-                    if player not in ticket_players:
+                    player = str(row.get('player', '')).strip().lower()
+                    if player and player not in ticket_players:
                         ticket_rows.append(row)
                         ticket_players.add(player)
                         sports_in_ticket.add(sport)
                         break
-            # Step 2: fill remaining legs from full pool by rank
+
             for _, row in eligible.iterrows():
-                if len(ticket_rows) == n_legs: break
-                player = row.get('player', '')
-                if player not in ticket_players:
+                if len(ticket_rows) == n_legs:
+                    break
+                player = str(row.get('player', '')).strip().lower()
+                if player and player not in ticket_players:
                     ticket_rows.append(row)
                     ticket_players.add(player)
                     sports_in_ticket.add(row.get('sport', ''))
         else:
             for _, row in eligible.iterrows():
-                if len(ticket_rows) == n_legs: break
-                player = row.get('player', '')
-                if player not in ticket_players:
+                if len(ticket_rows) == n_legs:
+                    break
+                player = str(row.get('player', '')).strip().lower()
+                if player and player not in ticket_players:
                     ticket_rows.append(row)
                     ticket_players.add(player)
 
         if len(ticket_rows) == n_legs:
-            # Enforce mix requirement
             if can_mix and len(sports_in_ticket) < 2:
                 if len(eligible) > 1:
                     eligible = eligible.iloc[1:].reset_index(drop=True)
                 continue
 
-            # Sort legs: by sport then rank score so NBA/CBB alternate nicely
             if can_mix:
-                ticket_rows = sorted(ticket_rows,
-                    key=lambda r: (r.get('sport',''), -r.get('rank_score', 0)))
+                ticket_rows = sorted(
+                    ticket_rows,
+                    key=lambda r: (str(r.get('sport','')), -float(r.get('rank_score', 0) or 0))
+                )
 
-            key = frozenset(r.get('player','') + '|' + str(r.get('prop_type','')) for r in ticket_rows)
+            key = frozenset(
+                (str(r.get('player','')) + '|' + str(r.get('prop_type',''))).strip()
+                for r in ticket_rows
+            )
             if key not in [t['key'] for t in tickets]:
-                avg_hr = float(np.mean([r.get('hit_rate', 0.5) for r in ticket_rows]))
-                avg_rs = float(np.mean([r.get('rank_score', 0) for r in ticket_rows]))
-                ep = win_prob([r.get('hit_rate', 0.5) for r in ticket_rows], n_legs)
+                hrs = []
+                rss = []
+                for r in ticket_rows:
+                    hrs.append(float(r.get('hit_rate', 0.5) or 0.5))
+                    rss.append(float(r.get('rank_score', 0) or 0))
+                avg_hr = float(np.mean(hrs)) if hrs else 0.0
+                avg_rs = float(np.mean(rss)) if rss else 0.0
+                ep = win_prob(hrs, n_legs)
                 pout = PAYOUT.get(n_legs, {'power': 0, 'flex': 0})
                 tickets.append({
                     'key': key,
@@ -266,7 +473,7 @@ def write_slate_sheet(wb, df, sheet_name, bg_hdr, sport_label=''):
         hc(ws, 1, ci, h, bg=bg_hdr)
     ws.freeze_panes = 'A2'
 
-    for ri, row in enumerate(df[cols].itertuples(), 2):
+    for ri, row in enumerate(df[cols].itertuples(index=False), 2):
         bg = C['alt'] if ri % 2 == 0 else C['white']
         sp = getattr(row, 'sport', '')
         if sp == 'NBA': bg_row = C['nba'] if ri % 2 == 0 else C['white']
@@ -277,9 +484,9 @@ def write_slate_sheet(wb, df, sheet_name, bg_hdr, sport_label=''):
             val = getattr(row, col, '')
             if val is None or (isinstance(val, float) and np.isnan(val)): val = ''
             if col == 'tier':
-                cell = dc(ws, ri, ci, val, bg=tier_bg(val), bold=True, align='center')
+                dc(ws, ri, ci, val, bg=tier_bg(val), bold=True, align='center')
             elif col == 'pick_type':
-                cell = dc(ws, ri, ci, val, bg=pt_bg(val), align='center')
+                dc(ws, ri, ci, val, bg=pt_bg(val), align='center')
             elif col == 'hit_rate':
                 pct_cell(ws, ri, ci, val if val != '' else np.nan)
                 continue
@@ -332,32 +539,28 @@ def write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=''):
         ep = ticket['est_win_prob']
         avg_rs = ticket['avg_rank_score']
 
-        # Ticket header banner
         banner = (f"  Ticket #{ti}  ·  {n}-Leg {label}  ·  "
                   f"Power: {pout}x (${cost:.0f} to win $100)  ·  Flex: {fout}x  ·  "
                   f"Avg Hit Rate: {avg_hr:.0%}  ·  Est Win Prob: {ep:.0%}  ·  "
                   f"Avg Rank Score: {avg_rs:.2f}")
         ws.merge_cells(start_row=ri, start_column=1, end_row=ri, end_column=len(TICKET_COLS))
-        hbg = bg_hdr
-        hc(ws, ri, 1, banner, bg=hbg, sz=9, align='left')
+        hc(ws, ri, 1, banner, bg=bg_hdr, sz=9, align='left')
         ws.row_dimensions[ri].height = 16
         ri += 1
 
-        # Column headers
         for ci, h in enumerate(TICKET_HDRS, 1):
             hc(ws, ri, ci, h, bg=C['hdr'], sz=8)
         ws.row_dimensions[ri].height = 14
         ri += 1
 
-        # Legs
         for leg_i, row in enumerate(ticket['rows'], 1):
             bg = C['alt'] if leg_i % 2 == 0 else C['white']
-            sp = row.get('sport', '') if isinstance(row, dict) else getattr(row, 'sport', '')
+            sp = row.get('sport', '')
             if sp == 'NBA': bg = C['nba']
             elif sp == 'CBB': bg = C['cbb']
 
             def gv(field):
-                return row.get(field, '') if isinstance(row, dict) else getattr(row, field, '')
+                return row.get(field, '')
 
             dc(ws, ri, 1, leg_i, bg=bg, bold=True, align='center')
             dc(ws, ri, 2, gv('player'), bg=bg, align='left', bold=True)
@@ -376,7 +579,11 @@ def write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=''):
             dc(ws, ri, 13, gv('l5_over'), bg=bg)
             dc(ws, ri, 14, gv('l5_under'), bg=bg)
             rs = gv('rank_score')
-            dc(ws, ri, 15, round(float(rs), 2) if rs != '' and rs is not None else '', bg=bg, bold=True)
+            try:
+                rs_out = round(float(rs), 2) if rs != '' and rs is not None else ''
+            except:
+                rs_out = ''
+            dc(ws, ri, 15, rs_out, bg=bg, bold=True)
             dc(ws, ri, 16, gv('def_tier'), bg=bg)
             sv = gv('sport')
             sbg = C['hdr_nba'] if sv == 'NBA' else (C['hdr_cbb'] if sv == 'CBB' else C['hdr'])
@@ -384,7 +591,6 @@ def write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=''):
             ws.row_dimensions[ri].height = 14
             ri += 1
 
-        # Spacer
         ws.row_dimensions[ri].height = 6
         ri += 1
 
@@ -392,7 +598,7 @@ def write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=''):
 def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, thresholds):
     ws = wb.create_sheet('SUMMARY', 0)
     sw(ws, [28, 14, 10, 10, 10, 10, 10, 12, 18])
-    # Title
+
     ws.merge_cells('A1:I1')
     c = ws['A1']
     c.value = f"COMBINED NBA + CBB SLATE  |  {date_str}  |  Generated {datetime.now().strftime('%Y-%m-%d %H:%M')}"
@@ -401,7 +607,6 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
     c.alignment = Alignment(horizontal='center', vertical='center')
     ws.row_dimensions[1].height = 30
 
-    # Thresholds used
     ws.merge_cells('A2:I2')
     c2 = ws['A2']
     c2.value = (f"Filters: Tier {thresholds.get('tiers','ALL')} | "
@@ -429,18 +634,20 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
         for ci in range(4, 10): dc(ws, r, ci, '', bg=bg)
         return r + 1
 
-    # Slate overview
     row = sec(row, '📊 SLATE OVERVIEW', C['hdr_sum'])
     for ci, h in enumerate(['Category','Total Props','Eligible','','','','','',''], 1):
         hc(ws, row, ci, h, bg=C['hdr'], sz=8)
     ws.row_dimensions[row].height = 14
     row += 1
-    row = stat_row(row, 'NBA Props', len(nba), len(nba[nba['tier'].isin(['A','B'])]), C['nba'])
-    row = stat_row(row, 'CBB Props', len(cbb), len(cbb[cbb['tier'].isin(['A','B'])]), C['cbb'])
-    row = stat_row(row, 'Combined Slate', len(combined), len(combined[combined['tier'].isin(['A','B'])]))
+
+    elig_nba = len(nba[nba.get('tier','').isin(['A','B'])]) if 'tier' in nba.columns else 0
+    elig_cbb = len(cbb[cbb.get('tier','').isin(['A','B'])]) if 'tier' in cbb.columns else 0
+    elig_all = len(combined[combined.get('tier','').isin(['A','B'])]) if 'tier' in combined.columns else 0
+    row = stat_row(row, 'NBA Props', len(nba), elig_nba, C['nba'])
+    row = stat_row(row, 'CBB Props', len(cbb), elig_cbb, C['cbb'])
+    row = stat_row(row, 'Combined Slate', len(combined), elig_all)
     row += 1
 
-    # Ticket summary
     row = sec(row, '🎟️ TICKET SUMMARY', C['hdr_mix'])
     for ci, h in enumerate(['Sheet','Legs','Type','# Tickets','Avg Hit Rate','Avg Win Prob','Avg Rank Score','Power Payout','Players'], 1):
         hc(ws, row, ci, h, bg=C['hdr'], sz=8)
@@ -448,7 +655,8 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
     row += 1
 
     for group_name, tickets, bg_row in all_ticket_groups:
-        if not tickets: continue
+        if not tickets:
+            continue
         avg_hr = np.mean([t['avg_hit_rate'] for t in tickets])
         avg_wp = np.mean([t['est_win_prob'] for t in tickets])
         avg_rs = np.mean([t['avg_rank_score'] for t in tickets])
@@ -464,13 +672,30 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
         pct_cell(ws, row, 6, avg_wp)
         dc(ws, row, 7, round(avg_rs, 2), bg=bg)
         dc(ws, row, 8, f'{pout}x', bg=bg)
-        # Sample players from top ticket
         sample = ' | '.join(
-            f"{r.get('player','') if isinstance(r,dict) else getattr(r,'player','')}"
+            f"{r.get('player','')}"
             for r in tickets[0]['rows'][:3]
         ) + ('...' if n > 3 else '')
         dc(ws, row, 9, sample, bg=bg, align='left', sz=8)
         row += 1
+
+# ──────────────────────────────────────────────────────────────────────────────
+# FINAL web groups (ONLY the ticket sets you want)
+# ──────────────────────────────────────────────────────────────────────────────
+def build_final_web_ticket_groups(nba_pool: pd.DataFrame):
+    mix_pool = nba_pool[nba_pool['pick_type'].isin(['Standard', 'Goblin'])].copy()
+    std_pool = nba_pool[nba_pool['pick_type'].isin(['Standard'])].copy()
+
+    groups = []
+    if len(mix_pool) >= 6:
+        groups.append(("FINAL 6-Leg (NBA Std+Gob)", build_tickets(mix_pool, 6, max_tickets=1), None))
+    if len(mix_pool) >= 5:
+        groups.append(("FINAL 5-Leg (NBA Std+Gob)", build_tickets(mix_pool, 5, max_tickets=1), None))
+    if len(mix_pool) >= 3:
+        groups.append(("FINAL 3-Leg MIX x2 (NBA Std+Gob)", build_tickets(mix_pool, 3, max_tickets=2), None))
+    if len(std_pool) >= 3:
+        groups.append(("FINAL 3-Leg STANDARD ONLY (NBA)", build_tickets(std_pool, 3, max_tickets=1), None))
+    return groups
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
@@ -485,16 +710,25 @@ def main():
     ap.add_argument('--min-rank',     type=float, default=None, dest='min_rank')
     ap.add_argument('--pick-types',   default='Goblin,Standard,Demon', dest='pick_types')
     ap.add_argument('--max-tickets',  type=int,   default=20,   dest='max_tickets')
+
+    # Web outputs
+    ap.add_argument('--write-web', action='store_true', help='Write tickets_latest.html/json for GitHub Pages')
+    ap.add_argument('--web-outdir', default='docs', help='Folder to write tickets_latest.html/json (default: docs)')
+    ap.add_argument('--also-root', action='store_true', help='Also write tickets_latest.* in repo root')
+
     args = ap.parse_args()
 
     if not args.output:
         args.output = f'combined_slate_tickets_{args.date}.xlsx'
 
-    tiers = [t.strip() for t in args.tiers.split(',')]
-    pick_types = [p.strip() for p in args.pick_types.split(',')]
+    tiers = [t.strip() for t in args.tiers.split(',') if t.strip()]
+    pick_types = [p.strip() for p in args.pick_types.split(',') if p.strip()]
     thresholds = {
-        'tiers': args.tiers, 'min_hit_rate': args.min_hit_rate,
-        'min_edge': args.min_edge, 'min_rank': args.min_rank, 'pick_types': args.pick_types
+        'tiers': args.tiers,
+        'min_hit_rate': args.min_hit_rate,
+        'min_edge': args.min_edge,
+        'min_rank': args.min_rank,
+        'pick_types': args.pick_types
     }
 
     print(f'Loading NBA slate from {args.nba}...')
@@ -509,17 +743,22 @@ def main():
     combined = build_combined_slate(nba, cbb)
     print(f'  {len(combined)} total props')
 
-    # Filter pools
     def pool(df, pt=None):
-        return filter_eligible(df, args.min_hit_rate, args.min_edge, args.min_rank,
-                               tiers, pt or pick_types)
+        return filter_eligible(
+            df,
+            args.min_hit_rate,
+            args.min_edge,
+            args.min_rank,
+            tiers if tiers else None,
+            pt if pt is not None else pick_types
+        )
 
     nba_pool    = pool(nba)
     cbb_pool    = pool(cbb)
     combo_pool  = pool(combined)
     print(f'  NBA eligible: {len(nba_pool)} | CBB eligible: {len(cbb_pool)} | Combined: {len(combo_pool)}')
 
-    print('Generating tickets...')
+    print('Generating tickets + workbook...')
     wb = Workbook()
     wb.remove(wb.active)
 
@@ -534,7 +773,6 @@ def main():
             if tickets:
                 pt_label = pick_type_filter or 'Mix'
                 sheet_name = f'{sport_prefix} {pt_label} {n}-Leg'[:31]
-                label = f'{n}-Leg {sport_label} {pt_label}'
                 write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=f'{sport_label} {pt_label}')
                 rows_out.append((sheet_name, tickets, None))
                 print(f'  {sheet_name}: {len(tickets)} tickets')
@@ -564,7 +802,7 @@ def main():
     if len(combo_pool) >= 3:
         all_ticket_groups += gen_tickets(combo_pool, 'COMBO', C['hdr_mix'], 'COMBO')
 
-    # Cross-sport Standard Mix (NBA Standard + CBB Standard) — enforces at least 1 leg from each
+    # Cross-sport Standard Mix (enforce mix)
     nba_std = pool(nba, ['Standard'])
     cbb_std = pool(cbb, ['Standard'])
     std_mix_pool = pd.concat([nba_std, cbb_std], ignore_index=True).sort_values('rank_score', ascending=False)
@@ -573,12 +811,12 @@ def main():
         for n in leg_sizes:
             tickets = build_tickets(std_mix_pool, n, args.max_tickets, require_mix=True)
             if tickets:
-                sheet_name = f'MIX Standard {n}-Leg'
+                sheet_name = f'MIX Standard {n}-Leg'[:31]
                 write_ticket_sheet(wb, tickets, sheet_name, C['hdr_mix'], label='NBA+CBB Standard')
                 all_ticket_groups.append((sheet_name, tickets, C['mix']))
                 print(f'  {sheet_name}: {len(tickets)} tickets')
 
-    # Cross-sport Goblin Mix (NBA Goblin + CBB Goblin) — enforces at least 1 leg from each
+    # Cross-sport Goblin Mix (enforce mix)
     nba_gob = pool(nba, ['Goblin'])
     cbb_gob = pool(cbb, ['Goblin'])
     gob_mix_pool = pd.concat([nba_gob, cbb_gob], ignore_index=True).sort_values('rank_score', ascending=False)
@@ -587,21 +825,19 @@ def main():
         for n in leg_sizes:
             tickets = build_tickets(gob_mix_pool, n, args.max_tickets, require_mix=True)
             if tickets:
-                sheet_name = f'MIX Goblin {n}-Leg'
+                sheet_name = f'MIX Goblin {n}-Leg'[:31]
                 write_ticket_sheet(wb, tickets, sheet_name, C['goblin'], label='NBA+CBB Goblin')
                 all_ticket_groups.append((sheet_name, tickets, C['goblin']))
                 print(f'  {sheet_name}: {len(tickets)} tickets')
 
-    # Write slate sheets
     print('Writing slate sheets...')
     write_slate_sheet(wb, combined, 'Full Slate',  C['hdr'],     'ALL')
     write_slate_sheet(wb, nba,      'NBA Slate',   C['hdr_nba'], 'NBA')
     write_slate_sheet(wb, cbb,      'CBB Slate',   C['hdr_cbb'], 'CBB')
 
-    # Summary
     write_summary(wb, nba, cbb, combined, all_ticket_groups, args.date, thresholds)
 
-    # Reorder: SUMMARY first, then slates, then tickets
+    # Reorder
     summary_sheet = wb['SUMMARY']
     wb.move_sheet(summary_sheet, offset=-len(wb.sheetnames))
     for sname in ['Full Slate','NBA Slate','CBB Slate']:
@@ -611,6 +847,16 @@ def main():
     wb.save(args.output)
     print(f'\n✅ Saved -> {args.output}')
     print(f'   Sheets ({len(wb.sheetnames)}): {wb.sheetnames}')
+
+    # Web output (FINAL only)
+    if args.write_web:
+        print("\nWriting GitHub Pages web outputs (FINAL tickets only)...")
+        final_groups = build_final_web_ticket_groups(nba_pool)
+        payload = ticket_groups_to_payload(final_groups, args.date, thresholds)
+        write_web_outputs(payload, args.web_outdir)
+        if args.also_root:
+            write_web_outputs(payload, outdir=".")
+        print("✅ Web outputs complete (FINAL only).")
 
 if __name__ == '__main__':
     main()
