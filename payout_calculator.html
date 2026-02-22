@@ -27,6 +27,14 @@
 
   .section-label{font-size:10px;color:#475569;letter-spacing:3px;margin-bottom:14px}
 
+  .settings-btn{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);color:#93c5fd;border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:bold;letter-spacing:1px;font-family:'Courier New',monospace;font-size:12px}
+  .settings-panel{margin:10px 0 14px 0;border:1px solid #1e293b;border-radius:10px;background:rgba(255,255,255,0.02);padding:10px}
+  .settings-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .settings-text{font-size:12px;color:#94a3b8}
+  .settings-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .settings-cta{background:rgba(148,163,184,0.12);border:1px solid rgba(148,163,184,0.20);color:#e2e8f0;border-radius:10px;padding:7px 10px;cursor:pointer;font-weight:bold;font-family:'Courier New',monospace}
+  .settings-area{width:100%;min-height:160px;background:#0f172a;color:#f8fafc;border:1px solid #334155;border-radius:10px;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,'Courier New',monospace;font-size:12px;outline:none}
+
   .leg-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:rgba(255,255,255,0.03);border-radius:8px;padding:8px 10px;border:1px solid #1e293b;transition:border-color 0.2s}
   .leg-emoji{font-size:16px;width:24px;text-align:center}
   .leg-num{color:#475569;font-size:11px;width:48px;flex-shrink:0}
@@ -108,6 +116,20 @@
     <div class="grid2">
       <div>
         <div class="section-label" id="leg-count-label">TICKET · 3 LEGS</div>
+        <button class="settings-btn" onclick="toggleSettings()">⚙ SETTINGS</button>
+        <div class="settings-panel" id="settings-panel" style="display:none">
+          <div class="settings-row">
+            <div class="settings-text">Paste updated payout tables / modifiers here. Saved to your browser.</div>
+            <div class="settings-actions">
+              <button class="settings-cta" onclick="applySettings()">Apply</button>
+              <button class="settings-cta" onclick="resetSettings()">Reset</button>
+            </div>
+          </div>
+          <textarea class="settings-area" id="settings-area" spellcheck="false"></textarea>
+          <div class="settings-text" style="margin-top:8px">
+            Tip: If you only want an exact match for one mixed slip, use “Exact Override” in the React version.
+          </div>
+        </div>
         <div id="legs-container"></div>
         <button class="add-leg-btn" onclick="addLeg()">+ ADD LEG</button>
         <div class="badges" id="badges"></div>
@@ -121,6 +143,7 @@
   <div id="view-table" style="display:none">
     <div class="leg-count-bar">
       <span class="lc-label">LEG COUNT:</span>
+      <button class="lc-btn" id="lc-2" onclick="setTableLegs(2)">2-LEG</button>
       <button class="lc-btn" id="lc-3" onclick="setTableLegs(3)">3-LEG</button>
       <button class="lc-btn active" id="lc-4" onclick="setTableLegs(4)">4-LEG</button>
       <button class="lc-btn" id="lc-5" onclick="setTableLegs(5)">5-LEG</button>
@@ -130,7 +153,7 @@
       <table class="ref-table" id="ref-table">
         <thead><tr>
           <th>LEG TYPE</th><th>POWER</th><th id="th-pp-win">WIN $10 (PP)</th>
-          <th>$ TO WIN $100</th><th>FLEX</th><th id="th-fl-win">WIN $10 (FL)</th>
+          <th>BREAKEVEN %</th><th>FLEX</th><th id="th-fl-win">WIN $10 (FL)</th>
         </tr></thead>
         <tbody id="ref-tbody"></tbody>
       </table>
@@ -144,18 +167,54 @@
 
 <script>
 // ── Data ──────────────────────────────────────────────────────────────────────
-const POWER_BASE = {2:3.0, 3:6.0, 4:10.0, 5:20.0, 6:37.5};
-const FLEX_BASE  = {
+const SETTINGS_KEY = "pp_payout_calc_settings_v2";
+
+// Defaults (PrizePicks *Standard* payout tables)
+const DEFAULT_POWER_BASE = {2:3.0, 3:6.0, 4:10.0, 5:20.0, 6:37.5};
+const DEFAULT_FLEX_BASE  = {
   2:{2:3.0},
   3:{3:3.0, 2:1.0},
   4:{4:6.0, 3:1.5},
   5:{5:10.0, 4:2.0, 3:0.4},
   6:{6:25.0, 5:2.0, 4:0.4},
 };
-const GOBLIN_POWER = {1:0.840, 2:0.747, 3:0.707};
-const GOBLIN_FLEX  = {1:0.800, 2:0.720, 3:0.600};
-const DEMON_POWER  = {1:1.627, 2:2.400, 3:2.720};
-const DEMON_FLEX   = {1:1.600, 2:1.520, 3:1.560};
+
+// Default heuristics (ESTIMATE MODE) — tweak to match what you observe in-app.
+const DEFAULT_GOBLIN_POWER = {1:0.840, 2:0.747, 3:0.707};
+const DEFAULT_GOBLIN_FLEX  = {1:0.800, 2:0.720, 3:0.600};
+const DEFAULT_DEMON_POWER  = {1:1.627, 2:2.400, 3:2.720};
+const DEFAULT_DEMON_FLEX   = {1:1.600, 2:1.520, 3:1.560};
+
+function loadSettings() {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function mergeDefaults(s) {
+  const out = {
+    powerBase: {...DEFAULT_POWER_BASE},
+    flexBase: JSON.parse(JSON.stringify(DEFAULT_FLEX_BASE)),
+    goblinPower: {...DEFAULT_GOBLIN_POWER},
+    goblinFlex: {...DEFAULT_GOBLIN_FLEX},
+    demonPower: {...DEFAULT_DEMON_POWER},
+    demonFlex: {...DEFAULT_DEMON_FLEX},
+  };
+  if (!s || typeof s !== 'object') return out;
+  if (s.powerBase) out.powerBase = {...out.powerBase, ...s.powerBase};
+  if (s.flexBase) out.flexBase = {...out.flexBase, ...s.flexBase};
+  if (s.goblinPower) out.goblinPower = {...out.goblinPower, ...s.goblinPower};
+  if (s.goblinFlex) out.goblinFlex = {...out.goblinFlex, ...s.goblinFlex};
+  if (s.demonPower) out.demonPower = {...out.demonPower, ...s.demonPower};
+  if (s.demonFlex) out.demonFlex = {...out.demonFlex, ...s.demonFlex};
+  return out;
+}
+
+let SETTINGS = mergeDefaults(loadSettings());
 
 const LEG_TYPES = ["Standard","Goblin -1","Goblin -2","Goblin -3","Demon +1","Demon +2","Demon +3"];
 
@@ -180,11 +239,17 @@ function calcPayouts(legs) {
   let pm=1, fm=1;
   for (const leg of legs) {
     const {kind,dev} = classify(leg);
-    if (kind==="goblin") { pm *= GOBLIN_POWER[dev]||0.840; fm *= GOBLIN_FLEX[dev]||0.800; }
-    else if (kind==="demon") { pm *= DEMON_POWER[dev]||1.627; fm *= DEMON_FLEX[dev]||1.600; }
+    if (kind==="goblin") {
+      pm *= (SETTINGS.goblinPower[dev] ?? SETTINGS.goblinPower[1]);
+      fm *= (SETTINGS.goblinFlex[dev] ?? SETTINGS.goblinFlex[1]);
+    }
+    else if (kind==="demon") {
+      pm *= (SETTINGS.demonPower[dev] ?? SETTINGS.demonPower[1]);
+      fm *= (SETTINGS.demonFlex[dev] ?? SETTINGS.demonFlex[1]);
+    }
   }
-  const powerTop = Math.round((POWER_BASE[n]||37.5)*pm*100)/100;
-  const fb = FLEX_BASE[n]||{};
+  const powerTop = Math.round((SETTINGS.powerBase[n]||37.5)*pm*100)/100;
+  const fb = SETTINGS.flexBase[n]||{};
   const flexTop  = Math.round(((fb[n]||25)*fm)*100)/100;
   const partials = Object.entries(fb).filter(([k])=>parseInt(k)<n).map(([k,v])=>({correct:parseInt(k),mult:v}));
   return {n, powerTop, flexTop, partials, pm, fm};
@@ -194,6 +259,40 @@ function calcPayouts(legs) {
 let legs = ["Standard","Standard","Standard"];
 let tableLegs = 4;
 let activeTab = "builder";
+
+// ── Settings UI ─────────────────────────────────────────────────────────────
+function toggleSettings() {
+  const panel = document.getElementById("settings-panel");
+  const open = panel.style.display !== "none";
+  panel.style.display = open ? "none" : "block";
+  if (!open) {
+    document.getElementById("settings-area").value = JSON.stringify(SETTINGS, null, 2);
+  }
+}
+
+function applySettings() {
+  const txt = document.getElementById("settings-area").value || "";
+  try {
+    const parsed = JSON.parse(txt);
+    SETTINGS = mergeDefaults(parsed);
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(SETTINGS));
+    render();
+    renderTable();
+  } catch (e) {
+    alert("Settings JSON is invalid. Fix it and try again.");
+  }
+}
+
+function resetSettings() {
+  SETTINGS = mergeDefaults(null);
+  localStorage.removeItem(SETTINGS_KEY);
+  const panel = document.getElementById("settings-panel");
+  if (panel.style.display !== "none") {
+    document.getElementById("settings-area").value = JSON.stringify(SETTINGS, null, 2);
+  }
+  render();
+  renderTable();
+}
 
 function getStake() { return Math.max(1, parseFloat(document.getElementById("stakeInput").value)||10); }
 
@@ -303,8 +402,9 @@ function render() {
           <div class="metric-val" style="color:#10b981">$${(stake*result.powerTop).toFixed(2)}</div>
         </div>
         <div class="metric-box">
-          <div class="metric-label">TO WIN $100</div>
-          <div class="metric-val" style="color:#f59e0b;font-size:18px">$${(100/result.powerTop).toFixed(2)}</div>
+          <div class="metric-label">BREAKEVEN</div>
+          <div class="metric-val" style="color:#f59e0b;font-size:18px">${(100/result.powerTop).toFixed(2)}%</div>
+          <div style="margin-top:6px;font-size:11px;color:#94a3b8">Stake to win $100: $${(100/result.powerTop).toFixed(2)}</div>
         </div>
       </div>
     </div>
@@ -333,7 +433,7 @@ function render() {
 // ── Table render ──────────────────────────────────────────────────────────────
 function setTableLegs(n) {
   tableLegs = n;
-  [3,4,5,6].forEach(x => {
+  [2,3,4,5,6].forEach(x => {
     document.getElementById(`lc-${x}`).className = "lc-btn"+(x===n?" active":"");
   });
   renderTable();
@@ -356,7 +456,7 @@ function renderTable() {
       <td style="color:${color};font-weight:bold">${legEmoji(row)} ${row}</td>
       <td style="text-align:center;color:#60a5fa;font-weight:bold">${p.powerTop}x</td>
       <td style="text-align:center;color:#10b981;font-weight:bold">$${(stake*p.powerTop).toFixed(2)}</td>
-      <td style="text-align:center;color:#f59e0b">$${(100/p.powerTop).toFixed(2)}</td>
+      <td style="text-align:center;color:#f59e0b">${(100/p.powerTop).toFixed(2)}%</td>
       <td style="text-align:center;color:#a78bfa;font-weight:bold">${p.flexTop}x</td>
       <td style="text-align:center;color:#10b981">$${(stake*p.flexTop).toFixed(2)}</td>
     </tr>`;
@@ -364,8 +464,8 @@ function renderTable() {
 
   // Flex partial reference cards
   const cards = document.getElementById("flex-cards");
-  cards.innerHTML = [3,4,5,6].map(n => {
-    const fb = FLEX_BASE[n]||{};
+  cards.innerHTML = [2,3,4,5,6].map(n => {
+    const fb = SETTINGS.flexBase[n]||{};
     const rows2 = Object.entries(fb).sort((a,b)=>b[0]-a[0]).map(([k,v])=>`
       <div class="flex-card-row">
         <span class="flex-card-k">${k}/${n}</span>
