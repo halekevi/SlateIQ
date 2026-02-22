@@ -13,15 +13,18 @@ h2{margin:0 0 6px 0;font-size:18px}
 h3{margin:0 0 8px 0;font-size:15px}
 .muted{color:#666;font-size:13px}
 table{width:100%;border-collapse:collapse;margin-top:8px;}
-th,td{padding:8px;border-bottom:1px solid #eee;text-align:left;font-size:13px;}
+th,td{padding:8px;border-bottom:1px solid #eee;text-align:left;font-size:13px;vertical-align:middle;}
 th{background:#1c1c1c;color:#fff;}
 .dir-over{background:#d6eaf8;padding:2px 6px;border-radius:6px;font-weight:600}
 .dir-under{background:#fdebd0;padding:2px 6px;border-radius:6px;font-weight:600}
+.pwrap{display:flex;gap:10px;align-items:center;}
+.avatar{width:34px;height:34px;border-radius:999px;overflow:hidden;border:1px solid #ddd;flex:0 0 auto;background:#f2f3f4;display:flex;align-items:center;justify-content:center;font-weight:700;color:#333;}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block;}
 </style></head><body>
 <div class='top'>
 <h1>🎟️ Latest Generated Tickets</h1>
 </div>
-<div class='muted'>Generated: 2026-02-22 21:54:55 UTC | Date: 2026-02-22</div>
+<div class='muted'>Generated: 2026-02-22 22:37:47 UTC | Date: 2026-02-22</div>
 <div class='top' style='margin-top:10px'>
 <span class='pill'>Outputs are static (GitHub Pages friendly)</span>
 <a class='pill' href='tickets_latest.json'>Download JSON</a>
@@ -37,12 +40,12 @@ Filters → tiers: A,B | min_hit_rate: 0.0 | min_edge: 0.0 | min_rank: None | pi
 <h3>Ticket #1</h3>
 <div class='muted'>Avg hit rate: 1.0 | Est win prob: 1.0 | Avg rank: 5.133333333333334</div>
 <table><thead><tr><th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th><th>Pick</th><th>Dir</th><th>HitRate</th><th>Edge</th><th>Rank</th></tr></thead><tbody>
-<tr><td>1</td><td>NBA</td><td>Baylor Scheierman</td><td>Rebounds</td><td>4.0</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>2.49</td><td>4.63</td></tr>
-<tr><td>2</td><td>NBA</td><td>Jarrett Allen</td><td>Points</td><td>14.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.8</td><td>4.31</td></tr>
-<tr><td>3</td><td>NBA</td><td>Danny Wolf</td><td>Points</td><td>5.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.66</td><td>5.65</td></tr>
-<tr><td>4</td><td>NBA</td><td>Neemias Queta</td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>4.4</td><td>5.46</td></tr>
-<tr><td>5</td><td>NBA</td><td>Day'Ron Sharpe</td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>3.62</td><td>5.44</td></tr>
-<tr><td>6</td><td>NBA</td><td>Joel Embiid</td><td>Points</td><td>19.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>12.65</td><td>5.31</td></tr>
+<tr><td>1</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>BS</div><div>Baylor Scheierman</div></div></td><td>Rebounds</td><td>4.0</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>2.49</td><td>4.63</td></tr>
+<tr><td>2</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>JA</div><div>Jarrett Allen</div></div></td><td>Points</td><td>14.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.8</td><td>4.31</td></tr>
+<tr><td>3</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>DW</div><div>Danny Wolf</div></div></td><td>Points</td><td>5.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.66</td><td>5.65</td></tr>
+<tr><td>4</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>NQ</div><div>Neemias Queta</div></div></td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>4.4</td><td>5.46</td></tr>
+<tr><td>5</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>DS</div><div>Day'Ron Sharpe</div></div></td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>3.62</td><td>5.44</td></tr>
+<tr><td>6</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>JE</div><div>Joel Embiid</div></div></td><td>Points</td><td>19.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>12.65</td><td>5.31</td></tr>
 </tbody></table>
 </div>
 </div>
@@ -53,11 +56,11 @@ Filters → tiers: A,B | min_hit_rate: 0.0 | min_edge: 0.0 | min_rank: None | pi
 <h3>Ticket #1</h3>
 <div class='muted'>Avg hit rate: 1.0 | Est win prob: 1.0 | Avg rank: 5.098000000000001</div>
 <table><thead><tr><th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th><th>Pick</th><th>Dir</th><th>HitRate</th><th>Edge</th><th>Rank</th></tr></thead><tbody>
-<tr><td>1</td><td>NBA</td><td>Baylor Scheierman</td><td>Rebounds</td><td>4.0</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>2.49</td><td>4.63</td></tr>
-<tr><td>2</td><td>NBA</td><td>Jarrett Allen</td><td>Points</td><td>14.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.8</td><td>4.31</td></tr>
-<tr><td>3</td><td>NBA</td><td>Danny Wolf</td><td>Points</td><td>5.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.66</td><td>5.65</td></tr>
-<tr><td>4</td><td>NBA</td><td>Neemias Queta</td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>4.4</td><td>5.46</td></tr>
-<tr><td>5</td><td>NBA</td><td>Day'Ron Sharpe</td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>3.62</td><td>5.44</td></tr>
+<tr><td>1</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>BS</div><div>Baylor Scheierman</div></div></td><td>Rebounds</td><td>4.0</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>2.49</td><td>4.63</td></tr>
+<tr><td>2</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>JA</div><div>Jarrett Allen</div></div></td><td>Points</td><td>14.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.8</td><td>4.31</td></tr>
+<tr><td>3</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>DW</div><div>Danny Wolf</div></div></td><td>Points</td><td>5.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.66</td><td>5.65</td></tr>
+<tr><td>4</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>NQ</div><div>Neemias Queta</div></div></td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>4.4</td><td>5.46</td></tr>
+<tr><td>5</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>DS</div><div>Day'Ron Sharpe</div></div></td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>3.62</td><td>5.44</td></tr>
 </tbody></table>
 </div>
 </div>
@@ -68,18 +71,18 @@ Filters → tiers: A,B | min_hit_rate: 0.0 | min_edge: 0.0 | min_rank: None | pi
 <h3>Ticket #1</h3>
 <div class='muted'>Avg hit rate: 1.0 | Est win prob: 1.0 | Avg rank: 5.246666666666667</div>
 <table><thead><tr><th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th><th>Pick</th><th>Dir</th><th>HitRate</th><th>Edge</th><th>Rank</th></tr></thead><tbody>
-<tr><td>1</td><td>NBA</td><td>Baylor Scheierman</td><td>Rebounds</td><td>4.0</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>2.49</td><td>4.63</td></tr>
-<tr><td>2</td><td>NBA</td><td>Danny Wolf</td><td>Points</td><td>5.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.66</td><td>5.65</td></tr>
-<tr><td>3</td><td>NBA</td><td>Neemias Queta</td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>4.4</td><td>5.46</td></tr>
+<tr><td>1</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>BS</div><div>Baylor Scheierman</div></div></td><td>Rebounds</td><td>4.0</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>2.49</td><td>4.63</td></tr>
+<tr><td>2</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>DW</div><div>Danny Wolf</div></div></td><td>Points</td><td>5.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.66</td><td>5.65</td></tr>
+<tr><td>3</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>NQ</div><div>Neemias Queta</div></div></td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>4.4</td><td>5.46</td></tr>
 </tbody></table>
 </div>
 <div class='ticket'>
 <h3>Ticket #2</h3>
 <div class='muted'>Avg hit rate: 1.0 | Est win prob: 1.0 | Avg rank: 5.07</div>
 <table><thead><tr><th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th><th>Pick</th><th>Dir</th><th>HitRate</th><th>Edge</th><th>Rank</th></tr></thead><tbody>
-<tr><td>1</td><td>NBA</td><td>Jarrett Allen</td><td>Points</td><td>14.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.8</td><td>4.31</td></tr>
-<tr><td>2</td><td>NBA</td><td>Neemias Queta</td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>4.4</td><td>5.46</td></tr>
-<tr><td>3</td><td>NBA</td><td>Day'Ron Sharpe</td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>3.62</td><td>5.44</td></tr>
+<tr><td>1</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>JA</div><div>Jarrett Allen</div></div></td><td>Points</td><td>14.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.8</td><td>4.31</td></tr>
+<tr><td>2</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>NQ</div><div>Neemias Queta</div></div></td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>4.4</td><td>5.46</td></tr>
+<tr><td>3</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>DS</div><div>Day'Ron Sharpe</div></div></td><td>Rebounds</td><td>4.5</td><td>Goblin</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>3.62</td><td>5.44</td></tr>
 </tbody></table>
 </div>
 </div>
@@ -90,9 +93,9 @@ Filters → tiers: A,B | min_hit_rate: 0.0 | min_edge: 0.0 | min_rank: None | pi
 <h3>Ticket #1</h3>
 <div class='muted'>Avg hit rate: 1.0 | Est win prob: 1.0 | Avg rank: 4.3933333333333335</div>
 <table><thead><tr><th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th><th>Pick</th><th>Dir</th><th>HitRate</th><th>Edge</th><th>Rank</th></tr></thead><tbody>
-<tr><td>1</td><td>NBA</td><td>Baylor Scheierman</td><td>Rebounds</td><td>4.0</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>2.49</td><td>4.63</td></tr>
-<tr><td>2</td><td>NBA</td><td>Jarrett Allen</td><td>Points</td><td>14.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.8</td><td>4.31</td></tr>
-<tr><td>3</td><td>NBA</td><td>Isaiah Joe</td><td>Pts+Rebs</td><td>15.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>3.11</td><td>4.24</td></tr>
+<tr><td>1</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>BS</div><div>Baylor Scheierman</div></div></td><td>Rebounds</td><td>4.0</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>2.49</td><td>4.63</td></tr>
+<tr><td>2</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>JA</div><div>Jarrett Allen</div></div></td><td>Points</td><td>14.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>5.8</td><td>4.31</td></tr>
+<tr><td>3</td><td>NBA</td><td><div class='pwrap'><div class='avatar'>IJ</div><div>Isaiah Joe</div></div></td><td>Pts+Rebs</td><td>15.5</td><td>Standard</td><td><span class='dir-over'>OVER</span></td><td>1.0</td><td>3.11</td><td>4.24</td></tr>
 </tbody></table>
 </div>
 </div>

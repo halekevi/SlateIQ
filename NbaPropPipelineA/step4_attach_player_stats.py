@@ -1,23 +1,12 @@
 #!/usr/bin/env python3
 """
 step4_attach_player_stats.py  (NBA) — deterministic, id-driven, combo-safe
-PATCHED v3: IPv4 fix + streamlined connection handling
+PATCHED v4: FIXED last-5 ordering (most recent first, guaranteed)
 
-ROOT CAUSE OF PRIOR HANGS:
-- nba_api uses requests under the hood
-- On many systems, requests defaults to IPv6 for stats.nba.com
-- stats.nba.com only reliably responds on IPv4 → connection hangs/times out
-- This was NOT a rate-limit issue — it was an IPv4/IPv6 routing issue
-
-FIXES IN THIS VERSION:
-1. Force IPv4 via socket-level monkey-patch (--force-ipv4, default ON)
-   Patches socket.getaddrinfo to return only AF_INET (IPv4) results.
-   Applied BEFORE nba_api is imported so it takes effect globally.
-2. Custom requests Session with IPv4-bound HTTPAdapter injected into nba_api
-3. Shorter connect timeout (10s) + longer read timeout (120s) — catches hangs fast
-4. Per-player timing so you can see exactly which player is slow
-5. Cache-first: skips any player already in cache (safe to re-run mid-pipeline)
-6. --dry-run flag: prints what would be fetched without hitting the API
+Key Fix:
+- Sort game logs by GAME_DATE DESC (most recent -> oldest)
+- Do NOT reverse arrays later
+- last5 averages and last5 over/under are now computed from the true most recent 5 games
 
 RECOMMENDED RUN:
   py -3.14 step4_attach_player_stats.py \
@@ -39,17 +28,15 @@ import argparse as _ap_early
 import sys as _sys
 import socket as _socket
 
-# Parse --force-ipv4 early before full argparse so the patch is in place
 _force_ipv4 = "--force-ipv4" in _sys.argv or "--no-force-ipv4" not in _sys.argv
 
 if _force_ipv4:
     _orig_getaddrinfo = _socket.getaddrinfo
 
     def _ipv4_getaddrinfo(host, port, family=0, type=0, proto=0, flags=0):
-        """Force IPv4 by filtering out AF_INET6 results."""
         results = _orig_getaddrinfo(host, port, family, type, proto, flags)
         ipv4 = [r for r in results if r[0] == _socket.AF_INET]
-        return ipv4 if ipv4 else results  # fallback to original if no IPv4 results
+        return ipv4 if ipv4 else results
 
     _socket.getaddrinfo = _ipv4_getaddrinfo
     print("🔧 IPv4 mode: socket.getaddrinfo patched to prefer AF_INET")
@@ -75,16 +62,11 @@ COMBO_SEP = "|"
 # ── IPv4-forced requests session ───────────────────────────────────────────────
 
 def _make_nba_session(connect_timeout: float = 10.0) -> requests.Session:
-    """
-    Build a requests Session tuned for NBA stats API:
-    - Retry on connection errors and 5xx (NOT on 429 — we handle that manually)
-    - Conservative pool size to avoid connection exhaustion
-    """
     session = requests.Session()
     retry = Retry(
         total=3,
         connect=3,
-        read=0,           # don't auto-retry reads — we handle timeouts ourselves
+        read=0,
         backoff_factor=2,
         status_forcelist=[500, 502, 503, 504],
         allowed_methods=["GET"],
@@ -101,18 +83,13 @@ def _make_nba_session(connect_timeout: float = 10.0) -> requests.Session:
 
 
 def _inject_session_into_nba_api(session: requests.Session) -> None:
-    """
-    nba_api uses its own internal NBAStatsHTTP class.
-    We can't easily replace it, but the IPv4 socket patch handles the routing.
-    This session is used for any direct requests fallback.
-    """
-    pass  # Socket patch handles it; session available for direct calls if needed
+    # Socket patch handles routing; session kept for future direct calls if needed.
+    pass
 
 
 # ── Stat computation ───────────────────────────────────────────────────────────
 
 def _to_str_num(x) -> str:
-    """Convert numeric to a compact string; return '' if missing."""
     try:
         if x is None:
             return ""
@@ -164,15 +141,12 @@ def _compute_stat_series(df: pd.DataFrame, prop_norm: str) -> pd.Series:
         ("fga",): fga, ("fgm",): fgm,
         ("fg3a", "3ptattempted"):                   fg3a,
         ("fg3m", "3ptmade"):                        fg3m,
-        ("fg2a", "twopointersattempted"):            fg2a,
+        ("fg2a", "twopointersattempted"):           fg2a,
         ("fg2m", "twopointersmade"):                fg2m,
         ("fta", "freethrowsattempted"):             fta,
         ("ftm", "freethrowsmade"):                  ftm,
         ("dreb", "defensiverebounds"):              dreb,
         ("oreb", "offensiverebounds"):              oreb,
-        # Quarter/dunk props — not available in standard game log (no box score breakdown)
-        # Mapped to nan so they get UNSUPPORTED_PROP and are handled gracefully
-        # ("dunks", "quarterswith3+points", "quarterswith5+points", "points1st3minutes"): nan
     }
     for keys, series in MAP.items():
         if p in keys:
@@ -222,7 +196,6 @@ def _read_player_log(
     if key in mem_cache:
         return mem_cache[key]
 
-    # Check disk cache first — safe to re-run mid-pipeline
     fp = None
     if cache_dir is not None:
         cache_dir.mkdir(parents=True, exist_ok=True)
@@ -244,9 +217,6 @@ def _read_player_log(
                 time.sleep(sleep_s + jitter)
 
             t0 = time.time()
-            # timeout tuple: (connect_timeout, read_timeout)
-            # connect_timeout short → catches IPv6 hangs fast
-            # read_timeout long → gives API time to respond once connected
             gl = playergamelog.PlayerGameLog(
                 player_id=player_id,
                 season=season,
@@ -256,7 +226,7 @@ def _read_player_log(
             elapsed = time.time() - t0
 
             if raw is None or len(raw) == 0:
-                print(f"  ⚠️  player_id={player_id}: empty response (inactive/invalid) — skipping [{elapsed:.1f}s]")
+                print(f"  ⚠️  player_id={player_id}: empty response — skipping [{elapsed:.1f}s]")
                 empty = pd.DataFrame()
                 mem_cache[key] = empty
                 return empty
@@ -265,13 +235,15 @@ def _read_player_log(
             for c in df.columns:
                 df[c] = df[c].astype(str)
 
+            # Remove DNP / MIN=0
             if "MIN" in df.columns:
                 mins = pd.to_numeric(df["MIN"], errors="coerce")
                 df = df.loc[mins.fillna(0) > 0].copy()
 
+            # ✅ FIX: sort MOST RECENT FIRST
             if "GAME_DATE" in df.columns:
                 df["GAME_DATE"] = pd.to_datetime(df["GAME_DATE"], errors="coerce")
-                df = df.sort_values("GAME_DATE", ascending=True)
+                df = df.sort_values("GAME_DATE", ascending=False)
 
             if fp is not None:
                 try:
@@ -284,26 +256,21 @@ def _read_player_log(
             return df
 
         except (requests.exceptions.ConnectTimeout,) as e:
-            # Short connect timeout hit — almost certainly an IPv6/routing issue
-            # The socket patch should prevent this, but log clearly if it still happens
             last_err = e
             backoff = min(15.0, (2 ** (attempt - 1)) * 2.0) + random.uniform(0.5, 2.0)
-            print(f"  🔌 CONNECT TIMEOUT player_id={player_id} attempt {attempt}/{retries} "
-                  f"(IPv4/IPv6 routing?) — retry in {backoff:.1f}s")
+            print(f"  🔌 CONNECT TIMEOUT player_id={player_id} attempt {attempt}/{retries} — retry in {backoff:.1f}s")
             time.sleep(backoff)
 
         except (requests.exceptions.ReadTimeout,) as e:
             last_err = e
             backoff = min(30.0, (2 ** (attempt - 1)) * 3.0) + random.uniform(1.0, 5.0)
-            print(f"  ⏱️  READ TIMEOUT player_id={player_id} attempt {attempt}/{retries} "
-                  f"— retry in {backoff:.1f}s")
+            print(f"  ⏱️  READ TIMEOUT player_id={player_id} attempt {attempt}/{retries} — retry in {backoff:.1f}s")
             time.sleep(backoff)
 
         except Exception as e:
             last_err = e
             backoff = min(20.0, (2 ** (attempt - 1)) * 1.5) + random.random()
-            print(f"  ⚠️  ERROR player_id={player_id} attempt {attempt}/{retries}: "
-                  f"{type(e).__name__}: {e} — retry in {backoff:.1f}s")
+            print(f"  ⚠️  ERROR player_id={player_id} attempt {attempt}/{retries}: {type(e).__name__}: {e} — retry in {backoff:.1f}s")
             time.sleep(backoff)
 
     print(f"  ❌ SKIPPING player_id={player_id} after {retries} retries. Last: {type(last_err).__name__}")
@@ -343,7 +310,8 @@ def _combo_aligned_sum(logs: List[pd.DataFrame], prop_norm: str) -> pd.DataFrame
     if "GAME_DATE" in prepared[0].columns:
         merged = merged.merge(prepared[0][["GAME_ID", "GAME_DATE"]], on="GAME_ID", how="left")
         merged["GAME_DATE"] = pd.to_datetime(merged["GAME_DATE"], errors="coerce")
-        merged = merged.sort_values("GAME_DATE", ascending=True)
+        # ✅ FIX: most recent first
+        merged = merged.sort_values("GAME_DATE", ascending=False)
 
     keep = ["GAME_ID"] + (["GAME_DATE"] if "GAME_DATE" in merged.columns else []) + ["STAT"]
     return merged[keep].copy()
@@ -358,9 +326,12 @@ def _calc_last5_hit(stat_g: List[float], line_val: float) -> Tuple[int, int, int
         if v is None or (isinstance(v, float) and np.isnan(v)):
             continue
         vals.append(float(v))
-        if v > line_val:   over += 1
-        elif v < line_val: under += 1
-        else:              push += 1
+        if v > line_val:
+            over += 1
+        elif v < line_val:
+            under += 1
+        else:
+            push += 1
     denom = len(vals)
     return over, under, push, (over / denom if denom > 0 else np.nan)
 
@@ -368,37 +339,25 @@ def _calc_last5_hit(stat_g: List[float], line_val: float) -> Tuple[int, int, int
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Step4: Attach player stats (IPv4-safe)")
+    ap = argparse.ArgumentParser(description="Step4: Attach player stats (IPv4-safe, fixed last-5 ordering)")
     ap.add_argument("--input",           default="step3_with_defense.csv")
     ap.add_argument("--output",          default="step4_with_stats.csv")
     ap.add_argument("--season",          default="2025-26")
     ap.add_argument("--n",               type=int,   default=10)
     ap.add_argument("--cache-dir",       default="")
     ap.add_argument("--sleep",           type=float, default=0.8)
-    ap.add_argument("--timeout",         type=float, default=120.0,
-                    help="Read timeout in seconds (default 120)")
-    ap.add_argument("--connect-timeout", type=float, default=10.0,
-                    help="Connect timeout in seconds (default 10). "
-                         "Short value catches IPv4/IPv6 routing hangs fast.")
+    ap.add_argument("--timeout",         type=float, default=120.0)
+    ap.add_argument("--connect-timeout", type=float, default=10.0)
     ap.add_argument("--retries",         type=int,   default=3)
-    ap.add_argument("--force-ipv4",      action="store_true", default=True,
-                    help="Force IPv4 via socket patch (default: ON). "
-                         "Use --no-force-ipv4 to disable.")
-    ap.add_argument("--no-force-ipv4",   action="store_true", default=False,
-                    help="Disable IPv4 forcing.")
-    ap.add_argument("--dry-run",         action="store_true",
-                    help="Print what would be fetched without hitting the API.")
+    ap.add_argument("--force-ipv4",      action="store_true", default=True)
+    ap.add_argument("--no-force-ipv4",   action="store_true", default=False)
+    ap.add_argument("--dry-run",         action="store_true")
     args = ap.parse_args()
 
-    # Log IPv4 mode (socket patch already applied at top of file)
     if args.no_force_ipv4:
-        print("⚠️  IPv4 forcing DISABLED (--no-force-ipv4). "
-              "Note: socket patch was applied at import time. "
-              "To fully disable, remove --force-ipv4 from the argument list before "
-              "the import guard at the top of this file.")
+        print("⚠️  IPv4 forcing DISABLED (--no-force-ipv4). Note: socket patch may already be active.")
     else:
-        print("🔧 IPv4 mode: ON (connect timeout: "
-              f"{args.connect_timeout}s, read timeout: {args.timeout}s)")
+        print(f"🔧 IPv4 mode: ON (connect timeout: {args.connect_timeout}s, read timeout: {args.timeout}s)")
 
     cache_dir = Path(args.cache_dir) if args.cache_dir.strip() else None
 
@@ -407,6 +366,7 @@ def main() -> None:
 
     if "nba_player_id" not in df.columns:
         raise RuntimeError("❌ Input missing nba_player_id")
+
     if "prop_norm" not in df.columns:
         if "prop_type" in df.columns:
             df["prop_norm"] = df["prop_type"].astype(str).str.lower()
@@ -417,7 +377,6 @@ def main() -> None:
 
     mem_cache: Dict[Tuple[int, str], pd.DataFrame] = {}
 
-    # Collect all unique player IDs
     all_ids: List[int] = []
     for s in df["nba_player_id"].astype(str).tolist():
         all_ids.extend(_parse_combo_ids(s))
@@ -436,7 +395,6 @@ def main() -> None:
         print(f"\nTotal: {len(unique_ids)} players")
         return
 
-    # Pre-fetch all player logs
     print(f"\n→ Fetching game logs (season={args.season})...\n")
     failed_ids = set()
     for i, pid in enumerate(unique_ids, start=1):
@@ -455,7 +413,6 @@ def main() -> None:
     if failed_ids:
         print(f"  Skipped IDs: {sorted(failed_ids)}")
 
-    # Attach stats to each row
     N = int(args.n)
     stat_cols = [f"stat_g{i}" for i in range(1, N + 1)]
     new_cols = stat_cols + [
@@ -480,15 +437,18 @@ def main() -> None:
             df.at[idx, "stat_status"] = "FETCH_FAILED"
             continue
 
+        # season_vals will now always be MOST RECENT FIRST
         if len(ids) == 1:
             log = mem_cache.get((ids[0], args.season))
             if log is None or len(log) == 0:
                 df.at[idx, "stat_status"] = "INSUFFICIENT_GAMES"
                 continue
+
             series = _compute_stat_series(log, prop_norm)
             if series.isna().all():
                 df.at[idx, "stat_status"] = "UNSUPPORTED_PROP"
                 continue
+
             season_vals = series.dropna().astype(float).tolist()
         else:
             logs = [mem_cache.get((pid, args.season)) for pid in ids]
@@ -502,19 +462,19 @@ def main() -> None:
             df.at[idx, "stat_status"] = "INSUFFICIENT_GAMES"
             continue
 
-        vals_mr = list(reversed(season_vals))  # most recent first
+        vals_mr = season_vals  # ✅ already most recent first
 
         for i in range(1, N + 1):
             v = vals_mr[i - 1] if i - 1 < len(vals_mr) else np.nan
             df.at[idx, f"stat_g{i}"] = _to_str_num(v)
 
         def avg_last(k: int) -> float:
-            v = season_vals[-k:] if len(season_vals) >= k else season_vals
+            v = vals_mr[:k] if len(vals_mr) >= k else vals_mr
             return float(np.mean(v)) if v else np.nan
 
         df.at[idx, "stat_last5_avg"]  = _to_str_num(avg_last(5))
         df.at[idx, "stat_last10_avg"] = _to_str_num(avg_last(10))
-        df.at[idx, "stat_season_avg"] = _to_str_num(float(np.mean(season_vals)))
+        df.at[idx, "stat_season_avg"] = _to_str_num(float(np.mean(vals_mr)))
 
         line_val = row.get("_line_num", np.nan)
         try:
@@ -533,13 +493,12 @@ def main() -> None:
 
     df = df.drop(columns=["_line_num"], errors="ignore")
 
-    # Output column ordering
     desired_front = ["nba_player_id", "player", "pos", "team", "opp_team",
                      "line", "prop_type", "prop_norm", "pick_type"]
-    front      = [c for c in desired_front if c in df.columns]
+    front       = [c for c in desired_front if c in df.columns]
     stats_block = [c for c in new_cols if c in df.columns]
-    tail       = [c for c in df.columns if c not in set(front + stats_block)]
-    out        = df[front + tail + stats_block].copy()
+    tail        = [c for c in df.columns if c not in set(front + stats_block)]
+    out         = df[front + tail + stats_block].copy()
 
     out.to_csv(args.output, index=False, encoding="utf-8")
     print(f"\n✅ Saved → {args.output} | rows={len(out)}")

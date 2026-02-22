@@ -1,6 +1,0 @@
-Date,Sport,Ticket_num,Leg,Player,Team,Opp,Prop,Pick_Type,Line,Direction,Edge,Hit_Rate,L5_Avg,Season_Avg,Rank_Score,Tier,Actual,Result,Margin,Legs
-2026-02-20,CBB,1,1,Dug McDaniel,MEM,USF,PRA,Goblin,18.5,UNDER,3.2,0.8,22.1,19.4,2.91,A,16,HIT,2.5,5
-2026-02-20,CBB,1,2,Wes Enis,USF,MEM,Points,Goblin,11.5,OVER,4.1,0.8,16.2,13.8,2.91,A,20,HIT,8.5,5
-2026-02-20,CBB,1,3,Aday Mara,MICH,DUKE,Pts+Asts,Goblin,11.5,OVER,5.1,1.0,13.2,12.0,3.44,A,,PENDING,,5
-2026-02-20,CBB,1,4,Cameron Boozer,DUKE,MICH,Rebounds,Goblin,7.5,OVER,,0.8,,,B,,PENDING,,5
-2026-02-20,CBB,1,5,Isaiah Evans,DUKE,MICH,Points,Goblin,9.5,OVER,6.2,1.0,16.4,15.1,3.41,A,,PENDING,,5

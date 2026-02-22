@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-22 21:54:55 UTC",
+  "generated_at": "2026-02-22 22:37:47 UTC",
   "date": "2026-02-22",
   "filters": {
     "tiers": "A,B",
@@ -33,7 +33,11 @@
               "edge": 2.49,
               "hit_rate": 1.0,
               "rank_score": 4.63,
-              "game_time": "2026-02-22 18:30:00-05:00"
+              "game_time": "2026-02-22 18:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "BS"
             },
             {
               "sport": "NBA",
@@ -47,7 +51,11 @@
               "edge": 5.8,
               "hit_rate": 1.0,
               "rank_score": 4.31,
-              "game_time": "2026-02-22 13:00:00-05:00"
+              "game_time": "2026-02-22 13:00:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "JA"
             },
             {
               "sport": "NBA",
@@ -61,7 +69,11 @@
               "edge": 5.66,
               "hit_rate": 1.0,
               "rank_score": 5.65,
-              "game_time": "2026-02-22 15:30:00-05:00"
+              "game_time": "2026-02-22 15:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "DW"
             },
             {
               "sport": "NBA",
@@ -75,7 +87,11 @@
               "edge": 4.4,
               "hit_rate": 1.0,
               "rank_score": 5.46,
-              "game_time": "2026-02-22 18:30:00-05:00"
+              "game_time": "2026-02-22 18:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "NQ"
             },
             {
               "sport": "NBA",
@@ -89,7 +105,11 @@
               "edge": 3.62,
               "hit_rate": 1.0,
               "rank_score": 5.44,
-              "game_time": "2026-02-22 15:30:00-05:00"
+              "game_time": "2026-02-22 15:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "DS"
             },
             {
               "sport": "NBA",
@@ -103,7 +123,11 @@
               "edge": 12.65,
               "hit_rate": 1.0,
               "rank_score": 5.31,
-              "game_time": "2026-02-22 19:00:00-05:00"
+              "game_time": "2026-02-22 19:00:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "JE"
             }
           ]
         }
@@ -133,7 +157,11 @@
               "edge": 2.49,
               "hit_rate": 1.0,
               "rank_score": 4.63,
-              "game_time": "2026-02-22 18:30:00-05:00"
+              "game_time": "2026-02-22 18:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "BS"
             },
             {
               "sport": "NBA",
@@ -147,7 +175,11 @@
               "edge": 5.8,
               "hit_rate": 1.0,
               "rank_score": 4.31,
-              "game_time": "2026-02-22 13:00:00-05:00"
+              "game_time": "2026-02-22 13:00:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "JA"
             },
             {
               "sport": "NBA",
@@ -161,7 +193,11 @@
               "edge": 5.66,
               "hit_rate": 1.0,
               "rank_score": 5.65,
-              "game_time": "2026-02-22 15:30:00-05:00"
+              "game_time": "2026-02-22 15:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "DW"
             },
             {
               "sport": "NBA",
@@ -175,7 +211,11 @@
               "edge": 4.4,
               "hit_rate": 1.0,
               "rank_score": 5.46,
-              "game_time": "2026-02-22 18:30:00-05:00"
+              "game_time": "2026-02-22 18:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "NQ"
             },
             {
               "sport": "NBA",
@@ -189,7 +229,11 @@
               "edge": 3.62,
               "hit_rate": 1.0,
               "rank_score": 5.44,
-              "game_time": "2026-02-22 15:30:00-05:00"
+              "game_time": "2026-02-22 15:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "DS"
             }
           ]
         }
@@ -219,7 +263,11 @@
               "edge": 2.49,
               "hit_rate": 1.0,
               "rank_score": 4.63,
-              "game_time": "2026-02-22 18:30:00-05:00"
+              "game_time": "2026-02-22 18:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "BS"
             },
             {
               "sport": "NBA",
@@ -233,7 +281,11 @@
               "edge": 5.66,
               "hit_rate": 1.0,
               "rank_score": 5.65,
-              "game_time": "2026-02-22 15:30:00-05:00"
+              "game_time": "2026-02-22 15:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "DW"
             },
             {
               "sport": "NBA",
@@ -247,7 +299,11 @@
               "edge": 4.4,
               "hit_rate": 1.0,
               "rank_score": 5.46,
-              "game_time": "2026-02-22 18:30:00-05:00"
+              "game_time": "2026-02-22 18:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "NQ"
             }
           ]
         },
@@ -269,7 +325,11 @@
               "edge": 5.8,
               "hit_rate": 1.0,
               "rank_score": 4.31,
-              "game_time": "2026-02-22 13:00:00-05:00"
+              "game_time": "2026-02-22 13:00:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "JA"
             },
             {
               "sport": "NBA",
@@ -283,7 +343,11 @@
               "edge": 4.4,
               "hit_rate": 1.0,
               "rank_score": 5.46,
-              "game_time": "2026-02-22 18:30:00-05:00"
+              "game_time": "2026-02-22 18:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "NQ"
             },
             {
               "sport": "NBA",
@@ -297,7 +361,11 @@
               "edge": 3.62,
               "hit_rate": 1.0,
               "rank_score": 5.44,
-              "game_time": "2026-02-22 15:30:00-05:00"
+              "game_time": "2026-02-22 15:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "DS"
             }
           ]
         }
@@ -327,7 +395,11 @@
               "edge": 2.49,
               "hit_rate": 1.0,
               "rank_score": 4.63,
-              "game_time": "2026-02-22 18:30:00-05:00"
+              "game_time": "2026-02-22 18:30:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "BS"
             },
             {
               "sport": "NBA",
@@ -341,7 +413,11 @@
               "edge": 5.8,
               "hit_rate": 1.0,
               "rank_score": 4.31,
-              "game_time": "2026-02-22 13:00:00-05:00"
+              "game_time": "2026-02-22 13:00:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "JA"
             },
             {
               "sport": "NBA",
@@ -355,7 +431,11 @@
               "edge": 3.11,
               "hit_rate": 1.0,
               "rank_score": 4.24,
-              "game_time": "2026-02-22 13:00:00-05:00"
+              "game_time": "2026-02-22 13:00:00-05:00",
+              "nba_player_id": "",
+              "espn_player_id": "",
+              "image_url": null,
+              "initials": "IJ"
             }
           ]
         }

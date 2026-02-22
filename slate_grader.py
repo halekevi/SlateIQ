@@ -16,6 +16,17 @@ import argparse
 import os
 from datetime import datetime
 
+def _def_rank_bucket(x):
+    try:
+        r = float(x)
+    except Exception:
+        return "UNK"
+    if r <= 5:   return "01-05"
+    if r <= 10:  return "06-10"
+    if r <= 20:  return "11-20"
+    if r <= 25:  return "21-25"
+    return "26-30"
+
 C = {
     'hit':'27AE60','miss':'E74C3C','push':'F39C12','void':'95A5A6',
     'hdr':'1C1C1C','hdr2':'1A5276','hdr3':'1E8449','hdr4':'7D6608',
@@ -191,13 +202,49 @@ def load_nba(path: str) -> pd.DataFrame:
     sheet = next((s for s in preferred if s in xls.sheet_names), xls.sheet_names[0])
     if sheet != "ALL":
         print(f"⚠️ NBA: sheet 'ALL' not found in {os.path.basename(path)}. Using sheet='{sheet}'.")
+
     df = pd.read_excel(path, sheet_name=sheet, engine="openpyxl")
-    df = _alias_cols(df)
+
+    # --- Normalize column names from PipelineA output ---
+    df.columns = [str(c).strip() for c in df.columns]
+
+    df = df.rename(columns={
+    "Player": "player",
+    "Prop": "prop_type_norm",
+    "Pick Type": "pick_type",
+    "Line": "line",
+    "Direction": "bet_direction",
+    "Team": "team",
+    "Opp": "opp_team",
+    "Pos": "pos",
+    "Tier": "tier",
+    "Rank Score": "rank_score",
+    "Edge": "edge",
+    "Projection": "projection",
+    "Void Reason": "void_reason",
+
+    # ADD THESE 👇
+    "Def Rank": "def_rank",
+    "Def Tier": "def_tier",
+    "Min Tier": "minutes_tier",
+    "Shot Role": "shot_role",
+    "Usage Role": "usage_role",
+})
+    # fallback compatibility
     if "prop_type_norm" not in df.columns:
         df["prop_type_norm"] = df.get("prop_type", "")
+
     if "bet_direction" not in df.columns and "final_bet_direction" in df.columns:
         df["bet_direction"] = df["final_bet_direction"]
-    df["player_key"] = df["player"].astype(str).str.lower().str.strip() + "|" + df["prop_type_norm"].apply(norm_prop_key)
+
+    # Hard fail if player still missing
+    if "player" not in df.columns:
+        raise KeyError(f"NBA slate missing 'player' column. Found columns: {list(df.columns)}")
+    df["player_key"] = (
+        df["player"].astype(str).str.lower().str.strip()
+        + "|"
+        + df["prop_type_norm"].apply(norm_prop_key)
+    )
     return df
 
 def load_cbb(path: str) -> pd.DataFrame:
@@ -397,6 +444,22 @@ def write_tier_dir_sheet(wb,df,sheet_name,tier_col,tier_order,bg_hdr):
         sub=df[df[tier_col]==t]
         ri=write_dir_subrows(ws,ri,sub,t,C['alt'] if ri%2==0 else C['white'])
 
+# ── By Def Rank bucket sheet (NEW) ────────────────────────────────────────────
+def write_def_rank_bucket_sheet(wb, df):
+    if 'def_rank' not in df.columns:
+        return
+    tmp = df.copy()
+    tmp['def_rank_bucket'] = tmp['def_rank'].apply(_def_rank_bucket)
+
+    ws = wb.create_sheet('By Def Rank')
+    sheet_hdr8(ws, 'Def Rank Bucket', C['hdr5'])
+    ri = 2
+    for b in ['01-05','06-10','11-20','21-25','26-30','UNK']:
+        sub = tmp[tmp['def_rank_bucket'] == b]
+        if len(sub) == 0:
+            continue
+        ri = write_dir_subrows(ws, ri, sub, b, C['alt'] if ri % 2 == 0 else C['white'])
+
 # ── Box Raw sheet ─────────────────────────────────────────────────────────────
 def write_raw(wb,df):
     ws=wb.create_sheet('Box Raw')
@@ -510,6 +573,18 @@ def write_dashboard(wb,df,sport,date_str):
             sub=df[df['def_tier']==dt]
             row=simple_row(row,dt,sub); row=dir_rows(row,sub)
 
+    # BY DEF RANK BUCKET (NEW)
+    if 'def_rank' in df.columns:
+        row+=1; row=sec_hdr(row,'BY OPP DEF RANK BUCKET',C['hdr5'])
+        tmp = df.copy()
+        tmp['def_rank_bucket'] = tmp['def_rank'].apply(_def_rank_bucket)
+        for b in ['01-05','06-10','11-20','21-25','26-30','UNK']:
+            sub = tmp[tmp['def_rank_bucket'] == b]
+            if len(sub) == 0: 
+                continue
+            row = simple_row(row, b, sub)
+            row = dir_rows(row, sub)
+
     # BY MINUTES TIER
     if 'minutes_tier' in df.columns:
         row+=1; row=sec_hdr(row,'BY MINUTES TIER',C['hdr6'])
@@ -568,6 +643,7 @@ def main():
         write_flat_breakdown(wb,breakdown(df,'abs_edge_bucket'),'By Edge Bucket','abs_edge_bucket',C['hdr'])
     write_tier_dir_sheet(wb,df,'By Minutes Tier','minutes_tier',MINUTES_TIER_ORDER,C['hdr6'])
     write_tier_dir_sheet(wb,df,'By Def Tier','def_tier',DEF_TIER_ORDER,C['hdr5'])
+    write_def_rank_bucket_sheet(wb, df)  # NEW
     write_tier_dir_sheet(wb,df,'By Player Role','usage_role',USAGE_ROLE_ORDER,C['hdr7'])
     write_tier_dir_sheet(wb,df,'By Shot Role','shot_role',SHOT_ROLE_ORDER,C['hdr8'])
 
