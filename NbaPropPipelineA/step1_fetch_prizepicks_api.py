@@ -371,7 +371,7 @@ def main():
             "projection_id", "pp_projection_id",
             "player_id",
             "pp_game_id", "start_time",
-            "player", "pos", "team", "opp_team", "pp_home_team", "pp_away_team",
+            "player", "image_url", "pos", "team", "opp_team", "pp_home_team", "pp_away_team",
             "prop_type", "line", "pick_type",
         ]
         pd.DataFrame(columns=cols).to_csv(args.output, index=False)
@@ -407,11 +407,20 @@ def main():
         player_name = ""
         pos = ""
         team = ""
+        image_url = ""
         if isinstance(player_obj, dict):
             pattrs = player_obj.get("attributes") or {}
             player_name = str(pattrs.get("display_name", pattrs.get("name", ""))).strip()
             pos = str(pattrs.get("position", "")).strip()
             team = _norm_team(pattrs.get("team", ""))
+            image_url = str(
+                pattrs.get("image_url")
+                or pattrs.get("image_url_small")
+                or pattrs.get("photo_url")
+                or pattrs.get("headshot")
+                or pattrs.get("avatar")
+                or ""
+            ).strip()
 
         home = away = start_time = ""
         if isinstance(game_obj, dict):
@@ -439,6 +448,7 @@ def main():
             "pp_game_id": str(game_id or "").strip(),
             "start_time": start_time,
             "player": player_name,
+            "image_url": image_url,
             "pos": pos,
             "team": team,
             "opp_team": opp_team,
@@ -464,6 +474,15 @@ def main():
 
     rows = len(df)
     teams = len({t for t in df["team"].astype(str).tolist() if t})
+
+
+    # Move Excel columns I,J,K (9th-11th) to the end (helps with consistent viewing)
+    cols = list(df.columns)
+    move_idxs = [8, 9, 10]
+    move_cols = [cols[i] for i in move_idxs if i < len(cols)]
+    if move_cols:
+        kept = [c for c in cols if c not in move_cols]
+        df = df[kept + move_cols].copy()
 
     df.to_csv(args.output, index=False)
 
