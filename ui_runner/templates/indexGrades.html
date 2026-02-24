@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NBA Ticket Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #09090b; --surface: #111114; --surface2: #18181c;
+      --border: #27272a; --border2: #3f3f46;
+      --text: #fafafa; --muted: #71717a; --dim: #3f3f46;
+      --green: #22c55e; --blue: #3b82f6; --purple: #a855f7;
+      --gold: #f59e0b; --red: #ef4444;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 60px; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+    .header {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 16px 28px; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border-radius: 10px; display: flex; align-items: center;
+      justify-content: center; font-size: 18px;
+    }
+    .logo-text h1 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; }
+    .logo-text p { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1.5px; margin-top: 1px; }
+    .header-actions { display: flex; gap: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--surface2); color: var(--text);
+      font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.5px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn:hover { background: var(--border); }
+    .btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .btn-primary:hover { background: #2563eb; border-color: #2563eb; }
+    .btn-ghost { background: transparent; border-color: transparent; color: var(--muted); }
+    .btn-ghost:hover { background: var(--surface2); color: var(--text); }
+
+    .main {
+      max-width: 1000px; margin: 0 auto; padding: 28px 20px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;
+    }
+    @media (max-width: 700px) { .main { grid-template-columns: 1fr; } }
+
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .panel-header {
+      padding: 13px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface2);
+    }
+    .panel-title { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .panel-body { padding: 18px; }
+
+    textarea {
+      width: 100%; min-height: 300px; background: var(--surface2); color: var(--text);
+      border: 1px solid var(--border); border-radius: 10px; padding: 14px;
+      font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.8;
+      resize: vertical; outline: none; transition: border-color 0.15s;
+    }
+    textarea:focus { border-color: var(--blue); }
+    textarea::placeholder { color: var(--dim); }
+
+    .format-hint {
+      margin-top: 10px; padding: 12px;
+      background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.13);
+      border-radius: 8px;
+    }
+    .format-hint-title { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--blue); letter-spacing: 1.5px; margin-bottom: 6px; }
+    .format-hint code { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); line-height: 2; }
+    .actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+    #output { display: flex; flex-direction: column; gap: 12px; }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--dim); }
+    .empty-icon { font-size: 36px; margin-bottom: 10px; opacity: 0.5; }
+    .empty-state p { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.5px; }
+
+    .ticket {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      animation: slideIn 0.2s ease both;
+    }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .ticket-header {
+      padding: 11px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface2);
+    }
+    .ticket-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; }
+    .ticket-badge {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      padding: 3px 10px; border-radius: 99px;
+      background: rgba(59,130,246,0.10); color: var(--blue);
+      border: 1px solid rgba(59,130,246,0.20); letter-spacing: 0.5px;
+    }
+
+    .leg {
+      padding: 10px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px; font-size: 12.5px;
+      transition: background 0.1s;
+    }
+    .leg:last-child { border-bottom: none; }
+    .leg:hover { background: rgba(255,255,255,0.015); }
+
+    .leg-type-badge {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      padding: 2px 8px; border-radius: 6px; font-weight: 500; flex-shrink: 0;
+    }
+    .type-goblin  { background: rgba(168,85,247,0.10); color: var(--purple); border: 1px solid rgba(168,85,247,0.22); }
+    .type-demon   { background: rgba(239,68,68,0.10);  color: var(--red);    border: 1px solid rgba(239,68,68,0.22); }
+    .type-standard{ background: rgba(59,130,246,0.09); color: var(--blue);   border: 1px solid rgba(59,130,246,0.20); }
+
+    .leg-text { flex: 1; color: var(--text); }
+    .leg-direction {
+      font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+      padding: 2px 8px; border-radius: 5px; flex-shrink: 0;
+    }
+    .dir-over  { background: rgba(34,197,94,0.10);  color: var(--green); }
+    .dir-under { background: rgba(239,68,68,0.09);  color: var(--red); }
+
+    .tier-badge {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      padding: 2px 7px; border-radius: 5px; font-weight: 500; flex-shrink: 0;
+    }
+    .tier-A { background: rgba(34,197,94,0.10);  color: #22c55e; border: 1px solid rgba(34,197,94,0.22); }
+    .tier-B { background: rgba(59,130,246,0.10); color: #3b82f6; border: 1px solid rgba(59,130,246,0.22); }
+    .tier-C { background: rgba(245,158,11,0.10); color: #f59e0b; border: 1px solid rgba(245,158,11,0.22); }
+    .tier-D { background: rgba(113,113,122,0.10);color: #71717a; border: 1px solid rgba(113,113,122,0.22); }
+
+    .toast {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: 10px; padding: 12px 18px;
+      font-family: 'DM Mono', monospace; font-size: 12px; color: var(--green);
+      opacity: 0; transform: translateY(8px); transition: all 0.2s;
+      pointer-events: none; z-index: 100;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">🏀</div>
+    <div class="logo-text">
+      <h1>Ticket Generator</h1>
+      <p>NBA PROP SLIP BUILDER</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
+    <button class="btn" onclick="copyAll()">Copy</button>
+    <button class="btn btn-primary" onclick="render()">▶ Render</button>
+  </div>
+</div>
+
+<div class="main">
+  <div>
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Input Slip</span>
+        <span class="panel-title" id="leg-count" style="color:var(--blue)"></span>
+      </div>
+      <div class="panel-body">
+        <textarea id="input" placeholder="Paste your slip here..." oninput="autoRender()"></textarea>
+        <div class="format-hint">
+          <div class="format-hint-title">FORMAT</div>
+          <code>
+            6-Leg Power Play<br>
+            - Goblin | Player A | PTS 24.5 | OVER | Tier A<br>
+            - Standard | Player B | REB 8.5 | UNDER | Tier B
+          </code>
+        </div>
+        <div class="actions">
+          <button class="btn" onclick="loadExample()">Load Example</button>
+          <button class="btn btn-primary" onclick="render()">▶ Render</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Generated Tickets</span>
+        <span class="panel-title" id="ticket-count" style="color:var(--green)"></span>
+      </div>
+      <div class="panel-body" style="padding:14px;">
+        <div id="output">
+          <div class="empty-state">
+            <div class="empty-icon">🎫</div>
+            <p>Paste a slip and click Render</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const EXAMPLE = `6-Leg Mix
+- Goblin | Nikola Vučević | PTS+REB 14.5 | OVER | Tier A
+- Standard | LaMelo Ball | AST 7.5 | OVER | Tier A
+- Demon | Anthony Edwards | PTS 29.5 | OVER | Tier B
+- Standard | Draymond Green | AST 5.5 | UNDER | Tier B
+- Goblin | Kristaps Porziņģis | REB 8.5 | OVER | Tier C
+- Standard | Josh Giddey | PTS 18.5 | OVER | Tier C
+
+3-Leg Power
+- Standard | Jayson Tatum | PTS 30.5 | OVER | Tier A
+- Standard | Jaylen Brown | REB 5.5 | OVER | Tier B
+- Standard | Al Horford | AST 3.5 | UNDER | Tier B`;
+
+let debounce;
+function autoRender() { clearTimeout(debounce); debounce = setTimeout(render, 350); }
+
+function getTypeClass(t) {
+  const l = t.toLowerCase();
+  if (l.includes('goblin')) return 'type-goblin';
+  if (l.includes('demon'))  return 'type-demon';
+  return 'type-standard';
+}
+function getTypeIcon(t) {
+  const l = t.toLowerCase();
+  if (l.includes('goblin')) return '👺';
+  if (l.includes('demon'))  return '😈';
+  return '⭐';
+}
+function getDirClass(d) {
+  if (!d) return '';
+  return d.trim().toUpperCase() === 'OVER' ? 'dir-over' : 'dir-under';
+}
+function getTierClass(t) {
+  if (!t) return '';
+  const m = t.toUpperCase().match(/[ABCD]/);
+  return m ? `tier-${m[0]}` : '';
+}
+
+function render() {
+  const raw = document.getElementById('input').value;
+  const lines = raw.split('\n').filter(l => l.trim());
+  const out = document.getElementById('output');
+
+  if (!lines.length) {
+    out.innerHTML = `<div class="empty-state"><div class="empty-icon">🎫</div><p>Paste a slip and click Render</p></div>`;
+    document.getElementById('leg-count').textContent = '';
+    document.getElementById('ticket-count').textContent = '';
+    return;
+  }
+
+  let tickets = [], current = null, totalLegs = 0;
+  lines.forEach(line => {
+    if (!line.trimStart().startsWith('-')) {
+      current = { title: line.trim(), legs: [] };
+      tickets.push(current);
+    } else {
+      if (!current) { current = { title: 'Slip', legs: [] }; tickets.push(current); }
+      const text = line.replace(/^[\s-]+/, '').trim();
+      const parts = text.split('|').map(s => s.trim());
+      current.legs.push({ type: parts[0]||'Standard', player: parts[1]||'', prop: parts[2]||'', dir: parts[3]||'', tier: parts[4]||'' });
+      totalLegs++;
+    }
+  });
+
+  out.innerHTML = tickets.map((ticket, ti) => {
+    const legsHtml = ticket.legs.map(leg => `
+      <div class="leg">
+        <span class="leg-type-badge ${getTypeClass(leg.type)}">${getTypeIcon(leg.type)} ${leg.type}</span>
+        <span class="leg-text">${leg.player}${leg.prop ? ' &middot; ' + leg.prop : ''}</span>
+        ${leg.dir ? `<span class="leg-direction ${getDirClass(leg.dir)}">${leg.dir.toUpperCase()}</span>` : ''}
+        ${leg.tier ? `<span class="tier-badge ${getTierClass(leg.tier)}">${leg.tier}</span>` : ''}
+      </div>`).join('');
+
+    return `<div class="ticket" style="animation-delay:${ti*0.06}s">
+      <div class="ticket-header">
+        <span class="ticket-title">${ticket.title}</span>
+        <span class="ticket-badge">${ticket.legs.length} LEG${ticket.legs.length !== 1 ? 'S' : ''}</span>
+      </div>
+      ${legsHtml}
+    </div>`;
+  }).join('');
+
+  document.getElementById('leg-count').textContent = `${totalLegs} leg${totalLegs !== 1 ? 's' : ''}`;
+  document.getElementById('ticket-count').textContent = `${tickets.length} ticket${tickets.length !== 1 ? 's' : ''}`;
+}
+
+function copyAll() {
+  const text = document.getElementById('input').value;
+  if (!text.trim()) return;
+  navigator.clipboard.writeText(text).then(() => toast('✓ Copied to clipboard'));
+}
+function clearAll() { document.getElementById('input').value = ''; render(); }
+function loadExample() { document.getElementById('input').value = EXAMPLE; render(); }
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+render();
+</script>
+</body>
+</html>

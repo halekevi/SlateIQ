@@ -1,0 +1,65 @@
+﻿{
+  "repo_root": "C:\\Users\\halek\\OneDrive\\Desktop\\Vision Board\\NbaPropPipelines\\NBA-Pipelines",
+  "pipelines": {
+    "DAILY (One-Click)": {
+      "workdir": "",
+      "commands": [
+        {
+          "id": "run_daily",
+          "label": "Run DAILY (Master)  NBA + CBB",
+          "cmd": ["powershell", "-ExecutionPolicy", "Bypass", "-File", "run_daily.ps1"]
+        },
+        {
+          "id": "run_grade",
+          "label": "Run GRADE (Master)  NBA + CBB",
+          "cmd": ["powershell", "-ExecutionPolicy", "Bypass", "-File", "run_grade.ps1"]
+        }
+      ]
+    },
+    "NBA - Pipeline A (Debug)": {
+      "workdir": "NbaPropPipelineA",
+      "commands": [
+        {
+          "id": "nba_step4_espn",
+          "label": "NBA Step 4 (ESPN Cache)  step4_with_stats.csv",
+          "cmd": ["py","-3.14","-u","step4_attach_player_stats_espn_cache.py","--slate","step3_with_defense.csv","--out","step4_with_stats.csv","--season","2025-26","--date","{TODAY}","--days","35","--cache","nba_espn_boxscore_cache.csv","--idmap","nba_to_espn_id_map.csv","--n","10","--sleep","0.8","--retries","4","--debug-misses","no_espn_player_debug.csv"]
+        },
+        {
+          "id": "nba_steps5_8",
+          "label": "NBA Steps 58 (Batch)",
+          "cmd_chain": ["nba_step5","nba_step6","nba_step7","nba_step8"]
+        },
+        {
+          "id": "nba_step5",
+          "label": "NBA Step 5  step5_with_line_hit_rates.csv",
+          "cmd": ["py","-3.14","-u","step5_add_line_hit_rates.py","--input","step4_with_stats.csv","--output","step5_with_line_hit_rates.csv"]
+        },
+        {
+          "id": "nba_step6",
+          "label": "NBA Step 6  step6_with_team_role_context.csv",
+          "cmd": ["py","-3.14","-u","step6_team_role_context.py","--input","step5_with_line_hit_rates.csv","--output","step6_with_team_role_context.csv"]
+        },
+        {
+          "id": "nba_step7",
+          "label": "NBA Step 7  step7_ranked_props.xlsx",
+          "cmd": ["py","-3.14","-u","step7_rank_props.py","--input","step6_with_team_role_context.csv","--output","step7_ranked_props.xlsx"]
+        },
+        {
+          "id": "nba_step8",
+          "label": "NBA Step 8  step8_all_direction.csv",
+          "cmd": ["py","-3.14","-u","step8_add_direction_context.py","--input","step7_ranked_props.xlsx","--sheet","ALL","--output","step8_all_direction.csv"]
+        }
+      ]
+    },
+    "CBB - CBB2 (Debug)": {
+      "workdir": "CBB2",
+      "commands": [
+        {
+          "id": "cbb_run_daily",
+          "label": "CBB2 Run Daily (uses your scripts in CBB2)",
+          "cmd": ["powershell","-ExecutionPolicy","Bypass","-Command","Write-Host 'TODO: wire to your CBB2 daily script';"]
+        }
+      ]
+    }
+  }
+}

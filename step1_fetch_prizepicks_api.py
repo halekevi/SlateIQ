@@ -316,19 +316,28 @@ def main():
 
     url_used = args.url.strip() or API_URL
 
-    print(f"📡 Fetching PrizePicks | league_id={args.league_id} | game_mode={args.game_mode} | per_page={args.per_page}")
+    print(f"Fetching PrizePicks | league_id={args.league_id} | game_mode={args.game_mode} | per_page={args.per_page}")
     if url_used != API_URL:
         print(f"→ using custom url: {url_used}")
 
     # If custom URL is used, do a single fetch without pagination (safety).
     if url_used != API_URL:
-        r = requests.get(url_used, headers=headers, timeout=30)
+        session = requests.Session()
+        ua = random.choice(USER_AGENTS)
+        headers = _make_headers(ua)
+        _warm_session(session, ua)
+        r = session.get(url_used, headers=headers, timeout=30)
         r.raise_for_status()
         j = r.json()
         data = j.get("data") or []
         included = j.get("included") or []
         raw_pages = [j]
+        try:
+            session.close()
+        except Exception:
+            pass
     else:
+
         data, included, raw_pages = fetch_pages(
             url=url_used,
             league_id=str(args.league_id),
@@ -345,7 +354,7 @@ def main():
         try:
             with open(args.raw_json, "w", encoding="utf-8") as f:
                 json.dump(raw_pages[-1] if raw_pages else {}, f, ensure_ascii=False)
-            print("🧾 raw_json saved →", args.raw_json)
+            print("raw_json saved →", args.raw_json)
         except Exception as e:
             print("⚠️ raw_json write failed:", e)
 
@@ -358,7 +367,7 @@ def main():
             "prop_type", "line", "pick_type",
         ]
         pd.DataFrame(columns=cols).to_csv(args.output, index=False)
-        print("❌ No projections fetched. Wrote empty CSV →", args.output)
+        print("No projections fetched. Wrote empty CSV ->", args.output)
         return
 
     inc = _included_index(included)
@@ -459,14 +468,14 @@ def main():
             ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_utc")
             hist_path = args.history.replace("{ts}", ts)
             df.to_csv(hist_path, index=False)
-            print("🕘 history saved →", hist_path)
+            print("history saved ->", hist_path)
         except Exception as e:
             print("⚠️ history write failed:", e)
 
     if rows < args.min_rows or teams < args.min_teams:
-        print(f"⛔ BOARD_TOO_SMALL (min_rows={args.min_rows}, min_teams={args.min_teams})")
+        print(f"BOARD_TOO_SMALL (min_rows={args.min_rows}, min_teams={args.min_teams})")
     else:
-        print("✅ BOARD_OK")
+        print("BOARD_OK")
 
 
 if __name__ == "__main__":

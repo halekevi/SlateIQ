@@ -1,0 +1,61 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>NBA Pipelines Control Panel</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div>
+        <div class="kicker">LOCAL DASHBOARD</div>
+        <h1>NBA + CBB Pipelines</h1>
+        <p class="sub">Run daily, debug steps, and watch logs live.</p>
+      </div>
+      <div class="chip">127.0.0.1</div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>Actions</h2>
+        <div class="actions">
+          {% for pname, pdata in config["pipelines"].items() %}
+            <div class="group">
+              <div class="group-title">{{ pname }}</div>
+              <div class="btnrow">
+                {% for c in pdata["commands"] %}
+                  <button class="btn" data-pipeline="{{pname}}" data-command="{{c['id']}}">
+                    <span class="btn-title">{{ c["label"] }}</span>
+                    <span class="btn-sub">{{ c["id"] }}</span>
+                  </button>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="cardhead">
+          <h2>Live Output</h2>
+          <div class="status">
+            <span id="jobLabel" class="muted">No job running</span>
+            <span id="jobPill" class="pill">IDLE</span>
+          </div>
+        </div>
+
+        <pre id="log" class="log">Click a button to run a job</pre>
+
+        <div class="footer">
+          <button class="btn ghost" id="refreshJobs">Refresh Recent Jobs</button>
+          <div id="recent" class="recent"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
