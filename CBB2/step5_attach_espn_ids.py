@@ -1,229 +1,111 @@
-#!/usr/bin/env python3
-"""
-step5_attach_espn_ids.py  (CBB2)
-
-Takes fresh PrizePicks CBB props (from pp_cbb_scraper.py) and attaches:
-- team_id (ESPN team id) using ESPN teams endpoint (abbr/name mapping)
-- player_norm
-- espn_athlete_id using ESPN search (cached)
-
-Input : step1_pp_props_today.csv
-Output: step5_with_espn_ids.csv
-
-Status:
-- OK
-- NO_TEAM_MATCH
-- NO_ATHLETE_MATCH
-"""
-
-from __future__ import annotations
-
 import argparse
-import re
-import time
-from typing import Dict, Optional, Tuple
-
 import pandas as pd
 import requests
+import time
 
-HEADERS = {"User-Agent": "Mozilla/5.0", "Accept": "application/json, text/plain, */*"}
+TEAM_URL = "https://site.web.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams"
+SEARCH_URL = "https://site.web.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/athletes"
+SLEEP_SECONDS = 0.2
 
-ESPN_TEAMS_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams"
-ESPN_SEARCH_URL = "https://site.web.api.espn.com/apis/common/v3/search"
+def pick_col(df, candidates):
+    for c in candidates:
+        if c in df.columns:
+            return c
+    return None
 
+def load_espn_teams():
+    resp = requests.get(TEAM_URL, timeout=20)
+    resp.raise_for_status()
+    data = resp.json()
+    teams = {}
+    for entry in data.get("sports", [])[0].get("leagues", [])[0].get("teams", []):
+        t = entry.get("team", {})
+        name = (t.get("displayName") or "").strip().lower()
+        abbrev = (t.get("abbreviation") or "").strip().lower()
+        tid = t.get("id")
+        if name and tid:
+            teams[name] = tid
+        if abbrev and tid:
+            teams[abbrev] = tid
+    return teams
 
-def norm(s: str) -> str:
-    s = (s or "").lower().strip()
-    s = re.sub(r"[^a-z0-9 ]+", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
-
-
-def req_json(url: str, params: dict | None = None, sleep: float = 0.0) -> dict:
-    if sleep:
-        time.sleep(sleep)
-    r = requests.get(url, headers=HEADERS, params=params, timeout=30)
-    r.raise_for_status()
-    return r.json()
-
-
-def build_team_map() -> Dict[str, str]:
-    """
-    Returns map from normalized keys to ESPN team id.
-    Keys include:
-      - abbreviation (exact)
-      - displayName / shortDisplayName (exact)
-      - nickname / location words for fuzzy CBB matching
-        e.g. "duke blue devils" -> keys "duke", "blue devils", "duke blue devils"
-    """
-    j = req_json(ESPN_TEAMS_URL, params={"limit": "5000"})
-    teams = (j.get("sports", [{}])[0].get("leagues", [{}])[0].get("teams", [])) if isinstance(j, dict) else []
-    out: Dict[str, str] = {}
-
-    for t in teams:
-        team = (t.get("team") or {})
-        tid = str(team.get("id", "")).strip()
-        if not tid:
-            continue
-
-        abbr   = norm(team.get("abbreviation") or "")
-        name   = norm(team.get("displayName") or "")
-        sname  = norm(team.get("shortDisplayName") or "")
-        loc    = norm(team.get("location") or "")
-        nick   = norm(team.get("name") or "")  # nickname e.g. "Blue Devils"
-
-        for k in (abbr, name, sname, loc, nick):
-            if k:
-                out[k] = tid
-
-        # Also index first word of displayName (e.g. "duke" from "duke blue devils")
-        if name:
-            first_word = name.split()[0] if name.split() else ""
-            if first_word and len(first_word) >= 3:
-                out.setdefault(first_word, tid)
-
-    return out
-
-
-def resolve_team_id(raw_team: str, team_map: Dict[str, str]) -> str:
-    """Try multiple normalizations to find a team_id match."""
-    if not raw_team:
+def normalize_team(s: str) -> str:
+    if pd.isna(s):
         return ""
-    # Direct normalized match
-    key = norm(raw_team)
-    if key in team_map:
-        return team_map[key]
-    # Try each word (catches "DUKE BLUE DEVILS" -> "duke")
-    for word in key.split():
-        if len(word) >= 3 and word in team_map:
-            return team_map[word]
-    # Try first two words
-    words = key.split()
-    if len(words) >= 2:
-        two = " ".join(words[:2])
-        if two in team_map:
-            return team_map[two]
-    return ""
+    return str(s).strip().lower()
 
-
-def search_athlete_id(player: str, team: str, team_id: str, cache: Dict[Tuple[str, str], str]) -> str:
-    """
-    Uses ESPN search. Caches by (player_norm, team_norm).
-    Returns espn athlete id or "".
-    """
-    pn = norm(player)
-    tn = norm(team)
-    key = (pn, tn)
-    if key in cache:
-        return cache[key]
-
-    q = player
-    if team:
-        q = f"{player} {team}"
-
+def find_athlete_id(player_name: str, team_id: str | None):
+    if not player_name or pd.isna(player_name):
+        return None
+    params = {"search": str(player_name).strip()}
     try:
-        j = req_json(
-            ESPN_SEARCH_URL,
-            params={"query": q, "limit": "10"},
-            sleep=0.10,
-        )
+        r = requests.get(SEARCH_URL, params=params, timeout=20)
+        r.raise_for_status()
+        js = r.json()
+        for it in js.get("items", []):
+            athlete = it.get("athlete", {})
+            aid = athlete.get("id")
+            # If ESPN returns team info, prefer matching team_id (when available)
+            if team_id:
+                teams = athlete.get("teams", [])
+                for t in teams:
+                    if str(t.get("id")) == str(team_id):
+                        return aid
+            # fallback: first hit
+            if aid:
+                return aid
     except Exception:
-        cache[key] = ""
-        return ""
-
-    # Flatten all result contents across all result groups
-    all_items = []
-    for result_group in (j.get("results") or []):
-        all_items.extend(result_group.get("contents") or [])
-
-    best_id = ""
-    for it in all_items:
-        # Accept athlete, player, collegeplayer, collegeathletes
-        ctype = str(it.get("type") or "").lower()
-        if not any(t in ctype for t in ("athlete", "player")):
-            continue
-        cid = str(it.get("id") or "").strip()
-        if not cid:
-            continue
-        # Name match: last name must appear in result
-        nm = norm((it.get("displayName") or it.get("name") or ""))
-        last = pn.split()[-1] if pn.split() else ""
-        if last and nm and last in nm:
-            best_id = cid
-            break
-
-    cache[key] = best_id
-    return best_id
-
+        return None
+    return None
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", required=True)
-    ap.add_argument("--output", default="step5_with_espn_ids.csv")
+    ap.add_argument("--output", required=True)
     args = ap.parse_args()
 
-    df = pd.read_csv(args.input, dtype=str).fillna("")
-    if df.empty:
-        print("❌ Input empty. Nothing to do.")
-        df.to_csv(args.output, index=False)
-        print("✅ Saved →", args.output)
-        return
+    df = pd.read_csv(args.input)
 
-    # expected cols from pp_cbb_scraper: player, team (raw), pp_team (normalized), pp_opp_team, prop_type, line, pick_type, etc.
-    if "player_norm" not in df.columns:
-        df["player_norm"] = df["player"].astype(str).apply(norm)
+    player_col = pick_col(df, ["player_name", "Player", "player", "name"])
+    team_col   = pick_col(df, ["pp_team", "Team", "team", "TEAM"])
+    opp_col    = pick_col(df, ["pp_opp_team", "Opp", "opp", "OPP"])
 
-    # Build team map from ESPN
-    print("→ Loading ESPN teams…")
-    team_map = build_team_map()
-    print("→ ESPN team keys:", len(team_map))
-
-    # Decide which team field to use for matching
-    team_col = "pp_team" if "pp_team" in df.columns else ("team" if "team" in df.columns else "")
+    if not player_col:
+        raise SystemExit(f"Missing player column. Found columns: {list(df.columns)}")
     if not team_col:
-        df["team_id"] = ""
-        df["espn_athlete_id"] = ""
-        df["status"] = "NO_TEAM_COL"
+        # Still write outputs with status so you can debug downstream
+        df["team_id"] = None
+        df["espn_athlete_id"] = None
+        df["attach_status"] = "NO_TEAM_COL"
         df.to_csv(args.output, index=False)
-        print("✅ Saved →", args.output)
-        print(df["status"].value_counts(dropna=False).to_string())
+        print("Saved but NO_TEAM_COL — fix normalize step to include Team/pp_team.")
         return
 
-    # Attach team_id using robust multi-strategy lookup
-    df["team_id"] = df[team_col].astype(str).apply(lambda x: resolve_team_id(x, team_map))
+    teams = load_espn_teams()
 
-    # Attach athlete_id via ESPN search (cached)
-    cache: Dict[Tuple[str, str], str] = {}
+    team_ids = []
+    statuses = []
+    for t in df[team_col].fillna("").astype(str):
+        key = normalize_team(t)
+        tid = teams.get(key)
+        team_ids.append(tid)
+        statuses.append("OK" if tid else "NO_TEAM_MATCH")
+
+    df["team_id"] = team_ids
+    df["attach_status"] = statuses
+
     athlete_ids = []
-    status = []
-    for _, r in df.iterrows():
-        tid = str(r.get("team_id", "")).strip()
-        player = str(r.get("player", "")).strip()
-        team = str(r.get(team_col, "")).strip()
-
-        if not tid:
-            athlete_ids.append("")
-            status.append("NO_TEAM_MATCH")
-            continue
-
-        # Skip ESPN search if we already have espn_athlete_id from scraper
-        existing_aid = str(r.get("espn_athlete_id", "")).strip()
-        if existing_aid and existing_aid not in ("", "nan"):
-            athlete_ids.append(existing_aid)
-            status.append("OK")
-            continue
-
-        aid = search_athlete_id(player=player, team=team, team_id=tid, cache=cache)
-        athlete_ids.append(aid)
-        status.append("OK" if aid else "NO_ATHLETE_MATCH")
+    for i, row in df.iterrows():
+        tid = row.get("team_id")
+        pid = find_athlete_id(row[player_col], tid)
+        athlete_ids.append(pid)
+        time.sleep(SLEEP_SECONDS)
 
     df["espn_athlete_id"] = athlete_ids
-    df["status"] = status
 
     df.to_csv(args.output, index=False)
-    print("✅ Saved →", args.output)
-    print(df["status"].value_counts(dropna=False).to_string())
-
+    print(f"✅ Saved → {args.output} | rows={len(df)}")
+    print(df["attach_status"].value_counts(dropna=False).head(10))
 
 if __name__ == "__main__":
     main()

@@ -545,11 +545,20 @@ def load_nba(path: str) -> pd.DataFrame:
             df["tier"] = df["tier"].iloc[:, 0]
         df["tier"] = df["tier"].astype(str).str.upper()
 
-    # Drop voids if present
+    # Drop voids if present — BUT keep NO_PROJECTION_OR_LINE rows so that
+    # shooting-split props (3-PT Made, Two Pointers Made, FT Made/Att, etc.)
+    # appear in slate sheets for historical hit-rate tracking.
+    # filter_eligible will still exclude them from tickets via tier/hit_rate filters.
     if "void_reason" in df.columns:
         if isinstance(df["void_reason"], pd.DataFrame):
             df["void_reason"] = df["void_reason"].iloc[:, 0]
-        df = df[df["void_reason"].isna() | (df["void_reason"].astype(str).str.strip() == "")]
+        void_str = df["void_reason"].astype(str).str.strip()
+        keep_mask = (
+            df["void_reason"].isna()
+            | (void_str == "")
+            | (void_str == "NO_PROJECTION_OR_LINE")
+        )
+        df = df[keep_mask]
 
     # Clean ID if present
     if "nba_player_id" in df.columns:
@@ -581,6 +590,9 @@ def load_cbb(path: str) -> pd.DataFrame:
             "stat_season_avg": "season_avg",
             "line_hits_over_5": "l5_over",
             "line_hits_under_5": "l5_under",
+            "Def Tier": "def_tier",
+            "DEF_TIER": "def_tier",
+            "Defense Tier": "def_tier",
             # OPTIONAL IDs
             "espn_player_id": "espn_player_id",
             "ESPN Player ID": "espn_player_id",
@@ -662,6 +674,10 @@ def build_combined_slate(nba: pd.DataFrame, cbb: pd.DataFrame) -> pd.DataFrame:
 # ── Filter eligible props for tickets ─────────────────────────────────────────
 def filter_eligible(df: pd.DataFrame, min_hit_rate=0.0, min_edge=0.0, min_rank=None, tiers=None, pick_types=None):
     mask = pd.Series([True] * len(df), index=df.index)
+    # Always exclude NO_PROJECTION_OR_LINE rows from tickets (no line = can't bet)
+    if "void_reason" in df.columns:
+        void_str = df["void_reason"].astype(str).str.strip()
+        mask &= ~(void_str == "NO_PROJECTION_OR_LINE")
     if min_hit_rate > 0 and "hit_rate" in df.columns:
         mask &= df["hit_rate"].fillna(0) >= min_hit_rate
     if min_edge > 0 and "edge" in df.columns:
@@ -1347,12 +1363,11 @@ def main():
 
     write_summary(wb, nba, cbb, combined, all_ticket_groups, args.date, thresholds)
 
-    # Reorder
-    summary_sheet = wb["SUMMARY"]
-    wb.move_sheet(summary_sheet, offset=-len(wb.sheetnames))
-    for sname in ["Full Slate", "NBA Slate", "CBB Slate"]:
+    # Reorder: put SUMMARY + slate sheets at the front
+    desired_first = ["SUMMARY", "Full Slate", "NBA Slate", "CBB Slate"]
+    for i, sname in enumerate(desired_first):
         if sname in wb.sheetnames:
-            wb.move_sheet(wb[sname], offset=-(len(wb.sheetnames) - 1))
+            wb.move_sheet(wb[sname], offset=-(len(wb.sheetnames) - 1 - i))
 
     wb.save(args.output)
     print(f"\n✅ Saved -> {args.output}")

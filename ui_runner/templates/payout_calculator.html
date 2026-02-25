@@ -3,142 +3,193 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>PrizePicks Payout Calculator</title>
+<title>Payout Calculator — NBA Pipelines</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#09090b;--surface:#111114;--surface2:#18181c;--surface3:#1e1e23;
-    --border:#27272a;--border2:#3f3f46;
-    --text:#fafafa;--muted:#71717a;--dim:#3f3f46;
-    --green:#22c55e;--blue:#3b82f6;--purple:#a855f7;--gold:#f59e0b;--red:#ef4444;
-  }
-  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-  ::-webkit-scrollbar{width:5px;height:5px}
-  ::-webkit-scrollbar-track{background:var(--bg)}
-  ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-  select option{background:var(--surface2)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060810;--bg2:#0a0d16;--bg3:#0f1320;
+  --surface:#131826;--surface2:#1a2035;
+  --border:#1e2640;--border2:#28335a;
+  --text:#e8eef8;--muted:#4d5f8a;--dim:#2a3557;
+  --accent:#e8ff47;--accent2:#00d4ff;
+  --green:#00e5a0;--red:#ff4560;--purple:#9b6dff;--gold:#ffb830;
+}
+*{scrollbar-width:thin;scrollbar-color:var(--border2) var(--bg)}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(232,255,71,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(232,255,71,.018) 1px,transparent 1px);
+  background-size:48px 48px;
+}
 
-  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:50}
-  .logo{display:flex;align-items:center;gap:12px}
-  .logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
-  .logo-text h1{font-family:'Syne',sans-serif;font-size:17px;font-weight:800}
-  .logo-text p{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1.5px;margin-top:1px}
-  .stake-wrap{display:flex;align-items:center;gap:10px}
-  .stake-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px}
-  .stake-input{width:100px;background:var(--surface2);color:var(--text);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:14px;font-weight:500;outline:none;transition:border-color .15s}
-  .stake-input:focus{border-color:var(--blue)}
+/* ── NAV ── */
+.snav{position:sticky;top:0;z-index:200;background:rgba(6,8,16,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:stretch;height:54px}
+.snav-brand{display:flex;align-items:center;gap:9px;margin-right:28px;flex-shrink:0;text-decoration:none}
+.snav-mark{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.snav-name{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;letter-spacing:2px;color:var(--text);text-transform:uppercase}
+.snav-links{display:flex;align-items:stretch;gap:0;list-style:none;flex:1}
+.snav-links a{display:flex;align-items:center;gap:6px;padding:0 14px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
+.snav-links a:hover{color:var(--text)}
+.snav-links a.snav-active{color:var(--accent);border-bottom-color:var(--accent)}
+.snav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.snav-live{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--green);display:flex;align-items:center;gap:5px}
+.snav-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:snavpulse 2s infinite}
+@keyframes snavpulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media(max-width:620px){.snav-links a span{display:none}.snav-links a{padding:0 10px}.snav-name{display:none}}
 
-  .tabs{background:var(--surface2);border-bottom:1px solid var(--border);padding:0 28px;display:flex;gap:2px}
-  .tab-btn{background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);padding:13px 18px;cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:1.5px;transition:all .15s}
-  .tab-btn:hover{color:var(--text)}
-  .tab-btn.active{border-bottom-color:var(--blue);color:var(--text)}
+/* ── LAYOUT ── */
+.shell{max-width:1060px;margin:0 auto;padding:28px 20px;position:relative;z-index:1}
 
-  .content{max-width:980px;margin:0 auto;padding:28px 20px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+/* ── PAGE HEADER ── */
+.page-header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.page-header-left{}
+.page-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.page-title{font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;letter-spacing:2px;text-transform:uppercase;line-height:1}
+.stake-row{display:flex;align-items:center;gap:10px}
+.stake-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted)}
+.stake-wrap{display:flex;align-items:center;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
+.stake-prefix{padding:0 12px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--accent);border-right:1px solid var(--border2)}
+.stake-input{width:90px;background:transparent;color:var(--text);border:none;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;outline:none}
 
-  .section-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2.5px;margin-bottom:14px;text-transform:uppercase}
+/* ── TABS ── */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);padding:12px 20px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:all .15s;margin-bottom:-1px}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 
-  .settings-btn{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);border-radius:8px;padding:7px 12px;cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;transition:all .15s;margin-bottom:12px}
-  .settings-btn:hover{color:var(--text);border-color:var(--blue)}
-  .settings-panel{margin-bottom:16px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);padding:14px}
-  .settings-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-  .settings-text{font-size:12px;color:var(--muted)}
-  .settings-actions{display:flex;gap:8px}
-  .settings-cta{background:var(--surface3);border:1px solid var(--border2);color:var(--text);border-radius:7px;padding:6px 12px;cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;transition:all .15s}
-  .settings-cta:hover{border-color:var(--blue)}
-  .settings-area{width:100%;min-height:160px;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Mono',monospace;font-size:12px;line-height:1.6;outline:none;resize:vertical}
+/* ── GRID ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
 
-  .leg-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:var(--surface2);border-radius:10px;padding:9px 12px;border:1px solid var(--border);transition:border-color .2s}
-  .leg-num{font-family:'DM Mono',monospace;color:var(--muted);font-size:11px;width:44px;flex-shrink:0}
-  .leg-select{flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:7px;padding:6px 10px;font-size:13px;cursor:pointer;outline:none;font-family:'DM Mono',monospace;font-weight:500;transition:border-color .15s}
-  .leg-select:focus{border-color:var(--blue)}
-  .leg-remove{background:rgba(239,68,68,.10);color:var(--red);border:1px solid rgba(239,68,68,.18);border-radius:7px;padding:5px 10px;cursor:pointer;font-size:14px;font-weight:700;transition:background .15s}
-  .leg-remove:hover{background:rgba(239,68,68,.20)}
+/* ── CARD ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.card-stripe{height:2px}
+.card-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.card-body{padding:18px}
 
-  .add-leg-btn{width:100%;padding:10px;background:rgba(59,130,246,.05);border:1px dashed rgba(59,130,246,.30);border-radius:10px;color:var(--blue);cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.5px;margin-top:4px;transition:background .15s}
-  .add-leg-btn:hover{background:rgba(59,130,246,.10)}
+/* ── SECTION LABEL ── */
+.slabel{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.slabel::after{content:'';flex:1;height:1px;background:var(--border)}
 
-  .badges{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
-  .badge{border-radius:99px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:11px;font-weight:500}
+/* ── LEG BUILDER ── */
+.settings-btn{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:6px 12px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;transition:all .15s;margin-bottom:12px}
+.settings-btn:hover{border-color:var(--border2);color:var(--text)}
+.settings-panel{margin-bottom:14px;border:1px solid var(--border);border-radius:12px;background:var(--bg2);padding:14px}
+.settings-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.settings-text{font-size:12px;color:var(--muted)}
+.settings-actions{display:flex;gap:8px}
+.settings-cta{background:var(--surface2);border:1px solid var(--border2);color:var(--text);border-radius:7px;padding:6px 12px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10px;transition:all .15s}
+.settings-cta:hover{border-color:var(--accent);color:var(--accent)}
+.settings-area{width:100%;min-height:160px;background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;outline:none;resize:vertical}
+.settings-area:focus{border-color:var(--accent2)}
 
-  .result-card{border-radius:14px;padding:18px;margin-bottom:14px}
-  .result-card.power{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(59,130,246,.02));border:1px solid rgba(59,130,246,.20)}
-  .result-card.flex{background:linear-gradient(135deg,rgba(168,85,247,.08),rgba(168,85,247,.02));border:1px solid rgba(168,85,247,.20)}
+.leg-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:var(--bg3);border-radius:10px;padding:10px 12px;border:1px solid var(--border);transition:border-color .2s}
+.leg-num{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:10px;width:44px;flex-shrink:0;letter-spacing:1px}
+.leg-select{flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:7px 10px;font-size:13px;cursor:pointer;outline:none;font-family:'JetBrains Mono',monospace;font-weight:500;transition:border-color .15s;color:var(--text)}
+.leg-select option{background:var(--surface2)}
+.leg-select:focus{border-color:var(--accent2)}
+.leg-remove{background:rgba(255,69,96,.08);color:var(--red);border:1px solid rgba(255,69,96,.18);border-radius:7px;padding:6px 11px;cursor:pointer;font-size:15px;font-weight:700;transition:background .15s}
+.leg-remove:hover{background:rgba(255,69,96,.18)}
+.add-leg-btn{width:100%;padding:11px;background:rgba(232,255,71,.03);border:1px dashed rgba(232,255,71,.2);border-radius:10px;color:var(--accent);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1px;margin-top:4px;transition:background .15s}
+.add-leg-btn:hover{background:rgba(232,255,71,.07)}
 
-  .card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-  .card-tag{border-radius:6px;padding:3px 10px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1.5px}
-  .card-tag.pp{background:rgba(59,130,246,.18);color:var(--blue);border:1px solid rgba(59,130,246,.28)}
-  .card-tag.fl{background:rgba(168,85,247,.18);color:var(--purple);border:1px solid rgba(168,85,247,.28)}
-  .card-sub{color:var(--muted);font-size:12px}
+.badges{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.badge{border-radius:99px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.5px}
 
-  .metrics{display:grid;gap:10px}
-  .metric-box{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
-  .metric-label{font-family:'DM Mono',monospace;color:var(--muted);font-size:9px;letter-spacing:2px;margin-bottom:6px}
-  .metric-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:700}
-  .metric-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px}
+/* ── RESULT CARDS ── */
+.result-card{border-radius:14px;padding:18px;margin-bottom:14px;position:relative;overflow:hidden}
+.result-card.power{background:linear-gradient(135deg,rgba(0,212,255,.06),rgba(0,212,255,.02));border:1px solid rgba(0,212,255,.18)}
+.result-card.flex{background:linear-gradient(135deg,rgba(155,109,255,.06),rgba(155,109,255,.02));border:1px solid rgba(155,109,255,.18)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.card-tag{border-radius:5px;padding:3px 10px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.card-tag.pp{background:rgba(0,212,255,.12);color:var(--accent2);border:1px solid rgba(0,212,255,.25)}
+.card-tag.fl{background:rgba(155,109,255,.12);color:var(--purple);border:1px solid rgba(155,109,255,.25)}
+.card-sub{color:var(--muted);font-size:12px}
+.metrics{display:grid;gap:10px}
+.metric-box{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.metric-label{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:9px;letter-spacing:2px;margin-bottom:6px}
+.metric-val{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;line-height:1;letter-spacing:1px}
+.metric-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px}
+.partials-wrap{border-top:1px solid rgba(155,109,255,.15);padding-top:12px;margin-top:14px}
+.partials-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.partial-box{background:rgba(155,109,255,.07);border:1px solid rgba(155,109,255,.18);border-radius:10px;padding:10px 14px;text-align:center;min-width:76px}
+.partial-nc{color:var(--purple);font-family:'JetBrains Mono',monospace;font-size:10px;margin-bottom:3px}
+.partial-mult{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800}
+.partial-win{color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;margin-top:4px}
+.mod-bar{margin-top:12px;background:rgba(255,255,255,.02);border-radius:8px;padding:8px 12px;border:1px solid var(--border)}
+.mod-text{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:10px}
+.empty-state{color:var(--dim);text-align:center;padding:50px 20px}
+.empty-icon{font-size:32px;margin-bottom:10px;opacity:.4}
+.empty-state p{font-family:'JetBrains Mono',monospace;font-size:11px}
 
-  .partials-wrap{border-top:1px solid rgba(168,85,247,.15);padding-top:12px;margin-top:14px}
-  .partials-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-  .partial-box{background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.20);border-radius:10px;padding:10px 14px;text-align:center;min-width:80px}
-  .partial-nc{color:var(--purple);font-family:'DM Mono',monospace;font-size:11px;margin-bottom:3px}
-  .partial-mult{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
-  .partial-win{color:var(--green);font-family:'DM Mono',monospace;font-size:11px;margin-top:4px}
-
-  .mod-bar{margin-top:12px;background:rgba(255,255,255,.02);border-radius:8px;padding:8px 12px;border:1px solid var(--border)}
-  .mod-text{font-family:'DM Mono',monospace;color:var(--muted);font-size:10px}
-  .empty-state{color:var(--dim);text-align:center;padding:60px 20px}
-  .empty-icon{font-size:32px;margin-bottom:10px;opacity:.5}
-  .empty-state p{font-family:'DM Mono',monospace;font-size:12px}
-
-  .leg-count-bar{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-  .lc-label{font-family:'DM Mono',monospace;color:var(--muted);font-size:10px;letter-spacing:2px}
-  .lc-btn{background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:7px;padding:6px 14px;cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;transition:all .15s}
-  .lc-btn:hover{color:var(--text);border-color:var(--border2)}
-  .lc-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-
-  .ref-table{width:100%;border-collapse:collapse;font-size:12px}
-  .ref-table th{padding:11px 14px;text-align:center;font-family:'DM Mono',monospace;color:var(--muted);border-bottom:1px solid var(--border);font-size:10px;letter-spacing:1.5px;white-space:nowrap;background:var(--surface2)}
-  .ref-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04)}
-  .ref-table tr:hover td{background:rgba(255,255,255,.015)}
-
-  .flex-ref{margin-top:32px}
-  .flex-cards{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
-  .flex-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px 18px;min-width:120px}
-  .flex-card-title{font-family:'Syne',sans-serif;color:var(--blue);font-weight:700;margin-bottom:10px;font-size:13px}
-  .flex-card-row{display:flex;justify-content:space-between;margin-bottom:6px;gap:16px}
-  .flex-card-k{font-family:'DM Mono',monospace;color:var(--muted);font-size:11px}
-  .flex-card-v{font-family:'DM Mono',monospace;color:var(--text);font-weight:500;font-size:11px}
+/* ── REFERENCE TABLE ── */
+.lc-bar{display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.lc-label{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:10px;letter-spacing:2px}
+.lc-btn{background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:7px;padding:6px 16px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;transition:all .15s}
+.lc-btn:hover{color:var(--text);border-color:var(--border2)}
+.lc-btn.active{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700}
+.ref-wrap{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px}
+.ref-table{width:100%;border-collapse:collapse;font-size:12px}
+.ref-table th{padding:11px 14px;text-align:center;font-family:'JetBrains Mono',monospace;color:var(--muted);border-bottom:1px solid var(--border);font-size:9px;letter-spacing:2px;white-space:nowrap;background:var(--bg3)}
+.ref-table th:first-child{text-align:left}
+.ref-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.03);text-align:center}
+.ref-table td:first-child{text-align:left}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:rgba(255,255,255,.015)}
+.flex-cards{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.flex-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;min-width:115px}
+.flex-card-title{font-family:'Barlow Condensed',sans-serif;color:var(--accent2);font-weight:700;margin-bottom:10px;font-size:14px;letter-spacing:1px}
+.flex-card-row{display:flex;justify-content:space-between;margin-bottom:6px;gap:14px}
+.flex-card-k{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:11px}
+.flex-card-v{font-family:'JetBrains Mono',monospace;color:var(--text);font-weight:500;font-size:11px}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="logo">
-    <div class="logo-icon">🎯</div>
-    <div class="logo-text">
-      <h1>Payout Calculator</h1>
-      <p>POWER · FLEX · STANDARD · GOBLIN · DEMON</p>
+<!-- NAV -->
+<nav class="snav">
+  <a class="snav-brand" href="/"><div class="snav-mark">🏀</div><span class="snav-name">Pipelines</span></a>
+  <ul class="snav-links">
+    <li><a href="/" data-page="control"><span>⚡</span> Control</a></li>
+    <li><a href="/tickets" data-page="tickets"><span>🎟️</span> Tickets</a></li>
+    <li><a href="/slate" data-page="slate"><span>📊</span> Slate</a></li>
+    <li><a href="/payout" data-page="payout"><span>💰</span> Payout</a></li>
+    <li><a href="/grades" data-page="grades"><span>✏️</span> Grades</a></li>
+  </ul>
+  <div class="snav-right"><span class="snav-live">LIVE</span></div>
+</nav>
+
+<div class="shell">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-eyebrow">PRIZEPICKS CALCULATOR</div>
+      <h1 class="page-title">Payout Calculator</h1>
+    </div>
+    <div class="stake-row">
+      <span class="stake-label">STAKE</span>
+      <div class="stake-wrap">
+        <span class="stake-prefix">$</span>
+        <input class="stake-input" type="number" id="stakeInput" value="10" min="1" max="100000" oninput="render();renderTable()"/>
+      </div>
     </div>
   </div>
-  <div class="stake-wrap">
-    <span class="stake-label">STAKE $</span>
-    <input class="stake-input" type="number" id="stakeInput" value="10" min="1" max="100000" oninput="render()"/>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-builder" onclick="switchTab('builder')">🏗 BUILDER</button>
+    <button class="tab-btn" id="tab-table" onclick="switchTab('table')">📊 REFERENCE TABLE</button>
   </div>
-</div>
 
-<div class="tabs">
-  <button class="tab-btn active" id="tab-builder" onclick="switchTab('builder')">🏗 BUILDER</button>
-  <button class="tab-btn" id="tab-table" onclick="switchTab('table')">📊 REFERENCE</button>
-</div>
-
-<div class="content">
+  <!-- BUILDER VIEW -->
   <div id="view-builder">
     <div class="grid2">
       <div>
-        <div class="section-label" id="leg-count-label">TICKET · 3 LEGS</div>
+        <div class="slabel" id="leg-count-label">TICKET · 3 LEGS</div>
         <button class="settings-btn" onclick="toggleSettings()">⚙ Settings</button>
         <div class="settings-panel" id="settings-panel" style="display:none">
           <div class="settings-row">
@@ -160,8 +211,9 @@
     </div>
   </div>
 
+  <!-- TABLE VIEW -->
   <div id="view-table" style="display:none">
-    <div class="leg-count-bar">
+    <div class="lc-bar">
       <span class="lc-label">LEGS:</span>
       <button class="lc-btn" id="lc-2" onclick="setTableLegs(2)">2</button>
       <button class="lc-btn" id="lc-3" onclick="setTableLegs(3)">3</button>
@@ -169,25 +221,30 @@
       <button class="lc-btn" id="lc-5" onclick="setTableLegs(5)">5</button>
       <button class="lc-btn" id="lc-6" onclick="setTableLegs(6)">6</button>
     </div>
-    <div style="overflow-x:auto">
+    <div class="ref-wrap" style="overflow-x:auto">
       <table class="ref-table">
         <thead><tr>
-          <th style="text-align:left">LEG TYPE</th>
-          <th>POWER</th><th id="th-pp-win">WIN (PP)</th>
+          <th>LEG TYPE</th>
+          <th>POWER MULT</th><th id="th-pp-win">WIN (PP)</th>
           <th>BREAKEVEN</th>
-          <th>FLEX</th><th id="th-fl-win">WIN (FLEX)</th>
+          <th>FLEX MULT</th><th id="th-fl-win">WIN (FLEX)</th>
         </tr></thead>
         <tbody id="ref-tbody"></tbody>
       </table>
     </div>
-    <div class="flex-ref">
-      <div class="section-label">FLEX PARTIAL PAYOUTS — STANDARD</div>
-      <div class="flex-cards" id="flex-cards"></div>
-    </div>
+    <div class="slabel" style="margin-top:8px">FLEX PARTIAL PAYOUTS — STANDARD</div>
+    <div class="flex-cards" id="flex-cards"></div>
   </div>
 </div>
 
 <script>
+(function(){
+  var path=window.location.pathname.replace(/\/$/,'')||'/';
+  var map={'/':'control','/tickets':'tickets','/slate':'slate','/payout':'payout','/grades':'grades'};
+  var current=map[path];
+  if(current){var el=document.querySelector('.snav-links a[data-page="'+current+'"]');if(el)el.classList.add('snav-active');}
+})();
+
 const SETTINGS_KEY="pp_payout_calc_settings_v2";
 const DEFAULT_POWER_BASE={2:3.0,3:6.0,4:10.0,5:20.0,6:37.5};
 const DEFAULT_FLEX_BASE={2:{2:3.0},3:{3:3.0,2:1.0},4:{4:6.0,3:1.5},5:{5:10.0,4:2.0,3:0.4},6:{6:25.0,5:2.0,4:0.4}};
@@ -210,7 +267,7 @@ function mergeDefaults(s){
 let SETTINGS=mergeDefaults((()=>{try{return JSON.parse(localStorage.getItem(SETTINGS_KEY));}catch{return null;}})());
 const LEG_TYPES=["Standard","Goblin -1","Goblin -2","Goblin -3","Demon +1","Demon +2","Demon +3"];
 
-function legColor(t){if(t.startsWith("Goblin"))return"#a855f7";if(t.startsWith("Demon"))return"#ef4444";return"#3b82f6";}
+function legColor(t){if(t.startsWith("Goblin"))return"#9b6dff";if(t.startsWith("Demon"))return"#ff4560";return"#00d4ff";}
 function legEmoji(t){if(t.startsWith("Goblin"))return"👺";if(t.startsWith("Demon"))return"😈";return"⭐";}
 function classify(t){if(t.startsWith("Goblin"))return{kind:"goblin",dev:parseInt(t.split("-")[1])};if(t.startsWith("Demon"))return{kind:"demon",dev:parseInt(t.split("+")[1])};return{kind:"standard",dev:0};}
 
@@ -248,37 +305,37 @@ function render(){
   document.getElementById("leg-count-label").textContent=`TICKET · ${legs.length} LEGS`;
   const cont=document.getElementById("legs-container");cont.innerHTML="";
   legs.forEach((leg,i)=>{
-    const color=legColor(leg);const div=document.createElement("div");div.className="leg-row";div.style.borderColor=color+"28";
-    div.innerHTML=`<span style="font-size:15px;width:22px;text-align:center">${legEmoji(leg)}</span><span class="leg-num">LEG ${i+1}</span><select class="leg-select" style="color:${color}" onchange="changeLeg(${i},this.value)">${LEG_TYPES.map(t=>`<option value="${t}" ${t===leg?"selected":""}>${legEmoji(t)} ${t}</option>`).join("")}</select><button class="leg-remove" onclick="removeLeg(${i})">×</button>`;
+    const color=legColor(leg);const div=document.createElement("div");div.className="leg-row";div.style.borderColor=color+"30";
+    div.innerHTML=`<span style="font-size:16px;width:22px;text-align:center">${legEmoji(leg)}</span><span class="leg-num">LEG ${i+1}</span><select class="leg-select" style="color:${color}" onchange="changeLeg(${i},this.value)">${LEG_TYPES.map(t=>`<option value="${t}" ${t===leg?"selected":""}>${legEmoji(t)} ${t}</option>`).join("")}</select><button class="leg-remove" onclick="removeLeg(${i})">×</button>`;
     cont.appendChild(div);
   });
-  document.querySelector(".add-leg-btn").style.display=legs.length>=6?"none":"block";
+  const addBtn=document.querySelector(".add-leg-btn");if(addBtn)addBtn.style.display=legs.length>=6?"none":"block";
 
   const comp=legs.reduce((a,l)=>{const k=l.startsWith("Goblin")?"Goblin":l.startsWith("Demon")?"Demon":"Standard";a[k]=(a[k]||0)+1;return a;},{});
-  const bStyles={Goblin:["rgba(168,85,247,.10)","rgba(168,85,247,.25)","#a855f7"],Demon:["rgba(239,68,68,.10)","rgba(239,68,68,.25)","#ef4444"],Standard:["rgba(59,130,246,.10)","rgba(59,130,246,.25)","#3b82f6"]};
+  const bStyles={Goblin:["rgba(155,109,255,.1)","rgba(155,109,255,.25)","#9b6dff"],Demon:["rgba(255,69,96,.1)","rgba(255,69,96,.25)","#ff4560"],Standard:["rgba(0,212,255,.1)","rgba(0,212,255,.25)","#00d4ff"]};
   document.getElementById("badges").innerHTML=Object.entries(comp).map(([k,v])=>{const[bg,border,color]=bStyles[k];return`<div class="badge" style="background:${bg};border:1px solid ${border};color:${color}">${v}× ${k}</div>`;}).join("");
 
   const result=calcPayouts(legs);const panel=document.getElementById("results-panel");
   if(!result){panel.innerHTML=`<div class="empty-state"><div class="empty-icon">📊</div><p>Add at least 2 legs to see payouts</p></div>`;return;}
 
-  const partialsHtml=result.partials.length?`<div class="partials-wrap"><div class="section-label" style="margin-bottom:0">PARTIAL PAYOUTS</div><div class="partials-row">${result.partials.sort((a,b)=>b.correct-a.correct).map(({correct,mult})=>`<div class="partial-box"><div class="partial-nc">${correct}/${result.n}</div><div class="partial-mult">${mult}x</div><div class="partial-win">$${(stake*mult).toFixed(2)}</div></div>`).join("")}</div></div>`:"";
-  const modHtml=result.pm!==1.0?`<div class="mod-bar"><div class="mod-text">MOD: Power ${result.pm.toFixed(3)}x · Flex ${result.fm.toFixed(3)}x</div></div>`:"";
+  const partialsHtml=result.partials.length?`<div class="partials-wrap"><div class="slabel" style="margin-bottom:8px">PARTIAL PAYOUTS</div><div class="partials-row">${result.partials.sort((a,b)=>b.correct-a.correct).map(({correct,mult})=>`<div class="partial-box"><div class="partial-nc">${correct}/${result.n}</div><div class="partial-mult">${mult}x</div><div class="partial-win">$${(stake*mult).toFixed(2)}</div></div>`).join("")}</div></div>`:"";
+  const modHtml=result.pm!==1.0?`<div class="mod-bar"><div class="mod-text">MOD: Power ×${result.pm.toFixed(3)} · Flex ×${result.fm.toFixed(3)}</div></div>`:"";
 
   panel.innerHTML=`
-    <div class="section-label">RESULTS · $${stake} STAKE</div>
+    <div class="slabel">RESULTS · $${stake} STAKE</div>
     <div class="result-card power">
       <div class="card-header"><div class="card-tag pp">POWER PLAY</div><span class="card-sub">All ${result.n} correct to win</span></div>
       <div class="metrics" style="grid-template-columns:1fr 1fr 1fr">
-        <div class="metric-box"><div class="metric-label">MULTIPLIER</div><div class="metric-val" style="color:#3b82f6">${result.powerTop}x</div></div>
-        <div class="metric-box"><div class="metric-label">WIN ON $${stake}</div><div class="metric-val" style="color:#22c55e">$${(stake*result.powerTop).toFixed(2)}</div></div>
-        <div class="metric-box"><div class="metric-label">TO WIN $100</div><div class="metric-val" style="color:#f59e0b;font-size:20px">$${(100/result.powerTop).toFixed(2)}</div><div class="metric-sub">Breakeven ${(100/result.powerTop).toFixed(1)}%</div></div>
+        <div class="metric-box"><div class="metric-label">MULTIPLIER</div><div class="metric-val" style="color:#00d4ff">${result.powerTop}x</div></div>
+        <div class="metric-box"><div class="metric-label">WIN ON $${stake}</div><div class="metric-val" style="color:#00e5a0">$${(stake*result.powerTop).toFixed(2)}</div></div>
+        <div class="metric-box"><div class="metric-label">TO WIN $100</div><div class="metric-val" style="color:#e8ff47;font-size:24px">$${(100/result.powerTop).toFixed(2)}</div><div class="metric-sub">Breakeven ${(100/result.powerTop).toFixed(1)}%</div></div>
       </div>
     </div>
     <div class="result-card flex">
       <div class="card-header"><div class="card-tag fl">FLEX PLAY</div><span class="card-sub">Partial wins allowed</span></div>
       <div class="metrics" style="grid-template-columns:1fr 1fr">
-        <div class="metric-box"><div class="metric-label">${result.n}/${result.n} CORRECT</div><div class="metric-val" style="color:#a855f7">${result.flexTop}x</div></div>
-        <div class="metric-box"><div class="metric-label">WIN ON $${stake}</div><div class="metric-val" style="color:#22c55e">$${(stake*result.flexTop).toFixed(2)}</div></div>
+        <div class="metric-box"><div class="metric-label">${result.n}/${result.n} CORRECT</div><div class="metric-val" style="color:#9b6dff">${result.flexTop}x</div></div>
+        <div class="metric-box"><div class="metric-label">WIN ON $${stake}</div><div class="metric-val" style="color:#00e5a0">$${(stake*result.flexTop).toFixed(2)}</div></div>
       </div>
       ${partialsHtml}
     </div>
@@ -295,11 +352,11 @@ function renderTable(){
   document.getElementById("ref-tbody").innerHTML=rows.map(row=>{
     const p=calcPayouts(Array(tableLegs).fill(row));if(!p)return"";
     const color=legColor(row);
-    return`<tr><td style="color:${color};font-family:'DM Mono',monospace;font-size:12px;font-weight:500">${legEmoji(row)} ${row}</td><td style="text-align:center;color:#3b82f6;font-family:'DM Mono',monospace;font-weight:500">${p.powerTop}x</td><td style="text-align:center;color:#22c55e;font-family:'DM Mono',monospace">$${(stake*p.powerTop).toFixed(2)}</td><td style="text-align:center;color:#f59e0b;font-family:'DM Mono',monospace">${(100/p.powerTop).toFixed(1)}%</td><td style="text-align:center;color:#a855f7;font-family:'DM Mono',monospace;font-weight:500">${p.flexTop}x</td><td style="text-align:center;color:#22c55e;font-family:'DM Mono',monospace">$${(stake*p.flexTop).toFixed(2)}</td></tr>`;
+    return`<tr><td style="color:${color};font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500">${legEmoji(row)} ${row}</td><td style="color:#00d4ff;font-family:'JetBrains Mono',monospace;font-weight:600">${p.powerTop}x</td><td style="color:#00e5a0;font-family:'JetBrains Mono',monospace">$${(stake*p.powerTop).toFixed(2)}</td><td style="color:#e8ff47;font-family:'JetBrains Mono',monospace">${(100/p.powerTop).toFixed(1)}%</td><td style="color:#9b6dff;font-family:'JetBrains Mono',monospace;font-weight:600">${p.flexTop}x</td><td style="color:#00e5a0;font-family:'JetBrains Mono',monospace">$${(stake*p.flexTop).toFixed(2)}</td></tr>`;
   }).join("");
   document.getElementById("flex-cards").innerHTML=[2,3,4,5,6].map(n=>{
     const fb=SETTINGS.flexBase[n]||{};
-    return`<div class="flex-card"><div class="flex-card-title">${n}-Leg Flex</div>${Object.entries(fb).sort((a,b)=>b[0]-a[0]).map(([k,v])=>`<div class="flex-card-row"><span class="flex-card-k">${k}/${n}</span><span class="flex-card-v">${v}x</span></div>`).join("")}</div>`;
+    return`<div class="flex-card"><div class="flex-card-title">${n}-Leg</div>${Object.entries(fb).sort((a,b)=>b[0]-a[0]).map(([k,v])=>`<div class="flex-card-row"><span class="flex-card-k">${k}/${n}</span><span class="flex-card-v">${v}x</span></div>`).join("")}</div>`;
   }).join("");
 }
 render();renderTable();

@@ -1,61 +1,629 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>NBA Pipelines Control Panel</title>
-  <link rel="stylesheet" href="/static/style.css"/>
+  <title>NBA Pipelines — Control Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #03050d;
+      --bg2:    #060a14;
+      --bg3:    #080d1a;
+      --panel:  #0b1120;
+      --panel2: #0e1628;
+      --border: #132038;
+      --border2:#1c3054;
+      --text:   #c8d8f0;
+      --text2:  #8aa0c8;
+      --muted:  #3d5278;
+      --dim:    #1e2e48;
+      --lime:   #b8ff3c;
+      --cyan:   #00e5ff;
+      --green:  #00ffb3;
+      --red:    #ff3860;
+      --amber:  #ffb830;
+      --purple: #b06aff;
+    }
+    *{ scrollbar-width:thin; scrollbar-color:var(--border2) var(--bg); }
+    ::-webkit-scrollbar{ width:4px; height:4px; }
+    ::-webkit-scrollbar-track{ background:var(--bg2); }
+    ::-webkit-scrollbar-thumb{ background:var(--border2); border-radius:4px; }
+
+    body {
+      font-family:'IBM Plex Sans',sans-serif;
+      background:var(--bg); color:var(--text);
+      min-height:100vh; overflow-x:hidden;
+    }
+
+    /* ── BG LAYERS ── */
+    .bg-dots {
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-image: radial-gradient(circle, rgba(28,48,84,0.55) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .bg-glows {
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 700px 450px at -8% 12%, rgba(184,255,60,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 600px at 108% 85%, rgba(0,229,255,0.05) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 50% 110%, rgba(176,106,255,0.04) 0%, transparent 70%);
+    }
+    .scanlines {
+      position:fixed; inset:0; z-index:1; pointer-events:none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position:sticky; top:0; z-index:500;
+      height:58px;
+      display:flex; align-items:stretch;
+      padding:0 32px;
+      background:rgba(3,5,13,0.92);
+      backdrop-filter:blur(24px) saturate(1.6);
+      border-bottom:1px solid var(--border);
+      position:sticky;
+    }
+    .nav::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg, transparent 0%, var(--lime) 20%, var(--cyan) 55%, var(--lime) 80%, transparent 100%);
+      opacity:0.45;
+    }
+    .nav-brand {
+      display:flex; align-items:center; gap:12px;
+      margin-right:40px; flex-shrink:0; text-decoration:none;
+    }
+    .nav-logo {
+      position:relative; width:34px; height:34px;
+    }
+    .nav-ring {
+      position:absolute; inset:0; border-radius:50%;
+      border:1.5px solid var(--lime); opacity:0.6;
+      animation:spin 12s linear infinite;
+    }
+    .nav-ring:nth-child(2){
+      inset:5px; border-color:var(--cyan); opacity:0.45;
+      animation-direction:reverse; animation-duration:8s;
+    }
+    .nav-inner {
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:15px;
+    }
+    @keyframes spin{ from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .nav-wm { display:flex; flex-direction:column; gap:1px; }
+    .nav-wm-top {
+      font-family:'Oswald',sans-serif; font-size:16px; font-weight:600;
+      letter-spacing:4px; text-transform:uppercase; color:var(--text); line-height:1;
+    }
+    .nav-wm-sub {
+      font-family:'IBM Plex Mono',monospace; font-size:8px;
+      letter-spacing:3px; color:var(--lime); text-transform:uppercase; line-height:1;
+    }
+    .nav-links { display:flex; align-items:stretch; list-style:none; flex:1; }
+    .nav-links li a {
+      display:flex; align-items:center; gap:7px;
+      padding:0 18px;
+      font-family:'IBM Plex Mono',monospace;
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--muted); text-decoration:none;
+      border-bottom:2px solid transparent;
+      transition:color .2s, border-color .2s;
+      position:relative;
+    }
+    .nav-links li a .ni{ font-size:13px; }
+    .nav-links li a:hover { color:var(--text2); }
+    .nav-links li a.active {
+      color:var(--lime); border-bottom-color:var(--lime);
+    }
+    .nav-links li a.active::after {
+      content:''; position:absolute; bottom:-1px; left:50%; transform:translateX(-50%);
+      width:6px; height:6px; border-radius:50%;
+      background:var(--lime); box-shadow:0 0 12px var(--lime), 0 0 24px rgba(184,255,60,0.4);
+    }
+    .nav-right { display:flex; align-items:center; gap:16px; margin-left:auto; }
+    .live-badge {
+      font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:2px;
+      padding:4px 12px; border:1px solid rgba(0,255,179,0.3); border-radius:3px;
+      color:var(--green); background:rgba(0,255,179,0.05);
+      display:flex; align-items:center; gap:7px;
+    }
+    .live-badge::before {
+      content:''; width:5px; height:5px; border-radius:50%;
+      background:var(--green); box-shadow:0 0 8px var(--green);
+      animation:blink 2s ease-in-out infinite;
+    }
+    @keyframes blink{ 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    /* ── SHELL ── */
+    .shell { max-width:1380px; margin:0 auto; padding:36px 32px 60px; position:relative; z-index:2; }
+
+    /* ── HERO ── */
+    .hero {
+      margin-bottom:40px;
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:24px; flex-wrap:wrap;
+      animation:fadeUp .5s ease both;
+    }
+    .hero-tag {
+      font-family:'IBM Plex Mono',monospace; font-size:9px;
+      letter-spacing:4px; text-transform:uppercase; color:var(--lime);
+      display:flex; align-items:center; gap:8px; margin-bottom:10px;
+    }
+    .hero-tag::before { content:''; width:24px; height:1px; background:var(--lime); box-shadow:0 0 6px var(--lime); }
+    .hero-title {
+      font-family:'Oswald',sans-serif;
+      font-size:clamp(44px,7vw,80px); font-weight:700;
+      letter-spacing:-1px; line-height:.92; text-transform:uppercase;
+    }
+    .hero-title .t1 { color:var(--text); display:block; }
+    .hero-title .t2 {
+      color:transparent; display:block;
+      -webkit-text-stroke:1.5px var(--lime);
+      filter:drop-shadow(0 0 14px rgba(184,255,60,0.45));
+    }
+    .hero-meta {
+      margin-top:14px; font-family:'IBM Plex Mono',monospace;
+      font-size:11px; color:var(--muted); letter-spacing:1px;
+      display:flex; gap:20px; flex-wrap:wrap; align-items:center;
+    }
+    .hero-meta span { display:flex; align-items:center; gap:6px; }
+    .hero-meta span::before { content:'//'; color:var(--border2); }
+    .hero-stats { display:flex; gap:1px; }
+    .hstat {
+      background:var(--panel); border:1px solid var(--border);
+      padding:16px 24px; text-align:center; min-width:100px; position:relative; overflow:hidden;
+    }
+    .hstat:first-child { border-radius:10px 0 0 10px; }
+    .hstat:last-child  { border-radius:0 10px 10px 0; }
+    .hstat::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+    .hstat.hs1::before { background:var(--lime); box-shadow:0 0 8px var(--lime); }
+    .hstat.hs2::before { background:var(--cyan); box-shadow:0 0 8px var(--cyan); }
+    .hstat.hs3::before { background:var(--green); box-shadow:0 0 8px var(--green); }
+    .hstat-num { font-family:'Oswald',sans-serif; font-size:28px; font-weight:600; line-height:1; }
+    .hstat-lbl { font-family:'IBM Plex Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+
+    /* ── QUICK CARDS ── */
+    .quick-grid {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+      margin-bottom:28px;
+      animation:fadeUp .5s .1s ease both;
+    }
+    @media(max-width:900px){ .quick-grid{ grid-template-columns:repeat(2,1fr); } }
+    .qcard {
+      display:block; text-decoration:none;
+      background:var(--panel); border:1px solid var(--border); border-radius:10px;
+      padding:18px 20px; position:relative; overflow:hidden;
+      transition:border-color .2s, transform .2s;
+    }
+    .qcard-glow {
+      position:absolute; inset:0; opacity:0; transition:opacity .25s;
+    }
+    .qcard:hover { transform:translateY(-2px); }
+    .qcard:hover .qcard-glow { opacity:1; }
+    .qcard.ql:hover { border-color:rgba(184,255,60,0.45); }
+    .qcard.qc:hover { border-color:rgba(0,229,255,0.45); }
+    .qcard.qg:hover { border-color:rgba(0,255,179,0.45); }
+    .qcard.qp:hover { border-color:rgba(176,106,255,0.45); }
+    .ql .qcard-glow { background:radial-gradient(ellipse at 0% 0%, rgba(184,255,60,0.09), transparent 65%); }
+    .qc .qcard-glow { background:radial-gradient(ellipse at 0% 0%, rgba(0,229,255,0.09),  transparent 65%); }
+    .qg .qcard-glow { background:radial-gradient(ellipse at 0% 0%, rgba(0,255,179,0.09),  transparent 65%); }
+    .qp .qcard-glow { background:radial-gradient(ellipse at 0% 0%, rgba(176,106,255,0.09),transparent 65%); }
+    .qcard-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+    .qcard-icon {
+      width:38px; height:38px; border-radius:8px;
+      display:flex; align-items:center; justify-content:center; font-size:18px;
+    }
+    .ql .qcard-icon { background:rgba(184,255,60,0.09);  border:1px solid rgba(184,255,60,0.2); }
+    .qc .qcard-icon { background:rgba(0,229,255,0.09);   border:1px solid rgba(0,229,255,0.2); }
+    .qg .qcard-icon { background:rgba(0,255,179,0.09);   border:1px solid rgba(0,255,179,0.2); }
+    .qp .qcard-icon { background:rgba(176,106,255,0.09); border:1px solid rgba(176,106,255,0.2); }
+    .qcard-arrow { font-size:16px; color:var(--muted); transition:transform .2s, color .2s; }
+    .qcard:hover .qcard-arrow { transform:translate(3px,-3px); }
+    .ql:hover .qcard-arrow { color:var(--lime); }
+    .qc:hover .qcard-arrow { color:var(--cyan); }
+    .qg:hover .qcard-arrow { color:var(--green); }
+    .qp:hover .qcard-arrow { color:var(--purple); }
+    .qcard-name {
+      font-family:'Oswald',sans-serif; font-size:17px; font-weight:600;
+      letter-spacing:2px; text-transform:uppercase; color:var(--text);
+    }
+    .qcard-desc { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); margin-top:3px; }
+
+    /* ── MAIN GRID ── */
+    .main-grid {
+      display:grid; grid-template-columns:420px 1fr; gap:16px;
+      animation:fadeUp .5s .2s ease both;
+    }
+    @media(max-width:1100px){ .main-grid{ grid-template-columns:1fr; } }
+
+    /* ── PANEL BASE ── */
+    .panel { background:var(--panel); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+    .phead {
+      padding:14px 20px; border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between;
+      background:var(--panel2); position:relative;
+    }
+    .ptitle {
+      font-family:'IBM Plex Mono',monospace; font-size:9px;
+      letter-spacing:3px; text-transform:uppercase; color:var(--muted);
+      display:flex; align-items:center; gap:8px;
+    }
+    .ptitle-dot { width:6px; height:6px; border-radius:50%; }
+
+    /* ── PIPELINE BUTTONS ── */
+    .abody { padding:16px; }
+    .pgroup { margin-bottom:18px; }
+    .pgroup:last-child { margin-bottom:0; }
+    .pgroup-lbl {
+      font-family:'IBM Plex Mono',monospace; font-size:8px;
+      letter-spacing:3px; text-transform:uppercase; color:var(--muted);
+      display:flex; align-items:center; gap:10px; margin-bottom:8px; padding:0 4px;
+    }
+    .pgroup-lbl::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
+    .run-btn {
+      width:100%; cursor:pointer; background:var(--bg3);
+      border:1px solid var(--border); border-radius:8px;
+      padding:11px 14px; text-align:left; color:var(--text);
+      display:flex; align-items:center; gap:12px; margin-bottom:6px;
+      position:relative; overflow:hidden;
+      transition:border-color .2s, background .2s;
+    }
+    .run-btn::before {
+      content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
+      background:var(--lime); transform:scaleY(0); transform-origin:bottom;
+      transition:transform .2s;
+    }
+    .run-btn:hover { border-color:var(--border2); background:var(--panel2); }
+    .run-btn:hover::before { transform:scaleY(1); }
+    .run-btn:active { transform:scale(0.99); }
+    .rbicon {
+      width:30px; height:30px; border-radius:6px;
+      background:rgba(184,255,60,0.06); border:1px solid rgba(184,255,60,0.12);
+      display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;
+    }
+    .rbtext { flex:1; min-width:0; }
+    .rbtitle { font-size:12px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .rbid { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); margin-top:1px; }
+    .rbchev { color:var(--muted); font-size:12px; transition:transform .15s, color .15s; }
+    .run-btn:hover .rbchev { transform:translateX(3px); color:var(--lime); }
+
+    /* ── LOG ── */
+    .log-panel { display:flex; flex-direction:column; }
+    .log-statusbar {
+      padding:9px 20px; background:var(--bg2);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; gap:10px;
+    }
+    .sindi {
+      display:flex; align-items:center; gap:7px;
+      font-family:'IBM Plex Mono',monospace;
+      font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+    }
+    .sdot {
+      width:8px; height:8px; border-radius:50%; background:var(--muted);
+      transition:background .3s, box-shadow .3s;
+    }
+    .sdot.running { background:var(--cyan); box-shadow:0 0 10px var(--cyan); animation:blink .8s ease-in-out infinite; }
+    .sdot.ok      { background:var(--green); box-shadow:0 0 10px var(--green); }
+    .sdot.fail    { background:var(--red);   box-shadow:0 0 10px var(--red); }
+    #stxt { color:var(--text2); }
+    .sindi.running #stxt { color:var(--cyan); }
+    .sindi.ok      #stxt { color:var(--green); }
+    .sindi.fail    #stxt { color:var(--red); }
+    #jobLabel {
+      font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted);
+      margin-left:auto; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:340px;
+    }
+    #log {
+      flex:1; min-height:300px; max-height:370px;
+      overflow-y:auto; padding:16px 20px;
+      background:var(--bg);
+      font-family:'IBM Plex Mono',monospace; font-size:11px; line-height:1.75;
+      white-space:pre-wrap; color:var(--text2);
+      border-bottom:1px solid var(--border);
+      box-shadow:inset 0 8px 24px rgba(0,0,0,0.5);
+    }
+    #log .ll  { color:var(--lime); font-weight:600; }
+    #log .le  { color:var(--red); }
+    #log .lg  { color:var(--green); }
+    #log .ld  { color:var(--muted); }
+
+    /* ── RECENT JOBS ── */
+    .rsec { padding:14px 20px; }
+    .rhead { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+    .rtitle { font-family:'IBM Plex Mono',monospace; font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); }
+    .gbtn {
+      background:transparent; border:1px solid var(--border); color:var(--muted);
+      font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px;
+      padding:5px 10px; border-radius:5px; cursor:pointer;
+      transition:border-color .15s, color .15s;
+    }
+    .gbtn:hover { border-color:var(--border2); color:var(--text2); }
+    .jrow {
+      display:flex; align-items:center; gap:10px;
+      padding:9px 12px; border:1px solid var(--border);
+      border-radius:7px; background:var(--bg3); margin-bottom:5px;
+      cursor:pointer; transition:border-color .15s, background .15s;
+    }
+    .jrow:hover { border-color:var(--border2); background:var(--panel2); }
+    .jdot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+    .jdot.ok    { background:var(--green); box-shadow:0 0 6px var(--green); }
+    .jdot.fail  { background:var(--red);   box-shadow:0 0 6px var(--red); }
+    .jdot.running { background:var(--cyan); box-shadow:0 0 6px var(--cyan); animation:blink .8s infinite; }
+    .jdot.idle  { background:var(--muted); }
+    .jinfo { flex:1; min-width:0; }
+    .jname { font-size:11px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text2); }
+    .jmeta { font-family:'IBM Plex Mono',monospace; font-size:9px; color:var(--muted); margin-top:1px; }
+    .jtag { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; padding:2px 7px; border-radius:3px; flex-shrink:0; }
+    .tok  { color:var(--green);  background:rgba(0,255,179,0.06); border:1px solid rgba(0,255,179,0.2); }
+    .tfail{ color:var(--red);    background:rgba(255,56,96,0.06);  border:1px solid rgba(255,56,96,0.2); }
+    .trun { color:var(--cyan);   background:rgba(0,229,255,0.06);  border:1px solid rgba(0,229,255,0.2); }
+    .tidle{ color:var(--muted);  background:rgba(255,255,255,0.03);border:1px solid var(--border); }
+
+    @keyframes fadeUp{ from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+    @media(max-width:700px){
+      .shell{ padding:20px 16px 40px; }
+      .nav  { padding:0 16px; }
+      .nav-links li a span:not(.ni){ display:none; }
+      .nav-links li a{ padding:0 10px; }
+      .hero-stats{ display:none; }
+      .nav-wm-sub{ display:none; }
+    }
+  </style>
 </head>
 <body>
-  <div class="shell">
-    <header class="topbar">
-      <div>
-        <div class="kicker">LOCAL DASHBOARD</div>
-        <h1>NBA + CBB Pipelines</h1>
-        <p class="sub">Run daily, debug steps, and watch logs live.</p>
+
+<div class="bg-dots"></div>
+<div class="bg-glows"></div>
+<div class="scanlines"></div>
+
+<!-- NAV -->
+<nav class="nav" style="position:sticky;top:0;">
+  <a class="nav-brand" href="/">
+    <div class="nav-logo">
+      <div class="nav-ring"></div>
+      <div class="nav-ring"></div>
+      <div class="nav-inner">🏀</div>
+    </div>
+    <div class="nav-wm">
+      <span class="nav-wm-top">Pipelines</span>
+      <span class="nav-wm-sub">NBA · CBB · ANALYTICS</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/" class="active"><span class="ni">⚡</span><span>Control</span></a></li>
+    <li><a href="/tickets"><span class="ni">🎟</span><span>Tickets</span></a></li>
+    <li><a href="/slate"><span class="ni">📊</span><span>Slate</span></a></li>
+    <li><a href="/payout"><span class="ni">💰</span><span>Payout</span></a></li>
+    <li><a href="/grades"><span class="ni">✏️</span><span>Grades</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="live-badge">Live · 8787</div>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-tag">Local Dashboard</div>
+      <h1 class="hero-title">
+        <span class="t1">NBA + CBB</span>
+        <span class="t2">Pipelines</span>
+      </h1>
+      <div class="hero-meta">
+        <span>127.0.0.1:8787</span>
+        <span>Flask 3.0</span>
+        <span id="clock">--:--:--</span>
       </div>
-      <div class="chip">127.0.0.1</div>
-    </header>
-
-    <main class="grid">
-      <section class="card">
-        <h2>Actions</h2>
-        <div class="actions">
-          {% for pname, pdata in config["pipelines"].items() %}
-            <div class="group">
-              <div class="group-title">{{ pname }}</div>
-              <div class="btnrow">
-                {% for c in pdata["commands"] %}
-                  <button class="btn" data-pipeline="{{pname}}" data-command="{{c['id']}}">
-                    <span class="btn-title">{{ c["label"] }}</span>
-                    <span class="btn-sub">{{ c["id"] }}</span>
-                  </button>
-                {% endfor %}
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="cardhead">
-          <h2>Live Output</h2>
-          <div class="status">
-            <span id="jobLabel" class="muted">No job running</span>
-            <span id="jobPill" class="pill">IDLE</span>
-          </div>
-        </div>
-
-        <pre id="log" class="log">Click a button to run a job</pre>
-
-        <div class="footer">
-          <button class="btn ghost" id="refreshJobs">Refresh Recent Jobs</button>
-          <div id="recent" class="recent"></div>
-        </div>
-      </section>
-    </main>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat hs1"><div class="hstat-num" id="sjobs">0</div><div class="hstat-lbl">Jobs Run</div></div>
+      <div class="hstat hs2"><div class="hstat-num" id="sok">0</div><div class="hstat-lbl">OK</div></div>
+      <div class="hstat hs3"><div class="hstat-num" id="sfail">0</div><div class="hstat-lbl">Failed</div></div>
+    </div>
   </div>
 
-  <script src="/static/app.js"></script>
+  <!-- QUICK CARDS -->
+  <div class="quick-grid">
+    <a class="qcard qc" href="/tickets">
+      <div class="qcard-glow"></div>
+      <div class="qcard-top"><div class="qcard-icon">🎟</div><span class="qcard-arrow">↗</span></div>
+      <div class="qcard-name">Tickets</div>
+      <div class="qcard-desc">Latest generated picks</div>
+    </a>
+    <a class="qcard ql" href="/slate">
+      <div class="qcard-glow"></div>
+      <div class="qcard-top"><div class="qcard-icon">📊</div><span class="qcard-arrow">↗</span></div>
+      <div class="qcard-name">Slate</div>
+      <div class="qcard-desc">Today's slate evaluation</div>
+    </a>
+    <a class="qcard qg" href="/payout">
+      <div class="qcard-glow"></div>
+      <div class="qcard-top"><div class="qcard-icon">💰</div><span class="qcard-arrow">↗</span></div>
+      <div class="qcard-name">Payout</div>
+      <div class="qcard-desc">Power &amp; Flex calculator</div>
+    </a>
+    <a class="qcard qp" href="/grades">
+      <div class="qcard-glow"></div>
+      <div class="qcard-top"><div class="qcard-icon">✏️</div><span class="qcard-arrow">↗</span></div>
+      <div class="qcard-name">Grades</div>
+      <div class="qcard-desc">Ticket slip builder</div>
+    </a>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- ACTIONS -->
+    <div class="panel">
+      <div class="phead">
+        <div class="ptitle">
+          <div class="ptitle-dot" style="background:var(--lime);box-shadow:0 0 7px var(--lime)"></div>
+          Pipeline Actions
+        </div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px">CLICK TO RUN</span>
+      </div>
+      <div class="abody" id="actions-body"></div>
+    </div>
+
+    <!-- LOG -->
+    <div class="panel log-panel">
+      <div class="phead">
+        <div class="ptitle">
+          <div class="ptitle-dot" style="background:var(--cyan);box-shadow:0 0 7px var(--cyan)"></div>
+          Live Output
+        </div>
+        <div class="sindi" id="sindi">
+          <div class="sdot" id="sdot"></div>
+          <span id="stxt">IDLE</span>
+        </div>
+      </div>
+      <div class="log-statusbar">
+        <span id="jobLabel">No job running — click an action to start</span>
+      </div>
+      <pre id="log">Waiting for job...</pre>
+      <div class="rsec">
+        <div class="rhead">
+          <span class="rtitle">Recent Jobs</span>
+          <button class="gbtn" id="refreshJobs">↻ Refresh</button>
+        </div>
+        <div id="recent"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// In production Flask injects: config=load_config() and the Jinja loop builds buttons.
+// This JS version mirrors that for standalone preview.
+const CONFIG = {
+  pipelines: {
+    "DAILY (One-Click)": {
+      commands: [
+        { id:"run_daily", label:"Run DAILY (Master)  NBA + CBB" },
+        { id:"run_grade", label:"Run GRADE (Master)  NBA + CBB" }
+      ]
+    },
+    "NBA - Pipeline A (Debug)": {
+      commands: [
+        { id:"nba_step4_espn", label:"NBA Step 4 — ESPN Cache" },
+        { id:"nba_steps5_8",   label:"NBA Steps 5–8 (Batch Chain)" },
+        { id:"nba_step5",      label:"NBA Step 5 — Line Hit Rates" },
+        { id:"nba_step6",      label:"NBA Step 6 — Team Role Context" },
+        { id:"nba_step7",      label:"NBA Step 7 — Ranked Props" },
+        { id:"nba_step8",      label:"NBA Step 8 — Direction Context" }
+      ]
+    },
+    "CBB - CBB2 (Debug)": {
+      commands: [
+        { id:"cbb_run_daily", label:"CBB2 Run Daily" }
+      ]
+    }
+  }
+};
+const ICONS = { "DAILY (One-Click)":"⚡", "NBA - Pipeline A (Debug)":"🏀", "CBB - CBB2 (Debug)":"🎓" };
+
+function buildActions() {
+  const body = document.getElementById("actions-body");
+  Object.entries(CONFIG.pipelines).forEach(([pname, pdata]) => {
+    const g = document.createElement("div"); g.className = "pgroup";
+    const lbl = document.createElement("div"); lbl.className = "pgroup-lbl"; lbl.textContent = pname;
+    g.appendChild(lbl);
+    pdata.commands.forEach(c => {
+      const b = document.createElement("button"); b.className = "run-btn";
+      b.dataset.pipeline = pname; b.dataset.command = c.id;
+      b.innerHTML = `<div class="rbicon">${ICONS[pname]||"▶"}</div><div class="rbtext"><div class="rbtitle">${c.label}</div><div class="rbid">${c.id}</div></div><span class="rbchev">›</span>`;
+      b.addEventListener("click", () => runCommand(pname, c.id));
+      g.appendChild(b);
+    });
+    body.appendChild(g);
+  });
+}
+
+let currentJobId=null, pollTimer=null;
+
+function setStatus(s) {
+  const dot=document.getElementById("sdot"), txt=document.getElementById("stxt"), ind=document.getElementById("sindi");
+  dot.className="sdot"; ind.className="sindi";
+  if (s==="RUNNING"){ dot.classList.add("running"); txt.textContent="RUNNING"; ind.classList.add("running"); }
+  else if(s==="OK") { dot.classList.add("ok");      txt.textContent="OK";      ind.classList.add("ok"); }
+  else if(s==="FAIL"){ dot.classList.add("fail");   txt.textContent="FAIL";    ind.classList.add("fail"); }
+  else { txt.textContent="IDLE"; }
+}
+
+function colorize(lines) {
+  return lines.map(l=>{
+    const e=l.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    if(/^===/.test(l.trim()))           return `<span class="ll">${e}</span>`;
+    if(/\[ERROR\]|FAIL|error/i.test(l)) return `<span class="le">${e}</span>`;
+    if(/OK|success|done/i.test(l))      return `<span class="lg">${e}</span>`;
+    if(/^\s*$/.test(l))                 return `<span class="ld">${e}</span>`;
+    return e;
+  }).join("\n");
+}
+
+async function runCommand(pipeline, command_id) {
+  const res  = await fetch("/api/run",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pipeline,command_id})});
+  const data = await res.json();
+  currentJobId = data.job_id;
+  document.getElementById("jobLabel").textContent = `${pipeline}  /  ${command_id}`;
+  document.getElementById("log").innerHTML = '<span class="ld">Starting job…</span>';
+  setStatus("RUNNING");
+  if(pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(pollJob, 800);
+}
+
+async function pollJob() {
+  if(!currentJobId) return;
+  const res = await fetch(`/api/job/${currentJobId}`);
+  if(!res.ok) return;
+  const data = await res.json();
+  setStatus(data.status);
+  document.getElementById("jobLabel").textContent = `${data.label}  ·  ${data.status}`;
+  const el = document.getElementById("log");
+  el.innerHTML = colorize(data.lines||[]);
+  el.scrollTop = el.scrollHeight;
+  if(data.status !== "RUNNING"){ clearInterval(pollTimer); pollTimer=null; refreshJobs(); }
+}
+
+async function refreshJobs() {
+  const res = await fetch("/api/jobs").catch(()=>null);
+  if(!res||!res.ok) return;
+  const jobs = await res.json();
+  document.getElementById("sjobs").textContent = jobs.length;
+  document.getElementById("sok").textContent   = jobs.filter(j=>j.status==="OK").length;
+  document.getElementById("sfail").textContent = jobs.filter(j=>j.status==="FAIL").length;
+  const wrap = document.getElementById("recent");
+  wrap.innerHTML="";
+  if(!jobs.length){
+    wrap.innerHTML=`<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-align:center;padding:16px 0">No recent jobs</div>`;
+    return;
+  }
+  jobs.slice(0,8).forEach(j=>{
+    const sc  = j.status==="OK"?"ok":j.status==="FAIL"?"fail":j.status==="RUNNING"?"running":"idle";
+    const tag = j.status==="OK"?"tok":j.status==="FAIL"?"tfail":j.status==="RUNNING"?"trun":"tidle";
+    const r   = document.createElement("div"); r.className="jrow";
+    r.innerHTML=`<div class="jdot ${sc}"></div><div class="jinfo"><div class="jname">${j.label}</div><div class="jmeta">${new Date(j.started_at*1000).toLocaleTimeString()}  ·  rc=${j.return_code??"—"}</div></div><span class="jtag ${tag}">${j.status}</span>`;
+    r.onclick=()=>{ currentJobId=j.job_id; if(!pollTimer) pollTimer=setInterval(pollJob,800); pollJob(); };
+    wrap.appendChild(r);
+  });
+}
+
+// Live clock
+setInterval(()=>{ document.getElementById("clock").textContent=new Date().toLocaleTimeString(); },1000);
+document.getElementById("clock").textContent = new Date().toLocaleTimeString();
+
+document.getElementById("refreshJobs").addEventListener("click", refreshJobs);
+buildActions();
+refreshJobs();
+</script>
 </body>
 </html>

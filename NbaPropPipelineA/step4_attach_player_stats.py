@@ -153,17 +153,17 @@ def derive_stat_series(df: pd.DataFrame, prop_norm: str) -> pd.Series:
         return fga
     if p in ("fgm",):
         return fgm
-    if p in ("fg3a", "3pa"):
+    if p in ("fg3a", "3pa", "3-pt attempted", "3pt attempted", "three pointers attempted"):
         return fg3a
-    if p in ("fg3m", "3pm"):
+    if p in ("fg3m", "3pm", "3-pt made", "3pt made", "three pointers made"):
         return fg3m
-    if p in ("fg2a", "2pa"):
+    if p in ("fg2a", "2pa", "two pointers attempted", "2 pointers attempted"):
         return fg2a
-    if p in ("fg2m", "2pm"):
+    if p in ("fg2m", "2pm", "two pointers made", "2 pointers made"):
         return fg2m
-    if p in ("fta",):
+    if p in ("fta", "free throws attempted", "freethrowsattempted"):
         return fta
-    if p in ("ftm",):
+    if p in ("ftm", "free throws made", "freethrowsmade"):
         return ftm
     if p in ("fantasy", "fantasy_score"):
         return pts + 1.2 * reb + 1.5 * ast + 3.0 * stl + 3.0 * blk - tov

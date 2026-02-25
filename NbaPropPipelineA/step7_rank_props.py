@@ -322,6 +322,31 @@ def main() -> None:
         else:
             out["prop_norm"] = ""
 
+    # Normalize full English prop names -> short keys used by _PROP_WEIGHTS / _PROP_HIT_RATE_PRIOR
+    _PROP_NORM_MAP = {
+        "3-pt made":               "fg3m",
+        "3-pt attempted":          "fg3a",
+        "3pt made":                "fg3m",
+        "3pt attempted":           "fg3a",
+        "three pointers made":     "fg3m",
+        "three pointers attempted":"fg3a",
+        "two pointers made":       "fg2m",
+        "two pointers attempted":  "fg2a",
+        "2 pointers made":         "fg2m",
+        "2 pointers attempted":    "fg2a",
+        "free throws made":        "ftm",
+        "free throws attempted":   "fta",
+        "freethrowsmade":          "ftm",
+        "freethrowsattempted":     "fta",
+        "fg attempted":            "fga",
+        "fg made":                 "fgm",
+        "field goals attempted":   "fga",
+        "field goals made":        "fgm",
+    }
+    out["prop_norm"] = out["prop_norm"].str.lower().str.strip().map(
+        lambda x: _PROP_NORM_MAP.get(x, x)
+    )
+
     line_num = _to_num(out["line"])
 
     # Build projection (FIX 5+6: includes combo corrections)

@@ -5,7 +5,11 @@ param(
     [switch]$NBAOnly,
     [switch]$CBBOnly,
     [switch]$CombinedOnly,
-    [switch]$RefreshNBACache
+    [switch]$RefreshNBACache,
+
+    # ✅ NEW: control combined filtering without editing the script
+    [string]$Tiers = "A,B,C,D",
+    [int]$MaxTickets = 3
 )
 
 # --- Force UTF-8 for this session (prevents UnicodeEncodeError + UI capture decode issues) ---
@@ -127,6 +131,7 @@ if ($RunCBB) {
             }
         }
 
+        # NOTE: This is still called "Step 3" in your runner, even if the file name says step5_attach_espn_ids.py
         if (Test-Path (Join-Path $CBBDir "step5_attach_espn_ids.py")) {
             Run-Step "Step 3 - Attach ESPN IDs (CBB)" $CBBDir ".\step5_attach_espn_ids.py --input step2_cbb.csv --output step3_cbb.csv"
         }
@@ -183,11 +188,25 @@ if ($RunCombined -and $NBASuccess -and $CBBSuccess) {
     $NBASlate = "$NBADir\step8_all_direction_clean.xlsx"
     $CBBSlate = "$CBBDir\step6_ranked_cbb.xlsx"
 
+    # ✅ Avoid PermissionError from Excel/OneDrive locks by copying inputs first
+    $NBASlateCopy = Join-Path $OutDir "nba_slate_for_combined_$Date.xlsx"
+    $CBBSlateCopy = Join-Path $OutDir "cbb_slate_for_combined_$Date.xlsx"
+    Copy-Item $NBASlate $NBASlateCopy -Force -ErrorAction Stop
+    Copy-Item $CBBSlate $CBBSlateCopy -Force -ErrorAction Stop
+
     Write-Host "  --> Combined Slate + Tickets (NBA + CBB)" -ForegroundColor Yellow
     try {
-        # IMPORTANT: quote tiers for PowerShell (A,B otherwise becomes an array and breaks argparse)
-        py -3.14 "$Root\combined_slate_tickets.py" --nba "$NBASlate" --cbb "$CBBSlate" --date $Date --output "$CombinedOut" --tiers "A,B" --max-tickets 3
+        # ✅ IMPORTANT: tiers must be passed as ONE argument string
+        py -3.14 "$Root\combined_slate_tickets.py" `
+            --nba "$NBASlateCopy" `
+            --cbb "$CBBSlateCopy" `
+            --date $Date `
+            --output "$CombinedOut" `
+            --tiers "$Tiers" `
+            --max-tickets $MaxTickets
+
         if ($LASTEXITCODE -ne 0) { throw "Exit code $LASTEXITCODE" }
+
         Copy-Item $CombinedOut "$OutDir\combined_slate_tickets_$Date.xlsx" -Force -ErrorAction SilentlyContinue
         Write-Host "      OK" -ForegroundColor Green
         Write-Host ""
@@ -215,3 +234,4 @@ Write-Host ""
 # .\run_daily.ps1 -NBAOnly -RefreshNBACache  # Force rebuild ESPN cache from scratch
 # .\run_daily.ps1 -CBBOnly                   # CBB pipeline only
 # .\run_daily.ps1 -CombinedOnly              # Re-run combined step using existing outputs
+# .\run_daily.ps1 -CombinedOnly -Tiers "A,B,C,D" -MaxTickets 3
