@@ -593,6 +593,12 @@ def load_cbb(path: str) -> pd.DataFrame:
             "Def Tier": "def_tier",
             "DEF_TIER": "def_tier",
             "Defense Tier": "def_tier",
+            "minutes_tier": "min_tier",
+            "Min Tier": "min_tier",
+            "shot_role": "shot_role",
+            "Shot Role": "shot_role",
+            "usage_role": "usage_role",
+            "Usage Role": "usage_role",
             # OPTIONAL IDs
             "espn_player_id": "espn_player_id",
             "ESPN Player ID": "espn_player_id",
@@ -650,6 +656,9 @@ def build_combined_slate(nba: pd.DataFrame, cbb: pd.DataFrame) -> pd.DataFrame:
         "l5_over",
         "l5_under",
         "def_tier",
+        "min_tier",
+        "shot_role",
+        "usage_role",
         "nba_player_id",
         "espn_player_id",
     ]
@@ -930,9 +939,12 @@ SLATE_COLS = [
     "l5_over",
     "l5_under",
     "def_tier",
+    "min_tier",
+    "shot_role",
+    "usage_role",
     "game_time",
 ]
-SLATE_WIDTHS = [6, 5, 10, 20, 6, 6, 18, 10, 6, 8, 7, 10, 10, 8, 10, 7, 7, 10, 16]
+SLATE_WIDTHS = [6, 5, 10, 20, 6, 6, 18, 10, 6, 8, 7, 10, 10, 8, 10, 7, 7, 10, 9, 10, 10, 16]
 SLATE_HDRS = [
     "Sport",
     "Tier",
@@ -952,6 +964,9 @@ SLATE_HDRS = [
     "L5 Over",
     "L5 Under",
     "Def Tier",
+    "Min Tier",
+    "Shot Role",
+    "Usage Role",
     "Game Time",
 ]
 
