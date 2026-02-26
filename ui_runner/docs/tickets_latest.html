@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SlateIQ — Tickets</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#05050f;--surface:#0d0d1f;--card:#111128;--border:#1e1e3a;
+  --accent:#c8ff00;--cyan:#00e5ff;--muted:#555;--text:#e8e8f0;
+}
+body{background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;min-height:100vh;overflow-x:hidden;}
+
+/* scrolling grid */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(200,255,0,.03) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(200,255,0,.03) 1px,transparent 1px);
+  background-size:40px 40px;
+  animation:gridScroll 20s linear infinite;pointer-events:none;z-index:0;
+}
+@keyframes gridScroll{from{background-position:0 0;}to{background-position:0 40px;}}
+
+/* scanlines */
+body::after{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 4px);
+  pointer-events:none;z-index:0;
+}
+
+#app{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:24px 20px;}
+
+/* nav */
+nav{display:flex;align-items:center;gap:16px;padding:12px 0 24px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.orb-wrap{width:38px;height:38px;position:relative;}
+.orb{width:38px;height:38px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#d4ff00,#00e5ff 55%,#7b2fff 100%);
+  animation:orbPulse 3s ease-in-out infinite;
+  box-shadow:0 0 18px #c8ff0066,0 0 40px #00e5ff33;}
+@keyframes orbPulse{0%,100%{box-shadow:0 0 18px #c8ff0066,0 0 40px #00e5ff33;}50%{box-shadow:0 0 28px #c8ff00aa,0 0 60px #00e5ff55;}}
+.brand{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.12em;color:var(--accent);line-height:1;}
+.brand span{color:var(--cyan);}
+.nav-links{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap;}
+.nav-links a{color:#aaa;text-decoration:none;font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid transparent;transition:all .2s;}
+.nav-links a:hover{color:var(--text);border-color:var(--border);}
+.nav-links a.active{color:var(--accent);border-color:var(--accent);background:rgba(200,255,0,.06);}
+
+/* hero */
+.hero{margin:28px 0 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:.08em;line-height:1;color:var(--accent);}
+.hero h1 span{color:var(--cyan);}
+.meta{color:var(--muted);font-size:12px;margin-top:4px;}
+
+/* filter pill */
+.filter-pill{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:12px;color:#888;margin-bottom:24px;}
+.filter-pill strong{color:var(--cyan);}
+
+/* group */
+.group{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:24px;}
+.group-hdr{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.group-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.08em;color:var(--accent);}
+.group-meta{color:var(--muted);font-size:12px;}
+
+/* ticket card */
+.ticket{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.ticket:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(200,255,0,.08);}
+.ticket-accent{width:5px;background:linear-gradient(180deg,var(--accent),var(--cyan));flex-shrink:0;}
+.ticket-inner{display:flex;}
+.ticket-body{flex:1;padding:14px 16px;}
+.ticket-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.ticket-no{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.08em;color:var(--text);}
+.kpi-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;}
+.kpi{display:flex;flex-direction:column;gap:2px;}
+.kpi-label{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.kpi-val{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.05em;}
+
+/* table */
+table{width:100%;border-collapse:collapse;}
+th{background:rgba(200,255,0,.06);color:var(--accent);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.08em;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);}
+td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(200,255,0,.03);}
+
+/* player cell */
+.pwrap{display:flex;gap:8px;align-items:center;}
+.avatar{width:30px;height:30px;border-radius:50%;overflow:hidden;border:1px solid var(--border);flex-shrink:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+
+/* dir badges */
+.dir-over{background:rgba(57,255,110,.15);color:#39ff6e;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;}
+.dir-under{background:rgba(240,165,0,.15);color:#f0a500;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;}
+
+/* responsive */
+@media(max-width:640px){
+  .kpi-row{gap:10px;}
+  th,td{padding:6px 6px;font-size:11px;}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="orb-wrap"><div class="orb"></div></div>
+    <div><div class="brand">Slate<span>IQ</span></div></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="indexGrades.html">Grades</a>
+    <a href="tickets_latest.html" class="active">Tickets</a>
+    <a href="payout_calculator.html">Payouts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <h1>🎟 Latest <span>Tickets</span></h1>
+    <div class="meta">Generated: 2026-02-26 21:37:21 UTC &nbsp;|&nbsp; Date: 2026-02-26</div>
+  </div>
+</div>
+
+<div class="filter-pill">
+  Filters &rarr;
+  <strong>tiers:</strong> A,B,C,D &nbsp;
+  <strong>min_hit_rate:</strong> 0.0 &nbsp;
+  <strong>min_edge:</strong> 0.0 &nbsp;
+  <strong>min_rank:</strong> None &nbsp;
+  <strong>pick_types:</strong> Goblin,Standard,Demon
+  &nbsp;&nbsp;<a href="tickets_latest.json" style="color:var(--cyan);">⬇ JSON</a>
+</div>
+
+
+<div class="group">
+  <div class="group-hdr">
+    <div class="group-title">FINAL 6-Leg (NBA Std+Gob)</div>
+    <div class="group-meta">Legs: 6 &nbsp;|&nbsp; Power: 40.0x &nbsp;|&nbsp; Flex: 16.0x</div>
+  </div>
+
+
+  <div class="ticket">
+    <div class="ticket-inner">
+      <div class="ticket-accent"></div>
+      <div class="ticket-body">
+        <div class="ticket-hdr">
+          <div class="ticket-no">Ticket #1</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Hit Rate</div>
+            <div class="kpi-val" style="color:#39ff6e;">96.7%</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Avg Rank</div>
+            <div class="kpi-val" style="color:var(--cyan);">6.86</div>
+          </div>
+          <div class="kpi" style="flex:1;min-width:140px;">
+            <div class="kpi-label">Win Prob</div>
+            <div style='display:flex;align-items:center;gap:8px;'><div style='flex:1;height:6px;background:#1a1a2e;border-radius:3px;overflow:hidden;'><div style='width:80.0%;height:100%;background:#39ff6e;border-radius:3px;'></div></div><span style='color:#39ff6e;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.05em;'>80.0%</span></div>
+          </div>
+        </div>
+        <table>
+          <thead><tr>
+            <th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th>
+            <th>Pick</th><th>Min</th><th>Shot</th><th>Usage</th>
+            <th>Dir</th><th>Hit%</th><th>Edge</th><th>Rank</th>
+          </tr></thead>
+          <tbody>
+
+<tr><td>1</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>MD</div><div>Moussa Diabaté</div></div></td><td>Pts+Asts</td><td style='color:var(--text);'>10.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>11.33</td><td>6.38</td></tr>
+<tr><td>2</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KG</div><div>Keyonte George</div></div></td><td>Fantasy Score</td><td style='color:var(--text);'>31.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>13.98</td><td>6.11</td></tr>
+<tr><td>3</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>DM</div><div>Dejounte Murray</div></div></td><td>Steals</td><td style='color:var(--text);'>0.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>0.50</td><td>7.34</td></tr>
+<tr><td>4</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KF</div><div>Kyle Filipowski</div></div></td><td>Steals</td><td style='color:var(--text);'>0.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>80.00%</td><td>2.11</td><td>7.24</td></tr>
+<tr><td>5</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KM</div><div>Kris Murray</div></div></td><td>Points</td><td style='color:var(--text);'>5.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>5.50</td><td>7.07</td></tr>
+<tr><td>6</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>BC</div><div>Bilal Coulibaly</div></div></td><td>Steals</td><td style='color:var(--text);'>0.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>1.12</td><td>7.04</td></tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="group">
+  <div class="group-hdr">
+    <div class="group-title">FINAL 5-Leg (NBA Std+Gob)</div>
+    <div class="group-meta">Legs: 5 &nbsp;|&nbsp; Power: 20.0x &nbsp;|&nbsp; Flex: 10.0x</div>
+  </div>
+
+
+  <div class="ticket">
+    <div class="ticket-inner">
+      <div class="ticket-accent"></div>
+      <div class="ticket-body">
+        <div class="ticket-hdr">
+          <div class="ticket-no">Ticket #1</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Hit Rate</div>
+            <div class="kpi-val" style="color:#39ff6e;">96.0%</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Avg Rank</div>
+            <div class="kpi-val" style="color:var(--cyan);">6.83</div>
+          </div>
+          <div class="kpi" style="flex:1;min-width:140px;">
+            <div class="kpi-label">Win Prob</div>
+            <div style='display:flex;align-items:center;gap:8px;'><div style='flex:1;height:6px;background:#1a1a2e;border-radius:3px;overflow:hidden;'><div style='width:80.0%;height:100%;background:#39ff6e;border-radius:3px;'></div></div><span style='color:#39ff6e;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.05em;'>80.0%</span></div>
+          </div>
+        </div>
+        <table>
+          <thead><tr>
+            <th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th>
+            <th>Pick</th><th>Min</th><th>Shot</th><th>Usage</th>
+            <th>Dir</th><th>Hit%</th><th>Edge</th><th>Rank</th>
+          </tr></thead>
+          <tbody>
+
+<tr><td>1</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>MD</div><div>Moussa Diabaté</div></div></td><td>Pts+Asts</td><td style='color:var(--text);'>10.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>11.33</td><td>6.38</td></tr>
+<tr><td>2</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KG</div><div>Keyonte George</div></div></td><td>Fantasy Score</td><td style='color:var(--text);'>31.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>13.98</td><td>6.11</td></tr>
+<tr><td>3</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>DM</div><div>Dejounte Murray</div></div></td><td>Steals</td><td style='color:var(--text);'>0.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>0.50</td><td>7.34</td></tr>
+<tr><td>4</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KF</div><div>Kyle Filipowski</div></div></td><td>Steals</td><td style='color:var(--text);'>0.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>80.00%</td><td>2.11</td><td>7.24</td></tr>
+<tr><td>5</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KM</div><div>Kris Murray</div></div></td><td>Points</td><td style='color:var(--text);'>5.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>5.50</td><td>7.07</td></tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="group">
+  <div class="group-hdr">
+    <div class="group-title">FINAL 3-Leg MIX x2 (NBA Std+Gob)</div>
+    <div class="group-meta">Legs: 3 &nbsp;|&nbsp; Power: 4.37x &nbsp;|&nbsp; Flex: 1.73x</div>
+  </div>
+
+
+  <div class="ticket">
+    <div class="ticket-inner">
+      <div class="ticket-accent"></div>
+      <div class="ticket-body">
+        <div class="ticket-hdr">
+          <div class="ticket-no">Ticket #1</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Hit Rate</div>
+            <div class="kpi-val" style="color:#39ff6e;">100.0%</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Avg Rank</div>
+            <div class="kpi-val" style="color:var(--cyan);">7.04</div>
+          </div>
+          <div class="kpi" style="flex:1;min-width:140px;">
+            <div class="kpi-label">Win Prob</div>
+            <div style='display:flex;align-items:center;gap:8px;'><div style='flex:1;height:6px;background:#1a1a2e;border-radius:3px;overflow:hidden;'><div style='width:100.0%;height:100%;background:#39ff6e;border-radius:3px;'></div></div><span style='color:#39ff6e;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.05em;'>100.0%</span></div>
+          </div>
+        </div>
+        <table>
+          <thead><tr>
+            <th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th>
+            <th>Pick</th><th>Min</th><th>Shot</th><th>Usage</th>
+            <th>Dir</th><th>Hit%</th><th>Edge</th><th>Rank</th>
+          </tr></thead>
+          <tbody>
+
+<tr><td>1</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>MD</div><div>Moussa Diabaté</div></div></td><td>Pts+Asts</td><td style='color:var(--text);'>10.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>11.33</td><td>6.38</td></tr>
+<tr><td>2</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KG</div><div>Keyonte George</div></div></td><td>Rebounds</td><td style='color:var(--text);'>1.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>2.50</td><td>7.39</td></tr>
+<tr><td>3</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>DM</div><div>Dejounte Murray</div></div></td><td>Steals</td><td style='color:var(--text);'>0.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>0.50</td><td>7.34</td></tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ticket">
+    <div class="ticket-inner">
+      <div class="ticket-accent"></div>
+      <div class="ticket-body">
+        <div class="ticket-hdr">
+          <div class="ticket-no">Ticket #2</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Hit Rate</div>
+            <div class="kpi-val" style="color:#39ff6e;">93.3%</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Avg Rank</div>
+            <div class="kpi-val" style="color:var(--cyan);">6.90</div>
+          </div>
+          <div class="kpi" style="flex:1;min-width:140px;">
+            <div class="kpi-label">Win Prob</div>
+            <div style='display:flex;align-items:center;gap:8px;'><div style='flex:1;height:6px;background:#1a1a2e;border-radius:3px;overflow:hidden;'><div style='width:80.0%;height:100%;background:#39ff6e;border-radius:3px;'></div></div><span style='color:#39ff6e;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.05em;'>80.0%</span></div>
+          </div>
+        </div>
+        <table>
+          <thead><tr>
+            <th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th>
+            <th>Pick</th><th>Min</th><th>Shot</th><th>Usage</th>
+            <th>Dir</th><th>Hit%</th><th>Edge</th><th>Rank</th>
+          </tr></thead>
+          <tbody>
+
+<tr><td>1</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KG</div><div>Keyonte George</div></div></td><td>Fantasy Score</td><td style='color:var(--text);'>31.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>13.98</td><td>6.11</td></tr>
+<tr><td>2</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>DM</div><div>Dejounte Murray</div></div></td><td>Steals</td><td style='color:var(--text);'>0.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>0.50</td><td>7.34</td></tr>
+<tr><td>3</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KF</div><div>Kyle Filipowski</div></div></td><td>Steals</td><td style='color:var(--text);'>0.5</td><td>Goblin</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>80.00%</td><td>2.11</td><td>7.24</td></tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="group">
+  <div class="group-hdr">
+    <div class="group-title">FINAL 3-Leg STANDARD ONLY (NBA)</div>
+    <div class="group-meta">Legs: 3 &nbsp;|&nbsp; Power: 4.37x &nbsp;|&nbsp; Flex: 1.73x</div>
+  </div>
+
+
+  <div class="ticket">
+    <div class="ticket-inner">
+      <div class="ticket-accent"></div>
+      <div class="ticket-body">
+        <div class="ticket-hdr">
+          <div class="ticket-no">Ticket #1</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Hit Rate</div>
+            <div class="kpi-val" style="color:#39ff6e;">100.0%</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Avg Rank</div>
+            <div class="kpi-val" style="color:var(--cyan);">6.01</div>
+          </div>
+          <div class="kpi" style="flex:1;min-width:140px;">
+            <div class="kpi-label">Win Prob</div>
+            <div style='display:flex;align-items:center;gap:8px;'><div style='flex:1;height:6px;background:#1a1a2e;border-radius:3px;overflow:hidden;'><div style='width:100.0%;height:100%;background:#39ff6e;border-radius:3px;'></div></div><span style='color:#39ff6e;font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:.05em;'>100.0%</span></div>
+          </div>
+        </div>
+        <table>
+          <thead><tr>
+            <th>#</th><th>Sport</th><th>Player</th><th>Prop</th><th>Line</th>
+            <th>Pick</th><th>Min</th><th>Shot</th><th>Usage</th>
+            <th>Dir</th><th>Hit%</th><th>Edge</th><th>Rank</th>
+          </tr></thead>
+          <tbody>
+
+<tr><td>1</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>MD</div><div>Moussa Diabaté</div></div></td><td>Pts+Asts</td><td style='color:var(--text);'>10.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>11.33</td><td>6.38</td></tr>
+<tr><td>2</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>KG</div><div>Keyonte George</div></div></td><td>Fantasy Score</td><td style='color:var(--text);'>31.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>13.98</td><td>6.11</td></tr>
+<tr><td>3</td><td><span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span></td><td><div class='pwrap'><div class='avatar'>CW</div><div>Coby White</div></div></td><td>Rebs+Asts</td><td style='color:var(--text);'>5.5</td><td>Standard</td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span style='color:#555;font-size:12px;'>—</span></td><td><span class='dir-over'>OVER</span></td><td style='color:#39ff6e;font-weight:600;'>100.00%</td><td>4.22</td><td>5.54</td></tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- #app -->
+</body>
+</html>
