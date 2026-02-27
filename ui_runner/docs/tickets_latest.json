@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-27 20:43:54 UTC",
+  "generated_at": "2026-02-27 20:56:39 UTC",
   "date": "2026-02-27",
   "filters": {
     "tiers": "A,B,C,D",
@@ -18,7 +18,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 6.941666666666666,
+          "avg_rank_score": 6.953333333333333,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -74,7 +74,7 @@
               "line": 0.5,
               "edge": 1.97,
               "hit_rate": 1.0,
-              "rank_score": 8.24,
+              "rank_score": 8.25,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -95,7 +95,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -116,7 +116,7 @@
               "line": 1.5,
               "edge": 4.02,
               "hit_rate": 1.0,
-              "rank_score": 6.93,
+              "rank_score": 6.95,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -137,7 +137,7 @@
               "line": 0.5,
               "edge": 1.68,
               "hit_rate": 1.0,
-              "rank_score": 6.89,
+              "rank_score": 6.91,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -160,7 +160,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 6.952,
+          "avg_rank_score": 6.962000000000001,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -216,7 +216,7 @@
               "line": 0.5,
               "edge": 1.97,
               "hit_rate": 1.0,
-              "rank_score": 8.24,
+              "rank_score": 8.25,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -237,7 +237,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -258,7 +258,7 @@
               "line": 1.5,
               "edge": 4.02,
               "hit_rate": 1.0,
-              "rank_score": 6.93,
+              "rank_score": 6.95,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -281,7 +281,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 6.9575,
+          "avg_rank_score": 6.965,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -337,7 +337,7 @@
               "line": 0.5,
               "edge": 1.97,
               "hit_rate": 1.0,
-              "rank_score": 8.24,
+              "rank_score": 8.25,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -358,7 +358,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -381,7 +381,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 7.213333333333334,
+          "avg_rank_score": 7.223333333333334,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -416,7 +416,7 @@
               "line": 0.5,
               "edge": 1.97,
               "hit_rate": 1.0,
-              "rank_score": 8.24,
+              "rank_score": 8.25,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -437,7 +437,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -452,7 +452,7 @@
         {
           "ticket_no": 2,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 6.706666666666667,
+          "avg_rank_score": 6.72,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -487,7 +487,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -508,7 +508,7 @@
               "line": 1.5,
               "edge": 4.02,
               "hit_rate": 1.0,
-              "rank_score": 6.93,
+              "rank_score": 6.95,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -1202,7 +1202,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 6.941666666666666,
+          "avg_rank_score": 6.953333333333333,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -1258,7 +1258,7 @@
               "line": 0.5,
               "edge": 1.97,
               "hit_rate": 1.0,
-              "rank_score": 8.24,
+              "rank_score": 8.25,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1279,7 +1279,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1300,7 +1300,7 @@
               "line": 1.5,
               "edge": 4.02,
               "hit_rate": 1.0,
-              "rank_score": 6.93,
+              "rank_score": 6.95,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1321,7 +1321,7 @@
               "line": 0.5,
               "edge": 1.68,
               "hit_rate": 1.0,
-              "rank_score": 6.89,
+              "rank_score": 6.91,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1344,7 +1344,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 6.952,
+          "avg_rank_score": 6.962000000000001,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -1400,7 +1400,7 @@
               "line": 0.5,
               "edge": 1.97,
               "hit_rate": 1.0,
-              "rank_score": 8.24,
+              "rank_score": 8.25,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1421,7 +1421,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1442,7 +1442,7 @@
               "line": 1.5,
               "edge": 4.02,
               "hit_rate": 1.0,
-              "rank_score": 6.93,
+              "rank_score": 6.95,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1465,7 +1465,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 6.9575,
+          "avg_rank_score": 6.965,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -1521,7 +1521,7 @@
               "line": 0.5,
               "edge": 1.97,
               "hit_rate": 1.0,
-              "rank_score": 8.24,
+              "rank_score": 8.25,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1542,7 +1542,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1565,7 +1565,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 7.213333333333334,
+          "avg_rank_score": 7.223333333333334,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -1600,7 +1600,7 @@
               "line": 0.5,
               "edge": 1.97,
               "hit_rate": 1.0,
-              "rank_score": 8.24,
+              "rank_score": 8.25,
               "game_time": "2026-02-27 20:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1621,7 +1621,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1636,7 +1636,7 @@
         {
           "ticket_no": 2,
           "avg_hit_rate": 1.0,
-          "avg_rank_score": 6.706666666666667,
+          "avg_rank_score": 6.72,
           "est_win_prob": 1.0,
           "legs": [
             {
@@ -1671,7 +1671,7 @@
               "line": 0.5,
               "edge": 0.9,
               "hit_rate": 1.0,
-              "rank_score": 7.0,
+              "rank_score": 7.02,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
@@ -1692,7 +1692,7 @@
               "line": 1.5,
               "edge": 4.02,
               "hit_rate": 1.0,
-              "rank_score": 6.93,
+              "rank_score": 6.95,
               "game_time": "2026-02-27 21:30:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
