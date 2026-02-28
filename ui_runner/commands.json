@@ -1,63 +1,424 @@
-﻿{
+{
   "repo_root": "C:\\Users\\halek\\OneDrive\\Desktop\\Vision Board\\NbaPropPipelines\\NBA-Pipelines",
   "pipelines": {
-    "DAILY (One-Click)": {
-      "workdir": "",
-      "commands": [
-        {
-          "id": "run_daily",
-          "label": "Run DAILY (Master)  NBA + CBB",
-          "cmd": ["powershell", "-ExecutionPolicy", "Bypass", "-File", "run_daily.ps1"]
-        },
-        {
-          "id": "run_grade",
-          "label": "Run GRADE (Master)  NBA + CBB",
-          "cmd": ["powershell", "-ExecutionPolicy", "Bypass", "-File", "run_grade.ps1"]
-        }
-      ]
-    },
-    "NBA - Pipeline A (Debug)": {
+    "nba": {
+      "label": "NBA Pipeline",
       "workdir": "NbaPropPipelineA",
       "commands": [
         {
-          "id": "nba_step4_espn",
-          "label": "NBA Step 4 (ESPN Cache)  step4_with_stats.csv",
-          "cmd": ["py","-3.14","-u","step4_attach_player_stats_espn_cache.py","--slate","step3_with_defense.csv","--out","step4_with_stats.csv","--season","2025-26","--date","{TODAY}","--days","35","--cache","nba_espn_boxscore_cache.csv","--idmap","nba_to_espn_id_map.csv","--n","10","--sleep","0.8","--retries","4","--debug-misses","no_espn_player_debug.csv"]
+          "id": "nba_step1",
+          "label": "Step 1 \u2014 Fetch PrizePicks",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step1_fetch_prizepicks_api.py",
+            "--league_id",
+            "7",
+            "--game_mode",
+            "pickem",
+            "--per_page",
+            "250",
+            "--max_pages",
+            "5",
+            "--sleep",
+            "2.0",
+            "--cooldown_seconds",
+            "90",
+            "--max_cooldowns",
+            "3",
+            "--jitter_seconds",
+            "10.0",
+            "--output",
+            "step1_pp_props_today.csv"
+          ]
         },
         {
-          "id": "nba_steps5_8",
-          "label": "NBA Steps 58 (Batch)",
-          "cmd_chain": ["nba_step5","nba_step6","nba_step7","nba_step8"]
+          "id": "nba_step2",
+          "label": "Step 2 \u2014 Attach Pick Types",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step2_attach_picktypes.py",
+            "--input",
+            "step1_pp_props_today.csv",
+            "--output",
+            "step2_with_picktypes.csv"
+          ]
+        },
+        {
+          "id": "nba_step3",
+          "label": "Step 3 \u2014 Attach Defense",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step3_attach_defense.py",
+            "--input",
+            "step2_with_picktypes.csv",
+            "--defense",
+            ".\\defense_team_summary.csv",
+            "--output",
+            "step3_with_defense.csv"
+          ]
+        },
+        {
+          "id": "nba_step4",
+          "label": "Step 4 \u2014 Player Stats (ESPN)",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step4_attach_player_stats_espn_cache.py",
+            "--slate",
+            "step3_with_defense.csv",
+            "--out",
+            "step4_with_stats.csv",
+            "--season",
+            "2025-26",
+            "--date",
+            "{TODAY}",
+            "--days",
+            "35",
+            "--cache",
+            "nba_espn_boxscore_cache.csv",
+            "--idmap",
+            "nba_to_espn_id_map.csv",
+            "--n",
+            "10",
+            "--sleep",
+            "0.8",
+            "--retries",
+            "4",
+            "--connect-timeout",
+            "8",
+            "--timeout",
+            "30",
+            "--debug-misses",
+            "no_espn_player_debug.csv",
+            "--workers",
+            "4"
+          ]
         },
         {
           "id": "nba_step5",
-          "label": "NBA Step 5  step5_with_line_hit_rates.csv",
-          "cmd": ["py","-3.14","-u","step5_add_line_hit_rates.py","--input","step4_with_stats.csv","--output","step5_with_line_hit_rates.csv"]
+          "label": "Step 5 \u2014 Line Hit Rates",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step5_add_line_hit_rates.py",
+            "--input",
+            "step4_with_stats.csv",
+            "--output",
+            "step5_with_hit_rates.csv"
+          ]
         },
         {
           "id": "nba_step6",
-          "label": "NBA Step 6  step6_with_team_role_context.csv",
-          "cmd": ["py","-3.14","-u","step6_team_role_context.py","--input","step5_with_line_hit_rates.csv","--output","step6_with_team_role_context.csv"]
+          "label": "Step 6 \u2014 Team Role Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step6_team_role_context.py",
+            "--input",
+            "step5_with_hit_rates.csv",
+            "--output",
+            "step6_with_team_role_context.csv"
+          ]
         },
         {
           "id": "nba_step7",
-          "label": "NBA Step 7  step7_ranked_props.xlsx",
-          "cmd": ["py","-3.14","-u","step7_rank_props.py","--input","step6_with_team_role_context.csv","--output","step7_ranked_props.xlsx"]
+          "label": "Step 7 \u2014 Rank Props",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step7_rank_props.py",
+            "--input",
+            "step6_with_team_role_context.csv",
+            "--output",
+            "step7_ranked_props.xlsx"
+          ]
         },
         {
           "id": "nba_step8",
-          "label": "NBA Step 8  step8_all_direction.csv",
-          "cmd": ["py","-3.14","-u","step8_add_direction_context.py","--input","step7_ranked_props.xlsx","--sheet","ALL","--output","step8_all_direction.csv"]
+          "label": "Step 8 \u2014 Direction Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step8_add_direction_context.py",
+            "--input",
+            "step7_ranked_props.xlsx",
+            "--sheet",
+            "ALL",
+            "--output",
+            "step8_all_direction_clean.xlsx"
+          ]
+        },
+        {
+          "id": "nba_step9",
+          "label": "Step 9 \u2014 Build Tickets",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step9_build_tickets.py",
+            "--input",
+            "step8_all_direction_clean.xlsx",
+            "--output",
+            "best_tickets.xlsx",
+            "--min_hit_rate",
+            "0.8",
+            "--legs",
+            "2,3,4"
+          ]
+        },
+        {
+          "id": "nba_full",
+          "label": "NBA Full Pipeline (Steps 1-9)",
+          "cmd_chain": [
+            "nba_step1",
+            "nba_step2",
+            "nba_step3",
+            "nba_step4",
+            "nba_step5",
+            "nba_step6",
+            "nba_step7",
+            "nba_step8",
+            "nba_step9"
+          ]
+        },
+        {
+          "id": "nba_refresh_cache",
+          "label": "NBA Full Pipeline + Refresh ESPN Cache",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "..\\run_pipeline.ps1",
+            "-NBAOnly",
+            "-RefreshCache"
+          ]
+        },
+        {
+          "id": "nba_stats_only",
+          "label": "NBA Steps 4-9 (Stats + Rank)",
+          "cmd_chain": [
+            "nba_step4",
+            "nba_step5",
+            "nba_step6",
+            "nba_step7",
+            "nba_step8",
+            "nba_step9"
+          ]
         }
       ]
     },
-    "CBB - CBB2 (Debug)": {
-      "workdir": "CBB2",
+    "cbb": {
+      "label": "CBB Pipeline",
+      "workdir": "cbb2",
       "commands": [
         {
-          "id": "cbb_run_daily",
-          "label": "CBB2 Run Daily (uses your scripts in CBB2)",
-          "cmd": ["powershell","-ExecutionPolicy","Bypass","-Command","Write-Host 'TODO: wire to your CBB2 daily script';"]
+          "id": "cbb_step1",
+          "label": "Step 1 \u2014 Fetch PrizePicks (CBB)",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\pp_cbb_scraper.py",
+            "--out",
+            "step1_cbb.csv"
+          ]
+        },
+        {
+          "id": "cbb_step2",
+          "label": "Step 2 \u2014 Normalize",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\cbb_step2_normalize.py",
+            "--input",
+            "step1_cbb.csv",
+            "--output",
+            "step2_cbb.csv"
+          ]
+        },
+        {
+          "id": "cbb_step3",
+          "label": "Step 3 \u2014 Attach Defense Rankings",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\cbb_step3b_attach_def_rankings.py",
+            "--input",
+            "step2_cbb.csv",
+            "--output",
+            "step3b_with_def_rankings_cbb.csv"
+          ]
+        },
+        {
+          "id": "cbb_step4",
+          "label": "Step 4 \u2014 Attach ESPN IDs",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step5_attach_espn_ids.py",
+            "--input",
+            "step3b_with_def_rankings_cbb.csv",
+            "--output",
+            "step3_cbb.csv",
+            "--master",
+            "data/ncaa_mbb_athletes_master.csv"
+          ]
+        },
+        {
+          "id": "cbb_step5",
+          "label": "Step 5 \u2014 Boxscore Stats",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\cbb_step5b_attach_boxscore_stats.py",
+            "--input",
+            "step3_cbb.csv",
+            "--output",
+            "step5b_cbb.csv",
+            "--workers",
+            "4"
+          ]
+        },
+        {
+          "id": "cbb_step6",
+          "label": "Step 6 \u2014 Rank Props",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\cbb_step6_rank_props.py",
+            "--input",
+            "step5b_cbb.csv",
+            "--output",
+            "step6_ranked_cbb.xlsx"
+          ]
+        },
+        {
+          "id": "cbb_full",
+          "label": "CBB Full Pipeline (Steps 1-6)",
+          "cmd_chain": [
+            "cbb_step1",
+            "cbb_step2",
+            "cbb_step3",
+            "cbb_step4",
+            "cbb_step5",
+            "cbb_step6"
+          ]
+        },
+        {
+          "id": "cbb_stats_only",
+          "label": "CBB Steps 4-6 (Stats + Rank)",
+          "cmd_chain": [
+            "cbb_step4",
+            "cbb_step5",
+            "cbb_step6"
+          ]
+        }
+      ]
+    },
+    "combined": {
+      "label": "Combined Slate + Tickets",
+      "workdir": "",
+      "commands": [
+        {
+          "id": "combined_run",
+          "label": "Build Combined Slate + Tickets (+ Web)",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\combined_slate_tickets.py",
+            "--nba",
+            "NbaPropPipelineA\\step8_all_direction_clean.xlsx",
+            "--cbb",
+            "cbb2\\step6_ranked_cbb.xlsx",
+            "--date",
+            "{TODAY}",
+            "--output",
+            "outputs\\{TODAY}\\combined_slate_{TODAY}.xlsx",
+            "--tiers",
+            "A,B,C,D",
+            "--max-tickets",
+            "5",
+            "--write-web",
+            "--web-outdir",
+            "docs",
+            "--also-root"
+          ]
+        },
+        {
+          "id": "full_pipeline",
+          "label": "Full Run \u2014 NBA + CBB + Combined",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "run_pipeline.ps1"
+          ]
+        },
+        {
+          "id": "full_refresh",
+          "label": "Full Run + Refresh ESPN Cache",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "run_pipeline.ps1",
+            "-RefreshCache"
+          ]
+        }
+      ]
+    },
+    "grading": {
+      "label": "Grading",
+      "workdir": "",
+      "commands": [
+        {
+          "id": "grade_slate",
+          "label": "Grade NBA Slate",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\slate_grader.py"
+          ]
+        },
+        {
+          "id": "grade_cbb",
+          "label": "Grade CBB Slate",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\grade_cbb_full_slate.py"
+          ]
+        },
+        {
+          "id": "grade_combined",
+          "label": "Grade Combined Tickets",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\combined_ticket_grader.py"
+          ]
+        },
+        {
+          "id": "fetch_actuals",
+          "label": "Fetch NBA Actuals",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\fetch_actuals.py"
+          ]
+        },
+        {
+          "id": "fetch_cbb_actuals",
+          "label": "Fetch CBB Actuals",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\fetch_cbb_actuals_by_date.py"
+          ]
         }
       ]
     }

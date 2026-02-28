@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import unicodedata
 
 import pandas as pd
 
@@ -72,7 +73,16 @@ TEAM_ALIASES = {
 
 
 def norm_str(s: str) -> str:
-    s = (s or "").lower().strip()
+    """Canonical player name normalizer.
+    NFKD first so accented chars (é→e, ü→u, ô→o) map correctly before stripping,
+    then lowercase + collapse non-alphanumeric to spaces.
+    Matches the normalization used in build_ncaa_mbb_espn_athletes_master.py.
+    """
+    s = (s or "")
+    # Strip accents/diacritics via NFKD decomposition
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode("ascii")
+    s = s.lower().strip()
+    # Strip everything except a-z, 0-9, and spaces
     s = re.sub(r"[^a-z0-9 ]+", " ", s)
     s = re.sub(r"\s+", " ", s).strip()
     return s

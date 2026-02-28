@@ -1,9 +1,0 @@
-{
-  "repo_root": "C:\\Users\\halek\\OneDrive\\Desktop\\Vision Board\\NbaPropPipelines\\NBA-Pipelines\\NbaPropPipelineA",
-  "pipelines": {
-    "DAILY (One-Click)": {
-      "workdir": "",
-      "commands": []
-    }
-  }
-}

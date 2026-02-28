@@ -1,25 +1,20 @@
 from __future__ import annotations
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Windows UTF-8 fix — MUST be at the very top, before any other imports.
-# Forces Python itself, all subprocesses, and PowerShell to speak UTF-8.
-# Prevents the cp1252 crash when scripts print emojis or non-ASCII player names.
+# Windows UTF-8 fix — MUST be at the very top
 # ──────────────────────────────────────────────────────────────────────────────
 import os
 import sys
 
-# 1. Force this Python process to use UTF-8 for all I/O
 os.environ.setdefault("PYTHONUTF8", "1")
 os.environ.setdefault("PYTHONIOENCODING", "utf-8")
 
-# 2. On Windows, reconfigure stdout/stderr to UTF-8 so Flask's own print()
-#    calls never crash on emoji characters.
 if sys.platform == "win32":
     try:
-        sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[attr-defined]
-        sys.stderr.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[attr-defined]
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
     except AttributeError:
-        pass  # Python < 3.7 fallback — shouldn't happen on 3.14
+        pass
 
 import json
 import time
@@ -34,13 +29,23 @@ from datetime import datetime
 from flask import Flask, jsonify, render_template, request, send_from_directory, abort
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Paths / App
+# Paths
 # ──────────────────────────────────────────────────────────────────────────────
-BASE_DIR      = Path(__file__).resolve().parent
-CONFIG_PATH   = BASE_DIR / "commands.json"
-DOCS_DIR      = BASE_DIR / "docs"
-TEMPLATES_DIR = BASE_DIR / "templates"
-STATIC_DIR    = BASE_DIR / "static"
+BASE_DIR      = Path(__file__).resolve().parent.parent  # repo root (one level above ui_runner/)
+UI_DIR        = Path(__file__).resolve().parent         # all UI assets live here (ui_runner/)
+CONFIG_PATH   = UI_DIR / "commands.json"
+DOCS_DIR      = UI_DIR / "docs"
+TEMPLATES_DIR = UI_DIR / "templates"
+STATIC_DIR    = UI_DIR / "static"
+
+# Pipeline output paths (used by status + slate endpoints)
+NBA_DIR       = BASE_DIR / "NbaPropPipelineA"
+CBB_DIR       = BASE_DIR / "cbb2"
+NBA_FLAG      = NBA_DIR / "RUN_COMPLETE.flag"
+NBA_SLATE     = NBA_DIR / "step8_all_direction_clean.xlsx"
+NBA_TICKETS   = NBA_DIR / "best_tickets.xlsx"
+CBB_SLATE     = CBB_DIR / "step6_ranked_cbb.xlsx"
+COMBINED_OUT  = BASE_DIR  # combined_slate_tickets_YYYY-MM-DD.xlsx lives here
 
 app = Flask(
     __name__,
@@ -53,13 +58,15 @@ app = Flask(
 # ──────────────────────────────────────────────────────────────────────────────
 @dataclass
 class RunJob:
-    job_id: str
-    label: str
-    started_at: float = field(default_factory=time.time)
-    ended_at: Optional[float] = None
-    status: str = "RUNNING"          # RUNNING | OK | FAIL
+    job_id:      str
+    label:       str
+    started_at:  float         = field(default_factory=time.time)
+    ended_at:    Optional[float] = None
+    status:      str           = "RUNNING"   # RUNNING | OK | FAIL
     return_code: Optional[int] = None
-    lines: List[str] = field(default_factory=list)
+    lines:       List[str]     = field(default_factory=list)
+    # Step-level progress (populated for chain jobs)
+    steps:       List[dict]    = field(default_factory=list)
 
 JOBS: Dict[str, RunJob] = {}
 LOCK = threading.Lock()
@@ -79,119 +86,79 @@ def safe_tail(lines: List[str], max_lines: int = 2500) -> List[str]:
 
 
 def _build_subprocess_env() -> dict:
-    """
-    Return an environment dict that forces every child process to use UTF-8.
-
-    Key variables explained:
-      PYTHONUTF8          – Python 3.7+ opt-in UTF-8 mode (overrides locale)
-      PYTHONIOENCODING    – Fallback for older Pythons / third-party scripts
-      PYTHONLEGACYWINDOWSSTDIO – Must be UNSET so Python 3 doesn't revert to cp1252
-      PYTHONUTF8 + chcp   – PowerShell will inherit this; we also call chcp 65001
-      PSDefaultParameterValues – Tells PowerShell to write UTF-8 by default
-    """
     env = os.environ.copy()
-    env["PYTHONUTF8"]                     = "1"
-    env["PYTHONIOENCODING"]               = "utf-8"
-    env["PYTHONLEGACYWINDOWSSTDIO"]       = ""    # explicitly clear, never set to 1
-    # Tell PowerShell / cmd to use UTF-8 code page
-    env["PYTHONLEGACYWINDOWSFSENCODING"]  = ""
+    env["PYTHONUTF8"]                    = "1"
+    env["PYTHONIOENCODING"]              = "utf-8"
+    env["PYTHONLEGACYWINDOWSSTDIO"]      = ""
+    env["PYTHONLEGACYWINDOWSFSENCODING"] = ""
     return env
 
 
-def _powershell_utf8_prefix() -> List[str]:
-    """
-    Returns a PowerShell preamble injected before every .ps1 invocation so that:
-      • chcp 65001   switches the console code page to UTF-8
-      • [Console]::OutputEncoding  makes PS write UTF-8 bytes to stdout
-      • $OutputEncoding             makes PS send UTF-8 over pipes
-    This is injected via -Command wrapping the -File call.
-    """
-    return [
-        "powershell",
-        "-NoProfile",
-        "-ExecutionPolicy", "Bypass",
-        "-Command",
-        (
-            "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; "
-            "$OutputEncoding = [System.Text.Encoding]::UTF8; "
-            "chcp 65001 | Out-Null; "
-        ),
-    ]
-
-
 def _maybe_wrap_powershell(cmd: List[str]) -> List[str]:
-    """
-    If the command is a plain `powershell … -File foo.ps1` invocation,
-    rewrite it so UTF-8 output encoding is set before the script runs.
-
-    Before:
-        ["powershell", "-ExecutionPolicy", "Bypass", "-File", "run_daily.ps1"]
-
-    After:
-        ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
-         "[Console]::OutputEncoding = ...; & './run_daily.ps1'"]
-    """
     if not cmd:
         return cmd
-
     exe = cmd[0].lower()
     if exe not in ("powershell", "powershell.exe", "pwsh", "pwsh.exe"):
-        return cmd  # not a PowerShell command — leave unchanged
-
-    # Already using -Command: just prepend the UTF-8 setup lines
+        return cmd
     lower_args = [a.lower() for a in cmd]
+    utf8_setup = (
+        "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; "
+        "$OutputEncoding = [System.Text.Encoding]::UTF8; "
+        "chcp 65001 | Out-Null; "
+    )
     if "-command" in lower_args:
         idx = lower_args.index("-command")
-        utf8_setup = (
-            "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; "
-            "$OutputEncoding = [System.Text.Encoding]::UTF8; "
-            "chcp 65001 | Out-Null; "
-        )
         cmd = list(cmd)
         cmd[idx + 1] = utf8_setup + cmd[idx + 1]
         return cmd
-
-    # Using -File: convert to -Command so we can inject the setup
     if "-file" in lower_args:
         idx = lower_args.index("-file")
         script_path = cmd[idx + 1]
-        # Collect any extra args after the script path
-        extra_args = cmd[idx + 2:]
-        extra_str  = " ".join(f'"{a}"' for a in extra_args) if extra_args else ""
-
-        # Build new -Command string
+        extra_args  = cmd[idx + 2:]
+        extra_str   = " ".join(f'"{a}"' for a in extra_args) if extra_args else ""
         ps_body = (
-            "[Console]::OutputEncoding = [System.Text.Encoding]::UTF8; "
-            "$OutputEncoding = [System.Text.Encoding]::UTF8; "
-            "chcp 65001 | Out-Null; "
+            utf8_setup +
             f"& '{script_path}' {extra_str}".strip()
         )
-
-        # Reconstruct: keep any flags that came before -File (e.g. -ExecutionPolicy Bypass)
         pre_flags: List[str] = []
         i = 1
         while i < idx:
             pre_flags.append(cmd[i])
             i += 1
+        return [cmd[0], "-NoProfile"] + pre_flags + ["-Command", ps_body]
+    return cmd
 
-        new_cmd = [cmd[0], "-NoProfile"] + pre_flags + ["-Command", ps_body]
-        return new_cmd
 
-    return cmd  # fallback — unrecognised shape, leave as-is
+def _auto_wrap_script_if_needed(cmd: List[str], workdir: Path) -> List[str]:
+    if not cmd:
+        return cmd
+    first = cmd[0]
+    first_lower = first.lower()
+    if first_lower in ("powershell", "powershell.exe", "pwsh", "pwsh.exe"):
+        return cmd
+    if first_lower.endswith(".ps1"):
+        script_path = Path(first)
+        if not script_path.is_absolute():
+            script_path = (workdir / script_path).resolve()
+        try:
+            rel = script_path.relative_to(workdir)
+            script_for_ps = str(rel)
+        except Exception:
+            script_for_ps = str(script_path)
+        return ["powershell", "-ExecutionPolicy", "Bypass", "-File", script_for_ps] + cmd[1:]
+    return cmd
 
 
 def _run_process(job: RunJob, cmd: List[str], workdir: Path) -> None:
     try:
         if not isinstance(cmd, list) or not all(isinstance(x, str) for x in cmd):
             raise ValueError(f"cmd must be List[str]. Got: {type(cmd)}")
-
         if not workdir.exists():
             raise FileNotFoundError(f"workdir does not exist: {workdir}")
 
-        env = _build_subprocess_env()
-
-        # Wrap PowerShell commands so they always output UTF-8
-        safe_cmd = _maybe_wrap_powershell(cmd)
+        env      = _build_subprocess_env()
+        cmd2     = _auto_wrap_script_if_needed(cmd, workdir)
+        safe_cmd = _maybe_wrap_powershell(cmd2)
 
         proc = subprocess.Popen(
             safe_cmd,
@@ -200,17 +167,14 @@ def _run_process(job: RunJob, cmd: List[str], workdir: Path) -> None:
             stderr=subprocess.STDOUT,
             text=True,
             encoding="utf-8",
-            errors="replace",   # replaces any un-decodable bytes with U+FFFD
+            errors="replace",
             bufsize=1,
             env=env,
         )
 
         assert proc.stdout is not None
         for raw_line in proc.stdout:
-            # Strip \r\n (Windows) and lone \n
-            line = raw_line.rstrip("\r\n")
-            # Replace any remaining null bytes that could break JSON serialisation
-            line = line.replace("\x00", "")
+            line = raw_line.rstrip("\r\n").replace("\x00", "")
             with LOCK:
                 job.lines.append(line)
                 job.lines = safe_tail(job.lines)
@@ -234,33 +198,23 @@ def start_job(label: str, cmd: List[str], workdir: Path) -> str:
     job    = RunJob(job_id=job_id, label=label)
     with LOCK:
         JOBS[job_id] = job
-    t = threading.Thread(target=_run_process, args=(job, cmd, workdir), daemon=True)
-    t.start()
+    threading.Thread(target=_run_process, args=(job, cmd, workdir), daemon=True).start()
     return job_id
 
 
 def resolve_command(config: dict, pipeline_name: str, command_id: str) -> Dict[str, Any]:
     pipelines = config.get("pipelines") or {}
     if pipeline_name not in pipelines:
-        raise KeyError(
-            f"Unknown pipeline '{pipeline_name}'. Available: {list(pipelines.keys())}"
-        )
+        raise KeyError(f"Unknown pipeline '{pipeline_name}'. Available: {list(pipelines.keys())}")
 
     pipe          = pipelines[pipeline_name]
     commands_list = pipe.get("commands") or []
-    cmds          = {
-        c.get("id"): c
-        for c in commands_list
-        if isinstance(c, dict) and c.get("id")
-    }
+    cmds          = {c.get("id"): c for c in commands_list if isinstance(c, dict) and c.get("id")}
 
     if command_id not in cmds:
-        raise KeyError(
-            f"Unknown command_id '{command_id}' for pipeline '{pipeline_name}'."
-        )
+        raise KeyError(f"Unknown command_id '{command_id}' for pipeline '{pipeline_name}'.")
 
     c = cmds[command_id]
-
     if "cmd_chain" in c:
         chain_ids = c.get("cmd_chain") or []
         expanded  = []
@@ -280,8 +234,7 @@ def subst_tokens(cmd: List[str], config: Optional[dict] = None) -> List[str]:
     if config and isinstance(config, dict):
         repo_root = (
             str(Path(config.get("repo_root", "")).resolve())
-            if config.get("repo_root")
-            else ""
+            if config.get("repo_root") else ""
         )
     out: List[str] = []
     for x in cmd:
@@ -293,7 +246,6 @@ def subst_tokens(cmd: List[str], config: Optional[dict] = None) -> List[str]:
 
 
 def latest_template(prefix: str, suffix: str = ".html") -> Optional[str]:
-    """Return filename of newest template matching e.g. slate_eval_*.html"""
     if not TEMPLATES_DIR.exists():
         return None
     candidates = sorted(
@@ -302,6 +254,18 @@ def latest_template(prefix: str, suffix: str = ".html") -> Optional[str]:
         reverse=True,
     )
     return candidates[0].name if candidates else None
+
+
+def _file_info(path: Path) -> dict:
+    """Return size + modified time for a file, or None flags if missing."""
+    if not path.exists():
+        return {"exists": False, "modified": None, "size_kb": None}
+    stat = path.stat()
+    return {
+        "exists":   True,
+        "modified": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M:%S"),
+        "size_kb":  round(stat.st_size / 1024, 1),
+    }
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -314,14 +278,13 @@ def home():
 
 @app.get("/tickets")
 def page_tickets():
-    target = DOCS_DIR / "tickets_latest.html"
-    if target.exists():
-        return send_from_directory(DOCS_DIR, "tickets_latest.html")
-    return (
-        "tickets_latest.html not found in ui_runner/docs. "
-        "Run the pipeline or copy the file.",
-        404,
-    )
+    # Check templates dir first (build_tickets_html.py writes here),
+    # then fall back to docs dir for backwards compatibility
+    for search_dir in [TEMPLATES_DIR, DOCS_DIR]:
+        target = search_dir / "tickets_latest.html"
+        if target.exists():
+            return send_from_directory(str(search_dir), "tickets_latest.html")
+    return "tickets_latest.html not found. Run the pipeline first.", 404
 
 
 @app.get("/payout")
@@ -331,19 +294,30 @@ def page_payout():
 
 @app.get("/slate")
 def page_slate():
-    fname = latest_template("slate_eval_")
-    if not fname:
-        return (
-            "No slate_eval_*.html template found in ui_runner/templates. "
-            "Generate it or copy it there.",
-            404,
-        )
-    return render_template(fname)
+    # combined_slate_latest.html is the full slate viewer (all props + tickets)
+    for search_dir in [TEMPLATES_DIR, DOCS_DIR]:
+        target = search_dir / "combined_slate_latest.html"
+        if target.exists():
+            return send_from_directory(str(search_dir), "combined_slate_latest.html")
+    # Fallback: newest combined_slate_tickets_*.html in templates
+    fname = latest_template("combined_slate_tickets_")
+    if fname:
+        return render_template(fname)
+    return "No slate found. Run the pipeline first.", 404
 
 
 @app.get("/grades")
 def page_grades():
     return render_template("indexGrades.html")
+
+
+@app.get("/grades/slate_eval_<date>.html")
+def serve_grade_report(date: str):
+    """Serve individual slate_eval_YYYY-MM-DD.html files for the grades iframe."""
+    fname = f"slate_eval_{date}.html"
+    if TEMPLATES_DIR.exists() and (TEMPLATES_DIR / fname).exists():
+        return send_from_directory(str(TEMPLATES_DIR), fname)
+    abort(404)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -357,8 +331,59 @@ def serve_docs(filename: str):
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# API
+# NEW: Pipeline Status API
+# Returns health of all pipeline outputs so UI can show green/red indicators
 # ──────────────────────────────────────────────────────────────────────────────
+@app.get("/api/pipeline/status")
+def api_pipeline_status():
+    today = datetime.now().strftime("%Y-%m-%d")
+    combined_path = next(
+        iter(sorted(BASE_DIR.glob(f"combined_slate_tickets_{today}*.xlsx"), reverse=True)),
+        None
+    )
+    return jsonify({
+        "nba": {
+            "run_complete_flag": NBA_FLAG.exists(),
+            "slate":   _file_info(NBA_SLATE),
+            "tickets": _file_info(NBA_TICKETS),
+        },
+        "cbb": {
+            "slate": _file_info(CBB_SLATE),
+        },
+        "combined": {
+            "slate": _file_info(combined_path) if combined_path else {"exists": False},
+        },
+        "as_of": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    })
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# NEW: Active Job Status (quick poll for running job count)
+# ──────────────────────────────────────────────────────────────────────────────
+@app.get("/api/pipeline/running")
+def api_pipeline_running():
+    with LOCK:
+        running = [j for j in JOBS.values() if j.status == "RUNNING"]
+    return jsonify({
+        "running": len(running),
+        "jobs": [{"job_id": j.job_id, "label": j.label, "started_at": j.started_at}
+                 for j in running]
+    })
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# API: Run Command
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── API: Config endpoint ──────────────────────────────────────────────────────
+@app.get("/api/config")
+def api_config():
+    try:
+        return jsonify(load_config())
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
+
+
 @app.post("/api/run")
 def api_run():
     data       = request.get_json(force=True) or {}
@@ -369,11 +394,11 @@ def api_run():
         return jsonify({"error": "missing_pipeline_or_command_id"}), 400
 
     try:
-        config       = load_config()
-        repo_root    = Path(config["repo_root"]).expanduser().resolve()
-        cmd_def      = resolve_command(config, pipeline, command_id)
-        workdir_rel  = (config["pipelines"][pipeline].get("workdir") or "").strip()
-        workdir      = (repo_root / workdir_rel).resolve()
+        config      = load_config()
+        repo_root   = Path(config["repo_root"]).expanduser().resolve()
+        cmd_def     = resolve_command(config, pipeline, command_id)
+        workdir_rel = (config["pipelines"][pipeline].get("workdir") or "").strip()
+        workdir     = (repo_root / workdir_rel).resolve()
     except Exception as exc:
         return jsonify({"error": "config_or_command_error", "detail": str(exc)}), 400
 
@@ -381,39 +406,51 @@ def api_run():
     if cmd_def["type"] == "chain":
         parent_id = str(uuid.uuid4())
         parent    = RunJob(job_id=parent_id, label=cmd_def["label"])
+        # Pre-populate step list for progress tracking
+        parent.steps = [
+            {"id": item.get("id"), "label": item.get("label", item.get("id")), "status": "PENDING"}
+            for item in cmd_def["items"]
+        ]
         with LOCK:
             JOBS[parent_id] = parent
 
         def chain_runner() -> None:
             ok = True
-            for item in cmd_def["items"]:
+            for i, item in enumerate(cmd_def["items"]):
                 label   = item.get("label") or item.get("id") or "STEP"
                 raw_cmd = item.get("cmd")
 
+                # Update step status to RUNNING
+                with LOCK:
+                    if i < len(parent.steps):
+                        parent.steps[i]["status"] = "RUNNING"
+                    parent.lines.append("")
+                    parent.lines.append(f"=== {label} ===")
+
                 if not isinstance(raw_cmd, list):
                     with LOCK:
-                        parent.lines.append(
-                            f"[ERROR] Bad cmd for '{label}': expected list, got {type(raw_cmd)}"
-                        )
+                        parent.lines.append(f"[ERROR] Bad cmd for '{label}': expected list")
+                        if i < len(parent.steps):
+                            parent.steps[i]["status"] = "FAIL"
                     ok = False
                     break
 
-                cmd = subst_tokens(raw_cmd, config=config)
-
-                with LOCK:
-                    parent.lines.append("")
-                    parent.lines.append(f"=== {label} ===")
-                    parent.lines.append(" ".join(cmd))
-
+                cmd   = subst_tokens(raw_cmd, config=config)
                 child = RunJob(job_id=str(uuid.uuid4()), label=label)
                 _run_process(child, cmd, workdir)
 
                 with LOCK:
                     parent.lines.extend(child.lines)
                     parent.lines = safe_tail(parent.lines)
-                    if child.return_code != 0:
+                    step_ok = (child.return_code == 0)
+                    if i < len(parent.steps):
+                        parent.steps[i]["status"] = "OK" if step_ok else "FAIL"
+                    if not step_ok:
                         ok = False
-                        parent.lines.append("[CHAIN] Stopping early due to failure.")
+                        parent.lines.append("[CHAIN] Stopping — step failed.")
+                        # Mark remaining steps as SKIPPED
+                        for j in range(i + 1, len(parent.steps)):
+                            parent.steps[j]["status"] = "SKIPPED"
                         break
 
             with LOCK:
@@ -428,32 +465,33 @@ def api_run():
     item    = cmd_def["item"]
     raw_cmd = item.get("cmd")
     if not isinstance(raw_cmd, list):
-        return jsonify(
-            {"error": "bad_cmd_type", "detail": f"Expected list, got {type(raw_cmd)}"}
-        ), 400
+        return jsonify({"error": "bad_cmd_type", "detail": f"Expected list, got {type(raw_cmd)}"}), 400
 
     cmd    = subst_tokens(raw_cmd, config=config)
     job_id = start_job(cmd_def["label"], cmd, workdir)
     return jsonify({"job_id": job_id})
 
 
+# ──────────────────────────────────────────────────────────────────────────────
+# API: Job Status (with step progress for chain jobs)
+# ──────────────────────────────────────────────────────────────────────────────
 @app.get("/api/job/<job_id>")
 def api_job(job_id: str):
     with LOCK:
         j = JOBS.get(job_id)
         if not j:
             return jsonify({"error": "not_found"}), 404
-        return jsonify(
-            {
-                "job_id":      j.job_id,
-                "label":       j.label,
-                "status":      j.status,
-                "return_code": j.return_code,
-                "started_at":  j.started_at,
-                "ended_at":    j.ended_at,
-                "lines":       j.lines[-400:],
-            }
-        )
+        return jsonify({
+            "job_id":      j.job_id,
+            "label":       j.label,
+            "status":      j.status,
+            "return_code": j.return_code,
+            "started_at":  j.started_at,
+            "ended_at":    j.ended_at,
+            "lines":       j.lines[-400:],
+            "steps":       j.steps,   # NEW: step-level progress
+            "elapsed_s":   round((j.ended_at or time.time()) - j.started_at, 1),
+        })
 
 
 @app.get("/api/jobs")
@@ -467,6 +505,8 @@ def api_jobs():
                 "started_at":  j.started_at,
                 "ended_at":    j.ended_at,
                 "return_code": j.return_code,
+                "elapsed_s":   round((j.ended_at or time.time()) - j.started_at, 1),
+                "steps":       j.steps,
             }
             for j in JOBS.values()
         ]

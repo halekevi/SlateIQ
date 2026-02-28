@@ -91,6 +91,22 @@ def extract_home_away(game_attrs: Dict[str, Any]) -> Tuple[str, str]:
     return home, away
 
 
+
+
+def _backfill_opponents(rows: list, game_teams: dict) -> list:
+    """Second pass: fill pp_opp_team for any rows that got blank opponents.
+    By the time all pages are fetched, game_teams is fully populated."""
+    for r in rows:
+        if r.get("pp_opp_team"):
+            continue
+        gid = str(r.get("pp_game_id", "")).strip()
+        team = r.get("pp_team", "")
+        if gid and team:
+            others = game_teams.get(gid, set()) - {team}
+            if others:
+                r["pp_opp_team"] = next(iter(others))
+    return rows
+
 def fetch_cbb_projections(
     league_id: int,
     per_page: int,
@@ -114,6 +130,8 @@ def fetch_cbb_projections(
     rows: List[Dict[str, Any]] = []
     seen_proj_ids: set = set()
     page = 1
+    # game_teams accumulates across ALL pages so cross-page opponents resolve correctly
+    game_teams: Dict[str, set] = {}
 
     while url:
         if max_pages is not None and page > max_pages:
@@ -173,8 +191,9 @@ def fetch_cbb_projections(
 
                 # Build game_id -> set of teams from projection data (CBB fix)
                 # CBB game objects don't have home/away fields, so we derive
-                # the two teams from all players in each game
-                game_teams: Dict[str, set] = {}
+                # the two teams from all players in each game.
+                # NOTE: game_teams is declared outside the loop and persists
+                # across pages so cross-page opponents always resolve correctly.
                 for proj in data:
                     rel  = proj.get("relationships") or {}
                     pid_data = (rel.get("new_player") or rel.get("player") or {}).get("data") or {}
@@ -245,6 +264,7 @@ def fetch_cbb_projections(
                 next_url = safe_get(j, "links", "next", default=None)
                 if not next_url:
                     print("  ✅ No links.next — pagination complete.")
+                    _backfill_opponents(rows, game_teams)
                     return pd.DataFrame(rows)
 
                 url    = next_url
@@ -257,8 +277,10 @@ def fetch_cbb_projections(
                 time.sleep(2 ** attempt)
                 if attempt == 5:
                     print(f"  ❌ Failed after retries on page {page}: {e}")
+                    _backfill_opponents(rows, game_teams)
                     return pd.DataFrame(rows)
 
+    _backfill_opponents(rows, game_teams)
     return pd.DataFrame(rows)
 
 

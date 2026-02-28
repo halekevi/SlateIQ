@@ -1,111 +1,117 @@
+#!/usr/bin/env python3
+"""
+step5_attach_espn_ids.py  (REVISED - local master lookup)
+----------------------------------------------------------
+Uses data/ncaa_mbb_athletes_master.csv instead of ESPN API calls.
+Matches on player_norm + team_abbr for best accuracy.
+Falls back to player_norm only if team match fails.
+"""
+
 import argparse
+import re
+import unicodedata
 import pandas as pd
-import requests
-import time
+from pathlib import Path
 
-TEAM_URL = "https://site.web.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams"
-SEARCH_URL = "https://site.web.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/athletes"
-SLEEP_SECONDS = 0.2
+MASTER_PATH = "data/ncaa_mbb_athletes_master.csv"
 
-def pick_col(df, candidates):
-    for c in candidates:
-        if c in df.columns:
-            return c
-    return None
-
-def load_espn_teams():
-    resp = requests.get(TEAM_URL, timeout=20)
-    resp.raise_for_status()
-    data = resp.json()
-    teams = {}
-    for entry in data.get("sports", [])[0].get("leagues", [])[0].get("teams", []):
-        t = entry.get("team", {})
-        name = (t.get("displayName") or "").strip().lower()
-        abbrev = (t.get("abbreviation") or "").strip().lower()
-        tid = t.get("id")
-        if name and tid:
-            teams[name] = tid
-        if abbrev and tid:
-            teams[abbrev] = tid
-    return teams
-
-def normalize_team(s: str) -> str:
-    if pd.isna(s):
-        return ""
-    return str(s).strip().lower()
-
-def find_athlete_id(player_name: str, team_id: str | None):
-    if not player_name or pd.isna(player_name):
-        return None
-    params = {"search": str(player_name).strip()}
-    try:
-        r = requests.get(SEARCH_URL, params=params, timeout=20)
-        r.raise_for_status()
-        js = r.json()
-        for it in js.get("items", []):
-            athlete = it.get("athlete", {})
-            aid = athlete.get("id")
-            # If ESPN returns team info, prefer matching team_id (when available)
-            if team_id:
-                teams = athlete.get("teams", [])
-                for t in teams:
-                    if str(t.get("id")) == str(team_id):
-                        return aid
-            # fallback: first hit
-            if aid:
-                return aid
-    except Exception:
-        return None
-    return None
+def norm_name(s: str) -> str:
+    """Canonical player name normalizer — must match cbb_step2_normalize.norm_str() exactly.
+    NFKD first (strips accents: é→e, ü→u), then lower + strip non-alphanumeric.
+    """
+    s = (s or "")
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode("ascii")
+    s = s.lower().strip()
+    s = re.sub(r"[^a-z0-9\s]", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--input", required=True)
+    ap.add_argument("--input",  required=True)
     ap.add_argument("--output", required=True)
+    ap.add_argument("--master", default=MASTER_PATH)
     args = ap.parse_args()
 
-    df = pd.read_csv(args.input)
+    df = pd.read_csv(args.input, dtype=str).fillna("")
+    print(f"-> Loaded slate: {args.input} | rows={len(df)}")
 
-    player_col = pick_col(df, ["player_name", "Player", "player", "name"])
-    team_col   = pick_col(df, ["pp_team", "Team", "team", "TEAM"])
-    opp_col    = pick_col(df, ["pp_opp_team", "Opp", "opp", "OPP"])
+    master_path = Path(args.master)
+    if not master_path.exists():
+        raise SystemExit(f"Master file not found: {master_path}")
+
+    master = pd.read_csv(master_path, dtype=str).fillna("")
+    print(f"-> Loaded master: {master_path} | rows={len(master)}")
+
+    # Normalize master — re-apply norm_name() to athlete_name_norm so keys match
+    # even though master was originally built with a slightly different normalizer
+    # (which kept hyphens/apostrophes). This ensures Trey Kaufman-Renn, Tre'Von
+    # Spillers, etc. all match correctly.
+    master["_name_norm"] = master["athlete_name_norm"].astype(str).apply(norm_name)
+    master["_team_norm"] = master["team_abbr"].str.strip().str.upper()
+
+    # Build lookup dicts
+    # Primary: (name_norm, team_abbr) -> (team_id, espn_athlete_id)
+    map_name_team: dict = {}
+    # Fallback: name_norm -> (team_id, espn_athlete_id)
+    map_name_only: dict = {}
+
+    for _, r in master.iterrows():
+        n = r["_name_norm"]
+        t = r["_team_norm"]
+        tid = r["team_id"]
+        aid = r["espn_athlete_id"]
+        if n and t:
+            map_name_team[(n, t)] = (tid, aid)
+        if n and n not in map_name_only:
+            map_name_only[n] = (tid, aid)
+
+    # Detect columns
+    player_col = next((c for c in ["player_norm", "player", "Player", "player_name"] if c in df.columns), None)
+    team_col   = next((c for c in ["team_abbr", "pp_team", "team", "Team"] if c in df.columns), None)
 
     if not player_col:
-        raise SystemExit(f"Missing player column. Found columns: {list(df.columns)}")
-    if not team_col:
-        # Still write outputs with status so you can debug downstream
-        df["team_id"] = None
-        df["espn_athlete_id"] = None
-        df["attach_status"] = "NO_TEAM_COL"
-        df.to_csv(args.output, index=False)
-        print("Saved but NO_TEAM_COL — fix normalize step to include Team/pp_team.")
-        return
+        raise SystemExit(f"No player column found. Columns: {list(df.columns)}")
 
-    teams = load_espn_teams()
+    team_ids     = []
+    athlete_ids  = []
+    statuses     = []
 
-    team_ids = []
-    statuses = []
-    for t in df[team_col].fillna("").astype(str):
-        key = normalize_team(t)
-        tid = teams.get(key)
-        team_ids.append(tid)
-        statuses.append("OK" if tid else "NO_TEAM_MATCH")
+    for _, row in df.iterrows():
+        raw_name = str(row.get(player_col, "")).strip()
+        raw_team = str(row.get(team_col, "")).strip().upper() if team_col else ""
+        n = norm_name(raw_name)
+        t = raw_team
 
-    df["team_id"] = team_ids
-    df["attach_status"] = statuses
+        # Try name + team first
+        result = map_name_team.get((n, t))
+        if result:
+            team_ids.append(result[0])
+            athlete_ids.append(result[1])
+            statuses.append("OK_TEAM")
+            continue
 
-    athlete_ids = []
-    for i, row in df.iterrows():
-        tid = row.get("team_id")
-        pid = find_athlete_id(row[player_col], tid)
-        athlete_ids.append(pid)
-        time.sleep(SLEEP_SECONDS)
+        # Fallback: name only
+        result = map_name_only.get(n)
+        if result:
+            team_ids.append(result[0])
+            athlete_ids.append(result[1])
+            statuses.append("OK_NAME")
+            continue
 
+        # No match
+        team_ids.append("")
+        athlete_ids.append("")
+        statuses.append("NO_MATCH")
+
+    df["team_id"]         = team_ids
     df["espn_athlete_id"] = athlete_ids
+    df["attach_status"]   = statuses
 
-    df.to_csv(args.output, index=False)
-    print(f"✅ Saved → {args.output} | rows={len(df)}")
-    print(df["attach_status"].value_counts(dropna=False).head(10))
+    df.to_csv(args.output, index=False, encoding="utf-8")
+    print(f"\nSaved -> {args.output} | rows={len(df)}")
+    print("\nattach_status breakdown:")
+    print(df["attach_status"].value_counts().to_string())
 
 if __name__ == "__main__":
     main()

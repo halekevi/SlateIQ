@@ -145,9 +145,25 @@ def main():
     slate   = pd.read_csv(args.slate,   dtype=str).fillna("")
     actuals = pd.read_csv(args.actuals, dtype=str).fillna("")
 
-    for req in ("espn_athlete_id", "prop_norm", "line"):
+    for req in ("prop_norm", "line"):
         if req not in slate.columns:
             raise RuntimeError(f"Slate missing required column: {req}")
+
+    # espn_athlete_id is preferred but not required — fall back to player_norm name matching
+    if "espn_athlete_id" not in slate.columns:
+        print("  ⚠️  No 'espn_athlete_id' in slate — using name-only matching.")
+        slate["espn_athlete_id"] = ""
+    if "player_norm" not in slate.columns:
+        if "player" in slate.columns:
+            import re, unicodedata
+            def _norm(s):
+                s = unicodedata.normalize("NFKD", str(s or "")).encode("ascii","ignore").decode("ascii")
+                s = s.lower().strip()
+                s = re.sub(r"[^a-z0-9 ]+", " ", s)
+                return re.sub(r"\s+", " ", s).strip()
+            slate["player_norm"] = slate["player"].apply(_norm)
+        else:
+            raise RuntimeError("Slate missing both 'player' and 'player_norm' columns.")
 
     # Resolve direction column (step5b uses model_dir_5, step6 uses final_bet_direction)
     dir_col = next((c for c in ("final_bet_direction", "model_dir_5", "bet_direction",
@@ -174,17 +190,37 @@ def main():
                       .drop(columns=["_min"]))
     actuals_idx = actuals.set_index("espn_athlete_id", drop=False)
 
+    # Secondary: name-based index for rows without espn_athlete_id
+    import re as _re, unicodedata as _uc
+    def _norm(s):
+        s = _uc.normalize("NFKD", str(s or "")).encode("ascii","ignore").decode("ascii")
+        s = s.lower().strip()
+        s = _re.sub(r"[^a-z0-9 ]+", " ", s)
+        return _re.sub(r"\s+", " ", s).strip()
+    actuals_name_idx = actuals.copy()
+    actuals_name_idx["_name_norm"] = actuals_name_idx["player_name"].apply(_norm)
+    actuals_name_idx = actuals_name_idx.drop_duplicates(subset=["_name_norm"], keep="first")
+    actuals_name_idx = actuals_name_idx.set_index("_name_norm", drop=False)
+
     # ── Grade each row ──────────────────────────────────────────────────────
     actual_values, actual_statuses = [], []
 
     for _, r in slate.iterrows():
         aid = str(r.get("espn_athlete_id", "")).strip()
-        if not aid:
-            actual_values.append(np.nan); actual_statuses.append("MISSING_ATHLETE_ID"); continue
-        if aid not in actuals_idx.index:
+        pnorm = str(r.get("player_norm", "")).strip()
+        arow = None
+        if aid and aid in actuals_idx.index:
+            arow = actuals_idx.loc[aid]
+            method = "ID"
+        elif pnorm and pnorm in actuals_name_idx.index:
+            arow = actuals_name_idx.loc[pnorm]
+            method = "NAME"
+        else:
+            method = "MISSING"
+
+        if arow is None:
             actual_values.append(np.nan); actual_statuses.append("NO_ACTUAL_FOUND"); continue
-        arow = actuals_idx.loc[aid]
-        av   = stat_from_row(arow, str(r.get("prop_norm", "")))
+        av = stat_from_row(arow, str(r.get("prop_norm", "")))
         actual_values.append(av)
         actual_statuses.append("OK" if not np.isnan(av) else "UNSUPPORTED_PROP")
 

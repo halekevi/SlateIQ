@@ -114,53 +114,88 @@ def _norm_pick_type(x):
     if 'dem' in t: return 'Demon'
     return 'Standard'
 
-def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets: int, used_legs: set) -> list:
-    """
-    Greedy ticket builder.
-    - Picks highest ranked anchor, fills with diverse games
-    - Tracks used legs globally so same leg doesn't repeat across tickets
-    """
-    pool = pool[pool['Hit Rate (5g)'] >= 0.0].sort_values('Rank Score', ascending=False).copy()
-    tickets = []
-    used_ticket_keys = set()
+def _game_key(row) -> frozenset:
+    """Canonical game identifier (team + opp, order-independent)."""
+    return frozenset([str(row['Team']), str(row['Opp'])])
 
-    for _, anchor in pool.iterrows():
-        leg_key = (anchor['Player'], anchor['Prop'], anchor['Line'])
-        if leg_key in used_legs:
+
+def _ticket_valid(combo) -> bool:
+    """A ticket is valid if: no duplicate players, one player per game."""
+    players = [r['Player'] for r in combo]
+    if len(players) != len(set(players)):
+        return False
+    games = [_game_key(r) for r in combo]
+    if len(games) != len(set(games)):
+        return False
+    return True
+
+
+def _ticket_score(combo) -> float:
+    """Average rank score — used to rank valid tickets."""
+    scores = []
+    for r in combo:
+        v = pd.to_numeric(pd.Series([r['Rank Score']]), errors='coerce').iloc[0]
+        if not pd.isna(v):
+            scores.append(float(v))
+    return float(np.mean(scores)) if scores else 0.0
+
+
+def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets: int,
+                  used_legs: set, min_hit_rate: float = 0.0) -> list:
+    """
+    Combinatorial ticket builder (replaces greedy anchor-fill).
+
+    - Searches all C(N, n_legs) combinations of the top-K candidates
+    - Filters: one player per game, no duplicate players, hit rate >= min_hit_rate
+    - Ranks by average rank_score → picks top max_tickets
+    - Tracks used_legs so legs don't repeat across ticket groups
+
+    K is capped at 25 props so C(25,4) = 12,650 combos — fast enough (~10ms).
+    """
+    from itertools import combinations
+
+    # Apply real hit-rate floor (this was the bug — was hardcoded >= 0.0)
+    if min_hit_rate > 0.0:
+        pool = pool[pd.to_numeric(pool['Hit Rate (5g)'], errors='coerce') >= min_hit_rate].copy()
+
+    pool = pool.sort_values('Rank Score', ascending=False).copy()
+
+    # Cap candidate pool so combinations stay fast
+    K = min(len(pool), 25)
+    candidates = [row for _, row in pool.head(K).iterrows()]
+
+    valid_tickets = []
+    seen_keys: set = set()
+
+    for combo in combinations(candidates, n_legs):
+        # Skip if any leg already used in another ticket group
+        leg_keys = [(r['Player'], r['Prop'], r['Line']) for r in combo]
+        if any(lk in used_legs for lk in leg_keys):
             continue
+        # Validate game diversity + player uniqueness
+        if not _ticket_valid(combo):
+            continue
+        tkey = frozenset((r['Player'], r['Prop'], str(r['Line'])) for r in combo)
+        if tkey in seen_keys:
+            continue
+        seen_keys.add(tkey)
+        valid_tickets.append((combo, _ticket_score(combo)))
 
-        ticket = [anchor]
-        used_games = {
-            (anchor['Team'], anchor['Opp']),
-            (anchor['Opp'],  anchor['Team']),
-        }
+    # Best tickets first
+    valid_tickets.sort(key=lambda x: x[1], reverse=True)
 
-        for _, row in pool.iterrows():
-            if len(ticket) >= n_legs:
-                break
-            if row['Player'] == anchor['Player']:
-                continue
-            lk = (row['Player'], row['Prop'], row['Line'])
-            if lk in used_legs:
-                continue
-            game  = (row['Team'], row['Opp'])
-            game_r= (row['Opp'],  row['Team'])
-            if game in used_games or game_r in used_games:
-                continue
-            ticket.append(row)
-            used_games.update([game, game_r])
-
-        if len(ticket) == n_legs:
-            tkey = frozenset((r['Player'], r['Prop'], str(r['Line'])) for r in ticket)
-            if tkey not in used_ticket_keys:
-                used_ticket_keys.add(tkey)
-                tickets.append(ticket)
-                # Mark legs as used so they don't repeat
-                for r in ticket:
-                    used_legs.add((r['Player'], r['Prop'], r['Line']))
-
+    # Pick top max_tickets, mark legs used
+    tickets = []
+    for combo, _ in valid_tickets:
         if len(tickets) >= max_tickets:
             break
+        # Re-check used_legs (another ticket in this batch may have claimed a leg)
+        leg_keys = [(r['Player'], r['Prop'], r['Line']) for r in combo]
+        if any(lk in used_legs for lk in leg_keys):
+            continue
+        tickets.append(list(combo))
+        for lk in leg_keys:
+            used_legs.add(lk)
 
     return tickets
 
@@ -367,7 +402,7 @@ def main():
         for n_legs in leg_counts:
             if len(pool) < n_legs:
                 continue
-            tickets = build_tickets(pool.copy(), n_legs, args.max_tickets, used_legs)
+            tickets = build_tickets(pool.copy(), n_legs, args.max_tickets, used_legs, args.min_hit_rate)
             sheet_name = f"{pick_label} {n_legs}-Leg"
             write_tickets_sheet(wb, sheet_name, tickets, n_legs, pick_label)
             all_ticket_sets.append((sheet_name, tickets, n_legs, pick_label))
@@ -384,7 +419,7 @@ def main():
         for n_legs in leg_counts:
             if n_legs < 3: continue  # 2-leg already covered above
             if len(std_fill_pool) < n_legs: continue
-            tickets = build_tickets(std_fill_pool.copy(), n_legs, args.max_tickets, used_legs_fill)
+            tickets = build_tickets(std_fill_pool.copy(), n_legs, args.max_tickets, used_legs_fill, args.min_hit_rate)
             if tickets:
                 sheet_name = f"Std+Gob Fill {n_legs}-Leg"
                 write_tickets_sheet(wb, sheet_name, tickets, n_legs, 'Best Mix')

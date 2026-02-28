@@ -189,6 +189,16 @@ def main() -> None:
     print("hit_rate_status breakdown:")
     print(df["hit_rate_status"].value_counts().head(10).to_string())
 
+    # Sanity check: warn if any row shows < 3 games played (possible All-Star contamination)
+    played_col = pd.to_numeric(df.get("line_games_played_5", pd.Series(dtype=float)), errors="coerce")
+    thin_rows = played_col[played_col < 3].dropna()
+    if len(thin_rows) > 0:
+        print(
+            f"\n⚠️  WARNING: {len(thin_rows)} row(s) have fewer than 3 games in last-5 window.\n"
+            f"   This may indicate All-Star break contamination in step4.\n"
+            f"   Check that ALLSTAR_BREAKS in step4 covers the current season."
+        )
+
 
 if __name__ == "__main__":
     main()

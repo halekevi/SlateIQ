@@ -21,8 +21,10 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import random
 import re
 import time
+import unicodedata
 from typing import Dict, List, Tuple, Optional
 
 import pandas as pd
@@ -34,7 +36,10 @@ ESPN_SUMMARY_URL    = "https://site.web.api.espn.com/apis/site/v2/sports/basketb
 
 
 def norm(s: str) -> str:
-    s = (s or "").lower().strip()
+    """Canonical player name normalizer — matches cbb_step2_normalize.norm_str()."""
+    s = (s or "")
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode("ascii")
+    s = s.lower().strip()
     s = re.sub(r"[^a-z0-9 ]+", " ", s)
     return re.sub(r"\s+", " ", s).strip()
 
@@ -151,8 +156,10 @@ def fantasy(r: dict) -> float:
 
 def prop_value(prop_norm: str, r: dict) -> Optional[float]:
     p = str(prop_norm or "").strip().lower()
+    three = r.get("3PM")
     m = {"pts": r.get("PTS"), "reb": r.get("REB"), "ast": r.get("AST"),
-         "stl": r.get("STL"), "blk": r.get("BLK"), "tov": r.get("TO"), "3pm": r.get("3PM"),
+         "stl": r.get("STL"), "blk": r.get("BLK"), "tov": r.get("TO"),
+         "3pm": three, "fg3m": three,  # fg3m alias matches step6 prop_norm
          "stocks": r.get("STL",0)+r.get("BLK",0),
          "pra": r.get("PTS",0)+r.get("REB",0)+r.get("AST",0),
          "pr":  r.get("PTS",0)+r.get("REB",0),
@@ -167,7 +174,7 @@ def prop_value(prop_norm: str, r: dict) -> Optional[float]:
     if "steals"   in p: return r.get("STL")
     if "blocks"   in p: return r.get("BLK")
     if "turnovers" in p or p in ("to","tov"): return r.get("TO")
-    if "3-pt" in p or "3pt" in p or "3pm" in p or "threes" in p: return r.get("3PM")
+    if "3-pt" in p or "3pt" in p or "3pm" in p or "fg3m" in p or "threes" in p: return three
     return m.get(p)
 
 
@@ -185,12 +192,86 @@ def hit_rates(vals: List[float], line: float, n: int):
     return over, under, push, hr_over, hr_under, hr_over_ou, hr_under_ou
 
 
+def _fetch_one_event_cbb(
+    eid: str,
+    t1: str,
+    t2: str,
+    slate_ids: set,
+) -> Tuple[str, List[dict]]:
+    """Fetch and parse a single CBB ESPN event. Returns (eid, player_rows)."""
+    # Only fetch if at least one team is on today's slate
+    if slate_ids and t1 not in slate_ids and t2 not in slate_ids:
+        return eid, []
+    try:
+        time.sleep(random.uniform(0.05, 0.25))   # light jitter per thread
+        summ = pull_summary(eid)
+        return eid, parse_players(summ)
+    except Exception as e:
+        print(f"  [WARN] CBB summary failed event={eid}: {e}")
+        return eid, []
+
+
+def build_player_histories(
+    days: int,
+    slate_ids: set,
+    workers: int = 4,
+) -> Tuple[Dict, Dict]:
+    """
+    Parallelized boxscore fetch for CBB.
+    Returns (hist_aid, hist_name) dicts.
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    import random
+
+    hist_aid:  Dict[Tuple[str, str], List[dict]] = {}
+    hist_name: Dict[Tuple[str, str], List[dict]] = {}
+
+    # Phase 1: pull all scoreboards sequentially (cheap — just IDs)
+    pending: List[Tuple[str, str, str]] = []   # (eid, t1, t2)
+    seen_eids: set = set()
+    print(f"-> Scanning {days + 1} days of CBB scoreboards...")
+    for d in date_range(dt.date.today(), days):
+        sb = pull_scoreboard(d)
+        for eid, t1, t2 in extract_events(sb):
+            if eid not in seen_eids:
+                seen_eids.add(eid)
+                pending.append((eid, t1, t2))
+
+    # Filter to slate-relevant games
+    if slate_ids:
+        pending = [(e, t1, t2) for e, t1, t2 in pending
+                   if t1 in slate_ids or t2 in slate_ids]
+
+    print(f"-> Fetching {len(pending)} CBB game summaries ({workers} workers)...")
+
+    # Phase 2: fetch game summaries in parallel
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {
+            pool.submit(_fetch_one_event_cbb, eid, t1, t2, slate_ids): eid
+            for eid, t1, t2 in pending
+        }
+        fetched = 0
+        for future in as_completed(futures):
+            eid, rows = future.result()
+            if rows:
+                fetched += 1
+                for rr in rows:
+                    tid, pn, aid = rr["team_id"], rr["player_norm"], rr["espn_athlete_id"]
+                    if tid and aid: hist_aid.setdefault((tid, aid), []).append(rr)
+                    if tid and pn:  hist_name.setdefault((tid, pn), []).append(rr)
+
+    print(f"-> CBB histories built | games={fetched} | by_id={len(hist_aid)} | by_name={len(hist_name)}")
+    return hist_aid, hist_name
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--input",  required=True)
     ap.add_argument("--output", default="step5b_with_stats_cbb.csv")
     ap.add_argument("--days",   type=int, default=45)
     ap.add_argument("--n",      type=int, default=10)
+    ap.add_argument("--workers", type=int, default=4,
+                    help="Parallel workers for ESPN game summary fetches (default 4)")
     args = ap.parse_args()
 
     print("→ Loading:", args.input)
@@ -206,26 +287,20 @@ def main():
     # use prop_norm if available, else prop_type
     prop_col = "prop_norm" if "prop_norm" in df.columns else "prop_type"
 
-    slate_ids = {x for x in df["team_id"].astype(str).str.strip() if x}
-    print("→ Slate teams:", len(slate_ids))
+    slate_ids = {x for x in df["team_id"].astype(str).str.strip() if x and x != "nan"}
+    print("→ Slate team_ids:", len(slate_ids))
 
-    # Pull boxscores
-    hist_aid:  Dict[Tuple[str,str], List[dict]] = {}
-    hist_name: Dict[Tuple[str,str], List[dict]] = {}
-    seen = set()
+    # If NO_MATCH rows have blank team_id but we know the team from team_abbr,
+    # fetch all games rather than filtering — the team_id filter is an optimization
+    # but it silently drops players whose ESPN ID wasn't found. If >10% of rows
+    # have no team_id, disable the slate_ids filter entirely for safety.
+    no_team_id = (df["team_id"].astype(str).str.strip().isin(["", "nan"])).sum()
+    if no_team_id > 0:
+        print(f"→ {no_team_id} rows have no team_id — fetching all CBB games (no team filter)")
+        slate_ids = set()  # empty set = fetch all games
 
-    for d in date_range(dt.date.today(), args.days):
-        print("→ Pulling:", d)
-        for eid, t1, t2 in extract_events(pull_scoreboard(d)):
-            if eid in seen: continue
-            if slate_ids and t1 not in slate_ids and t2 not in slate_ids: continue
-            seen.add(eid)
-            for rr in parse_players(pull_summary(eid)):
-                tid, pn, aid = rr["team_id"], rr["player_norm"], rr["espn_athlete_id"]
-                if tid and aid:  hist_aid.setdefault((tid, aid), []).append(rr)
-                if tid and pn:   hist_name.setdefault((tid, pn), []).append(rr)
-
-    print(f"→ Player histories — by ID: {len(hist_aid)} | by name: {len(hist_name)}")
+    # ── Parallelized fetch ────────────────────────────────────────────────────
+    hist_aid, hist_name = build_player_histories(args.days, slate_ids, workers=args.workers)
 
     out_rows, stat_status = [], []
 
@@ -236,10 +311,19 @@ def main():
         prop = str(row.get(prop_col,        "")).strip()
         line = row.get("line", None)
 
+        # When team_id is missing, skip ID-based lookups and fall through to
+        # name-only matching across all teams.  This handles CBB props where
+        # ESPN team_id was never resolved by step5.
         if not tid:
-            stat_status.append("NO_TEAM_ID"); out_rows.append({}); continue
-
-        games = (hist_aid.get((tid, aid), []) if aid else []) or hist_name.get((tid, pn), [])
+            # Try player name across every team in hist_name
+            games = []
+            for (t, p), g in hist_name.items():
+                if p == pn:
+                    games.extend(g)
+            if not games:
+                stat_status.append("NO_BOX_HISTORY"); out_rows.append({}); continue
+        else:
+            games = (hist_aid.get((tid, aid), []) if aid else []) or hist_name.get((tid, pn), [])
         if not games:
             stat_status.append("NO_BOX_HISTORY"); out_rows.append({}); continue
 
@@ -305,6 +389,8 @@ def main():
     print(f"✅ Saved → {args.output} | rows={len(out)}")
     print("stat_status breakdown:")
     print(out["stat_status"].value_counts().to_string())
+
+
 
 
 if __name__ == "__main__":

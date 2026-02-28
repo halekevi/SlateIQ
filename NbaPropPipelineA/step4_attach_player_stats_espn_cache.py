@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 r"""
-step4_attach_player_stats_espn_cache.py  (REVISED 2026-02-23)
+step4_attach_player_stats_espn_cache.py  (REVISED 2026-02-25)
 --------------------------------------------------------------
 ESPN-based Step4. Fixes applied vs prior version:
 
@@ -33,19 +33,12 @@ FIX 5 - EVENT SKIP TRACKING
     Prior code silently swallowed ESPN event failures. Now counts and
     surfaces events skipped vs fetched at end of cache update.
 
-Usage (unchanged):
-  py -3.14 -u .\step4_attach_player_stats_espn_cache.py \
-    --slate step3_with_defense.csv \
-    --out step4_with_stats.csv \
-    --season 2025-26 \
-    --date 2026-02-23 \
-    --days 35 \
-    --cache nba_espn_boxscore_cache.csv \
-    --idmap nba_to_espn_id_map.csv \
-    --n 10 \
-    --sleep 0.8 \
-    --retries 4 \
-    --debug-misses no_espn_player_debug.csv
+FIX 6 - SEASON FILTER ON PLAYER ROW PULLS (IMPORTANT)
+    Prevents mixing seasons when selecting a player's games from the cache.
+    We now filter BOTH by (SEASON == args.season) AND ESPN_ATHLETE_ID
+    for:
+      - single-player vals pulls
+      - combo-player EVENT_ID intersection pulls
 """
 
 from __future__ import annotations
@@ -63,7 +56,7 @@ import re
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 import numpy as np
 import pandas as pd
@@ -155,7 +148,7 @@ def fmt_num(x: float) -> str:
     return f"{float(x):.3f}".rstrip("0").rstrip(".")
 
 def derive_stat_series(df: pd.DataFrame, prop_norm: str) -> pd.Series:
-    p = (prop_norm or "").lower().strip()
+    p = re.sub(r"\(combo\)\s*$", "", (prop_norm or "").lower().strip()).strip()
 
     pts  = _to_float(df.get("PTS",  pd.Series([np.nan] * len(df), index=df.index)))
     reb  = _to_float(df.get("REB",  pd.Series([np.nan] * len(df), index=df.index)))
@@ -266,9 +259,28 @@ def parse_summary_boxscore(summary: dict) -> pd.DataFrame:
         gd = comp[0].get("date")
         if gd:
             try:
-                game_date = pd.to_datetime(gd, utc=True, errors="coerce").date().isoformat()
+                # FIX 11: Convert UTC -> US/Eastern before extracting date.
+                # ESPN timestamps are UTC. A 9:40 PM ET game is 2:40 AM UTC
+                # the NEXT day, so .date() on raw UTC flips the date forward.
+                # e.g. Isaiah Joe Feb 25 9:40PM ET was stored as Feb 26.
+                import pytz
+                _eastern = pytz.timezone("US/Eastern")
+                _utc_dt  = pd.to_datetime(gd, utc=True, errors="coerce")
+                if _utc_dt is not pd.NaT:
+                    game_date = _utc_dt.astimezone(_eastern).date().isoformat()
             except Exception:
-                game_date = ""
+                try:
+                    # Fallback if pytz unavailable: games after midnight UTC
+                    # (hour < 5) are actually the prior evening ET
+                    from datetime import timedelta
+                    _raw = pd.to_datetime(gd, utc=True, errors="coerce")
+                    if _raw is not pd.NaT:
+                        if _raw.hour < 5:
+                            game_date = (_raw - timedelta(days=1)).date().isoformat()
+                        else:
+                            game_date = _raw.date().isoformat()
+                except Exception:
+                    game_date = ""
     event_id = str(header.get("id") or "").strip()
 
     for team_block in players_blocks:
@@ -298,7 +310,6 @@ def parse_summary_boxscore(summary: dict) -> pd.DataFrame:
                         return ""
                     return str(stats[i]).strip()
 
-                # FIX 1: use proper minutes parser
                 mins = _parse_minutes(getv("MIN"))
                 if np.isnan(mins) or mins <= 0:
                     continue
@@ -328,6 +339,34 @@ def parse_summary_boxscore(summary: dict) -> pd.DataFrame:
 
     return pd.DataFrame(rows)
 
+def _fetch_one_event_nba(
+    eid: str,
+    date_str: str,
+    season: str,
+    timeout: Tuple[float, float],
+    retries: int,
+    sleep_s: float,
+    base_cols: List[str],
+) -> Tuple[str, pd.DataFrame | None]:
+    """Fetch and parse a single NBA ESPN event. Returns (eid, df | None)."""
+    url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event={eid}"
+    try:
+        # Spread load: each thread sleeps a random fraction so they don't all
+        # hammer ESPN at the same millisecond.
+        time.sleep(random.uniform(0.1, sleep_s))
+        summ = espn_get_json(url, timeout=timeout, retries=retries, sleep_s=0.0)
+        df = parse_summary_boxscore(summ)
+        if df.empty:
+            return eid, None
+        df["SEASON"]    = season
+        df["EVENT_ID"]  = df["EVENT_ID"].replace("", eid)
+        df["GAME_DATE"] = df["GAME_DATE"].replace("", date_str)
+        return eid, df[base_cols].copy()
+    except Exception as e:
+        print(f"  [WARN] ESPN summary failed event={eid}: {type(e).__name__}: {e}")
+        return eid, None
+
+
 def update_espn_cache(
     cache_path: Path,
     season: str,
@@ -335,7 +374,19 @@ def update_espn_cache(
     timeout: Tuple[float, float],
     retries: int,
     sleep_s: float,
+    workers: int = 4,          # ← parallel game fetches (safe for ESPN)
 ) -> pd.DataFrame:
+    """
+    Parallelized ESPN cache updater.
+
+    Strategy:
+    - Scoreboards (one per date) are fetched sequentially — cheap, just IDs.
+    - Game summaries (boxscores) are fetched in parallel with ThreadPoolExecutor.
+      workers=4 is safe; ESPN rarely rate-limits at this concurrency.
+    - Each worker adds a random jitter so requests don't burst simultaneously.
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
     base_cols = [
         "SEASON", "EVENT_ID", "GAME_DATE", "TEAM",
         "ESPN_ATHLETE_ID", "PLAYER", "PLAYER_NORM", "MIN",
@@ -357,39 +408,49 @@ def update_espn_cache(
         cache.loc[cache["SEASON"].astype(str) == season, "EVENT_ID"].astype(str).tolist()
     )
 
-    new_frames: List[pd.DataFrame] = []
-    new_events = 0
-    skipped_events = 0   # FIX 5: track failures
-
-    print(f"\n-> Updating ESPN cache for rolling days (dates={len(date_list)})...")
+    # Phase 1: collect all event IDs that need fetching (sequential — fast)
+    pending: List[Tuple[str, str]] = []   # (eid, date_str)
+    skipped_scoreboards = 0
+    print(f"\n-> Scanning {len(date_list)} dates for new NBA events...")
     for d in date_list:
         yyyymmdd = d.replace("-", "")
         try:
             event_ids = fetch_espn_event_ids(yyyymmdd, timeout=timeout, retries=retries, sleep_s=sleep_s)
         except Exception as e:
             print(f"  [WARN] ESPN scoreboard failed {d}: {e}")
-            skipped_events += 1
+            skipped_scoreboards += 1
             continue
-
         for eid in event_ids:
-            if eid in existing_events:
-                continue
-            url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event={eid}"
-            try:
-                summ = espn_get_json(url, timeout=timeout, retries=retries, sleep_s=sleep_s)
-                df = parse_summary_boxscore(summ)
-                if df.empty:
-                    skipped_events += 1
-                    continue
-                df["SEASON"]   = season
-                df["EVENT_ID"] = df["EVENT_ID"].replace("", eid)
-                df["GAME_DATE"] = df["GAME_DATE"].replace("", d)
-                new_frames.append(df[base_cols].copy())
+            if eid not in existing_events:
+                pending.append((eid, d))
+
+    if not pending:
+        print(f"\nESPN cache already up to date (0 new events, {skipped_scoreboards} scoreboard errors)")
+        return cache
+
+    print(f"-> Fetching {len(pending)} new events with {workers} parallel workers...")
+
+    # Phase 2: fetch game summaries in parallel
+    new_frames: List[pd.DataFrame] = []
+    new_events = 0
+    skipped_events = 0
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {
+            pool.submit(
+                _fetch_one_event_nba,
+                eid, date_str, season, timeout, retries, sleep_s, base_cols
+            ): (eid, date_str)
+            for eid, date_str in pending
+        }
+        for future in as_completed(futures):
+            eid, df = future.result()
+            if df is not None:
+                new_frames.append(df)
                 existing_events.add(eid)
                 new_events += 1
-                print(f"  cached ESPN event {eid} ({d}) players={len(df)}")
-            except Exception as e:
-                print(f"  [WARN] ESPN summary failed event={eid}: {type(e).__name__}: {e}")
+                print(f"  cached NBA event {eid} | players={len(df)}")
+            else:
                 skipped_events += 1
 
     if new_frames:
@@ -397,11 +458,10 @@ def update_espn_cache(
         cache2 = pd.concat([cache, add], ignore_index=True)
         cache2 = cache2.drop_duplicates(subset=["SEASON", "EVENT_ID", "ESPN_ATHLETE_ID"], keep="last")
         cache2.to_csv(cache_path, index=False, encoding="utf-8")
-        print(f"\nESPN cache updated: {cache_path.name} | rows={len(cache2)} | new_events={new_events} | skipped={skipped_events}")
+        print(f"\nNBA ESPN cache updated: {cache_path.name} | rows={len(cache2)} | new={new_events} | skipped={skipped_events}")
         return cache2
 
-    # FIX 5: always report skip count
-    print(f"\nESPN cache already up to date (new_events=0, skipped={skipped_events})")
+    print(f"\nNo new rows added (new_events={new_events}, skipped={skipped_events})")
     return cache
 
 # ── ID MAP ────────────────────────────────────────────────────────────────────
@@ -431,15 +491,6 @@ def upsert_idmap(df_map: pd.DataFrame, nba_player_id: str, team: str, player: st
     }])], ignore_index=True)
 
 def build_cache_lookup(cache: pd.DataFrame) -> Tuple[Dict[Tuple[str, str], str], Dict[str, str]]:
-    """
-    Returns:
-      map_team: (player_norm, TEAM) -> ESPN_ATHLETE_ID  (most recent game)
-      map_name: player_norm -> ESPN_ATHLETE_ID           (most recent game)
-
-    FIX 2: map_name is now the PRIMARY lookup path, not the fallback.
-    Traded players have correct ESPN_ATHLETE_ID but wrong old TEAM in cache.
-    Name-only resolution finds them regardless of team.
-    """
     c = cache.copy()
     c["_dt"] = pd.to_datetime(c.get("GAME_DATE", ""), errors="coerce")
     c = c.sort_values("_dt", ascending=False)
@@ -453,10 +504,8 @@ def build_cache_lookup(cache: pd.DataFrame) -> Tuple[Dict[Tuple[str, str], str],
         aid = str(r.get("ESPN_ATHLETE_ID", "")).strip()
         if not n or not aid:
             continue
-        # map_name: name-only, first hit wins (most recent game due to sort)
         if n not in map_name:
             map_name[n] = aid
-        # map_team: name+team, used for disambiguation when two players share a name
         if t and (n, t) not in map_team:
             map_team[(n, t)] = aid
 
@@ -468,35 +517,33 @@ def resolve_espn_id(
     map_team: Dict[Tuple[str, str], str],
     map_name: Dict[str, str],
 ) -> str:
-    """
-    FIX 2: Name-only lookup first, then name+team for disambiguation.
-
-    Rationale: after a trade the team in the slate is the NEW team,
-    but all historical cache rows still have the OLD team. Name-only
-    resolves correctly in both cases. Name+team is only useful for the
-    rare case of two players with identical normalized names on different
-    teams; in that case the team match disambiguates correctly.
-    """
     n = _norm_name(player)
     t = str(team or "").strip()
     if not n:
         return ""
-
-    # Primary: name-only (handles traded players correctly)
     aid = map_name.get(n, "")
     if aid:
         return aid
-
-    # Secondary: name+team (rare disambiguation case)
     if t:
         return map_team.get((n, t), "")
-
     return ""
 
 # ── stat attachment ───────────────────────────────────────────────────────────
 
-def get_vals_for_athlete(cache: pd.DataFrame, aid: str, prop: str) -> List[float]:
-    dfp = cache.loc[cache["ESPN_ATHLETE_ID"].astype(str) == str(aid)].copy()
+# FIX 6: filter by SEASON + ESPN_ATHLETE_ID so we do NOT mix seasons
+# FIX 7: cutoff_date filters to only games within the rolling window (avoids stale early-season games)
+# NOTE: MIN filter removed — include all games regardless of minutes played
+def get_vals_for_athlete(
+    cache: pd.DataFrame, season: str, aid: str, prop: str,
+    cutoff_date: "pd.Timestamp | None" = None,
+) -> List[float]:
+    mask = (
+        (cache["SEASON"].astype(str) == str(season)) &
+        (cache["ESPN_ATHLETE_ID"].astype(str) == str(aid))
+    )
+    if cutoff_date is not None:
+        mask = mask & (cache["GAME_DATE"] >= cutoff_date)
+    dfp = cache.loc[mask].copy()
     if dfp.empty:
         return []
     dfp = dfp.sort_values("GAME_DATE", ascending=False)
@@ -520,6 +567,8 @@ def main() -> None:
     ap.add_argument("--timeout",       type=float, default=30.0)
     ap.add_argument("--sleep",         type=float, default=0.8)
     ap.add_argument("--retries",       type=int,   default=4)
+    ap.add_argument("--workers",       type=int,   default=4,
+                    help="Parallel workers for ESPN game summary fetches (default 4)")
     args = ap.parse_args()
 
     timeout = (args.connect_timeout, args.timeout)
@@ -551,12 +600,15 @@ def main() -> None:
         timeout=timeout,
         retries=int(args.retries),
         sleep_s=max(float(args.sleep), 0.2),
+        workers=int(args.workers),
     )
 
-    # Coerce stat columns to numeric
     for c in ["MIN", "PTS", "REB", "AST", "STL", "BLK", "TO", "FGM", "FGA", "FG3M", "FG3A", "FTM", "FTA"]:
         cache[c] = pd.to_numeric(cache.get(c, ""), errors="coerce")
     cache["GAME_DATE"] = pd.to_datetime(cache.get("GAME_DATE", ""), errors="coerce")
+
+    # FIX 7: derive the rolling-window cutoff so stat pulls respect --days
+    cutoff_date = pd.Timestamp(start_dt)
 
     map_team, map_name = build_cache_lookup(cache)
 
@@ -566,13 +618,11 @@ def main() -> None:
         zip(df_map["nba_player_id"].astype(str), df_map["espn_athlete_id"].astype(str))
     )
 
-    # Output columns — FIX 4: add direction-aware hit rate columns
     N = int(args.n)
     stat_cols = [f"stat_g{i}" for i in range(1, N + 1)]
     out_cols  = stat_cols + [
         "stat_last5_avg", "stat_last10_avg", "stat_season_avg",
         "last5_over", "last5_under", "last5_push", "last5_hit_rate",
-        # FIX 4: step7-expected direction-aware columns
         "line_hit_rate_over_ou_5",  "line_hit_rate_under_ou_5",
         "line_hit_rate_over_ou_10", "line_hit_rate_under_ou_10",
         "stat_status",
@@ -604,14 +654,11 @@ def main() -> None:
         )
 
         def _resolve_one(nba_pid_str: str, pname: str, pteam: str) -> str:
-            """Resolve a single player's ESPN athlete ID, updating idmap on new hits."""
             nonlocal map_updates, df_map, map_direct
             pid_key = _clean_id(nba_pid_str)
-            # 1. idmap direct (fastest)
             aid = map_direct.get(pid_key, "").strip() if pid_key else ""
             if aid:
                 return aid
-            # 2. FIX 2: name-only first, then name+team
             aid = resolve_espn_id(pname, pteam, map_team, map_name)
             if aid and pid_key:
                 df_map = upsert_idmap(df_map, pid_key, pteam, pname, aid)
@@ -634,24 +681,23 @@ def main() -> None:
                 })
                 continue
 
-            vals = get_vals_for_athlete(cache, aid, prop)
+            # FIX 6 + FIX 7 applied here
+            vals = get_vals_for_athlete(cache, args.season, aid, prop, cutoff_date=cutoff_date)
             if not vals:
                 slate.at[idx, "stat_status"] = "NO_CACHE_PLAYER"
                 continue
 
         # ── FIX 3: N-player combo via EVENT_ID intersection ──────────────────
         else:
-            # Gather player names/teams from player_1/player_2 fields (or fall back to main player)
             p_names = [
-                str(row.get("player_1", "")).strip() or player,
-                str(row.get("player_2", "")).strip() or player,
+                str(row.get(f"player_{i}", "")).strip() or player
+                for i in range(1, len(ids) + 1)
             ]
             p_teams = [
-                str(row.get("team_1", "")).strip() or team,
-                str(row.get("team_2", "")).strip() or team,
+                str(row.get(f"team_{i}", "")).strip() or team
+                for i in range(1, len(ids) + 1)
             ]
 
-            # Resolve ESPN IDs for each component player
             aids: List[str] = []
             for i, pid_int in enumerate(ids):
                 pname = p_names[i] if i < len(p_names) else player
@@ -672,32 +718,34 @@ def main() -> None:
                 })
                 continue
 
-            # Merge all players on EVENT_ID intersection, sum stat
-            dfs: List[pd.DataFrame] = []
+            per_player_vals = []
             any_empty = False
-            for i, aid in enumerate(aids):
-                dfp = cache.loc[cache["ESPN_ATHLETE_ID"].astype(str) == str(aid)].copy()
+            for aid in aids:
+                dfp = cache.loc[
+                    (cache["SEASON"].astype(str) == str(args.season)) &
+                    (cache["ESPN_ATHLETE_ID"].astype(str) == str(aid)) &
+                    (cache["GAME_DATE"] >= cutoff_date)
+                ].copy()
                 if dfp.empty:
                     any_empty = True
                     break
                 dfp = dfp.sort_values("GAME_DATE", ascending=False)
                 dfp["STAT"] = derive_stat_series(dfp, prop)
-                dfs.append(dfp[["EVENT_ID", "GAME_DATE", "STAT"]].copy())
+                pvals = pd.to_numeric(dfp["STAT"], errors="coerce").dropna().astype(float).tolist()
+                if not pvals:
+                    any_empty = True
+                    break
+                per_player_vals.append(pvals)
 
-            if any_empty or not dfs:
+            if any_empty or not per_player_vals:
                 slate.at[idx, "stat_status"] = "NO_CACHE_PLAYER"
                 continue
 
-            merged = dfs[0].rename(columns={"STAT": "S0"})
-            for i, dfi in enumerate(dfs[1:], start=1):
-                merged = merged.merge(
-                    dfi[["EVENT_ID", "STAT"]].rename(columns={"STAT": f"S{i}"}),
-                    on="EVENT_ID", how="inner",
-                )
-            s_cols = [c for c in merged.columns if re.match(r"^S\d+$", c)]
-            merged["STAT_SUM"] = merged[s_cols].apply(pd.to_numeric, errors="coerce").sum(axis=1)
-            merged = merged.sort_values("GAME_DATE", ascending=False)
-            vals = pd.to_numeric(merged["STAT_SUM"], errors="coerce").dropna().astype(float).tolist()
+            min_games = min(len(pv) for pv in per_player_vals)
+            vals = [
+                float(sum(pv[i] for pv in per_player_vals))
+                for i in range(min_games)
+            ]
 
             if not vals:
                 slate.at[idx, "stat_status"] = "INSUFFICIENT_GAMES"
@@ -716,23 +764,21 @@ def main() -> None:
         slate.at[idx, "stat_last10_avg"] = fmt_num(avg_k(10))
         slate.at[idx, "stat_season_avg"] = fmt_num(float(np.mean(vals)))
 
-        # FIX 4: compute all hit rate columns for step7
         if not np.isnan(line):
             o5, u5, p5, hr5_all, hr5_ou, ur5_ou = calc_hit_context(vals, line, k=5)
-            slate.at[idx, "last5_over"]              = str(o5)
-            slate.at[idx, "last5_under"]             = str(u5)
-            slate.at[idx, "last5_push"]              = str(p5)
-            slate.at[idx, "last5_hit_rate"]          = fmt_num(hr5_all)
-            slate.at[idx, "line_hit_rate_over_ou_5"] = fmt_num(hr5_ou)
-            slate.at[idx, "line_hit_rate_under_ou_5"]= fmt_num(ur5_ou)
+            slate.at[idx, "last5_over"]               = str(o5)
+            slate.at[idx, "last5_under"]              = str(u5)
+            slate.at[idx, "last5_push"]               = str(p5)
+            slate.at[idx, "last5_hit_rate"]           = fmt_num(hr5_all)
+            slate.at[idx, "line_hit_rate_over_ou_5"]  = fmt_num(hr5_ou)
+            slate.at[idx, "line_hit_rate_under_ou_5"] = fmt_num(ur5_ou)
 
             _, _, _, _, hr10_ou, ur10_ou = calc_hit_context(vals, line, k=10)
-            slate.at[idx, "line_hit_rate_over_ou_10"] = fmt_num(hr10_ou)
-            slate.at[idx, "line_hit_rate_under_ou_10"]= fmt_num(ur10_ou)
+            slate.at[idx, "line_hit_rate_over_ou_10"]  = fmt_num(hr10_ou)
+            slate.at[idx, "line_hit_rate_under_ou_10"] = fmt_num(ur10_ou)
 
         slate.at[idx, "stat_status"] = "OK"
 
-    # Save idmap if updated
     if map_updates > 0:
         df_map = df_map.drop_duplicates(subset=["nba_player_id"], keep="last")
         df_map.to_csv(idmap_path, index=False, encoding="utf-8")
