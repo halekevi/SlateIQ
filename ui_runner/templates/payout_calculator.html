@@ -49,26 +49,17 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .snav-links li a:hover{color:var(--text);background:rgba(255,255,255,.02);}
 .snav-links li a.active{color:var(--accent);border-bottom-color:var(--accent);}
 .snav-links li a.active::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent),0 0 24px rgba(200,255,0,.5);}
-.snav-links li:nth-child(1) a:hover{color:var(--cyan)}
-.snav-links li:nth-child(2) a:hover{color:var(--accent)}
-.snav-links li:nth-child(3) a:hover{color:var(--purple)}
-.snav-links li:nth-child(4) a:hover{color:var(--green)}
-.snav-links li:nth-child(5) a:hover{color:var(--amber)}
+.snav-links li:nth-child(1) a:hover{color:var(--cyan)}.snav-links li:nth-child(2) a:hover{color:var(--accent)}.snav-links li:nth-child(3) a:hover{color:var(--purple)}.snav-links li:nth-child(4) a:hover{color:var(--green)}.snav-links li:nth-child(5) a:hover{color:var(--amber)}
 .ni{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s,box-shadow .2s;}
 .snav-links li a:hover .ni{transform:scale(1.1) translateY(-1px);}
 .ni-ctrl{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);color:var(--cyan)}
-.ni-slate{background:rgba(200,255,0,.08);border:1px solid rgba(200,255,0,.2);color:var(--accent)}
 .ni-tick{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);color:var(--purple)}
 .ni-grade{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.2);color:var(--green)}
 .ni-pay{background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.2);color:var(--amber)}
-.snav-links li a:hover .ni-ctrl{box-shadow:0 0 10px rgba(0,212,255,.25)}
-.snav-links li a:hover .ni-slate{box-shadow:0 0 10px rgba(200,255,0,.25)}
-.snav-links li a:hover .ni-tick{box-shadow:0 0 10px rgba(167,139,250,.25)}
-.snav-links li a:hover .ni-grade{box-shadow:0 0 10px rgba(0,255,170,.25)}
-.snav-links li a:hover .ni-pay{box-shadow:0 0 10px rgba(240,165,0,.25)}
+.snav-links li a:hover .ni-ctrl{box-shadow:0 0 10px rgba(0,212,255,.25)}.snav-links li a:hover .ni-tick{box-shadow:0 0 10px rgba(167,139,250,.25)}.snav-links li a:hover .ni-grade{box-shadow:0 0 10px rgba(0,255,170,.25)}.snav-links li a:hover .ni-pay{box-shadow:0 0 10px rgba(240,165,0,.25)}
 .snav-right{display:flex;align-items:center;gap:16px;margin-left:auto;}
-.live-pill{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;padding:6px 14px;border-radius:100px;border:1px solid rgba(0,255,170,.25);color:var(--green);background:rgba(0,255,170,.04);display:flex;align-items:center;gap:8px;}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite;}
+.live-pill{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;padding:6px 14px;border-radius:100px;border:1px solid rgba(240,165,0,.25);color:var(--amber);background:rgba(240,165,0,.04);display:flex;align-items:center;gap:8px;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);animation:blink 2s ease-in-out infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
 /* ── LAYOUT ── */
@@ -92,18 +83,18 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .card.demon::before{background:linear-gradient(90deg,var(--demon),transparent)}
 .card.cyan::before{background:linear-gradient(90deg,var(--cyan),var(--purple))}
 .card.purple::before{background:linear-gradient(90deg,var(--purple),transparent)}
+.card.amber::before{background:linear-gradient(90deg,var(--amber),transparent)}
 .card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin-bottom:16px;}
 
 /* ── FORM ── */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
 .form-grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;}
+.form-grid-5{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px;}
 .field{display:flex;flex-direction:column;gap:6px;}
 .field label{font-size:10px;letter-spacing:2px;color:var(--muted);}
 .field input,.field select{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--text);width:100%;transition:border-color .2s,box-shadow .2s;outline:none;}
 .field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(200,255,0,.08);}
-.field input.goblin-input:focus{border-color:var(--goblin);box-shadow:0 0 0 2px rgba(57,255,110,.08);}
-.field input.demon-input:focus{border-color:var(--demon);box-shadow:0 0 0 2px rgba(255,77,77,.08);}
 .field select option{background:var(--bg3);}
 .section-divider{font-size:10px;letter-spacing:2.5px;color:var(--muted);margin:20px 0 14px;display:flex;align-items:center;gap:10px;}
 .section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -117,8 +108,26 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .btn-danger{background:rgba(255,77,77,.08);border-color:rgba(255,77,77,.25);color:var(--red);}
 .btn-danger:hover{background:rgba(255,77,77,.15);}
 .btn-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;}
+.add-leg-row{display:flex;gap:8px;align-items:center;margin-bottom:12px;}
+.add-leg-btn{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1.5px;padding:7px 16px;border-radius:8px;border:1px dashed var(--border);background:transparent;color:var(--muted2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px;}
+.add-leg-btn:hover{border-color:var(--bd2);color:var(--text);}
+.add-leg-btn.goblin:hover{border-color:var(--goblin);color:var(--goblin);}
+.add-leg-btn.demon:hover{border-color:var(--demon);color:var(--demon);}
+.add-leg-btn.standard:hover{border-color:var(--std);color:var(--std);}
 
-/* ── RESULTS ── */
+/* ── LEG ROW ── */
+.leg-input{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text);width:100%;outline:none;transition:border-color .15s;}
+.leg-input:focus{border-color:var(--accent);}
+.leg-input:disabled{opacity:.3;cursor:not-allowed;}
+.leg-type-badge{font-size:10px;letter-spacing:1px;padding:3px 10px;border-radius:20px;font-weight:700;text-align:center;white-space:nowrap;}
+.leg-type-badge.goblin{background:rgba(57,255,110,.12);color:var(--goblin);border:1px solid rgba(57,255,110,.25);}
+.leg-type-badge.demon{background:rgba(255,77,77,.12);color:var(--demon);border:1px solid rgba(255,77,77,.25);}
+.leg-type-badge.standard{background:rgba(0,229,255,.12);color:var(--std);border:1px solid rgba(0,229,255,.25);}
+.leg-remove{background:none;border:none;color:var(--muted2);cursor:pointer;font-size:16px;padding:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:color .15s;}
+.leg-remove:hover{color:var(--red);}
+.delta-badge{display:inline-block;font-size:10px;letter-spacing:.5px;padding:2px 8px;border-radius:4px;font-family:'Share Tech Mono',monospace;}
+
+/* ── RESULT GRID ── */
 .result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px;}
 .result-item{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
 .result-item-label{font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:6px;}
@@ -135,24 +144,6 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .pp-cell-power{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--text);}
 .pp-cell-flex{font-size:10px;color:var(--muted2);line-height:1.6;margin-top:4px;}
 
-/* ── LEG BUILDER ── */
-.leg-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
-.leg-row{display:grid;grid-template-columns:120px 1fr 1fr 1fr 28px;gap:8px;align-items:center;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px;}
-.leg-type-badge{font-size:10px;letter-spacing:1px;padding:3px 10px;border-radius:20px;font-weight:700;text-align:center;}
-.leg-type-badge.goblin{background:rgba(57,255,110,.12);color:var(--goblin);border:1px solid rgba(57,255,110,.25);}
-.leg-type-badge.demon{background:rgba(255,77,77,.12);color:var(--demon);border:1px solid rgba(255,77,77,.25);}
-.leg-type-badge.standard{background:rgba(0,229,255,.12);color:var(--std);border:1px solid rgba(0,229,255,.25);}
-.leg-input{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text);width:100%;outline:none;transition:border-color .15s;}
-.leg-input:focus{border-color:var(--accent);}
-.leg-remove{background:none;border:none;color:var(--muted2);cursor:pointer;font-size:16px;padding:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:color .15s;}
-.leg-remove:hover{color:var(--red);}
-.add-leg-row{display:flex;gap:8px;align-items:center;}
-.add-leg-btn{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1.5px;padding:7px 16px;border-radius:8px;border:1px dashed var(--border);background:transparent;color:var(--muted2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px;}
-.add-leg-btn:hover{border-color:var(--bd2);color:var(--text);}
-.add-leg-btn.goblin:hover{border-color:var(--goblin);color:var(--goblin);}
-.add-leg-btn.demon:hover{border-color:var(--demon);color:var(--demon);}
-.add-leg-btn.standard:hover{border-color:var(--std);color:var(--std);}
-
 /* ── LOG TABLE ── */
 .log-table-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .log-table{width:100%;border-collapse:collapse;font-size:12px;}
@@ -168,7 +159,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .del-btn:hover{color:var(--red);}
 .empty-log{text-align:center;padding:40px;font-size:11px;color:var(--muted2);}
 
-/* ── PATTERN CHART ── */
+/* ── PATTERNS ── */
 .pattern-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
 .stat-mini{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;}
 .stat-mini-label{font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:6px;}
@@ -183,24 +174,24 @@ canvas{width:100%!important;max-height:220px;}
 .insight-item.good{border-color:rgba(57,255,110,.2);}
 .insight-item.warn{border-color:rgba(240,165,0,.2);}
 .insight-item.bad{border-color:rgba(255,77,77,.2);}
+.bucket-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px;}
+.bucket-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.bucket-card-label{font-size:9px;letter-spacing:1.5px;margin-bottom:10px;font-weight:700;}
+.bucket-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.bucket-stat{background:var(--bg2);border-radius:6px;padding:8px 10px;text-align:center;}
+.bucket-stat-l{font-size:8px;color:var(--muted);letter-spacing:1.5px;margin-bottom:3px;}
+.bucket-stat-v{font-family:'Bebas Neue',sans-serif;font-size:20px;}
 
 /* ── MISC ── */
 .badge-count{background:var(--bg3);border-radius:10px;padding:1px 7px;font-size:9px;color:var(--muted2);border:1px solid var(--border);}
 .mono{font-family:'Share Tech Mono',monospace;}
 .pos{color:var(--green)}.neg{color:var(--red)}.warn-col{color:var(--amber)}
 .hint{font-size:10px;color:var(--muted2);line-height:1.7;margin-bottom:16px;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;}
-.platform-tabs{display:flex;gap:6px;margin-bottom:20px;}
-.ptab{font-size:10px;letter-spacing:1.5px;padding:5px 16px;border-radius:20px;border:1px solid var(--border);background:var(--bg2);color:var(--muted2);cursor:pointer;transition:all .15s;}
-.ptab:hover{color:var(--text);border-color:var(--bd2);}
-.ptab.active{color:var(--accent);border-color:var(--accent);background:rgba(200,255,0,.06);}
-.dist-badge{font-size:11px;font-family:'Bebas Neue',sans-serif;padding:2px 8px;border-radius:4px;letter-spacing:1px;}
-.dist-goblin{color:var(--goblin)}.dist-demon{color:var(--demon)}.dist-standard{color:var(--std)}
 
 @media(max-width:768px){
   .snav{padding:0 16px}.snav-name{display:none}
   .result-grid{grid-template-columns:repeat(2,1fr)}
-  .form-grid,.form-grid-3,.form-grid-4{grid-template-columns:1fr}
-  .leg-row{grid-template-columns:100px 1fr 1fr 24px}
+  .form-grid,.form-grid-3,.form-grid-4,.form-grid-5{grid-template-columns:1fr}
   .pp-table{grid-template-columns:repeat(3,1fr)}
   .pattern-grid{grid-template-columns:1fr}
 }
@@ -239,7 +230,6 @@ canvas{width:100%!important;max-height:220px;}
   </a>
   <ul class="snav-links">
     <li><a href="/"><span class="ni ni-ctrl"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 5.5V13h4V9h4v4h4V5.5L7 1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/></svg></span> Home</a></li>
-
     <li><a href="/tickets"><span class="ni ni-tick"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg></span> Tickets</a></li>
     <li><a href="/grades"><span class="ni ni-grade"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 10.5L5.5 7l2.5 2.5L11 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x="1.5" y="1.5" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/></svg></span> Grades</a></li>
     <li><a href="/payout" class="active"><span class="ni ni-pay"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 3.5v7M5 5.5c0-.8.9-1.5 2-1.5s2 .7 2 1.5-1 1.3-2 1.5-2 .7-2 1.5.9 1.5 2 1.5 2-.7 2-1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></span> Payouts</a></li>
@@ -252,22 +242,21 @@ canvas{width:100%!important;max-height:220px;}
 <div class="main">
   <div class="page-eyebrow">SLATEIQ TOOLS</div>
   <div class="page-title">Payout Calculator</div>
-  <div class="page-sub">EV ANALYSIS · LINE LOGGER · PATTERN DISCOVERY</div>
+  <div class="page-sub">EV ANALYSIS &nbsp;·&nbsp; LINE LOGGER &nbsp;·&nbsp; PATTERN DISCOVERY</div>
 
   <!-- TABS -->
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('calc')">⚡ Calculator</button>
-    <button class="tab-btn" onclick="switchTab('log')">📋 Log Lines <span class="badge-count" id="log-count">0</span></button>
-    <button class="tab-btn" onclick="switchTab('patterns')">📈 Patterns</button>
-    <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+    <button class="tab-btn active" onclick="switchTab('calc',this)">⚡ Calculator</button>
+    <button class="tab-btn" onclick="switchTab('log',this)">📋 Log Lines <span class="badge-count" id="log-count">0</span></button>
+    <button class="tab-btn" onclick="switchTab('patterns',this)">📈 Patterns</button>
+    <button class="tab-btn" onclick="switchTab('ref',this)">📊 Reference</button>
   </div>
 
   <!-- ═══════════ TAB 1: CALCULATOR ═══════════ -->
   <div id="tab-calc" class="tab-panel active">
-
     <div class="card accent">
       <div class="card-title">💰 Slip Builder + EV</div>
-      <p class="hint">Build your slip leg by leg. Enter the <strong>standard line</strong>, <strong>goblin/demon line</strong>, and your <strong>estimated hit probability</strong> for each. The calculator will show total EV based on the actual payout multiplier PrizePicks is showing you.</p>
+      <p class="hint">Build your slip leg by leg. Enter the <strong>standard line</strong>, <strong>goblin/demon line</strong>, and your <strong>estimated hit probability</strong>. The calculator shows total EV based on the actual multiplier PrizePicks is showing you.</p>
 
       <div class="form-grid" style="margin-bottom:16px">
         <div class="field">
@@ -286,34 +275,33 @@ canvas{width:100%!important;max-height:220px;}
         </div>
       </div>
 
-      <!-- LEG BUILDER -->
       <div class="section-divider">LEGS</div>
-      <div class="leg-list" id="leg-list"></div>
+      <div id="calc-leg-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+        <div style="font-size:11px;color:var(--muted2);padding:12px 0">No legs added yet.</div>
+      </div>
       <div class="add-leg-row">
-        <button class="add-leg-btn standard" onclick="addLeg('standard')">+ Standard</button>
-        <button class="add-leg-btn goblin" onclick="addLeg('goblin')">🎃 Goblin</button>
-        <button class="add-leg-btn demon" onclick="addLeg('demon')">😈 Demon</button>
+        <button class="add-leg-btn standard" onclick="addCalcLeg('standard')">⭐ + Standard</button>
+        <button class="add-leg-btn goblin"   onclick="addCalcLeg('goblin')">🎃 + Goblin</button>
+        <button class="add-leg-btn demon"    onclick="addCalcLeg('demon')">😈 + Demon</button>
       </div>
 
       <div class="section-divider" style="margin-top:20px">ACTUAL PAYOUT</div>
       <div class="form-grid" style="margin-bottom:0">
         <div class="field">
           <label>PAYOUT MULTIPLIER SHOWN (x)</label>
-          <input id="calc-mult" type="number" step="0.01" value="" placeholder="e.g. 8.5 — enter what PrizePicks shows"/>
+          <input id="calc-mult" type="number" step="0.01" placeholder="e.g. 8.5 — enter what PrizePicks shows"/>
         </div>
         <div class="field">
           <label>STAKE ($)</label>
           <input id="calc-stake" type="number" step="1" value="10"/>
         </div>
       </div>
-
       <div class="btn-row">
         <button class="btn btn-accent" onclick="runCalc()">▶ Calculate EV</button>
-        <button class="btn btn-ghost" onclick="clearLegs()">✕ Clear Legs</button>
+        <button class="btn btn-ghost" onclick="clearCalcLegs()">✕ Clear</button>
       </div>
     </div>
 
-    <!-- RESULTS -->
     <div class="card cyan" id="calc-results" style="display:none">
       <div class="card-title" style="color:var(--cyan)">Results</div>
       <div class="result-grid">
@@ -340,30 +328,28 @@ canvas{width:100%!important;max-height:220px;}
       </div>
       <div class="result-notes" id="r-notes"></div>
     </div>
-
   </div>
 
   <!-- ═══════════ TAB 2: LOG ═══════════ -->
   <div id="tab-log" class="tab-panel">
-
     <div class="card accent">
       <div class="card-title">🎟 Log a Full Ticket</div>
-      <p class="hint">Build the <strong>complete ticket</strong> leg by leg — every player, prop, standard line, and adjusted line. The payout is determined by the full mix of Standard / Goblin / Demon legs together, so the whole ticket must be logged as one entry.</p>
+      <p class="hint">Log every leg with its <strong>standard line</strong> and <strong>played line</strong>. Type auto-classifies from the delta. The delta% per leg (played ÷ standard) is the key variable — two tickets labeled "2Std + 1Goblin" price differently if the goblin is at 81% vs 63% of standard.</p>
 
-      <!-- Ticket meta -->
       <div class="form-grid-3" style="margin-bottom:16px">
         <div class="field">
           <label>PLATFORM</label>
           <select id="log-platform">
-            <option value="prizepicks">PrizePicks</option>
-            <option value="underdog">Underdog Fantasy</option>
+            <option value="PrizePicks">PrizePicks</option>
+            <option value="Underdog">Underdog Fantasy</option>
+            <option value="Sleeper">Sleeper</option>
           </select>
         </div>
         <div class="field">
           <label>SLIP TYPE</label>
           <select id="log-slip-type">
-            <option value="power">Power Play</option>
-            <option value="flex">Flex Play</option>
+            <option value="Power Play">Power Play</option>
+            <option value="Flex Play">Flex Play</option>
           </select>
         </div>
         <div class="field">
@@ -372,40 +358,32 @@ canvas{width:100%!important;max-height:220px;}
         </div>
       </div>
 
-      <!-- Leg builder -->
       <div class="section-divider">TICKET LEGS <span id="log-leg-summary" style="color:var(--muted2);font-size:10px;letter-spacing:1px;margin-left:8px"></span></div>
-
-      <div id="log-leg-list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+      <div id="log-leg-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
         <div style="font-size:11px;color:var(--muted2);padding:10px 0">No legs added yet — use the buttons below.</div>
       </div>
-
-      <!-- Add leg row -->
-      <div class="add-leg-row" style="margin-bottom:20px">
-        <button class="add-leg-btn standard" onclick="addLogLeg('standard')">+ Standard</button>
-        <button class="add-leg-btn goblin" onclick="addLogLeg('goblin')">🎃 + Goblin</button>
-        <button class="add-leg-btn demon" onclick="addLogLeg('demon')">😈 + Demon</button>
+      <div class="add-leg-row">
+        <button class="add-leg-btn standard" onclick="addLogLeg('standard')">⭐ + Standard</button>
+        <button class="add-leg-btn goblin"   onclick="addLogLeg('goblin')">🎃 + Goblin</button>
+        <button class="add-leg-btn demon"    onclick="addLogLeg('demon')">😈 + Demon</button>
       </div>
 
-      <!-- Payout inputs -->
       <div class="section-divider">PAYOUT</div>
       <div class="form-grid" style="margin-bottom:0">
         <div class="field">
           <label>BASE PAYOUT (all-standard, same leg count)</label>
-          <input id="log-base-mult" type="number" step="0.01" placeholder="Auto-filled or enter manually (e.g. 6 for 3-leg)" oninput="refreshLogTicketSummary()"/>
-          <div style="font-size:10px;color:var(--muted2);margin-top:4px" id="log-base-hint"></div>
+          <input id="log-base-mult" type="number" step="0.01" placeholder="Auto: e.g. 6x for 3-leg" readonly style="opacity:.6"/>
         </div>
         <div class="field">
           <label>ACTUAL PAYOUT SHOWN ON APP</label>
-          <input id="log-actual-mult" type="number" step="0.01" placeholder="e.g. 4.2 — exactly what PrizePicks shows" oninput="refreshLogTicketSummary()"/>
+          <input id="log-actual-mult" type="number" step="0.01" placeholder="e.g. 4.2 — exactly what PP shows" oninput="refreshLogSummary()"/>
         </div>
       </div>
-
-      <!-- Ticket summary -->
-      <div id="log-ticket-summary" style="display:none;margin-top:16px;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;font-size:11px;line-height:2;color:var(--muted)"></div>
+      <div id="log-ticket-summary" style="display:none;margin-top:14px;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;font-size:11px;line-height:2;color:var(--muted)"></div>
 
       <div class="btn-row">
         <button class="btn btn-accent" onclick="logTicket()">💾 Log This Ticket</button>
-        <button class="btn btn-ghost" onclick="clearLogTicket()">✕ Clear All</button>
+        <button class="btn btn-ghost" onclick="clearLogForm()">✕ Clear</button>
       </div>
       <div id="log-msg" style="font-size:11px;margin-top:10px;height:18px;"></div>
     </div>
@@ -414,13 +392,12 @@ canvas{width:100%!important;max-height:220px;}
     <div class="card" style="padding:0">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);">
         <div class="card-title" style="margin-bottom:0">Ticket Log <span class="badge-count" id="log-table-count">0</span></div>
-        <button class="btn btn-danger btn-ghost" onclick="clearAllLog()" style="font-size:12px;padding:7px 14px">🗑 Clear All</button>
+        <button class="btn btn-danger" onclick="clearAllLog()" style="font-size:12px;padding:7px 14px">🗑 Clear All</button>
       </div>
       <div id="log-table-wrap">
         <div class="empty-log">No tickets logged yet. Build one above to start finding patterns.</div>
       </div>
     </div>
-
   </div>
 
   <!-- ═══════════ TAB 3: PATTERNS ═══════════ -->
@@ -429,28 +406,33 @@ canvas{width:100%!important;max-height:220px;}
     <div id="patterns-empty" class="card">
       <div class="empty-log" style="padding:60px">
         <div style="font-size:32px;margin-bottom:12px">📈</div>
-        <div style="font-size:14px;color:var(--muted);margin-bottom:8px">Log at least 3 observations to see patterns</div>
-        <div style="font-size:11px;color:var(--muted2)">Switch to the Log tab and start entering real lines + payouts you see on PrizePicks / Underdog</div>
+        <div style="font-size:14px;color:var(--muted);margin-bottom:8px">Log at least 3 tickets to see patterns</div>
+        <div style="font-size:11px;color:var(--muted2)">Switch to Log Lines and start entering real standard + played lines with actual payouts</div>
       </div>
     </div>
 
     <div id="patterns-content" style="display:none">
 
+      <!-- Goblin / Demon stat cards -->
       <div class="pattern-grid">
-        <div>
-          <div class="card goblin" style="margin-bottom:12px">
-            <div class="card-title" style="color:var(--goblin)">🎃 Goblin Pattern</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="goblin-stats"></div>
-          </div>
+        <div class="card goblin" style="margin-bottom:0">
+          <div class="card-title" style="color:var(--goblin)">🎃 Goblin Pattern</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="goblin-stats"></div>
         </div>
-        <div>
-          <div class="card demon" style="margin-bottom:12px">
-            <div class="card-title" style="color:var(--demon)">😈 Demon Pattern</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="demon-stats"></div>
-          </div>
+        <div class="card demon" style="margin-bottom:0">
+          <div class="card-title" style="color:var(--demon)">😈 Demon Pattern</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="demon-stats"></div>
         </div>
       </div>
 
+      <!-- Delta% Bucket Breakdown -->
+      <div class="card amber" style="margin-top:20px">
+        <div class="card-title" style="color:var(--amber)">📐 Line Distance Bucket Analysis</div>
+        <p class="hint">Groups legs by how far the played line is from standard (delta%). A Goblin at 81% of standard prices differently than one at 63% — even on the same prop. More samples = more reliable multiplier contribution estimate.</p>
+        <div class="bucket-grid" id="bucket-breakdown"></div>
+      </div>
+
+      <!-- Scatter chart -->
       <div class="card cyan">
         <div class="card-title" style="color:var(--cyan)">📐 Multiplier Shift vs Line Distance</div>
         <div class="chart-wrap">
@@ -460,9 +442,17 @@ canvas{width:100%!important;max-height:220px;}
         <div class="insight-row" id="pattern-insights"></div>
       </div>
 
+      <!-- Combo signature table -->
       <div class="card purple">
-        <div class="card-title" style="color:var(--purple)">🔬 Estimated Per-Leg Multiplier Formula</div>
-        <p class="hint">Based on your logged data, here's the estimated formula for how each Goblin/Demon leg adjusts the slip payout. Use this to predict payouts before locking in.</p>
+        <div class="card-title" style="color:var(--purple)">🔬 Combo Signature Analysis</div>
+        <p class="hint">Groups tickets by their full bucket combo (e.g. "Goblin Mid + Standard + Standard"). Avg actual payout vs base reveals how PP prices each combo type over time.</p>
+        <div id="combo-table-wrap" style="overflow-x:auto"></div>
+      </div>
+
+      <!-- Formula -->
+      <div class="card" style="border-color:rgba(200,255,0,.15)">
+        <div class="card-title" style="color:var(--accent)">⚗️ Estimated Per-Leg Formula</div>
+        <p class="hint">Derived from your logged data. Use to predict payouts before locking in.</p>
         <div id="formula-output" style="font-size:12px;line-height:2;color:var(--muted);"></div>
       </div>
 
@@ -471,7 +461,6 @@ canvas{width:100%!important;max-height:220px;}
 
   <!-- ═══════════ TAB 4: REFERENCE ═══════════ -->
   <div id="tab-ref" class="tab-panel">
-
     <div class="card accent">
       <div class="card-title">📊 PrizePicks Standard Payouts</div>
       <div class="pp-table">
@@ -481,7 +470,6 @@ canvas{width:100%!important;max-height:220px;}
         <div class="pp-cell"><div class="pp-cell-label">LEGS</div><div class="pp-cell-legs">5</div><div class="pp-cell-label" style="margin-top:8px">POWER</div><div class="pp-cell-power">20x</div></div>
         <div class="pp-cell"><div class="pp-cell-label">LEGS</div><div class="pp-cell-legs">6</div><div class="pp-cell-label" style="margin-top:8px">POWER</div><div class="pp-cell-power">37.5x</div></div>
       </div>
-
       <div class="section-divider">FLEX PLAY PAYOUTS</div>
       <div class="pp-table">
         <div class="pp-cell"><div class="pp-cell-legs">3</div><div class="pp-cell-flex">3/3 → 3x<br>2/3 → 1x</div></div>
@@ -493,427 +481,366 @@ canvas{width:100%!important;max-height:220px;}
 
     <div class="card goblin">
       <div class="card-title" style="color:var(--goblin)">🎃 How Goblin Lines Work</div>
-      <p class="hint">Goblins move the line <strong>in your favor</strong> (lower for OVER props). You must pick MORE on Goblins. They <strong>reduce</strong> the payout multiplier because they're easier to hit. The further the line moves from standard, the bigger the payout reduction. On a mixed slip, each Goblin leg pulls the overall multiplier down.</p>
+      <p class="hint">Goblins move the line <strong>in your favor</strong>. They <strong>reduce</strong> the payout multiplier because they're easier to hit. The further the line moves from standard, the bigger the payout reduction. Key metric: <strong style="color:var(--goblin)">played ÷ standard = delta%</strong>. A goblin at 90% of standard is priced very differently than one at 60%.</p>
       <div style="font-size:11px;color:var(--muted);line-height:1.9">
-        <strong style="color:var(--goblin)">Example:</strong> LeBron standard points = 24.5. Goblin = 19.5 (5 units easier).<br>
-        A 3-leg all-standard Power Play pays <strong style="color:var(--text)">6x</strong>. The same slip with this Goblin might pay <strong style="color:var(--goblin)">~4.2x</strong> instead.<br>
-        <br>
-        <strong style="color:var(--text)">Key insight:</strong> Goblins are not always bad value. If the reduced line is significantly easier to hit and the payout only drops modestly, it can still be +EV.
+        <strong style="color:var(--goblin)">Example:</strong> Standard = 20.5. Goblin at 16.5 → delta% = 80.5%. Goblin at 12.0 → delta% = 58.5%.<br>
+        Same 3-leg base of 6x, but PP prices the 58.5% goblin much lower because it's far more likely to hit.<br><br>
+        <strong style="color:var(--text)">Key insight:</strong> Log both lines every time — the label "Goblin" tells you nothing without knowing <em>how far</em> the line moved.
       </div>
     </div>
 
     <div class="card demon">
       <div class="card-title" style="color:var(--demon)">😈 How Demon Lines Work</div>
-      <p class="hint">Demons move the line <strong>against you</strong> (higher for OVER props). You must pick MORE on Demons. They <strong>increase</strong> the payout multiplier because they're harder to hit. Demon boosts vary widely — a +2 unit move might give a small bump while a +10 unit move can push toward the 2000x maximum.</p>
+      <p class="hint">Demons move the line <strong>against you</strong>. They <strong>increase</strong> the payout multiplier. Delta% for Demons will be above 1.0 — a demon at 110% of standard is shallow; one at 140%+ is extreme. The boost varies widely and is not linear.</p>
       <div style="font-size:11px;color:var(--muted);line-height:1.9">
-        <strong style="color:var(--demon)">Example:</strong> LeBron standard points = 24.5. Demon = 29.5 (5 units harder).<br>
-        A 3-leg all-standard Power Play pays <strong style="color:var(--text)">6x</strong>. The same slip with this Demon might pay <strong style="color:var(--demon)">~9–12x</strong> depending on how far the line moved.<br>
-        <br>
-        <strong style="color:var(--text)">Key insight:</strong> Demon boosts are often <em>not</em> proportional to the actual difficulty increase. PrizePicks captures extra margin here — log your observations to see if the boost is worth the harder line.
+        <strong style="color:var(--demon)">Example:</strong> Standard = 24.5. Demon at 26.5 → delta% = 108%. Demon at 34.5 → delta% = 141%.<br>
+        PP captures extra margin on Demon lines — log your observations to see if the boost is worth the harder line.<br><br>
+        <strong style="color:var(--text)">Key insight:</strong> Demon boosts are often <em>not</em> proportional to actual difficulty. Your logged data will reveal whether PP under- or over-prices specific delta% ranges.
       </div>
     </div>
 
     <div class="card cyan">
       <div class="card-title" style="color:var(--cyan)">🧮 Mixed Slip Payout Logic</div>
       <div style="font-size:11px;color:var(--muted);line-height:2;">
-        PrizePicks does NOT publish the formula for how Goblin/Demon legs adjust the slip multiplier. However, based on community observations, the mechanics appear to work roughly like this:<br><br>
+        PrizePicks does not publish the formula for how Goblin/Demon legs adjust the slip multiplier. Based on observations, the mechanics appear to work roughly like this:<br><br>
         <strong style="color:var(--text)">1. Base multiplier</strong> = standard payout for the leg count (e.g. 6x for 3 legs)<br>
-        <strong style="color:var(--text)">2. Per-leg adjustment</strong> = each Goblin/Demon applies a multiplier factor to the base<br>
-        <strong style="color:var(--text)">3. Goblin factor</strong> ≈ reduces payout (factor &lt; 1.0, e.g. 0.65–0.85 per leg)<br>
-        <strong style="color:var(--text)">4. Demon factor</strong> ≈ increases payout (factor &gt; 1.0, e.g. 1.3–2.5+ per leg depending on distance)<br>
-        <strong style="color:var(--text)">5. Factors multiply together</strong> — one Goblin and one Demon in the same slip partially offset each other<br><br>
-        <em style="color:var(--muted2)">The exact factors are dynamic per-prop and are not disclosed. Logging real observations is the only way to reverse-engineer them.</em>
+        <strong style="color:var(--text)">2. Per-leg adjustment</strong> = each Goblin/Demon applies a factor based on its <em>delta%</em>, not just its label<br>
+        <strong style="color:var(--text)">3. Goblin factor</strong> ≈ reduces payout, scales with how far below standard the line is<br>
+        <strong style="color:var(--text)">4. Demon factor</strong> ≈ increases payout, scales with how far above standard the line is<br>
+        <strong style="color:var(--text)">5. Factors multiply together</strong> — one Goblin and one Demon partially offset each other<br><br>
+        <em style="color:var(--muted2)">The exact per-leg factor is dynamic per-prop and undisclosed. Logging real delta% observations is the only way to reverse-engineer the actual curve.</em>
       </div>
     </div>
-
   </div>
-</div>
+
+</div><!-- /main -->
 
 <script>
 // ═══════════════════════════════════════════════════════
+//  CONSTANTS
+// ═══════════════════════════════════════════════════════
+const PP_BASE  = { 2:3, 3:6, 4:10, 5:20, 6:37.5 };
+const STORAGE_KEY = 'slateiq_payout_log_v4';
+const PROP_OPTS  = ['Points','Rebounds','Assists','Pts+Reb+Ast','Pts+Reb','Pts+Ast','3-PT Made','Steals','Blocks','Turnovers','Fantasy Score','Other'];
+const SPORT_OPTS = ['NBA','CBB','NFL','MLB','WNBA','Soccer','Other'];
+
+// ═══════════════════════════════════════════════════════
 //  STORAGE
 // ═══════════════════════════════════════════════════════
-const STORAGE_KEY = 'slateiq_payout_log_v3';
-
-function loadLog() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch { return []; }
-}
-function saveLog(entries) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(entries)); } catch {}
-}
-
+function loadLog() { try { const r = localStorage.getItem(STORAGE_KEY); return r ? JSON.parse(r) : []; } catch { return []; } }
+function saveLog(e) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(e)); } catch {} }
 let logEntries = loadLog();
 
 // ═══════════════════════════════════════════════════════
 //  TABS
 // ═══════════════════════════════════════════════════════
-function switchTab(id) {
+function switchTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
-  event.currentTarget.classList.add('active');
+  btn.classList.add('active');
   if (id === 'patterns') renderPatterns();
-  if (id === 'log') { renderLogTable(); updateLogCount(); refreshLogTicketSummary(); }
+  if (id === 'log') { renderLogTable(); updateLogCount(); }
 }
 
 // ═══════════════════════════════════════════════════════
-//  CALC LEG BUILDER (Tab 1)
+//  DELTA% HELPERS
 // ═══════════════════════════════════════════════════════
-let legs = [];
-let legCounter = 0;
-
-function addLeg(type) {
-  const id = ++legCounter;
-  legs.push({ id, type, player: '', stdLine: '', adjLine: '', hitProb: type === 'goblin' ? 0.68 : type === 'demon' ? 0.32 : 0.52 });
-  renderLegs();
+function getDeltaPct(std, played) {
+  if (!std || !played || std === 0) return null;
+  return Math.round((played / std) * 1000) / 1000;
 }
-
-function removeLeg(id) {
-  legs = legs.filter(l => l.id !== id);
-  renderLegs();
+function autoClassifyType(std, played) {
+  if (!std || !played) return 'standard';
+  const delta = played - std;
+  if (Math.abs(delta) < 0.25) return 'standard';
+  if (delta < 0) return 'goblin';
+  return 'demon';
 }
-
-function clearLegs() {
-  legs = [];
-  legCounter = 0;
-  renderLegs();
-  document.getElementById('calc-results').style.display = 'none';
-}
-
-function renderLegs() {
-  const container = document.getElementById('leg-list');
-  if (!legs.length) {
-    container.innerHTML = '<div style="font-size:11px;color:var(--muted2);padding:12px 0">No legs added yet. Use the buttons below to build your slip.</div>';
-    return;
+function getDeltaBucket(pct, kind) {
+  if (!pct || kind === 'standard') return 'Standard';
+  if (kind === 'goblin') {
+    if (pct >= 0.90) return 'Goblin Shallow (≥90%)';
+    if (pct >= 0.75) return 'Goblin Mid (75–89%)';
+    if (pct >= 0.60) return 'Goblin Deep (60–74%)';
+    return 'Goblin Extreme (<60%)';
   }
-  container.innerHTML = legs.map(leg => {
-    const icons = { goblin: '🎃', demon: '😈', standard: '⭐' };
-    return `<div class="leg-row">
-      <span class="leg-type-badge ${leg.type}">${icons[leg.type]} ${leg.type.toUpperCase()}</span>
-      <input class="leg-input" placeholder="Player name" value="${leg.player}"
-        oninput="updateLeg(${leg.id},'player',this.value)"/>
-      <input class="leg-input" type="number" step="0.5" placeholder="Std line"
-        value="${leg.stdLine}" oninput="updateLeg(${leg.id},'stdLine',this.value)"/>
-      <input class="leg-input" type="number" step="0.01" min="0" max="1" placeholder="Hit prob (0-1)"
-        value="${leg.hitProb}" oninput="updateLeg(${leg.id},'hitProb',this.value)"/>
-      <button class="leg-remove" onclick="removeLeg(${leg.id})">✕</button>
-    </div>`;
-  }).join('');
+  if (kind === 'demon') {
+    if (pct <= 1.10) return 'Demon Shallow (≤110%)';
+    if (pct <= 1.25) return 'Demon Mid (111–125%)';
+    if (pct <= 1.40) return 'Demon Deep (126–140%)';
+    return 'Demon Extreme (>140%)';
+  }
+  return 'Unknown';
 }
-
-function updateLeg(id, field, val) {
-  const leg = legs.find(l => l.id === id);
-  if (leg) leg[field] = field === 'hitProb' || field === 'stdLine' ? parseFloat(val) || 0 : val;
+function bucketColor(b) {
+  if (!b) return 'var(--muted)';
+  if (b.startsWith('Standard')) return 'var(--std)';
+  if (b.startsWith('Goblin'))   return 'var(--goblin)';
+  if (b.startsWith('Demon'))    return 'var(--demon)';
+  return 'var(--muted)';
+}
+function shiftColor(pct) {
+  if (pct === null || pct === undefined) return 'var(--muted)';
+  if (pct > 5)  return 'var(--demon)';
+  if (pct < -5) return 'var(--goblin)';
+  return 'var(--amber)';
 }
 
 // ═══════════════════════════════════════════════════════
 //  CALCULATOR (Tab 1)
 // ═══════════════════════════════════════════════════════
-const PP_BASE = { 2: 3, 3: 6, 4: 10, 5: 20, 6: 37.5 };
-const PP_FLEX = {
-  2: [[1, 1.5]],
-  3: [[1, 3], [2/3, 1]],
-  4: [[1, 6], [3/4, 1.5]],
-  5: [[1, 10], [4/5, 2], [3/5, 0.4]],
-  6: [[1, 25], [5/6, 2], [4/6, 0.4]]
-};
+let calcLegs = [], calcLegCounter = 0;
+
+function addCalcLeg(type) {
+  const id = ++calcLegCounter;
+  calcLegs.push({ id, type, player:'', stdLine:'', hitProb: type==='goblin'?0.68:type==='demon'?0.32:0.52 });
+  renderCalcLegs();
+}
+function removeCalcLeg(id) { calcLegs = calcLegs.filter(l => l.id !== id); renderCalcLegs(); }
+function clearCalcLegs() { calcLegs = []; calcLegCounter = 0; renderCalcLegs(); document.getElementById('calc-results').style.display='none'; }
+function updateCalcLeg(id, field, val) {
+  const l = calcLegs.find(l => l.id === id);
+  if (l) l[field] = (field === 'hitProb' || field === 'stdLine') ? parseFloat(val)||0 : val;
+}
+function renderCalcLegs() {
+  const c = document.getElementById('calc-leg-list');
+  if (!calcLegs.length) { c.innerHTML = '<div style="font-size:11px;color:var(--muted2);padding:12px 0">No legs added yet.</div>'; return; }
+  const icons = { goblin:'🎃', demon:'😈', standard:'⭐' };
+  c.innerHTML = calcLegs.map(leg => {
+    const col = leg.type==='goblin'?'rgba(57,255,110,.35)':leg.type==='demon'?'rgba(255,77,77,.35)':'rgba(0,229,255,.25)';
+    return `<div style="display:grid;grid-template-columns:120px 1fr 1fr 28px;gap:8px;align-items:center;background:var(--bg3);border:1px solid ${col};border-left:3px solid ${bucketColor('').replace('var(--muted)','')};border-radius:10px;padding:10px 12px;">
+      <span class="leg-type-badge ${leg.type}">${icons[leg.type]} ${leg.type.toUpperCase()}</span>
+      <input class="leg-input" placeholder="Player name" value="${leg.player}" oninput="updateCalcLeg(${leg.id},'player',this.value)"/>
+      <input class="leg-input" type="number" step="0.01" min="0" max="1" placeholder="Hit prob (0–1)" value="${leg.hitProb}" oninput="updateCalcLeg(${leg.id},'hitProb',this.value)"/>
+      <button class="leg-remove" onclick="removeCalcLeg(${leg.id})">✕</button>
+    </div>`;
+  }).join('');
+}
 
 function runCalc() {
-  if (!legs.length) { alert('Add at least one leg first.'); return; }
-  const mult = parseFloat(document.getElementById('calc-mult').value);
+  if (!calcLegs.length) { alert('Add at least one leg.'); return; }
+  const mult  = parseFloat(document.getElementById('calc-mult').value);
   const stake = parseFloat(document.getElementById('calc-stake').value) || 10;
-  const n = legs.length;
-
+  const n     = calcLegs.length;
   if (!mult || mult <= 0) { alert('Enter the payout multiplier PrizePicks is showing you.'); return; }
-
   let modeledP = 1;
-  legs.forEach(leg => {
-    const p = Math.min(0.99, Math.max(0.01, parseFloat(leg.hitProb) || 0.5));
-    modeledP *= p;
-  });
-
-  const impliedP = 1 / mult;
-  const payout = stake * mult;
-  const ev = modeledP * mult - 1;
-  const evDollar = ev * stake;
-  const baseMult = PP_BASE[n] || mult;
+  calcLegs.forEach(l => { modeledP *= Math.min(0.99, Math.max(0.01, parseFloat(l.hitProb)||0.5)); });
+  const impliedP  = 1 / mult;
+  const ev        = modeledP * mult - 1;
+  const baseMult  = PP_BASE[n] || mult;
   const multShift = ((mult / baseMult) - 1) * 100;
-
-  document.getElementById('r-payout').textContent = '$' + payout.toFixed(2);
+  document.getElementById('r-payout').textContent     = '$' + (stake * mult).toFixed(2);
   document.getElementById('r-payout-sub').textContent = `${mult}x on $${stake}`;
-  document.getElementById('r-winprob').textContent = (modeledP * 100).toFixed(1) + '%';
-  document.getElementById('r-winprob-sub').textContent = legs.map(l => {
-    const p = parseFloat(l.hitProb) || 0.5;
-    const icons = { goblin: '🎃', demon: '😈', standard: '⭐' };
-    return `${icons[l.type]}${(p*100).toFixed(0)}%`;
-  }).join(' × ');
-  document.getElementById('r-implied').textContent = (impliedP * 100).toFixed(1) + '%';
-
+  document.getElementById('r-winprob').textContent    = (modeledP * 100).toFixed(1) + '%';
+  document.getElementById('r-winprob-sub').textContent= calcLegs.map(l => { const p = parseFloat(l.hitProb)||0.5; return `${l.type==='goblin'?'🎃':l.type==='demon'?'😈':'⭐'}${(p*100).toFixed(0)}%`; }).join(' × ');
+  document.getElementById('r-implied').textContent    = (impliedP * 100).toFixed(1) + '%';
   const evEl = document.getElementById('r-ev');
-  evEl.textContent = (ev >= 0 ? '+' : '') + (ev * 100).toFixed(1) + '¢';
-  evEl.className = 'result-val ' + (ev > 0.02 ? 'pos' : ev < -0.02 ? 'neg' : 'warn');
-
+  evEl.textContent  = (ev >= 0 ? '+' : '') + (ev * 100).toFixed(1) + '¢';
+  evEl.className    = 'result-val ' + (ev > 0.02 ? 'pos' : ev < -0.02 ? 'neg' : 'warn');
   const evSubEl = document.getElementById('r-ev-sub');
-  evSubEl.textContent = `${ev >= 0 ? '+' : ''}$${evDollar.toFixed(2)} on $${stake}`;
-  evSubEl.className = ev >= 0 ? 'result-sub pos' : 'result-sub neg';
-
-  const gobCount = legs.filter(l => l.type === 'goblin').length;
-  const demCount = legs.filter(l => l.type === 'demon').length;
-  const multNote = multShift === 0 ? '' :
-    multShift > 0 ? ` Demon(s) boosted the base ${baseMult}x by ${multShift.toFixed(0)}% → ${mult}x.` :
-                    ` Goblin(s) reduced the base ${baseMult}x by ${Math.abs(multShift).toFixed(0)}% → ${mult}x.`;
-
-  document.getElementById('r-notes').innerHTML =
-    `<strong style="color:${ev >= 0 ? 'var(--green)' : 'var(--red)'}">
-      ${ev >= 0 ? '✅ POSITIVE EV' : '❌ NEGATIVE EV'}
-    </strong> — Your modeled win prob (${(modeledP*100).toFixed(1)}%) is ` +
-    `${ev >= 0 ? 'ABOVE' : 'BELOW'} the implied prob (${(impliedP*100).toFixed(1)}%).` +
-    `${multNote} ` +
-    `Slip: ${n}-leg, ${gobCount > 0 ? gobCount + ' Goblin' : ''}${gobCount > 0 && demCount > 0 ? ' + ' : ''}${demCount > 0 ? demCount + ' Demon' : ''}${gobCount === 0 && demCount === 0 ? 'all Standard' : ''}.`;
-
+  evSubEl.textContent = `${ev>=0?'+':''}$${(ev*stake).toFixed(2)} on $${stake}`;
+  evSubEl.className   = ev >= 0 ? 'result-sub pos' : 'result-sub neg';
+  const gob = calcLegs.filter(l=>l.type==='goblin').length, dem = calcLegs.filter(l=>l.type==='demon').length;
+  const multNote = multShift===0?'': multShift>0 ? ` Demon(s) boosted base ${baseMult}x by ${multShift.toFixed(0)}% → ${mult}x.` : ` Goblin(s) reduced base ${baseMult}x by ${Math.abs(multShift).toFixed(0)}% → ${mult}x.`;
+  document.getElementById('r-notes').innerHTML = `<strong style="color:${ev>=0?'var(--green)':'var(--red)'}">${ev>=0?'✅ POSITIVE EV':'❌ NEGATIVE EV'}</strong> — Your modeled win prob (${(modeledP*100).toFixed(1)}%) is ${ev>=0?'ABOVE':'BELOW'} the implied prob (${(impliedP*100).toFixed(1)}%).${multNote}`;
   document.getElementById('calc-results').style.display = 'block';
-  document.getElementById('calc-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  document.getElementById('calc-results').scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
 // ═══════════════════════════════════════════════════════
 //  LOG — TICKET BUILDER (Tab 2)
 // ═══════════════════════════════════════════════════════
-let logLegs = [];
-let logLegCounter = 0;
-
-const PROP_OPTS = ['Points','Rebounds','Assists','Pts+Reb+Ast','Pts+Reb','Pts+Ast','3-PT Made','Steals','Blocks','Turnovers','Fantasy Score','Other'];
-const SPORT_OPTS = ['NBA','CBB','NFL','MLB','Other'];
-
-// Set today's date on load
+let logLegs = [], logLegCounter = 0;
 document.getElementById('log-date').value = new Date().toISOString().slice(0,10);
 
 function addLogLeg(type) {
-  const id = ++logLegCounter;
-  logLegs.push({ id, type, player: '', sport: 'NBA', prop: 'Points', stdLine: '', adjLine: '' });
+  logLegs.push({ id:++logLegCounter, type, player:'', sport:'NBA', prop:'Points', stdLine:'', playedLine:'' });
   renderLogLegs();
-  refreshLogTicketSummary();
+  refreshLogSummary();
 }
-
-function removeLogLeg(id) {
-  logLegs = logLegs.filter(l => l.id !== id);
-  renderLogLegs();
-  refreshLogTicketSummary();
-}
-
+function removeLogLeg(id) { logLegs = logLegs.filter(l => l.id !== id); renderLogLegs(); refreshLogSummary(); }
 function updateLogLeg(id, field, val) {
-  const leg = logLegs.find(l => l.id === id);
-  if (leg) {
-    leg[field] = (field === 'stdLine' || field === 'adjLine') ? val : val;
+  const l = logLegs.find(l => l.id === id);
+  if (!l) return;
+  l[field] = val;
+  // Auto re-classify type from lines
+  if (field === 'stdLine' || field === 'playedLine') {
+    const std = parseFloat(l.stdLine), pld = parseFloat(l.playedLine);
+    if (!isNaN(std) && !isNaN(pld)) l.type = autoClassifyType(std, pld);
   }
-  refreshLogTicketSummary();
-}
-
-function clearLogTicket() {
-  logLegs = [];
-  logLegCounter = 0;
   renderLogLegs();
+  refreshLogSummary();
+}
+function clearLogForm() {
+  logLegs = []; logLegCounter = 0; renderLogLegs();
   document.getElementById('log-base-mult').value = '';
   document.getElementById('log-actual-mult').value = '';
   document.getElementById('log-ticket-summary').style.display = 'none';
-  document.getElementById('log-base-hint').textContent = '';
   document.getElementById('log-leg-summary').textContent = '';
 }
 
 function renderLogLegs() {
-  const container = document.getElementById('log-leg-list');
-  if (!logLegs.length) {
-    container.innerHTML = '<div style="font-size:11px;color:var(--muted2);padding:10px 0">No legs added yet — use the buttons below.</div>';
-    return;
-  }
+  const c = document.getElementById('log-leg-list');
+  if (!logLegs.length) { c.innerHTML = '<div style="font-size:11px;color:var(--muted2);padding:10px 0">No legs added yet — use the buttons below.</div>'; return; }
+  const sportSel = (cur) => SPORT_OPTS.map(s => `<option value="${s}"${s===cur?' selected':''}>${s}</option>`).join('');
+  const propSel  = (cur) => PROP_OPTS.map(p  => `<option value="${p}"${p===cur?' selected':''}>${p}</option>`).join('');
 
-  const sportOptions = SPORT_OPTS.map(s => `<option value="${s}">${s}</option>`).join('');
-  const propOptions  = PROP_OPTS.map(p => `<option value="${p}">${p}</option>`).join('');
+  c.innerHTML = logLegs.map((leg, i) => {
+    const std = parseFloat(leg.stdLine), pld = parseFloat(leg.playedLine);
+    const delta    = (!isNaN(std)&&!isNaN(pld)) ? Math.round((pld-std)*100)/100 : null;
+    const deltaPct = getDeltaPct(std, pld);
+    const bucket   = deltaPct ? getDeltaBucket(deltaPct, leg.type) : null;
+    const accentCol = leg.type==='goblin'?'var(--goblin)':leg.type==='demon'?'var(--demon)':'var(--std)';
+    const borderCol = leg.type==='goblin'?'rgba(57,255,110,.3)':leg.type==='demon'?'rgba(255,77,77,.3)':'rgba(0,229,255,.2)';
+    const icons = { goblin:'🎃', demon:'😈', standard:'⭐' };
 
-  container.innerHTML = logLegs.map((leg, i) => {
-    const icons = { goblin: '🎃', demon: '😈', standard: '⭐' };
-    const borderCol = leg.type === 'goblin' ? 'rgba(57,255,110,.35)' : leg.type === 'demon' ? 'rgba(255,77,77,.35)' : 'rgba(0,229,255,.25)';
-    const accentCol = leg.type === 'goblin' ? 'var(--goblin)' : leg.type === 'demon' ? 'var(--demon)' : 'var(--std)';
+    const bucketHtml = bucket ? `<span style="font-size:9px;letter-spacing:.5px;padding:2px 8px;border-radius:4px;background:${bucketColor(bucket)}18;color:${bucketColor(bucket)};border:1px solid ${bucketColor(bucket)}33">${bucket}</span>` : '';
+    const deltaHtml  = delta !== null
+      ? `<span style="color:${delta<0?'var(--goblin)':delta>0?'var(--demon)':'var(--muted)'};font-size:11px">${delta>0?'+':''}${delta} &nbsp;·&nbsp; ${deltaPct}</span>`
+      : '<span style="color:var(--muted2);font-size:11px">—</span>';
 
-    // Build sport select with current value selected
-    const sportSel = SPORT_OPTS.map(s => `<option value="${s}"${leg.sport===s?' selected':''}>${s}</option>`).join('');
-    const propSel  = PROP_OPTS.map(p => `<option value="${p}"${leg.prop===p?' selected':''}>${p}</option>`).join('');
-
-    const adjLabel = leg.type === 'goblin' ? 'GOBLIN LINE (lower)' : leg.type === 'demon' ? 'DEMON LINE (higher)' : 'N/A';
-    const adjPlaceholder = leg.type === 'goblin' ? 'e.g. 19.5' : leg.type === 'demon' ? 'e.g. 29.5' : 'Std only';
-
-    return `<div style="background:var(--bg3);border:1px solid ${borderCol};border-left:3px solid ${accentCol};border-radius:10px;padding:12px 14px;position:relative;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-        <span class="leg-type-badge ${leg.type}" style="font-size:11px">${icons[leg.type]} LEG ${i+1} — ${leg.type.toUpperCase()}</span>
-        <button class="leg-remove" onclick="removeLogLeg(${leg.id})" style="font-size:14px;color:var(--muted2)">✕</button>
+    return `<div style="background:var(--bg3);border:1px solid ${borderCol};border-left:3px solid ${accentCol};border-radius:10px;padding:12px 14px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px;flex-wrap:wrap;">
+        <span class="leg-type-badge ${leg.type}">${icons[leg.type]} LEG ${i+1} — ${leg.type.toUpperCase()}</span>
+        <div style="display:flex;align-items:center;gap:8px;">${bucketHtml}<button class="leg-remove" onclick="removeLogLeg(${leg.id})">✕</button></div>
       </div>
-      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px;align-items:end;">
+      <div class="form-grid-5">
         <div class="field">
           <label>PLAYER</label>
-          <input class="leg-input" type="text" placeholder="e.g. LeBron James" value="${leg.player}"
-            oninput="updateLogLeg(${leg.id},'player',this.value)" style="background:var(--bg2)"/>
+          <input class="leg-input" type="text" placeholder="e.g. Tari Eason" value="${leg.player}" oninput="updateLogLeg(${leg.id},'player',this.value)"/>
         </div>
         <div class="field">
           <label>SPORT</label>
-          <select class="leg-input" onchange="updateLogLeg(${leg.id},'sport',this.value)" style="background:var(--bg2)">
-            ${sportSel}
-          </select>
+          <select class="leg-input" onchange="updateLogLeg(${leg.id},'sport',this.value)">${sportSel(leg.sport)}</select>
         </div>
         <div class="field">
           <label>PROP</label>
-          <select class="leg-input" onchange="updateLogLeg(${leg.id},'prop',this.value)" style="background:var(--bg2)">
-            ${propSel}
-          </select>
+          <select class="leg-input" onchange="updateLogLeg(${leg.id},'prop',this.value)">${propSel(leg.prop)}</select>
         </div>
         <div class="field">
-          <label>STD LINE</label>
-          <input class="leg-input" type="number" step="0.5" placeholder="e.g. 24.5" value="${leg.stdLine}"
-            oninput="updateLogLeg(${leg.id},'stdLine',this.value)" style="background:var(--bg2)"/>
+          <label style="color:var(--std)">STD LINE</label>
+          <input class="leg-input" type="number" step="0.5" placeholder="e.g. 20.5" value="${leg.stdLine}"
+            oninput="updateLogLeg(${leg.id},'stdLine',this.value)" style="color:var(--std)"/>
         </div>
         <div class="field">
-          <label style="color:${leg.type==='standard'?'var(--muted2)':accentCol}">${adjLabel}</label>
-          <input class="leg-input" type="number" step="0.5" placeholder="${adjPlaceholder}" value="${leg.adjLine}"
-            ${leg.type==='standard'?'disabled style="opacity:.35;background:var(--bg2)"':'style="background:var(--bg2)"'}
-            oninput="updateLogLeg(${leg.id},'adjLine',this.value)"/>
+          <label style="color:${accentCol}">${leg.type==='goblin'?'GOBLIN LINE':leg.type==='demon'?'DEMON LINE':'PLAYED LINE'}</label>
+          <input class="leg-input" type="number" step="0.5" placeholder="${leg.type==='goblin'?'e.g. 16.5':leg.type==='demon'?'e.g. 24.5':'same as std'}" value="${leg.playedLine}"
+            ${leg.type==='standard'&&!leg.playedLine?'disabled':''} oninput="updateLogLeg(${leg.id},'playedLine',this.value)" style="color:${accentCol}"/>
         </div>
+      </div>
+      <div style="margin-top:8px;font-size:10px;color:var(--muted2);letter-spacing:1px">
+        Δ / Δ% &nbsp;→&nbsp; ${deltaHtml}
       </div>
     </div>`;
   }).join('');
 }
 
-function refreshLogTicketSummary() {
-  const n = logLegs.length;
-  const nGob = logLegs.filter(l => l.type === 'goblin').length;
-  const nDem = logLegs.filter(l => l.type === 'demon').length;
-  const nStd = logLegs.filter(l => l.type === 'standard').length;
+function refreshLogSummary() {
+  const n    = logLegs.length;
+  const nGob = logLegs.filter(l=>l.type==='goblin').length;
+  const nDem = logLegs.filter(l=>l.type==='demon').length;
+  const nStd = logLegs.filter(l=>l.type==='standard').length;
 
-  // Update leg count badge
   const parts = [];
-  if (nStd) parts.push(`${nStd} Std`);
+  if (nStd) parts.push(`${nStd}⭐ Std`);
   if (nGob) parts.push(`${nGob}🎃`);
   if (nDem) parts.push(`${nDem}😈`);
   document.getElementById('log-leg-summary').textContent = n ? `(${n} legs: ${parts.join(' · ')})` : '';
 
   // Auto-fill base mult
   const baseEl = document.getElementById('log-base-mult');
-  const hintEl = document.getElementById('log-base-hint');
-  if (n >= 2 && PP_BASE[n] && !baseEl.value) {
-    baseEl.placeholder = `Auto: ${PP_BASE[n]}x for ${n}-leg all-standard`;
-    hintEl.textContent = `Standard ${n}-leg Power = ${PP_BASE[n]}x`;
-  } else if (n) {
-    hintEl.textContent = n < 2 ? 'Need at least 2 legs' : '';
+  if (n >= 2 && PP_BASE[n]) {
+    baseEl.value = PP_BASE[n];
+    baseEl.placeholder = `${PP_BASE[n]}x (${n}-leg standard)`;
+  } else {
+    baseEl.value = '';
   }
 
-  // Ticket summary preview
-  const summaryEl = document.getElementById('log-ticket-summary');
+  // Summary preview
+  const summaryEl  = document.getElementById('log-ticket-summary');
   const actualMult = parseFloat(document.getElementById('log-actual-mult').value);
-  const baseMult = parseFloat(document.getElementById('log-base-mult').value) || PP_BASE[n];
-
+  const baseMult   = PP_BASE[n] || null;
   if (!n) { summaryEl.style.display = 'none'; return; }
 
   const legLines = logLegs.map((l, i) => {
-    const icon = l.type === 'goblin' ? '🎃' : l.type === 'demon' ? '😈' : '⭐';
-    const player = l.player || `Leg ${i+1}`;
-    const dist = (l.stdLine !== '' && l.adjLine !== '' && l.type !== 'standard')
-      ? ` · ${l.type==='goblin'?'↓':'↑'}${Math.abs(parseFloat(l.adjLine||0) - parseFloat(l.stdLine||0)).toFixed(1)} units (${l.stdLine} → ${l.adjLine})`
-      : l.stdLine ? ` · Line: ${l.stdLine}` : '';
-    return `<span style="color:${l.type==='goblin'?'var(--goblin)':l.type==='demon'?'var(--demon)':'var(--std)'}">${icon} ${player} — ${l.sport} ${l.prop}${dist}</span>`;
-  }).join('<br>');
+    const std = parseFloat(l.stdLine), pld = parseFloat(l.playedLine);
+    const col  = l.type==='goblin'?'var(--goblin)':l.type==='demon'?'var(--demon)':'var(--std)';
+    const icon = l.type==='goblin'?'🎃':l.type==='demon'?'😈':'⭐';
+    const linePart = (!isNaN(std) && !isNaN(pld) && l.type !== 'standard')
+      ? ` &nbsp;<span style="color:${col}">${l.stdLine}→${l.playedLine} (${Math.round((pld/std)*1000)/1000})</span>`
+      : (l.stdLine ? ` &nbsp;Line: ${l.stdLine}` : '');
+    return `<div>${icon} <span style="color:${col}">${l.player||`Leg ${i+1}`}</span> · ${l.sport} ${l.prop}${linePart}</div>`;
+  }).join('');
 
   let payoutLine = '';
   if (baseMult && actualMult) {
     const shift = ((actualMult / baseMult) - 1) * 100;
-    const shiftCol = shift < 0 ? 'var(--goblin)' : shift > 0 ? 'var(--demon)' : 'var(--muted)';
     payoutLine = `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-      Base: <strong>${baseMult}x</strong> → Actual: <strong style="color:${shiftCol}">${actualMult}x</strong>
-      &nbsp;·&nbsp; Multiplier ${shift >= 0 ? '+' : ''}${shift.toFixed(1)}% vs all-standard
+      Base: <strong>${baseMult}x</strong> &nbsp;→&nbsp; Actual: <strong style="color:${shiftColor(shift)}">${actualMult}x</strong>
+      &nbsp;·&nbsp; <span style="color:${shiftColor(shift)}">${shift>=0?'+':''}${shift.toFixed(1)}%</span> vs all-standard
     </div>`;
   }
 
   summaryEl.style.display = 'block';
-  summaryEl.innerHTML = `<div style="color:var(--muted);font-size:10px;letter-spacing:2px;margin-bottom:8px">TICKET PREVIEW — ${n}-LEG ${nGob?nGob+'🎃 ':''}${nDem?nDem+'😈 ':''}${nStd?nStd+'⭐':''}SLIP</div>${legLines}${payoutLine}`;
+  summaryEl.innerHTML = `<div style="font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:8px">TICKET PREVIEW — ${n}-LEG ${nGob?nGob+'🎃 ':''}${nDem?nDem+'😈 ':''}${nStd?nStd+'⭐ ':''}SLIP</div>${legLines}${payoutLine}`;
 }
 
 // ═══════════════════════════════════════════════════════
 //  LOG — SAVE TICKET
 // ═══════════════════════════════════════════════════════
 function logTicket() {
-  if (logLegs.length < 2) {
-    showLogMsg('⚠ Add at least 2 legs to log a ticket.', 'warn'); return;
-  }
-
+  if (logLegs.length < 2) { showLogMsg('⚠ Add at least 2 legs.', 'warn'); return; }
   const actualMult = parseFloat(document.getElementById('log-actual-mult').value);
-  if (!actualMult || actualMult <= 0) {
-    showLogMsg('⚠ Enter the actual payout multiplier shown on the app.', 'warn'); return;
-  }
+  if (!actualMult || actualMult <= 0) { showLogMsg('⚠ Enter the actual payout multiplier.', 'warn'); return; }
 
-  const n = logLegs.length;
+  const n         = logLegs.length;
   const platform  = document.getElementById('log-platform').value;
   const slipType  = document.getElementById('log-slip-type').value;
   const dateVal   = document.getElementById('log-date').value;
-  const baseMult  = parseFloat(document.getElementById('log-base-mult').value) || PP_BASE[n] || null;
+  const baseMult  = PP_BASE[n] || null;
+  const nGob = logLegs.filter(l=>l.type==='goblin').length;
+  const nDem = logLegs.filter(l=>l.type==='demon').length;
+  const nStd = logLegs.filter(l=>l.type==='standard').length;
+  const multChange = baseMult ? Math.round(((actualMult / baseMult) - 1) * 1000) / 10 : null;
 
-  const nGob = logLegs.filter(l => l.type === 'goblin').length;
-  const nDem = logLegs.filter(l => l.type === 'demon').length;
-  const nStd = logLegs.filter(l => l.type === 'standard').length;
+  const legsData = logLegs.map(l => {
+    const std = parseFloat(l.stdLine)||null, pld = parseFloat(l.playedLine)||null;
+    const deltaPct = getDeltaPct(std, pld);
+    const bucket   = getDeltaBucket(deltaPct, l.type);
+    return {
+      type: l.type, player: l.player||'Unknown', sport: l.sport, prop: l.prop,
+      stdLine: std, playedLine: l.type!=='standard' ? pld : null,
+      distance: (l.type!=='standard'&&std&&pld) ? Math.round(Math.abs(pld-std)*100)/100 : null,
+      deltaPct, bucket
+    };
+  });
 
-  const multChange = baseMult ? ((actualMult / baseMult) - 1) * 100 : null;
-
-  // Per-leg detail for pattern analysis
-  const legsData = logLegs.map(l => ({
-    type:    l.type,
-    player:  l.player || 'Unknown',
-    sport:   l.sport,
-    prop:    l.prop,
-    stdLine: parseFloat(l.stdLine) || null,
-    adjLine: l.type !== 'standard' ? (parseFloat(l.adjLine) || null) : null,
-    distance: (l.type !== 'standard' && l.stdLine !== '' && l.adjLine !== '')
-      ? Math.abs(parseFloat(l.adjLine||0) - parseFloat(l.stdLine||0))
-      : null
-  }));
+  const bucketSig = [...legsData].map(l=>l.bucket||l.type).sort().join(' + ');
+  const comboSig  = [...legsData].map(l=>l.type).sort().join(' + ');
 
   const entry = {
-    id:         Date.now(),
-    ts:         dateVal || new Date().toLocaleDateString(),
-    platform,   slipType,
-    nLegs:      n,
-    nStd,       nGob,   nDem,
-    baseMult,   actualMult, multChange,
-    legs:       legsData
+    id: Date.now(), ts: dateVal||new Date().toLocaleDateString(),
+    platform, slipType, nLegs:n, nStd, nGob, nDem,
+    baseMult, actualMult, multChange, bucketSig, comboSig, legs: legsData
   };
 
   logEntries.push(entry);
   saveLog(logEntries);
   renderLogTable();
   updateLogCount();
-  clearLogTicket();
-  showLogMsg(`✓ Ticket logged! ${logEntries.length} total ticket${logEntries.length !== 1 ? 's' : ''} in log.`, 'good');
+  clearLogForm();
+  showLogMsg(`✓ Ticket logged! ${logEntries.length} total.`, 'good');
 }
 
 function showLogMsg(msg, type) {
   const el = document.getElementById('log-msg');
   el.textContent = msg;
-  el.style.color = type === 'good' ? 'var(--green)' : type === 'warn' ? 'var(--amber)' : 'var(--red)';
-  setTimeout(() => el.textContent = '', 3500);
+  el.style.color = type==='good'?'var(--green)':type==='warn'?'var(--amber)':'var(--red)';
+  setTimeout(()=>el.textContent='', 3500);
 }
-
-function deleteEntry(id) {
-  logEntries = logEntries.filter(e => e.id !== id);
-  saveLog(logEntries);
-  renderLogTable();
-  updateLogCount();
-}
-
-function clearAllLog() {
-  if (!logEntries.length || !confirm('Delete all logged tickets?')) return;
-  logEntries = [];
-  saveLog(logEntries);
-  renderLogTable();
-  updateLogCount();
-}
-
+function deleteEntry(id) { logEntries=logEntries.filter(e=>e.id!==id); saveLog(logEntries); renderLogTable(); updateLogCount(); }
+function clearAllLog() { if (!logEntries.length||!confirm('Delete all logged tickets?')) return; logEntries=[]; saveLog(logEntries); renderLogTable(); updateLogCount(); }
 function updateLogCount() {
   const n = logEntries.length;
   document.getElementById('log-count').textContent = n;
@@ -922,75 +849,48 @@ function updateLogCount() {
 
 function renderLogTable() {
   const wrap = document.getElementById('log-table-wrap');
-  if (!logEntries.length) {
-    wrap.innerHTML = '<div class="empty-log">No tickets logged yet. Build one above to start finding patterns.</div>';
-    return;
-  }
-
+  if (!logEntries.length) { wrap.innerHTML='<div class="empty-log">No tickets logged yet.</div>'; return; }
   const rows = [...logEntries].reverse().map(e => {
-    const shiftCol  = e.multChange === null ? 'var(--muted)' : e.multChange < 0 ? 'var(--goblin)' : 'var(--demon)';
-    const changeStr = e.multChange !== null
-      ? `<span style="color:${shiftCol};font-weight:700">${e.multChange >= 0 ? '+' : ''}${e.multChange.toFixed(1)}%</span>`
-      : '—';
-
-    // Mix chips
+    const shiftCol = shiftColor(e.multChange);
+    const changeStr = e.multChange!==null ? `<span style="color:${shiftCol};font-weight:700">${e.multChange>=0?'+':''}${e.multChange.toFixed(1)}%</span>` : '—';
     const mixParts = [];
     if (e.nStd) mixParts.push(`<span class="tag tag-standard">${e.nStd}⭐ Std</span>`);
     if (e.nGob) mixParts.push(`<span class="tag tag-goblin">${e.nGob}🎃 Gob</span>`);
     if (e.nDem) mixParts.push(`<span class="tag tag-demon">${e.nDem}😈 Dem</span>`);
-
-    // Leg detail rows (expanded inline)
-    const legDetail = (e.legs || []).map(l => {
-      const icon = l.type === 'goblin' ? '🎃' : l.type === 'demon' ? '😈' : '⭐';
-      const col  = l.type === 'goblin' ? 'var(--goblin)' : l.type === 'demon' ? 'var(--demon)' : 'var(--std)';
-      const distStr = l.distance !== null ? ` <span style="color:${col};font-size:10px">(${l.type==='goblin'?'-':'+'}${l.distance.toFixed(1)}u · ${l.stdLine}→${l.adjLine})</span>` : l.stdLine ? ` <span style="color:var(--muted2);font-size:10px">Line: ${l.stdLine}</span>` : '';
-      return `<div style="font-size:10px;color:var(--muted);line-height:1.7">${icon} <span style="color:${col}">${l.player}</span> · ${l.sport} ${l.prop}${distStr}</div>`;
+    const legDetail = (e.legs||[]).map(l => {
+      const icon = l.type==='goblin'?'🎃':l.type==='demon'?'😈':'⭐';
+      const col  = l.type==='goblin'?'var(--goblin)':l.type==='demon'?'var(--demon)':'var(--std)';
+      const lineStr = (l.stdLine&&l.playedLine&&l.type!=='standard')
+        ? ` <span style="color:${col};font-size:10px">(${l.stdLine}→${l.playedLine} · Δ%=${l.deltaPct})</span>`
+        : l.stdLine ? ` <span style="color:var(--muted2);font-size:10px">Line: ${l.stdLine}</span>` : '';
+      const bkt = l.bucket&&l.bucket!=='Standard' ? ` <span style="color:${bucketColor(l.bucket)};font-size:9px">[${l.bucket}]</span>` : '';
+      return `<div style="font-size:10px;color:var(--muted);line-height:1.7">${icon} <span style="color:${col}">${l.player}</span> · ${l.sport} ${l.prop}${lineStr}${bkt}</div>`;
     }).join('');
-
     return `<tr>
       <td style="font-size:11px;color:var(--muted)">${e.ts}</td>
-      <td style="font-size:10px;color:var(--muted2)">${e.platform === 'prizepicks' ? 'PP' : 'UD'} · ${(e.slipType||'power').toUpperCase()}</td>
+      <td style="font-size:10px;color:var(--muted2)">${e.platform} · ${e.slipType||'Power'}</td>
       <td><div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px">${mixParts.join('')}</div><div style="font-size:10px;color:var(--muted2)">${e.nLegs}-leg</div></td>
       <td>${legDetail}</td>
-      <td class="mono" style="font-size:12px">${e.baseMult ? e.baseMult + 'x' : '—'}</td>
+      <td class="mono" style="font-size:12px">${e.baseMult?e.baseMult+'x':'—'}</td>
       <td class="mono" style="font-size:14px;color:${shiftCol};font-weight:700">${e.actualMult}x</td>
       <td>${changeStr}</td>
       <td><button class="del-btn" onclick="deleteEntry(${e.id})">✕</button></td>
     </tr>`;
   }).join('');
-
   wrap.innerHTML = `<div style="overflow-x:auto"><table class="log-table">
-    <thead><tr>
-      <th>DATE</th><th>PLATFORM</th><th>MIX</th><th>LEGS</th>
-      <th>BASE</th><th>ACTUAL</th><th>SHIFT</th><th></th>
-    </tr></thead>
+    <thead><tr><th>DATE</th><th>PLATFORM</th><th>MIX</th><th>LEGS</th><th>BASE</th><th>ACTUAL</th><th>SHIFT</th><th></th></tr></thead>
     <tbody>${rows}</tbody>
   </table></div>`;
 }
 
 // ═══════════════════════════════════════════════════════
-//  PATTERNS (updated to work off ticket-level data)
+//  PATTERNS
 // ═══════════════════════════════════════════════════════
+function avg(arr) { return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0; }
+
 function renderPatterns() {
-  // Flatten per-leg data from tickets that have multChange for analysis
-  const goblinObs = [];
-  const demonObs  = [];
-
-  logEntries.forEach(e => {
-    if (e.multChange === null) return;
-    (e.legs || []).forEach(l => {
-      if (l.type === 'goblin' && l.distance !== null) {
-        goblinObs.push({ distance: l.distance, multChange: e.multChange, nLegs: e.nLegs, nGob: e.nGob, nDem: e.nDem });
-      }
-      if (l.type === 'demon' && l.distance !== null) {
-        demonObs.push({ distance: l.distance, multChange: e.multChange, nLegs: e.nLegs, nGob: e.nGob, nDem: e.nDem });
-      }
-    });
-  });
-
-  const total = logEntries.length;
-
-  if (total < 3) {
+  const withActual = logEntries.filter(e => e.multChange !== null);
+  if (logEntries.length < 3) {
     document.getElementById('patterns-empty').style.display = 'block';
     document.getElementById('patterns-content').style.display = 'none';
     return;
@@ -998,235 +898,182 @@ function renderPatterns() {
   document.getElementById('patterns-empty').style.display = 'none';
   document.getElementById('patterns-content').style.display = 'block';
 
+  // Flatten legs with ticket context
+  const goblinObs=[], demonObs=[], bucketMap={};
+  withActual.forEach(e => {
+    (e.legs||[]).forEach(l => {
+      if (l.type==='goblin'&&l.distance!==null) goblinObs.push({ distance:l.distance, deltaPct:l.deltaPct, multChange:e.multChange, bucket:l.bucket });
+      if (l.type==='demon' &&l.distance!==null) demonObs.push({ distance:l.distance, deltaPct:l.deltaPct, multChange:e.multChange, bucket:l.bucket });
+      if (l.bucket) {
+        if (!bucketMap[l.bucket]) bucketMap[l.bucket] = { count:0, deltaPcts:[], kind:l.type };
+        bucketMap[l.bucket].count++;
+        if (l.deltaPct) bucketMap[l.bucket].deltaPcts.push(l.deltaPct);
+      }
+    });
+  });
+
   renderTypeStats('goblin-stats', goblinObs, 'goblin');
   renderTypeStats('demon-stats',  demonObs,  'demon');
+  renderBuckets(bucketMap);
   renderChart(goblinObs, demonObs);
-  renderFormula(goblinObs, demonObs);
   renderInsights(goblinObs, demonObs);
+  renderComboTable(withActual);
+  renderFormula(goblinObs, demonObs);
 }
 
-function avg(arr) { return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0; }
-
-function renderTypeStats(containerId, entries, type) {
-  const el = document.getElementById(containerId);
-  if (!entries.length) {
-    el.innerHTML = `<div style="grid-column:span 2;font-size:11px;color:var(--muted2);text-align:center;padding:16px">No ${type} data logged yet.</div>`;
-    return;
-  }
-  const changes = entries.map(e => e.multChange);
-  const dists   = entries.map(e => e.distance);
-  const avgChange = avg(changes);
-  const avgDist   = avg(dists);
-  const perUnit   = avgDist > 0 ? avgChange / avgDist : 0;
-  const color     = type === 'goblin' ? 'var(--goblin)' : 'var(--demon)';
-
+function renderTypeStats(id, entries, type) {
+  const el = document.getElementById(id);
+  if (!entries.length) { el.innerHTML=`<div style="grid-column:span 2;font-size:11px;color:var(--muted2);text-align:center;padding:16px">No ${type} data logged yet.</div>`; return; }
+  const changes = entries.map(e=>e.multChange), dists=entries.map(e=>e.distance);
+  const aC=avg(changes), aD=avg(dists), pU=aD>0?aC/aD:0;
+  const color = type==='goblin'?'var(--goblin)':'var(--demon)';
   el.innerHTML = `
-    <div class="stat-mini"><div class="stat-mini-label">OBSERVATIONS</div>
-      <div class="stat-mini-val">${entries.length}</div></div>
-    <div class="stat-mini"><div class="stat-mini-label">AVG MULT CHANGE</div>
-      <div class="stat-mini-val" style="color:${color}">${avgChange >= 0 ? '+' : ''}${avgChange.toFixed(1)}%</div></div>
-    <div class="stat-mini"><div class="stat-mini-label">AVG LINE DISTANCE</div>
-      <div class="stat-mini-val">${avgDist.toFixed(1)} units</div></div>
-    <div class="stat-mini"><div class="stat-mini-label">AVG CHANGE / UNIT</div>
-      <div class="stat-mini-val" style="color:${color}">${perUnit >= 0 ? '+' : ''}${perUnit.toFixed(1)}%</div>
-      <div class="stat-mini-sub">per 1-unit line move</div></div>`;
+    <div class="stat-mini"><div class="stat-mini-label">OBSERVATIONS</div><div class="stat-mini-val">${entries.length}</div></div>
+    <div class="stat-mini"><div class="stat-mini-label">AVG MULT CHANGE</div><div class="stat-mini-val" style="color:${color}">${aC>=0?'+':''}${aC.toFixed(1)}%</div></div>
+    <div class="stat-mini"><div class="stat-mini-label">AVG LINE DISTANCE</div><div class="stat-mini-val">${aD.toFixed(1)} units</div></div>
+    <div class="stat-mini"><div class="stat-mini-label">AVG CHANGE / UNIT</div><div class="stat-mini-val" style="color:${color}">${pU>=0?'+':''}${pU.toFixed(1)}%</div><div class="stat-mini-sub">per 1-unit line move</div></div>`;
+}
+
+function renderBuckets(bucketMap) {
+  const el = document.getElementById('bucket-breakdown');
+  const entries = Object.entries(bucketMap).sort((a,b)=>b[1].count-a[1].count);
+  if (!entries.length) { el.innerHTML='<div style="color:var(--muted2);font-size:11px">No leg-level data with lines logged yet.</div>'; return; }
+  el.innerHTML = entries.map(([bucket, data]) => {
+    const col   = bucketColor(bucket);
+    const avgPct= data.deltaPcts.length ? Math.round(avg(data.deltaPcts)*1000)/1000 : null;
+    const minPct= data.deltaPcts.length ? Math.min(...data.deltaPcts) : null;
+    const maxPct= data.deltaPcts.length ? Math.max(...data.deltaPcts) : null;
+    return `<div class="bucket-card" style="border-color:${col}28">
+      <div class="bucket-card-label" style="color:${col}">${bucket}</div>
+      <div class="bucket-stat-row">
+        <div class="bucket-stat"><div class="bucket-stat-l">SAMPLES</div><div class="bucket-stat-v" style="color:${col}">${data.count}</div></div>
+        <div class="bucket-stat"><div class="bucket-stat-l">AVG Δ%</div><div class="bucket-stat-v" style="color:${col}">${avgPct??'—'}</div></div>
+      </div>
+      ${minPct!==null?`<div style="font-size:9px;color:var(--muted2);margin-top:8px">Range: ${minPct} – ${maxPct}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function renderComboTable(withActual) {
+  const wrap = document.getElementById('combo-table-wrap');
+  if (!withActual.length) { wrap.innerHTML='<div style="font-size:11px;color:var(--muted2)">No tickets with actual payouts yet.</div>'; return; }
+  const combos = {};
+  withActual.forEach(t => {
+    const key = t.bucketSig || t.comboSig || 'Unknown';
+    if (!combos[key]) combos[key] = { actuals:[], shifts:[], count:0 };
+    combos[key].actuals.push(t.actualMult);
+    combos[key].count++;
+    if (t.multChange!==null) combos[key].shifts.push(t.multChange);
+  });
+  const rows = Object.entries(combos).sort((a,b)=>b[1].count-a[1].count).map(([sig, c]) => {
+    const aA = avg(c.actuals), aS = c.shifts.length ? avg(c.shifts) : null;
+    return `<tr>
+      <td style="font-size:10px;color:var(--text)">${sig}</td>
+      <td style="text-align:center"><span style="background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-size:11px">${c.count}</span></td>
+      <td style="text-align:center;font-family:'Bebas Neue';font-size:16px;color:var(--amber)">${aA.toFixed(2)}x</td>
+      <td style="text-align:center;font-size:11px;color:var(--muted2)">${Math.min(...c.actuals).toFixed(2)}x</td>
+      <td style="text-align:center;font-size:11px;color:var(--muted2)">${Math.max(...c.actuals).toFixed(2)}x</td>
+      <td style="text-align:center;font-family:'Bebas Neue';font-size:15px;color:${shiftColor(aS)}">${aS!==null?`${aS>=0?'+':''}${aS.toFixed(1)}%`:'—'}</td>
+    </tr>`;
+  }).join('');
+  wrap.innerHTML = `<table class="log-table" style="font-size:11px">
+    <thead><tr><th>COMBO SIGNATURE</th><th style="text-align:center">SAMPLES</th><th style="text-align:center">AVG ACTUAL</th><th style="text-align:center">MIN</th><th style="text-align:center">MAX</th><th style="text-align:center">AVG SHIFT</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
 }
 
 function renderChart(goblins, demons) {
   const canvas = document.getElementById('pattern-chart');
   const ctx = canvas.getContext('2d');
-  canvas.width = canvas.offsetWidth * window.devicePixelRatio || 600;
+  canvas.width  = (canvas.offsetWidth || 600) * window.devicePixelRatio;
   canvas.height = 220 * window.devicePixelRatio;
   ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
   const W = canvas.offsetWidth || 600, H = 220;
   ctx.clearRect(0, 0, W, H);
-
-  const allPoints = [
-    ...goblins.map(e => ({ x: -e.distance, y: e.multChange, type: 'goblin' })),
-    ...demons.map(e  => ({ x:  e.distance, y: e.multChange, type: 'demon'  }))
-  ];
-
+  const allPoints = [...goblins.map(e=>({x:-e.distance,y:e.multChange,type:'goblin'})),...demons.map(e=>({x:e.distance,y:e.multChange,type:'demon'}))];
   if (!allPoints.length) return;
-
-  const xs = allPoints.map(p => p.x);
-  const ys = allPoints.map(p => p.y);
-  const minX = Math.min(...xs) - 1, maxX = Math.max(...xs) + 1;
-  const minY = Math.min(...ys, -20) - 5, maxY = Math.max(...ys, 20) + 5;
-
-  const px = x => 40 + ((x - minX) / (maxX - minX)) * (W - 60);
-  const py = y => H - 30 - ((y - minY) / (maxY - minY)) * (H - 50);
-
-  // Grid
-  ctx.strokeStyle = 'rgba(255,255,255,.05)';
-  ctx.lineWidth = 1;
-  for (let i = 0; i <= 5; i++) {
-    const y = 20 + i * (H - 50) / 5;
-    ctx.beginPath(); ctx.moveTo(40, y); ctx.lineTo(W - 20, y); ctx.stroke();
+  const xs=allPoints.map(p=>p.x), ys=allPoints.map(p=>p.y);
+  const minX=Math.min(...xs)-1, maxX=Math.max(...xs)+1, minY=Math.min(...ys,-20)-5, maxY=Math.max(...ys,20)+5;
+  const px=x=>40+((x-minX)/(maxX-minX))*(W-60);
+  const py=y=>H-30-((y-minY)/(maxY-minY))*(H-50);
+  ctx.strokeStyle='rgba(255,255,255,.05)'; ctx.lineWidth=1;
+  for (let i=0;i<=5;i++) { const y=20+i*(H-50)/5; ctx.beginPath(); ctx.moveTo(40,y); ctx.lineTo(W-20,y); ctx.stroke(); }
+  ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(40,py(0)); ctx.lineTo(W-20,py(0)); ctx.stroke();
+  ctx.setLineDash([]); ctx.beginPath(); ctx.moveTo(px(0),10); ctx.lineTo(px(0),H-30); ctx.stroke();
+  ctx.fillStyle='rgba(153,153,153,.7)'; ctx.font='9px monospace';
+  ctx.fillText('← GOBLIN',44,14); ctx.fillText('DEMON →',W-80,14); ctx.fillText('0%',14,py(0)+4);
+  function drawTrend(pts, color) {
+    if (pts.length<2) return;
+    const n=pts.length, sX=pts.reduce((a,p)=>a+p.x,0), sY=pts.reduce((a,p)=>a+p.y,0);
+    const sXY=pts.reduce((a,p)=>a+p.x*p.y,0), sX2=pts.reduce((a,p)=>a+p.x*p.x,0);
+    const slope=(n*sXY-sX*sY)/(n*sX2-sX*sX), int=(sY-slope*sX)/n;
+    ctx.strokeStyle=color; ctx.lineWidth=1.5; ctx.globalAlpha=.4; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(px(minX),py(slope*minX+int)); ctx.lineTo(px(maxX),py(slope*maxX+int)); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha=1;
   }
-
-  // Zero line
-  ctx.strokeStyle = 'rgba(255,255,255,.2)';
-  ctx.lineWidth = 1;
-  ctx.setLineDash([4, 4]);
-  ctx.beginPath();
-  ctx.moveTo(40, py(0)); ctx.lineTo(W - 20, py(0));
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  // X=0 line
-  ctx.beginPath();
-  ctx.moveTo(px(0), 10); ctx.lineTo(px(0), H - 30);
-  ctx.stroke();
-
-  // Axis labels
-  ctx.fillStyle = 'rgba(153,153,153,.7)';
-  ctx.font = '9px monospace';
-  ctx.fillText('← GOBLIN', 44, 14);
-  ctx.fillText('DEMON →', W - 80, 14);
-  ctx.fillText('0%', 14, py(0) + 4);
-
-  // Trend lines
-  function drawTrend(points, color) {
-    if (points.length < 2) return;
-    const n = points.length;
-    const sumX = points.reduce((a,p)=>a+p.x,0);
-    const sumY = points.reduce((a,p)=>a+p.y,0);
-    const sumXY= points.reduce((a,p)=>a+p.x*p.y,0);
-    const sumX2= points.reduce((a,p)=>a+p.x*p.x,0);
-    const slope = (n*sumXY - sumX*sumY) / (n*sumX2 - sumX*sumX);
-    const intercept = (sumY - slope*sumX) / n;
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 1.5;
-    ctx.globalAlpha = 0.4;
-    ctx.setLineDash([6, 4]);
-    ctx.beginPath();
-    ctx.moveTo(px(minX), py(slope*minX + intercept));
-    ctx.lineTo(px(maxX), py(slope*maxX + intercept));
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.globalAlpha = 1;
-  }
-
-  drawTrend(goblins.map(e => ({ x: -e.distance, y: e.multChange })), '#39ff6e');
-  drawTrend(demons.map(e  => ({ x:  e.distance, y: e.multChange })), '#ff4d4d');
-
-  // Points
+  drawTrend(goblins.map(e=>({x:-e.distance,y:e.multChange})),'#39ff6e');
+  drawTrend(demons.map(e=>({x:e.distance,y:e.multChange})),'#ff4d4d');
   allPoints.forEach(p => {
-    const x = px(p.x), y = py(p.y);
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI * 2);
-    ctx.fillStyle = p.type === 'goblin' ? 'rgba(57,255,110,.9)' : 'rgba(255,77,77,.9)';
-    ctx.fill();
-    ctx.strokeStyle = p.type === 'goblin' ? '#39ff6e' : '#ff4d4d';
-    ctx.lineWidth = 1;
-    ctx.stroke();
+    ctx.beginPath(); ctx.arc(px(p.x),py(p.y),5,0,Math.PI*2);
+    ctx.fillStyle=p.type==='goblin'?'rgba(57,255,110,.9)':'rgba(255,77,77,.9)';
+    ctx.fill(); ctx.strokeStyle=p.type==='goblin'?'#39ff6e':'#ff4d4d'; ctx.lineWidth=1; ctx.stroke();
   });
 }
 
 function renderFormula(goblins, demons) {
-  const el = document.getElementById('formula-output');
-  let html = '';
-
-  function getFormula(entries, type) {
-    if (!entries.length) return null;
-    const dists = entries.map(e => e.distance);
-    const changes = entries.map(e => e.multChange);
-    const avgDist = avg(dists);
-    const avgChange = avg(changes);
-    const perUnit = avgDist > 0 ? avgChange / avgDist : 0;
-    const factor = 1 + avgChange / 100;
-    return { avgDist, avgChange, perUnit, factor };
+  const el = document.getElementById('formula-output'); let html='';
+  function getF(obs) {
+    if (!obs.length) return null;
+    const aD=avg(obs.map(e=>e.distance)), aC=avg(obs.map(e=>e.multChange));
+    return { aD, aC, perUnit:aD>0?aC/aD:0, factor:1+aC/100 };
   }
-
-  const gf = getFormula(goblins, 'goblin');
-  const df = getFormula(demons, 'demon');
-
-  if (gf) {
-    html += `<div style="margin-bottom:12px;padding:14px;background:rgba(57,255,110,.04);border:1px solid rgba(57,255,110,.15);border-radius:8px;">
-      <div style="color:var(--goblin);font-size:11px;letter-spacing:1px;margin-bottom:8px">🎃 GOBLIN PER-LEG EFFECT (estimated from your ${goblins.length} observations)</div>
-      <div style="color:var(--text)">Each Goblin leg shifts the slip multiplier by approximately <strong style="color:var(--goblin)">${gf.avgChange.toFixed(1)}%</strong> on average.</div>
-      <div style="color:var(--muted);margin-top:4px">Average line distance: ${gf.avgDist.toFixed(1)} units → ${gf.perUnit.toFixed(1)}% change per unit of line movement.</div>
-      <div style="color:var(--muted);margin-top:4px">Estimated per-leg factor: <strong style="color:var(--goblin)">${gf.factor.toFixed(3)}x</strong> the base multiplier</div>
-    </div>`;
-  } else {
-    html += `<div style="color:var(--muted2);font-size:11px;margin-bottom:12px">No Goblin data yet — log observations to generate formula.</div>`;
-  }
-
-  if (df) {
-    html += `<div style="margin-bottom:12px;padding:14px;background:rgba(255,77,77,.04);border:1px solid rgba(255,77,77,.15);border-radius:8px;">
-      <div style="color:var(--demon);font-size:11px;letter-spacing:1px;margin-bottom:8px">😈 DEMON PER-LEG EFFECT (estimated from your ${demons.length} observations)</div>
-      <div style="color:var(--text)">Each Demon leg shifts the slip multiplier by approximately <strong style="color:var(--demon)">+${df.avgChange.toFixed(1)}%</strong> on average.</div>
-      <div style="color:var(--muted);margin-top:4px">Average line distance: ${df.avgDist.toFixed(1)} units → ${df.perUnit.toFixed(1)}% change per unit of line movement.</div>
-      <div style="color:var(--muted);margin-top:4px">Estimated per-leg factor: <strong style="color:var(--demon)">${df.factor.toFixed(3)}x</strong> the base multiplier</div>
-    </div>`;
-  } else {
-    html += `<div style="color:var(--muted2);font-size:11px">No Demon data yet — log observations to generate formula.</div>`;
-  }
-
-  if (gf && df) {
-    html += `<div style="padding:14px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.15);border-radius:8px;">
-      <div style="color:var(--cyan);font-size:11px;letter-spacing:1px;margin-bottom:8px">📐 COMBINED FORMULA ESTIMATE</div>
-      <div style="color:var(--text);font-family:'Share Tech Mono',monospace;font-size:12px;line-height:2">
-        Predicted Multiplier ≈ BaseMult × (${gf.factor.toFixed(3)})<sup>nGoblin</sup> × (${df.factor.toFixed(3)})<sup>nDemon</sup><br>
-        <span style="color:var(--muted)">where BaseMult = standard payout for that leg count (2L=3x, 3L=6x, 4L=10x, 5L=20x, 6L=37.5x)</span>
-      </div>
-    </div>`;
-  }
-
+  const gf=getF(goblins), df=getF(demons);
+  if (gf) html+=`<div style="margin-bottom:12px;padding:14px;background:rgba(57,255,110,.04);border:1px solid rgba(57,255,110,.15);border-radius:8px;">
+    <div style="color:var(--goblin);font-size:11px;letter-spacing:1px;margin-bottom:8px">🎃 GOBLIN PER-LEG EFFECT (${goblins.length} obs)</div>
+    <div>Each Goblin leg shifts multiplier by ~<strong style="color:var(--goblin)">${gf.aC.toFixed(1)}%</strong> · Avg line dist: ${gf.aD.toFixed(1)} units · ${gf.perUnit.toFixed(1)}% per unit · Factor: <strong style="color:var(--goblin)">${gf.factor.toFixed(3)}x</strong></div>
+  </div>`;
+  else html+=`<div style="color:var(--muted2);font-size:11px;margin-bottom:12px">No Goblin data — log observations to generate formula.</div>`;
+  if (df) html+=`<div style="margin-bottom:12px;padding:14px;background:rgba(255,77,77,.04);border:1px solid rgba(255,77,77,.15);border-radius:8px;">
+    <div style="color:var(--demon);font-size:11px;letter-spacing:1px;margin-bottom:8px">😈 DEMON PER-LEG EFFECT (${demons.length} obs)</div>
+    <div>Each Demon leg shifts multiplier by ~<strong style="color:var(--demon)">+${df.aC.toFixed(1)}%</strong> · Avg line dist: ${df.aD.toFixed(1)} units · +${df.perUnit.toFixed(1)}% per unit · Factor: <strong style="color:var(--demon)">${df.factor.toFixed(3)}x</strong></div>
+  </div>`;
+  else html+=`<div style="color:var(--muted2);font-size:11px">No Demon data yet.</div>`;
+  if (gf&&df) html+=`<div style="padding:14px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.15);border-radius:8px;">
+    <div style="color:var(--cyan);font-size:11px;letter-spacing:1px;margin-bottom:8px">📐 COMBINED FORMULA</div>
+    <div style="font-family:'Share Tech Mono',monospace;font-size:12px;line-height:2">
+      Predicted ≈ BaseMult × (${gf.factor.toFixed(3)})<sup>nGoblin</sup> × (${df.factor.toFixed(3)})<sup>nDemon</sup><br>
+      <span style="color:var(--muted)">where BaseMult = standard payout for leg count (2L=3x, 3L=6x, 4L=10x, 5L=20x, 6L=37.5x)</span>
+    </div>
+  </div>`;
   el.innerHTML = html;
 }
 
 function renderInsights(goblins, demons) {
-  const el = document.getElementById('pattern-insights');
-  const insights = [];
-
-  if (goblins.length >= 3) {
-    const avgChange = avg(goblins.map(e => e.multChange));
-    const avgDist = avg(goblins.map(e => e.distance));
-    const perUnit = avgDist > 0 ? avgChange / avgDist : 0;
-    const cls = avgChange > -25 ? 'good' : avgChange > -40 ? 'warn' : 'bad';
-    insights.push(`<div class="insight-item ${cls}">
-      🎃 <strong>Goblin Value:</strong> Your logged Goblins reduce the payout by <strong>${Math.abs(avgChange).toFixed(1)}%</strong> on average
-      for a ${avgDist.toFixed(1)}-unit line move. That's <strong>${Math.abs(perUnit).toFixed(1)}% reduction per unit</strong>.
-      ${avgChange > -20 ? 'The payout penalty is relatively small — Goblins may be worth it if your hit rate improves significantly.' : 'The payout cut is substantial — only use Goblins if the easier line meaningfully boosts your hit probability.'}
-    </div>`);
+  const el = document.getElementById('pattern-insights'); const insights=[];
+  if (goblins.length>=3) {
+    const aC=avg(goblins.map(e=>e.multChange)), aD=avg(goblins.map(e=>e.distance));
+    const cls=aC>-25?'good':aC>-40?'warn':'bad';
+    insights.push(`<div class="insight-item ${cls}">🎃 <strong>Goblin Value:</strong> Your logged Goblins reduce payout by <strong>${Math.abs(aC).toFixed(1)}%</strong> avg for a ${aD.toFixed(1)}-unit move. ${aC>-20?'Penalty is small — may be worth it if hit rate improves.':'Substantial cut — only use if easier line meaningfully boosts hit probability.'}</div>`);
   }
-
-  if (demons.length >= 3) {
-    const avgChange = avg(demons.map(e => e.multChange));
-    const avgDist = avg(demons.map(e => e.distance));
-    const perUnit = avgDist > 0 ? avgChange / avgDist : 0;
-    const cls = avgChange > 40 ? 'good' : avgChange > 20 ? 'warn' : 'bad';
-    insights.push(`<div class="insight-item ${cls}">
-      😈 <strong>Demon Value:</strong> Your logged Demons boost the payout by <strong>+${avgChange.toFixed(1)}%</strong> on average
-      for a ${avgDist.toFixed(1)}-unit move. That's <strong>+${perUnit.toFixed(1)}% per unit</strong>.
-      ${avgChange > 50 ? 'Strong boost — Demons may offer real edge if your model says the line is still beatable.' : 'Modest boost — check whether the extra difficulty is worth the payout increase.'}
-    </div>`);
+  if (demons.length>=3) {
+    const aC=avg(demons.map(e=>e.multChange)), aD=avg(demons.map(e=>e.distance));
+    const cls=aC>40?'good':aC>20?'warn':'bad';
+    insights.push(`<div class="insight-item ${cls}">😈 <strong>Demon Value:</strong> Your logged Demons boost payout by <strong>+${aC.toFixed(1)}%</strong> avg for a ${aD.toFixed(1)}-unit move. ${aC>50?'Strong boost — real edge if model says line is still beatable.':'Modest boost — check whether extra difficulty is worth it.'}</div>`);
   }
-
-  if (goblins.length >= 2 && demons.length >= 2) {
-    const gobFactor = 1 + avg(goblins.map(e => e.multChange)) / 100;
-    const demFactor = 1 + avg(demons.map(e => e.multChange)) / 100;
-    const mixFactor = gobFactor * demFactor;
-    insights.push(`<div class="insight-item warn">
-      🔀 <strong>Mixed Slips:</strong> Based on your data, a slip with 1 Goblin + 1 Demon multiplies together:
-      ${gobFactor.toFixed(3)}x × ${demFactor.toFixed(3)}x = <strong>${mixFactor.toFixed(3)}x</strong> the base.
-      ${mixFactor > 1 ? 'The Demon boost outweighs the Goblin penalty in your data.' : 'The Goblin penalty outweighs the Demon boost — mixed slips lean negative.'}
-    </div>`);
+  if (goblins.length>=2&&demons.length>=2) {
+    const gF=1+avg(goblins.map(e=>e.multChange))/100, dF=1+avg(demons.map(e=>e.multChange))/100;
+    insights.push(`<div class="insight-item warn">🔀 <strong>Mixed Slips:</strong> 1 Goblin + 1 Demon → ${gF.toFixed(3)}x × ${dF.toFixed(3)}x = <strong>${(gF*dF).toFixed(3)}x</strong> the base. ${gF*dF>1?'Demon boost outweighs Goblin penalty.':'Goblin penalty outweighs Demon boost.'}</div>`);
   }
-
-  if (!insights.length) {
-    insights.push(`<div class="insight-item"><strong>Keep logging!</strong> You need at least 3 observations per type to see meaningful patterns.</div>`);
-  }
-
+  if (!insights.length) insights.push(`<div class="insight-item"><strong>Keep logging!</strong> Need at least 3 observations per type.</div>`);
   el.innerHTML = insights.join('');
 }
 
 // ═══════════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════════
-addLeg('standard');
-addLeg('goblin');
+addCalcLeg('standard');
+addCalcLeg('goblin');
 updateLogCount();
 renderLogTable();
 renderLogLegs();
