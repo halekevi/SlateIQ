@@ -34,7 +34,6 @@ from flask import Flask, jsonify, render_template, request, send_from_directory,
 BASE_DIR      = Path(__file__).resolve().parent.parent  # repo root (one level above ui_runner/)
 UI_DIR        = Path(__file__).resolve().parent         # all UI assets live here (ui_runner/)
 CONFIG_PATH   = UI_DIR / "commands.json"
-DOCS_DIR      = UI_DIR / "docs"
 TEMPLATES_DIR = UI_DIR / "templates"
 STATIC_DIR    = UI_DIR / "static"
 
@@ -245,16 +244,6 @@ def subst_tokens(cmd: List[str], config: Optional[dict] = None) -> List[str]:
     return out
 
 
-def latest_template(prefix: str, suffix: str = ".html") -> Optional[str]:
-    if not TEMPLATES_DIR.exists():
-        return None
-    candidates = sorted(
-        TEMPLATES_DIR.glob(f"{prefix}*{suffix}"),
-        key=lambda p: p.stat().st_mtime,
-        reverse=True,
-    )
-    return candidates[0].name if candidates else None
-
 
 def _file_info(path: Path) -> dict:
     """Return size + modified time for a file, or None flags if missing."""
@@ -278,32 +267,15 @@ def home():
 
 @app.get("/tickets")
 def page_tickets():
-    # Check templates dir first (build_tickets_html.py writes here),
-    # then fall back to docs dir for backwards compatibility
-    for search_dir in [TEMPLATES_DIR, DOCS_DIR]:
-        target = search_dir / "tickets_latest.html"
-        if target.exists():
-            return send_from_directory(str(search_dir), "tickets_latest.html")
+    target = TEMPLATES_DIR / "tickets_latest.html"
+    if target.exists():
+        return send_from_directory(str(TEMPLATES_DIR), "tickets_latest.html")
     return "tickets_latest.html not found. Run the pipeline first.", 404
 
 
 @app.get("/payout")
 def page_payout():
     return render_template("payout_calculator.html")
-
-
-@app.get("/slate")
-def page_slate():
-    # combined_slate_latest.html is the full slate viewer (all props + tickets)
-    for search_dir in [TEMPLATES_DIR, DOCS_DIR]:
-        target = search_dir / "combined_slate_latest.html"
-        if target.exists():
-            return send_from_directory(str(search_dir), "combined_slate_latest.html")
-    # Fallback: newest combined_slate_tickets_*.html in templates
-    fname = latest_template("combined_slate_tickets_")
-    if fname:
-        return render_template(fname)
-    return "No slate found. Run the pipeline first.", 404
 
 
 @app.get("/grades")
@@ -319,15 +291,6 @@ def serve_grade_report(date: str):
         return send_from_directory(str(TEMPLATES_DIR), fname)
     abort(404)
 
-
-# ──────────────────────────────────────────────────────────────────────────────
-# Docs Static Serving
-# ──────────────────────────────────────────────────────────────────────────────
-@app.get("/docs/<path:filename>")
-def serve_docs(filename: str):
-    if not DOCS_DIR.exists():
-        abort(404)
-    return send_from_directory(str(DOCS_DIR), filename)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -518,5 +481,4 @@ def api_jobs():
 # Main
 # ──────────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    DOCS_DIR.mkdir(exist_ok=True)
     app.run(host="0.0.0.0", port=8787, debug=False)
