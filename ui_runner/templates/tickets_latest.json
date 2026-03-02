@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-02 20:01:46 UTC",
+  "generated_at": "2026-03-02 20:27:39 UTC",
   "date": "2026-03-02",
   "filters": {
     "tiers": "A,B,C,D",
@@ -441,7 +441,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 0.8333333333333334,
-          "avg_rank_score": 7.546666666666667,
+          "avg_rank_score": 7.543333333333333,
           "est_win_prob": 0.5,
           "legs": [
             {
@@ -509,7 +509,7 @@
               "standard_projection": null,
               "line_discount_vs_standard": null,
               "hit_rate": 1.0,
-              "rank_score": 8.06,
+              "rank_score": 8.05,
               "game_time": "2026-03-01 20:00:00-05:00",
               "nba_player_id": "",
               "espn_player_id": "",
@@ -1817,7 +1817,7 @@
         {
           "ticket_no": 1,
           "avg_hit_rate": 0.8333333333333334,
-          "avg_rank_score": 7.546666666666667,
+          "avg_rank_score": 7.543333333333333,
           "est_win_prob": 0.5,
           "legs": [
             {
@@ -1885,7 +1885,7 @@
               "standard_projection": null,
               "line_discount_vs_standard": null,
               "hit_rate": 1.0,
-              "rank_score": 8.06,
+              "rank_score": 8.05,
               "game_time": "2026-03-01 20:00:00-05:00",
               "nba_player_id": "",
               "espn_player_id": NaN,
