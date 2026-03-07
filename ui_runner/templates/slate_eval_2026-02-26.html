@@ -13,24 +13,7 @@ body::before{content:'';position:fixed;top:-20%;left:-10%;width:55%;height:55%;b
 body::after{content:'';position:fixed;bottom:-20%;right:-10%;width:50%;height:50%;background:radial-gradient(ellipse,rgba(16,185,129,.03) 0%,transparent 70%);pointer-events:none}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:4px}
 /* NAV */
-.snav{position:sticky;top:0;z-index:200;background:rgba(7,10,16,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:stretch;height:54px}
-.snav-brand{display:flex;align-items:center;gap:9px;margin-right:28px;flex-shrink:0;text-decoration:none}
-.snav-mark{width:28px;height:28px;background:linear-gradient(135deg,#c8ff00,#00e5ff);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px}
-.snav-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:3px;color:#e8edf5}
-.snav-links{display:flex;align-items:stretch;gap:0;list-style:none;flex:1}
-.snav-links a{display:flex;align-items:center;gap:7px;padding:0 14px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#4a5568;text-decoration:none;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
-.snav-links a svg{opacity:.55;transition:opacity .15s}
-.snav-links a:hover svg{opacity:1}
-.snav-links li:nth-child(1) a:hover{color:#00d4ff}
-.snav-links li:nth-child(2) a:hover{color:#c8ff00}
-.snav-links li:nth-child(3) a:hover{color:#9b6dff}
-.snav-links li:nth-child(4) a:hover{color:#00e5a0}
-.snav-links li:nth-child(5) a:hover{color:#ffb830}
-.snav-links a.snav-active{color:#c8ff00;border-bottom-color:#c8ff00}
-.snav-right{display:flex;align-items:center;margin-left:auto}
-.snav-live{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#10b981;display:flex;align-items:center;gap:5px}
-.snav-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#10b981;animation:snavpulse 2s infinite}
-@keyframes snavpulse{0%,100%{opacity:1}50%{opacity:.3}}
+50%{opacity:.3}}
 /* HEADER */
 header{background:rgba(7,10,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:18px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .logo{display:flex;align-items:center;gap:14px}
@@ -109,20 +92,6 @@ td.right{text-align:right}td.mono{font-family:'DM Mono',monospace;font-size:12px
 </style>
 </head>
 <body>
-<nav class="snav">
-  <a class="snav-brand" href="/">
-    <div class="snav-mark">🧠</div>
-    <span class="snav-name">SlateIQ</span>
-  </a>
-  <ul class="snav-links">
-    <li><a href="/" data-page="control"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 5.5V13h4V9h4v4h4V5.5L7 1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> Home</a></li>
-    
-    <li><a href="/tickets" data-page="tickets"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h11" stroke="currentColor" stroke-width="1" stroke-dasharray="2 1.5"/><circle cx="4" cy="9" r="1" fill="currentColor"/><circle cx="7" cy="9" r="1" fill="currentColor"/><circle cx="10" cy="9" r="1" fill="currentColor"/></svg> Tickets</a></li>
-    <li><a href="/grades" data-page="grades" class="snav-active"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 10.5L5.5 7l2.5 2.5L11 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x="1.5" y="1.5" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/></svg> Grades</a></li>
-    <li><a href="/payout" data-page="payout"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 3.5v7M5 5.5c0-.8.9-1.5 2-1.5s2 .7 2 1.5-1 1.3-2 1.5-2 .7-2 1.5.9 1.5 2 1.5 2-.7 2-1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg> Payouts</a></li>
-  </ul>
-  <div class="snav-right"><span class="snav-live">LIVE</span></div>
-</nav>
 <header>
   <div class="logo">
     <div class="logo-icon">📊</div>
@@ -445,9 +414,7 @@ td.right{text-align:right}td.mono{font-family:'DM Mono',monospace;font-size:12px
 (function(){
   var path = window.location.pathname.replace(/\/$/,'') || '/';
   var map  = {'/':'control','/tickets':'tickets','/slate':'slate','/payout':'payout','/grades':'grades'};
-  var el   = document.querySelector('.snav-links a[data-page="'+(map[path]||'')+'"]');
-  if(el){ el.classList.add('snav-active'); }
-})();
+  var el   = document.querySelector('})();
 </script>
 </body>
 </html>

@@ -203,31 +203,9 @@ td.mono { font-family: 'DM Mono', monospace; font-size: 12px; }
 <body>
 
 <style>
-.snav{position:sticky;top:0;z-index:200;background:rgba(7,10,16,.95);backdrop-filter:blur(16px);border-bottom:1px solid #1c2333;padding:0 24px;display:flex;align-items:stretch;height:54px}
-.snav-brand{display:flex;align-items:center;gap:9px;margin-right:28px;flex-shrink:0;text-decoration:none}
-.snav-mark{width:28px;height:28px;background:#e8ff47;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px}
-.snav-name{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:17px;font-weight:800;letter-spacing:2px;color:#e8edf5;text-transform:uppercase}
-.snav-links{display:flex;align-items:stretch;gap:0;list-style:none;flex:1}
-.snav-links a{display:flex;align-items:center;gap:6px;padding:0 14px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#4a5568;text-decoration:none;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
-.snav-links a:hover{color:#e8edf5}.snav-links a.snav-active{color:#e8ff47;border-bottom-color:#e8ff47}
-.snav-right{display:flex;align-items:center;margin-left:auto}
-.snav-live{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#10b981;display:flex;align-items:center;gap:5px}
-.snav-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#10b981;animation:snavpulse 2s infinite}
-@keyframes snavpulse{0%,100%{opacity:1}50%{opacity:.3}}
-@media(max-width:620px){.snav-links a span{display:none}.snav-links a{padding:0 10px}.snav-name{display:none}}
+50%{opacity:.3}}
+@media(max-width:620px){}
 </style>
-<nav class="snav">
-  <a class="snav-brand" href="/"><div class="snav-mark">🏀</div><span class="snav-name">Pipelines</span></a>
-  <ul class="snav-links">
-    <li><a href="/" data-page="control"><span>⚡</span> Control</a></li>
-    <li><a href="/tickets" data-page="tickets"><span>🎟️</span> Tickets</a></li>
-    
-    <li><a href="/payout" data-page="payout"><span>💰</span> Payout</a></li>
-    <li><a href="/grades" data-page="grades"><span>✏️</span> Grades</a></li>
-  </ul>
-  <div class="snav-right"><span class="snav-live">LIVE</span></div>
-</nav>
-
 <header>
   <div class="logo">
     <div class="logo-icon">📊</div>
