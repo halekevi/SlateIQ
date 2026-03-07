@@ -150,6 +150,8 @@ td.muted{color:var(--muted2);}td.small{font-size:11px;}
 .alert-amber{background:rgba(240,165,0,.06);border-color:rgba(240,165,0,.25);}
 .footer{font-size:10px;color:var(--muted);text-align:center;margin-top:40px;letter-spacing:1.5px;}
 @media(max-width:768px){.stat-grid-4{grid-template-columns:repeat(2,1fr)}.snav-name{display:none}}
+@media(max-width:1100px){.status-row{grid-template-columns:repeat(3,1fr)!important;}}
+@media(max-width:640px){.status-row{grid-template-columns:repeat(2,1fr)!important;}}
 
 /* ── HAMBURGER (mobile) ── */
 .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);}
@@ -320,13 +322,12 @@ pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-si
   <!-- HERO -->
   <div class="hero">
     <div>
-      <div class="hero-eyebrow">NBA · CBB · Prop Intelligence</div>
+      <div class="hero-eyebrow">NBA · CBB · NHL · SOCCER · Prop Intelligence</div>
       <h1 class="hero-title">
         <span class="ht1">Slate</span>
         <span class="ht2">IQ</span>
       </h1>
       <div class="hero-meta">
-        <span>127.0.0.1:8787</span>
         <span>Flask 3.0</span>
         <span id="clock">--:--:--</span>
       </div>
@@ -339,7 +340,7 @@ pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-si
   </div>
 
   <!-- PIPELINE STATUS CARDS -->
-  <div class="status-row">
+  <div class="status-row" style="grid-template-columns:repeat(5,1fr);">
     <div class="scard loading" id="sc-nba">
       <div class="scard-icon">🏀</div>
       <div class="scard-body">
@@ -357,6 +358,24 @@ pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-si
         <div class="scard-sub" id="sc-cbb-sub"></div>
       </div>
       <span class="sbadge loading" id="sc-cbb-badge">—</span>
+    </div>
+    <div class="scard loading" id="sc-nhl">
+      <div class="scard-icon">🏒</div>
+      <div class="scard-body">
+        <div class="scard-title">NHL Slate</div>
+        <div class="scard-val" id="sc-nhl-val">Checking...</div>
+        <div class="scard-sub" id="sc-nhl-sub"></div>
+      </div>
+      <span class="sbadge loading" id="sc-nhl-badge">—</span>
+    </div>
+    <div class="scard loading" id="sc-soccer">
+      <div class="scard-icon">⚽</div>
+      <div class="scard-body">
+        <div class="scard-title">Soccer Slate</div>
+        <div class="scard-val" id="sc-soccer-val">Checking...</div>
+        <div class="scard-sub" id="sc-soccer-sub"></div>
+      </div>
+      <span class="sbadge loading" id="sc-soccer-badge">—</span>
     </div>
     <div class="scard loading" id="sc-combined">
       <div class="scard-icon">🎟</div>
@@ -445,18 +464,30 @@ pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-si
 const ICONS = {
   "nba":      "🏀",
   "cbb":      "🎓",
+  "nhl":      "🏒",
+  "soccer":   "⚽",
+  "mlb":      "⚾",
+  "wnba":     "🏀",
   "combined": "🎟",
   "grading":  "📝",
 };
 const PIPE_COLORS = {
   "nba":      "var(--lime)",
   "cbb":      "var(--cyan)",
+  "nhl":      "var(--blue)",
+  "soccer":   "var(--green)",
+  "mlb":      "var(--amber)",
+  "wnba":     "var(--purple)",
   "combined": "var(--purple)",
   "grading":  "var(--amber)",
 };
 const PIPE_BTN_COLOR = {
   "nba":      "#c6ff00",
   "cbb":      "#00d4ff",
+  "nhl":      "#00e5ff",
+  "soccer":   "#39ff6e",
+  "mlb":      "#ffaa00",
+  "wnba":     "#a855f7",
   "combined": "#a855f7",
   "grading":  "#ffaa00",
 };
@@ -551,10 +582,10 @@ function applyStatusCard(id, info, label) {
   card.classList.remove("fresh","stale","missing","loading");
   badge.classList.remove("fresh","stale","missing","loading");
   if (!info || !info.exists) {
-    card.classList.add("missing"); badge.classList.add("missing");
-    val.textContent = "Not found";
+    card.classList.add("loading"); badge.classList.add("loading");
+    val.textContent = "Not Yet Run";
     sub.textContent = "Run pipeline to generate";
-    badge.textContent = "MISSING";
+    badge.textContent = "PENDING";
     return;
   }
   const today = new Date().toISOString().slice(0,10);
@@ -573,6 +604,8 @@ async function refreshStatus() {
     const data = await res.json();
     applyStatusCard("nba",      data.nba?.slate,      "step8_all_direction_clean.xlsx");
     applyStatusCard("cbb",      data.cbb?.slate,      "step6_ranked_cbb.xlsx");
+    applyStatusCard("nhl",      data.nhl?.slate,      "step8_nhl_direction_clean.xlsx");
+    applyStatusCard("soccer",   data.soccer?.slate,   "step8_soccer_direction_clean.xlsx");
     applyStatusCard("combined", data.combined?.slate, "combined_slate_tickets");
   } catch { }
 }

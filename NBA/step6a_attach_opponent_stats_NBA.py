@@ -55,6 +55,7 @@ from pathlib import Path
 from typing import Dict, Tuple
 from datetime import datetime, timedelta
 
+import unicodedata
 import numpy as np
 import pandas as pd
 
@@ -66,6 +67,13 @@ TEAM_ABBR = {
     "ATL", "BOS", "BRK", "CHA", "CHI", "CLE", "DAL", "DEN", "DET", "GSW",
     "HOU", "LAC", "LAL", "MEM", "MIA", "MIL", "MIN", "NOP", "NYK", "OKC",
     "ORL", "PHI", "PHX", "POR", "SAC", "SAS", "TOR", "UTA", "WAS",
+}
+
+# ESPN cache uses different abbreviations — map to pipeline standard
+ESPN_TO_PIPELINE: dict = {
+    "NY":  "NYK", "NO":  "NOP", "SA":  "SAS", "GS":  "GSW",
+    "BKN": "BRK", "PHO": "PHX", "WSH": "WAS", "UTA": "UTA",
+    "CLE": "CLE", "OKC": "OKC",
 }
 
 # Stat columns to compute L10 averages for
@@ -83,24 +91,32 @@ OPP_COLS = [
 # ── UTILITIES ─────────────────────────────────────────────────────────────────
 
 def _normalize_team(team_str: str) -> str:
-    """Normalize team to 3-letter code."""
+    """Normalize team to pipeline 3-letter code, handling ESPN abbreviation differences."""
     if pd.isna(team_str):
         return ""
     t = str(team_str).strip().upper()
-    return t if t in TEAM_ABBR else t
+    return ESPN_TO_PIPELINE.get(t, t)
 
 def _normalize_name(name_str: str) -> str:
-    """Normalize player name for matching."""
+    """Normalize player name — lowercase + strip diacritics (Jokić → jokic)."""
     if pd.isna(name_str):
         return ""
-    return str(name_str).strip().lower()
+    s = str(name_str).strip().lower()
+    # Strip accent marks so Jokić matches jokic, Dončić matches doncic
+    s = unicodedata.normalize("NFD", s)
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return s
 
 def _parse_date(date_str: str) -> datetime:
-    """Parse date string to datetime object."""
+    """Parse date string to timezone-naive datetime object."""
     if not date_str or pd.isna(date_str):
         return None
     try:
-        return pd.to_datetime(date_str)
+        ts = pd.to_datetime(date_str)
+        # Strip timezone so comparisons work against cache dates (which are tz-naive)
+        if ts.tzinfo is not None:
+            ts = ts.tz_localize(None)
+        return ts
     except:
         return None
 
@@ -207,7 +223,7 @@ class OpponentIndex:
         
         # Filter to games before current date (don't look into future)
         if before_date:
-            games = games[games["GAME_DATE"] < before_date]
+            games = games[games["GAME_DATE"] < pd.Timestamp(before_date)]
         
         if len(games) == 0:
             return result
@@ -228,7 +244,7 @@ class OpponentIndex:
         
         # ── MOST RECENT GAME ──────────────────────────────────────────────
         last_game = games.iloc[-1]
-        result["opp_last_game_date"] = str(last_game.get("GAME_DATE", ""))
+        result["opp_last_game_date"] = str(last_game.get("GAME_DATE", ""))[:10]
         result["opp_last_game_pts"] = pd.to_numeric(
             last_game.get("PTS"), errors="coerce"
         )
@@ -248,20 +264,17 @@ class OpponentIndex:
                 result["opp_last_3_avg_pts"] = mean_l3
         
         # ── HOME/AWAY SPLITS ──────────────────────────────────────────────
-        # Simplified: assume first half of games are home, second half away
-        # (Real data would need a HOME_FLAG column in cache)
-        if len(games) >= 4:
-            mid = len(games) // 2
-            home_games = games.iloc[:mid]
-            away_games = games.iloc[mid:]
-            
+        # Use home_flag column if available, otherwise skip (positional guess is unreliable)
+        if "HOME_FLAG" in games.columns:
+            home_games = games[games["HOME_FLAG"] == 1]
+            away_games = games[games["HOME_FLAG"] == 0]
             if len(home_games) > 0:
                 home_pts = pd.to_numeric(home_games["PTS"], errors="coerce")
                 result["opp_home_avg_pts"] = home_pts.mean()
-            
             if len(away_games) > 0:
                 away_pts = pd.to_numeric(away_games["PTS"], errors="coerce")
                 result["opp_away_avg_pts"] = away_pts.mean()
+        # else: leave as NaN — better than a wrong positional guess
         
         return result
 
@@ -294,6 +307,11 @@ Examples:
         "--cache",
         default="nba_espn_boxscore_cache.csv",
         help="ESPN boxscore cache (default: nba_espn_boxscore_cache.csv)"
+    )
+    ap.add_argument(
+        "--opp-cache",
+        default="",
+        help="Optional output cache for opponent stats (unused, reserved for future)"
     )
     ap.add_argument(
         "--max-rows",
@@ -364,32 +382,32 @@ Examples:
     for col in OPP_COLS:
         df[col] = np.nan
     
-    # ── COMPUTE STATS ─────────────────────────────────────────────────────
+    # ── COMPUTE STATS — batch collect then assign once ────────────────────────
     print(f"[S6a] Computing opponent stats for {len(df)} rows...")
-    
+    results_list = []
+
     for row_idx, (_, row) in enumerate(df.iterrows()):
         if (row_idx + 1) % 1000 == 0:
             print(f"  {row_idx + 1}/{len(df)}")
-        
-        # Extract player info
-        player = row.get("player", "")
-        opp_team = row.get("opp_team", "")
+
+        player        = row.get("player", "")
+        opp_team      = row.get("opp_team", "")
         game_date_str = row.get("start_time", "")
-        
-        # Skip if missing key fields
+
         if not (player and opp_team):
+            results_list.append({col: np.nan for col in OPP_COLS})
             continue
-        
+
         player_norm = _normalize_name(player)
-        game_date = _parse_date(game_date_str)
-        
-        # Get opponent stats
-        opp_stats = idx.get_stats(player_norm, opp_team, game_date)
-        
-        # Assign to row
-        for col in OPP_COLS:
-            if col in opp_stats:
-                df.at[row_idx, col] = opp_stats[col]
+        game_date   = _parse_date(game_date_str)
+        opp_stats   = idx.get_stats(player_norm, opp_team, game_date)
+        results_list.append(opp_stats)
+
+    # Assign all columns at once — avoids fragmentation + type errors
+    opp_df = pd.DataFrame(results_list, index=df.index)
+    opp_df["opp_last_game_date"] = opp_df["opp_last_game_date"].astype(str).replace("nan", "")
+    for col in OPP_COLS:
+        df[col] = opp_df[col]
     
     # ── OUTPUT ────────────────────────────────────────────────────────────
     df.to_csv(args.output, index=False, encoding="utf-8-sig")

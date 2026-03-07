@@ -134,7 +134,7 @@ if (-not $CBBOnly -and -not $NHLOnly -and -not $SoccerOnly) {
     if ($ok -or (Test-Path $NBAActuals)) {
         if ($AdvancedMode -and -not $LegacyMode) {
             # Use advanced unified grader
-            $NBASlate = "$NBADir\s8_nba_direction.xlsx"
+            $NBASlate = "$NBADir\step8_all_direction_clean.xlsx"
             if (Test-Path $NBASlate) {
                 Run-Py "NBA Advanced Grade" $Root $UnifiedGrader @("--sport", "nba", "--date", $Date, "--actuals", $NBAActuals, "--slate", $NBASlate, "--output-dir", $DateDir)
                 if (Test-Path $NBAGraded) { Write-Host "  NBA advanced graded -> $NBAGraded" -ForegroundColor Green }
@@ -170,7 +170,7 @@ if (-not $NBAOnly -and -not $NHLOnly -and -not $SoccerOnly) {
     if ($ok -or (Test-Path $CBBActuals)) {
         if ($AdvancedMode -and -not $LegacyMode) {
             # Use advanced unified grader
-            $CBBSlate = "$CBBDir\s8_cbb_ranked.xlsx"
+            $CBBSlate = "$CBBDir\step6_ranked_cbb.xlsx"
             if (Test-Path $CBBSlate) {
                 Run-Py "CBB Advanced Grade" $Root $UnifiedGrader @("--sport", "cbb", "--date", $Date, "--actuals", $CBBActuals, "--slate", $CBBSlate, "--output-dir", $DateDir)
                 if (Test-Path $CBBGraded) { Write-Host "  CBB advanced graded -> $CBBGraded" -ForegroundColor Green }

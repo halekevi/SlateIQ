@@ -291,8 +291,18 @@ def main() -> None:
     def_adj  = ((def_rank - 15.0) / 15.0 * 0.06).fillna(0.0)
     out["def_adj"] = def_adj
 
+    # ── GAME CONTEXT ADJUSTMENT (Step 6b: Vegas lines) ────────────────────────
+    # ctx_adj: -0.08 low total on combo prop, -0.05 blowout risk, -0.15 both
+    ctx_adj  = _to_num(out["ctx_adj"]).fillna(0.0)  if "ctx_adj"  in out.columns else pd.Series(0.0, index=out.index)
+    out["ctx_adj"] = ctx_adj
+
+    # ── SCHEDULE / REST ADJUSTMENT (Step 6c: B2B, rest days) ─────────────────
+    # rest_adj: -0.10 B2B, 0.00 baseline (1-day rest), +0.02 two days, +0.04 three+
+    rest_adj = _to_num(out["rest_adj"]).fillna(0.0) if "rest_adj" in out.columns else pd.Series(0.0, index=out.index)
+    out["rest_adj"] = rest_adj
+
     proj_base = _to_num(out["projection"])
-    out["projection_adj"] = proj_base * (1.0 + def_adj)
+    out["projection_adj"] = proj_base * (1.0 + def_adj + ctx_adj + rest_adj)
     out["edge_adj"]       = out["projection_adj"] - line_num
 
     # ── VECTORIZED EDGE_ADJ_DR (direction-aware) ──────────────────────────────
@@ -365,6 +375,13 @@ def main() -> None:
     out["prop_hr_z"]     = zcol(out["prop_hr_prior"],    direction_aware=True)
 
     # ── FINAL SCORE ───────────────────────────────────────────────────────────
+    # ctx_adj and rest_adj already baked into projection_adj/edge_adj_dr.
+    # We also apply a small direct score bonus/penalty so B2B and blowout risk
+    # visibly shift rank even if edge is positive.
+    b2b_penalty    = np.where(out.get("b2b_flag",    pd.Series(False, index=out.index)).astype(str).str.lower() == "true", -0.20, 0.0)
+    blowout_penalty= np.where(out.get("blowout_risk", pd.Series(False, index=out.index)).astype(str).str.lower() == "true", -0.10, 0.0)
+    low_total_pen  = np.where(out.get("low_total_flag", pd.Series(False, index=out.index)).astype(str).str.lower() == "true", -0.10, 0.0)
+
     score = (
         _to_num(out["edge_adj_dr"]).fillna(0.0)      * 0.85
         + _to_num(out["line_hit_z"]).fillna(0.0)     * 0.85
@@ -372,6 +389,9 @@ def main() -> None:
         + _to_num(out["def_rank_z"]).fillna(0.0)     * 0.80
         + _to_num(out["prop_hr_z"]).fillna(0.0)      * 0.50
         + _to_num(out["min_z"]).fillna(0.0)          * 0.25
+        + pd.Series(b2b_penalty,     index=out.index)  # B2B fatigue
+        + pd.Series(blowout_penalty, index=out.index)  # blowout bench risk
+        + pd.Series(low_total_pen,   index=out.index)  # low O/U game
     )
     score = (
         score
