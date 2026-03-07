@@ -1,0 +1,85 @@
+/*console.log(3>2)
+
+console.log("Itchy"!="Scratchy")
+
+console.log(100+4)*11
+console.log(typeof 4.5)
+console.log(typeof "x")
+let caught = 5*5;
+    console.log(caught)
+
+    //While Loop
+let number = 0;
+while (number <= 12) {
+    console.log(number);
+    number = number + 2;
+    }
+
+for (let number =0; number<= 12; number = number + 2) {
+    console.log(number);
+    }
+
+let result = 1; //start
+let counter = 0; //counter
+//arguments
+while (counter < 10) { 
+        result = result * 2;
+        counter = counter + 1;
+}
+console.log(result);
+
+for (let current = 20; ; current = current + 1) {
+    if (current %7 == 0) {
+        console.log(current);
+        break;
+    }
+}
+
+let triangle = "";
+let length = triangle.length;
+while (length <= 7) {
+    triangle = triangle + "#";
+    console.log(triangle);
+    length = length + 1;
+}
+
+//simplified
+for (let line = "#"; line.length < 8; line += "#")
+  console.log(line);*/
+
+//FizzBuzz
+for (let number =1; number<= 100; number = number + 1) {
+    if (number %5 == 0 && number %3 == 0) {
+        console.log("FizzBuzz");
+    } else if (number %5 == 0) {
+        console.log("Buzz");
+    } else if (number %3==0) {
+        console.log("Fizz");
+    } else console.log(number);
+}
+
+//simplified
+for (let n = 1; n <= 100; n++) {
+    let output = "";
+    if (n % 3 == 0) output += "Fizz";
+    if (n % 5 == 0) output += "Buzz";
+    console.log(output || n);
+  }
+
+//Chessboard
+let size = 8;
+
+let board = "";
+
+for (let y = 0; y < size; y++) {
+  for (let x = 0; x < size; x++) {
+    if ((x + y) % 2 == 0) {
+      board += " ";
+    } else {
+      board += "#";
+    }
+  }
+  board += "\n";
+}
+
+console.log(board);

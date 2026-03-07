@@ -1,0 +1,131 @@
+/* General Styling */
+.alignfull {
+    width: 100%;
+}
+
+.header-transparent {
+    background: transparent;
+}
+
+.wp-block-main-header {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    border-bottom-color: var(--wp--preset--color--border-color);
+    border-bottom-width: 1px;
+    gap: 0px;
+}
+
+.wp-block-group {
+    padding-top: 28px;
+    padding-bottom: 28px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.wp-block-group.alignwide {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0px;
+}
+
+/* Heading Styling */
+.wp-block-heading {
+    margin: 0;
+}
+
+/* Navigation Styling */
+.wp-block-navigation {
+    text-transform: uppercase;
+    text-decoration: none;
+    gap: 28px;
+}
+
+/* Banner Styling */
+.header-banner-wrap {
+    gap: 0px;
+}
+
+.wp-block-custom-header-media {
+    width: 100%;
+    padding: 0;
+}
+
+.wp-block-section {
+    padding: 0;
+}
+
+/* Main Content Styling */
+.main-front-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-block-hero-content-default {
+    background-color: var(--wp--preset--color--foreground);
+}
+
+.wp-block-group-heading {
+    margin-bottom: var(--wp--preset--spacing--30);
+    gap: 14px;
+}
+
+.wp-block-group-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-block-entry-content {
+    gap: 14px;
+}
+
+.wp-block-heading.has-product-heading-font-size {
+    font-size: var(--wp--preset--font-size--product-heading);
+}
+
+/* Paragraph Styling */
+.has-gray-color {
+    color: var(--wp--preset--color--gray);
+}
+
+.has-background-color {
+    color: var(--wp--preset--color--background);
+}
+
+.has-text-color {
+    color: var(--wp--preset--color--text);
+}
+
+.has-link-color {
+    color: var(--wp--preset--color--link);
+}
+
+/* Buttons Styling */
+.wp-block-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.wp-block-buttons .wp-block-button {
+    text-align: center;
+}
+
+/* Media Text Styling */
+.wp-block-media-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wp-block-media-text.has-media-on-the-right {
+    flex-direction: row-reverse;
+}
+
+.wp-block-media-text__content {
+    flex: 1;
+}
+
+.wp-block-media-text__media {
+    flex: 1;
+}

@@ -1,0 +1,320 @@
+/*********************************************/
+/*************Heritage Barbershop CSS ********/
+/*********************************************/
+
+body {
+    color: #797979;
+    background: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2, 
+h3, 
+h4,
+h5, 
+h6 {
+    color: #1d2434;
+}
+
+a {
+    color: #454545;
+    transition: .3s;
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: #D5B981;
+    outline: none;
+    text-decoration: none;
+}
+
+.btn:focus,
+.form-control:focus {
+    box-shadow: none;
+}
+
+.container-fluid {
+    max-width: 100%;
+}
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    background: #D5B981;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    line-height: 1;
+    font-size: 22px;
+    right: 15px;
+    bottom: 15px;
+    transition: background 0.5s;
+    z-index: 9;
+}
+
+.back-to-top:hover {
+    background: #1d2434;
+}
+
+.back-to-top:hover i {
+    color: #D5B981;
+}
+
+.back-to-top i {
+    color: #1d2434;
+    padding-top: 10px;
+}
+
+
+/**********************************/
+/********** Top Bar CSS ***********/
+/**********************************/
+
+.top-bar {
+    position: relative;
+    height: 100px;
+    background: #1d2434;
+}
+
+.top-bar .top-bar-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.top-bar .top-bar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.top-bar .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 60px;
+    padding: 0 10px;
+    text-align: center;
+    border-left: 1px solid rgba(255, 255, 255, .15);
+}
+
+.top-bar .text:last-child {
+    border-right: 1px solid rgba(255, 255, 255, .15);
+}
+
+.top-bar .text h2 {
+    color: #eeeeee;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 0;
+    text-align: left;
+}
+
+.top-bar .text p {
+    color: #eeeeee;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.top-bar .social {
+    display: flex;
+    height: 60px;
+    font-size: 0;
+    justify-content: flex-end;
+}
+
+.top-bar .social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 100%;
+    font-size: 22px;
+    color: #ffffff;
+    border-right: 1px solid rgba(255, 255, 255, .15);
+}
+
+.top-bar .social a:first-child {
+    border-left: 1px solid rgba(255, 255, 255, .15);
+}
+
+.top-bar .social a:hover {
+    color: #D5B981;
+    background: #ffffff;
+}
+
+@media (min-width: 992px) {
+    .top-bar {
+        padding: 0 60px;
+    }
+}
+/*Mobile Test Start*/
+@media all and (max-width: 320px) {   
+    .navbar navbar-expand-lg bg-dark navbar-dark nav-sticky {
+        width: 100%;
+    } 
+}
+
+/**********************************/
+/*********** Nav Bar CSS **********/
+/**********************************/
+.navbar {
+    position: relative;
+    transition: .5s;
+    z-index: 999;
+}
+
+.navbar.nav-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+}
+
+.navbar .navbar-brand {
+    margin: 0;
+    color: #ffffff;
+    font-size: 45px;
+    line-height: 0px;
+    font-weight: 600;
+}
+
+.navbar .navbar-brand span {
+    font-weight: 800;
+}
+
+.navbar .navbar-brand img {
+    max-width: 100%;
+    max-height: 40px;
+}
+
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    padding: 10px 10px 8px 10px;
+    color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    background: rgba(256, 256, 256, .1);
+    transition: none;
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0;
+    border: 0;
+    border-radius: 0;
+    background: #f8f9fa;
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        padding: 40px 60px;
+        background: rgba(0, 0, 0, .1) !important;
+        z-index: 9;
+    }
+    
+    .navbar.nav-sticky {
+        padding: 10px 60px;
+        background: #1d2434 !important;
+    }
+    
+    .navbar a.nav-link {
+        padding: 8px 15px;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+}
+/* This affects the color of the navbar */
+@media (max-width: 991.9px) {   
+    .navbar {
+        padding: 15px;
+        background: #1d2434 !important;
+    }
+    
+    .navbar a.nav-link {
+        padding: 5px;
+    }
+    
+    .navbar .dropdown-menu {
+        box-shadow: none;
+    }
+}
+
+/*Mobile View*/
+@media all and (max-width: 320px) {   
+    .navbar .navbar-expand-lg .bg-dark .navbar-dark .nav-sticky {
+        padding: 15px;
+        background: #1d2434 !important;
+        width: 100vw;
+    }
+    
+    .navbar a.nav-link {
+        padding: 1em;
+    }
+    
+    .navbar .dropdown-menu {
+        box-shadow: none;
+    }
+    .navbar .navbar-brand  {
+        margin: 0;
+        color: #ffffff;
+        font-size: 1.5rem;
+        line-height: 1rem;
+        font-weight: 1rem;
+    }
+    
+    .navbar .navbar-brand span {
+        font-weight: 1rem;
+    }
+    
+    .navbar .navbar-brand img {
+        max-width: 100vw;
+        max-height: 1rem;
+    }
+}
+
+/*******************************/
+/********** Hero CSS ***********/
+/*******************************/
+
+.hero {
+    width: 100%;
+    height: 100%;
+    
+    
+    position: center;
+    /*margin: 20px;*/
+    /*padding: 30px;*/
+    overflow: hidden;
+    border: 5px solid red;
+    display: block;
+
+
+}
+
+.hero .container-fluid {
+    padding: 0;
+    border: 5px solid blue;
+    max-width: 100%;
+    height: calc(100vh - 16px);
+    background-image: url("../HBShop img/Booman Homepage background.jpg");
+    background-repeat: no-repeat ;
+    background-size: 100% 100%;
+}
+
+.hero-text {
+    flex: center;
+}
