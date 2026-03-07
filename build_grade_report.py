@@ -1,16 +1,21 @@
 """
 build_grade_report.py
 =====================
-Reads graded_legs_YYYY-MM-DD.csv  +  graded_tickets_YYYY-MM-DD.csv
-(produced by grade_legs.py and grade_tickets.py in the nightly grader)
-and writes a rich HTML grade report:  slate_eval_YYYY-MM-DD.html
+DROP THIS FILE into your SlateIQ root folder (next to run_grader.ps1).
 
-Usage:
-    py -3 build_grade_report.py                      # auto-detects yesterday
+Reads graded_nba/cbb/nhl/soccer_YYYY-MM-DD.xlsx from your outputs folder
+and writes a rich HTML grade report to:
+  ui_runner/ui_runner/templates/slate_eval_YYYY-MM-DD.html
+
+This file is self-locating — it finds the SlateIQ root automatically
+regardless of which subfolder you drop it in.
+
+Usage (called automatically by run_grader.ps1):
+    py -3 build_grade_report.py --date 2026-03-06 --nba outputs/2026-03-06/graded_nba_2026-03-06.xlsx ...
+
+Manual run (auto-detects yesterday):
+    py -3 build_grade_report.py
     py -3 build_grade_report.py --date 2026-03-06
-    py -3 build_grade_report.py --legs path/to/graded_legs.csv --tickets path/to/graded_tickets.csv
-
-Output saved to:  ui_runner/ui_runner/templates/slate_eval_YYYY-MM-DD.html
 """
 
 from __future__ import annotations
@@ -26,9 +31,23 @@ except ImportError:
     print("ERROR: pandas not installed.  pip install pandas openpyxl"); sys.exit(1)
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
-SCRIPT_DIR   = Path(__file__).resolve().parent
-BASE_DIR     = SCRIPT_DIR.parent            # SlateIQ root
-TEMPLATES_DIR = SCRIPT_DIR / "ui_runner" / "ui_runner" / "templates"
+# ── Path resolution ────────────────────────────────────────────────────────────
+# Works whether this file lives in:
+#   SlateIQ/build_grade_report.py          (root — correct location)
+#   SlateIQ/grader/build_grade_report.py   (grader subfolder)
+#   SlateIQ/scripts/build_grade_report.py  (scripts subfolder)
+# In all cases we walk up until we find the folder containing ui_runner.
+
+def _find_root() -> Path:
+    here = Path(__file__).resolve().parent
+    for candidate in [here, here.parent, here.parent.parent]:
+        if (candidate / "ui_runner").exists():
+            return candidate
+    return here  # fallback
+
+SCRIPT_DIR    = Path(__file__).resolve().parent
+BASE_DIR      = _find_root()
+TEMPLATES_DIR = BASE_DIR / "ui_runner" / "ui_runner" / "templates"
 
 SPORT_COLORS = {
     "NBA":    "#c8ff00",
@@ -94,6 +113,8 @@ def find_file(date_str: str, pattern: str) -> Path | None:
     search_dirs = [
         SCRIPT_DIR,
         BASE_DIR,
+        BASE_DIR / "outputs" / date_str,
+        BASE_DIR / "outputs",
         BASE_DIR / "NBA",
         BASE_DIR / "CBB",
         BASE_DIR / "NHL",
@@ -649,23 +670,7 @@ details[open] summary span:first-of-type{transform:rotate(90deg);display:inline-
 """
 
 # ── Main HTML builder ──────────────────────────────────────────────────────────
-def build_html_from_df(df: pd.DataFrame, tickets_path, date_str: str, legs_path) -> str:
-    """Build HTML from an already-loaded combined DataFrame."""
-    tdf = load_tickets(tickets_path)
-    if not tdf.empty:
-        print(f"  Loaded {len(tdf)} ticket rows.")
-    return _build_html_core(df, tdf, date_str, legs_path, tickets_path)
-
-
-def build_html(legs_path: Path, tickets_path, date_str: str) -> str:
-    print(f"  Loading legs: {legs_path}")
-    df = load_legs(legs_path)
-    print(f"  Loaded {len(df)} leg rows.  Cols: {list(df.columns)[:12]}")
-
-    tdf = load_tickets(tickets_path)
-    if not tdf.empty:
-        print(f"  Loaded {len(tdf)} ticket rows.")
-
+def _build_html_core(df: pd.DataFrame, tdf: pd.DataFrame, date_str: str, legs_path, tickets_path) -> str:
     generated = datetime.now().strftime("%Y-%m-%d %H:%M")
     try:
         d = datetime.strptime(date_str, "%Y-%m-%d")
@@ -727,6 +732,20 @@ def build_html(legs_path: Path, tickets_path, date_str: str) -> str:
 </div>
 </body>
 </html>"""
+
+# ── Convenience wrappers ───────────────────────────────────────────────────────
+def build_html_from_df(df: pd.DataFrame, tickets_path, date_str: str, legs_path) -> str:
+    tdf = load_tickets(tickets_path)
+    if not tdf.empty:
+        print(f"  Loaded {len(tdf)} ticket rows.")
+    return _build_html_core(df, tdf, date_str, legs_path, tickets_path)
+
+def build_html(legs_path: Path, tickets_path, date_str: str) -> str:
+    print(f"  Loading legs: {legs_path}")
+    df = load_legs(legs_path)
+    print(f"  Loaded {len(df)} leg rows.")
+    tdf = load_tickets(tickets_path)
+    return _build_html_core(df, tdf, date_str, legs_path, tickets_path)
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
 def load_any(path: Path) -> pd.DataFrame:
