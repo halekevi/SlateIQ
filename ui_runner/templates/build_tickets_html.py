@@ -302,6 +302,60 @@ def build_ticket_card(ticket: dict) -> str:
 </div>"""
 
 
+def build_best_ticket_summary(tickets: list[dict]) -> str:
+    """Build a highlighted 'Best Ticket' banner showing the #1 ticket from a group."""
+    if not tickets:
+        return ""
+    best = tickets[0]
+    info = parse_ticket_title(best["title"])
+    legs = best["legs"]
+    if not legs:
+        return ""
+
+    # compute avg hit rate display
+    hrs = []
+    for leg in legs:
+        try:
+            f = float(leg.get("Hit Rate", 0))
+            hrs.append(f if f > 1 else f * 100)
+        except (TypeError, ValueError):
+            pass
+    avg_hr = sum(hrs) / len(hrs) if hrs else 0
+    hr_color = "#39ff6e" if avg_hr >= 75 else "#f0a500" if avg_hr >= 60 else "#ff4d4d"
+
+    rows_html = ""
+    for leg in legs:
+        hr_val = ""
+        try:
+            f = float(leg.get("Hit Rate", 0))
+            hr_val = f"{f*100:.0f}%" if f <= 1.0 else f"{f:.0f}%"
+        except (TypeError, ValueError):
+            hr_val = str(leg.get("Hit Rate", "—"))
+        lc, _ = rate_color(leg.get("Hit Rate"))
+        rows_html += f"""<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+  <span style="font-size:12px;color:var(--text);flex:1;font-weight:600">{h(leg.get('Player',''))}</span>
+  <span style="font-size:11px;color:var(--muted);font-family:'Share Tech Mono',monospace">{h(leg.get('Prop',''))} {fmt(leg.get('Line'),1)}</span>
+  {dir_chip(leg.get('Dir'))}
+  <span style="font-size:11px;color:{lc};font-family:'Share Tech Mono',monospace;min-width:38px;text-align:right">{hr_val}</span>
+</div>"""
+
+    power_str = f"⚡ {info['power']} Power" if info['power'] else ""
+    flex_str  = f"🔄 {info['flex']} Flex"  if info['flex']  else ""
+
+    return f"""<div style="background:linear-gradient(135deg,rgba(200,255,0,.06) 0%,rgba(0,229,255,.04) 100%);border:1px solid rgba(200,255,0,.2);border-left:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:20px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;color:var(--accent)">⭐ BEST TICKET</span>
+    <span style="font-size:10px;color:var(--muted);letter-spacing:1px">{h(info['desc'])}</span>
+    <span style="margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:22px;color:{hr_color}">{avg_hr:.0f}% HR</span>
+  </div>
+  <div style="margin-bottom:10px;">{rows_html}</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+    {"<span style='font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(57,255,110,.1);color:var(--green);border:1px solid rgba(57,255,110,.2)'>" + power_str + "</span>" if power_str else ""}
+    {"<span style='font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(0,229,255,.1);color:var(--cyan);border:1px solid rgba(0,229,255,.2)'>" + flex_str + "</span>" if flex_str else ""}
+  </div>
+</div>"""
+
+
 def build_ticket_group(tickets: list[dict], limit: int = 60) -> str:
     if not tickets:
         return '<div class="muted" style="padding:20px;font-family:\'DM Mono\',monospace;font-size:12px">No tickets in this group.</div>'
@@ -352,7 +406,8 @@ def build_tab_section(wb, sheet_names: list[str], id_prefix: str) -> tuple[str, 
             tickets = leg_data[leg]
             active  = "active" if first_leg else ""
             inner_btns   += f'<button class="stab {active}" onclick="switchStab(event,\'{lid}\')">{leg}-Leg <span class="count-badge">{len(tickets)}</span></button>'
-            inner_panels += f'<div id="{lid}" class="stab-panel {active}">{build_ticket_group(tickets)}</div>'
+            best_summary  = build_best_ticket_summary(tickets)
+            inner_panels += f'<div id="{lid}" class="stab-panel {active}">{best_summary}{build_ticket_group(tickets)}</div>'
             first_leg = False
 
         total = sum(len(v) for v in leg_data.values())
@@ -769,10 +824,10 @@ def build_html(xlsx_path: Path) -> str:
     <span class="snav-name">Slate<span>IQ</span></span>
   </a>
   <ul class="snav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="tickets_latest.html" class="active">🎟 Tickets</a></li>
-    <li><a href="indexGrades.html">Grades</a></li>
-    <li><a href="payout_calculator.html">💰 Payouts</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/tickets" class="active">🎟 Tickets</a></li>
+    <li><a href="/grades">Grades</a></li>
+    <li><a href="/payout">💰 Payouts</a></li>
   </ul>
   <div class="snav-right">
     <div class="live-pill"><div class="live-dot"></div>LIVE</div>
@@ -782,10 +837,10 @@ def build_html(xlsx_path: Path) -> str:
   </button>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html">🏠 Home</a>
-  <a href="tickets_latest.html" class="active">🎟 Tickets</a>
-  <a href="indexGrades.html">✏️ Grades</a>
-  <a href="payout_calculator.html">💰 Payouts</a>
+  <a href="/">🏠 Home</a>
+  <a href="/tickets" class="active">🎟 Tickets</a>
+  <a href="/grades">✏️ Grades</a>
+  <a href="/payout">💰 Payouts</a>
 </div>
 
 <div class="page-header">
