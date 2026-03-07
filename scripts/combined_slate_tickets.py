@@ -2,7 +2,7 @@
 """
 combined_slate_tickets.py
 
-Combined NBA + CBB Slate & Ticket Generator
+Combined NBA + CBB + NHL + Soccer Slate & Ticket Generator
 Merges NBA (step8_all_direction_clean.xlsx) and CBB (step6_ranked_cbb.xlsx ELIGIBLE)
 Outputs:
   - combined_slate_tickets_YYYY-MM-DD.xlsx
@@ -66,6 +66,10 @@ C = {
     "white": "FFFFFF",
     "nba": "EBF5FB",
     "cbb": "EAFAF1",
+    "nhl": "EBF4FD",
+    "hdr_nhl": "1A3A5C",
+    "hdr_soccer": "1A5C2E",
+    "soccer": "EAFBF1",
     "mix": "F5EEF8",
     "gold": "F9E79F",
 }
@@ -96,6 +100,8 @@ def hc(ws, r, c, v, bg=None, fc="FFFFFF", bold=True, sz=9, align="center"):
 
 
 def dc(ws, r, c, v, bg=None, bold=False, sz=9, align="center", fc="000000", fmt=None):
+    if v is pd.NA or (isinstance(v, float) and np.isnan(v)) or v is None:
+        v = ""
     cell = ws.cell(row=r, column=c, value=v)
     cell.font = Font(bold=bold, name="Arial", size=sz, color=fc)
     cell.fill = PatternFill("solid", start_color=bg or C["white"])
@@ -235,6 +241,77 @@ def _clean_id(x) -> str:
         return s
     return ""
 
+def attach_standard_refs(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Adds Standard sibling references to every row (Standard/Goblin/Demon):
+      - standard_line
+      - standard_edge
+      - standard_projection
+      - line_discount_vs_standard (direction-aware)
+
+    Matching key uses: sport, player, team, opp, prop_type, game_time
+    Bulletproof: supports 'Projection' vs 'projection' and missing cols.
+    """
+    if df is None or df.empty:
+        return df
+
+    out = df.copy()
+
+    # --- unify projection column name (Projection -> projection) ---
+    if "projection" not in out.columns and "Projection" in out.columns:
+        out["projection"] = out["Projection"]
+
+    # Ensure required columns exist
+    for c in [
+        "sport", "player", "team", "opp", "prop_type", "pick_type",
+        "direction", "line", "edge", "projection", "game_time"
+    ]:
+        if c not in out.columns:
+            out[c] = pd.NA
+
+    key_cols = ["sport", "player", "team", "opp", "prop_type", "game_time"]
+
+    # Build Standard reference table
+    std = out[out["pick_type"].astype(str).str.lower() == "standard"].copy()
+    if std.empty:
+        out["standard_line"] = pd.NA
+        out["standard_edge"] = pd.NA
+        out["standard_projection"] = pd.NA
+        out["line_discount_vs_standard"] = pd.NA
+        return out
+
+    std_ref = (
+        std[key_cols + ["line", "edge", "projection"]]
+        .rename(columns={
+            "line": "standard_line",
+            "edge": "standard_edge",
+            "projection": "standard_projection",
+        })
+        .drop_duplicates(subset=key_cols, keep="first")
+    )
+
+    out = out.merge(std_ref, on=key_cols, how="left")
+
+    # Direction-aware "discount vs standard"
+    def _discount(row):
+        try:
+            s = row.get("standard_line", pd.NA)
+            l = row.get("line", pd.NA)
+            if pd.isna(s) or pd.isna(l):
+                return pd.NA
+            d = str(row.get("direction", "")).upper().strip()
+            s = float(s)
+            l = float(l)
+            if d == "OVER":
+                return s - l
+            if d == "UNDER":
+                return l - s
+            return pd.NA
+        except Exception:
+            return pd.NA
+
+    out["line_discount_vs_standard"] = out.apply(_discount, axis=1)
+    return out
 
 def player_initials(name: str) -> str:
     s = (name or "").strip()
@@ -312,6 +389,10 @@ def ticket_groups_to_payload(all_ticket_groups, date_str, thresholds):
                     "direction": str(gv("direction") or ""),
                     "line": _safe_float(gv("line")),
                     "edge": _safe_float(gv("edge")),
+                    "standard_line": _safe_float(gv("standard_line")),
+                    "standard_edge": _safe_float(gv("standard_edge")),
+                    "standard_projection": _safe_float(gv("standard_projection")),
+                    "line_discount_vs_standard": _safe_float(gv("line_discount_vs_standard")),
                     "hit_rate": _safe_float(gv("hit_rate")),
                     "rank_score": _safe_float(gv("rank_score")),
                     "game_time": str(gv("game_time") or ""),
@@ -387,6 +468,10 @@ def write_web_outputs(payload, outdir: str):
             return "<span style='background:#c8ff00;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NBA</span>"
         if "CBB" in s or "NCAA" in s:
             return "<span style='background:#00e5ff;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>CBB</span>"
+        if "NHL" in s:
+            return "<span style='background:#5bc4f5;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>NHL</span>"
+        if "SOCCER" in s:
+            return "<span style='background:#57e87d;color:#000;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;'>SOC</span>"
         return f"<span style='background:#333;color:#ccc;font-size:11px;padding:2px 7px;border-radius:4px;'>{sport or ''}</span>"
 
     def badge(val, color="#39ff6e") -> str:
@@ -930,8 +1015,162 @@ def load_cbb(path: str) -> pd.DataFrame:
     return df
 
 
+# ── Load & normalize NHL ──────────────────────────────────────────────────────
+def load_nhl(path: str) -> pd.DataFrame:
+    path = resolve_input_path(path, fallback_filename="step8_nhl_direction_clean.xlsx")
+
+    xl = pd.ExcelFile(path, engine="openpyxl")
+    sheet = "NHL" if "NHL" in xl.sheet_names else ("ALL" if "ALL" in xl.sheet_names else xl.sheet_names[0])
+    df = pd.read_excel(path, sheet_name=sheet, engine="openpyxl")
+
+    df = df.rename(columns={
+        "player_name":        "player",
+        "position":           "pos",
+        "stat_type":          "prop_type",
+        "line_score":         "line",
+        "recommended_side":   "direction",
+        "composite_hit_rate": "hit_rate",
+        "avg_L5":             "l5_avg",
+        "avg_season":         "season_avg",
+        "def_tier":           "def_tier",
+        "def_rank":           "def_rank",
+        "prop_score":         "rank_score",
+        "game_start":         "game_time",
+    })
+
+    # opponent is stored in 'description' column
+    if "opp" not in df.columns:
+        if "description" in df.columns:
+            df["opp"] = df["description"]
+        else:
+            df["opp"] = ""
+
+    df = df.loc[:, ~df.columns.duplicated()].copy()
+    df["sport"] = "NHL"
+
+    def _norm_pick(x):
+        t = str(x).strip().lower() if x else ""
+        if "gob" in t: return "Goblin"
+        if "dem" in t: return "Demon"
+        return "Standard"
+
+    if "pick_type" not in df.columns:
+        df["pick_type"] = "Standard"
+    df["pick_type"] = df["pick_type"].apply(_norm_pick)
+    forced = df["pick_type"].isin(["Goblin", "Demon"])
+
+    if "direction" in df.columns:
+        df["direction"] = df["direction"].astype(str).str.upper()
+        df.loc[forced, "direction"] = "OVER"
+    else:
+        df["direction"] = "OVER"
+
+    if "tier" in df.columns:
+        df["tier"] = df["tier"].astype(str).str.upper()
+    else:
+        df["tier"] = "C"
+
+    for col in ["rank_score", "hit_rate", "line"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+    if "edge" not in df.columns:
+        df["edge"] = 0.0
+
+    df = df[df["line"].notna() & (df["line"] > 0)]
+    # Convert all pandas NA/NaT to None so openpyxl can handle them
+    df = df.astype(object).where(df.notna(), other=None)
+    return df
+
+
+
+# ── Load & normalize Soccer ───────────────────────────────────────────────────
+def load_soccer(path: str) -> pd.DataFrame:
+    path = resolve_input_path(path, fallback_filename="step8_soccer_direction_clean.xlsx")
+
+    xl = pd.ExcelFile(path, engine="openpyxl")
+    sheet = "Soccer" if "Soccer" in xl.sheet_names else (
+        "ALL" if "ALL" in xl.sheet_names else xl.sheet_names[0])
+    df = pd.read_excel(path, sheet_name=sheet, engine="openpyxl")
+
+    df = df.rename(columns={
+        # title-case (from step8 clean xlsx)
+        "Player":           "player",
+        "Tier":             "tier",
+        "Rank Score":       "rank_score",
+        "Pos":              "pos",
+        "Team":             "team",
+        "Opp":              "opp",
+        "Game Time":        "game_time",
+        "Prop":             "prop_type",
+        "Pick Type":        "pick_type",
+        "Line":             "line",
+        "Direction":        "direction",
+        "Edge":             "edge",
+        "Projection":       "projection",
+        "Hit Rate (5g)":    "hit_rate",
+        "Last 5 Avg":       "l5_avg",
+        "Season Avg":       "season_avg",
+        "L5 Over":          "l5_over",
+        "L5 Under":         "l5_under",
+        "Def Rank":         "def_rank",
+        "Def Tier":         "def_tier",
+        "Min Tier":         "min_tier",
+        "Void Reason":      "void_reason",
+        # snake_case fallbacks
+        "player_name":        "player",
+        "stat_type":          "prop_type",
+        "stat_norm":          "prop_type",
+        "line_score":         "line",
+        "recommended_side":   "direction",
+        "composite_hit_rate": "hit_rate",
+        "avg_L5":             "l5_avg",
+        "avg_season":         "season_avg",
+        "def_tier":           "def_tier",
+        "def_rank":           "def_rank",
+        "prop_score":         "rank_score",
+        "game_start":         "game_time",
+        "opponent":           "opp",
+    })
+
+    if "opp" not in df.columns:
+        df["opp"] = ""
+
+    df = df.loc[:, ~df.columns.duplicated()].copy()
+    df["sport"] = "Soccer"
+
+    def _norm_pick(x):
+        t = str(x).strip().lower() if x else ""
+        if "gob" in t: return "Goblin"
+        if "dem" in t: return "Demon"
+        return "Standard"
+
+    if "pick_type" not in df.columns:
+        df["pick_type"] = "Standard"
+    df["pick_type"] = df["pick_type"].apply(_norm_pick)
+
+    if "direction" in df.columns:
+        df["direction"] = df["direction"].astype(str).str.upper()
+    else:
+        df["direction"] = "OVER"
+
+    if "tier" in df.columns:
+        df["tier"] = df["tier"].astype(str).str.upper()
+    else:
+        df["tier"] = "C"
+
+    for col in ["rank_score", "hit_rate", "line"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+    if "edge" not in df.columns:
+        df["edge"] = 0.0
+
+    df = df[df["line"].notna() & (df["line"] >= 0)]
+    df = df.astype(object).where(df.notna(), other=None)
+    return df
+
+
 # ── Merge to full slate ────────────────────────────────────────────────────────
-def build_combined_slate(nba: pd.DataFrame, cbb: pd.DataFrame) -> pd.DataFrame:
+def build_combined_slate(nba: pd.DataFrame, cbb: pd.DataFrame, nhl: pd.DataFrame = None, soccer: pd.DataFrame = None) -> pd.DataFrame:
     keep = [
         "sport",
         "tier",
@@ -963,7 +1202,12 @@ def build_combined_slate(nba: pd.DataFrame, cbb: pd.DataFrame) -> pd.DataFrame:
         df = df.loc[:, ~df.columns.duplicated()].copy()
         return df[[c for c in cols if c in df.columns]].copy()
 
-    combined = pd.concat([safe_keep(nba, keep), safe_keep(cbb, keep)], ignore_index=True)
+    frames = [safe_keep(nba, keep), safe_keep(cbb, keep)]
+    if nhl is not None and len(nhl) > 0:
+        frames.append(safe_keep(nhl, keep))
+    if soccer is not None and len(soccer) > 0:
+        frames.append(safe_keep(soccer, keep))
+    combined = pd.concat(frames, ignore_index=True)
 
     if "rank_score" in combined.columns:
         combined["rank_score"] = pd.to_numeric(combined["rank_score"], errors="coerce")
@@ -1517,7 +1761,7 @@ def write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=""):
 
 
 # ── Write SUMMARY sheet ───────────────────────────────────────────────────────
-def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, thresholds):
+def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, thresholds, nhl=None, soccer=None):
     ws = wb.create_sheet("SUMMARY", 0)
     sw(ws, [28, 14, 10, 10, 10, 10, 10, 12, 18])
 
@@ -1571,6 +1815,12 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
     elig_all = len(combined[combined.get("tier", "").isin(["A", "B"])]) if "tier" in combined.columns else 0
     row = stat_row(row, "NBA Props", len(nba), elig_nba, C["nba"])
     row = stat_row(row, "CBB Props", len(cbb), elig_cbb, C["cbb"])
+    if nhl is not None and len(nhl) > 0:
+        elig_nhl = len(nhl[nhl.get("tier", "").isin(["A", "B"])]) if "tier" in nhl.columns else 0
+        row = stat_row(row, "NHL Props", len(nhl), elig_nhl, C["nhl"])
+    if soccer is not None and len(soccer) > 0:
+        elig_soc = len(soccer[soccer.get("tier", "").isin(["A", "B"])]) if "tier" in soccer.columns else 0
+        row = stat_row(row, "Soccer Props", len(soccer), elig_soc, C["soccer"])
     row = stat_row(row, "Combined Slate", len(combined), elig_all)
     row += 1
 
@@ -1611,6 +1861,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--nba", required=True, help="NBA step8_all_direction_clean.xlsx")
     ap.add_argument("--cbb", required=True, help="CBB step6_ranked_cbb.xlsx")
+    ap.add_argument("--nhl", default="", help="NHL step8_nhl_direction_clean.xlsx (optional)")
+    ap.add_argument("--soccer", default="", help="Soccer step8_soccer_direction_clean.xlsx (optional)")
     ap.add_argument("--output", default="")
     ap.add_argument("--date", default=datetime.now().strftime("%Y-%m-%d"))
     ap.add_argument("--tiers", default="A,B", help="Comma-separated tiers e.g. A,B")
@@ -1622,7 +1874,7 @@ def main():
 
     # Web outputs
     ap.add_argument("--write-web", action="store_true", help="Write tickets_latest.html/json for GitHub Pages")
-    ap.add_argument("--web-outdir", default="docs", help="Folder to write tickets_latest.html/json (default: docs)")
+    ap.add_argument("--web-outdir", default=r"..\ui_runner\templates",help="Folder to write tickets_latest.html/json")
     ap.add_argument("--also-root", action="store_true", help="Also write tickets_latest.* in repo root")
 
     args = ap.parse_args()
@@ -1644,12 +1896,39 @@ def main():
     nba = load_nba(args.nba)
     print(f"  {len(nba)} NBA props loaded")
 
-    print(f"Loading CBB slate from {args.cbb}...")
     cbb = load_cbb(args.cbb)
     print(f"  {len(cbb)} CBB props loaded")
 
+    nhl = None
+    if args.nhl:
+        try:
+            nhl = load_nhl(args.nhl)
+            nhl = attach_standard_refs(nhl)
+            print(f"  {len(nhl)} NHL props loaded")
+        except Exception as e:
+            print(f"  WARNING: Could not load NHL file: {e}")
+            nhl = None
+
+    soccer = None
+    if args.soccer:
+        try:
+            soccer = load_soccer(args.soccer)
+            soccer = attach_standard_refs(soccer)
+            print(f"  {len(soccer)} Soccer props loaded")
+        except Exception as e:
+            print(f"  WARNING: Could not load Soccer file: {e}")
+            soccer = None
+
+    # ✅ Attach Standard sibling refs AFTER normalized columns exist
+    nba = attach_standard_refs(nba)
+    cbb = attach_standard_refs(cbb)
+
     print("Building combined slate...")
-    combined = build_combined_slate(nba, cbb)
+    combined = build_combined_slate(nba, cbb, nhl, soccer)
+
+    # ✅ Attach Standard refs for combined too
+    combined = attach_standard_refs(combined)
+
     print(f"  {len(combined)} total props")
 
     def pool(df, pt=None):
@@ -1681,7 +1960,7 @@ def main():
             tickets = build_tickets(sub_pool, n, args.max_tickets)
             if tickets:
                 pt_label = pick_type_filter or "Mix"
-                sheet_name = f"{sport_prefix} {pt_label} {n}-Leg"[:31]
+                sheet_name = f"{sport_prefix} {pt_label} {n}-Leg"[:31] if pick_type_filter else f"{sport_prefix} Mix {n}-Leg"[:31]
                 write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=f"{sport_label} {pt_label}")
                 rows_out.append((sheet_name, tickets, None))
                 print(f"  {sheet_name}: {len(tickets)} tickets")
@@ -1706,6 +1985,27 @@ def main():
     # CBB Mix
     if len(cbb_pool) >= 3:
         all_ticket_groups += gen_tickets(cbb_pool, "CBB", C["hdr_cbb"], "CBB Mix")
+
+
+    # NHL tickets
+    if nhl is not None and len(nhl) > 0:
+        nhl_pool = pool(nhl)
+        if len(nhl_pool) >= 3:
+            for pt in ["Goblin", "Standard", "Demon"]:
+                pt_pool = pool(nhl, [pt])
+                if len(pt_pool) >= 3:
+                    all_ticket_groups += gen_tickets(pt_pool, "NHL", C["hdr_nhl"], "NHL", pt)
+            all_ticket_groups += gen_tickets(nhl_pool, "NHL", C["hdr_nhl"], "NHL Mix")
+
+    # Soccer tickets
+    if soccer is not None and len(soccer) > 0:
+        soccer_pool = pool(soccer)
+        if len(soccer_pool) >= 3:
+            for pt in ["Goblin", "Standard", "Demon"]:
+                pt_pool = pool(soccer, [pt])
+                if len(pt_pool) >= 3:
+                    all_ticket_groups += gen_tickets(pt_pool, "Soccer", C["hdr_soccer"], "Soccer", pt)
+            all_ticket_groups += gen_tickets(soccer_pool, "Soccer", C["hdr_soccer"], "Soccer Mix")
 
     # Combined NBA+CBB tickets (all pick types mixed)
     if len(combo_pool) >= 3:
@@ -1743,14 +2043,18 @@ def main():
     write_slate_sheet(wb, combined, "Full Slate", C["hdr"], "ALL")
     write_slate_sheet(wb, nba, "NBA Slate", C["hdr_nba"], "NBA")
     write_slate_sheet(wb, cbb, "CBB Slate", C["hdr_cbb"], "CBB")
+    if nhl is not None and len(nhl) > 0:
+        write_slate_sheet(wb, nhl, "NHL Slate", C["hdr_nhl"], "NHL")
+    if soccer is not None and len(soccer) > 0:
+        write_slate_sheet(wb, soccer, "Soccer Slate", C["hdr_soccer"], "Soccer")
 
-    write_summary(wb, nba, cbb, combined, all_ticket_groups, args.date, thresholds)
+    write_summary(wb, nba, cbb, combined, all_ticket_groups, args.date, thresholds, nhl=nhl, soccer=soccer)
 
     # Reorder: put SUMMARY + slate sheets at the front
-    desired_first = ["SUMMARY", "Full Slate", "NBA Slate", "CBB Slate"]
-    for i, sname in enumerate(desired_first):
+    desired_first = ["SUMMARY", "Full Slate", "NBA Slate", "CBB Slate", "NHL Slate", "Soccer Slate"]
+    for sname in reversed(desired_first):
         if sname in wb.sheetnames:
-            wb.move_sheet(wb[sname], offset=-(len(wb.sheetnames) - 1 - i))
+            wb.move_sheet(wb[sname], offset=-(len(wb.sheetnames) - 1))
 
     wb.save(args.output)
     print(f"\n✅ Saved -> {args.output}")

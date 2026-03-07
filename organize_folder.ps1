@@ -1,5 +1,5 @@
 # ============================================================
-#  NBA-Pipelines  -  Folder Organizer
+#  SlateIQ  -  Folder Organizer
 #  Run once to clean up root and archive old dated files
 #  Safe: never deletes anything — only moves
 # ============================================================
@@ -210,15 +210,15 @@ Write-Host "======================================================" -ForegroundC
 Write-Host "  DONE. Final structure:" -ForegroundColor Cyan
 Write-Host "======================================================" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "  NBA-Pipelines\" -ForegroundColor White
+Write-Host "  SlateIQ\" -ForegroundColor White
 Write-Host "  ├── run_pipeline.ps1          (master runner)" -ForegroundColor Green
 Write-Host "  ├── run_grader.ps1            (grader runner)" -ForegroundColor Green
 Write-Host "  ├── combined_slate_tickets_TODAY.xlsx" -ForegroundColor Green
 Write-Host "  ├── scripts\                  (all Python pipeline scripts)" -ForegroundColor Yellow
 Write-Host "  │   ├── grading\              (slate_grader, grade_cbb, build_grades_html)" -ForegroundColor Yellow
 Write-Host "  │   └── ui\                   (build_tickets_html, render_combined_slate)" -ForegroundColor Yellow
-Write-Host "  ├── NbaPropPipelineA\         (NBA step scripts)" -ForegroundColor Cyan
-Write-Host "  ├── CBB2\                     (CBB step scripts)" -ForegroundColor Cyan
+Write-Host "  ├── NBA\         (NBA step scripts)" -ForegroundColor Cyan
+Write-Host "  ├── CBB\                     (CBB step scripts)" -ForegroundColor Cyan
 Write-Host "  ├── outputs\{date}\           (dated combined slates + graded files)" -ForegroundColor Cyan
 Write-Host "  ├── ui_runner\                (web UI)" -ForegroundColor Cyan
 Write-Host "  │   ├── components\           (JSX files)" -ForegroundColor Cyan
@@ -228,3 +228,4 @@ Write-Host "      ├── outputs\              (old combined slates)" -Foregr
 Write-Host "      ├── graded\               (old graded xlsx)" -ForegroundColor DarkGray
 Write-Host "      └── dev\                  (cheatsheets, progress notes)" -ForegroundColor DarkGray
 Write-Host ""
+

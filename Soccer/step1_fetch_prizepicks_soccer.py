@@ -1,0 +1,205 @@
+"""
+Step 1 — Fetch PrizePicks Soccer Board
+Fetches all soccer props from the PrizePicks API directly (no browser needed).
+PrizePicks soccer is a single board (league_id=82 SOCCER) — EPL/MLS/etc. are
+determined by player/game data inside the response, not separate API endpoints.
+
+Usage:
+    py step1_fetch_prizepicks_soccer.py --output s1_soccer_props.csv
+    py step1_fetch_prizepicks_soccer.py --include_halves --output s1_soccer_props.csv
+"""
+
+import argparse
+import sys
+import time
+import json
+import urllib.request
+import urllib.error
+
+import pandas as pd
+
+# PrizePicks internal soccer league IDs
+SOCCER_BOARDS = {
+    "82":  "SOCCER",      # full game (main board)
+    "242": "SOCCER1H",    # first half
+    "243": "SOCCER2H",    # second half
+    "262": "SOCCERSZN",   # season props
+}
+
+PICKTYPE_MAP = {
+    "standard": "Standard",
+    "goblin":   "Goblin",
+    "demon":    "Demon",
+}
+
+HEADERS = {
+    "User-Agent":  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Accept":      "application/json",
+    "Referer":     "https://app.prizepicks.com/",
+    "Origin":      "https://app.prizepicks.com",
+}
+
+
+def fetch_board(league_id: str, league_name: str, per_page: int = 250) -> tuple[list, list]:
+    """Fetch all props for a single PrizePicks board via direct API calls."""
+    all_data = []
+    all_included = []
+
+    # PrizePicks paginates — fetch both in_game=false and in_game=true
+    for in_game in ("false", "true"):
+        url = (
+            f"https://api.prizepicks.com/projections"
+            f"?league_id={league_id}"
+            f"&per_page={per_page}"
+            f"&single_stat=true"
+            f"&in_game={in_game}"
+            f"&game_mode=pickem"
+        )
+        for attempt in range(1, 4):
+            try:
+                req = urllib.request.Request(url, headers=HEADERS)
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    j = json.loads(resp.read())
+                data  = j.get("data") or []
+                incl  = j.get("included") or []
+                all_data.extend(data)
+                all_included.extend(incl)
+                print(f"    in_game={in_game}: {len(data)} props")
+                break
+            except urllib.error.HTTPError as e:
+                if e.code == 429:
+                    wait = 60 * attempt
+                    print(f"    429 rate limit — waiting {wait}s (attempt {attempt})")
+                    time.sleep(wait)
+                else:
+                    print(f"    HTTP {e.code} for {league_name} in_game={in_game}: {e}")
+                    break
+            except Exception as e:
+                print(f"    Error fetching {league_name} in_game={in_game}: {e}")
+                break
+
+    return all_data, all_included
+
+
+def build_rows(data: list, included: list, league_name: str) -> list:
+    players_map = {}
+    games_map   = {}
+    for obj in included:
+        obj_id   = obj.get("id")
+        obj_type = obj.get("type", "")
+        attrs    = obj.get("attributes", {})
+        if obj_type in ("new_player", "player"):
+            players_map[obj_id] = attrs
+        elif obj_type in ("game", "new_game"):
+            games_map[obj_id] = attrs
+
+    rows     = []
+    seen_ids = set()
+    for proj in data:
+        proj_id = str(proj.get("id", ""))
+        if not proj_id or proj_id in seen_ids:
+            continue
+        seen_ids.add(proj_id)
+
+        attrs = proj.get("attributes", {})
+        rels  = proj.get("relationships", {})
+
+        player_id = (rels.get("new_player") or rels.get("player") or {}).get("data", {}).get("id", "")
+        game_id   = (rels.get("new_game")   or rels.get("game")   or {}).get("data", {}).get("id", "")
+        p = players_map.get(str(player_id), {})
+        g = games_map.get(str(game_id), {})
+
+        player_name = str(p.get("display_name", p.get("name", ""))).strip()
+        team        = str(p.get("team", "")).strip().upper()
+        pos         = str(p.get("position", "")).strip()
+        image_url   = str(p.get("image_url") or p.get("image_url_small") or "").strip()
+
+        home       = str(g.get("home_team", "")).strip().upper()
+        away       = str(g.get("away_team", "")).strip().upper()
+        start_time = str(g.get("start_time", attrs.get("start_time", ""))).strip()
+
+        opp_team = ""
+        if team and home and away:
+            opp_team = away if team == home else (home if team == away else "")
+
+        # Derive sub-league from game description or player league attr
+        sub_league = str(attrs.get("league", p.get("league", league_name))).strip()
+        if not sub_league:
+            sub_league = league_name
+
+        odds_type = str(attrs.get("odds_type", "")).strip().lower()
+        pick_type = PICKTYPE_MAP.get(odds_type, "Standard")
+        prop_type = str(attrs.get("stat_type", attrs.get("name", ""))).strip()
+        line      = attrs.get("line_score", attrs.get("line", ""))
+
+        rows.append({
+            "projection_id":    proj_id,
+            "pp_projection_id": proj_id,
+            "player_id":        str(player_id),
+            "pp_game_id":       str(game_id),
+            "league":           sub_league,
+            "start_time":       start_time,
+            "player":           player_name,
+            "image_url":        image_url,
+            "pos":              pos,
+            "team":             team,
+            "opp_team":         opp_team,
+            "pp_home_team":     home,
+            "pp_away_team":     away,
+            "prop_type":        prop_type,
+            "line":             line,
+            "pick_type":        pick_type,
+        })
+
+    return rows
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--output",          default="s1_soccer_props.csv")
+    ap.add_argument("--include_halves",  action="store_true",
+                    help="Also fetch SOCCER1H and SOCCER2H boards")
+    ap.add_argument("--include_season",  action="store_true",
+                    help="Also fetch SOCCERSZN board")
+    args = ap.parse_args()
+
+    boards_to_fetch = {"82": "SOCCER"}
+    if args.include_halves:
+        boards_to_fetch["242"] = "SOCCER1H"
+        boards_to_fetch["243"] = "SOCCER2H"
+    if args.include_season:
+        boards_to_fetch["262"] = "SOCCERSZN"
+
+    print(f"📡 Fetching PrizePicks Soccer | boards: {list(boards_to_fetch.values())}")
+
+    all_rows = []
+
+    for lid, lname in boards_to_fetch.items():
+        print(f"\n  → {lname} (league_id={lid})")
+        data, included = fetch_board(lid, lname)
+        if data:
+            rows = build_rows(data, included, lname)
+            all_rows.extend(rows)
+            print(f"    ✓ {len(rows)} rows parsed")
+        else:
+            print(f"    ⚠️ No data for {lname} — may not be on the board today")
+
+    if not all_rows:
+        print("\n❌ No soccer props fetched — nothing on the board right now.")
+        pd.DataFrame().to_csv(args.output, index=False, encoding="utf-8-sig")
+        sys.exit(1)
+
+    df = pd.DataFrame(all_rows)
+    df["line"] = pd.to_numeric(df["line"], errors="coerce")
+    df = df.drop_duplicates(subset=["projection_id"], keep="first").reset_index(drop=True)
+
+    df.to_csv(args.output, index=False, encoding="utf-8-sig")
+    print(f"\n✅ Saved {len(df)} rows -> {args.output}")
+    league_counts = df["league"].value_counts().to_dict()
+    print(f"   Leagues: {league_counts}")
+    prop_counts = df["prop_type"].value_counts().head(10).to_dict()
+    print(f"   Top props: {prop_counts}")
+
+
+if __name__ == "__main__":
+    main()

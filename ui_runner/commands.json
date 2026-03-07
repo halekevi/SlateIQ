@@ -7,7 +7,7 @@
       "commands": [
         {
           "id": "nba_step1",
-          "label": "Step 1 \u2014 Fetch PrizePicks",
+          "label": "Step 1 — Fetch PrizePicks",
           "cmd": [
             "py",
             "-3.14",
@@ -34,7 +34,7 @@
         },
         {
           "id": "nba_step2",
-          "label": "Step 2 \u2014 Attach Pick Types",
+          "label": "Step 2 — Attach Pick Types",
           "cmd": [
             "py",
             "-3.14",
@@ -47,7 +47,7 @@
         },
         {
           "id": "nba_step3",
-          "label": "Step 3 \u2014 Attach Defense",
+          "label": "Step 3 — Attach Defense",
           "cmd": [
             "py",
             "-3.14",
@@ -62,7 +62,7 @@
         },
         {
           "id": "nba_step4",
-          "label": "Step 4 \u2014 Player Stats (ESPN)",
+          "label": "Step 4 — Player Stats (ESPN)",
           "cmd": [
             "py",
             "-3.14",
@@ -99,7 +99,7 @@
         },
         {
           "id": "nba_step5",
-          "label": "Step 5 \u2014 Line Hit Rates",
+          "label": "Step 5 — Line Hit Rates",
           "cmd": [
             "py",
             "-3.14",
@@ -112,7 +112,7 @@
         },
         {
           "id": "nba_step6",
-          "label": "Step 6 \u2014 Team Role Context",
+          "label": "Step 6 — Team Role Context",
           "cmd": [
             "py",
             "-3.14",
@@ -125,7 +125,7 @@
         },
         {
           "id": "nba_step7",
-          "label": "Step 7 \u2014 Rank Props",
+          "label": "Step 7 — Rank Props",
           "cmd": [
             "py",
             "-3.14",
@@ -138,7 +138,7 @@
         },
         {
           "id": "nba_step8",
-          "label": "Step 8 \u2014 Direction Context",
+          "label": "Step 8 — Direction Context",
           "cmd": [
             "py",
             "-3.14",
@@ -153,7 +153,7 @@
         },
         {
           "id": "nba_step9",
-          "label": "Step 9 \u2014 Build Tickets",
+          "label": "Step 9 — Build Tickets",
           "cmd": [
             "py",
             "-3.14",
@@ -216,7 +216,7 @@
       "commands": [
         {
           "id": "cbb_step1",
-          "label": "Step 1 \u2014 Fetch PrizePicks (CBB)",
+          "label": "Step 1 — Fetch PrizePicks (CBB)",
           "cmd": [
             "py",
             "-3.14",
@@ -227,7 +227,7 @@
         },
         {
           "id": "cbb_step2",
-          "label": "Step 2 \u2014 Normalize",
+          "label": "Step 2 — Normalize",
           "cmd": [
             "py",
             "-3.14",
@@ -240,7 +240,7 @@
         },
         {
           "id": "cbb_step3",
-          "label": "Step 3 \u2014 Attach Defense Rankings",
+          "label": "Step 3 — Attach Defense Rankings",
           "cmd": [
             "py",
             "-3.14",
@@ -253,7 +253,7 @@
         },
         {
           "id": "cbb_step4",
-          "label": "Step 4 \u2014 Attach ESPN IDs",
+          "label": "Step 4 — Attach ESPN IDs",
           "cmd": [
             "py",
             "-3.14",
@@ -268,7 +268,7 @@
         },
         {
           "id": "cbb_step5",
-          "label": "Step 5 \u2014 Boxscore Stats",
+          "label": "Step 5 — Boxscore Stats",
           "cmd": [
             "py",
             "-3.14",
@@ -283,7 +283,7 @@
         },
         {
           "id": "cbb_step6",
-          "label": "Step 6 \u2014 Rank Props",
+          "label": "Step 6 — Rank Props",
           "cmd": [
             "py",
             "-3.14",
@@ -323,15 +323,15 @@
       "commands": [
         {
           "id": "combined_run",
-          "label": "Build Combined Slate + Tickets (+ Web)",
+          "label": "Build Combined Slate + Tickets (NBA + CBB)",
           "cmd": [
             "py",
             "-3.14",
-            ".\\combined_slate_tickets.py",
+            ".\\scripts\\combined_slate_tickets.py",
             "--nba",
             "NbaPropPipelineA\\step8_all_direction_clean.xlsx",
             "--cbb",
-            "cbb2\\step6_ranked_cbb.xlsx",
+            "CBB2\\step6_ranked_cbb.xlsx",
             "--date",
             "{TODAY}",
             "--output",
@@ -342,13 +342,12 @@
             "5",
             "--write-web",
             "--web-outdir",
-            "docs",
-            "--also-root"
+            "ui_runner\\templates"
           ]
         },
         {
           "id": "full_pipeline",
-          "label": "Full Run \u2014 NBA + CBB + Combined",
+          "label": "Full Run — NBA + CBB + Combined",
           "cmd": [
             "powershell",
             "-ExecutionPolicy",
@@ -367,6 +366,56 @@
             "-File",
             "run_pipeline.ps1",
             "-RefreshCache"
+          ]
+        },
+        {
+          "id": "full_pipeline_nhl",
+          "label": "Full Run — NBA + CBB + NHL + Combined",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "run_pipeline.ps1",
+            "-IncludeNHL"
+          ]
+        },
+        {
+          "id": "full_pipeline_mlb",
+          "label": "Full Run — NBA + CBB + MLB + Combined",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "run_pipeline.ps1",
+            "-IncludeMLB"
+          ]
+        },
+        {
+          "id": "full_pipeline_soccer",
+          "label": "Full Run — NBA + CBB + Soccer + Combined",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "run_pipeline.ps1",
+            "-IncludeSoccer"
+          ]
+        },
+        {
+          "id": "full_pipeline_all",
+          "label": "Full Run — ALL Sports",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "run_pipeline.ps1",
+            "-IncludeNHL",
+            "-IncludeMLB",
+            "-IncludeSoccer"
           ]
         }
       ]
@@ -418,6 +467,736 @@
             "py",
             "-3.14",
             ".\\fetch_cbb_actuals_by_date.py"
+          ]
+        },
+        {
+          "id": "grade_wnba",
+          "label": "Grade WNBA Slate",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "run_wnba_grader.ps1"
+          ]
+        }
+      ]
+    },
+    "nhl": {
+      "label": "NHL Pipeline",
+      "workdir": "NHL",
+      "commands": [
+        {
+          "id": "nhl_step1",
+          "label": "Step 1 — Fetch PrizePicks (NHL)",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step1_fetch_prizepicks_nhl.py",
+            "--output",
+            "step1_nhl_props.csv"
+          ]
+        },
+        {
+          "id": "nhl_step2",
+          "label": "Step 2 — Attach Pick Types",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step2_attach_picktypes_nhl.py",
+            "--input",
+            "step1_nhl_props.csv",
+            "--output",
+            "step2_nhl_picktypes.csv"
+          ]
+        },
+        {
+          "id": "nhl_step3",
+          "label": "Step 3 — Attach Defense",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step3_attach_defense_nhl.py",
+            "--input",
+            "step2_nhl_picktypes.csv",
+            "--output",
+            "step3_nhl_with_defense.csv"
+          ]
+        },
+        {
+          "id": "nhl_step4",
+          "label": "Step 4 — Player Stats",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step4_attach_player_stats_nhl.py",
+            "--input",
+            "step3_nhl_with_defense.csv",
+            "--cache",
+            "nhl_stats_cache.csv",
+            "--output",
+            "step4_nhl_with_stats.csv",
+            "--season",
+            "20242025",
+            "--max-games",
+            "30"
+          ]
+        },
+        {
+          "id": "nhl_step5",
+          "label": "Step 5 — Line Hit Rates",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step5_add_line_hit_rates_nhl.py",
+            "--input",
+            "step4_nhl_with_stats.csv",
+            "--output",
+            "step5_nhl_hit_rates.csv"
+          ]
+        },
+        {
+          "id": "nhl_step6",
+          "label": "Step 6 — Team Role Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step6_team_role_context_nhl.py",
+            "--input",
+            "step5_nhl_hit_rates.csv",
+            "--output",
+            "step6_nhl_role_context.csv"
+          ]
+        },
+        {
+          "id": "nhl_step7",
+          "label": "Step 7 — Rank Props",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step7_rank_props_nhl.py",
+            "--input",
+            "step6_nhl_role_context.csv",
+            "--output",
+            "step7_nhl_ranked.xlsx"
+          ]
+        },
+        {
+          "id": "nhl_step8",
+          "label": "Step 8 — Direction Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step8_add_direction_context_nhl.py",
+            "--input",
+            "step7_nhl_ranked.xlsx",
+            "--output",
+            "step8_nhl_direction.csv"
+          ]
+        },
+        {
+          "id": "nhl_step9",
+          "label": "Step 9 — Build Tickets",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step9_build_tickets_nhl.py",
+            "--input",
+            "step8_nhl_direction_clean.xlsx",
+            "--output",
+            "nhl_best_tickets.xlsx",
+            "--min_hit_rate",
+            "0.7",
+            "--legs",
+            "2,3,4"
+          ]
+        },
+        {
+          "id": "nhl_full",
+          "label": "NHL Full Pipeline (Steps 1-9)",
+          "cmd_chain": [
+            "nhl_step1",
+            "nhl_step2",
+            "nhl_step3",
+            "nhl_step4",
+            "nhl_step5",
+            "nhl_step6",
+            "nhl_step7",
+            "nhl_step8",
+            "nhl_step9"
+          ]
+        },
+        {
+          "id": "nhl_stats_only",
+          "label": "NHL Steps 4-9 (Stats + Rank)",
+          "cmd_chain": [
+            "nhl_step4",
+            "nhl_step5",
+            "nhl_step6",
+            "nhl_step7",
+            "nhl_step8",
+            "nhl_step9"
+          ]
+        },
+        {
+          "id": "nhl_run_script",
+          "label": "NHL Full Run (via run_pipeline.ps1 -NHLOnly)",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "..\\run_pipeline.ps1",
+            "-NHLOnly"
+          ]
+        }
+      ]
+    },
+    "mlb": {
+      "label": "MLB Pipeline",
+      "workdir": "MLB",
+      "commands": [
+        {
+          "id": "mlb_step1",
+          "label": "Step 1 — Fetch PrizePicks (MLB)",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step1_fetch_prizepicks_mlb.py",
+            "--output",
+            "step1_mlb_props.csv"
+          ]
+        },
+        {
+          "id": "mlb_step2",
+          "label": "Step 2 — Attach Pick Types",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step2_attach_picktypes_mlb.py",
+            "--input",
+            "step1_mlb_props.csv",
+            "--output",
+            "step2_mlb_picktypes.csv"
+          ]
+        },
+        {
+          "id": "mlb_step3",
+          "label": "Step 3 — Attach Defense",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step3_attach_defense_mlb.py",
+            "--input",
+            "step2_mlb_picktypes.csv",
+            "--defense",
+            "mlb_defense_summary.csv",
+            "--output",
+            "step3_mlb_with_defense.csv"
+          ]
+        },
+        {
+          "id": "mlb_step4",
+          "label": "Step 4 — Player Stats",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step4_attach_player_stats_mlb.py",
+            "--input",
+            "step3_mlb_with_defense.csv",
+            "--cache",
+            "mlb_stats_cache.csv",
+            "--output",
+            "step4_mlb_with_stats.csv",
+            "--season",
+            "2025"
+          ]
+        },
+        {
+          "id": "mlb_step5",
+          "label": "Step 5 — Line Hit Rates",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step5_add_line_hit_rates_mlb.py",
+            "--input",
+            "step4_mlb_with_stats.csv",
+            "--output",
+            "step5_mlb_hit_rates.csv"
+          ]
+        },
+        {
+          "id": "mlb_step6",
+          "label": "Step 6 — Team Role Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step6_team_role_context_mlb.py",
+            "--input",
+            "step5_mlb_hit_rates.csv",
+            "--output",
+            "step6_mlb_role_context.csv"
+          ]
+        },
+        {
+          "id": "mlb_step7",
+          "label": "Step 7 — Rank Props",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step7_rank_props_mlb.py",
+            "--input",
+            "step6_mlb_role_context.csv",
+            "--output",
+            "step7_mlb_ranked.xlsx"
+          ]
+        },
+        {
+          "id": "mlb_step8",
+          "label": "Step 8 — Direction Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step8_add_direction_context_mlb.py",
+            "--input",
+            "step7_mlb_ranked.xlsx",
+            "--output",
+            "step8_mlb_direction.csv"
+          ]
+        },
+        {
+          "id": "mlb_step9",
+          "label": "Step 9 — Build Tickets",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step9_build_tickets_mlb.py",
+            "--input",
+            "step8_mlb_direction_clean.xlsx",
+            "--output",
+            "mlb_best_tickets.xlsx",
+            "--min_hit_rate",
+            "0.65",
+            "--legs",
+            "2,3,4"
+          ]
+        },
+        {
+          "id": "mlb_full",
+          "label": "MLB Full Pipeline (Steps 1-9)",
+          "cmd_chain": [
+            "mlb_step1",
+            "mlb_step2",
+            "mlb_step3",
+            "mlb_step4",
+            "mlb_step5",
+            "mlb_step6",
+            "mlb_step7",
+            "mlb_step8",
+            "mlb_step9"
+          ]
+        },
+        {
+          "id": "mlb_stats_only",
+          "label": "MLB Steps 4-9 (Stats + Rank)",
+          "cmd_chain": [
+            "mlb_step4",
+            "mlb_step5",
+            "mlb_step6",
+            "mlb_step7",
+            "mlb_step8",
+            "mlb_step9"
+          ]
+        },
+        {
+          "id": "mlb_run_script",
+          "label": "MLB Full Run (via run_pipeline.ps1 -MLBOnly)",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "..\\run_pipeline.ps1",
+            "-MLBOnly"
+          ]
+        }
+      ]
+    },
+    "soccer": {
+      "label": "Soccer Pipeline",
+      "workdir": "Soccer",
+      "commands": [
+        {
+          "id": "soccer_step1",
+          "label": "Step 1 — Fetch PrizePicks (Soccer — all leagues)",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step1_fetch_prizepicks_soccer.py",
+            "--output",
+            "step1_soccer_props.csv"
+          ]
+        },
+        {
+          "id": "soccer_step2",
+          "label": "Step 2 — Attach Pick Types",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step2_attach_picktypes_soccer.py",
+            "--input",
+            "step1_soccer_props.csv",
+            "--output",
+            "step2_soccer_picktypes.csv"
+          ]
+        },
+        {
+          "id": "soccer_step3",
+          "label": "Step 3 — Attach Defense",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step3_attach_defense_soccer.py",
+            "--input",
+            "step2_soccer_picktypes.csv",
+            "--defense",
+            "soccer_defense_summary.csv",
+            "--output",
+            "step3_soccer_with_defense.csv"
+          ]
+        },
+        {
+          "id": "soccer_step4",
+          "label": "Step 4 — Player Stats",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step4_attach_player_stats_soccer.py",
+            "--input",
+            "step3_soccer_with_defense.csv",
+            "--cache",
+            "soccer_stats_cache.csv",
+            "--output",
+            "step4_soccer_with_stats.csv"
+          ]
+        },
+        {
+          "id": "soccer_step5",
+          "label": "Step 5 — Line Hit Rates",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step5_add_line_hit_rates_soccer.py",
+            "--input",
+            "step4_soccer_with_stats.csv",
+            "--output",
+            "step5_soccer_hit_rates.csv"
+          ]
+        },
+        {
+          "id": "soccer_step6",
+          "label": "Step 6 — Team Role Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step6_team_role_context_soccer.py",
+            "--input",
+            "step5_soccer_hit_rates.csv",
+            "--output",
+            "step6_soccer_role_context.csv"
+          ]
+        },
+        {
+          "id": "soccer_step7",
+          "label": "Step 7 — Rank Props",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step7_rank_props_soccer.py",
+            "--input",
+            "step6_soccer_role_context.csv",
+            "--output",
+            "step7_soccer_ranked.xlsx"
+          ]
+        },
+        {
+          "id": "soccer_step8",
+          "label": "Step 8 — Direction Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step8_add_direction_context_soccer.py",
+            "--input",
+            "step7_soccer_ranked.xlsx",
+            "--output",
+            "step8_soccer_direction.csv"
+          ]
+        },
+        {
+          "id": "soccer_step9",
+          "label": "Step 9 — Build Tickets",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step9_build_tickets_soccer.py",
+            "--input",
+            "step8_soccer_direction_clean.xlsx",
+            "--output",
+            "soccer_best_tickets.xlsx",
+            "--min_hit_rate",
+            "0.6",
+            "--legs",
+            "2,3,4"
+          ]
+        },
+        {
+          "id": "soccer_full",
+          "label": "Soccer Full Pipeline (Steps 1-9)",
+          "cmd_chain": [
+            "soccer_step1",
+            "soccer_step2",
+            "soccer_step3",
+            "soccer_step4",
+            "soccer_step5",
+            "soccer_step6",
+            "soccer_step7",
+            "soccer_step8",
+            "soccer_step9"
+          ]
+        },
+        {
+          "id": "soccer_stats_only",
+          "label": "Soccer Steps 4-9 (Stats + Rank)",
+          "cmd_chain": [
+            "soccer_step4",
+            "soccer_step5",
+            "soccer_step6",
+            "soccer_step7",
+            "soccer_step8",
+            "soccer_step9"
+          ]
+        },
+        {
+          "id": "soccer_run_script",
+          "label": "Soccer Full Run (via run_pipeline.ps1 -SoccerOnly)",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "..\\run_pipeline.ps1",
+            "-SoccerOnly"
+          ]
+        }
+      ]
+    },
+    "wnba": {
+      "label": "WNBA Pipeline",
+      "workdir": "WNBA",
+      "commands": [
+        {
+          "id": "wnba_step1",
+          "label": "Step 1 — Fetch PrizePicks (WNBA)",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step1_fetch_prizepicks.py",
+            "--league_id",
+            "3",
+            "--game_mode",
+            "pickem",
+            "--per_page",
+            "250",
+            "--max_pages",
+            "10",
+            "--sleep",
+            "1.2",
+            "--cooldown_seconds",
+            "90",
+            "--max_cooldowns",
+            "3",
+            "--jitter_seconds",
+            "10.0",
+            "--output",
+            "step1_wnba_props.csv"
+          ]
+        },
+        {
+          "id": "wnba_step2",
+          "label": "Step 2 — Attach Pick Types",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step2_attach_picktypes.py",
+            "--input",
+            "step1_wnba_props.csv",
+            "--output",
+            "step2_wnba_picktypes.csv"
+          ]
+        },
+        {
+          "id": "wnba_step3",
+          "label": "Step 3 — Attach Defense",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step3_attach_defense.py",
+            "--input",
+            "step2_wnba_picktypes.csv",
+            "--defense",
+            "wnba_defense_summary.csv",
+            "--output",
+            "step3_wnba_defense.csv"
+          ]
+        },
+        {
+          "id": "wnba_step4",
+          "label": "Step 4 — Player Stats (ESPN)",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step4_fetch_player_stats.py",
+            "--slate",
+            "step3_wnba_defense.csv",
+            "--out",
+            "step4_wnba_stats.csv",
+            "--season",
+            "2026",
+            "--date",
+            "{TODAY}",
+            "--days",
+            "35",
+            "--cache",
+            "wnba_espn_cache.csv",
+            "--sleep",
+            "0.8",
+            "--retries",
+            "4",
+            "--timeout",
+            "30",
+            "--debug-misses",
+            "wnba_no_espn_debug.csv"
+          ]
+        },
+        {
+          "id": "wnba_step5",
+          "label": "Step 5 — Line Hit Rates",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step5_add_line_hit_rates.py",
+            "--input",
+            "step4_wnba_stats.csv",
+            "--output",
+            "step5_wnba_hitrates.csv"
+          ]
+        },
+        {
+          "id": "wnba_step6",
+          "label": "Step 6 — Team Role Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step6_team_role_context.py",
+            "--input",
+            "step5_wnba_hitrates.csv",
+            "--output",
+            "step6_wnba_context.csv"
+          ]
+        },
+        {
+          "id": "wnba_step7",
+          "label": "Step 7 — Rank Props",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step7_rank_props.py",
+            "--input",
+            "step6_wnba_context.csv",
+            "--output",
+            "step7_wnba_ranked.xlsx"
+          ]
+        },
+        {
+          "id": "wnba_step8",
+          "label": "Step 8 — Direction Context",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step8_add_direction_context.py",
+            "--input",
+            "step7_wnba_ranked.xlsx",
+            "--sheet",
+            "ALL",
+            "--output",
+            "step8_wnba_direction.xlsx"
+          ]
+        },
+        {
+          "id": "wnba_step9",
+          "label": "Step 9 — Build Tickets",
+          "cmd": [
+            "py",
+            "-3.14",
+            ".\\step9_build_tickets.py",
+            "--input",
+            "step8_wnba_direction.xlsx",
+            "--output",
+            "wnba_best_tickets.xlsx",
+            "--min_hit_rate",
+            "0.8",
+            "--legs",
+            "2,3,4"
+          ]
+        },
+        {
+          "id": "wnba_full",
+          "label": "WNBA Full Pipeline (Steps 1-9)",
+          "cmd_chain": [
+            "wnba_step1",
+            "wnba_step2",
+            "wnba_step3",
+            "wnba_step4",
+            "wnba_step5",
+            "wnba_step6",
+            "wnba_step7",
+            "wnba_step8",
+            "wnba_step9"
+          ]
+        },
+        {
+          "id": "wnba_stats_only",
+          "label": "WNBA Steps 4-9 (Stats + Rank)",
+          "cmd_chain": [
+            "wnba_step4",
+            "wnba_step5",
+            "wnba_step6",
+            "wnba_step7",
+            "wnba_step8",
+            "wnba_step9"
+          ]
+        },
+        {
+          "id": "wnba_run_script",
+          "label": "WNBA Full Run (via run_wnba_pipeline.ps1)",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "..\\run_wnba_pipeline.ps1"
+          ]
+        },
+        {
+          "id": "wnba_refresh_cache",
+          "label": "WNBA Full Run + Refresh ESPN Cache",
+          "cmd": [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "..\\run_wnba_pipeline.ps1",
+            "-RefreshCache"
           ]
         }
       ]

@@ -1,6 +1,6 @@
 # ============================================================
 #  organize_root.ps1
-#  Moves loose files in NBA-Pipelines root into proper folders
+#  Moves loose files in SlateIQ root into proper folders
 #  Safe - only moves files, never deletes
 #  Usage:
 #    .\organize_root.ps1           # Preview
@@ -140,8 +140,9 @@ if (-not $Execute) {
     Write-Host "    git_push_log.txt" -ForegroundColor DarkGray
     Write-Host "    .gitignore / .gitattributes" -ForegroundColor DarkGray
     Write-Host "    combined_slate_tickets_TODAY.xlsx" -ForegroundColor DarkGray
-    Write-Host "    scripts\ / NbaPropPipelineA\ / CBB2\" -ForegroundColor DarkGray
+    Write-Host "    scripts\ / NBA\ / CBB\" -ForegroundColor DarkGray
     Write-Host "    outputs\ / ui_runner\ / _archive\ / grades\" -ForegroundColor DarkGray
 }
 Write-Host "====================================================" -ForegroundColor Cyan
 Write-Host ""
+

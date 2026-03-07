@@ -1,6 +1,6 @@
 # ============================================================
 #  PIPELINE FOLDER CLEANUP SCRIPT
-#  Run from: NBA-Pipelines root
+#  Run from: SlateIQ root
 #
 #  Usage:
 #    .\cleanup_pipeline.ps1           # Preview mode (safe, no changes)
@@ -11,7 +11,7 @@ param(
 )
 
 $Root   = Split-Path -Parent $MyInvocation.MyCommand.Definition
-$NBADir = "$Root\NbaPropPipelineA"
+$NBADir = "$Root\NBA"
 $Date   = Get-Date -Format "yyyy-MM-dd"
 
 if (-not $Execute) {
@@ -127,7 +127,7 @@ Get-ChildItem "$Root\outputs\*" -File -ErrorAction SilentlyContinue | ForEach-Ob
 
 # ─────────────────────────────────────────────────────────────────────────────
 Write-Host ""
-Write-Host "[ 4 ] NbaPropPipelineA\Result Files\ -> move to outputs\$Date\ResultFiles\" -ForegroundColor Magenta
+Write-Host "[ 4 ] NBA\Result Files\ -> move to outputs\$Date\ResultFiles\" -ForegroundColor Magenta
 Write-Host ""
 
 $resultFiles = "$NBADir\Result Files"
@@ -150,12 +150,12 @@ if (Test-Path $resultFiles) {
 
 # ─────────────────────────────────────────────────────────────────────────────
 Write-Host ""
-Write-Host "[ 5 ] NbaPropPipelineA\ui_runner\ duplicate -> delete" -ForegroundColor Magenta
+Write-Host "[ 5 ] NBA\ui_runner\ duplicate -> delete" -ForegroundColor Magenta
 Write-Host ""
 
 $innerUIRunner = "$NBADir\ui_runner"
 if (Test-Path $innerUIRunner) {
-    Do-Action "Remove duplicate ui_runner inside NbaPropPipelineA\" "DELETE" $innerUIRunner
+    Do-Action "Remove duplicate ui_runner inside NBA\" "DELETE" $innerUIRunner
 } else {
     Write-Host "  (not found - skipping)" -ForegroundColor DarkGray
 }
@@ -200,3 +200,4 @@ if (-not $Execute) {
 }
 Write-Host "=====================================================" -ForegroundColor Cyan
 Write-Host ""
+
