@@ -217,9 +217,15 @@ if ($NHLOnly -or (-not $NBAOnly -and -not $CBBOnly -and -not $SoccerOnly)) {
                 if (Test-Path $NHLGraded) { Write-Host "  NHL advanced graded -> $NHLGraded" -ForegroundColor Green }
                 if (Test-Path $NHLRecommendations) { Write-Host "  Recommendations -> $NHLRecommendations" -ForegroundColor Green }
             } else {
-                # Legacy grader
-                Run-Py "NHL Grade (Legacy)" $Root $LegacySlateGrader @("--sport", "NHL", "--slate", $NHLSlate, "--actuals", $NHLActuals, "--output", $NHLGraded, "--date", $Date)
-                if (Test-Path $NHLGraded) { Write-Host "  NHL graded (legacy) -> $NHLGraded" -ForegroundColor Green }
+                # Sport-specific grader (handles NHL/Soccer step8 format)
+                $NHLSoccerGrader = "$Root\nhl_soccer_grader.py"
+                if (Test-Path $NHLSoccerGrader) {
+                    Run-Py "NHL Grade" $Root $NHLSoccerGrader @("--sport", "NHL", "--date", $Date, "--slate", $NHLSlate, "--actuals", $NHLActuals, "--output-dir", $DateDir)
+                    if (Test-Path $NHLGraded) { Write-Host "  NHL graded -> $NHLGraded" -ForegroundColor Green }
+                } else {
+                    Write-Host "  WARNING: nhl_soccer_grader.py not found at $NHLSoccerGrader" -ForegroundColor Red
+                    Write-Host "  Drop nhl_soccer_grader.py into $Root to enable NHL grading." -ForegroundColor Yellow
+                }
             }
         } else {
             Write-Host "  Skipping NHL - actuals fetch failed" -ForegroundColor Yellow
@@ -261,9 +267,15 @@ if ($SoccerOnly -or (-not $NBAOnly -and -not $CBBOnly -and -not $NHLOnly)) {
                 if (Test-Path $SoccerGraded) { Write-Host "  Soccer advanced graded -> $SoccerGraded" -ForegroundColor Green }
                 if (Test-Path $SoccerRecommendations) { Write-Host "  Recommendations -> $SoccerRecommendations" -ForegroundColor Green }
             } else {
-                # Legacy grader
-                Run-Py "Soccer Grade (Legacy)" $Root $LegacySlateGrader @("--sport", "Soccer", "--slate", $SoccerSlate, "--actuals", $SoccerActuals, "--output", $SoccerGraded, "--date", $Date)
-                if (Test-Path $SoccerGraded) { Write-Host "  Soccer graded (legacy) -> $SoccerGraded" -ForegroundColor Green }
+                # Sport-specific grader (handles NHL/Soccer step8 format)
+                $NHLSoccerGrader = "$Root\nhl_soccer_grader.py"
+                if (Test-Path $NHLSoccerGrader) {
+                    Run-Py "Soccer Grade" $Root $NHLSoccerGrader @("--sport", "Soccer", "--date", $Date, "--slate", $SoccerSlate, "--actuals", $SoccerActuals, "--output-dir", $DateDir)
+                    if (Test-Path $SoccerGraded) { Write-Host "  Soccer graded -> $SoccerGraded" -ForegroundColor Green }
+                } else {
+                    Write-Host "  WARNING: nhl_soccer_grader.py not found at $NHLSoccerGrader" -ForegroundColor Red
+                    Write-Host "  Drop nhl_soccer_grader.py into $Root to enable Soccer grading." -ForegroundColor Yellow
+                }
             }
         } else {
             Write-Host "  Skipping Soccer - actuals fetch failed" -ForegroundColor Yellow
