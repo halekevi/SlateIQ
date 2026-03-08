@@ -140,6 +140,8 @@ def load_graded(path: Path) -> list[dict]:
             if nk.lower() == "bet_direction":       nk = "Direction"
             if nk.lower() == "prop_type_norm":      nk = "Prop Type"
             if nk.lower() == "pick_type":           nk = "Pick Type"
+            if nk.lower() == "tier":                nk = "Tier"
+            if nk.lower() == "pick_type":           nk = "Pick Type"
             nr[nk] = v
         normalized.append(nr)
     return normalized
