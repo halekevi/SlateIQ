@@ -109,11 +109,23 @@ body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--te
 .empty-sub{font-size:11px;letter-spacing:2px;color:var(--muted2);text-align:center;line-height:1.8;max-width:400px;}
 .empty-hint{font-size:10px;letter-spacing:1.5px;color:var(--muted2);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 16px;margin-top:8px;}
 
+/* tabs */
+.tabs-bar{flex-shrink:0;background:rgba(5,5,15,.96);border-bottom:1px solid var(--border);padding:0 40px;display:flex;gap:0;position:relative;z-index:90;}
+.tab-btn{display:flex;align-items:center;gap:8px;padding:0 22px;height:44px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .15s,border-color .15s;white-space:nowrap;}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab-icon{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;}
+.tab-btn.active .tab-icon{filter:drop-shadow(0 0 6px var(--accent));}
+
+/* date-bar hidden for ticket tab */
+.date-bar.hidden{display:none;}
+
 @media(max-width:768px){
   .snav{padding:0 16px;}
   .snav-name{display:none;}
   .date-bar{padding:0 16px;gap:12px;}
   .date-bar-right{display:none;}
+  .tabs-bar{padding:0 16px;}
 }
 </style>
 </head>
@@ -189,6 +201,16 @@ body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--te
   </div>
 </div>
 
+<!-- ═══════════════════════ TABS ═══════════════════════ -->
+<div class="tabs-bar">
+  <button class="tab-btn active" id="tab-slate" onclick="switchTab('slate')">
+    <span class="tab-icon">📋</span>SLATE EVALUATION
+  </button>
+  <button class="tab-btn" id="tab-tickets" onclick="switchTab('tickets')">
+    <span class="tab-icon">🎟</span>TICKET EVALUATION
+  </button>
+</div>
+
 <!-- ═══════════════════════ IFRAME SHELL ═══════════════════════ -->
 <div class="iframe-shell">
   <div class="load-overlay" id="load-overlay">
@@ -203,6 +225,7 @@ body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--te
     <div class="empty-hint">Expected: slate_eval_<span id="empty-date"></span>.html</div>
   </div>
   <iframe class="grade-frame loading" id="grade-frame" src="about:blank" title="Grade Report"></iframe>
+  <iframe class="grade-frame" id="ticket-frame" src="about:blank" title="Ticket Evaluation" style="display:none;"></iframe>
 </div>
 
 <script>
@@ -217,6 +240,33 @@ body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--te
 //   Same dir: slate_eval_{date}.html  (relative)
 //
 const REPORT_URL_TEMPLATE = '/grades/slate_eval_{date}.html';
+const TICKET_EVAL_URL_TEMPLATE = '/grades/ticket_eval_{date}.html';
+
+// ─── TAB SWITCHING ────────────────────────────────────────────────────────────
+let activeTab = 'slate';
+function switchTab(tab) {
+  activeTab = tab;
+  document.getElementById('tab-slate').classList.toggle('active', tab === 'slate');
+  document.getElementById('tab-tickets').classList.toggle('active', tab === 'tickets');
+  document.getElementById('grade-frame').style.display   = tab === 'slate'   ? 'block' : 'none';
+  document.getElementById('ticket-frame').style.display  = tab === 'tickets' ? 'block' : 'none';
+  document.querySelector('.date-bar').classList.toggle('hidden', tab === 'tickets');
+  // Load ticket eval iframe on first open
+  if(tab === 'tickets') {
+    const tf = document.getElementById('ticket-frame');
+    if(tf.src === 'about:blank' || tf.src === '') {
+      // Try to load for current date
+      const ds = document.getElementById('date-jump').value || yesterdayStr();
+      loadTicketEval(ds);
+    }
+  }
+}
+
+function loadTicketEval(dateStr) {
+  const tf = document.getElementById('ticket-frame');
+  const url = TICKET_EVAL_URL_TEMPLATE.replace('{date}', dateStr);
+  tf.src = url;
+}
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let availableDates = [];  // sorted ascending

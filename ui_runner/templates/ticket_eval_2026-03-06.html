@@ -1,0 +1,2970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#05050f;--bg2:#0d0d1f;--bg3:#111128;--border:#1e1e3a;--bd2:#2a2a4a;
+  --text:#e8e8f0;--muted:#999;--muted2:#666;
+  --accent:#c8ff00;--cyan:#00e5ff;
+  --green:#39ff6e;--amber:#f0a500;--red:#ff4d4d;
+  --goblin:#39ff14;--standard:#00e5ff;--demon:#ff6b00;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Share Tech Mono',monospace;background:var(--bg);color:var(--text);padding:28px 32px;}
+
+/* summary bar */
+.sum-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:28px;}
+.sb{background:var(--bg2);padding:16px 20px;}
+.sb-l{font-size:9px;letter-spacing:2.5px;color:var(--muted2);text-transform:uppercase;margin-bottom:6px;}
+.sb-v{font-family:'Share Tech Mono',monospace;font-size:22px;font-weight:700;color:var(--text);}
+.sb-v.accent{color:var(--accent);}
+.sb-v.pos{color:var(--green);}
+.sb-v.neg{color:var(--red);}
+.sb-v.cyan{color:var(--cyan);}
+
+/* sheet group */
+.sg{margin-bottom:24px;}
+.sg-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 14px;
+  background:var(--bg3);
+  border:1px solid var(--bd2);
+  border-bottom:2px solid var(--accent);
+  border-radius:6px 6px 0 0;
+}
+.sg-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;color:var(--accent);}
+.sg-right{display:flex;gap:20px;font-size:10px;letter-spacing:1.5px;color:var(--muted);}
+.sg-right .pos{color:var(--green);}
+.sg-right .neg{color:var(--red);}
+
+/* ticket */
+.ticket{
+  background:var(--bg2);border:1px solid var(--border);border-top:none;
+  padding:12px 14px 14px;
+}
+.ticket:last-child{border-radius:0 0 6px 6px;}
+.ticket+.ticket{border-top:1px solid var(--border);}
+.ticket.win{border-left:3px solid var(--green);}
+.ticket.lose{border-left:3px solid var(--red);}
+.ticket.cash{border-left:3px solid var(--amber);}
+
+.t-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.t-num{font-size:9px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;}
+.t-b{
+  font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1.5px;
+  padding:3px 10px;border-radius:4px;text-transform:uppercase;
+}
+.t-b.win{color:var(--green);background:rgba(57,255,110,.08);border:1px solid rgba(57,255,110,.2);}
+.t-b.lose{color:var(--red);background:rgba(255,77,77,.08);border:1px solid rgba(255,77,77,.2);}
+.t-b.cash{color:var(--amber);background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.2);}
+
+.t-stats{display:flex;flex-wrap:wrap;gap:20px 32px;margin-bottom:12px;}
+.ts{}
+.ts-l{font-size:8px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;margin-bottom:3px;}
+.ts-v{font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--text);}
+.ts-v.pos{color:var(--green);}
+.ts-v.neg{color:var(--red);}
+
+/* legs table */
+.lt{width:100%;border-collapse:collapse;font-size:11px;}
+.lt thead tr{border-bottom:1px solid var(--bd2);}
+.lt th{padding:5px 7px;font-size:8px;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;text-align:left;font-weight:400;}
+.lr td{padding:6px 7px;border-bottom:1px solid rgba(30,30,58,.5);vertical-align:middle;}
+.lr:last-child td{border-bottom:none;}
+.lr.hit{background:rgba(57,255,110,.03);}
+.lr.miss{background:rgba(255,77,77,.04);}
+.lr.push{background:rgba(240,165,0,.03);}
+
+.c-n{width:20px;color:var(--muted2);font-size:10px;}
+.stag{background:var(--bg3);border:1px solid var(--bd2);padding:2px 6px;border-radius:3px;font-size:9px;letter-spacing:1.5px;color:var(--muted);}
+.c-pl{display:flex;align-items:center;gap:7px;min-width:140px;color:var(--text);}
+.pi{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bg3);border:1px solid var(--bd2);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:8px;color:var(--accent);flex-shrink:0;
+}
+.mono{font-family:'Share Tech Mono',monospace;}
+.ptag{padding:2px 7px;border-radius:3px;font-size:9px;letter-spacing:1px;text-transform:uppercase;}
+.ptag.goblin{background:rgba(57,255,20,.1);color:var(--goblin);}
+.ptag.standard{background:rgba(0,229,255,.1);color:var(--standard);}
+.ptag.demon{background:rgba(255,107,0,.1);color:var(--demon);}
+.d-over{color:var(--green);font-size:10px;letter-spacing:1px;}
+.d-under{color:var(--red);font-size:10px;letter-spacing:1px;}
+.rb{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 8px;border-radius:4px;
+  font-size:9px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;
+}
+.rb-hit{background:rgba(57,255,110,.1);color:var(--green);border:1px solid rgba(57,255,110,.18);}
+.rb-miss{background:rgba(255,77,77,.1);color:var(--red);border:1px solid rgba(255,77,77,.18);}
+.rb-push{background:rgba(240,165,0,.1);color:var(--amber);border:1px solid rgba(240,165,0,.18);}
+.rb-pending{background:rgba(102,102,102,.1);color:var(--muted2);border:1px solid rgba(102,102,102,.15);}
+
+.page-hd{margin-bottom:24px;}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:5px;color:var(--accent);margin-bottom:4px;}
+.page-sub{font-size:9px;letter-spacing:2px;color:var(--muted2);}
+</style>
+</head>
+<body>
+
+<div class="page-hd">
+  <div class="page-title">🎟 TICKET EVALUATION</div>
+  <div class="page-sub">POST-GAME TICKET RESULTS  ·  MAR 06, 2026  ·  40 TICKETS GRADED</div>
+</div>
+
+<div class="sum-bar">
+  <div class="sb"><div class="sb-l">Tickets Graded</div><div class="sb-v accent">40</div></div>
+  <div class="sb"><div class="sb-l">Wins</div><div class="sb-v pos">5</div></div>
+  <div class="sb"><div class="sb-l">Losses</div><div class="sb-v neg">35</div></div>
+  <div class="sb"><div class="sb-l">Total Staked</div><div class="sb-v">$800</div></div>
+  <div class="sb"><div class="sb-l">Total Payout</div><div class="sb-v cyan">$620</div></div>
+  <div class="sb"><div class="sb-l">Net Profit</div><div class="sb-v neg">$-180</div></div>
+</div>
+
+<div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">MIX Standard 3 LEG</span>
+        <div class="sg-right">
+          <span>1/2 WIN</span>
+          <span class="pos">+$80</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">CBB</span></td>
+          <td class="c-pl"><span class="pi">DM</span>Dillon Mitchell</td>
+          <td>Points</td>
+          <td class="mono">8</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">89%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket win">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b win">WIN  +$100</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">6x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$120</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v pos">+$100</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">CBB</span></td>
+          <td class="c-pl"><span class="pi">DM</span>Dillon Mitchell</td>
+          <td>Points</td>
+          <td class="mono">8</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">89%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Assists</td>
+          <td class="mono">9.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">MIX Standard 4 LEG</span>
+        <div class="sg-right">
+          <span>1/2 WIN</span>
+          <span class="pos">+$80</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">CBB</span></td>
+          <td class="c-pl"><span class="pi">DM</span>Dillon Mitchell</td>
+          <td>Points</td>
+          <td class="mono">8</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">89%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket win">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b win">WIN  +$100</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">6x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$120</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v pos">+$100</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">CBB</span></td>
+          <td class="c-pl"><span class="pi">DM</span>Dillon Mitchell</td>
+          <td>Points</td>
+          <td class="mono">8</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">89%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Assists</td>
+          <td class="mono">9.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">MIX Standard 5 LEG</span>
+        <div class="sg-right">
+          <span>1/2 WIN</span>
+          <span class="pos">+$160</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">CBB</span></td>
+          <td class="c-pl"><span class="pi">DM</span>Dillon Mitchell</td>
+          <td>Points</td>
+          <td class="mono">8</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">89%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket win">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b win">WIN  +$180</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">4/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">10x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$200</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v pos">+$180</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">CBB</span></td>
+          <td class="c-pl"><span class="pi">DM</span>Dillon Mitchell</td>
+          <td>Points</td>
+          <td class="mono">8</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">89%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Assists</td>
+          <td class="mono">9.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">MIX Standard 6 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">CBB</span></td>
+          <td class="c-pl"><span class="pi">DM</span>Dillon Mitchell</td>
+          <td>Points</td>
+          <td class="mono">8</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">89%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">6.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">4/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">CBB</span></td>
+          <td class="c-pl"><span class="pi">DM</span>Dillon Mitchell</td>
+          <td>Points</td>
+          <td class="mono">8</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">89%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Assists</td>
+          <td class="mono">9.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">6.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Demon 3 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Pts+Rebs</td>
+          <td class="mono">20.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">21</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">5.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">1/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Pts+Rebs+Asts</td>
+          <td class="mono">24.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">21</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">5.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Demon 4 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Pts+Rebs</td>
+          <td class="mono">20.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">21</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">5.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JB</span>Jaylen Brown</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">13.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">14</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Pts+Rebs+Asts</td>
+          <td class="mono">24.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">21</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">5.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JB</span>Jaylen Brown</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">13.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">14</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Demon 5 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Pts+Rebs</td>
+          <td class="mono">20.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">21</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">5.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JB</span>Jaylen Brown</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">13.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">14</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Ben Sheppard</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Pts+Rebs+Asts</td>
+          <td class="mono">24.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">21</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">5.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JB</span>Jaylen Brown</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">13.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">14</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Ben Sheppard</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Demon 6 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/6</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Pts+Rebs</td>
+          <td class="mono">20.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">21</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">5.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JB</span>Jaylen Brown</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">13.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">14</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Ben Sheppard</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MS</span>Marcus Smart</td>
+          <td>Steals</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">60%</td>
+          <td class="mono">0</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/6</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Pts+Rebs+Asts</td>
+          <td class="mono">24.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">21</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">5.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JB</span>Jaylen Brown</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">13.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">14</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Ben Sheppard</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MS</span>Marcus Smart</td>
+          <td>Steals</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag demon">Demon</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">60%</td>
+          <td class="mono">0</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Goblin 3 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Goblin 4 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">4.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Goblin 5 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">4/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">4.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">4/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">4.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">1</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Goblin 6 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">5/6</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">4.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">20.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">5/6</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">4.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">1</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">20.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Mix Mix 3 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">1/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MS</span>Marcus Smart</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">0</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Mix Mix 4 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MS</span>Marcus Smart</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">0</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Mix Mix 5 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MS</span>Marcus Smart</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">0</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Mix Mix 6 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/6</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MS</span>Marcus Smart</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">0</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">4/6</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">RS</span>Reed Sheppard</td>
+          <td>3-PT Made</td>
+          <td class="mono">1.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">3</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">DW</span>Derrick White</td>
+          <td>Steals</td>
+          <td class="mono">0.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">2</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Points</td>
+          <td class="mono">7.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">6</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Rebs+Asts</td>
+          <td class="mono">3.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">4.5</td>
+          <td><span class="ptag goblin">Goblin</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Standard 3 LEG</span>
+        <div class="sg-right">
+          <span>1/2 WIN</span>
+          <span class="pos">+$20</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">1/2</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket win">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b win">WIN  +$40</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/2</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">3x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$60</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v pos">+$40</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Assists</td>
+          <td class="mono">9.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Standard 4 LEG</span>
+        <div class="sg-right">
+          <span>1/2 WIN</span>
+          <span class="pos">+$80</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket win">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b win">WIN  +$100</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/3</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">6x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$120</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v pos">+$100</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Assists</td>
+          <td class="mono">9.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Standard 5 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">2/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">6.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/4</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Assists</td>
+          <td class="mono">9.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">6.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr></tbody></table>
+    </div>
+    </div><div class="sg">
+      <div class="sg-hd">
+        <span class="sg-title">NBA Standard 6 LEG</span>
+        <div class="sg-right">
+          <span>0/2 WIN</span>
+          <span class="neg">$-40</span>
+        </div>
+      </div>
+      <div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #2</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">3/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr miss">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Points</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">38</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">6.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Free Throws Attempted</td>
+          <td class="mono">2.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div><div class="ticket lose">
+      <div class="t-hd">
+        <span class="t-num">TICKET #3</span>
+        <span class="t-b lose">LOSS  −$20</span>
+      </div>
+      <div class="t-stats">
+        <div class="ts"><div class="ts-l">LEGS HIT</div><div class="ts-v">4/5</div></div>
+        <div class="ts"><div class="ts-l">STAKED</div><div class="ts-v">$20</div></div>
+        <div class="ts"><div class="ts-l">MULTIPLIER</div><div class="ts-v">0x</div></div>
+        <div class="ts"><div class="ts-l">PAYOUT</div><div class="ts-v">$0</div></div>
+        <div class="ts"><div class="ts-l">PROFIT</div><div class="ts-v neg">$-20</div></div>
+        <div class="ts"><div class="ts-l">MODE</div><div class="ts-v">POWER</div></div>
+      </div>
+      <table class="lt"><thead><tr>
+        <th>#</th><th>SPORT</th><th>PLAYER</th><th>PROP</th><th>LINE</th>
+        <th>PICK</th><th>DIR</th><th>HIT%</th><th>ACTUAL</th><th>RESULT</th>
+      </tr></thead><tbody><tr class="lr hit">
+          <td class="c-n">1</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">NJ</span>Nikola Jokić</td>
+          <td>Assists</td>
+          <td class="mono">9.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">2</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">MD</span>Moussa Diabaté</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">35</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr push">
+          <td class="c-n">3</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">LD</span>Luka Dončić</td>
+          <td>Rebounds</td>
+          <td class="mono">9</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-under">UNDER</span></td>
+          <td class="mono">0%</td>
+          <td class="mono">9</td>
+          <td><span class="rb rb-push">~ PUSH</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">4</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">JW</span>Jarace Walker</td>
+          <td>Fantasy Score</td>
+          <td class="mono">26.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">34.8</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr><tr class="lr miss">
+          <td class="c-n">5</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">BS</span>Baylor Scheierman</td>
+          <td>Points</td>
+          <td class="mono">6.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">100%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-miss">✗ MISS</span></td>
+        </tr><tr class="lr hit">
+          <td class="c-n">6</td>
+          <td><span class="stag">NBA</span></td>
+          <td class="c-pl"><span class="pi">CW</span>Coby White</td>
+          <td>Free Throws Attempted</td>
+          <td class="mono">2.5</td>
+          <td><span class="ptag standard">Standard</span></td>
+          <td><span class="d-over">OVER</span></td>
+          <td class="mono">80%</td>
+          <td class="mono">5</td>
+          <td><span class="rb rb-hit">✓ HIT</span></td>
+        </tr></tbody></table>
+    </div>
+    </div>
+
+</body>
+</html>
