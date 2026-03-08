@@ -42,6 +42,9 @@ except ImportError:
 # ── Paths ─────────────────────────────────────────────────────────────────────
 SCRIPT_DIR  = Path(__file__).resolve().parent
 OUTPUTS_DIR = SCRIPT_DIR / "outputs"
+ROOT_DIR    = SCRIPT_DIR.parent.parent  # scripts/grading -> scripts -> project root
+# Two levels up from scripts/grading → project root → outputs/{date}
+ROOT_DIR    = SCRIPT_DIR.parent.parent
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -675,7 +678,7 @@ def sport_label(s: str) -> str:
 
 def find_graded_file(sport: str, date_str: str) -> Path | None:
     """Search common locations for nba_graded_{date}.xlsx or cbb_graded_{date}.xlsx."""
-    pattern = f"{sport.lower()}_graded_{date_str}.xlsx"
+    pattern = f"graded_{sport.lower()}_{date_str}.xlsx"
     search_dirs = [
         SCRIPT_DIR,
         SCRIPT_DIR / "outputs",
@@ -685,6 +688,10 @@ def find_graded_file(sport: str, date_str: str) -> Path | None:
         Path.cwd(),
         Path.cwd() / "outputs",
         Path.cwd() / "outputs" / date_str,
+        # project root outputs/{date}/ — e.g. SlateIQ/outputs/2026-03-06/
+        ROOT_DIR / "outputs" / date_str,
+        ROOT_DIR / "outputs",
+        ROOT_DIR,
     ]
     for d in search_dirs:
         p = d / pattern
@@ -703,20 +710,7 @@ def find_graded_file(sport: str, date_str: str) -> Path | None:
 #  FULL HTML
 # ══════════════════════════════════════════════════════════════════════════════
 
-NAV_HTML = """<nav class="snav">
-  <a class="snav-brand" href="/">
-    <div class="snav-mark">🧠</div>
-    <span class="snav-name">SlateIQ</span>
-  </a>
-  <ul class="snav-links">
-    <li><a href="/" data-page="control"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 5.5V13h4V9h4v4h4V5.5L7 1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> Home</a></li>
-    <li><a href="/slate" data-page="slate"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="1.5" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><line x1="4" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg> Slate</a></li>
-    <li><a href="/tickets" data-page="tickets"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg> Tickets</a></li>
-    <li><a href="/grades" data-page="grades" class="snav-active"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 10.5L5.5 7l2.5 2.5L11 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x="1.5" y="1.5" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/></svg> Grades</a></li>
-    <li><a href="/payout" data-page="payout"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/></svg> Payouts</a></li>
-  </ul>
-  <div class="snav-right"><span class="snav-live">LIVE</span></div>
-</nav>"""
+NAV_HTML = ""
 
 CSS = """
 :root{--bg:#070a10;--bg2:#0c1018;--bg3:#111722;--border:#1c2333;--bd2:#243044;--text:#e8edf5;--muted:#4a5568;--muted2:#6b7a94;--blue:#3b82f6;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--purple:#8b5cf6;}
@@ -725,18 +719,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 body::before{content:'';position:fixed;top:-20%;left:-10%;width:55%;height:55%;background:radial-gradient(ellipse,rgba(59,130,246,.04) 0%,transparent 70%);pointer-events:none}
 body::after{content:'';position:fixed;bottom:-20%;right:-10%;width:50%;height:50%;background:radial-gradient(ellipse,rgba(16,185,129,.03) 0%,transparent 70%);pointer-events:none}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:4px}
-.snav{position:sticky;top:0;z-index:200;background:rgba(7,10,16,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:stretch;height:54px}
-.snav-brand{display:flex;align-items:center;gap:9px;margin-right:28px;flex-shrink:0;text-decoration:none}
-.snav-mark{width:28px;height:28px;background:linear-gradient(135deg,#c8ff00,#00e5ff);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px}
-.snav-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:3px;color:#e8edf5}
-.snav-links{display:flex;align-items:stretch;gap:0;list-style:none;flex:1}
-.snav-links a{display:flex;align-items:center;gap:7px;padding:0 14px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#4a5568;text-decoration:none;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
-.snav-links a.snav-active{color:#c8ff00;border-bottom-color:#c8ff00}
-.snav-links li:nth-child(1) a:hover{color:#00d4ff}.snav-links li:nth-child(2) a:hover{color:#c8ff00}.snav-links li:nth-child(3) a:hover{color:#9b6dff}.snav-links li:nth-child(4) a:hover{color:#00e5a0}.snav-links li:nth-child(5) a:hover{color:#ffb830}
-.snav-right{display:flex;align-items:center;margin-left:auto}
-.snav-live{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:#10b981;display:flex;align-items:center;gap:5px}
-.snav-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#10b981;animation:snavpulse 2s infinite}
-@keyframes snavpulse{0%,100%{opacity:1}50%{opacity:.3}}
+
 header{background:rgba(7,10,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:18px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .logo{display:flex;align-items:center;gap:14px}
 .logo-icon{width:42px;height:42px;background:linear-gradient(135deg,#3b82f6,#10b981);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 0 20px rgba(59,130,246,.3)}
@@ -808,7 +791,11 @@ td.right{text-align:right}td.mono{font-family:'DM Mono',monospace;font-size:12px
 
 
 def build_html(date_str: str, nba_rows: list[dict], cbb_rows: list[dict],
-               nba_path: Path | None, cbb_path: Path | None) -> str:
+               nba_path: Path | None, cbb_path: Path | None,
+               nhl_rows: list[dict] | None = None,
+               soccer_rows: list[dict] | None = None,
+               nhl_path: Path | None = None,
+               soccer_path: Path | None = None) -> str:
     try:
         d = datetime.strptime(date_str, "%Y-%m-%d")
         display_date = d.strftime("%b %d, %Y").upper()
@@ -817,16 +804,22 @@ def build_html(date_str: str, nba_rows: list[dict], cbb_rows: list[dict],
 
     generated = datetime.now().strftime("%Y-%m-%d %H:%M")
 
-    nba_section = build_sport_section(nba_rows, "NBA", "#3b82f6", "🏀") if nba_rows else ""
-    cbb_section = build_sport_section(cbb_rows, "CBB", "#8b5cf6", "🎓") if cbb_rows else ""
+    nhl_rows    = nhl_rows    or []
+    soccer_rows = soccer_rows or []
+    nba_section    = build_sport_section(nba_rows,    "NBA",    "#3b82f6", "🏀") if nba_rows    else ""
+    cbb_section    = build_sport_section(cbb_rows,    "CBB",    "#8b5cf6", "🎓") if cbb_rows    else ""
+    nhl_section    = build_sport_section(nhl_rows,    "NHL",    "#06b6d4", "🏒") if nhl_rows    else ""
+    soccer_section = build_sport_section(soccer_rows, "Soccer", "#10b981", "⚽") if soccer_rows else ""
     takeaways   = build_takeaways(nba_rows, cbb_rows)
 
     sources = []
-    if nba_path: sources.append(nba_path.name)
-    if cbb_path: sources.append(cbb_path.name)
+    if nba_path:    sources.append(nba_path.name)
+    if cbb_path:    sources.append(cbb_path.name)
+    if nhl_path:    sources.append(nhl_path.name)
+    if soccer_path: sources.append(soccer_path.name)
     source_line = " &nbsp;·&nbsp; ".join(h(s) for s in sources)
 
-    if not nba_section and not cbb_section:
+    if not nba_section and not cbb_section and not nhl_section and not soccer_section:
         body_content = """<div style="text-align:center;padding:60px 20px;font-family:'DM Mono',monospace">
           <div style="font-size:32px;margin-bottom:16px">📭</div>
           <div style="font-size:18px;color:#94a3b8">No graded data found for this date.</div>
@@ -835,7 +828,7 @@ def build_html(date_str: str, nba_rows: list[dict], cbb_rows: list[dict],
           </div>
         </div>""".replace("{date_str}", date_str)
     else:
-        body_content = nba_section + cbb_section + takeaways
+        body_content = nba_section + cbb_section + nhl_section + soccer_section + takeaways
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -847,7 +840,6 @@ def build_html(date_str: str, nba_rows: list[dict], cbb_rows: list[dict],
 <style>{CSS}</style>
 </head>
 <body>
-{NAV_HTML}
 <header>
   <div class="logo">
     <div class="logo-icon">📊</div>
@@ -864,14 +856,6 @@ def build_html(date_str: str, nba_rows: list[dict], cbb_rows: list[dict],
     GENERATED {h(generated)} &nbsp;·&nbsp; {source_line}
   </div>
 </div>
-<script>
-(function(){{
-  var path = window.location.pathname.replace(/\\/$/,'') || '/';
-  var map  = {{'/':'control','/tickets':'tickets','/slate':'slate','/payout':'payout','/grades':'grades'}};
-  var el   = document.querySelector('.snav-links a[data-page="'+(map[path]||'')+'"]');
-  if(el){{ el.classList.add('snav-active'); }}
-}})();
-</script>
 </body>
 </html>"""
 
@@ -890,6 +874,10 @@ def main() -> None:
                         help="Path to nba_graded_*.xlsx")
     parser.add_argument("--cbb",  type=str, default="",
                         help="Path to cbb_graded_*.xlsx")
+    parser.add_argument("--nhl",  type=str, default="",
+                        help="Path to nhl_graded_*.xlsx")
+    parser.add_argument("--soccer", type=str, default="",
+                        help="Path to soccer_graded_*.xlsx")
     parser.add_argument("--out",  type=str, default="",
                         help="Output path or directory (default: next to this script)")
     args = parser.parse_args()
@@ -929,8 +917,30 @@ def main() -> None:
         else:
             print(f"  WARNING: Could not auto-detect cbb_graded_{date_str}.xlsx")
 
-    if not nba_path and not cbb_path:
-        print("  ERROR: No graded files found. Specify --nba and/or --cbb.")
+    nhl_path: Path | None = None
+    if args.nhl:
+        nhl_path = Path(args.nhl).resolve()
+        if not nhl_path.exists():
+            print(f"  WARNING: NHL file not found: {nhl_path}")
+            nhl_path = None
+    else:
+        nhl_path = find_graded_file("nhl", date_str)
+        if nhl_path:
+            print(f"  Auto-detected NHL: {nhl_path}")
+
+    soccer_path: Path | None = None
+    if args.soccer:
+        soccer_path = Path(args.soccer).resolve()
+        if not soccer_path.exists():
+            print(f"  WARNING: Soccer file not found: {soccer_path}")
+            soccer_path = None
+    else:
+        soccer_path = find_graded_file("soccer", date_str)
+        if soccer_path:
+            print(f"  Auto-detected Soccer: {soccer_path}")
+
+    if not nba_path and not cbb_path and not nhl_path and not soccer_path:
+        print("  ERROR: No graded files found. Specify --nba/--cbb/--nhl/--soccer.")
         sys.exit(1)
 
     # Load rows
@@ -945,9 +955,23 @@ def main() -> None:
         cbb_rows = load_graded(cbb_path)
         print(f" {len(cbb_rows):,} rows")
 
+    nhl_rows: list[dict] = []
+    if nhl_path:
+        print(f"  Loading NHL: {nhl_path.name} ...", end="", flush=True)
+        nhl_rows = load_graded(nhl_path)
+        print(f" {len(nhl_rows):,} rows")
+
+    soccer_rows: list[dict] = []
+    if soccer_path:
+        print(f"  Loading Soccer: {soccer_path.name} ...", end="", flush=True)
+        soccer_rows = load_graded(soccer_path)
+        print(f" {len(soccer_rows):,} rows")
+
     # Build HTML
     print("  Building HTML ...", end="", flush=True)
-    html = build_html(date_str, nba_rows, cbb_rows, nba_path, cbb_path)
+    html = build_html(date_str, nba_rows, cbb_rows, nba_path, cbb_path,
+                      nhl_rows=nhl_rows, soccer_rows=soccer_rows,
+                      nhl_path=nhl_path, soccer_path=soccer_path)
     print(f" {len(html):,} bytes")
 
     # Resolve output path
