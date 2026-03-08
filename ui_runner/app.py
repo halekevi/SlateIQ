@@ -298,6 +298,15 @@ def serve_grade_report(date: str):
     abort(404)
 
 
+@app.get("/grades/ticket_eval_<date>.html")
+def serve_ticket_eval_report(date: str):
+    """Serve individual ticket_eval_YYYY-MM-DD.html files for the ticket evaluation iframe."""
+    fname = f"ticket_eval_{date}.html"
+    if TEMPLATES_DIR.exists() and (TEMPLATES_DIR / fname).exists():
+        return send_from_directory(str(TEMPLATES_DIR), fname)
+    abort(404)
+
+
 
 # ──────────────────────────────────────────────────────────────────────────────
 # NEW: Pipeline Status API
