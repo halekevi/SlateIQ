@@ -75,12 +75,33 @@ C = {
 }
 
 PAYOUT = {
-    2: {"power": 3.0, "flex": 3.0},
-    3: {"power": 4.37, "flex": 1.73},
+    2: {"power": 3.0,  "flex": 3.0},
+    3: {"power": 6.0,  "flex": 3.0},   # Updated: power=6x, flex=3x
     4: {"power": 10.0, "flex": 6.0},
     5: {"power": 20.0, "flex": 10.0},
-    6: {"power": 40.0, "flex": 16.0},
+    6: {"power": 37.5, "flex": 25.0},  # Updated: power=37.5x, flex=25x
 }
+
+# ── Per-leg count quality thresholds (used by smart ticket builder) ───────────
+# Min hit rate required per leg depending on ticket length
+# Longer tickets need higher floor because win prob = product of all hit rates
+LEG_MIN_HIT_RATE = {
+    3: 0.58,   # 3-leg: 0.58^3 = 19.5% win prob floor
+    4: 0.62,   # 4-leg: 0.62^4 = 14.8% win prob floor
+    5: 0.65,   # 5-leg: 0.65^5 = 11.6% win prob floor
+    6: 0.68,   # 6-leg: 0.68^6 = 9.8% win prob floor
+}
+
+# Min tier per leg count for Power mode tickets
+POWER_MIN_TIER = {
+    3: ["A", "B", "C"],   # 3-leg power: Tier A/B/C ok
+    4: ["A", "B", "C"],   # 4-leg power: Tier A/B/C ok
+    5: ["A", "B"],         # 5-leg power: Tier A/B only
+    6: ["A", "B"],         # 6-leg power: Tier A/B only
+}
+
+# Demon legs are only allowed in Flex-mode analysis (too low hit rate for Power)
+# This is enforced in build_tickets_smart() below
 
 
 # ── Excel style helpers ───────────────────────────────────────────────────────
@@ -1221,7 +1242,7 @@ def build_combined_slate(nba: pd.DataFrame, cbb: pd.DataFrame, nhl: pd.DataFrame
 
 
 # ── Filter eligible props for tickets ─────────────────────────────────────────
-def filter_eligible(df: pd.DataFrame, min_hit_rate=0.0, min_edge=0.0, min_rank=None, tiers=None, pick_types=None):
+def filter_eligible(df: pd.DataFrame, min_hit_rate=0.55, min_edge=0.0, min_rank=None, tiers=None, pick_types=None):
     mask = pd.Series([True] * len(df), index=df.index)
     # Always exclude NO_PROJECTION_OR_LINE rows from tickets (no line = can't bet)
     if "void_reason" in df.columns:
@@ -1243,11 +1264,35 @@ def filter_eligible(df: pd.DataFrame, min_hit_rate=0.0, min_edge=0.0, min_rank=N
 # ── Build tickets ──────────────────────────────────────────────────────────────
 def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets=20, require_mix=False) -> list:
     """
-    Build top tickets of n_legs from pool, sorted by avg rank score.
-    If require_mix=True, each ticket must contain at least 1 NBA and 1 CBB leg.
+    Smart ticket builder with quality filters per leg count.
+
+    Key improvements vs original:
+    - Per-leg min hit rate floor (longer tickets require higher floor)
+    - Tier floor per leg count for longer tickets (5/6-leg = Tier A/B only)
+    - Demon legs soft-filtered: excluded from 5/6-leg tickets, capped at 1 in 3/4-leg
+    - Tickets sorted by est_win_prob DESC then avg_rank_score (optimises for actual wins)
+    - require_mix still enforced for cross-sport sheets
     """
     pool = pool.copy().reset_index(drop=True)
     tickets = []
+
+    # ── Per-leg-count quality filters ─────────────────────────────────────────
+    min_hr   = LEG_MIN_HIT_RATE.get(n_legs, 0.55)
+    ok_tiers = POWER_MIN_TIER.get(n_legs, ["A", "B", "C", "D"])
+
+    # Apply hit rate floor to this pool
+    if "hit_rate" in pool.columns:
+        pool = pool[pool["hit_rate"].fillna(0) >= min_hr].copy()
+
+    # Apply tier floor for 5/6-leg tickets
+    if n_legs >= 5 and "tier" in pool.columns:
+        pool = pool[pool["tier"].isin(ok_tiers)].copy()
+
+    # For 5/6-leg tickets: remove Demon legs entirely (38% hit rate kills these)
+    if n_legs >= 5 and "pick_type" in pool.columns:
+        pool = pool[pool["pick_type"] != "Demon"].copy()
+
+    pool = pool.reset_index(drop=True)
 
     has_sport_col = "sport" in pool.columns
     sports_available = pool["sport"].dropna().unique().tolist() if has_sport_col else []
@@ -1288,6 +1333,14 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets=20, require_mix=F
                     break
                 player = str(row.get("player", "")).strip().lower()
                 if player and player not in ticket_players:
+
+                    # Cap Demon legs at 1 per 3/4-leg ticket
+                    if n_legs <= 4 and "pick_type" in row.index:
+                        demon_count = sum(1 for r in ticket_rows
+                                          if str(r.get("pick_type", "")) == "Demon")
+                        if str(row.get("pick_type", "")) == "Demon" and demon_count >= 1:
+                            continue
+
                     ticket_rows.append(row)
                     ticket_players.add(player)
 
@@ -1335,7 +1388,8 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets=20, require_mix=F
         else:
             break
 
-    tickets.sort(key=lambda x: (-x["avg_rank_score"], -x["avg_hit_rate"]))
+    # Sort by win probability first, then rank score — optimises for actual wins
+    tickets.sort(key=lambda x: (-x["est_win_prob"], -x["avg_rank_score"]))
     return tickets[:max_tickets]
 
 
@@ -1865,11 +1919,11 @@ def main():
     ap.add_argument("--soccer", default="", help="Soccer step8_soccer_direction_clean.xlsx (optional)")
     ap.add_argument("--output", default="")
     ap.add_argument("--date", default=datetime.now().strftime("%Y-%m-%d"))
-    ap.add_argument("--tiers", default="A,B", help="Comma-separated tiers e.g. A,B")
-    ap.add_argument("--min-hit-rate", type=float, default=0.0, dest="min_hit_rate")
+    ap.add_argument("--tiers", default="A,B,C", help="Comma-separated tiers e.g. A,B")
+    ap.add_argument("--min-hit-rate", type=float, default=0.55, dest="min_hit_rate")
     ap.add_argument("--min-edge", type=float, default=0.0, dest="min_edge")
     ap.add_argument("--min-rank", type=float, default=None, dest="min_rank")
-    ap.add_argument("--pick-types", default="Goblin,Standard,Demon", dest="pick_types")
+    ap.add_argument("--pick-types", default="Goblin,Standard,Demon", dest="pick_types")  # Demon kept for Flex sheets; filtered out of 5/6-leg Power by build_tickets
     ap.add_argument("--max-tickets", type=int, default=20, dest="max_tickets")
 
     # Web outputs
