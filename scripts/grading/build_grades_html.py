@@ -133,6 +133,13 @@ def load_graded(path: Path) -> list[dict]:
             nk = re.sub(r"\bdef[\s_]?tier\b", "Def Tier", nk, flags=re.I)
             nk = re.sub(r"\bprop[\s_]type\b", "Prop Type", nk, flags=re.I)
             nk = re.sub(r"\bmin(utes)?\b", "Minutes", nk, flags=re.I)
+            # Normalize result/grade column
+            if nk.lower() == "result":              nk = "Result"
+            if nk.lower() == "grade":               nk = "Result"
+            if nk.lower() == "void_reason_grade":   nk = "void_reason"
+            if nk.lower() == "bet_direction":       nk = "Direction"
+            if nk.lower() == "prop_type_norm":      nk = "Prop Type"
+            if nk.lower() == "pick_type":           nk = "Pick Type"
             nr[nk] = v
         normalized.append(nr)
     return normalized
