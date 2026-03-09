@@ -1,0 +1,25 @@
+﻿py.exe : C:\Users\halek\OneDrive\Desktop\Vision 
+Board\NbaPropPipelines\NBA-Pipelines\CBB2\cbb_step6_rank_props.py:242: UserWarning: 
+Boolean Series key will be reindexed to match DataFrame index.
+At line:22 char:25
++ ... $output   = & py -3.14 ($Cmd -split ' ')[0] (($Cmd -split ' ') | Sele ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\halek\...ataFrame index.:String 
+   ) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  out_sorted[elig_mask].to_excel(xw, index=False, sheet_name="ELIGIBLE")
+ΓåÆ Loaded: step5b_cbb.csv | rows=4123
+Γ£à Saved ΓåÆ step6_ranked_cbb.xlsx
+ALL rows: 4123
+Tier breakdown:
+tier
+D    4001
+A      55
+B      36
+C      31
+
+Void reasons:
+void_reason
+NO_PROJECTION_OR_LINE    3176
+FORCED_OVER_NEG_EDGE      533

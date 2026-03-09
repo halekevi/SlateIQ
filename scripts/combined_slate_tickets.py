@@ -1985,12 +1985,23 @@ def main():
 
     print(f"  {len(combined)} total props")
 
+    # ── CBB Goblin rank floor ─────────────────────────────────────────────────
+    # CBB Goblin hits at ~55-58% vs NBA Goblin at ~67%.
+    # We raise the minimum rank score for CBB Goblin-only pools so only
+    # the model's highest-confidence CBB Goblin props enter tickets.
+    CBB_GOBLIN_MIN_RANK = 5.0   # tune this up/down based on graded results
+
     def pool(df, pt=None):
+        sport = str(df["sport"].iloc[0]).upper() if "sport" in df.columns and len(df) > 0 else ""
+        # Apply tighter rank floor specifically for CBB Goblin
+        effective_min_rank = args.min_rank
+        if sport == "CBB" and pt is not None and pt == ["Goblin"]:
+            effective_min_rank = max(args.min_rank or 0, CBB_GOBLIN_MIN_RANK)
         return filter_eligible(
             df,
             args.min_hit_rate,
             args.min_edge,
-            args.min_rank,
+            effective_min_rank,
             tiers if tiers else None,
             pt if pt is not None else pick_types,
         )
@@ -1999,6 +2010,7 @@ def main():
     cbb_pool = pool(cbb)
     combo_pool = pool(combined)
     print(f"  NBA eligible: {len(nba_pool)} | CBB eligible: {len(cbb_pool)} | Combined: {len(combo_pool)}")
+    print(f"  CBB Goblin rank floor: {CBB_GOBLIN_MIN_RANK} (NBA uses global floor: {args.min_rank})")
 
     print("Generating tickets + workbook...")
     wb = Workbook()
@@ -2079,19 +2091,10 @@ def main():
                 all_ticket_groups.append((sheet_name, tickets, C["mix"]))
                 print(f"  {sheet_name}: {len(tickets)} tickets")
 
-    # Cross-sport Goblin Mix (enforce mix)
-    nba_gob = pool(nba, ["Goblin"])
-    cbb_gob = pool(cbb, ["Goblin"])
-    gob_mix_pool = pd.concat([nba_gob, cbb_gob], ignore_index=True).sort_values("rank_score", ascending=False)
-    if len(gob_mix_pool) >= 3:
-        print("Generating cross-sport Goblin Mix tickets...")
-        for n in leg_sizes:
-            tickets = build_tickets(gob_mix_pool, n, args.max_tickets, require_mix=True)
-            if tickets:
-                sheet_name = f"MIX Goblin {n}-Leg"[:31]
-                write_ticket_sheet(wb, tickets, sheet_name, C["goblin"], label="NBA+CBB Goblin")
-                all_ticket_groups.append((sheet_name, tickets, C["goblin"]))
-                print(f"  {sheet_name}: {len(tickets)} tickets")
+    # Cross-sport Goblin Mix — RETIRED
+    # Data showed 0% win rate across all dates. NBA Goblin (67%) and CBB Goblin (55%)
+    # dilute each other in multi-leg tickets. Pure NBA Goblin sheets outperform.
+    # MIX Goblin sheets are no longer generated.
 
     print("Writing slate sheets...")
     write_slate_sheet(wb, combined, "Full Slate", C["hdr"], "ALL")

@@ -1,0 +1,58 @@
+﻿Loading NBA slate from C:\Users\halek\OneDrive\Desktop\Vision Board\NbaPropPipelines\NBA-Pipelines\outputs\2026-02-25\nba_slate_for_combined_2026-02-25.xlsx...
+  2756 NBA props loaded
+Loading CBB slate from C:\Users\halek\OneDrive\Desktop\Vision Board\NbaPropPipelines\NBA-Pipelines\outputs\2026-02-25\cbb_slate_for_combined_2026-02-25.xlsx...
+  414 CBB props loaded
+Building combined slate...
+  3170 total props
+  NBA eligible: 2149 | CBB eligible: 414 | Combined: 3170
+Generating tickets + workbook...
+  NBA Goblin 3-Leg: 3 tickets
+  NBA Goblin 4-Leg: 3 tickets
+  NBA Goblin 5-Leg: 3 tickets
+  NBA Goblin 6-Leg: 3 tickets
+  NBA Standard 3-Leg: 3 tickets
+  NBA Standard 4-Leg: 3 tickets
+  NBA Standard 5-Leg: 3 tickets
+  NBA Standard 6-Leg: 3 tickets
+  NBA Demon 3-Leg: 3 tickets
+  NBA Demon 4-Leg: 3 tickets
+  NBA Demon 5-Leg: 3 tickets
+  NBA Demon 6-Leg: 3 tickets
+  NBA Mix Mix 3-Leg: 3 tickets
+  NBA Mix Mix 4-Leg: 3 tickets
+  NBA Mix Mix 5-Leg: 3 tickets
+  NBA Mix Mix 6-Leg: 3 tickets
+  CBB Goblin 3-Leg: 3 tickets
+  CBB Goblin 4-Leg: 3 tickets
+  CBB Goblin 5-Leg: 3 tickets
+  CBB Goblin 6-Leg: 3 tickets
+  CBB Standard 3-Leg: 3 tickets
+  CBB Standard 4-Leg: 3 tickets
+  CBB Standard 5-Leg: 3 tickets
+  CBB Standard 6-Leg: 3 tickets
+  CBB Demon 3-Leg: 3 tickets
+  CBB Demon 4-Leg: 3 tickets
+  CBB Demon 5-Leg: 3 tickets
+  CBB Demon 6-Leg: 3 tickets
+  CBB Mix Mix 3-Leg: 3 tickets
+  CBB Mix Mix 4-Leg: 3 tickets
+  CBB Mix Mix 5-Leg: 3 tickets
+  CBB Mix Mix 6-Leg: 3 tickets
+  COMBO Mix 3-Leg: 3 tickets
+  COMBO Mix 4-Leg: 3 tickets
+  COMBO Mix 5-Leg: 3 tickets
+  COMBO Mix 6-Leg: 3 tickets
+Generating cross-sport Standard Mix tickets...
+  MIX Standard 3-Leg: 3 tickets
+  MIX Standard 4-Leg: 3 tickets
+  MIX Standard 5-Leg: 3 tickets
+  MIX Standard 6-Leg: 3 tickets
+Generating cross-sport Goblin Mix tickets...
+  MIX Goblin 3-Leg: 3 tickets
+  MIX Goblin 4-Leg: 3 tickets
+  MIX Goblin 5-Leg: 3 tickets
+  MIX Goblin 6-Leg: 3 tickets
+Writing slate sheets...
+
+✅ Saved -> C:\Users\halek\OneDrive\Desktop\Vision Board\NbaPropPipelines\NBA-Pipelines\combined_slate_tickets_2026-02-25.xlsx
+   Sheets (48): ['NBA Slate', 'SUMMARY', 'NBA Goblin 3-Leg', 'CBB Slate', 'NBA Goblin 4-Leg', 'NBA Goblin 5-Leg', 'NBA Goblin 6-Leg', 'NBA Standard 3-Leg', 'NBA Standard 4-Leg', 'NBA Standard 5-Leg', 'NBA Standard 6-Leg', 'NBA Demon 3-Leg', 'NBA Demon 4-Leg', 'NBA Demon 5-Leg', 'NBA Demon 6-Leg', 'NBA Mix Mix 3-Leg', 'NBA Mix Mix 4-Leg', 'NBA Mix Mix 5-Leg', 'NBA Mix Mix 6-Leg', 'CBB Goblin 3-Leg', 'CBB Goblin 4-Leg', 'CBB Goblin 5-Leg', 'CBB Goblin 6-Leg', 'CBB Standard 3-Leg', 'CBB Standard 4-Leg', 'CBB Standard 5-Leg', 'CBB Standard 6-Leg', 'CBB Demon 3-Leg', 'CBB Demon 4-Leg', 'CBB Demon 5-Leg', 'CBB Demon 6-Leg', 'CBB Mix Mix 3-Leg', 'CBB Mix Mix 4-Leg', 'CBB Mix Mix 5-Leg', 'CBB Mix Mix 6-Leg', 'COMBO Mix 3-Leg', 'COMBO Mix 4-Leg', 'COMBO Mix 5-Leg', 'COMBO Mix 6-Leg', 'MIX Standard 3-Leg', 'MIX Standard 4-Leg', 'MIX Standard 5-Leg', 'MIX Standard 6-Leg', 'MIX Goblin 3-Leg', 'MIX Goblin 4-Leg', 'MIX Goblin 5-Leg', 'MIX Goblin 6-Leg', 'Full Slate']

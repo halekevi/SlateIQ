@@ -1,0 +1,6 @@
+﻿ΓåÆ Loading Step2: step2_with_picktypes.csv
+ΓåÆ Loading defense: .\defense_team_summary.csv
+ΓåÆ Merging defense for singles on opp_team
+Γ£à Saved ΓåÆ step3_with_defense.csv
+Rows: 4678 | Cols: 96
+Defense filled (OVERALL_DEF_RANK): 4678/4678

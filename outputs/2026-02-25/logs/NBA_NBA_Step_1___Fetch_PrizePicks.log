@@ -1,0 +1,9 @@
+﻿≡ƒôí Fetching PrizePicks | league_id=7 | game_mode=pickem | per_page=250
+  ≡ƒîÉ Session warmed (leagues endpoint: 200)
+  Γ£ô Page 1: +4678 new projections (unique total 4678)
+ΓÜá∩╕Å page 2: 0 new projection_ids (repeat page). Streak=1
+≡ƒ¢æ Stopping pagination: detected repeat pages.
+Step1 saved ΓåÆ step1_pp_props_today.csv
+  fetch_method: requests_ok
+  rows=4678 teams=18
+Γ£à BOARD_OK

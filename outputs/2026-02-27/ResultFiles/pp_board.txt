@@ -1,0 +1,336 @@
+{
+    "data": [
+        {
+            "type": "new_wager",
+            "id": "1454348000",
+            "attributes": {
+                "amount_bet_cents": 0,
+                "amount_to_win_cents": 0,
+                "amount_won_cents": 0,
+                "cashed_out_at": null,
+                "cashout_amount_won_cents": 0,
+                "code": null,
+                "community_play_id": null,
+                "contest_amount_won_cents": 0,
+                "correlated_entry": false,
+                "created_at": "2026-02-01T07:03:56.953-05:00",
+                "eligible_for_refund": false,
+                "f2p": false,
+                "full_payout_multipliers": null,
+                "game_mode": "f2p_streak",
+                "is_cashout_eligible": false,
+                "is_gift": false,
+                "parlay_count": 1,
+                "payout_data": null,
+                "payout_multipliers": null,
+                "payouts": {},
+                "pick_protection": false,
+                "player_pack_id": null,
+                "promo_tag": true,
+                "promotion_id": null,
+                "refund_allowed_until": null,
+                "result": "pending",
+                "reverted_payouts": null,
+                "ruleset_id": 0,
+                "sport": "NBA",
+                "updated_at": "2026-02-01T07:03:56.953-05:00",
+                "user_id": 17085664,
+                "uuid": null
+            },
+            "relationships": {
+                "player_pack": {
+                    "data": null
+                },
+                "predictions": {
+                    "data": [
+                        {
+                            "type": "prediction",
+                            "id": "6216194018"
+                        }
+                    ]
+                },
+                "promotion": {
+                    "data": null
+                }
+            }
+        }
+    ],
+    "included": [
+        {
+            "type": "stat_type",
+            "id": "106",
+            "attributes": {
+                "lfg_ignored_leagues": [],
+                "name": "Pts+Rebs+Asts",
+                "rank": 1
+            }
+        },
+        {
+            "type": "projection_type",
+            "id": "2",
+            "attributes": {
+                "name": "Single Stat"
+            }
+        },
+        {
+            "type": "league",
+            "id": "7",
+            "attributes": {
+                "active": true,
+                "f2p_enabled": true,
+                "has_live_projections": false,
+                "icon": "basketball",
+                "image_url": "https://static.prizepicks.com/images/leagues/production/26.svg",
+                "last_five_games_enabled": true,
+                "league_icon_id": 26,
+                "name": "NBA",
+                "parent_id": null,
+                "parent_name": null,
+                "projections_count": 0,
+                "rank": 5,
+                "show_trending": true
+            },
+            "relationships": {
+                "projection_filters": {
+                    "data": []
+                }
+            }
+        },
+        {
+            "type": "projection",
+            "id": "9622772",
+            "attributes": {
+                "adjusted_odds": null,
+                "board_time": "2026-01-31T17:33:56.633-05:00",
+                "custom_image": null,
+                "description": "NYK",
+                "end_time": null,
+                "event_type": "team",
+                "flash_sale_line_score": null,
+                "game_id": "NBA_game_SflpRt4ahZsu8GycKAgGumDa",
+                "group_key": "227710-106-NBA_game_SflpRt4ahZsu8GycKAgGumDa-11-false",
+                "hr_20": true,
+                "in_game": false,
+                "is_live": false,
+                "is_live_scored": true,
+                "is_promo": false,
+                "line_score": 48.5,
+                "odds_type": "standard",
+                "projection_type": "Single Stat",
+                "rank": 1000,
+                "refundable": true,
+                "start_time": "2026-02-01T19:10:00.000-05:00",
+                "stat_display_name": "PRA",
+                "stat_type": "Pts+Rebs+Asts",
+                "status": "pre_game",
+                "today": true,
+                "tv_channel": null,
+                "updated_at": "2026-02-01T08:18:49.553-05:00"
+            },
+            "relationships": {
+                "duration": {
+                    "data": {
+                        "type": "duration",
+                        "id": "11"
+                    }
+                },
+                "game": {
+                    "data": {
+                        "type": "game",
+                        "id": "123755"
+                    }
+                },
+                "league": {
+                    "data": {
+                        "type": "league",
+                        "id": "7"
+                    }
+                },
+                "new_player": {
+                    "data": {
+                        "type": "new_player",
+                        "id": "227710"
+                    }
+                },
+                "projection_type": {
+                    "data": {
+                        "type": "projection_type",
+                        "id": "2"
+                    }
+                },
+                "score": {
+                    "data": {
+                        "type": "score",
+                        "id": "8460599"
+                    }
+                },
+                "stat_type": {
+                    "data": {
+                        "type": "stat_type",
+                        "id": "106"
+                    }
+                }
+            }
+        },
+        {
+            "type": "prediction",
+            "id": "6216194018",
+            "attributes": {
+                "adjusted_odds": null,
+                "initial_score": 0,
+                "is_promo": false,
+                "line_score": 48.5,
+                "odds_type": "standard",
+                "wager_type": "under"
+            },
+            "relationships": {
+                "new_player": {
+                    "data": {
+                        "type": "new_player",
+                        "id": "227710"
+                    }
+                },
+                "projection": {
+                    "data": {
+                        "type": "projection",
+                        "id": "9622772"
+                    }
+                },
+                "score": {
+                    "data": {
+                        "type": "score",
+                        "id": "8460599"
+                    }
+                },
+                "score_snapshot": {
+                    "data": null
+                }
+            }
+        },
+        {
+            "type": "duration",
+            "id": "11",
+            "attributes": {
+                "name": "Full"
+            }
+        },
+        {
+            "type": "team",
+            "id": "193",
+            "attributes": {
+                "abbreviation": "LAL",
+                "market": "Los Angeles",
+                "name": "Lakers",
+                "primary_color": "FDB927",
+                "secondary_color": "552583",
+                "tertiary_color": "FDB927"
+            }
+        },
+        {
+            "type": "new_player",
+            "id": "227710",
+            "attributes": {
+                "combo": false,
+                "display_name": "Luka Dončić",
+                "image_url": "https://static.prizepicks.com/images/players/NBA/Luka_Doncic_NBA_player_fKmR8FlizWoOkrLzqVJDKre3.webp",
+                "jersey_number": "77",
+                "league": "NBA",
+                "league_id": 7,
+                "market": "Los Angeles",
+                "name": "Luka Dončić",
+                "position": "F-G",
+                "team": "LAL",
+                "team_name": "Lakers"
+            },
+            "relationships": {
+                "league": {
+                    "data": {
+                        "type": "league",
+                        "id": "7"
+                    }
+                },
+                "team_data": {
+                    "data": {
+                        "type": "team",
+                        "id": "193"
+                    }
+                }
+            }
+        },
+        {
+            "type": "score",
+            "id": "8460599",
+            "attributes": {
+                "details": null,
+                "is_final": false,
+                "is_off_the_board": false,
+                "is_retired": false,
+                "score": 0,
+                "unders_win_dnp": false,
+                "updated_at": "2026-01-31T17:35:54.035-05:00"
+            }
+        },
+        {
+            "type": "team",
+            "id": "1367",
+            "attributes": {
+                "abbreviation": "NYK",
+                "market": "New York",
+                "name": "Knicks",
+                "primary_color": "F58426",
+                "secondary_color": "006BB6",
+                "tertiary_color": "F58426"
+            }
+        },
+        {
+            "type": "game",
+            "id": "123755",
+            "attributes": {
+                "created_at": "2026-01-02T00:11:03.436-05:00",
+                "end_time": null,
+                "external_game_id": "NBA_game_SflpRt4ahZsu8GycKAgGumDa",
+                "is_live": false,
+                "metadata": {
+                    "game_id": "NBA_game_SflpRt4ahZsu8GycKAgGumDa",
+                    "game_info": {
+                        "teams": {
+                            "away": {
+                                "abbreviation": "LAL"
+                            },
+                            "home": {
+                                "abbreviation": "NYK"
+                            }
+                        }
+                    },
+                    "league_name": "NBA",
+                    "status": "scheduled"
+                },
+                "start_time": "2026-02-01T19:00:00.000-05:00",
+                "status": "scheduled",
+                "updated_at": "2026-01-02T00:11:03.436-05:00"
+            },
+            "relationships": {
+                "away_team_data": {
+                    "data": {
+                        "type": "team",
+                        "id": "193"
+                    }
+                },
+                "home_team_data": {
+                    "data": {
+                        "type": "team",
+                        "id": "1367"
+                    }
+                }
+            }
+        }
+    ],
+    "links": {
+        "self": "api.prod01.universe.prizepicks.com/v1/entries?filter=pending\u0026game_mode=f2p_streak\u0026start_date=2026-01-01\u0026end_date=2026-02-28"
+    },
+    "meta": {
+        "current_page": 1,
+        "potential_winnings_cents": 0,
+        "total_pages": 1
+    }
+}

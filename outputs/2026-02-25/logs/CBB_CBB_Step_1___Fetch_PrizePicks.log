@@ -1,0 +1,5 @@
+﻿📡 Fetching PrizePicks | league_id=20 | per_page=250 | single_stat=False
+  ✓ Page 1: +4031 new projections (unique total 4031)
+  ✅ No links.next — pagination complete.
+✅ Saved CSV → step1_cbb.csv | rows=4031 | unique proj_id=4031
+🆚 pp_opp_team filled: 3910/4031

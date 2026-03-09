@@ -1,5 +1,0 @@
-rank,tier,player,team,opp,is_home,player_role,position_group,prop_display,prop_type,line,direction,composite_hr,hr_L5,hr_L10,hr_L20,hr_season,sample_L5,sample_L10,sample_L20,sample_season,avg_L5,avg_L10,avg_L20,avg_season,gap_vs_line_L5,gap_vs_line_L10,last1_raw,last2_raw,last3_raw,games_played,scoring_tier,pp_tier,def_tier,def_rank,opp_gaa,opp_saa,opp_pk_pct,pts_per_game,pp_pts_per_game,toi_avg_L10,toi_per_game_api,prop_score,edge
-1,A,Jack Eichel,VGK,,0,SKATER,F,Time On Ice,time_on_ice,20.2,UNDER,,,,,,5,10,20,30,,,,,,,,,,30,ELITE,PP1_STAR,,,,,,1.333,0.451,18.94,21.27,1.09000,0.5000
-2,A,Evgeni Malkin,PIT,,0,SKATER,F,Time On Ice,time_on_ice,17.8,UNDER,,,,,,5,10,20,30,,,,,,,,,,30,ELITE,PP_REGULAR,,,,,,1.070,0.372,17.25,17.63,1.06000,0.5000
-3,A,Kris Letang,PIT,,0,SKATER,D,Time On Ice,time_on_ice,22.8,UNDER,,,,,,5,10,20,30,,,,,,,,,,30,DEPTH,PP_OCC,,,,,,0.500,0.173,23.29,22.07,0.98000,0.5000
-4,A,Noah Hanifin,VGK,,0,SKATER,D,Time On Ice,time_on_ice,21.5,UNDER,,,,,,5,10,20,30,,,,,,,,,,30,DEPTH,PP_OCC,,,,,,0.417,0.125,21.65,23.35,0.98000,0.5000

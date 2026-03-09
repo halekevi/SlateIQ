@@ -1,0 +1,865 @@
+player,team,prop_type,actual
+Amare Bynum,OSU,Points,0.0
+Amare Bynum,OSU,Rebounds,2.0
+Amare Bynum,OSU,Assists,0.0
+Amare Bynum,OSU,Blocked Shots,0.0
+Amare Bynum,OSU,Steals,0.0
+Amare Bynum,OSU,Turnovers,0.0
+Amare Bynum,OSU,FG Made,0.0
+Amare Bynum,OSU,FG Attempted,5.0
+Amare Bynum,OSU,3-PT Made,0.0
+Amare Bynum,OSU,3-PT Attempted,2.0
+Amare Bynum,OSU,Two Pointers Made,0.0
+Amare Bynum,OSU,Two Pointers Attempted,3.0
+Amare Bynum,OSU,Free Throws Made,0.0
+Amare Bynum,OSU,Free Throws Attempted,0.0
+Amare Bynum,OSU,Offensive Rebounds,0.0
+Amare Bynum,OSU,Defensive Rebounds,2.0
+Amare Bynum,OSU,Personal Fouls,4.0
+Amare Bynum,OSU,Fantasy Score,2.5
+Amare Bynum,OSU,Pts+Rebs+Asts,2.0
+Amare Bynum,OSU,PRA,2.0
+Amare Bynum,OSU,Pts+Rebs,2.0
+Amare Bynum,OSU,Pts+Asts,0.0
+Amare Bynum,OSU,Rebs+Asts,2.0
+Amare Bynum,OSU,Blks+Stls,0.0
+Christoph Tilly,OSU,Points,10.0
+Christoph Tilly,OSU,Rebounds,8.0
+Christoph Tilly,OSU,Assists,1.0
+Christoph Tilly,OSU,Blocked Shots,1.0
+Christoph Tilly,OSU,Steals,2.0
+Christoph Tilly,OSU,Turnovers,0.0
+Christoph Tilly,OSU,FG Made,5.0
+Christoph Tilly,OSU,FG Attempted,6.0
+Christoph Tilly,OSU,3-PT Made,0.0
+Christoph Tilly,OSU,3-PT Attempted,0.0
+Christoph Tilly,OSU,Two Pointers Made,5.0
+Christoph Tilly,OSU,Two Pointers Attempted,6.0
+Christoph Tilly,OSU,Free Throws Made,0.0
+Christoph Tilly,OSU,Free Throws Attempted,3.0
+Christoph Tilly,OSU,Offensive Rebounds,0.0
+Christoph Tilly,OSU,Defensive Rebounds,8.0
+Christoph Tilly,OSU,Personal Fouls,2.0
+Christoph Tilly,OSU,Fantasy Score,32.0
+Christoph Tilly,OSU,Pts+Rebs+Asts,19.0
+Christoph Tilly,OSU,PRA,19.0
+Christoph Tilly,OSU,Pts+Rebs,18.0
+Christoph Tilly,OSU,Pts+Asts,11.0
+Christoph Tilly,OSU,Rebs+Asts,9.0
+Christoph Tilly,OSU,Blks+Stls,3.0
+Bruce Thornton,OSU,Points,32.0
+Bruce Thornton,OSU,Rebounds,4.0
+Bruce Thornton,OSU,Assists,2.0
+Bruce Thornton,OSU,Blocked Shots,0.0
+Bruce Thornton,OSU,Steals,2.0
+Bruce Thornton,OSU,Turnovers,0.0
+Bruce Thornton,OSU,FG Made,12.0
+Bruce Thornton,OSU,FG Attempted,22.0
+Bruce Thornton,OSU,3-PT Made,2.0
+Bruce Thornton,OSU,3-PT Attempted,8.0
+Bruce Thornton,OSU,Two Pointers Made,10.0
+Bruce Thornton,OSU,Two Pointers Attempted,14.0
+Bruce Thornton,OSU,Free Throws Made,6.0
+Bruce Thornton,OSU,Free Throws Attempted,8.0
+Bruce Thornton,OSU,Offensive Rebounds,1.0
+Bruce Thornton,OSU,Defensive Rebounds,3.0
+Bruce Thornton,OSU,Personal Fouls,0.0
+Bruce Thornton,OSU,Fantasy Score,49.5
+Bruce Thornton,OSU,Pts+Rebs+Asts,38.0
+Bruce Thornton,OSU,PRA,38.0
+Bruce Thornton,OSU,Pts+Rebs,36.0
+Bruce Thornton,OSU,Pts+Asts,34.0
+Bruce Thornton,OSU,Rebs+Asts,6.0
+Bruce Thornton,OSU,Blks+Stls,2.0
+Puff Johnson,OSU,Points,2.0
+Puff Johnson,OSU,Rebounds,0.0
+Puff Johnson,OSU,Assists,0.0
+Puff Johnson,OSU,Blocked Shots,0.0
+Puff Johnson,OSU,Steals,0.0
+Puff Johnson,OSU,Turnovers,1.0
+Puff Johnson,OSU,FG Made,0.0
+Puff Johnson,OSU,FG Attempted,4.0
+Puff Johnson,OSU,3-PT Made,0.0
+Puff Johnson,OSU,3-PT Attempted,3.0
+Puff Johnson,OSU,Two Pointers Made,0.0
+Puff Johnson,OSU,Two Pointers Attempted,1.0
+Puff Johnson,OSU,Free Throws Made,2.0
+Puff Johnson,OSU,Free Throws Attempted,2.0
+Puff Johnson,OSU,Offensive Rebounds,0.0
+Puff Johnson,OSU,Defensive Rebounds,0.0
+Puff Johnson,OSU,Personal Fouls,4.0
+Puff Johnson,OSU,Fantasy Score,1.5
+Puff Johnson,OSU,Pts+Rebs+Asts,2.0
+Puff Johnson,OSU,PRA,2.0
+Puff Johnson,OSU,Pts+Rebs,2.0
+Puff Johnson,OSU,Pts+Asts,2.0
+Puff Johnson,OSU,Rebs+Asts,0.0
+Puff Johnson,OSU,Blks+Stls,0.0
+Taison Chatman,OSU,Points,5.0
+Taison Chatman,OSU,Rebounds,3.0
+Taison Chatman,OSU,Assists,3.0
+Taison Chatman,OSU,Blocked Shots,1.0
+Taison Chatman,OSU,Steals,0.0
+Taison Chatman,OSU,Turnovers,1.0
+Taison Chatman,OSU,FG Made,2.0
+Taison Chatman,OSU,FG Attempted,8.0
+Taison Chatman,OSU,3-PT Made,1.0
+Taison Chatman,OSU,3-PT Attempted,5.0
+Taison Chatman,OSU,Two Pointers Made,1.0
+Taison Chatman,OSU,Two Pointers Attempted,3.0
+Taison Chatman,OSU,Free Throws Made,0.0
+Taison Chatman,OSU,Free Throws Attempted,0.0
+Taison Chatman,OSU,Offensive Rebounds,0.0
+Taison Chatman,OSU,Defensive Rebounds,3.0
+Taison Chatman,OSU,Personal Fouls,4.0
+Taison Chatman,OSU,Fantasy Score,15.2
+Taison Chatman,OSU,Pts+Rebs+Asts,11.0
+Taison Chatman,OSU,PRA,11.0
+Taison Chatman,OSU,Pts+Rebs,8.0
+Taison Chatman,OSU,Pts+Asts,8.0
+Taison Chatman,OSU,Rebs+Asts,6.0
+Taison Chatman,OSU,Blks+Stls,1.0
+Colin White,OSU,Points,3.0
+Colin White,OSU,Rebounds,4.0
+Colin White,OSU,Assists,1.0
+Colin White,OSU,Blocked Shots,0.0
+Colin White,OSU,Steals,1.0
+Colin White,OSU,Turnovers,0.0
+Colin White,OSU,FG Made,1.0
+Colin White,OSU,FG Attempted,2.0
+Colin White,OSU,3-PT Made,1.0
+Colin White,OSU,3-PT Attempted,2.0
+Colin White,OSU,Two Pointers Made,0.0
+Colin White,OSU,Two Pointers Attempted,0.0
+Colin White,OSU,Free Throws Made,0.0
+Colin White,OSU,Free Throws Attempted,2.0
+Colin White,OSU,Offensive Rebounds,1.0
+Colin White,OSU,Defensive Rebounds,3.0
+Colin White,OSU,Personal Fouls,4.0
+Colin White,OSU,Fantasy Score,12.0
+Colin White,OSU,Pts+Rebs+Asts,8.0
+Colin White,OSU,PRA,8.0
+Colin White,OSU,Pts+Rebs,7.0
+Colin White,OSU,Pts+Asts,4.0
+Colin White,OSU,Rebs+Asts,5.0
+Colin White,OSU,Blks+Stls,1.0
+Ivan Njegovan,OSU,Points,6.0
+Ivan Njegovan,OSU,Rebounds,3.0
+Ivan Njegovan,OSU,Assists,0.0
+Ivan Njegovan,OSU,Blocked Shots,0.0
+Ivan Njegovan,OSU,Steals,0.0
+Ivan Njegovan,OSU,Turnovers,0.0
+Ivan Njegovan,OSU,FG Made,2.0
+Ivan Njegovan,OSU,FG Attempted,2.0
+Ivan Njegovan,OSU,3-PT Made,0.0
+Ivan Njegovan,OSU,3-PT Attempted,0.0
+Ivan Njegovan,OSU,Two Pointers Made,2.0
+Ivan Njegovan,OSU,Two Pointers Attempted,2.0
+Ivan Njegovan,OSU,Free Throws Made,2.0
+Ivan Njegovan,OSU,Free Throws Attempted,2.0
+Ivan Njegovan,OSU,Offensive Rebounds,1.0
+Ivan Njegovan,OSU,Defensive Rebounds,2.0
+Ivan Njegovan,OSU,Personal Fouls,2.0
+Ivan Njegovan,OSU,Fantasy Score,9.8
+Ivan Njegovan,OSU,Pts+Rebs+Asts,9.0
+Ivan Njegovan,OSU,PRA,9.0
+Ivan Njegovan,OSU,Pts+Rebs,9.0
+Ivan Njegovan,OSU,Pts+Asts,6.0
+Ivan Njegovan,OSU,Rebs+Asts,3.0
+Ivan Njegovan,OSU,Blks+Stls,0.0
+Gabe Cupps,OSU,Points,2.0
+Gabe Cupps,OSU,Rebounds,0.0
+Gabe Cupps,OSU,Assists,1.0
+Gabe Cupps,OSU,Blocked Shots,0.0
+Gabe Cupps,OSU,Steals,0.0
+Gabe Cupps,OSU,Turnovers,2.0
+Gabe Cupps,OSU,FG Made,1.0
+Gabe Cupps,OSU,FG Attempted,3.0
+Gabe Cupps,OSU,3-PT Made,0.0
+Gabe Cupps,OSU,3-PT Attempted,2.0
+Gabe Cupps,OSU,Two Pointers Made,1.0
+Gabe Cupps,OSU,Two Pointers Attempted,1.0
+Gabe Cupps,OSU,Free Throws Made,0.0
+Gabe Cupps,OSU,Free Throws Attempted,0.0
+Gabe Cupps,OSU,Offensive Rebounds,0.0
+Gabe Cupps,OSU,Defensive Rebounds,0.0
+Gabe Cupps,OSU,Personal Fouls,1.0
+Gabe Cupps,OSU,Fantasy Score,2.5
+Gabe Cupps,OSU,Pts+Rebs+Asts,3.0
+Gabe Cupps,OSU,PRA,3.0
+Gabe Cupps,OSU,Pts+Rebs,2.0
+Gabe Cupps,OSU,Pts+Asts,3.0
+Gabe Cupps,OSU,Rebs+Asts,1.0
+Gabe Cupps,OSU,Blks+Stls,0.0
+Jordan Scott,MSU,Points,12.0
+Jordan Scott,MSU,Rebounds,4.0
+Jordan Scott,MSU,Assists,3.0
+Jordan Scott,MSU,Blocked Shots,1.0
+Jordan Scott,MSU,Steals,0.0
+Jordan Scott,MSU,Turnovers,1.0
+Jordan Scott,MSU,FG Made,4.0
+Jordan Scott,MSU,FG Attempted,7.0
+Jordan Scott,MSU,3-PT Made,1.0
+Jordan Scott,MSU,3-PT Attempted,2.0
+Jordan Scott,MSU,Two Pointers Made,3.0
+Jordan Scott,MSU,Two Pointers Attempted,5.0
+Jordan Scott,MSU,Free Throws Made,3.0
+Jordan Scott,MSU,Free Throws Attempted,5.0
+Jordan Scott,MSU,Offensive Rebounds,2.0
+Jordan Scott,MSU,Defensive Rebounds,2.0
+Jordan Scott,MSU,Personal Fouls,3.0
+Jordan Scott,MSU,Fantasy Score,28.0
+Jordan Scott,MSU,Pts+Rebs+Asts,19.0
+Jordan Scott,MSU,PRA,19.0
+Jordan Scott,MSU,Pts+Rebs,16.0
+Jordan Scott,MSU,Pts+Asts,15.0
+Jordan Scott,MSU,Rebs+Asts,7.0
+Jordan Scott,MSU,Blks+Stls,1.0
+Jaxon Kohler,MSU,Points,9.0
+Jaxon Kohler,MSU,Rebounds,10.0
+Jaxon Kohler,MSU,Assists,0.0
+Jaxon Kohler,MSU,Blocked Shots,0.0
+Jaxon Kohler,MSU,Steals,0.0
+Jaxon Kohler,MSU,Turnovers,1.0
+Jaxon Kohler,MSU,FG Made,4.0
+Jaxon Kohler,MSU,FG Attempted,8.0
+Jaxon Kohler,MSU,3-PT Made,1.0
+Jaxon Kohler,MSU,3-PT Attempted,4.0
+Jaxon Kohler,MSU,Two Pointers Made,3.0
+Jaxon Kohler,MSU,Two Pointers Attempted,4.0
+Jaxon Kohler,MSU,Free Throws Made,0.0
+Jaxon Kohler,MSU,Free Throws Attempted,0.0
+Jaxon Kohler,MSU,Offensive Rebounds,2.0
+Jaxon Kohler,MSU,Defensive Rebounds,8.0
+Jaxon Kohler,MSU,Personal Fouls,5.0
+Jaxon Kohler,MSU,Fantasy Score,27.5
+Jaxon Kohler,MSU,Pts+Rebs+Asts,19.0
+Jaxon Kohler,MSU,PRA,19.0
+Jaxon Kohler,MSU,Pts+Rebs,19.0
+Jaxon Kohler,MSU,Pts+Asts,9.0
+Jaxon Kohler,MSU,Rebs+Asts,10.0
+Jaxon Kohler,MSU,Blks+Stls,0.0
+Coen Carr,MSU,Points,5.0
+Coen Carr,MSU,Rebounds,8.0
+Coen Carr,MSU,Assists,1.0
+Coen Carr,MSU,Blocked Shots,0.0
+Coen Carr,MSU,Steals,0.0
+Coen Carr,MSU,Turnovers,1.0
+Coen Carr,MSU,FG Made,2.0
+Coen Carr,MSU,FG Attempted,7.0
+Coen Carr,MSU,3-PT Made,0.0
+Coen Carr,MSU,3-PT Attempted,1.0
+Coen Carr,MSU,Two Pointers Made,2.0
+Coen Carr,MSU,Two Pointers Attempted,6.0
+Coen Carr,MSU,Free Throws Made,1.0
+Coen Carr,MSU,Free Throws Attempted,4.0
+Coen Carr,MSU,Offensive Rebounds,2.0
+Coen Carr,MSU,Defensive Rebounds,6.0
+Coen Carr,MSU,Personal Fouls,2.0
+Coen Carr,MSU,Fantasy Score,16.0
+Coen Carr,MSU,Pts+Rebs+Asts,14.0
+Coen Carr,MSU,PRA,14.0
+Coen Carr,MSU,Pts+Rebs,13.0
+Coen Carr,MSU,Pts+Asts,6.0
+Coen Carr,MSU,Rebs+Asts,9.0
+Coen Carr,MSU,Blks+Stls,0.0
+Carson Cooper,MSU,Points,20.0
+Carson Cooper,MSU,Rebounds,11.0
+Carson Cooper,MSU,Assists,3.0
+Carson Cooper,MSU,Blocked Shots,0.0
+Carson Cooper,MSU,Steals,0.0
+Carson Cooper,MSU,Turnovers,1.0
+Carson Cooper,MSU,FG Made,7.0
+Carson Cooper,MSU,FG Attempted,10.0
+Carson Cooper,MSU,3-PT Made,0.0
+Carson Cooper,MSU,3-PT Attempted,0.0
+Carson Cooper,MSU,Two Pointers Made,7.0
+Carson Cooper,MSU,Two Pointers Attempted,10.0
+Carson Cooper,MSU,Free Throws Made,6.0
+Carson Cooper,MSU,Free Throws Attempted,6.0
+Carson Cooper,MSU,Offensive Rebounds,3.0
+Carson Cooper,MSU,Defensive Rebounds,8.0
+Carson Cooper,MSU,Personal Fouls,1.0
+Carson Cooper,MSU,Fantasy Score,48.2
+Carson Cooper,MSU,Pts+Rebs+Asts,34.0
+Carson Cooper,MSU,PRA,34.0
+Carson Cooper,MSU,Pts+Rebs,31.0
+Carson Cooper,MSU,Pts+Asts,23.0
+Carson Cooper,MSU,Rebs+Asts,14.0
+Carson Cooper,MSU,Blks+Stls,0.0
+Jeremy Fears Jr.,MSU,Points,11.0
+Jeremy Fears Jr.,MSU,Rebounds,1.0
+Jeremy Fears Jr.,MSU,Assists,8.0
+Jeremy Fears Jr.,MSU,Blocked Shots,0.0
+Jeremy Fears Jr.,MSU,Steals,2.0
+Jeremy Fears Jr.,MSU,Turnovers,4.0
+Jeremy Fears Jr.,MSU,FG Made,2.0
+Jeremy Fears Jr.,MSU,FG Attempted,7.0
+Jeremy Fears Jr.,MSU,3-PT Made,1.0
+Jeremy Fears Jr.,MSU,3-PT Attempted,1.0
+Jeremy Fears Jr.,MSU,Two Pointers Made,1.0
+Jeremy Fears Jr.,MSU,Two Pointers Attempted,6.0
+Jeremy Fears Jr.,MSU,Free Throws Made,6.0
+Jeremy Fears Jr.,MSU,Free Throws Attempted,6.0
+Jeremy Fears Jr.,MSU,Offensive Rebounds,0.0
+Jeremy Fears Jr.,MSU,Defensive Rebounds,1.0
+Jeremy Fears Jr.,MSU,Personal Fouls,3.0
+Jeremy Fears Jr.,MSU,Fantasy Score,31.2
+Jeremy Fears Jr.,MSU,Pts+Rebs+Asts,20.0
+Jeremy Fears Jr.,MSU,PRA,20.0
+Jeremy Fears Jr.,MSU,Pts+Rebs,12.0
+Jeremy Fears Jr.,MSU,Pts+Asts,19.0
+Jeremy Fears Jr.,MSU,Rebs+Asts,9.0
+Jeremy Fears Jr.,MSU,Blks+Stls,2.0
+Jesse McCulloch,MSU,Points,0.0
+Jesse McCulloch,MSU,Rebounds,0.0
+Jesse McCulloch,MSU,Assists,0.0
+Jesse McCulloch,MSU,Blocked Shots,0.0
+Jesse McCulloch,MSU,Steals,0.0
+Jesse McCulloch,MSU,Turnovers,0.0
+Jesse McCulloch,MSU,FG Made,0.0
+Jesse McCulloch,MSU,FG Attempted,1.0
+Jesse McCulloch,MSU,3-PT Made,0.0
+Jesse McCulloch,MSU,3-PT Attempted,0.0
+Jesse McCulloch,MSU,Two Pointers Made,0.0
+Jesse McCulloch,MSU,Two Pointers Attempted,1.0
+Jesse McCulloch,MSU,Free Throws Made,0.0
+Jesse McCulloch,MSU,Free Throws Attempted,0.0
+Jesse McCulloch,MSU,Offensive Rebounds,0.0
+Jesse McCulloch,MSU,Defensive Rebounds,0.0
+Jesse McCulloch,MSU,Personal Fouls,2.0
+Jesse McCulloch,MSU,Fantasy Score,0.0
+Jesse McCulloch,MSU,Pts+Rebs+Asts,0.0
+Jesse McCulloch,MSU,PRA,0.0
+Jesse McCulloch,MSU,Pts+Rebs,0.0
+Jesse McCulloch,MSU,Pts+Asts,0.0
+Jesse McCulloch,MSU,Rebs+Asts,0.0
+Jesse McCulloch,MSU,Blks+Stls,0.0
+Cam Ward,MSU,Points,4.0
+Cam Ward,MSU,Rebounds,4.0
+Cam Ward,MSU,Assists,0.0
+Cam Ward,MSU,Blocked Shots,1.0
+Cam Ward,MSU,Steals,0.0
+Cam Ward,MSU,Turnovers,0.0
+Cam Ward,MSU,FG Made,1.0
+Cam Ward,MSU,FG Attempted,3.0
+Cam Ward,MSU,3-PT Made,0.0
+Cam Ward,MSU,3-PT Attempted,0.0
+Cam Ward,MSU,Two Pointers Made,1.0
+Cam Ward,MSU,Two Pointers Attempted,3.0
+Cam Ward,MSU,Free Throws Made,2.0
+Cam Ward,MSU,Free Throws Attempted,4.0
+Cam Ward,MSU,Offensive Rebounds,2.0
+Cam Ward,MSU,Defensive Rebounds,2.0
+Cam Ward,MSU,Personal Fouls,0.0
+Cam Ward,MSU,Fantasy Score,11.0
+Cam Ward,MSU,Pts+Rebs+Asts,8.0
+Cam Ward,MSU,PRA,8.0
+Cam Ward,MSU,Pts+Rebs,8.0
+Cam Ward,MSU,Pts+Asts,4.0
+Cam Ward,MSU,Rebs+Asts,4.0
+Cam Ward,MSU,Blks+Stls,1.0
+Kur Teng,MSU,Points,5.0
+Kur Teng,MSU,Rebounds,1.0
+Kur Teng,MSU,Assists,1.0
+Kur Teng,MSU,Blocked Shots,0.0
+Kur Teng,MSU,Steals,0.0
+Kur Teng,MSU,Turnovers,1.0
+Kur Teng,MSU,FG Made,2.0
+Kur Teng,MSU,FG Attempted,9.0
+Kur Teng,MSU,3-PT Made,1.0
+Kur Teng,MSU,3-PT Attempted,5.0
+Kur Teng,MSU,Two Pointers Made,1.0
+Kur Teng,MSU,Two Pointers Attempted,4.0
+Kur Teng,MSU,Free Throws Made,0.0
+Kur Teng,MSU,Free Throws Attempted,0.0
+Kur Teng,MSU,Offensive Rebounds,1.0
+Kur Teng,MSU,Defensive Rebounds,0.0
+Kur Teng,MSU,Personal Fouls,1.0
+Kur Teng,MSU,Fantasy Score,7.8
+Kur Teng,MSU,Pts+Rebs+Asts,7.0
+Kur Teng,MSU,PRA,7.0
+Kur Teng,MSU,Pts+Rebs,6.0
+Kur Teng,MSU,Pts+Asts,6.0
+Kur Teng,MSU,Rebs+Asts,2.0
+Kur Teng,MSU,Blks+Stls,0.0
+Trey Fort,MSU,Points,0.0
+Trey Fort,MSU,Rebounds,0.0
+Trey Fort,MSU,Assists,0.0
+Trey Fort,MSU,Blocked Shots,0.0
+Trey Fort,MSU,Steals,0.0
+Trey Fort,MSU,Turnovers,0.0
+Trey Fort,MSU,FG Made,0.0
+Trey Fort,MSU,FG Attempted,3.0
+Trey Fort,MSU,3-PT Made,0.0
+Trey Fort,MSU,3-PT Attempted,2.0
+Trey Fort,MSU,Two Pointers Made,0.0
+Trey Fort,MSU,Two Pointers Attempted,1.0
+Trey Fort,MSU,Free Throws Made,0.0
+Trey Fort,MSU,Free Throws Attempted,0.0
+Trey Fort,MSU,Offensive Rebounds,0.0
+Trey Fort,MSU,Defensive Rebounds,0.0
+Trey Fort,MSU,Personal Fouls,0.0
+Trey Fort,MSU,Fantasy Score,0.0
+Trey Fort,MSU,Pts+Rebs+Asts,0.0
+Trey Fort,MSU,PRA,0.0
+Trey Fort,MSU,Pts+Rebs,0.0
+Trey Fort,MSU,Pts+Asts,0.0
+Trey Fort,MSU,Rebs+Asts,0.0
+Trey Fort,MSU,Blks+Stls,0.0
+Denham Wojcik,MSU,Points,0.0
+Denham Wojcik,MSU,Rebounds,1.0
+Denham Wojcik,MSU,Assists,2.0
+Denham Wojcik,MSU,Blocked Shots,0.0
+Denham Wojcik,MSU,Steals,0.0
+Denham Wojcik,MSU,Turnovers,0.0
+Denham Wojcik,MSU,FG Made,0.0
+Denham Wojcik,MSU,FG Attempted,0.0
+Denham Wojcik,MSU,3-PT Made,0.0
+Denham Wojcik,MSU,3-PT Attempted,0.0
+Denham Wojcik,MSU,Two Pointers Made,0.0
+Denham Wojcik,MSU,Two Pointers Attempted,0.0
+Denham Wojcik,MSU,Free Throws Made,0.0
+Denham Wojcik,MSU,Free Throws Attempted,0.0
+Denham Wojcik,MSU,Offensive Rebounds,0.0
+Denham Wojcik,MSU,Defensive Rebounds,1.0
+Denham Wojcik,MSU,Personal Fouls,0.0
+Denham Wojcik,MSU,Fantasy Score,4.2
+Denham Wojcik,MSU,Pts+Rebs+Asts,3.0
+Denham Wojcik,MSU,PRA,3.0
+Denham Wojcik,MSU,Pts+Rebs,1.0
+Denham Wojcik,MSU,Pts+Asts,2.0
+Denham Wojcik,MSU,Rebs+Asts,3.0
+Denham Wojcik,MSU,Blks+Stls,0.0
+Cam Manyawu,IOWA,Points,4.0
+Cam Manyawu,IOWA,Rebounds,7.0
+Cam Manyawu,IOWA,Assists,0.0
+Cam Manyawu,IOWA,Blocked Shots,0.0
+Cam Manyawu,IOWA,Steals,0.0
+Cam Manyawu,IOWA,Turnovers,0.0
+Cam Manyawu,IOWA,FG Made,2.0
+Cam Manyawu,IOWA,FG Attempted,5.0
+Cam Manyawu,IOWA,3-PT Made,0.0
+Cam Manyawu,IOWA,3-PT Attempted,0.0
+Cam Manyawu,IOWA,Two Pointers Made,2.0
+Cam Manyawu,IOWA,Two Pointers Attempted,5.0
+Cam Manyawu,IOWA,Free Throws Made,0.0
+Cam Manyawu,IOWA,Free Throws Attempted,0.0
+Cam Manyawu,IOWA,Offensive Rebounds,4.0
+Cam Manyawu,IOWA,Defensive Rebounds,3.0
+Cam Manyawu,IOWA,Personal Fouls,2.0
+Cam Manyawu,IOWA,Fantasy Score,12.8
+Cam Manyawu,IOWA,Pts+Rebs+Asts,11.0
+Cam Manyawu,IOWA,PRA,11.0
+Cam Manyawu,IOWA,Pts+Rebs,11.0
+Cam Manyawu,IOWA,Pts+Asts,4.0
+Cam Manyawu,IOWA,Rebs+Asts,7.0
+Cam Manyawu,IOWA,Blks+Stls,0.0
+Cooper Koch,IOWA,Points,6.0
+Cooper Koch,IOWA,Rebounds,0.0
+Cooper Koch,IOWA,Assists,3.0
+Cooper Koch,IOWA,Blocked Shots,0.0
+Cooper Koch,IOWA,Steals,0.0
+Cooper Koch,IOWA,Turnovers,1.0
+Cooper Koch,IOWA,FG Made,2.0
+Cooper Koch,IOWA,FG Attempted,11.0
+Cooper Koch,IOWA,3-PT Made,2.0
+Cooper Koch,IOWA,3-PT Attempted,10.0
+Cooper Koch,IOWA,Two Pointers Made,0.0
+Cooper Koch,IOWA,Two Pointers Attempted,1.0
+Cooper Koch,IOWA,Free Throws Made,0.0
+Cooper Koch,IOWA,Free Throws Attempted,0.0
+Cooper Koch,IOWA,Offensive Rebounds,0.0
+Cooper Koch,IOWA,Defensive Rebounds,0.0
+Cooper Koch,IOWA,Personal Fouls,1.0
+Cooper Koch,IOWA,Fantasy Score,11.0
+Cooper Koch,IOWA,Pts+Rebs+Asts,9.0
+Cooper Koch,IOWA,PRA,9.0
+Cooper Koch,IOWA,Pts+Rebs,6.0
+Cooper Koch,IOWA,Pts+Asts,9.0
+Cooper Koch,IOWA,Rebs+Asts,3.0
+Cooper Koch,IOWA,Blks+Stls,0.0
+Bennett Stirtz,IOWA,Points,23.0
+Bennett Stirtz,IOWA,Rebounds,1.0
+Bennett Stirtz,IOWA,Assists,2.0
+Bennett Stirtz,IOWA,Blocked Shots,0.0
+Bennett Stirtz,IOWA,Steals,1.0
+Bennett Stirtz,IOWA,Turnovers,3.0
+Bennett Stirtz,IOWA,FG Made,9.0
+Bennett Stirtz,IOWA,FG Attempted,16.0
+Bennett Stirtz,IOWA,3-PT Made,3.0
+Bennett Stirtz,IOWA,3-PT Attempted,8.0
+Bennett Stirtz,IOWA,Two Pointers Made,6.0
+Bennett Stirtz,IOWA,Two Pointers Attempted,8.0
+Bennett Stirtz,IOWA,Free Throws Made,2.0
+Bennett Stirtz,IOWA,Free Throws Attempted,3.0
+Bennett Stirtz,IOWA,Offensive Rebounds,0.0
+Bennett Stirtz,IOWA,Defensive Rebounds,1.0
+Bennett Stirtz,IOWA,Personal Fouls,1.0
+Bennett Stirtz,IOWA,Fantasy Score,33.8
+Bennett Stirtz,IOWA,Pts+Rebs+Asts,26.0
+Bennett Stirtz,IOWA,PRA,26.0
+Bennett Stirtz,IOWA,Pts+Rebs,24.0
+Bennett Stirtz,IOWA,Pts+Asts,25.0
+Bennett Stirtz,IOWA,Rebs+Asts,3.0
+Bennett Stirtz,IOWA,Blks+Stls,1.0
+Tavion Banks,IOWA,Points,10.0
+Tavion Banks,IOWA,Rebounds,1.0
+Tavion Banks,IOWA,Assists,1.0
+Tavion Banks,IOWA,Blocked Shots,0.0
+Tavion Banks,IOWA,Steals,0.0
+Tavion Banks,IOWA,Turnovers,1.0
+Tavion Banks,IOWA,FG Made,5.0
+Tavion Banks,IOWA,FG Attempted,6.0
+Tavion Banks,IOWA,3-PT Made,0.0
+Tavion Banks,IOWA,3-PT Attempted,0.0
+Tavion Banks,IOWA,Two Pointers Made,5.0
+Tavion Banks,IOWA,Two Pointers Attempted,6.0
+Tavion Banks,IOWA,Free Throws Made,0.0
+Tavion Banks,IOWA,Free Throws Attempted,0.0
+Tavion Banks,IOWA,Offensive Rebounds,0.0
+Tavion Banks,IOWA,Defensive Rebounds,1.0
+Tavion Banks,IOWA,Personal Fouls,4.0
+Tavion Banks,IOWA,Fantasy Score,16.8
+Tavion Banks,IOWA,Pts+Rebs+Asts,12.0
+Tavion Banks,IOWA,PRA,12.0
+Tavion Banks,IOWA,Pts+Rebs,11.0
+Tavion Banks,IOWA,Pts+Asts,11.0
+Tavion Banks,IOWA,Rebs+Asts,2.0
+Tavion Banks,IOWA,Blks+Stls,0.0
+Kael Combs,IOWA,Points,4.0
+Kael Combs,IOWA,Rebounds,4.0
+Kael Combs,IOWA,Assists,3.0
+Kael Combs,IOWA,Blocked Shots,0.0
+Kael Combs,IOWA,Steals,2.0
+Kael Combs,IOWA,Turnovers,0.0
+Kael Combs,IOWA,FG Made,2.0
+Kael Combs,IOWA,FG Attempted,5.0
+Kael Combs,IOWA,3-PT Made,0.0
+Kael Combs,IOWA,3-PT Attempted,1.0
+Kael Combs,IOWA,Two Pointers Made,2.0
+Kael Combs,IOWA,Two Pointers Attempted,4.0
+Kael Combs,IOWA,Free Throws Made,0.0
+Kael Combs,IOWA,Free Throws Attempted,0.0
+Kael Combs,IOWA,Offensive Rebounds,1.0
+Kael Combs,IOWA,Defensive Rebounds,3.0
+Kael Combs,IOWA,Personal Fouls,0.0
+Kael Combs,IOWA,Fantasy Score,17.5
+Kael Combs,IOWA,Pts+Rebs+Asts,11.0
+Kael Combs,IOWA,PRA,11.0
+Kael Combs,IOWA,Pts+Rebs,8.0
+Kael Combs,IOWA,Pts+Asts,7.0
+Kael Combs,IOWA,Rebs+Asts,7.0
+Kael Combs,IOWA,Blks+Stls,2.0
+Alvaro Folgueiras,IOWA,Points,11.0
+Alvaro Folgueiras,IOWA,Rebounds,6.0
+Alvaro Folgueiras,IOWA,Assists,4.0
+Alvaro Folgueiras,IOWA,Blocked Shots,0.0
+Alvaro Folgueiras,IOWA,Steals,1.0
+Alvaro Folgueiras,IOWA,Turnovers,1.0
+Alvaro Folgueiras,IOWA,FG Made,4.0
+Alvaro Folgueiras,IOWA,FG Attempted,7.0
+Alvaro Folgueiras,IOWA,3-PT Made,1.0
+Alvaro Folgueiras,IOWA,3-PT Attempted,4.0
+Alvaro Folgueiras,IOWA,Two Pointers Made,3.0
+Alvaro Folgueiras,IOWA,Two Pointers Attempted,3.0
+Alvaro Folgueiras,IOWA,Free Throws Made,2.0
+Alvaro Folgueiras,IOWA,Free Throws Attempted,2.0
+Alvaro Folgueiras,IOWA,Offensive Rebounds,1.0
+Alvaro Folgueiras,IOWA,Defensive Rebounds,5.0
+Alvaro Folgueiras,IOWA,Personal Fouls,3.0
+Alvaro Folgueiras,IOWA,Fantasy Score,31.0
+Alvaro Folgueiras,IOWA,Pts+Rebs+Asts,21.0
+Alvaro Folgueiras,IOWA,PRA,21.0
+Alvaro Folgueiras,IOWA,Pts+Rebs,17.0
+Alvaro Folgueiras,IOWA,Pts+Asts,15.0
+Alvaro Folgueiras,IOWA,Rebs+Asts,10.0
+Alvaro Folgueiras,IOWA,Blks+Stls,1.0
+Tate Sage,IOWA,Points,11.0
+Tate Sage,IOWA,Rebounds,7.0
+Tate Sage,IOWA,Assists,0.0
+Tate Sage,IOWA,Blocked Shots,1.0
+Tate Sage,IOWA,Steals,0.0
+Tate Sage,IOWA,Turnovers,2.0
+Tate Sage,IOWA,FG Made,3.0
+Tate Sage,IOWA,FG Attempted,7.0
+Tate Sage,IOWA,3-PT Made,1.0
+Tate Sage,IOWA,3-PT Attempted,3.0
+Tate Sage,IOWA,Two Pointers Made,2.0
+Tate Sage,IOWA,Two Pointers Attempted,4.0
+Tate Sage,IOWA,Free Throws Made,4.0
+Tate Sage,IOWA,Free Throws Attempted,6.0
+Tate Sage,IOWA,Offensive Rebounds,3.0
+Tate Sage,IOWA,Defensive Rebounds,4.0
+Tate Sage,IOWA,Personal Fouls,2.0
+Tate Sage,IOWA,Fantasy Score,25.8
+Tate Sage,IOWA,Pts+Rebs+Asts,18.0
+Tate Sage,IOWA,PRA,18.0
+Tate Sage,IOWA,Pts+Rebs,18.0
+Tate Sage,IOWA,Pts+Asts,11.0
+Tate Sage,IOWA,Rebs+Asts,7.0
+Tate Sage,IOWA,Blks+Stls,1.0
+Isaia Howard,IOWA,Points,2.0
+Isaia Howard,IOWA,Rebounds,1.0
+Isaia Howard,IOWA,Assists,0.0
+Isaia Howard,IOWA,Blocked Shots,1.0
+Isaia Howard,IOWA,Steals,0.0
+Isaia Howard,IOWA,Turnovers,1.0
+Isaia Howard,IOWA,FG Made,1.0
+Isaia Howard,IOWA,FG Attempted,2.0
+Isaia Howard,IOWA,3-PT Made,0.0
+Isaia Howard,IOWA,3-PT Attempted,0.0
+Isaia Howard,IOWA,Two Pointers Made,1.0
+Isaia Howard,IOWA,Two Pointers Attempted,2.0
+Isaia Howard,IOWA,Free Throws Made,0.0
+Isaia Howard,IOWA,Free Throws Attempted,0.0
+Isaia Howard,IOWA,Offensive Rebounds,0.0
+Isaia Howard,IOWA,Defensive Rebounds,1.0
+Isaia Howard,IOWA,Personal Fouls,3.0
+Isaia Howard,IOWA,Fantasy Score,4.8
+Isaia Howard,IOWA,Pts+Rebs+Asts,3.0
+Isaia Howard,IOWA,PRA,3.0
+Isaia Howard,IOWA,Pts+Rebs,3.0
+Isaia Howard,IOWA,Pts+Asts,2.0
+Isaia Howard,IOWA,Rebs+Asts,1.0
+Isaia Howard,IOWA,Blks+Stls,1.0
+Aleksas Bieliauskas,WIS,Points,4.0
+Aleksas Bieliauskas,WIS,Rebounds,2.0
+Aleksas Bieliauskas,WIS,Assists,0.0
+Aleksas Bieliauskas,WIS,Blocked Shots,0.0
+Aleksas Bieliauskas,WIS,Steals,0.0
+Aleksas Bieliauskas,WIS,Turnovers,0.0
+Aleksas Bieliauskas,WIS,FG Made,1.0
+Aleksas Bieliauskas,WIS,FG Attempted,2.0
+Aleksas Bieliauskas,WIS,3-PT Made,0.0
+Aleksas Bieliauskas,WIS,3-PT Attempted,1.0
+Aleksas Bieliauskas,WIS,Two Pointers Made,1.0
+Aleksas Bieliauskas,WIS,Two Pointers Attempted,1.0
+Aleksas Bieliauskas,WIS,Free Throws Made,2.0
+Aleksas Bieliauskas,WIS,Free Throws Attempted,2.0
+Aleksas Bieliauskas,WIS,Offensive Rebounds,0.0
+Aleksas Bieliauskas,WIS,Defensive Rebounds,2.0
+Aleksas Bieliauskas,WIS,Personal Fouls,1.0
+Aleksas Bieliauskas,WIS,Fantasy Score,6.5
+Aleksas Bieliauskas,WIS,Pts+Rebs+Asts,6.0
+Aleksas Bieliauskas,WIS,PRA,6.0
+Aleksas Bieliauskas,WIS,Pts+Rebs,6.0
+Aleksas Bieliauskas,WIS,Pts+Asts,4.0
+Aleksas Bieliauskas,WIS,Rebs+Asts,2.0
+Aleksas Bieliauskas,WIS,Blks+Stls,0.0
+Nolan Winter,WIS,Points,18.0
+Nolan Winter,WIS,Rebounds,5.0
+Nolan Winter,WIS,Assists,0.0
+Nolan Winter,WIS,Blocked Shots,1.0
+Nolan Winter,WIS,Steals,0.0
+Nolan Winter,WIS,Turnovers,1.0
+Nolan Winter,WIS,FG Made,8.0
+Nolan Winter,WIS,FG Attempted,11.0
+Nolan Winter,WIS,3-PT Made,2.0
+Nolan Winter,WIS,3-PT Attempted,3.0
+Nolan Winter,WIS,Two Pointers Made,6.0
+Nolan Winter,WIS,Two Pointers Attempted,8.0
+Nolan Winter,WIS,Free Throws Made,0.0
+Nolan Winter,WIS,Free Throws Attempted,0.0
+Nolan Winter,WIS,Offensive Rebounds,1.0
+Nolan Winter,WIS,Defensive Rebounds,4.0
+Nolan Winter,WIS,Personal Fouls,0.0
+Nolan Winter,WIS,Fantasy Score,31.2
+Nolan Winter,WIS,Pts+Rebs+Asts,23.0
+Nolan Winter,WIS,PRA,23.0
+Nolan Winter,WIS,Pts+Rebs,23.0
+Nolan Winter,WIS,Pts+Asts,18.0
+Nolan Winter,WIS,Rebs+Asts,5.0
+Nolan Winter,WIS,Blks+Stls,1.0
+Andrew Rohde,WIS,Points,6.0
+Andrew Rohde,WIS,Rebounds,2.0
+Andrew Rohde,WIS,Assists,4.0
+Andrew Rohde,WIS,Blocked Shots,0.0
+Andrew Rohde,WIS,Steals,3.0
+Andrew Rohde,WIS,Turnovers,1.0
+Andrew Rohde,WIS,FG Made,2.0
+Andrew Rohde,WIS,FG Attempted,5.0
+Andrew Rohde,WIS,3-PT Made,2.0
+Andrew Rohde,WIS,3-PT Attempted,5.0
+Andrew Rohde,WIS,Two Pointers Made,0.0
+Andrew Rohde,WIS,Two Pointers Attempted,0.0
+Andrew Rohde,WIS,Free Throws Made,0.0
+Andrew Rohde,WIS,Free Throws Attempted,0.0
+Andrew Rohde,WIS,Offensive Rebounds,0.0
+Andrew Rohde,WIS,Defensive Rebounds,2.0
+Andrew Rohde,WIS,Personal Fouls,2.0
+Andrew Rohde,WIS,Fantasy Score,21.0
+Andrew Rohde,WIS,Pts+Rebs+Asts,12.0
+Andrew Rohde,WIS,PRA,12.0
+Andrew Rohde,WIS,Pts+Rebs,8.0
+Andrew Rohde,WIS,Pts+Asts,10.0
+Andrew Rohde,WIS,Rebs+Asts,6.0
+Andrew Rohde,WIS,Blks+Stls,3.0
+John Blackwell,WIS,Points,13.0
+John Blackwell,WIS,Rebounds,2.0
+John Blackwell,WIS,Assists,1.0
+John Blackwell,WIS,Blocked Shots,1.0
+John Blackwell,WIS,Steals,1.0
+John Blackwell,WIS,Turnovers,2.0
+John Blackwell,WIS,FG Made,2.0
+John Blackwell,WIS,FG Attempted,8.0
+John Blackwell,WIS,3-PT Made,1.0
+John Blackwell,WIS,3-PT Attempted,5.0
+John Blackwell,WIS,Two Pointers Made,1.0
+John Blackwell,WIS,Two Pointers Attempted,3.0
+John Blackwell,WIS,Free Throws Made,8.0
+John Blackwell,WIS,Free Throws Attempted,8.0
+John Blackwell,WIS,Offensive Rebounds,0.0
+John Blackwell,WIS,Defensive Rebounds,2.0
+John Blackwell,WIS,Personal Fouls,3.0
+John Blackwell,WIS,Fantasy Score,25.0
+John Blackwell,WIS,Pts+Rebs+Asts,16.0
+John Blackwell,WIS,PRA,16.0
+John Blackwell,WIS,Pts+Rebs,15.0
+John Blackwell,WIS,Pts+Asts,14.0
+John Blackwell,WIS,Rebs+Asts,3.0
+John Blackwell,WIS,Blks+Stls,2.0
+Nick Boyd,WIS,Points,27.0
+Nick Boyd,WIS,Rebounds,9.0
+Nick Boyd,WIS,Assists,10.0
+Nick Boyd,WIS,Blocked Shots,0.0
+Nick Boyd,WIS,Steals,1.0
+Nick Boyd,WIS,Turnovers,1.0
+Nick Boyd,WIS,FG Made,9.0
+Nick Boyd,WIS,FG Attempted,16.0
+Nick Boyd,WIS,3-PT Made,1.0
+Nick Boyd,WIS,3-PT Attempted,3.0
+Nick Boyd,WIS,Two Pointers Made,8.0
+Nick Boyd,WIS,Two Pointers Attempted,13.0
+Nick Boyd,WIS,Free Throws Made,8.0
+Nick Boyd,WIS,Free Throws Attempted,9.0
+Nick Boyd,WIS,Offensive Rebounds,3.0
+Nick Boyd,WIS,Defensive Rebounds,6.0
+Nick Boyd,WIS,Personal Fouls,1.0
+Nick Boyd,WIS,Fantasy Score,65.8
+Nick Boyd,WIS,Pts+Rebs+Asts,46.0
+Nick Boyd,WIS,PRA,46.0
+Nick Boyd,WIS,Pts+Rebs,36.0
+Nick Boyd,WIS,Pts+Asts,37.0
+Nick Boyd,WIS,Rebs+Asts,19.0
+Nick Boyd,WIS,Blks+Stls,1.0
+Austin Rapp,WIS,Points,14.0
+Austin Rapp,WIS,Rebounds,3.0
+Austin Rapp,WIS,Assists,0.0
+Austin Rapp,WIS,Blocked Shots,0.0
+Austin Rapp,WIS,Steals,0.0
+Austin Rapp,WIS,Turnovers,2.0
+Austin Rapp,WIS,FG Made,5.0
+Austin Rapp,WIS,FG Attempted,7.0
+Austin Rapp,WIS,3-PT Made,4.0
+Austin Rapp,WIS,3-PT Attempted,5.0
+Austin Rapp,WIS,Two Pointers Made,1.0
+Austin Rapp,WIS,Two Pointers Attempted,2.0
+Austin Rapp,WIS,Free Throws Made,0.0
+Austin Rapp,WIS,Free Throws Attempted,1.0
+Austin Rapp,WIS,Offensive Rebounds,0.0
+Austin Rapp,WIS,Defensive Rebounds,3.0
+Austin Rapp,WIS,Personal Fouls,3.0
+Austin Rapp,WIS,Fantasy Score,23.2
+Austin Rapp,WIS,Pts+Rebs+Asts,17.0
+Austin Rapp,WIS,PRA,17.0
+Austin Rapp,WIS,Pts+Rebs,17.0
+Austin Rapp,WIS,Pts+Asts,14.0
+Austin Rapp,WIS,Rebs+Asts,3.0
+Austin Rapp,WIS,Blks+Stls,0.0
+Jack Robison,WIS,Points,0.0
+Jack Robison,WIS,Rebounds,0.0
+Jack Robison,WIS,Assists,0.0
+Jack Robison,WIS,Blocked Shots,0.0
+Jack Robison,WIS,Steals,1.0
+Jack Robison,WIS,Turnovers,0.0
+Jack Robison,WIS,FG Made,0.0
+Jack Robison,WIS,FG Attempted,0.0
+Jack Robison,WIS,3-PT Made,0.0
+Jack Robison,WIS,3-PT Attempted,0.0
+Jack Robison,WIS,Two Pointers Made,0.0
+Jack Robison,WIS,Two Pointers Attempted,0.0
+Jack Robison,WIS,Free Throws Made,0.0
+Jack Robison,WIS,Free Throws Attempted,0.0
+Jack Robison,WIS,Offensive Rebounds,0.0
+Jack Robison,WIS,Defensive Rebounds,0.0
+Jack Robison,WIS,Personal Fouls,0.0
+Jack Robison,WIS,Fantasy Score,2.0
+Jack Robison,WIS,Pts+Rebs+Asts,0.0
+Jack Robison,WIS,PRA,0.0
+Jack Robison,WIS,Pts+Rebs,0.0
+Jack Robison,WIS,Pts+Asts,0.0
+Jack Robison,WIS,Rebs+Asts,0.0
+Jack Robison,WIS,Blks+Stls,1.0
+Hayden Jones,WIS,Points,2.0
+Hayden Jones,WIS,Rebounds,1.0
+Hayden Jones,WIS,Assists,1.0
+Hayden Jones,WIS,Blocked Shots,1.0
+Hayden Jones,WIS,Steals,0.0
+Hayden Jones,WIS,Turnovers,0.0
+Hayden Jones,WIS,FG Made,1.0
+Hayden Jones,WIS,FG Attempted,1.0
+Hayden Jones,WIS,3-PT Made,0.0
+Hayden Jones,WIS,3-PT Attempted,0.0
+Hayden Jones,WIS,Two Pointers Made,1.0
+Hayden Jones,WIS,Two Pointers Attempted,1.0
+Hayden Jones,WIS,Free Throws Made,0.0
+Hayden Jones,WIS,Free Throws Attempted,0.0
+Hayden Jones,WIS,Offensive Rebounds,0.0
+Hayden Jones,WIS,Defensive Rebounds,1.0
+Hayden Jones,WIS,Personal Fouls,2.0
+Hayden Jones,WIS,Fantasy Score,6.8
+Hayden Jones,WIS,Pts+Rebs+Asts,4.0
+Hayden Jones,WIS,PRA,4.0
+Hayden Jones,WIS,Pts+Rebs,3.0
+Hayden Jones,WIS,Pts+Asts,3.0
+Hayden Jones,WIS,Rebs+Asts,2.0
+Hayden Jones,WIS,Blks+Stls,1.0
+Zach Kinziger,WIS,Points,0.0
+Zach Kinziger,WIS,Rebounds,0.0
+Zach Kinziger,WIS,Assists,0.0
+Zach Kinziger,WIS,Blocked Shots,0.0
+Zach Kinziger,WIS,Steals,0.0
+Zach Kinziger,WIS,Turnovers,0.0
+Zach Kinziger,WIS,FG Made,0.0
+Zach Kinziger,WIS,FG Attempted,0.0
+Zach Kinziger,WIS,3-PT Made,0.0
+Zach Kinziger,WIS,3-PT Attempted,0.0
+Zach Kinziger,WIS,Two Pointers Made,0.0
+Zach Kinziger,WIS,Two Pointers Attempted,0.0
+Zach Kinziger,WIS,Free Throws Made,0.0
+Zach Kinziger,WIS,Free Throws Attempted,0.0
+Zach Kinziger,WIS,Offensive Rebounds,0.0
+Zach Kinziger,WIS,Defensive Rebounds,0.0
+Zach Kinziger,WIS,Personal Fouls,0.0
+Zach Kinziger,WIS,Fantasy Score,0.0
+Zach Kinziger,WIS,Pts+Rebs+Asts,0.0
+Zach Kinziger,WIS,PRA,0.0
+Zach Kinziger,WIS,Pts+Rebs,0.0
+Zach Kinziger,WIS,Pts+Asts,0.0
+Zach Kinziger,WIS,Rebs+Asts,0.0
+Zach Kinziger,WIS,Blks+Stls,0.0
+Braeden Carrington,WIS,Points,0.0
+Braeden Carrington,WIS,Rebounds,2.0
+Braeden Carrington,WIS,Assists,1.0
+Braeden Carrington,WIS,Blocked Shots,0.0
+Braeden Carrington,WIS,Steals,0.0
+Braeden Carrington,WIS,Turnovers,1.0
+Braeden Carrington,WIS,FG Made,0.0
+Braeden Carrington,WIS,FG Attempted,2.0
+Braeden Carrington,WIS,3-PT Made,0.0
+Braeden Carrington,WIS,3-PT Attempted,2.0
+Braeden Carrington,WIS,Two Pointers Made,0.0
+Braeden Carrington,WIS,Two Pointers Attempted,0.0
+Braeden Carrington,WIS,Free Throws Made,0.0
+Braeden Carrington,WIS,Free Throws Attempted,0.0
+Braeden Carrington,WIS,Offensive Rebounds,0.0
+Braeden Carrington,WIS,Defensive Rebounds,2.0
+Braeden Carrington,WIS,Personal Fouls,0.0
+Braeden Carrington,WIS,Fantasy Score,3.5
+Braeden Carrington,WIS,Pts+Rebs+Asts,3.0
+Braeden Carrington,WIS,PRA,3.0
+Braeden Carrington,WIS,Pts+Rebs,2.0
+Braeden Carrington,WIS,Pts+Asts,1.0
+Braeden Carrington,WIS,Rebs+Asts,3.0
+Braeden Carrington,WIS,Blks+Stls,0.0

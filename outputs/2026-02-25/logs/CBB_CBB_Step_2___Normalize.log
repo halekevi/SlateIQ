@@ -1,0 +1,5 @@
+﻿→ Loaded: step1_cbb.csv | rows=4031
+✅ Saved → step2_cbb.csv | rows=4031
+  prop_norm values: {'pts': 852, 'reb': 693, 'pra': 606, 'ast': 425, '3pm': 385, 'stl': 311, 'pr': 190, 'pa': 136, 'tov': 134, 'ra': 127, 'blk': 94, 'fantasy': 56, 'stocks': 22}
+  pick_type values: {'Demon': 2034, 'Goblin': 1041, 'Standard': 956}
+  opp_team_abbr blank: 121/4031

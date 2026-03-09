@@ -1,0 +1,454 @@
+proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_team,pp_opp_team,pos,prop_type,prop_norm,pick_type,line,start_time,pp_game_id,league_id,team,stat_type,odds_type,opp_def_rank,opp_def_ppg,opp_def_tier,OVERALL_DEF_RANK
+10050119,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Fantasy Score,fantasy,Standard,29.0,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Fantasy Score,standard,,,,
+10048659,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Pts+Rebs+Asts,pra,Demon,25.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Rebs+Asts,demon,,,,
+10050120,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Fantasy Score,fantasy,Standard,25.0,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Fantasy Score,standard,,,,
+10049236,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Pts+Rebs+Asts,pra,Standard,24.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Rebs+Asts,standard,,,,
+10048636,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Demon,23.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,demon,,,,
+10048658,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Pts+Rebs+Asts,pra,Demon,23.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Rebs+Asts,demon,,,,
+10048686,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,demon,,,,
+10048634,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Demon,21.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,demon,,,,
+10048657,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Pts+Rebs+Asts,pra,Demon,21.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Rebs+Asts,demon,,,,
+10050118,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Fantasy Score,fantasy,Standard,21.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Fantasy Score,standard,,,,
+10048608,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Points,pts,Demon,20.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,demon,,,,
+10048684,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Demon,20.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,demon,,,,
+10049277,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Pts+Asts,pa,Standard,20.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Asts,standard,,,,
+10050117,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Fantasy Score,fantasy,Standard,20.0,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Fantasy Score,standard,,,,
+10048635,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Demon,19.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,demon,,,,
+10048656,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Pts+Rebs+Asts,pra,Standard,19.0,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Rebs+Asts,standard,,,,
+10048607,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Points,pts,Demon,18.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,demon,,,,
+10048610,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Pts+Rebs,pr,Standard,18.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Rebs,standard,,,,
+10048685,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Demon,18.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,demon,,,,
+10048629,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Points,pts,Demon,17.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,demon,,,,
+10048633,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Standard,17.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,standard,,,,
+10048660,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Pts+Rebs+Asts,pra,Goblin,17.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Rebs+Asts,goblin,,,,
+10048606,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Points,pts,Demon,16.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,demon,,,,
+10048654,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Points,pts,Demon,16.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,demon,,,,
+10048628,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Points,pts,Demon,15.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,demon,,,,
+10048637,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Goblin,15.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,goblin,,,,
+10050467,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Goblin,15.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,goblin,,,,
+10048605,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Points,pts,Standard,14.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,standard,,,,
+10048631,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Pts+Asts,pa,Standard,14.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Asts,standard,,,,
+10048632,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Pts+Rebs,pr,Standard,14.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs,standard,,,,
+10048652,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Points,pts,Demon,14.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,demon,,,,
+10048683,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Pts+Asts,pa,Standard,14.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Asts,standard,,,,
+10048687,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Pts+Rebs+Asts,pra,Goblin,14.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Pts+Rebs+Asts,goblin,,,,
+10048627,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Points,pts,Demon,13.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,demon,,,,
+10048680,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Points,pts,Demon,13.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,demon,,,,
+10048609,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Points,pts,Goblin,12.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,goblin,,,,
+10048653,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Points,pts,Demon,12.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,demon,,,,
+10048679,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Points,pts,Demon,12.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,demon,,,,
+10053674,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Pts+Asts,pa,Demon,12.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Pts+Asts,demon,,,,
+10048626,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Points,pts,Standard,11.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,standard,,,,
+10048681,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Points,pts,Demon,11.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,demon,,,,
+10048651,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Points,pts,Standard,10.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,standard,,,,
+10048678,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Points,pts,Standard,10.0,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,standard,,,,
+10048630,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Points,pts,Goblin,9.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,goblin,,,,
+10048662,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Rebounds,reb,Demon,9.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,demon,,,,
+10049313,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Rebs+Asts,ra,Standard,9.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebs+Asts,standard,,,,
+10048655,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Points,pts,Goblin,8.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Points,goblin,,,,
+10048661,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Rebounds,reb,Demon,8.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,demon,,,,
+10048682,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Points,pts,Goblin,8.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Points,goblin,,,,
+10050134,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Rebs+Asts,ra,Demon,8.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebs+Asts,demon,,,,
+10049314,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Rebs+Asts,ra,Standard,8.0,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebs+Asts,standard,,,,
+10048663,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Rebounds,reb,Demon,7.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,demon,,,,
+10049168,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Rebounds,reb,Standard,7.0,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,standard,,,,
+10049312,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Rebs+Asts,ra,Standard,7.0,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebs+Asts,standard,,,,
+10048613,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Rebounds,reb,Demon,6.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,demon,,,,
+10048665,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Rebounds,reb,Goblin,6.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,goblin,,,,
+10048675,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Assists,ast,Demon,6.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,demon,,,,
+10048691,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Rebs+Asts,ra,Goblin,6.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebs+Asts,goblin,,,,
+10048612,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Rebounds,reb,Demon,5.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,demon,,,,
+10048641,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Rebs+Asts,ra,Goblin,5.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebs+Asts,goblin,,,,
+10048664,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Rebounds,reb,Goblin,5.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,goblin,,,,
+10048674,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Assists,ast,Demon,5.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,demon,,,,
+10048611,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Rebounds,reb,Demon,4.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,demon,,,,
+10048624,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Assists,ast,Demon,4.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,demon,,,,
+10048639,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Rebounds,reb,Demon,4.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebounds,demon,,,,
+10048673,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Assists,ast,Demon,4.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,demon,,,,
+10048688,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Rebounds,reb,Demon,4.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebounds,demon,,,,
+10049228,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Assists,ast,Standard,4.0,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,standard,,,,
+10048615,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Rebounds,reb,Goblin,3.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,goblin,,,,
+10048623,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Assists,ast,Demon,3.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,demon,,,,
+10048638,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Rebounds,reb,Demon,3.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebounds,demon,,,,
+10048677,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Assists,ast,Goblin,3.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,goblin,,,,
+10048689,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Rebounds,reb,Demon,3.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebounds,demon,,,,
+10048693,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Steals,stl,Demon,3.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Steals,demon,,,,
+10048614,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Rebounds,reb,Goblin,2.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Rebounds,goblin,,,,
+10048617,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Steals,stl,Demon,2.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Steals,demon,,,,
+10048620,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,3-PT Made,3pm,Demon,2.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,3-PT Made,demon,,,,
+10048625,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Assists,ast,Goblin,2.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,goblin,,,,
+10048640,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Rebounds,reb,Goblin,2.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebounds,goblin,,,,
+10048646,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Assists,ast,Demon,2.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Assists,demon,,,,
+10048649,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Blocked Shots,blk,Demon,2.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Blocked Shots,demon,,,,
+10048667,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Steals,stl,Demon,2.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Steals,demon,,,,
+10048671,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,3-PT Made,3pm,Demon,2.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,3-PT Made,demon,,,,
+10048676,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Assists,ast,Goblin,2.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Assists,goblin,,,,
+10048690,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Rebounds,reb,Goblin,2.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Rebounds,goblin,,,,
+10048692,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Steals,stl,Demon,2.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Steals,demon,,,,
+10048603,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,3-PT Made,3pm,Demon,1.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,3-PT Made,demon,,,,
+10048616,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Steals,stl,Demon,1.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Steals,demon,,,,
+10048619,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Turnovers,tov,Goblin,1.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Turnovers,goblin,,,,
+10048621,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,3-PT Made,3pm,Demon,1.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,3-PT Made,demon,,,,
+10048642,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Steals,stl,Demon,1.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Steals,demon,,,,
+10048643,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Turnovers,tov,Goblin,1.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Turnovers,goblin,,,,
+10048645,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Assists,ast,Demon,1.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Assists,demon,,,,
+10048648,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Blocked Shots,blk,Demon,1.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Blocked Shots,demon,,,,
+10048666,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Steals,stl,Demon,1.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Steals,demon,,,,
+10048669,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Turnovers,tov,Standard,1.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Turnovers,standard,,,,
+10048670,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,3-PT Made,3pm,Demon,1.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,3-PT Made,demon,,,,
+10048694,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Steals,stl,Standard,1.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Steals,standard,,,,
+10048695,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,Turnovers,tov,Goblin,1.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Turnovers,goblin,,,,
+10048604,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,3-PT Made,3pm,Goblin,0.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,3-PT Made,goblin,,,,
+10048618,277929,chance westry|UAB,Chance Westry,chance westry,UAB,MEM,UAB,MEM,G,Steals,stl,Goblin,0.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Steals,goblin,,,,
+10048622,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,3-PT Made,3pm,Goblin,0.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,3-PT Made,goblin,,,,
+10048644,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,3-PT Made,3pm,Demon,0.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,3-PT Made,demon,,,,
+10048647,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Assists,ast,Goblin,0.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Assists,goblin,,,,
+10048650,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Blocked Shots,blk,Goblin,0.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Blocked Shots,goblin,,,,
+10048668,302244,daniel rivera|UAB,Daniel Rivera,daniel rivera,UAB,MEM,UAB,MEM,F,Steals,stl,Goblin,0.5,2026-02-22T12:00:00.000-05:00,129747,20,UAB,Steals,goblin,,,,
+10048672,278349,dug mcdaniel|MEM,Dug McDaniel,dug mcdaniel,MEM,UAB,MEM,UAB,G,3-PT Made,3pm,Goblin,0.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,3-PT Made,goblin,,,,
+10050132,302243,curtis givens|MEM,Curtis Givens,curtis givens,MEM,UAB,MEM,UAB,G,Steals,stl,Goblin,0.5,2026-02-22T12:00:00.000-05:00,129747,20,MEM,Steals,goblin,,,,
+10048853,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Pts+Rebs+Asts,pra,Demon,35.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,demon,165.0,73.38,Above Avg,165.0
+10050124,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Fantasy Score,fantasy,Standard,35.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Fantasy Score,standard,165.0,73.38,Above Avg,165.0
+10048851,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Pts+Rebs+Asts,pra,Demon,33.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,demon,165.0,73.38,Above Avg,165.0
+10048852,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Pts+Rebs+Asts,pra,Demon,31.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,demon,165.0,73.38,Above Avg,165.0
+10050125,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Fantasy Score,fantasy,Standard,31.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Fantasy Score,standard,,,,
+10048850,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Pts+Rebs+Asts,pra,Standard,29.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,standard,165.0,73.38,Above Avg,165.0
+10048854,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Pts+Rebs+Asts,pra,Goblin,27.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,goblin,165.0,73.38,Above Avg,165.0
+10049242,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Pts+Rebs+Asts,pra,Standard,27.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,standard,,,,
+10048810,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Demon,26.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10048848,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Pts+Asts,pa,Standard,26.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Asts,standard,165.0,73.38,Above Avg,165.0
+10050123,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Fantasy Score,fantasy,Standard,26.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Fantasy Score,standard,165.0,73.38,Above Avg,165.0
+10048725,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Points,pts,Demon,24.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048727,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Pts+Rebs,pr,Standard,24.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs,standard,,,,
+10048808,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Demon,24.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10048846,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Points,pts,Demon,23.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10050122,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Fantasy Score,fantasy,Standard,23.0,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Fantasy Score,standard,165.0,73.38,Above Avg,165.0
+10048723,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Points,pts,Demon,22.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048809,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10049279,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Pts+Asts,pa,Standard,22.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Asts,standard,,,,
+10050121,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Fantasy Score,fantasy,Standard,22.0,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Fantasy Score,standard,165.0,73.38,Above Avg,165.0
+10050126,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Fantasy Score,fantasy,Standard,22.0,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Fantasy Score,standard,,,,
+10048768,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Pts+Rebs+Asts,pra,Demon,21.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10048844,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Points,pts,Demon,21.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10049240,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Pts+Rebs+Asts,pra,Standard,21.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,standard,165.0,73.38,Above Avg,165.0
+10048712,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Demon,20.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10048724,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Points,pts,Demon,20.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048807,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Standard,20.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,standard,,,,
+10048828,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Pts+Rebs,pr,Standard,20.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs,standard,165.0,73.38,Above Avg,165.0
+10048849,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Pts+Rebs,pr,Standard,20.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs,standard,165.0,73.38,Above Avg,165.0
+10048767,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Pts+Rebs+Asts,pra,Demon,19.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10048804,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Points,pts,Demon,19.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048845,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Points,pts,Demon,19.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10049239,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Pts+Rebs+Asts,pra,Standard,19.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,standard,165.0,73.38,Above Avg,165.0
+10048710,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Demon,18.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10048722,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Points,pts,Standard,18.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,standard,,,,
+10048784,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Points,pts,Demon,18.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048786,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Pts+Rebs,pr,Standard,18.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs,standard,165.0,73.38,Above Avg,165.0
+10048806,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Pts+Rebs,pr,Standard,18.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs,standard,,,,
+10048811,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Goblin,18.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,goblin,,,,
+10048766,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Pts+Rebs+Asts,pra,Demon,17.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10048802,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Points,pts,Demon,17.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048843,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Points,pts,Standard,17.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,standard,165.0,73.38,Above Avg,165.0
+10049238,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Pts+Rebs+Asts,pra,Standard,17.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,standard,165.0,73.38,Above Avg,165.0
+10048711,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Demon,16.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,demon,,,,
+10048726,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Points,pts,Goblin,16.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,goblin,,,,
+10048743,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Pts+Rebs,pr,Standard,16.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs,standard,165.0,73.38,Above Avg,165.0
+10048782,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Points,pts,Demon,16.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048765,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Pts+Rebs+Asts,pra,Standard,15.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,standard,,,,
+10048803,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Points,pts,Demon,15.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048824,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Points,pts,Demon,15.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048847,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Points,pts,Goblin,15.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,goblin,165.0,73.38,Above Avg,165.0
+10049246,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Pts+Asts,pa,Standard,15.0,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Asts,standard,,,,
+10049280,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Pts+Asts,pa,Standard,15.0,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Asts,standard,,,,
+10048783,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Points,pts,Demon,14.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048822,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Points,pts,Demon,14.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10049241,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Pts+Rebs+Asts,pra,Standard,14.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Rebs+Asts,standard,165.0,73.38,Above Avg,165.0
+10049278,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Pts+Asts,pa,Standard,14.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Pts+Asts,standard,165.0,73.38,Above Avg,165.0
+10048705,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Points,pts,Demon,13.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048761,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Points,pts,Demon,13.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048764,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Pts+Rebs,pr,Standard,13.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs,standard,,,,
+10048769,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Pts+Rebs+Asts,pra,Goblin,13.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,goblin,,,,
+10048801,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Points,pts,Standard,13.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,standard,,,,
+10048823,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Points,pts,Demon,13.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048703,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Points,pts,Demon,12.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048713,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Pts+Rebs+Asts,pra,Goblin,12.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Rebs+Asts,goblin,,,,
+10048741,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Points,pts,Demon,12.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048760,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Points,pts,Demon,12.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048781,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Points,pts,Standard,12.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,standard,165.0,73.38,Above Avg,165.0
+10048869,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Points,pts,Demon,12.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048704,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Points,pts,Demon,11.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048740,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Points,pts,Demon,11.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048759,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Points,pts,Demon,11.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,demon,,,,
+10048763,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Pts+Asts,pa,Standard,11.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Asts,standard,,,,
+10048805,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Points,pts,Goblin,11.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,goblin,,,,
+10048821,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Points,pts,Standard,11.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,standard,165.0,73.38,Above Avg,165.0
+10048830,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,11.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048841,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Assists,ast,Demon,11.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Assists,demon,165.0,73.38,Above Avg,165.0
+10048859,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Rebs+Asts,ra,Standard,11.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebs+Asts,standard,165.0,73.38,Above Avg,165.0
+10048868,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Points,pts,Demon,11.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048707,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Pts+Asts,pa,Standard,10.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Pts+Asts,standard,,,,
+10048739,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Points,pts,Demon,10.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048747,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Rebounds,reb,Demon,10.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048785,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Points,pts,Goblin,10.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,goblin,165.0,73.38,Above Avg,165.0
+10048827,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Points,pts,Goblin,10.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,goblin,165.0,73.38,Above Avg,165.0
+10048829,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,10.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048839,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Assists,ast,Demon,10.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Assists,demon,165.0,73.38,Above Avg,165.0
+10048870,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Points,pts,Demon,10.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,demon,165.0,73.38,Above Avg,165.0
+10048702,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Points,pts,Standard,9.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,standard,,,,
+10048746,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Rebounds,reb,Demon,9.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048826,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Points,pts,Goblin,9.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,goblin,165.0,73.38,Above Avg,165.0
+10048831,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,9.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048840,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Assists,ast,Demon,9.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Assists,demon,165.0,73.38,Above Avg,165.0
+10048867,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Points,pts,Standard,9.0,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,standard,165.0,73.38,Above Avg,165.0
+10049230,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Assists,ast,Standard,9.0,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Assists,standard,165.0,73.38,Above Avg,165.0
+10049315,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Rebs+Asts,ra,Standard,9.0,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebs+Asts,standard,,,,
+10048366,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Points,pts,Standard,8.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,standard,165.0,73.38,Above Avg,165.0
+10048706,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Points,pts,Goblin,8.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,goblin,,,,
+10048730,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Rebounds,reb,Demon,8.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048745,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Rebounds,reb,Demon,8.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048762,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Points,pts,Goblin,8.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Points,goblin,,,,
+10048790,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,8.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048814,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Rebounds,reb,Demon,8.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048825,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Points,pts,Goblin,8.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,goblin,165.0,73.38,Above Avg,165.0
+10052260,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Rebounds,reb,Goblin,8.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,goblin,165.0,73.38,Above Avg,165.0
+10048729,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Rebounds,reb,Demon,7.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048742,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Points,pts,Goblin,7.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,goblin,165.0,73.38,Above Avg,165.0
+10048744,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Rebounds,reb,Standard,7.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,standard,165.0,73.38,Above Avg,165.0
+10048789,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,7.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048813,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Rebounds,reb,Demon,7.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048832,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Rebounds,reb,Goblin,7.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,goblin,165.0,73.38,Above Avg,165.0
+10048842,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Assists,ast,Goblin,7.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Assists,goblin,165.0,73.38,Above Avg,165.0
+10048871,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Points,pts,Goblin,7.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Points,goblin,165.0,73.38,Above Avg,165.0
+10048715,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Rebounds,reb,Demon,6.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048728,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Rebounds,reb,Demon,6.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048748,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Rebounds,reb,Goblin,6.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,goblin,165.0,73.38,Above Avg,165.0
+10048772,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Rebounds,reb,Demon,6.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048788,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,6.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048812,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Rebounds,reb,Demon,6.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048874,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,6.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048714,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Rebounds,reb,Demon,5.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048770,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Rebounds,reb,Demon,5.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048787,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Rebounds,reb,Standard,5.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,standard,165.0,73.38,Above Avg,165.0
+10048872,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,5.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10050469,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Rebs+Asts,ra,Demon,5.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebs+Asts,demon,,,,
+10050597,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Rebounds,reb,Demon,5.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048716,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Rebounds,reb,Demon,4.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048731,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Rebounds,reb,Goblin,4.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,goblin,,,,
+10048771,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Rebounds,reb,Demon,4.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,demon,,,,
+10048791,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Rebounds,reb,Goblin,4.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,goblin,165.0,73.38,Above Avg,165.0
+10048815,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Rebounds,reb,Goblin,4.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,goblin,,,,
+10048857,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Rebounds,reb,Demon,4.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048873,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Rebounds,reb,Demon,4.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10049170,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Rebounds,reb,Standard,4.0,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,standard,,,,
+10049171,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Rebounds,reb,Standard,4.0,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,standard,,,,
+10048717,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Rebounds,reb,Goblin,3.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,goblin,,,,
+10048721,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,3-PT Made,3pm,Demon,3.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,demon,,,,
+10048754,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Assists,ast,Demon,3.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Assists,demon,,,,
+10048773,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Rebounds,reb,Goblin,3.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,goblin,,,,
+10048799,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Assists,ast,Demon,3.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Assists,demon,,,,
+10048856,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Rebounds,reb,Demon,3.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,demon,165.0,73.38,Above Avg,165.0
+10048875,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Rebounds,reb,Goblin,3.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,goblin,165.0,73.38,Above Avg,165.0
+10048697,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,3-PT Made,3pm,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,demon,,,,
+10048700,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Assists,ast,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Assists,demon,,,,
+10048720,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,3-PT Made,3pm,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,demon,,,,
+10048733,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Steals,stl,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,demon,,,,
+10048737,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Blocked Shots,blk,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Blocked Shots,demon,165.0,73.38,Above Avg,165.0
+10048753,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Assists,ast,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Assists,demon,,,,
+10048796,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,3-PT Made,3pm,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,demon,,,,
+10048798,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Assists,ast,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Assists,demon,,,,
+10048818,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,3-PT Made,3pm,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,demon,165.0,73.38,Above Avg,165.0
+10048837,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,3-PT Made,3pm,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,demon,165.0,73.38,Above Avg,165.0
+10048855,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Rebounds,reb,Standard,2.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,standard,165.0,73.38,Above Avg,165.0
+10048861,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Steals,stl,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048864,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,3-PT Made,3pm,Demon,2.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,demon,165.0,73.38,Above Avg,165.0
+10050470,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Rebounds,reb,Goblin,2.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Rebounds,goblin,,,,
+10048696,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,3-PT Made,3pm,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,demon,,,,
+10048699,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Assists,ast,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Assists,demon,,,,
+10048718,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,demon,,,,
+10048732,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,demon,,,,
+10048735,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Turnovers,tov,Goblin,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Turnovers,goblin,,,,
+10048736,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Blocked Shots,blk,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Blocked Shots,demon,165.0,73.38,Above Avg,165.0
+10048750,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048751,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Turnovers,tov,Standard,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Turnovers,standard,165.0,73.38,Above Avg,165.0
+10048752,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,3-PT Made,3pm,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,demon,,,,
+10048755,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Assists,ast,Goblin,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Assists,goblin,,,,
+10048757,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Blocked Shots,blk,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Blocked Shots,demon,,,,
+10048775,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,demon,,,,
+10048776,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Turnovers,tov,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Turnovers,demon,,,,
+10048777,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,3-PT Made,3pm,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,demon,165.0,73.38,Above Avg,165.0
+10048779,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Blocked Shots,blk,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Blocked Shots,demon,165.0,73.38,Above Avg,165.0
+10048793,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048794,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Turnovers,tov,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Turnovers,demon,165.0,73.38,Above Avg,165.0
+10048795,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,3-PT Made,3pm,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,demon,,,,
+10048816,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,demon,,,,
+10048817,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,3-PT Made,3pm,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,demon,165.0,73.38,Above Avg,165.0
+10048820,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Blocked Shots,blk,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Blocked Shots,demon,165.0,73.38,Above Avg,165.0
+10048834,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048835,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Turnovers,tov,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Turnovers,demon,165.0,73.38,Above Avg,165.0
+10048836,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,3-PT Made,3pm,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,demon,165.0,73.38,Above Avg,165.0
+10048858,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Rebounds,reb,Goblin,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Rebounds,goblin,165.0,73.38,Above Avg,165.0
+10048860,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048863,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Turnovers,tov,Goblin,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Turnovers,goblin,165.0,73.38,Above Avg,165.0
+10048865,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,3-PT Made,3pm,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,demon,165.0,73.38,Above Avg,165.0
+10048876,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Steals,stl,Demon,1.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048698,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,3-PT Made,3pm,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,goblin,,,,
+10048701,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Assists,ast,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Assists,goblin,,,,
+10048719,290367,amare bynum|OSU,Amare Bynum,amare bynum,OSU,MSU,OSU,MSU,F,Steals,stl,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,goblin,,,,
+10048734,88130,bruce thornton|OSU,Bruce Thornton,bruce thornton,OSU,MSU,OSU,MSU,G,Steals,stl,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,goblin,,,,
+10048738,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Blocked Shots,blk,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Blocked Shots,goblin,165.0,73.38,Above Avg,165.0
+10048749,232618,carson cooper|MSU,Carson Cooper,carson cooper,MSU,OSU,MSU,OSU,C,Steals,stl,Demon,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048756,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Blocked Shots,blk,Demon,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Blocked Shots,demon,,,,
+10048778,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,3-PT Made,3pm,Standard,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,standard,165.0,73.38,Above Avg,165.0
+10048780,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Blocked Shots,blk,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Blocked Shots,goblin,165.0,73.38,Above Avg,165.0
+10048792,224757,coen carr|MSU,Coen Carr,coen carr,MSU,OSU,MSU,OSU,F,Steals,stl,Demon,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048797,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,3-PT Made,3pm,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,goblin,,,,
+10048819,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,3-PT Made,3pm,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,goblin,165.0,73.38,Above Avg,165.0
+10048833,126548,jaxon kohler|MSU,Jaxon Kohler,jaxon kohler,MSU,OSU,MSU,OSU,F,Steals,stl,Demon,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,demon,165.0,73.38,Above Avg,165.0
+10048838,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,3-PT Made,3pm,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,goblin,165.0,73.38,Above Avg,165.0
+10048862,219002,jeremy fears|MSU,Jeremy Fears,jeremy fears,MSU,OSU,MSU,OSU,G,Steals,stl,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,goblin,165.0,73.38,Above Avg,165.0
+10048866,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,3-PT Made,3pm,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,3-PT Made,goblin,165.0,73.38,Above Avg,165.0
+10048877,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Steals,stl,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Steals,goblin,165.0,73.38,Above Avg,165.0
+10048878,297324,jordan scott|MSU,Jordan Scott,jordan scott,MSU,OSU,MSU,OSU,F,Turnovers,tov,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,MSU,Turnovers,goblin,165.0,73.38,Above Avg,165.0
+10049245,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,Steals,stl,Standard,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,standard,,,,
+10049247,220721,devin royal|OSU,Devin Royal,devin royal,OSU,MSU,OSU,MSU,F,Steals,stl,Demon,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,Steals,demon,,,,
+10049337,280519,christoph tilly|OSU,Christoph Tilly,christoph tilly,OSU,MSU,OSU,MSU,C,3-PT Made,3pm,Goblin,0.5,2026-02-22T13:00:00.000-05:00,129749,20,OSU,3-PT Made,goblin,,,,
+10050127,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Fantasy Score,fantasy,Standard,34.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Fantasy Score,standard,241.0,76.0,Avg,241.0
+10048950,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Pts+Rebs+Asts,pra,Demon,31.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,demon,,,,
+10049243,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Pts+Rebs+Asts,pra,Standard,30.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,standard,241.0,76.0,Avg,241.0
+10050130,280727,nick boyd|WIS,Nick Boyd,nick boyd,WIS,IOWA,WIS,IOWA,G,Fantasy Score,fantasy,Standard,30.0,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Fantasy Score,standard,,,,
+10048896,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Points,pts,Demon,29.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10048948,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Pts+Rebs+Asts,pra,Demon,29.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,demon,,,,
+10048978,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Pts+Rebs+Asts,pra,Demon,28.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,demon,,,,
+10050129,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Fantasy Score,fantasy,Standard,28.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Fantasy Score,standard,,,,
+10048895,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Points,pts,Demon,27.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10048899,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Pts+Rebs,pr,Standard,27.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs,standard,241.0,76.0,Avg,241.0
+10048949,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Pts+Rebs+Asts,pra,Demon,27.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,demon,,,,
+10049281,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Pts+Asts,pa,Standard,27.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Asts,standard,241.0,76.0,Avg,241.0
+10050131,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Fantasy Score,fantasy,Standard,27.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Fantasy Score,standard,,,,
+10048977,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Pts+Rebs+Asts,pra,Demon,26.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,demon,,,,
+10049002,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Pts+Rebs+Asts,pra,Demon,26.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,demon,241.0,76.0,Avg,241.0
+10049244,280727,nick boyd|WIS,Nick Boyd,nick boyd,WIS,IOWA,WIS,IOWA,G,Pts+Rebs+Asts,pra,Standard,26.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,standard,,,,
+10048897,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Points,pts,Demon,25.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10048947,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Pts+Rebs+Asts,pra,Standard,25.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,standard,,,,
+10048979,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Pts+Rebs+Asts,pra,Demon,24.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,demon,,,,
+10049000,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Pts+Rebs+Asts,pra,Demon,24.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,demon,241.0,76.0,Avg,241.0
+10048951,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Pts+Rebs+Asts,pra,Goblin,23.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,goblin,,,,
+10048976,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Pts+Rebs+Asts,pra,Standard,23.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,standard,,,,
+10050128,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Fantasy Score,fantasy,Standard,23.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Fantasy Score,standard,241.0,76.0,Avg,241.0
+10049282,280727,nick boyd|WIS,Nick Boyd,nick boyd,WIS,IOWA,WIS,IOWA,G,Pts+Asts,pa,Standard,23.0,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Asts,standard,,,,
+10048894,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Points,pts,Standard,22.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,standard,241.0,76.0,Avg,241.0
+10048941,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Points,pts,Demon,22.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,demon,,,,
+10048946,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Pts+Rebs,pr,Standard,22.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs,standard,,,,
+10049001,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Pts+Rebs+Asts,pra,Demon,22.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,demon,241.0,76.0,Avg,241.0
+10048898,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Points,pts,Goblin,21.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,goblin,241.0,76.0,Avg,241.0
+10048940,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Points,pts,Demon,21.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,demon,,,,
+10048975,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Pts+Rebs,pr,Standard,21.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs,standard,,,,
+10051676,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Pts+Rebs+Asts,pra,Goblin,21.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,goblin,,,,
+10048942,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Points,pts,Demon,20.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,demon,,,,
+10048945,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Pts+Asts,pa,Standard,20.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Asts,standard,,,,
+10048980,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Pts+Rebs+Asts,pra,Goblin,20.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Rebs+Asts,goblin,,,,
+10048999,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Pts+Rebs+Asts,pra,Standard,20.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,standard,241.0,76.0,Avg,241.0
+10048998,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Pts+Rebs,pr,Standard,19.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs,standard,241.0,76.0,Avg,241.0
+10048939,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Points,pts,Standard,18.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,standard,,,,
+10048995,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Points,pts,Demon,18.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10049003,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Pts+Rebs+Asts,pra,Goblin,18.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,goblin,241.0,76.0,Avg,241.0
+10049145,280727,nick boyd|WIS,Nick Boyd,nick boyd,WIS,IOWA,WIS,IOWA,G,Points,pts,Standard,18.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,standard,,,,
+10050311,280727,nick boyd|WIS,Nick Boyd,nick boyd,WIS,IOWA,WIS,IOWA,G,Points,pts,Standard,18.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,standard,,,,
+10048923,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Pts+Rebs+Asts,pra,Demon,17.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,demon,241.0,76.0,Avg,241.0
+10048972,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Points,pts,Demon,17.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,demon,,,,
+10048944,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Points,pts,Goblin,16.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,goblin,,,,
+10048993,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Points,pts,Demon,16.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10048921,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Pts+Rebs+Asts,pra,Demon,15.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,demon,241.0,76.0,Avg,241.0
+10048943,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Points,pts,Goblin,15.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,goblin,,,,
+10048970,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Points,pts,Demon,15.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,demon,,,,
+10048994,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Points,pts,Demon,14.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10048922,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Pts+Rebs+Asts,pra,Demon,13.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,demon,241.0,76.0,Avg,241.0
+10048971,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Points,pts,Demon,13.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,demon,,,,
+10048974,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Pts+Asts,pa,Standard,13.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Pts+Asts,standard,,,,
+10048997,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Pts+Asts,pa,Standard,13.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Asts,standard,241.0,76.0,Avg,241.0
+10048984,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Rebounds,reb,Demon,12.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,demon,,,,
+10048992,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Points,pts,Standard,12.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,standard,241.0,76.0,Avg,241.0
+10048920,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Pts+Rebs+Asts,pra,Standard,11.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,standard,241.0,76.0,Avg,241.0
+10048969,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Points,pts,Standard,11.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,standard,,,,
+10048982,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Rebounds,reb,Demon,11.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,demon,,,,
+10049318,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Rebs+Asts,ra,Standard,11.0,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebs+Asts,standard,,,,
+10048915,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Points,pts,Demon,10.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10048983,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Rebounds,reb,Demon,10.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,demon,,,,
+10048996,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Points,pts,Goblin,10.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,goblin,241.0,76.0,Avg,241.0
+10049343,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Pts+Rebs,pr,Standard,10.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs,standard,241.0,76.0,Avg,241.0
+10049345,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Rebs+Asts,ra,Goblin,10.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebs+Asts,goblin,,,,
+10050826,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Pts+Rebs+Asts,pra,Goblin,10.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,goblin,241.0,76.0,Avg,241.0
+10048914,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Points,pts,Demon,9.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10048924,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Pts+Rebs+Asts,pra,Goblin,9.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Rebs+Asts,goblin,241.0,76.0,Avg,241.0
+10048973,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Points,pts,Goblin,9.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Points,goblin,,,,
+10049007,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Rebounds,reb,Demon,9.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,demon,241.0,76.0,Avg,241.0
+10048981,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Rebounds,reb,Standard,9.0,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,standard,,,,
+10048916,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Points,pts,Demon,8.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,demon,241.0,76.0,Avg,241.0
+10048919,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Pts+Asts,pa,Demon,8.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Pts+Asts,demon,241.0,76.0,Avg,241.0
+10048985,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Rebounds,reb,Goblin,8.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,goblin,,,,
+10049006,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Rebounds,reb,Demon,8.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,demon,241.0,76.0,Avg,241.0
+10048954,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Rebounds,reb,Demon,7.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,demon,,,,
+10048956,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Rebs+Asts,ra,Demon,7.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebs+Asts,demon,,,,
+10049005,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Rebounds,reb,Demon,7.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,demon,241.0,76.0,Avg,241.0
+10049009,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Rebs+Asts,ra,Standard,7.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebs+Asts,standard,241.0,76.0,Avg,241.0
+10049317,280727,nick boyd|WIS,Nick Boyd,nick boyd,WIS,IOWA,WIS,IOWA,G,Rebs+Asts,ra,Standard,7.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebs+Asts,standard,,,,
+10049316,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Rebs+Asts,ra,Standard,7.0,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebs+Asts,standard,,,,
+10048918,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Points,pts,Goblin,6.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,goblin,241.0,76.0,Avg,241.0
+10048928,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Rebounds,reb,Demon,6.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,demon,241.0,76.0,Avg,241.0
+10048953,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Rebounds,reb,Demon,6.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,demon,,,,
+10049004,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Rebounds,reb,Standard,6.0,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,standard,241.0,76.0,Avg,241.0
+10048901,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Rebounds,reb,Demon,5.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,demon,241.0,76.0,Avg,241.0
+10048917,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Points,pts,Goblin,5.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Points,goblin,241.0,76.0,Avg,241.0
+10048927,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Rebounds,reb,Demon,5.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,demon,241.0,76.0,Avg,241.0
+10048952,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Rebounds,reb,Demon,5.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,demon,,,,
+10048892,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,3-PT Made,3pm,Demon,4.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,3-PT Made,demon,241.0,76.0,Avg,241.0
+10048900,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Rebounds,reb,Demon,4.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,demon,241.0,76.0,Avg,241.0
+10048926,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Rebounds,reb,Demon,4.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,demon,241.0,76.0,Avg,241.0
+10048930,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Rebs+Asts,ra,Standard,4.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebs+Asts,standard,241.0,76.0,Avg,241.0
+10048937,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Assists,ast,Demon,4.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Assists,demon,,,,
+10049229,280727,nick boyd|WIS,Nick Boyd,nick boyd,WIS,IOWA,WIS,IOWA,G,Assists,ast,Standard,4.0,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Assists,standard,,,,
+10048891,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,3-PT Made,3pm,Demon,3.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,3-PT Made,demon,241.0,76.0,Avg,241.0
+10048925,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Rebounds,reb,Standard,3.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,standard,241.0,76.0,Avg,241.0
+10048934,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,3-PT Made,3pm,Demon,3.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,3-PT Made,demon,,,,
+10048936,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Assists,ast,Demon,3.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Assists,demon,,,,
+10048955,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Rebounds,reb,Goblin,3.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Rebounds,goblin,,,,
+10048964,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Assists,ast,Demon,3.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Assists,demon,,,,
+10048902,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Rebounds,reb,Goblin,2.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,goblin,241.0,76.0,Avg,241.0
+10048904,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Steals,stl,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Steals,demon,241.0,76.0,Avg,241.0
+10048906,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Turnovers,tov,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Turnovers,demon,241.0,76.0,Avg,241.0
+10048907,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,3-PT Made,3pm,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,3-PT Made,demon,241.0,76.0,Avg,241.0
+10048911,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Assists,ast,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Assists,demon,241.0,76.0,Avg,241.0
+10048929,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Rebounds,reb,Goblin,2.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Rebounds,goblin,241.0,76.0,Avg,241.0
+10048933,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,3-PT Made,3pm,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,3-PT Made,demon,,,,
+10048958,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Steals,stl,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Steals,demon,,,,
+10048960,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Turnovers,tov,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Turnovers,demon,,,,
+10048963,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Assists,ast,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Assists,demon,,,,
+10048967,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Blocked Shots,blk,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Blocked Shots,demon,,,,
+10048990,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Assists,ast,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Assists,demon,241.0,76.0,Avg,241.0
+10050711,280727,nick boyd|WIS,Nick Boyd,nick boyd,WIS,IOWA,WIS,IOWA,G,3-PT Made,3pm,Demon,2.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,3-PT Made,demon,,,,
+10048893,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,3-PT Made,3pm,Goblin,1.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,3-PT Made,goblin,241.0,76.0,Avg,241.0
+10048903,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Steals,stl,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Steals,demon,241.0,76.0,Avg,241.0
+10048908,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,3-PT Made,3pm,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,3-PT Made,demon,241.0,76.0,Avg,241.0
+10048910,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Assists,ast,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Assists,demon,241.0,76.0,Avg,241.0
+10048931,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Steals,stl,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Steals,demon,241.0,76.0,Avg,241.0
+10048935,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,3-PT Made,3pm,Goblin,1.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,3-PT Made,goblin,,,,
+10048938,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Assists,ast,Goblin,1.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Assists,goblin,,,,
+10048957,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Steals,stl,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Steals,demon,,,,
+10048961,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,3-PT Made,3pm,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,3-PT Made,demon,,,,
+10048965,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Assists,ast,Standard,1.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Assists,standard,,,,
+10048966,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Blocked Shots,blk,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Blocked Shots,demon,,,,
+10048988,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,3-PT Made,3pm,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,3-PT Made,demon,241.0,76.0,Avg,241.0
+10048989,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Assists,ast,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Assists,demon,241.0,76.0,Avg,241.0
+10049010,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Steals,stl,Demon,1.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Steals,demon,241.0,76.0,Avg,241.0
+10048905,276868,bennett stirtz|IOWA,Bennett Stirtz,bennett stirtz,IOWA,WIS,IOWA,WIS,G,Steals,stl,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Steals,goblin,241.0,76.0,Avg,241.0
+10048909,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,3-PT Made,3pm,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,3-PT Made,goblin,241.0,76.0,Avg,241.0
+10048912,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Assists,ast,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Assists,goblin,241.0,76.0,Avg,241.0
+10048932,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Steals,stl,Standard,0.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Steals,standard,241.0,76.0,Avg,241.0
+10048959,181307,john blackwell|WIS,John Blackwell,john blackwell,WIS,IOWA,WIS,IOWA,G,Steals,stl,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Steals,goblin,,,,
+10048962,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,3-PT Made,3pm,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,3-PT Made,goblin,,,,
+10048968,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Blocked Shots,blk,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Blocked Shots,goblin,,,,
+10048986,219388,nolan winter|WIS,Nolan Winter,nolan winter,WIS,IOWA,WIS,IOWA,F,Turnovers,tov,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,WIS,Turnovers,goblin,,,,
+10048987,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,3-PT Made,3pm,Demon,0.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,3-PT Made,demon,241.0,76.0,Avg,241.0
+10048991,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Assists,ast,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Assists,goblin,241.0,76.0,Avg,241.0
+10049011,279767,tavion banks|IOWA,Tavion Banks,tavion banks,IOWA,WIS,IOWA,WIS,G-F,Steals,stl,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Steals,goblin,241.0,76.0,Avg,241.0
+10049344,279765,cooper koch|IOWA,Cooper Koch,cooper koch,IOWA,WIS,IOWA,WIS,F,Turnovers,tov,Goblin,0.5,2026-02-22T16:00:00.000-05:00,129763,20,IOWA,Turnovers,goblin,241.0,76.0,Avg,241.0

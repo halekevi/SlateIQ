@@ -1,0 +1,31 @@
+﻿-> Loading slate: step3_with_defense.csv
+Loaded ESPN cache: nba_espn_boxscore_cache.csv | rows=4915
+
+-> Updating ESPN cache for rolling days (dates=36)...
+  cached ESPN event 401810686 (2026-02-24) players=22
+  cached ESPN event 401810687 (2026-02-24) players=23
+  cached ESPN event 401810688 (2026-02-24) players=23
+  cached ESPN event 401810689 (2026-02-24) players=21
+  cached ESPN event 401810690 (2026-02-24) players=28
+  cached ESPN event 401810691 (2026-02-24) players=24
+  cached ESPN event 401810692 (2026-02-24) players=20
+  cached ESPN event 401810693 (2026-02-24) players=19
+  cached ESPN event 401810694 (2026-02-24) players=24
+  cached ESPN event 401810696 (2026-02-24) players=18
+  cached ESPN event 401810695 (2026-02-24) players=20
+
+ESPN cache updated: nba_espn_boxscore_cache.csv | rows=5157 | new_events=11 | skipped=9
+
+-> Attaching stats from ESPN cache -> rows=4678
+
+Updated idmap: nba_to_espn_id_map.csv | rows=217 | updates=12
+Wrote misses -> no_espn_player_debug.csv | rows=134
+
+Saved -> step4_with_stats.csv
+
+stat_status breakdown:
+stat_status
+OK                    4071
+NO_CACHE_PLAYER        409
+NO_ESPN_PLAYER         134
+INSUFFICIENT_GAMES      64

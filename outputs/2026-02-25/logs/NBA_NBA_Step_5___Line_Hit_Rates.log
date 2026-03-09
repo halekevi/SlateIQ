@@ -1,0 +1,9 @@
+﻿ΓåÆ Loading: step4_with_stats.csv
+Γ£à Saved ΓåÆ step5_with_hit_rates.csv
+Rows: 4678
+Filled line_hit_rate_over_5    : 4071/4678
+Filled line_hit_rate_over_ou_5 : 4071/4678
+hit_rate_status breakdown:
+hit_rate_status
+OK                     4071
+MISSING_STAT_VALUES     607

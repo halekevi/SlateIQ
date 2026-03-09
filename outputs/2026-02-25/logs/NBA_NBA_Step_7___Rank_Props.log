@@ -1,0 +1,24 @@
+﻿Γ£à Saved ΓåÆ step7_ranked_props.xlsx
+ALL rows      : 4678
+STANDARD rows : 963
+GOB_DEM rows  : 3715
+
+Tier counts (ALL):
+tier
+D    3799
+A     466
+B     219
+C     194
+
+Ineligible reason breakdown:
+void_reason
+FORCED_OVER_NEG_EDGE     1922
+NO_PROJECTION_OR_LINE     607
+
+Score percentiles (eligible):
+0.50    0.510
+0.70    1.872
+0.80    2.650
+0.85    3.079
+0.90    3.644
+0.95    4.344

@@ -1,0 +1,23 @@
+﻿ΓåÆ Loading: step8_all_direction_clean.xlsx (sheet=Tier A)
+  Props with hit rate >= 0.8: 388
+  Standard 2-Leg: 10 tickets
+  Standard 3-Leg: 2 tickets
+  Standard 4-Leg: 0 tickets
+  Goblin 2-Leg: 10 tickets
+  Goblin 3-Leg: 10 tickets
+  Goblin 4-Leg: 3 tickets
+  Best Mix 2-Leg: 10 tickets
+  Best Mix 3-Leg: 10 tickets
+  Best Mix 4-Leg: 2 tickets
+  Std+Gob Fill 3-Leg: 10 tickets (Standard-first, Goblin fill)
+  Std+Gob Fill 4-Leg: 10 tickets (Standard-first, Goblin fill)
+
+Γ£à Saved ΓåÆ best_tickets.xlsx
+
+PrizePicks Power Play payout reference:
+  Legs      Power     Flex   $ to win $100 (Power)
+  2-leg      3.0x     3.0x  $ 33.33
+  3-leg      6.0x     3.0x  $ 16.67
+  4-leg     10.0x     6.0x  $  10.0
+  5-leg     20.0x    10.0x  $   5.0
+  6-leg     37.5x    25.0x  $  2.67
