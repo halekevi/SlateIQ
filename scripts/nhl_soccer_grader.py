@@ -49,15 +49,18 @@ NHL_SLATE_MAP = {
 }
 
 SOCCER_SLATE_MAP = {
+    # ── lowercase / original ──────────────────────────────────────────────────
     "player":              "player",
     "team":                "team",
     "opp_team":            "opp_team",
     "tier":                "tier",
     "DEF_TIER":            "def_tier",
+    "def_tier":            "def_tier",
     "line":                "line",
     "prop_type":           "prop_type_norm",
     "prop_norm":           "prop_type_raw",
     "edge_adj":            "edge",
+    "edge":                "edge",
     "rank_score":          "rank_score",
     "line_hit_rate":       "hit_rate_raw",
     "pick_type":           "pick_type",
@@ -65,6 +68,35 @@ SOCCER_SLATE_MAP = {
     "position_group":      "position_group",
     "minutes_tier":        "minutes_tier",
     "projection":          "projection",
+    "direction":           "bet_direction",
+    "final_bet_direction": "bet_direction",
+    # ── Title-case / capitalized (what the soccer slate actually has) ─────────
+    "Player":              "player",
+    "Team":                "team",
+    "Opp":                 "opp_team",
+    "Opp Team":            "opp_team",
+    "Opponent":            "opp_team",
+    "Tier":                "tier",
+    "Def Tier":            "def_tier",
+    "Def_Tier":            "def_tier",
+    "Line":                "line",
+    "Prop":                "prop_type_norm",
+    "Prop Type":           "prop_type_norm",
+    "Prop_Type":           "prop_type_norm",
+    "Edge":                "edge",
+    "Edge Adj":            "edge",
+    "Rank Score":          "rank_score",
+    "Hit Rate":            "hit_rate_raw",
+    "Hit Rate (5g)":       "hit_rate_raw",
+    "Pick Type":           "pick_type",
+    "League":              "league",
+    "Position Group":      "position_group",
+    "Position":            "position_group",
+    "Minutes Tier":        "minutes_tier",
+    "Min Tier":            "minutes_tier",
+    "Projection":          "projection",
+    "Direction":           "bet_direction",
+    "Final Bet Direction": "bet_direction",
 }
 
 # Actuals CSVs: what columns to look for player name and stat value
@@ -134,7 +166,21 @@ def load_slate(path: Path, sport: str) -> pd.DataFrame:
     df.columns = [c.strip() for c in df.columns]
 
     col_map = NHL_SLATE_MAP if sport == "NHL" else SOCCER_SLATE_MAP
-    df = df.rename(columns={k:v for k,v in col_map.items() if k in df.columns})
+
+    if sport == "SOCCER":
+        original_cols = list(df.columns)
+        df = df.rename(columns={k: v for k, v in col_map.items() if k in df.columns})
+        mapped   = [f"{k}->{v}" for k, v in col_map.items() if k in original_cols]
+        unmapped = [c for c in original_cols if c not in col_map]
+        print(f"  [ColMap] Renamed: {mapped[:12]}")
+        if unmapped:
+            print(f"  [ColMap] Unmapped (kept): {unmapped[:15]}")
+        for required in ("player", "prop_type_norm", "line", "bet_direction"):
+            if required not in df.columns:
+                print(f"  [ColMap] WARNING: '{required}' missing after rename!")
+                print(f"  [ColMap] All cols after rename: {list(df.columns)}")
+    else:
+        df = df.rename(columns={k: v for k, v in col_map.items() if k in df.columns})
 
     # Ensure pick_type exists (NHL step8 doesn't have it — derive from edge/tier)
     if "pick_type" not in df.columns:
@@ -169,6 +215,29 @@ def load_slate(path: Path, sport: str) -> pd.DataFrame:
         df["hit_rate"] = df["hit_rate_raw"].apply(_pct_to_f)
 
     df["Sport"] = sport
+
+    # ── Soccer: filter to only rows whose game time has passed ────────────────
+    # This prevents future-slate rows from polluting a grading run and causing
+    # 100% VOID when the actuals are for a different day's games.
+    if sport == "SOCCER":
+        game_time_col = next((c for c in df.columns if c.lower() in
+                              ("game time", "game_time", "gametime", "kickoff")), None)
+        if game_time_col:
+            now_utc = pd.Timestamp.utcnow()
+            try:
+                gts = pd.to_datetime(df[game_time_col], utc=True, errors="coerce")
+                before_now = gts <= now_utc
+                n_total = len(df)
+                df = df[before_now].copy()
+                n_kept = len(df)
+                print(f"  [DateFilter] Kept {n_kept}/{n_total} rows with game_time <= now "
+                      f"(dropped {n_total - n_kept} future rows)")
+                if n_kept == 0:
+                    print(f"  [DateFilter] WARNING: 0 rows remain after date filter — "
+                          f"all games on this slate are in the future")
+            except Exception as exc:
+                print(f"  [DateFilter] Could not parse '{game_time_col}': {exc} — skipping filter")
+
     return df
 
 def load_actuals(path: Path) -> pd.DataFrame:
@@ -230,6 +299,21 @@ def grade(slate: pd.DataFrame, actuals: pd.DataFrame, sport: str) -> pd.DataFram
 
     hits = misses = voids = 0
 
+    # ── SOCCER DIAGNOSTIC (first run only) ──────────────────────────────────
+    if sport == "SOCCER" and len(slate) > 0:
+        # Sample first 3 slate players — are they in act_by_name?
+        sample_slate = list(slate["player"].apply(_norm_name).unique())[:5]
+        sample_acts  = list(act_by_name.keys())[:5]
+        name_overlap = sum(1 for n in list(slate["player"].apply(_norm_name)) if n in act_by_name)
+        # Sample props
+        prop_col_s = "prop_type_norm" if "prop_type_norm" in slate.columns else "prop_type_raw" if "prop_type_raw" in slate.columns else None
+        sample_props = list(slate[prop_col_s].apply(_norm_prop).unique())[:8] if prop_col_s else []
+        print(f"  [DIAG] Slate name sample (normed): {sample_slate}")
+        print(f"  [DIAG] Actuals name sample (normed): {sample_acts}")
+        print(f"  [DIAG] Name matches (slate players found in actuals): {name_overlap}/{len(slate)}")
+        print(f"  [DIAG] Slate prop norms: {sample_props}")
+        print(f"  [DIAG] Actuals prop norms: {sorted(set(actuals['_prop'].tolist()))[:10] if pr_col else 'no prop col'}")
+
     for idx, srow in slate.iterrows():
         sname = _norm_name(srow.get("player",""))
         sprop = _norm_prop(srow.get("prop_type_norm", srow.get("prop_type_raw","")))
@@ -243,9 +327,36 @@ def grade(slate: pd.DataFrame, actuals: pd.DataFrame, sport: str) -> pd.DataFram
         candidates = act_by_name[sname]
 
         # Try to match by prop type if actuals have it
+        # SOCCER PROP ALIAS TABLE
+        # Key   = normalised SLATE prop (_norm_prop on slate Prop column)
+        # Value = list of normalised ACTUALS prop names that should match
+        # Confirmed mismatches:
+        #   Slate "Goalie Saves"    -> "goaliesaves"   -> actuals "Goalkeeper Saves" ("goalkeepersaves")
+        #   Slate "Shots On Target" -> "shotsontarget" -> actuals "Shots" ("shots")
+        SOCCER_PROP_ALIASES = {
+            "goaliesaves":      ["goalkeepersaves", "saves", "gksaves"],
+            "goalkeepersaves":  ["goalkeepersaves", "saves", "gksaves"],
+            "saves":            ["goalkeepersaves", "saves", "gksaves"],
+            "gksaves":          ["goalkeepersaves", "saves", "gksaves"],
+            "shotsontarget":    ["shots", "shotsontarget", "sot"],
+            "sot":              ["shots", "shotsontarget", "sot"],
+            "fouls":            ["fouls", "foulscommitted", "foulsc"],
+            "foulscommitted":   ["fouls", "foulscommitted", "foulsc"],
+            "yellowcards":      ["yellowcards", "yellow", "yc"],
+            "yellow":           ["yellowcards", "yellow", "yc"],
+            "assists":          ["assists", "goalassists", "ast"],
+            "goals":            ["goals", "goal"],
+            "shots":            ["shots", "totalshots", "sh"],
+        }
         matched = None
         if pr_col and candidates:
+            # Exact normalised match first
             prop_matches = [r for r in candidates if _norm_prop(r.get("_prop","")) == sprop]
+            # Alias match if no exact hit
+            if not prop_matches:
+                aliases = SOCCER_PROP_ALIASES.get(sprop, [sprop])
+                prop_matches = [r for r in candidates
+                                if _norm_prop(r.get("_prop","")) in aliases]
             if prop_matches:
                 matched = prop_matches[0]
 

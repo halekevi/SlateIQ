@@ -267,18 +267,18 @@ if ($NBAOnly) {
     }
 
     $ok = $true
-    if (-not $SkipFetch) { if ($ok) { $ok = Run-Step "NBA Step 1 - Fetch PrizePicks" $NBADir ".\\step1_fetch_prizepicks_api.py" "--league_id 7 --game_mode pickem --per_page 250 --max_pages 5 --sleep 2.0 --cooldown_seconds 90 --max_cooldowns 3 --jitter_seconds 10.0 --output step1_pp_props_today.csv" } } else { Write-Host "  [NBA] Skipping step1 fetch -- using existing step1_pp_props_today.csv" -ForegroundColor DarkGray }
-    if ($ok) { $ok = Run-Step "NBA Step 2 - Attach Pick Types"       $NBADir ".\\step2_attach_picktypes.py"                "--input step1_pp_props_today.csv --output step2_with_picktypes.csv" }
-    if ($ok) { $ok = Run-Step "NBA Step 3 - Attach Defense"          $NBADir ".\\step3_attach_defense.py"                  "--input step2_with_picktypes.csv --defense .\\defense_team_summary.csv --output step3_with_defense.csv" }
-    if ($ok) { $ok = Run-Step "NBA Step 4 - Player Stats (ESPN)"     $NBADir ".\\step4_attach_player_stats_espn_cache.py"  "--slate step3_with_defense.csv --out step4_with_stats.csv --season 2025-26 --date $Date --days 35 --cache nba_espn_boxscore_cache.csv --idmap nba_to_espn_id_map.csv --n 10 --sleep 0.8 --retries 4 --connect-timeout 8 --timeout 30 --debug-misses no_espn_player_debug.csv" }
-    if ($ok) { $ok = Run-Step "NBA Step 5 - Line Hit Rates"          $NBADir ".\\step5_add_line_hit_rates.py"              "--input step4_with_stats.csv --output step5_with_hit_rates.csv" }
-    if ($ok) { $ok = Run-Step "NBA Step 6 - Team Role Context"       $NBADir ".\\step6_team_role_context.py"               "--input step5_with_hit_rates.csv --output step6_with_team_role_context.csv" }
-    if ($ok) { $ok = Run-Step "NBA Step 6a - Opponent H2H Stats"     $NBADir ".\\step6a_attach_opponent_stats_NBA.py"       "--input step6_with_team_role_context.csv --output step6a_with_opp_stats.csv --cache nba_espn_boxscore_cache.csv --opp-cache s6a_nba_opp_stats_cache.csv" }
-    if ($ok) { $ok = Run-Step "NBA Step 6b - Game Context (Vegas)"   $NBADir ".\\step6b_attach_game_context.py"            "--input step6a_with_opp_stats.csv --output step6b_with_game_context.csv --api_key `"$OddsApiKey`" --date $Date --cache `"game_context_cache_$Date.csv`"" }
-    if ($ok) { $ok = Run-Step "NBA Step 6c - Schedule Flags (B2B)"   $NBADir ".\\step6c_schedule_flags.py"                 "--input step6b_with_game_context.csv --output step6c_with_schedule_flags.csv --date $Date --cache `"schedule_cache_$Date.csv`"" }
-    if ($ok) { $ok = Run-Step "NBA Step 6d - H2H Matchup Stats"      $NBADir ".\\step6d_attach_h2h_matchups.py"            "--input step6c_with_schedule_flags.csv --cache nba_espn_boxscore_cache.csv --output step6d_with_h2h.csv" }
-    if ($ok) { $ok = Run-Step "NBA Step 7 - Rank Props"              $NBADir ".\\step7_rank_props.py"                      "--input step6d_with_h2h.csv --output step7_ranked_props.xlsx" }
-    if ($ok) { $ok = Run-Step "NBA Step 8 - Direction Context"       $NBADir ".\\step8_add_direction_context.py"           "--input step7_ranked_props.xlsx --sheet ALL --output step8_all_direction.csv" }
+    if (-not $SkipFetch) { if ($ok) { $ok = Run-Step "NBA Step 1 - Fetch PrizePicks" $NBADir ".\\scripts\\step1_fetch_prizepicks_api.py" "--league_id 7 --game_mode pickem --per_page 250 --max_pages 5 --sleep 2.0 --cooldown_seconds 90 --max_cooldowns 3 --jitter_seconds 10.0 --output data\\outputs\\step1_pp_props_today.csv" } } else { Write-Host "  [NBA] Skipping step1 fetch -- using existing data\\outputs\\step1_pp_props_today.csv" -ForegroundColor DarkGray }
+    if ($ok) { $ok = Run-Step "NBA Step 2 - Attach Pick Types"       $NBADir ".\\scripts\\step2_attach_picktypes.py"                "--input data\\outputs\\step1_pp_props_today.csv --output data\\outputs\\step2_with_picktypes.csv" }
+    if ($ok) { $ok = Run-Step "NBA Step 3 - Attach Defense"          $NBADir ".\\scripts\\step3_attach_defense.py"                  "--input data\\outputs\\step2_with_picktypes.csv --defense .\\defense_team_summary.csv --output data\\outputs\\step3_with_defense.csv" }
+    if ($ok) { $ok = Run-Step "NBA Step 4 - Player Stats (ESPN)"     $NBADir ".\\scripts\\step4_attach_player_stats_espn_cache.py"  "--slate data\\outputs\\step3_with_defense.csv --out data\\outputs\\step4_with_stats.csv --season 2025-26 --date $Date --days 35 --cache nba_espn_boxscore_cache.csv --idmap nba_to_espn_id_map.csv --n 10 --sleep 0.8 --retries 4 --connect-timeout 8 --timeout 30 --debug-misses no_espn_player_debug.csv" }
+    if ($ok) { $ok = Run-Step "NBA Step 5 - Line Hit Rates"          $NBADir ".\\scripts\\step5_add_line_hit_rates.py"              "--input data\\outputs\\step4_with_stats.csv --output data\\outputs\\step5_with_hit_rates.csv" }
+    if ($ok) { $ok = Run-Step "NBA Step 6 - Team Role Context"       $NBADir ".\\scripts\\step6_team_role_context.py"               "--input data\\outputs\\step5_with_hit_rates.csv --output data\\outputs\\step6_with_team_role_context.csv" }
+    if ($ok) { $ok = Run-Step "NBA Step 6a - Opponent H2H Stats"     $NBADir ".\\scripts\\step6a_attach_opponent_stats_NBA.py"       "--input data\\outputs\\step6_with_team_role_context.csv --output data\\outputs\\step6a_with_opp_stats.csv --cache nba_espn_boxscore_cache.csv --opp-cache s6a_nba_opp_stats_cache.csv" }
+    if ($ok) { $ok = Run-Step "NBA Step 6b - Game Context (Vegas)"   $NBADir ".\\scripts\\step6b_attach_game_context.py"            "--input data\\outputs\\step6a_with_opp_stats.csv --output data\\outputs\\step6b_with_game_context.csv --api_key `"$OddsApiKey`" --date $Date --cache `"game_context_cache_$Date.csv`"" }
+    if ($ok) { $ok = Run-Step "NBA Step 6c - Schedule Flags (B2B)"   $NBADir ".\\scripts\\step6c_schedule_flags.py"                 "--input data\\outputs\\step6b_with_game_context.csv --output data\\outputs\\step6c_with_schedule_flags.csv --date $Date --cache `"schedule_cache_$Date.csv`"" }
+    if ($ok) { $ok = Run-Step "NBA Step 6d - H2H Matchup Stats"      $NBADir ".\\scripts\\step6d_attach_h2h_matchups.py"            "--input data\\outputs\\step6c_with_schedule_flags.csv --cache nba_espn_boxscore_cache.csv --output data\\outputs\\step6d_with_h2h.csv" }
+    if ($ok) { $ok = Run-Step "NBA Step 7 - Rank Props"              $NBADir ".\\scripts\\step7_rank_props.py"                      "--input data\\outputs\\step6d_with_h2h.csv --output data\\outputs\\step7_ranked_props.xlsx" }
+    if ($ok) { $ok = Run-Step "NBA Step 8 - Direction Context"       $NBADir ".\\scripts\\step8_add_direction_context.py"           "--input data\\outputs\\step7_ranked_props.xlsx --sheet ALL --output data\\outputs\\step8_all_direction.csv" }
     # NBA S9 disabled -- tickets generated in combined_slate_tickets.py
     # if ($ok) { $ok = Run-Step "NBA Step 9 - Build Tickets" $NBADir ".\\step9_build_tickets.py" "--input step8_all_direction_clean.xlsx --output best_tickets.xlsx --min_hit_rate 0.6 --legs 2,3,4" }
 
@@ -326,7 +326,7 @@ $MLBSuccess    = $false
 $SoccerSuccess = $false
 
 if ($CombinedOnly) {
-    $NBASuccess = Test-Path (Join-Path $NBADir "step8_all_direction_clean.xlsx")
+    $NBASuccess = Test-Path (Join-Path $NBADir "data\outputs\step8_all_direction_clean.xlsx")
     $CBBSuccess = Test-Path (Join-Path $CBBDir "step6_ranked_cbb.xlsx")
     if (-not $NBASuccess) { Write-Host "  WARNING: NBA slate not found" -ForegroundColor Yellow }
     if (-not $CBBSuccess) { Write-Host "  WARNING: CBB slate not found" -ForegroundColor Yellow }
@@ -373,18 +373,18 @@ if ($CombinedOnly) {
             } finally { Pop-Location }
         }
         $ok = $true
-        if (-not $using:SkipFetch) { if ($ok) { $ok = Run-Step-Job "NBA Step 1 - Fetch PrizePicks" $NBADir ".\\step1_fetch_prizepicks_api.py" "--league_id 7 --game_mode pickem --per_page 250 --max_pages 5 --sleep 2.0 --cooldown_seconds 90 --max_cooldowns 3 --jitter_seconds 10.0 --output step1_pp_props_today.csv" } } else { Write-Output "[NBA] Skipping step1 fetch -- using existing step1_pp_props_today.csv" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 2 - Attach Pick Types"       $NBADir ".\\step2_attach_picktypes.py"                "--input step1_pp_props_today.csv --output step2_with_picktypes.csv" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 3 - Attach Defense"          $NBADir ".\\step3_attach_defense.py"                  "--input step2_with_picktypes.csv --defense .\\defense_team_summary.csv --output step3_with_defense.csv" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 4 - Player Stats (ESPN)"     $NBADir ".\\step4_attach_player_stats_espn_cache.py"  "--slate step3_with_defense.csv --out step4_with_stats.csv --season 2025-26 --date $Date --days 35 --cache nba_espn_boxscore_cache.csv --idmap nba_to_espn_id_map.csv --n 10 --sleep 0.8 --retries 4 --connect-timeout 8 --timeout 30 --debug-misses no_espn_player_debug.csv" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 5 - Line Hit Rates"          $NBADir ".\\step5_add_line_hit_rates.py"              "--input step4_with_stats.csv --output step5_with_hit_rates.csv" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 6 - Team Role Context"       $NBADir ".\\step6_team_role_context.py"               "--input step5_with_hit_rates.csv --output step6_with_team_role_context.csv" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 6a - Opponent H2H Stats"     $NBADir ".\\step6a_attach_opponent_stats_NBA.py"       "--input step6_with_team_role_context.csv --output step6a_with_opp_stats.csv --cache nba_espn_boxscore_cache.csv --opp-cache s6a_nba_opp_stats_cache.csv" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 6b - Game Context (Vegas)"   $NBADir ".\\step6b_attach_game_context.py"            "--input step6a_with_opp_stats.csv --output step6b_with_game_context.csv --api_key `"$using:OddsApiKey`" --date $Date --cache `"game_context_cache_$Date.csv`"" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 6c - Schedule Flags (B2B)"   $NBADir ".\\step6c_schedule_flags.py"                 "--input step6b_with_game_context.csv --output step6c_with_schedule_flags.csv --date $Date --cache `"schedule_cache_$Date.csv`"" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 6d - H2H Matchup Stats"      $NBADir ".\\step6d_attach_h2h_matchups.py"            "--input step6c_with_schedule_flags.csv --cache nba_espn_boxscore_cache.csv --output step6d_with_h2h.csv" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 7 - Rank Props"              $NBADir ".\\step7_rank_props.py"                      "--input step6d_with_h2h.csv --output step7_ranked_props.xlsx" }
-        if ($ok) { $ok = Run-Step-Job "NBA Step 8 - Direction Context"       $NBADir ".\\step8_add_direction_context.py"           "--input step7_ranked_props.xlsx --sheet ALL --output step8_all_direction.csv" }
+        if (-not $using:SkipFetch) { if ($ok) { $ok = Run-Step-Job "NBA Step 1 - Fetch PrizePicks" $NBADir ".\\scripts\\step1_fetch_prizepicks_api.py" "--league_id 7 --game_mode pickem --per_page 250 --max_pages 5 --sleep 2.0 --cooldown_seconds 90 --max_cooldowns 3 --jitter_seconds 10.0 --output data\\outputs\\step1_pp_props_today.csv" } } else { Write-Output "[NBA] Skipping step1 fetch -- using existing step1_pp_props_today.csv" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 2 - Attach Pick Types"       $NBADir ".\\scripts\\step2_attach_picktypes.py"                "--input data\\outputs\\step1_pp_props_today.csv --output data\\outputs\\step2_with_picktypes.csv" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 3 - Attach Defense"          $NBADir ".\\scripts\\step3_attach_defense.py"                  "--input data\\outputs\\step2_with_picktypes.csv --defense .\\defense_team_summary.csv --output data\\outputs\\step3_with_defense.csv" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 4 - Player Stats (ESPN)"     $NBADir ".\\scripts\\step4_attach_player_stats_espn_cache.py"  "--slate data\\outputs\\step3_with_defense.csv --out data\\outputs\\step4_with_stats.csv --season 2025-26 --date $Date --days 35 --cache nba_espn_boxscore_cache.csv --idmap nba_to_espn_id_map.csv --n 10 --sleep 0.8 --retries 4 --connect-timeout 8 --timeout 30 --debug-misses no_espn_player_debug.csv" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 5 - Line Hit Rates"          $NBADir ".\\scripts\\step5_add_line_hit_rates.py"              "--input data\\outputs\\step4_with_stats.csv --output data\\outputs\\step5_with_hit_rates.csv" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 6 - Team Role Context"       $NBADir ".\\scripts\\step6_team_role_context.py"               "--input data\\outputs\\step5_with_hit_rates.csv --output data\\outputs\\step6_with_team_role_context.csv" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 6a - Opponent H2H Stats"     $NBADir ".\\scripts\\step6a_attach_opponent_stats_NBA.py"       "--input data\\outputs\\step6_with_team_role_context.csv --output data\\outputs\\step6a_with_opp_stats.csv --cache nba_espn_boxscore_cache.csv --opp-cache s6a_nba_opp_stats_cache.csv" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 6b - Game Context (Vegas)"   $NBADir ".\\scripts\\step6b_attach_game_context.py"            "--input data\\outputs\\step6a_with_opp_stats.csv --output data\\outputs\\step6b_with_game_context.csv --api_key `"$using:OddsApiKey`" --date $Date --cache `"game_context_cache_$Date.csv`"" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 6c - Schedule Flags (B2B)"   $NBADir ".\\scripts\\step6c_schedule_flags.py"                 "--input data\\outputs\\step6b_with_game_context.csv --output data\\outputs\\step6c_with_schedule_flags.csv --date $Date --cache `"schedule_cache_$Date.csv`"" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 6d - H2H Matchup Stats"      $NBADir ".\\scripts\\step6d_attach_h2h_matchups.py"            "--input data\\outputs\\step6c_with_schedule_flags.csv --cache nba_espn_boxscore_cache.csv --output data\\outputs\\step6d_with_h2h.csv" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 7 - Rank Props"              $NBADir ".\\scripts\\step7_rank_props.py"                      "--input data\\outputs\\step6d_with_h2h.csv --output data\\outputs\\step7_ranked_props.xlsx" }
+        if ($ok) { $ok = Run-Step-Job "NBA Step 8 - Direction Context"       $NBADir ".\\scripts\\step8_add_direction_context.py"           "--input data\\outputs\\step7_ranked_props.xlsx --sheet ALL --output data\\outputs\\step8_all_direction.csv" }
         # NBA S9 disabled -- tickets generated in combined_slate_tickets.py
         # if ($ok) { $ok = Run-Step-Job "NBA Step 9 - Build Tickets" $NBADir ".\\step9_build_tickets.py" "--input step8_all_direction_clean.xlsx --output best_tickets.xlsx --min_hit_rate 0.6 --legs 2,3,4" }
         return $ok
@@ -531,7 +531,7 @@ if ($CombinedOnly) {
     foreach ($job in $allJobs) { $out = Receive-Job $job -ErrorAction SilentlyContinue; foreach ($line in $out) { Write-Host "    $line" -ForegroundColor DarkGray } }
 
     # -- Determine success from output files ----------------------------------
-    $NBASuccess = Test-Path (Join-Path $NBADir "step8_all_direction_clean.xlsx")
+    $NBASuccess = Test-Path (Join-Path $NBADir "data\outputs\step8_all_direction_clean.xlsx")
     $CBBSuccess = Test-Path (Join-Path $CBBDir "step6_ranked_cbb.xlsx")
     if ($IncludeNHL)    { $NHLSuccess    = Test-Path (Join-Path $NHLDir    "outputs\step8_nhl_direction_clean.xlsx") }
     if ($IncludeMLB)    { $MLBSuccess    = Test-Path (Join-Path $MLBDir    "step8_mlb_direction_clean.xlsx") }
@@ -566,7 +566,7 @@ if (-not $NBAOnly -and -not $CBBOnly -and -not $NHLOnly -and -not $MLBOnly -and 
 
         $CombinedOut = Join-Path $OutDir "combined_slate_tickets_$Date.xlsx"
 
-        $CombinedArgs  = "--nba `"$NBADir\step8_all_direction_clean.xlsx`""
+        $CombinedArgs  = "--nba `"$NBADir\data\outputs\step8_all_direction_clean.xlsx`""
         $CombinedArgs += " --cbb `"$CBBDir\step6_ranked_cbb.xlsx`""
         if ($IncludeNHL -and (Test-Path "$NHLDir\outputs\step8_nhl_direction_clean.xlsx")) {
             $CombinedArgs += " --nhl `"$NHLDir\step8_nhl_direction_clean.xlsx`""

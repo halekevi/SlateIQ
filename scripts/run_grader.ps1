@@ -28,13 +28,16 @@ param(
 )
 
 $ErrorActionPreference = "Continue"
-$Root    = Split-Path -Parent $MyInvocation.MyCommand.Definition
+# Always resolve to repo root regardless of where the script lives
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$Root = if ((Split-Path -Leaf $ScriptDir) -eq "scripts") { Split-Path -Parent $ScriptDir } else { $ScriptDir }
 $NBADir     = "$Root\NBA"
 $CBBDir     = "$Root\CBB"
 $NHLDir     = "$Root\NHL"
 $SoccerDir  = "$Root\Soccer"
 $OutRoot = "$Root\outputs"
 $GraderDir = "$Root\grader"  # NEW: advanced graders location
+$ScriptsDir = "$Root\scripts"
 
 # ── Unified actuals fetcher ──
 $FetchActuals = "$Root\scripts\fetch_actuals.py"
@@ -218,13 +221,13 @@ if ($NHLOnly -or (-not $NBAOnly -and -not $CBBOnly -and -not $SoccerOnly)) {
                 if (Test-Path $NHLRecommendations) { Write-Host "  Recommendations -> $NHLRecommendations" -ForegroundColor Green }
             } else {
                 # Sport-specific grader (handles NHL/Soccer step8 format)
-                $NHLSoccerGrader = "$Root\nhl_soccer_grader.py"
+                $NHLSoccerGrader = "$ScriptsDir\nhl_soccer_grader.py"
                 if (Test-Path $NHLSoccerGrader) {
                     Run-Py "NHL Grade" $Root $NHLSoccerGrader @("--sport", "NHL", "--date", $Date, "--slate", $NHLSlate, "--actuals", $NHLActuals, "--output-dir", $DateDir)
                     if (Test-Path $NHLGraded) { Write-Host "  NHL graded -> $NHLGraded" -ForegroundColor Green }
                 } else {
                     Write-Host "  WARNING: nhl_soccer_grader.py not found at $NHLSoccerGrader" -ForegroundColor Red
-                    Write-Host "  Drop nhl_soccer_grader.py into $Root to enable NHL grading." -ForegroundColor Yellow
+                    Write-Host "  nhl_soccer_grader.py should be in $ScriptsDir" -ForegroundColor Yellow
                 }
             }
         } else {
@@ -253,7 +256,59 @@ if ($SoccerOnly -or (-not $NBAOnly -and -not $CBBOnly -and -not $NHLOnly)) {
     $SoccerSlate = "$SoccerDir\outputs\step8_soccer_direction_clean.xlsx"
     
     if (Test-Path $SoccerSlate) {
-        $ok = Run-Py "Soccer Fetch Actuals" $Root $FetchActuals @("--sport", "Soccer", "--date", $Date, "--output", $SoccerActuals)
+        # ── Derive game dates from the slate so we fetch the right actuals ──
+        # Soccer slates often cover multiple days (e.g. today + tomorrow).
+        # We collect all unique YYYY-MM-DD dates from the slate's Game Time column
+        # and fetch actuals for each one, then merge into a single actuals CSV.
+        $SoccerDates = @($Date)  # default: fall back to $Date if detection fails
+        if (Test-Path $SoccerSlate) {
+            $slateDatesRaw = & py -3.14 -c @"
+import pandas as pd, sys
+try:
+    xf = pd.ExcelFile(r'$SoccerSlate')
+    sheet = next((s for s in xf.sheet_names if 'all' in s.lower()), xf.sheet_names[0])
+    df = pd.read_excel(r'$SoccerSlate', sheet_name=sheet)
+    gt_col = next((c for c in df.columns if c.lower() in ('game time','game_time','gametime','kickoff')), None)
+    if gt_col:
+        dates = sorted(set(pd.to_datetime(df[gt_col], utc=True, errors='coerce').dropna().dt.date.astype(str).tolist()))
+        # Only dates <= today (already played)
+        from datetime import date
+        today = str(date.today())
+        dates = [d for d in dates if d <= today]
+        print('\n'.join(dates) if dates else '$Date')
+    else:
+        print('$Date')
+except Exception as e:
+    print('$Date')
+"@ 2>$null
+            if ($slateDatesRaw) {
+                $SoccerDates = @($slateDatesRaw -split "`n" | Where-Object { $_ -match '^\d{4}-\d{2}-\d{2}$' })
+                if ($SoccerDates.Count -eq 0) { $SoccerDates = @($Date) }
+            }
+            Write-Host "  Soccer game dates to fetch actuals for: $($SoccerDates -join ', ')" -ForegroundColor DarkGray
+        }
+
+        # Fetch actuals for each game date and merge
+        $allSoccerActuals = @()
+        foreach ($sDate in $SoccerDates) {
+            $sDailyActuals = "$DateDir\actuals_soccer_$sDate.csv"
+            if (-not (Test-Path $sDailyActuals)) {
+                Run-Py "Soccer Fetch Actuals ($sDate)" $Root $FetchActuals @("--sport", "Soccer", "--date", $sDate, "--output", $sDailyActuals) | Out-Null
+            }
+            if (Test-Path $sDailyActuals) { $allSoccerActuals += $sDailyActuals }
+        }
+
+        # Merge daily actuals into the main SoccerActuals path
+        if ($allSoccerActuals.Count -gt 1) {
+            & py -3.14 -c @"
+import pandas as pd
+files = r'$($allSoccerActuals -join '|')'.split('|')
+pd.concat([pd.read_csv(f) for f in files if __import__('os').path.exists(f)], ignore_index=True).to_csv(r'$SoccerActuals', index=False)
+print(f'Merged {len(files)} actuals files -> $SoccerActuals')
+"@ 2>&1 | ForEach-Object { Write-Host "      | $_" -ForegroundColor DarkGray }
+        } elseif ($allSoccerActuals.Count -eq 1 -and $allSoccerActuals[0] -ne $SoccerActuals) {
+            Copy-Item $allSoccerActuals[0] $SoccerActuals -Force
+        }
 
         if ($ok -or (Test-Path $SoccerActuals)) {
             if ($AdvancedMode -and -not $LegacyMode -and (Test-Path $SoccerAdvGrader)) {
@@ -268,13 +323,13 @@ if ($SoccerOnly -or (-not $NBAOnly -and -not $CBBOnly -and -not $NHLOnly)) {
                 if (Test-Path $SoccerRecommendations) { Write-Host "  Recommendations -> $SoccerRecommendations" -ForegroundColor Green }
             } else {
                 # Sport-specific grader (handles NHL/Soccer step8 format)
-                $NHLSoccerGrader = "$Root\nhl_soccer_grader.py"
+                $NHLSoccerGrader = "$ScriptsDir\nhl_soccer_grader.py"
                 if (Test-Path $NHLSoccerGrader) {
                     Run-Py "Soccer Grade" $Root $NHLSoccerGrader @("--sport", "Soccer", "--date", $Date, "--slate", $SoccerSlate, "--actuals", $SoccerActuals, "--output-dir", $DateDir)
                     if (Test-Path $SoccerGraded) { Write-Host "  Soccer graded -> $SoccerGraded" -ForegroundColor Green }
                 } else {
                     Write-Host "  WARNING: nhl_soccer_grader.py not found at $NHLSoccerGrader" -ForegroundColor Red
-                    Write-Host "  Drop nhl_soccer_grader.py into $Root to enable Soccer grading." -ForegroundColor Yellow
+                    Write-Host "  nhl_soccer_grader.py should be in $ScriptsDir" -ForegroundColor Yellow
                 }
             }
         } else {
@@ -345,7 +400,7 @@ Write-Host ""
 Write-Host "[ BUILDING GRADES HTML ]" -ForegroundColor Magenta
 Write-Host ""
 
-$BuildGradeReport = "$Root\build_grade_report.py"
+$BuildGradeReport = "$ScriptsDir\build_grade_report.py"
 
 if (Test-Path $BuildGradeReport) {
     $htmlArgs = @("--date", $Date)
@@ -374,7 +429,7 @@ Write-Host ""
 Write-Host "[ BUILDING TICKET EVAL HTML ]" -ForegroundColor Magenta
 Write-Host ""
 
-$BuildTicketEval = "$Root\build_ticket_eval_html.py"
+$BuildTicketEval = "$ScriptsDir\build_ticket_eval_html.py"
 $TicketGraded    = "$DateDir\combined_tickets_graded_$Date.xlsx"
 
 if (-not (Test-Path $BuildTicketEval)) {
@@ -392,5 +447,35 @@ Write-Host ""
 Write-Host "======================================================" -ForegroundColor Cyan
 Write-Host "  SlateIQ Grader Run Complete" -ForegroundColor Cyan
 Write-Host "======================================================" -ForegroundColor Cyan
+Write-Host ""
+
+# =============================================================================
+#  GIT PUSH — push grade reports to GitHub so Railway deploys them
+# =============================================================================
+Write-Host "[ PUSHING GRADE REPORTS TO GITHUB ]" -ForegroundColor Magenta
+Write-Host ""
+
+Push-Location $Root
+try {
+    $slateEval  = "ui_runner/templates/slate_eval_$Date.html"
+    $ticketEval = "ui_runner/templates/ticket_eval_$Date.html"
+
+    $filesToAdd = @()
+    if (Test-Path "$Root\$slateEval")  { $filesToAdd += $slateEval }
+    if (Test-Path "$Root\$ticketEval") { $filesToAdd += $ticketEval }
+
+    if ($filesToAdd.Count -eq 0) {
+        Write-Host "  No HTML reports found to push — skipping git." -ForegroundColor Yellow
+    } else {
+        git add @($filesToAdd) 2>&1 | Out-Null
+        git commit -m "grades: $Date slate + ticket eval" 2>&1 | Out-Null
+        git push origin main 2>&1 | ForEach-Object { Write-Host "  | $_" -ForegroundColor DarkGray }
+        Write-Host "  Pushed: $($filesToAdd -join ', ')" -ForegroundColor Green
+    }
+} catch {
+    Write-Host "  Git push failed: $_" -ForegroundColor Red
+} finally {
+    Pop-Location
+}
 Write-Host ""
 

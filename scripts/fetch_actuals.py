@@ -605,22 +605,181 @@ def fetch_nhl(date_str):
 
 
 # ── Parse Soccer ESPN box score ───────────────────────────────────────────────
+#
+# ESPN soccer roster stats are NOT flat arrays — each entry["stats"] is a
+# list of stat OBJECTS with this structure:
+#   {"name": "foulsCommitted", "abbreviation": "FC", "value": 0.0, ...}
+#
+# We index by abbreviation.upper() -> value.
+#
+# Known ESPN soccer abbreviations:
+#   G   = goals             A   = goalAssists (assists)
+#   SH  = totalShots        SOG = shotsOnTarget
+#   SV  = saves (GK)        PA  = totalPass
+#   KP  = keyPass           TK  = totalTackle
+#   FC  = foulsCommitted    YC  = yellowCards
+#   MIN = minsPlayed        RC  = redCards
+#   FA  = foulsSuffered     OG  = ownGoals
+#
 SOCCER_STAT_MAP = {
-    "shots_on_target": ["SOT", "SHT_ON_TARGET", "SHOTS_ON_TARGET"],
-    "shots":           ["SH", "SHOTS", "SHT"],
-    "goals":           ["G", "GOALS", "GL"],
-    "assists":         ["A", "ASSISTS", "AST"],
-    "saves":           ["SV", "SAVES"],
-    "passes":          ["PA", "PASSES"],
-    "key_passes":      ["KP", "KEY_PASSES"],
-    "tackles":         ["TK", "TACKLES"],
-    "fouls":           ["FL", "FOULS"],
-    "yellow_cards":    ["YC", "YELLOW"],
+    # Shots on target — ESPN uses SOG (shotsOnTarget)
+    "shots_on_target": ["SOG", "SOT", "SHOTSONTARGET", "ONTARGETSCORINGATT",
+                        "SHT_ON_TARGET", "SHOTS_ON_TARGET"],
+    # Total shots
+    "shots":           ["SH", "TOTALSHOTS", "SHOTS", "SHT", "ATTSHOT"],
+    # Goals
+    "goals":           ["G", "GOALS", "GL", "GLS"],
+    # Assists — ESPN uses "A" (goalAssists)
+    "assists":         ["A", "GOALASSISTS", "ASSISTS", "AST"],
+    # Goalkeeper saves
+    "saves":           ["SV", "SAVES", "SVS", "GOALSAVE"],
+    # Passes — ESPN uses "PA" (totalPass)
+    "passes":          ["PA", "TOTALPASS", "PASSES", "PS"],
+    # Key passes
+    "key_passes":      ["KP", "KEYPASS", "KEY_PASSES", "KEYPASSES"],
+    # Tackles — ESPN uses "TK" (totalTackle)
+    "tackles":         ["TK", "TOTALTACKLE", "TACKLES", "TCKS"],
+    # Fouls committed — ESPN uses "FC" (foulsCommitted)
+    "fouls":           ["FC", "FOULSCOMMITTED", "FL", "FOULS", "FOULSC"],
+    # Yellow cards — ESPN uses "YC" (yellowCards)
+    "yellow_cards":    ["YC", "YELLOWCARDS", "YELLOW", "YELLOWS"],
 }
 
+
+def _build_soccer_label_map(stats_list: list) -> dict:
+    """
+    Build {NORM_ABBREV: float_value} from an ESPN soccer stats list.
+
+    ESPN soccer uses TWO formats depending on the endpoint:
+      Format A (rosters path — confirmed by diagnostic):
+        stats_list = [
+          {"name": "foulsCommitted", "abbreviation": "FC", "value": 0.0, ...},
+          {"name": "goals",          "abbreviation": "G",  "value": 1.0, ...},
+          ...
+        ]
+      Format B (older / boxscore.players path):
+        stats_list = ["0", "1", "--", ...]   (flat strings, labels from parent)
+
+    This function handles Format A.  Format B is handled separately in the
+    boxscore.players fallback path.
+    """
+    norm = lambda s: re.sub(r"[^A-Z0-9]", "", str(s).upper())
+    label_map = {}
+    for stat in stats_list:
+        if not isinstance(stat, dict):
+            return {}  # not Format A — signal caller to use flat-array path
+        abbr = stat.get("abbreviation") or stat.get("name") or ""
+        val  = stat.get("value")
+        if abbr and val is not None:
+            try:
+                label_map[norm(abbr)] = float(val)
+            except (TypeError, ValueError):
+                pass
+    return label_map
+
+
+def _get_soccer_stat(label_map: dict, key: str):
+    """Look up a soccer stat from a label_map using SOCCER_STAT_MAP aliases."""
+    norm = lambda s: re.sub(r"[^A-Z0-9]", "", str(s).upper())
+    for alias in SOCCER_STAT_MAP.get(key, [key.upper()]):
+        k = norm(alias)
+        if k in label_map:
+            return label_map[k]
+    return None
+
+
+def _emit_soccer_rows(name: str, t_abbr: str, label_map: dict, league_id: str) -> list:
+    """Given a player's label_map, extract all soccer props and return row list."""
+    sot = _get_soccer_stat(label_map, "shots_on_target")
+    sh  = _get_soccer_stat(label_map, "shots")
+    g   = _get_soccer_stat(label_map, "goals")
+    ast = _get_soccer_stat(label_map, "assists")
+    sv  = _get_soccer_stat(label_map, "saves")
+    pa  = _get_soccer_stat(label_map, "passes")
+    kp  = _get_soccer_stat(label_map, "key_passes")
+    tk  = _get_soccer_stat(label_map, "tackles")
+    fl  = _get_soccer_stat(label_map, "fouls")
+    yc  = _get_soccer_stat(label_map, "yellow_cards")
+
+    if all(x is None for x in [sot, sh, g, ast, sv, pa, kp, tk, fl, yc]):
+        return []
+
+    prop_map = {
+        "Shots On Target":  sot,
+        "Shots":            sh,
+        "Goals":            g,
+        "Assists":          ast,
+        "Goalkeeper Saves": sv,
+        "Passes":           pa,
+        "Key Passes":       kp,
+        "Tackles":          tk,
+        "Fouls":            fl,
+        "Yellow Cards":     yc,
+    }
+    raw = {"SOT": sot, "SH": sh, "G": g, "A": ast,
+           "SV": sv,  "PA": pa, "KP": kp, "TK": tk}
+
+    out = []
+    for prop_type, actual in prop_map.items():
+        if actual is not None:
+            row = {
+                "player":    name,
+                "team":      t_abbr,
+                "prop_type": prop_type,
+                "actual":    round(float(actual), 1),
+                "league":    league_id,
+            }
+            for col, val in raw.items():
+                row[col] = round(float(val), 1) if val is not None else None
+            out.append(row)
+    return out
+
+
 def parse_soccer_boxscore(box, league_id):
-    """Parse soccer ESPN summary JSON into long-format actuals rows."""
+    """
+    Parse ESPN soccer summary JSON into long-format actuals rows.
+
+    ESPN soccer uses box['rosters'] where each athlete entry has:
+      entry['athlete']['displayName']
+      entry['stats'] = list of stat objects:
+        [{"abbreviation": "G", "value": 1.0}, {"abbreviation": "SH", "value": 3.0}, ...]
+
+    Fallback: some older endpoints use box['boxscore']['players'] with
+    flat stats arrays and parent-level labels (Format B).
+    """
     rows = []
+    norm = lambda s: re.sub(r"[^A-Z0-9]", "", str(s).upper())
+
+    # ── PATH 1 (primary): box['rosters'] with stat objects ────────────────────
+    rosters = box.get("rosters")
+    if isinstance(rosters, list) and len(rosters) > 0:
+        for team_block in rosters:
+            if not isinstance(team_block, dict):
+                continue
+            t_abbr = team_block.get("team", {}).get("abbreviation", "")
+
+            for entry in (team_block.get("roster") or []):
+                if not isinstance(entry, dict):
+                    continue
+                athlete = entry.get("athlete", {})
+                name    = str(athlete.get("displayName", "")).strip()
+                if not name:
+                    continue
+
+                stats_list = entry.get("stats") or []
+                if not stats_list:
+                    continue
+
+                label_map = _build_soccer_label_map(stats_list)
+                if not label_map:
+                    continue  # not stat-object format, skip
+
+                rows.extend(_emit_soccer_rows(name, t_abbr, label_map, league_id))
+
+        if rows:
+            return rows  # rosters path worked
+
+    # ── PATH 2 (fallback): box['boxscore']['players'] with flat arrays ────────
     players_blocks = box.get("boxscore", {}).get("players", [])
     if not isinstance(players_blocks, list):
         return rows
@@ -631,74 +790,26 @@ def parse_soccer_boxscore(box, league_id):
         t_abbr = team_block.get("team", {}).get("abbreviation", "")
 
         for stat_group in team_block.get("statistics", []):
-            labels = stat_group.get("labels") or stat_group.get("keys") or []
-            norm_labels = [re.sub(r"[^A-Z0-9_]", "", str(l).upper()) for l in labels]
-            athletes = stat_group.get("athletes") or []
+            parent_labels = stat_group.get("labels") or stat_group.get("keys") or []
+            norm_labels   = [norm(l) for l in parent_labels]
 
-            for a in athletes:
+            for a in (stat_group.get("athletes") or []):
                 athlete = a.get("athlete", {}) if isinstance(a, dict) else {}
-                name = str(athlete.get("displayName", "")).strip()
-                stats = a.get("stats") or []
-                if not stats or all(s in ("--", "", None) for s in stats):
+                name    = str(athlete.get("displayName", "")).strip()
+                if not name:
                     continue
-
+                flat_stats = a.get("stats") or []
+                if not flat_stats or all(s in ("--", "", None) for s in flat_stats):
+                    continue
                 label_map = {}
                 for i, lbl in enumerate(norm_labels):
-                    if i < len(stats):
-                        label_map[lbl] = stats[i]
+                    if i < len(flat_stats):
+                        try:
+                            label_map[lbl] = float(flat_stats[i])
+                        except (TypeError, ValueError):
+                            pass
+                rows.extend(_emit_soccer_rows(name, t_abbr, label_map, league_id))
 
-                def get_s(key):
-                    for alias in SOCCER_STAT_MAP.get(key, [key.upper()]):
-                        norm = re.sub(r"[^A-Z0-9_]", "", alias.upper())
-                        if norm in label_map:
-                            try:
-                                return float(label_map[norm])
-                            except (ValueError, TypeError):
-                                pass
-                    return None
-
-                sot  = get_s("shots_on_target")
-                sh   = get_s("shots")
-                g    = get_s("goals")
-                ast  = get_s("assists")
-                sv   = get_s("saves")
-                pa   = get_s("passes")
-                kp   = get_s("key_passes")
-                tk   = get_s("tackles")
-                fl   = get_s("fouls")
-                yc   = get_s("yellow_cards")
-
-                if all(x is None for x in [sot, sh, g, sv]):
-                    continue
-
-                prop_map = {
-                    "Shots On Target": sot,
-                    "Shots":           sh,
-                    "Goals":           g,
-                    "Assists":         ast,
-                    "Goalkeeper Saves": sv,
-                    "Passes":          pa,
-                    "Key Passes":      kp,
-                    "Tackles":         tk,
-                    "Fouls":           fl,
-                    "Yellow Cards":    yc,
-                }
-                raw = {
-                    "SOT": sot, "SH": sh, "G": g, "A": ast,
-                    "SV": sv, "PA": pa, "KP": kp, "TK": tk,
-                }
-                for prop_type, actual in prop_map.items():
-                    if actual is not None:
-                        row = {
-                            "player":    name,
-                            "team":      t_abbr,
-                            "prop_type": prop_type,
-                            "actual":    round(float(actual), 1),
-                            "league":    league_id,
-                        }
-                        for col, val in raw.items():
-                            row[col] = round(float(val), 1) if val is not None else None
-                        rows.append(row)
     return rows
 
 
@@ -720,7 +831,7 @@ def fetch_soccer(date_str):
             print(f"  {league_name}: {len(events)} events")
 
             for event in events:
-                state = event.get("status", {}).get("type", {}).get("state", "")
+                state     = event.get("status", {}).get("type", {}).get("state", "")
                 completed = event.get("status", {}).get("type", {}).get("completed", False)
                 if state != "post" and not completed:
                     continue
@@ -735,9 +846,26 @@ def fetch_soccer(date_str):
                     sum_url = SOCCER_SUMMARY_BASE.format(league=league_id, event_id=event_id)
                     br = requests.get(sum_url, headers=HEADERS, timeout=20)
                     br.raise_for_status()
-                    rows = parse_soccer_boxscore(br.json(), league_id)
-                    all_rows.extend(rows)
-                    print(f"      -> {len(rows)} stat rows")
+                    box_json = br.json()
+                    game_rows = parse_soccer_boxscore(box_json, league_id)
+                    all_rows.extend(game_rows)
+                    if len(game_rows) == 0:
+                        # Diagnostic: dump first athlete's actual stats structure
+                        rosters = box_json.get("rosters", [])
+                        if isinstance(rosters, list) and rosters:
+                            first_team  = rosters[0] if isinstance(rosters[0], dict) else {}
+                            roster_list = first_team.get("roster") or []
+                            first_entry = roster_list[0] if roster_list else {}
+                            entry_stats = first_entry.get("stats", [])
+                            # Show abbreviations found so we can add missing aliases
+                            abbrevs = [s.get("abbreviation","?") for s in entry_stats
+                                       if isinstance(s, dict)]
+                            print(f"      WARNING: 0 rows — stat abbrevs in roster: {abbrevs}")
+                        else:
+                            print(f"      WARNING: 0 rows — no rosters block found")
+                            print(f"      Top-level keys: {list(box_json.keys())}")
+                    else:
+                        print(f"      -> {len(game_rows)} stat rows")
                     time.sleep(0.2)
                 except Exception as e:
                     print(f"      ERROR: {e}")

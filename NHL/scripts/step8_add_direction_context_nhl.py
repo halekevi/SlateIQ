@@ -70,6 +70,7 @@ COLUMN_ALIASES = {
     "prop_display":     ["stat_type", "prop_display"],
     "prop_type":        ["stat_norm", "prop_type"],
     "line":             ["line_score", "line"],
+    "pick_type":        ["pick_type"],
     "direction":        ["recommended_side", "bet_dir", "dir", "direction"],
     "opp":              ["opponent", "opp_team", "opp"],
     "composite_hr":     ["composite_hit_rate", "composite_hr"],
@@ -250,6 +251,7 @@ def build_display_row(raw: dict, available_cols: set) -> dict:
         # Model scores
         "prop_score":       fmt_num(r("prop_score"), 5),
         "edge":             fmt_num(r("edge"), 4),
+        "pick_type":        r("pick_type"),
     }
 
 

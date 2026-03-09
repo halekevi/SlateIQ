@@ -82,6 +82,64 @@ PAYOUT = {
     6: {"power": 37.5, "flex": 25.0},  # Updated: power=37.5x, flex=25x
 }
 
+# ── Goblin / Demon payout adjustment ─────────────────────────────────────────
+# Goblin: line moved in your favor → REDUCES payout LINEARLY per unit of
+#   line_discount_vs_standard.  Each 0.5pt of line movement cuts payout by
+#   GOBLIN_REDUCTION_PER_UNIT * 0.5.  Tune this constant against real
+#   PrizePicks payout tables once you have more graded data.
+#   Current value: 0.18 per unit → 0.5pt goblin ≈ 9% payout reduction per leg.
+GOBLIN_REDUCTION_PER_UNIT: float = 0.18   # ← tune me
+GOBLIN_MAX_REDUCTION:      float = 0.60   # single-leg reduction cap (60%)
+
+# Demon: line moved against you → BOOSTS payout MULTIPLICATIVELY per unit.
+#   DEMON_BOOST_PER_UNIT * discount applied as a multiplier per leg.
+#   Current value: 0.28 per unit → 0.5pt demon ≈ 14% payout boost per leg.
+DEMON_BOOST_PER_UNIT: float = 0.28        # ← tune me
+DEMON_MAX_BOOST:      float = 2.50        # single-leg multiplier cap (2.5×)
+
+# Min EV threshold for a ticket to be included in output.
+# ev = est_win_prob × adj_power_payout.  ev < 1.0 means expected loss.
+# Set slightly above 1.0 for a small profit margin cushion.
+MIN_TICKET_EV: float = 1.05              # ← tune me (1.0 = break-even)
+
+
+def calc_adjusted_payout(base_payout: float, legs: list) -> float:
+    """
+    Adjusts base_payout for Goblin (linear reduction) and Demon
+    (multiplicative boost) legs based on how far each line was moved
+    from the Standard reference (line_discount_vs_standard).
+
+    Goblin legs reduce payout linearly:
+        reduction = min(discount * GOBLIN_REDUCTION_PER_UNIT, GOBLIN_MAX_REDUCTION)
+        multiplier *= (1 - reduction)
+
+    Demon legs boost payout multiplicatively:
+        boost = min(1 + discount * DEMON_BOOST_PER_UNIT, DEMON_MAX_BOOST)
+        multiplier *= boost
+
+    Standard legs: no adjustment (multiplier unchanged).
+
+    Returns adjusted payout rounded to 2 decimal places.
+    """
+    multiplier = 1.0
+    for leg in legs:
+        pt = str(leg.get("pick_type", "")).strip()
+        raw_discount = leg.get("line_discount_vs_standard")
+        try:
+            discount = abs(float(raw_discount))
+        except (TypeError, ValueError):
+            discount = 0.0
+
+        if pt == "Goblin":
+            reduction = min(discount * GOBLIN_REDUCTION_PER_UNIT, GOBLIN_MAX_REDUCTION)
+            multiplier *= max(0.0, 1.0 - reduction)
+        elif pt == "Demon":
+            boost = min(1.0 + discount * DEMON_BOOST_PER_UNIT, DEMON_MAX_BOOST)
+            multiplier *= boost
+        # Standard: no change
+
+    return round(base_payout * multiplier, 2)
+
 # ── Per-leg count quality thresholds (used by smart ticket builder) ───────────
 # Min hit rate required per leg depending on ticket length
 # Longer tickets need higher floor because win prob = product of all hit rates
@@ -392,6 +450,11 @@ def ticket_groups_to_payload(all_ticket_groups, date_str, thresholds):
                 "avg_hit_rate": _safe_float(t.get("avg_hit_rate")),
                 "avg_rank_score": _safe_float(t.get("avg_rank_score")),
                 "est_win_prob": _safe_float(t.get("est_win_prob")),
+                "power_payout": _safe_float(t.get("power_payout")),
+                "flex_payout": _safe_float(t.get("flex_payout")),
+                "base_power_payout": _safe_float(t.get("base_power_payout")),
+                "payout_multiplier": _safe_float(t.get("payout_multiplier")),
+                "ev_power": _safe_float(t.get("ev_power")),
                 "legs": [],
             }
 
@@ -1051,6 +1114,8 @@ def load_nhl(path: str) -> pd.DataFrame:
         "line_score":         "line",
         "recommended_side":   "direction",
         "composite_hit_rate": "hit_rate",
+        "Composite Hit Rate": "hit_rate",
+        "composite_hr":       "hit_rate",
         "avg_L5":             "l5_avg",
         "avg_season":         "season_avg",
         "def_tier":           "def_tier",
@@ -1058,6 +1123,23 @@ def load_nhl(path: str) -> pd.DataFrame:
         "prop_score":         "rank_score",
         "game_start":         "game_time",
     })
+
+    # Fallback: derive hit_rate from hit_rate_over_L10 if still missing
+    if "hit_rate" not in df.columns or df["hit_rate"].isna().all():
+        for fallback_col in ("hit_rate_over_L10", "hit_rate_over_L5", "hit_rate_over_L20",
+                             "over_L10", "over_L5"):
+            if fallback_col in df.columns:
+                df["hit_rate"] = pd.to_numeric(df[fallback_col], errors="coerce")
+                print(f"  [load_nhl] hit_rate sourced from '{fallback_col}'")
+                break
+
+    # Normalize hit_rate to 0-1 — handle "94.0%", "0.94", or 94.0
+    if "hit_rate" in df.columns:
+        hr = df["hit_rate"].astype(str).str.replace("%", "", regex=False).str.strip()
+        hr = pd.to_numeric(hr, errors="coerce")
+        if hr.dropna().max() > 1.5:   # clearly a percentage value (e.g. 94.0)
+            hr = hr / 100.0
+        df["hit_rate"] = hr
 
     # opponent is stored in 'description' column
     if "opp" not in df.columns:
@@ -1370,6 +1452,16 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets=20, require_mix=F
                 avg_rs = float(np.mean(rss)) if rss else 0.0
                 ep = win_prob(hrs, n_legs)
                 pout = PAYOUT.get(n_legs, {"power": 0, "flex": 0})
+
+                # Adjust payouts for Goblin (reduces) and Demon (boosts)
+                adj_power = calc_adjusted_payout(pout["power"], ticket_rows)
+                adj_flex  = calc_adjusted_payout(pout["flex"],  ticket_rows)
+
+                # EV gate: skip tickets with negative expected value
+                ev_power = ep * adj_power
+                if ev_power < MIN_TICKET_EV:
+                    continue
+
                 tickets.append(
                     {
                         "key": key,
@@ -1377,8 +1469,11 @@ def build_tickets(pool: pd.DataFrame, n_legs: int, max_tickets=20, require_mix=F
                         "avg_hit_rate": avg_hr,
                         "avg_rank_score": avg_rs,
                         "est_win_prob": ep,
-                        "power_payout": pout["power"],
-                        "flex_payout": pout["flex"],
+                        "power_payout": adj_power,
+                        "flex_payout":  adj_flex,
+                        "base_power_payout": pout["power"],  # kept for reference
+                        "payout_multiplier": round(adj_power / pout["power"], 4) if pout["power"] else 1.0,
+                        "ev_power": round(ev_power, 4),
                         "n_legs": n_legs,
                     }
                 )
@@ -1457,6 +1552,18 @@ def build_mixed_picktype_tickets(pool_df: pd.DataFrame, n_legs: int, max_tickets
                 ep = win_prob(hrs, n_legs)
                 pout = PAYOUT.get(n_legs, {"power": 0, "flex": 0})
 
+                # Adjust payouts for Goblin/Demon legs
+                adj_power = calc_adjusted_payout(pout["power"], legs)
+                adj_flex  = calc_adjusted_payout(pout["flex"],  legs)
+
+                # EV gate
+                ev_power = ep * adj_power
+                if ev_power < MIN_TICKET_EV:
+                    std_start = min(std_start + 1, max(len(std) - 1, 0))
+                    if len(gob) > 0:
+                        gob_start = min(gob_start + 1, max(len(gob) - 1, 0))
+                    continue
+
                 key = frozenset((str(x.get("player", "")) + "|" + str(x.get("prop_type", ""))).strip() for x in legs)
                 if key not in [t["key"] for t in tickets]:
                     tickets.append(
@@ -1466,8 +1573,11 @@ def build_mixed_picktype_tickets(pool_df: pd.DataFrame, n_legs: int, max_tickets
                             "avg_hit_rate": avg_hr,
                             "avg_rank_score": avg_rs,
                             "est_win_prob": ep,
-                            "power_payout": pout["power"],
-                            "flex_payout": pout["flex"],
+                            "power_payout": adj_power,
+                            "flex_payout":  adj_flex,
+                            "base_power_payout": pout["power"],
+                            "payout_multiplier": round(adj_power / pout["power"], 4) if pout["power"] else 1.0,
+                            "ev_power": round(ev_power, 4),
                             "n_legs": n_legs,
                         }
                     )
@@ -1754,11 +1864,18 @@ def write_ticket_sheet(wb, tickets, sheet_name, bg_hdr, label=""):
         ep = ticket["est_win_prob"]
         avg_rs = ticket["avg_rank_score"]
 
+        base_pout  = ticket.get("base_power_payout", pout)
+        pay_mult   = ticket.get("payout_multiplier", 1.0)
+        ev_pow     = ticket.get("ev_power", round(ep * pout, 4))
+        mult_label = (
+            f"  ·  Payout Mult: {pay_mult:.2f}x (base {base_pout}x → adj {pout}x)"
+            if abs(pay_mult - 1.0) > 0.001 else ""
+        )
         banner = (
             f"  Ticket #{ti}  ·  {n}-Leg {label}  ·  "
             f"Power: {pout}x (${cost:.0f} to win $100)  ·  Flex: {fout}x  ·  "
-            f"Avg Hit Rate: {avg_hr:.0%}  ·  Est Win Prob: {ep:.0%}  ·  "
-            f"Avg Rank Score: {avg_rs:.2f}"
+            f"Avg Hit Rate: {avg_hr:.0%}  ·  Est Win Prob: {ep:.0%}  ·  EV: {ev_pow:.2f}  ·  "
+            f"Avg Rank Score: {avg_rs:.2f}{mult_label}"
         )
         ws.merge_cells(start_row=ri, start_column=1, end_row=ri, end_column=len(TICKET_COLS))
         hc(ws, ri, 1, banner, bg=bg_hdr, sz=9, align="left")
@@ -1880,22 +1997,28 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
 
     row = sec(row, "🎟️ TICKET SUMMARY", C["hdr_mix"])
     for ci, h in enumerate(
-        ["Sheet", "Legs", "Type", "# Tickets", "Avg Hit Rate", "Avg Win Prob", "Avg Rank Score", "Power Payout", "Players"],
+        ["Sheet", "Legs", "Type", "# Tickets", "Avg Hit Rate", "Avg Win Prob", "Avg Rank Score", "Adj Power Payout", "Avg EV", "Payout Mult", "Players"],
         1,
     ):
         hc(ws, row, ci, h, bg=C["hdr"], sz=8)
     ws.row_dimensions[row].height = 14
     row += 1
 
+    sw(ws, [28, 14, 10, 10, 10, 10, 10, 12, 10, 11, 18])
+
     for group_name, tickets, bg_row in all_ticket_groups:
         if not tickets:
             continue
-        avg_hr = np.mean([t["avg_hit_rate"] for t in tickets])
-        avg_wp = np.mean([t["est_win_prob"] for t in tickets])
-        avg_rs = np.mean([t["avg_rank_score"] for t in tickets])
-        n = tickets[0]["n_legs"]
+        avg_hr  = np.mean([t["avg_hit_rate"] for t in tickets])
+        avg_wp  = np.mean([t["est_win_prob"] for t in tickets])
+        avg_rs  = np.mean([t["avg_rank_score"] for t in tickets])
+        avg_ev  = np.mean([t.get("ev_power", t["est_win_prob"] * t["power_payout"]) for t in tickets])
+        avg_pm  = np.mean([t.get("payout_multiplier", 1.0) for t in tickets])
+        n    = tickets[0]["n_legs"]
         pout = tickets[0]["power_payout"]
-        bg = bg_row if bg_row else (C["alt"] if row % 2 == 0 else C["white"])
+        bg   = bg_row if bg_row else (C["alt"] if row % 2 == 0 else C["white"])
+        # colour the EV cell: green ≥ 1.2, amber 1.0–1.2, red < 1.0
+        ev_bg = C["hit"] if avg_ev >= 1.2 else (C["push"] if avg_ev >= 1.0 else C["miss"])
         dc(ws, row, 1, group_name, bg=bg, align="left", bold=True)
         dc(ws, row, 2, n, bg=bg)
         lbl = group_name.split(" ")[0] if group_name else ""
@@ -1905,8 +2028,10 @@ def write_summary(wb, nba, cbb, combined, all_ticket_groups, date_str, threshold
         pct_cell(ws, row, 6, avg_wp)
         dc(ws, row, 7, round(avg_rs, 2), bg=bg)
         dc(ws, row, 8, f"{pout}x", bg=bg)
+        dc(ws, row, 9, round(avg_ev, 2), bg=ev_bg, bold=True, fc="FFFFFF")
+        dc(ws, row, 10, f"{avg_pm:.2f}x", bg=bg)
         sample = " | ".join(f"{r.get('player','')}" for r in tickets[0]["rows"][:3]) + ("..." if n > 3 else "")
-        dc(ws, row, 9, sample, bg=bg, align="left", sz=8)
+        dc(ws, row, 11, sample, bg=bg, align="left", sz=8)
         row += 1
 
 
