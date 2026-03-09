@@ -492,9 +492,9 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step1_fetch_prizepicks_nhl.py",
+            ".\\scripts\\step1_fetch_prizepicks_nhl.py",
             "--output",
-            "step1_nhl_props.csv"
+            "outputs\\step1_nhl_props.csv"
           ]
         },
         {
@@ -503,11 +503,11 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step2_attach_picktypes_nhl.py",
+            ".\\scripts\\step2_attach_picktypes_nhl.py",
             "--input",
-            "step1_nhl_props.csv",
+            "outputs\\step1_nhl_props.csv",
             "--output",
-            "step2_nhl_picktypes.csv"
+            "outputs\\step2_nhl_picktypes.csv"
           ]
         },
         {
@@ -516,11 +516,11 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step3_attach_defense_nhl.py",
+            ".\\scripts\\step3_attach_defense_nhl.py",
             "--input",
-            "step2_nhl_picktypes.csv",
+            "outputs\\step2_nhl_picktypes.csv",
             "--output",
-            "step3_nhl_with_defense.csv"
+            "outputs\\step3_nhl_with_defense.csv"
           ]
         },
         {
@@ -529,15 +529,13 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step4_attach_player_stats_nhl.py",
+            ".\\scripts\\step4_attach_player_stats_nhl.py",
             "--input",
-            "step3_nhl_with_defense.csv",
+            "outputs\\step3_nhl_with_defense.csv",
             "--cache",
-            "nhl_stats_cache.csv",
+            "cache\\nhl_stats_cache.csv",
             "--output",
-            "step4_nhl_with_stats.csv",
-            "--season",
-            "20242025",
+            "outputs\\step4_nhl_with_stats.csv",
             "--max-games",
             "30"
           ]
@@ -548,11 +546,13 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step5_add_line_hit_rates_nhl.py",
+            ".\\scripts\\step5_add_line_hit_rates_nhl.py",
             "--input",
-            "step4_nhl_with_stats.csv",
+            "outputs\\step4_nhl_with_stats.csv",
             "--output",
-            "step5_nhl_hit_rates.csv"
+            "outputs\\step5_nhl_hit_rates.csv",
+            "--gamelog-cache",
+            "cache\\nhl_gamelog_cache.json"
           ]
         },
         {
@@ -561,11 +561,11 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step6_team_role_context_nhl.py",
+            ".\\scripts\\step6_team_role_context_nhl.py",
             "--input",
-            "step5_nhl_hit_rates.csv",
+            "outputs\\step5_nhl_hit_rates.csv",
             "--output",
-            "step6_nhl_role_context.csv"
+            "outputs\\step6_nhl_role_context.csv"
           ]
         },
         {
@@ -574,11 +574,11 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step7_rank_props_nhl.py",
+            ".\\scripts\\step7_rank_props_nhl.py",
             "--input",
-            "step6_nhl_role_context.csv",
+            "outputs\\step6_nhl_role_context.csv",
             "--output",
-            "step7_nhl_ranked.xlsx"
+            "outputs\\step7_nhl_ranked.xlsx"
           ]
         },
         {
@@ -587,11 +587,13 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step8_add_direction_context_nhl.py",
+            ".\\scripts\\step8_add_direction_context_nhl.py",
             "--input",
-            "step7_nhl_ranked.xlsx",
+            "outputs\\step7_nhl_ranked.xlsx",
             "--output",
-            "step8_nhl_direction.csv"
+            "outputs\\step8_nhl_direction.csv",
+            "--xlsx",
+            "outputs\\step8_nhl_direction_clean.xlsx"
           ]
         },
         {
@@ -622,8 +624,7 @@
             "nhl_step5",
             "nhl_step6",
             "nhl_step7",
-            "nhl_step8",
-            "nhl_step9"
+            "nhl_step8"
           ]
         },
         {
@@ -634,8 +635,7 @@
             "nhl_step5",
             "nhl_step6",
             "nhl_step7",
-            "nhl_step8",
-            "nhl_step9"
+            "nhl_step8"
           ]
         },
         {
@@ -832,9 +832,9 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step1_fetch_prizepicks_soccer.py",
+            ".\\scripts\\step1_fetch_prizepicks_soccer.py",
             "--output",
-            "step1_soccer_props.csv"
+            "outputs\\step1_soccer_props.csv"
           ]
         },
         {
@@ -843,11 +843,15 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step2_attach_picktypes_soccer.py",
+            ".\\scripts\\step2_attach_picktypes_soccer.py",
             "--input",
-            "step1_soccer_props.csv",
+            "outputs\\step1_soccer_props.csv",
             "--output",
-            "step2_soccer_picktypes.csv"
+            "outputs\\step2_soccer_picktypes.csv",
+            "--idcache",
+            "cache\\soccer_espn_id_cache.csv",
+            "--rostercache",
+            "cache\\soccer_roster_cache.csv"
           ]
         },
         {
@@ -856,13 +860,13 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step3_attach_defense_soccer.py",
+            ".\\scripts\\step3_attach_defense_soccer.py",
             "--input",
-            "step2_soccer_picktypes.csv",
+            "outputs\\step2_soccer_picktypes.csv",
             "--defense",
-            "soccer_defense_summary.csv",
+            "cache\\soccer_defense_summary.csv",
             "--output",
-            "step3_soccer_with_defense.csv"
+            "outputs\\step3_soccer_with_defense.csv"
           ]
         },
         {
@@ -871,13 +875,15 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step4_attach_player_stats_soccer.py",
+            ".\\scripts\\step4_attach_player_stats_soccer.py",
             "--input",
-            "step3_soccer_with_defense.csv",
+            "outputs\\step3_soccer_with_defense.csv",
             "--cache",
-            "soccer_stats_cache.csv",
+            "cache\\soccer_stats_cache.csv",
             "--output",
-            "step4_soccer_with_stats.csv"
+            "outputs\\step4_soccer_with_stats.csv",
+            "--workers",
+            "6"
           ]
         },
         {
@@ -886,11 +892,12 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step5_add_line_hit_rates_soccer.py",
+            ".\\scripts\\step5_add_line_hit_rates_soccer.py",
             "--input",
-            "step4_soccer_with_stats.csv",
+            "outputs\\step4_soccer_with_stats.csv",
             "--output",
-            "step5_soccer_hit_rates.csv"
+            "outputs\\step5_soccer_hit_rates.csv",
+            "--compute10"
           ]
         },
         {
@@ -899,11 +906,11 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step6_team_role_context_soccer.py",
+            ".\\scripts\\step6_team_role_context_soccer.py",
             "--input",
-            "step5_soccer_hit_rates.csv",
+            "outputs\\step5_soccer_hit_rates.csv",
             "--output",
-            "step6_soccer_role_context.csv"
+            "outputs\\step6_soccer_role_context.csv"
           ]
         },
         {
@@ -912,11 +919,13 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step7_rank_props_soccer.py",
+            ".\\scripts\\step7_rank_props_soccer.py",
             "--input",
-            "step6_soccer_role_context.csv",
+            "outputs\\step6_soccer_role_context.csv",
             "--output",
-            "step7_soccer_ranked.xlsx"
+            "outputs\\step7_soccer_ranked.xlsx",
+            "--n_teams",
+            "15"
           ]
         },
         {
@@ -925,11 +934,15 @@
           "cmd": [
             "py",
             "-3.14",
-            ".\\step8_add_direction_context_soccer.py",
+            ".\\scripts\\step8_add_direction_context_soccer.py",
             "--input",
-            "step7_soccer_ranked.xlsx",
+            "outputs\\step7_soccer_ranked.xlsx",
+            "--sheet",
+            "ALL",
             "--output",
-            "step8_soccer_direction.csv"
+            "outputs\\step8_soccer_direction.csv",
+            "--xlsx",
+            "outputs\\step8_soccer_direction_clean.xlsx"
           ]
         },
         {
@@ -960,8 +973,7 @@
             "soccer_step5",
             "soccer_step6",
             "soccer_step7",
-            "soccer_step8",
-            "soccer_step9"
+            "soccer_step8"
           ]
         },
         {
@@ -972,8 +984,7 @@
             "soccer_step5",
             "soccer_step6",
             "soccer_step7",
-            "soccer_step8",
-            "soccer_step9"
+            "soccer_step8"
           ]
         },
         {

@@ -46,10 +46,10 @@ NBA_FLAG      = NBA_DIR / "RUN_COMPLETE.flag"
 NBA_SLATE     = NBA_DIR / "step8_all_direction_clean.xlsx"
 NBA_TICKETS   = NBA_DIR / "best_tickets.xlsx"
 CBB_SLATE     = CBB_DIR / "step6_ranked_cbb.xlsx"
-NHL_SLATE     = NHL_DIR / "step8_nhl_direction_clean.xlsx"
-NHL_TICKETS   = NHL_DIR / "nhl_best_tickets.xlsx"
-SOCCER_SLATE  = SOCCER_DIR / "step8_soccer_direction_clean.xlsx"
-SOCCER_TICKETS= SOCCER_DIR / "soccer_best_tickets.xlsx"
+NHL_SLATE     = NHL_DIR / "outputs" / "step8_nhl_direction_clean.xlsx"
+NHL_TICKETS   = NHL_DIR / "outputs" / "nhl_best_tickets.xlsx"
+SOCCER_SLATE  = SOCCER_DIR / "outputs" / "step8_soccer_direction_clean.xlsx"
+SOCCER_TICKETS= SOCCER_DIR / "outputs" / "soccer_best_tickets.xlsx"
 COMBINED_OUT  = BASE_DIR  # combined_slate_tickets_YYYY-MM-DD.xlsx lives here
 
 app = Flask(
