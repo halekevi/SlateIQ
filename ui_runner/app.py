@@ -275,7 +275,11 @@ def home():
 def page_tickets():
     target = TEMPLATES_DIR / "tickets_latest.html"
     if target.exists():
-        return send_from_directory(str(TEMPLATES_DIR), "tickets_latest.html")
+        response = send_from_directory(str(TEMPLATES_DIR), "tickets_latest.html")
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
     return "tickets_latest.html not found. Run the pipeline first.", 404
 
 
@@ -294,7 +298,10 @@ def serve_grade_report(date: str):
     """Serve individual slate_eval_YYYY-MM-DD.html files for the grades iframe."""
     fname = f"slate_eval_{date}.html"
     if TEMPLATES_DIR.exists() and (TEMPLATES_DIR / fname).exists():
-        return send_from_directory(str(TEMPLATES_DIR), fname)
+        response = send_from_directory(str(TEMPLATES_DIR), fname)
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        return response
     abort(404)
 
 
@@ -303,7 +310,10 @@ def serve_ticket_eval_report(date: str):
     """Serve individual ticket_eval_YYYY-MM-DD.html files for the ticket evaluation iframe."""
     fname = f"ticket_eval_{date}.html"
     if TEMPLATES_DIR.exists() and (TEMPLATES_DIR / fname).exists():
-        return send_from_directory(str(TEMPLATES_DIR), fname)
+        response = send_from_directory(str(TEMPLATES_DIR), fname)
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        return response
     abort(404)
 
 
