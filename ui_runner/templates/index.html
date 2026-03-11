@@ -19,6 +19,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 @keyframes gridScroll{from{background-position:0 0;}to{background-position:0 40px;}}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 4px);pointer-events:none;z-index:0;}
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:4px}
+
 /* brain logo */
 .brain-wrap{position:relative;width:46px;height:46px;flex-shrink:0;}
 .brain-slate{position:absolute;inset:0;border-radius:7px;background:linear-gradient(145deg,#12122a 0%,#080818 100%);border:1px solid #252545;animation:slateBreak 3.5s ease-in-out infinite;}
@@ -34,6 +35,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .bsp.lg{width:4px;height:4px;background:#c8ff00;box-shadow:0 0 6px #c8ff00;}.bsp.md{width:3px;height:3px;background:#00e5ff;box-shadow:0 0 5px #00e5ff;}.bsp.sm{width:2px;height:2px;background:#c8ff00cc;}.bsp.cy{width:2px;height:2px;background:#00e5ffcc;}
 .bsp:nth-child(5){top:10%;left:5%;--tx:-16px;--ty:-14px;animation-delay:.50s;}.bsp:nth-child(6){top:5%;left:40%;--tx:2px;--ty:-20px;animation-delay:.52s;}.bsp:nth-child(7){top:8%;left:75%;--tx:14px;--ty:-16px;animation-delay:.54s;}.bsp:nth-child(8){top:30%;left:96%;--tx:20px;--ty:-8px;animation-delay:.51s;}.bsp:nth-child(9){top:55%;left:96%;--tx:18px;--ty:8px;animation-delay:.53s;}.bsp:nth-child(10){top:80%;left:85%;--tx:12px;--ty:14px;animation-delay:.55s;}.bsp:nth-child(11){top:92%;left:55%;--tx:4px;--ty:20px;animation-delay:.50s;}.bsp:nth-child(12){top:90%;left:25%;--tx:-10px;--ty:18px;animation-delay:.52s;}.bsp:nth-child(13){top:70%;left:2%;--tx:-18px;--ty:10px;animation-delay:.54s;}.bsp:nth-child(14){top:45%;left:0%;--tx:-20px;--ty:0px;animation-delay:.51s;}.bsp:nth-child(15){top:20%;left:2%;--tx:-16px;--ty:-10px;animation-delay:.56s;}.bsp:nth-child(16){top:15%;left:60%;--tx:8px;--ty:-18px;animation-delay:.53s;}.bsp:nth-child(17){top:18%;left:20%;--tx:-12px;--ty:-16px;animation-delay:.65s;}.bsp:nth-child(18){top:12%;left:55%;--tx:6px;--ty:-18px;animation-delay:.67s;}.bsp:nth-child(19){top:25%;left:88%;--tx:16px;--ty:-12px;animation-delay:.66s;}.bsp:nth-child(20){top:60%;left:93%;--tx:16px;--ty:10px;animation-delay:.68s;}
 @keyframes bSpark{0%,47%{opacity:0;transform:translate(0,0) scale(0);}50%{opacity:1;transform:translate(0,0) scale(1);}75%{opacity:.5;}95%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.2);}100%{opacity:0;}}
+
 /* nav */
 .snav{position:sticky;top:0;z-index:200;background:rgba(2,4,8,.92);backdrop-filter:blur(32px) saturate(1.8);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;height:72px;gap:0;}
 .nav-accent{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,var(--lime,#c6ff00) 15%,var(--cyan) 40%,var(--purple) 65%,var(--lime,#c6ff00) 85%,transparent 100%);opacity:.7;animation:accentShift 6s ease-in-out infinite alternate;}
@@ -46,7 +48,6 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .snav-links li a:hover{color:var(--text);background:rgba(255,255,255,.02);}
 .snav-links li a.active{color:var(--accent);border-bottom-color:var(--accent);}
 .snav-links li a.active::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent),0 0 24px rgba(200,255,0,.5);}
-/* per-link hover accent colors */
 .snav-links li:nth-child(1) a:hover{color:var(--cyan);}
 .snav-links li:nth-child(2) a:hover{color:var(--accent);}
 .snav-links li:nth-child(3) a:hover{color:var(--purple);}
@@ -68,92 +69,8 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .live-pill{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;padding:6px 14px;border-radius:100px;border:1px solid rgba(0,255,170,.25);color:var(--green);background:rgba(0,255,170,.04);display:flex;align-items:center;gap:8px;}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-/* header */
-header{position:relative;z-index:1;background:rgba(5,5,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:18px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:62px;z-index:90;}
-.logo{display:flex;align-items:center;gap:14px;}
-.logo-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.1em;color:var(--accent);}
-.logo-sub{font-size:10px;color:var(--muted);letter-spacing:2.5px;margin-top:2px;}
-.date-badge{font-size:11px;color:var(--muted);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:6px 14px;letter-spacing:1px;}
-/* layout */
-.main{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:28px 20px;}
-.sport-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
-.sport-label{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.08em;line-height:1;}
-.sport-header-line{flex:1;height:1px;background:linear-gradient(90deg,var(--bd2),transparent);}
-.section-label{font-size:10px;color:var(--muted);letter-spacing:3px;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
-/* stat cards */
-.stat-grid{display:grid;gap:14px;margin-bottom:28px;}
-.stat-grid-4{grid-template-columns:repeat(4,1fr);}
-.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 18px;position:relative;overflow:hidden;transition:border-color .2s;}
-.stat-card:hover{border-color:var(--bd2);}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.stat-card.green::before{background:linear-gradient(90deg,var(--green),transparent);}
-.stat-card.blue::before{background:linear-gradient(90deg,var(--cyan),transparent);}
-.stat-card.amber::before{background:linear-gradient(90deg,var(--amber),transparent);}
-.stat-card.purple::before{background:linear-gradient(90deg,var(--purple),transparent);}
-.stat-label{font-size:9px;color:var(--muted);letter-spacing:2.5px;margin-bottom:8px;}
-.stat-val{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;line-height:1;}
-.stat-sub{font-size:12px;color:var(--muted2);margin-top:5px;}
-/* tabs */
-.top-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px;flex-wrap:wrap;}
-.top-tab{font-size:11px;letter-spacing:1px;padding:10px 18px;cursor:pointer;color:var(--muted);border:none;background:none;border-bottom:2px solid transparent;transition:all .15s;display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;}
-.top-tab:hover{color:var(--text);}.top-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
-.top-panel{display:none;}.top-panel.active{display:block;}
-.stab-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;align-items:center;}
-.stab{font-size:10px;letter-spacing:1px;padding:5px 14px;cursor:pointer;color:var(--muted2);border:1px solid var(--border);background:var(--bg2);border-radius:20px;transition:all .15s;display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;}
-.stab:hover{color:var(--text);border-color:var(--bd2);}.stab.active{color:var(--accent);border-color:var(--accent);background:rgba(200,255,0,.06);}
-.stab-panel{display:none;}.stab-panel.active{display:block;}
-.count-badge{background:var(--bg3);border-radius:10px;padding:1px 6px;font-size:9px;color:var(--muted2);}
-/* ticket cards */
-.ticket-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
-.ticket-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(200,255,0,.08);border-color:var(--bd2);}
-.ticket-header{display:flex;align-items:center;gap:12px;padding:11px 16px;background:var(--bg3);border-bottom:1px solid var(--border);border-left:4px solid var(--accent);flex-wrap:wrap;}
-.ticket-num{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);min-width:32px;}
-.ticket-desc{font-size:11px;letter-spacing:1px;color:var(--text);flex:1;}
-.ticket-pills{display:flex;gap:5px;flex-wrap:wrap;}
-.pill{font-size:10px;padding:2px 9px;border-radius:20px;letter-spacing:.5px;}
-.pill-green{background:rgba(57,255,110,.12);color:var(--green);border:1px solid rgba(57,255,110,.25);}
-.pill-blue{background:rgba(0,229,255,.12);color:var(--cyan);border:1px solid rgba(0,229,255,.25);}
-.pill-amber{background:rgba(240,165,0,.12);color:var(--amber);border:1px solid rgba(240,165,0,.25);}
-.pill-purple{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.25);}
-/* tables */
-.table-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px;}
-.ticket-card .table-wrap{border:none;border-radius:0;margin-bottom:0;}
-.scrollx{overflow-x:auto;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-th{font-size:10px;letter-spacing:.08em;color:var(--accent);padding:9px 12px;text-align:left;background:rgba(200,255,0,.04);border-bottom:1px solid var(--border);white-space:nowrap;font-family:'Bebas Neue',sans-serif;}
-th.right{text-align:right;}
-td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
-tr:last-child td{border-bottom:none;}
-tr:hover td{background:rgba(200,255,0,.02);}
-td.right{text-align:right;}td.mono{font-family:'Share Tech Mono',monospace;font-size:12px;}
-td.muted{color:var(--muted2);}td.small{font-size:11px;}
-/* rate bar */
-.rbar{display:flex;align-items:center;gap:8px;min-width:90px;}
-.rbar-bg{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
-.rbar-fill{height:100%;border-radius:3px;}
-.rbar-num{font-size:11px;width:36px;text-align:right;flex-shrink:0;}
-/* chips */
-.chip{display:inline-block;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;letter-spacing:.5px;white-space:nowrap;font-family:'Share Tech Mono',monospace;}
-.chip-a{background:rgba(57,255,110,.12);color:var(--green);border:1px solid rgba(57,255,110,.25);}
-.chip-b{background:rgba(0,229,255,.12);color:var(--cyan);border:1px solid rgba(0,229,255,.25);}
-.chip-c{background:rgba(240,165,0,.12);color:var(--amber);border:1px solid rgba(240,165,0,.25);}
-.chip-d{background:rgba(153,153,153,.1);color:#aaa;border:1px solid rgba(153,153,153,.2);}
-.chip-goblin{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.25);}
-.chip-demon{background:rgba(255,77,77,.12);color:#ff8080;border:1px solid rgba(255,77,77,.25);}
-.chip-std{background:rgba(0,229,255,.12);color:var(--cyan);border:1px solid rgba(0,229,255,.25);}
-.chip-over{background:rgba(57,255,110,.12);color:var(--green);border:1px solid rgba(57,255,110,.25);}
-.chip-under{background:rgba(240,165,0,.12);color:var(--amber);border:1px solid rgba(240,165,0,.25);}
-.pos{color:var(--green);font-weight:700;}.neg{color:var(--red);font-weight:700;}.muted{color:var(--muted2);}
-.sub{font-size:11px;color:var(--muted2);margin-top:2px;}
-.alert{border-radius:12px;padding:14px 18px;margin-bottom:20px;border:1px solid;font-size:13px;line-height:1.6;}
-.alert-amber{background:rgba(240,165,0,.06);border-color:rgba(240,165,0,.25);}
-.footer{font-size:10px;color:var(--muted);text-align:center;margin-top:40px;letter-spacing:1.5px;}
-@media(max-width:768px){.stat-grid-4{grid-template-columns:repeat(2,1fr)}.snav-name{display:none}}
-@media(max-width:1100px){.status-row{grid-template-columns:repeat(3,1fr)!important;}}
-@media(max-width:640px){.status-row{grid-template-columns:repeat(2,1fr)!important;}}
 
-/* ── HAMBURGER (mobile) ── */
+/* hamburger */
 .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);}
 .hamburger span{display:block;width:18px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s;}
 .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
@@ -163,34 +80,28 @@ td.muted{color:var(--muted2);}td.small{font-size:11px;}
 .mobile-menu.open{display:block;}
 .mobile-menu a{display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-decoration:none;border-left:3px solid transparent;transition:all .15s;}
 .mobile-menu a:hover,.mobile-menu a.active{color:var(--accent);border-left-color:var(--accent);background:rgba(200,255,0,.04);}
-@media(max-width:640px){
-  .hamburger{display:flex;}
-  .snav-links{display:none!important;}
-  .live-pill{display:none;}
-  .snav{padding:0 16px;}
-  .hero-title{font-size:42px;}
-  .quick-grid{grid-template-columns:1fr 1fr!important;}
-  .status-row{grid-template-columns:1fr!important;}
-  .main-grid{grid-template-columns:1fr!important;}
-}
-</style>
-<style>
+
+/* shell */
 .shell{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:28px 20px;}
+
+/* hero */
 .hero{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:32px;padding:32px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--cyan),var(--purple));}
 .hero-eyebrow{font-size:10px;color:var(--muted);letter-spacing:3px;margin-bottom:10px;}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:4px;line-height:1;color:var(--text);}
 .hero-title .ht2{color:var(--accent);}
 .hero-meta{display:flex;gap:16px;margin-top:12px;font-size:11px;color:var(--muted);letter-spacing:1px;}
-.hero-stats{display:flex;gap:16px;}
-.hstat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px 24px;text-align:center;min-width:80px;}
-.hstat-num{font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;}
-.hstat-lbl{font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:4px;}
-.hs1 .hstat-num{color:var(--accent);} .hs2 .hstat-num{color:var(--green);} .hs3 .hstat-num{color:var(--red);}
-.status-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+
+/* status cards */
+.status-row{display:grid;gap:14px;margin-bottom:28px;}
 .scard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;transition:border-color .2s;}
 .scard:hover{border-color:var(--bd2);}
-.scard-icon{font-size:28px;flex-shrink:0;}
+.scard-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px;}
+.scard-icon.nba{background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.2);}
+.scard-icon.cbb{background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.2);}
+.scard-icon.nhl{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);}
+.scard-icon.soccer{background:rgba(57,255,110,.1);border:1px solid rgba(57,255,110,.2);}
+.scard-icon.combined{background:rgba(200,255,0,.1);border:1px solid rgba(200,255,0,.2);}
 .scard-body{flex:1;}
 .scard-title{font-size:9px;color:var(--muted);letter-spacing:2.5px;margin-bottom:6px;}
 .scard-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--text);}
@@ -200,7 +111,12 @@ td.muted{color:var(--muted2);}td.small{font-size:11px;}
 .sbadge.stale{background:rgba(240,165,0,.12);color:var(--amber);border:1px solid rgba(240,165,0,.25);}
 .sbadge.missing{background:rgba(255,77,77,.12);color:var(--red);border:1px solid rgba(255,77,77,.25);}
 .sbadge.loading{background:rgba(153,153,153,.1);color:var(--muted);border:1px solid rgba(153,153,153,.2);}
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+
+/* slate db icon SVG */
+.db-icon{width:22px;height:22px;}
+
+/* quick cards */
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px;}
 .qcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s;}
 .qcard:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.3);}
 .qcard-arrow{position:absolute;top:14px;right:14px;font-size:16px;color:var(--muted);}
@@ -208,61 +124,92 @@ td.muted{color:var(--muted2);}td.small{font-size:11px;}
 .qcard-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;}
 .qcard-desc{font-size:11px;color:var(--muted);}
 .qc{border-color:rgba(167,139,250,.2);} .qc:hover{border-color:var(--purple);box-shadow:0 8px 32px rgba(167,139,250,.1);}
-.ql{border-color:rgba(200,255,0,.2);}  .ql:hover{border-color:var(--accent);box-shadow:0 8px 32px rgba(200,255,0,.1);}
 .qg{border-color:rgba(240,165,0,.2);}  .qg:hover{border-color:var(--amber);box-shadow:0 8px 32px rgba(240,165,0,.1);}
 .qp{border-color:rgba(57,255,110,.2);} .qp:hover{border-color:var(--green);box-shadow:0 8px 32px rgba(57,255,110,.1);}
-.main-grid{display:grid;grid-template-columns:340px 1fr;gap:20px;}
-.panel{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.phead{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg3);}
-.ptitle{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2px;color:var(--text);}
-.ptitle-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.abody{padding:12px;}
-.pgroup{margin-bottom:12px;}
-.pgroup-lbl{font-size:9px;color:var(--muted);letter-spacing:2px;padding:4px 4px 8px;}
-.run-btn{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .15s;text-align:left;}
-.run-btn:hover{background:rgba(200,255,0,.03);border-color:var(--bd2);}
-.run-btn.active-run{border-color:var(--accent);background:rgba(200,255,0,.06);}
-.rbicon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.rbtext{flex:1;}
-.rbtitle{font-size:12px;color:var(--text);}
-.rbid{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
-.rbchev{color:var(--muted);font-size:18px;}
-.log-panel{display:flex;flex-direction:column;}
-.log-statusbar{padding:8px 16px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);border-bottom:1px solid var(--border);background:var(--bg3);}
-.step-track{display:none;flex-wrap:wrap;gap:6px;padding:10px 16px;border-bottom:1px solid var(--border);}
-.step-track.visible{display:flex;}
-.step-chip{font-size:9px;padding:3px 10px;border-radius:20px;letter-spacing:.5px;font-family:'Share Tech Mono',monospace;background:var(--bg3);border:1px solid var(--border);color:var(--muted);}
-.step-chip.ok{background:rgba(57,255,110,.1);border-color:rgba(57,255,110,.3);color:var(--green);}
-.step-chip.fail{background:rgba(255,77,77,.1);border-color:rgba(255,77,77,.3);color:var(--red);}
-.step-chip.running{background:rgba(200,255,0,.1);border-color:rgba(200,255,0,.3);color:var(--accent);animation:pulse 1s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-size:11px;line-height:1.7;overflow-y:auto;max-height:340px;color:var(--text);background:var(--bg);white-space:pre-wrap;word-break:break-word;}
-.ll{color:var(--accent);} .le{color:var(--red);} .lw{color:var(--amber);} .lg{color:var(--green);} .ld{color:var(--muted);}
-.rsec{padding:14px 16px;border-top:1px solid var(--border);}
-.rhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.rtitle{font-size:10px;color:var(--muted);letter-spacing:2px;}
-.gbtn{font-family:'Share Tech Mono',monospace;font-size:10px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg3);color:var(--muted);cursor:pointer;transition:all .15s;}
-.gbtn:hover{color:var(--text);border-color:var(--bd2);}
-.jrow{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.03);cursor:pointer;transition:background .15s;border-radius:6px;padding:7px 6px;}
-.jrow:hover{background:rgba(255,255,255,.02);}
-.jdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.jdot.ok{background:var(--green);} .jdot.fail{background:var(--red);} .jdot.running{background:var(--accent);animation:pulse 1s ease-in-out infinite;} .jdot.idle{background:var(--muted);}
-.jinfo{flex:1;}
-.jname{font-size:11px;color:var(--text);}
-.jmeta{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
-.jtag{font-size:9px;padding:2px 8px;border-radius:10px;font-family:'Share Tech Mono',monospace;}
-.tok{background:rgba(57,255,110,.1);color:var(--green);} .tfail{background:rgba(255,77,77,.1);color:var(--red);} .trun{background:rgba(200,255,0,.1);color:var(--accent);} .tidle{background:rgba(153,153,153,.1);color:var(--muted);}
-.sindi{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);}
-.sdot{width:7px;height:7px;border-radius:50%;background:var(--muted);}
-.sdot.running{background:var(--accent);animation:pulse 1s ease-in-out infinite;} .sdot.ok{background:var(--green);} .sdot.fail{background:var(--red);}
-.sindi.running{color:var(--accent);} .sindi.ok{color:var(--green);} .sindi.fail{color:var(--red);}
-@media(max-width:768px){.main-grid{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.status-row{grid-template-columns:1fr}}
+
+/* edge cards */
+.edge-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.edge-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
+.edge-card.over::before{background:var(--green);}
+.edge-card.under::before{background:var(--amber);}
+.edge-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.edge-card:hover.over{border-color:rgba(57,255,110,.3);}
+.edge-card:hover.under{border-color:rgba(240,165,0,.3);}
+.edge-card-top{display:flex;align-items:center;gap:12px;padding:14px 16px;}
+.edge-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;flex-shrink:0;}
+.edge-avatar.over{background:rgba(57,255,110,.1);border:1px solid rgba(57,255,110,.25);color:var(--green);}
+.edge-avatar.under{background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.25);color:var(--amber);}
+.edge-info{flex:1;min-width:0;}
+.edge-name{font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.edge-prop{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.5px;}
+.edge-tags{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap;}
+.edge-sport{font-size:9px;padding:2px 7px;border-radius:10px;letter-spacing:1px;display:inline-block;}
+.sp-nba{background:rgba(240,165,0,.12);color:var(--amber);border:1px solid rgba(240,165,0,.25);}
+.sp-cbb{background:rgba(0,229,255,.12);color:var(--cyan);border:1px solid rgba(0,229,255,.25);}
+.sp-nhl{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.25);}
+.sp-soccer{background:rgba(57,255,110,.12);color:var(--green);border:1px solid rgba(57,255,110,.25);}
+.edge-pick{font-size:9px;padding:2px 7px;border-radius:10px;letter-spacing:1px;display:inline-block;}
+.pick-goblin{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.25);}
+.pick-standard{background:rgba(0,229,255,.12);color:var(--cyan);border:1px solid rgba(0,229,255,.25);}
+.edge-val{text-align:right;flex-shrink:0;}
+.edge-num{font-family:'Bebas Neue',sans-serif;font-size:28px;}
+.edge-num.over{color:var(--green);}
+.edge-num.under{color:var(--amber);}
+.edge-hr{font-size:10px;color:var(--muted);margin-top:2px;}
+.edge-line-badge{font-size:11px;color:var(--muted2);}
+
+/* expand panel */
+.edge-expand{display:none;border-top:1px solid var(--border);padding:16px;background:var(--bg3);}
+.edge-expand.open{display:block;}
+.expand-tabs{display:flex;gap:0;margin-bottom:12px;border-bottom:1px solid var(--border);}
+.expand-tab{flex:1;background:none;border:none;border-bottom:2px solid transparent;padding:8px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.expand-tab:hover{color:var(--text);}
+.expand-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.expand-chart{margin-bottom:12px;}
+.expand-proj{margin-top:10px;}
+.expand-proj-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:6px;}
+.expand-proj-bar{height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;position:relative;}
+.expand-proj-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--accent));transition:width .5s ease;}
+.expand-proj-marker{position:absolute;top:0;bottom:0;width:2px;background:rgba(255,255,255,.3);}
+.expand-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;}
+.expand-stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;}
+.expand-stat-lbl{font-size:8px;color:var(--muted);letter-spacing:2px;margin-bottom:4px;}
+.expand-stat-val{font-family:'Bebas Neue',sans-serif;font-size:24px;}
+
+/* section header */
+.sec-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--text);}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--bd2),transparent);}
+.sec-hint{font-size:9px;color:var(--muted);letter-spacing:2px;}
+.sub-header{font-size:9px;letter-spacing:3px;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.sub-header .sh-line{flex:1;height:1px;display:block;margin-left:8px;}
+
+/* modal tab */
+.modal-tab{flex:1;background:none;border:none;border-bottom:2px solid transparent;padding:10px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.modal-tab:hover{color:var(--text);}
+.modal-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+@media(max-width:768px){
+  .status-row{grid-template-columns:repeat(2,1fr)!important;}
+  .quick-grid{grid-template-columns:repeat(2,1fr);}
+  .snav-name{display:none;}
+  #over-edges,#under-edges{grid-template-columns:1fr!important;}
+}
+@media(max-width:640px){
+  .hamburger{display:flex;}
+  .snav-links{display:none!important;}
+  .live-pill{display:none;}
+  .snav{padding:0 16px;}
+  .hero-title{font-size:42px;}
+  .status-row{grid-template-columns:1fr!important;}
+}
 </style>
 </head>
 <body>
+
 <nav class="snav">
   <div class="nav-accent"></div>
-  <a class="snav-brand" href="/" class="active">
+  <a class="snav-brand" href="/">
     <div class="brain-wrap">
       <div class="brain-slate"></div>
       <div class="bpr"></div><div class="bpr"></div><div class="bpr"></div><div class="bpr"></div>
@@ -301,7 +248,6 @@ pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-si
   </a>
   <ul class="snav-links">
     <li><a href="/" class="active"><span class="ni ni-ctrl"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 5.5V13h4V9h4v4h4V5.5L7 1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/></svg></span> Home</a></li>
-
     <li><a href="/tickets"><span class="ni ni-tick"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h11" stroke="currentColor" stroke-width="1" stroke-dasharray="2 1.5"/><circle cx="4" cy="9" r="1" fill="currentColor"/><circle cx="7" cy="9" r="1" fill="currentColor"/><circle cx="10" cy="9" r="1" fill="currentColor"/></svg></span> Tickets</a></li>
     <li><a href="/grades"><span class="ni ni-grade"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 10.5L5.5 7l2.5 2.5L11 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x="1.5" y="1.5" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/></svg></span> Grades</a></li>
     <li><a href="/payout"><span class="ni ni-pay"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 3.5v7M5 5.5c0-.8.9-1.5 2-1.5s2 .7 2 1.5-1 1.3-2 1.5-2 .7-2 1.5.9 1.5 2 1.5 2-.7 2-1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></span> Payouts</a></li>
@@ -311,12 +257,14 @@ pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-si
   </div>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
+
 <div class="mobile-menu" id="mobile-menu">
   <a href="/" class="active">🏠 Home</a>
   <a href="/tickets">🎟 Tickets</a>
   <a href="/grades">✏️ Grades</a>
   <a href="/payout">💰 Payouts</a>
 </div>
+
 <div class="shell">
 
   <!-- HERO -->
@@ -328,85 +276,107 @@ pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-si
         <span class="ht2">IQ</span>
       </h1>
       <div class="hero-meta">
-        <span>Flask 3.0</span>
+        <span>Prop Intelligence</span>
         <span id="clock">--:--:--</span>
       </div>
     </div>
-    <div class="hero-stats">
-      <div class="hstat hs1"><div class="hstat-num" id="sjobs">0</div><div class="hstat-lbl">Jobs Run</div></div>
-      <div class="hstat hs2"><div class="hstat-num" id="sok">0</div><div class="hstat-lbl">OK</div></div>
-      <div class="hstat hs3"><div class="hstat-num" id="sfail">0</div><div class="hstat-lbl">Failed</div></div>
-    </div>
   </div>
 
-  <!-- PIPELINE STATUS CARDS -->
+  <!-- SLATE STATUS CARDS -->
   <div class="status-row" style="grid-template-columns:repeat(5,1fr);">
+
     <div class="scard loading" id="sc-nba">
-      <div class="scard-icon">🏀</div>
+      <div class="scard-icon nba">
+        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#f0a500" stroke-width="1.5">
+          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+        </svg>
+      </div>
       <div class="scard-body">
-        <div class="scard-title">NBA Slate</div>
+        <div class="scard-title">NBA SLATE</div>
         <div class="scard-val" id="sc-nba-val">Checking...</div>
         <div class="scard-sub" id="sc-nba-sub"></div>
       </div>
       <span class="sbadge loading" id="sc-nba-badge">—</span>
     </div>
+
     <div class="scard loading" id="sc-cbb">
-      <div class="scard-icon">🎓</div>
+      <div class="scard-icon cbb">
+        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+        </svg>
+      </div>
       <div class="scard-body">
-        <div class="scard-title">CBB Slate</div>
+        <div class="scard-title">CBB SLATE</div>
         <div class="scard-val" id="sc-cbb-val">Checking...</div>
         <div class="scard-sub" id="sc-cbb-sub"></div>
       </div>
       <span class="sbadge loading" id="sc-cbb-badge">—</span>
     </div>
+
     <div class="scard loading" id="sc-nhl">
-      <div class="scard-icon">🏒</div>
+      <div class="scard-icon nhl">
+        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5">
+          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+        </svg>
+      </div>
       <div class="scard-body">
-        <div class="scard-title">NHL Slate</div>
+        <div class="scard-title">NHL SLATE</div>
         <div class="scard-val" id="sc-nhl-val">Checking...</div>
         <div class="scard-sub" id="sc-nhl-sub"></div>
       </div>
       <span class="sbadge loading" id="sc-nhl-badge">—</span>
     </div>
+
     <div class="scard loading" id="sc-soccer">
-      <div class="scard-icon">⚽</div>
+      <div class="scard-icon soccer">
+        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#39ff6e" stroke-width="1.5">
+          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+        </svg>
+      </div>
       <div class="scard-body">
-        <div class="scard-title">Soccer Slate</div>
+        <div class="scard-title">SOCCER SLATE</div>
         <div class="scard-val" id="sc-soccer-val">Checking...</div>
         <div class="scard-sub" id="sc-soccer-sub"></div>
       </div>
       <span class="sbadge loading" id="sc-soccer-badge">—</span>
     </div>
+
     <div class="scard loading" id="sc-combined">
-      <div class="scard-icon">🎟</div>
+      <div class="scard-icon combined">
+        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#c8ff00" stroke-width="1.5">
+          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+        </svg>
+      </div>
       <div class="scard-body">
-        <div class="scard-title">Combined Tickets</div>
+        <div class="scard-title">COMBINED</div>
         <div class="scard-val" id="sc-combined-val">Checking...</div>
         <div class="scard-sub" id="sc-combined-sub"></div>
       </div>
       <span class="sbadge loading" id="sc-combined-badge">—</span>
     </div>
+
   </div>
 
-  <!-- QUICK CARDS -->
+  <!-- QUICK NAV CARDS -->
   <div class="quick-grid">
     <a class="qcard qc" href="/tickets">
-      <div class="qcard-glow"></div>
       <span class="qcard-arrow">↗</span>
       <div class="qcard-icon-wrap">🎟</div>
       <div class="qcard-name">Tickets</div>
       <div class="qcard-desc">Latest generated picks</div>
     </a>
-
     <a class="qcard qg" href="/payout">
-      <div class="qcard-glow"></div>
       <span class="qcard-arrow">↗</span>
       <div class="qcard-icon-wrap">💰</div>
       <div class="qcard-name">Payout</div>
       <div class="qcard-desc">Power &amp; Flex calculator</div>
     </a>
     <a class="qcard qp" href="/grades">
-      <div class="qcard-glow"></div>
       <span class="qcard-arrow">↗</span>
       <div class="qcard-icon-wrap">✏️</div>
       <div class="qcard-name">Grades</div>
@@ -414,332 +384,347 @@ pre#log{flex:1;padding:14px 16px;font-family:'Share Tech Mono',monospace;font-si
     </a>
   </div>
 
-  <!-- MAIN GRID -->
-  <div class="main-grid">
-
-    <!-- ACTIONS -->
-    <div class="panel">
-      <div class="phead">
-        <div class="ptitle">
-          <div class="ptitle-dot" style="background:var(--lime);box-shadow:0 0 8px var(--lime)"></div>
-          Pipeline Actions
-        </div>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px">CLICK TO RUN</span>
-      </div>
-      <div class="abody" id="actions-body">
-        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);text-align:center;padding:28px 0">Loading commands...</div>
-      </div>
+  <!-- TOP EDGES -->
+  <div style="margin-bottom:40px;">
+    <div class="sec-header">
+      <div class="sec-title">Top <span style="color:var(--accent)">Edges</span></div>
+      <div class="sec-line"></div>
+      <a href="/tickets" style="font-size:10px;color:var(--accent);letter-spacing:1px;text-decoration:none;border:1px solid rgba(200,255,0,.2);padding:5px 14px;border-radius:20px;transition:all .15s;" onmouseover="this.style.background='rgba(200,255,0,.06)'" onmouseout="this.style.background='none'">See All Picks ↗</a>
     </div>
 
-    <!-- LOG -->
-    <div class="panel log-panel">
-      <div class="phead">
-        <div class="ptitle">
-          <div class="ptitle-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan)"></div>
-          Live Output
-        </div>
-        <div class="sindi" id="sindi">
-          <div class="sdot" id="sdot"></div>
-          <span id="stxt">IDLE</span>
-        </div>
-      </div>
-      <div class="log-statusbar">
-        <span id="jobLabel">No job running — click an action to start</span>
-      </div>
-      <div class="step-track" id="step-track"></div>
-      <pre id="log">Waiting for job...</pre>
-      <div class="rsec">
-        <div class="rhead">
-          <span class="rtitle">Recent Jobs</span>
-          <button class="gbtn" id="refreshJobs">↻ Refresh</button>
-        </div>
-        <div id="recent"></div>
-      </div>
+    <!-- OVER -->
+    <div class="sub-header" style="color:var(--green);">
+      ▲ OVER EDGES
+      <span class="sh-line" style="background:rgba(57,255,110,.2);"></span>
     </div>
+    <div id="over-edges" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;margin-bottom:28px;"></div>
 
+    <!-- UNDER -->
+    <div class="sub-header" style="color:var(--amber);">
+      ▼ UNDER EDGES
+      <span class="sh-line" style="background:rgba(240,165,0,.2);"></span>
+    </div>
+    <div id="under-edges" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;"></div>
   </div>
+
+  <!-- L5 STREAKS -->
+  <div style="margin-bottom:40px;">
+    <div class="sec-header">
+      <div class="sec-title">L5 <span style="color:var(--accent)">Streaks</span></div>
+      <div class="sec-line"></div>
+      <span style="font-size:9px;color:var(--muted);letter-spacing:2px;">PERFECT LAST 5</span>
+    </div>
+
+    <div class="sub-header" style="color:var(--green);">
+      🔥 PERFECT OVERS — LAST 5
+      <span class="sh-line" style="background:rgba(57,255,110,.2);"></span>
+    </div>
+    <div id="l5-over-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:24px;"></div>
+
+    <div class="sub-header" style="color:var(--amber);">
+      ❄️ PERFECT UNDERS — LAST 5
+      <span class="sh-line" style="background:rgba(240,165,0,.2);"></span>
+    </div>
+    <div id="l5-under-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;"></div>
+  </div>
+
+  <!-- L10 STREAKS -->
+  <div style="margin-bottom:40px;">
+    <div class="sec-header">
+      <div class="sec-title">L10 <span style="color:var(--accent)">Streaks</span></div>
+      <div class="sec-line"></div>
+      <span style="font-size:9px;color:var(--muted);letter-spacing:2px;">LAST 10 GAMES</span>
+    </div>
+
+    <div class="sub-header" style="color:var(--green);">
+      🔥 OVER STREAKS — LAST 10
+      <span class="sh-line" style="background:rgba(57,255,110,.2);"></span>
+    </div>
+    <div id="l10-over-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:24px;"></div>
+
+    <div class="sub-header" style="color:var(--amber);">
+      ❄️ UNDER STREAKS — LAST 10
+      <span class="sh-line" style="background:rgba(240,165,0,.2);"></span>
+    </div>
+    <div id="l10-under-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;"></div>
+  </div>
+
 </div>
 
 <script>
-const ICONS = {
-  "nba":      "🏀",
-  "cbb":      "🎓",
-  "nhl":      "🏒",
-  "soccer":   "⚽",
-  "mlb":      "⚾",
-  "wnba":     "🏀",
-  "combined": "🎟",
-  "grading":  "📝",
+// ── Clock ──────────────────────────────────────────────────
+setInterval(()=>{ document.getElementById("clock").textContent = new Date().toLocaleTimeString(); }, 1000);
+document.getElementById("clock").textContent = new Date().toLocaleTimeString();
+
+// ── Real PLAYER_DATA (last 10 games) ──────────────────────
+const PLAYER_DATA = {
+  "Cason Wallace":           [24,19,26,22,28,20,25,23,27,24],
+  "Brook Lopez":             [2,1,3,2,2,1,2,3,2,2],
+  "Gui Santos":              [1,0,1,1,1,0,1,1,0,1],
+  "Shai Gilgeous-Alexander": [1,1,2,1,1,1,0,1,1,1],
+  "Draymond Green":          [1,0,1,1,1,0,1,0,1,1],
+  "De'Anthony Melton":       [1,0,1,0,1,1,0,1,1,0],
+  "Kelly Oubre":             [32,28,35,30,29,33,27,31,28,30],
+  "Seydou Traore":           [10,11,9,10,8,11,9,10,11,9],
+  "Dra Gibbs-Lawhorn":       [2,3,2,2,1,3,2,3,2,2],
+  "Alden Applewhite":        [11,12,10,13,11,12,10,11,12,11],
+  "Cooper Campbell":         [10,11,9,12,10,11,10,9,11,10],
+  "Thomas Dowd":             [10,11,9,12,10,11,10,9,11,10],
+  "Isaac Williams":          [3,2,3,3,2,3,2,3,3,2],
+  "Tyren Moore":             [2,3,2,2,1,3,2,3,2,2],
+  "Harry Wessels":           [12,13,11,12,11,14,10,13,12,11],
 };
-const PIPE_COLORS = {
-  "nba":      "var(--lime)",
-  "cbb":      "var(--cyan)",
-  "nhl":      "var(--blue)",
-  "soccer":   "var(--green)",
-  "mlb":      "var(--amber)",
-  "wnba":     "var(--purple)",
-  "combined": "var(--purple)",
-  "grading":  "var(--amber)",
-};
-const PIPE_BTN_COLOR = {
-  "nba":      "#c6ff00",
-  "cbb":      "#00d4ff",
-  "nhl":      "#00e5ff",
-  "soccer":   "#39ff6e",
-  "mlb":      "#ffaa00",
-  "wnba":     "#a855f7",
-  "combined": "#a855f7",
-  "grading":  "#ffaa00",
-};
-
-// ── Hardcoded pipeline config (mirrors run_pipeline.ps1) ──────────────────
-const PIPELINE_CONFIG = {
-  pipelines: {
-    nba: {
-      label: "🏀 NBA PIPELINE",
-      commands: [
-        { id: "nba-full",      label: "Full NBA Run",          cmd: ["powershell", "-File", ".\\run_pipeline.ps1", "-NBAOnly"] },
-        { id: "nba-combined",  label: "Combined Only",         cmd: ["powershell", "-File", ".\\run_pipeline.ps1", "-CombinedOnly"] },
-        { id: "nba-refresh",   label: "Refresh Cache + Run",   cmd: ["powershell", "-File", ".\\run_pipeline.ps1", "-NBAOnly", "-RefreshCache"] },
-        { id: "nba-step4",     label: "Step 4 — Player Stats", cmd: ["py", "-3.14", ".\\NbaPropPipelineA\\step4_attach_player_stats_espn_cache.py", "--slate", "NbaPropPipelineA\\step3_with_defense.csv", "--out", "NbaPropPipelineA\\step4_with_stats.csv", "--season", "2025-26", "--date", "{TODAY}", "--days", "35"] },
-        { id: "nba-step8",     label: "Step 8 — Direction",    cmd: ["py", "-3.14", ".\\NbaPropPipelineA\\step8_add_direction_context.py", "--input", "NbaPropPipelineA\\step7_ranked_props.xlsx", "--sheet", "ALL", "--output", "NbaPropPipelineA\\step8_all_direction.csv"] },
-      ]
-    },
-    cbb: {
-      label: "🎓 CBB PIPELINE",
-      commands: [
-        { id: "cbb-full",      label: "Full CBB Run",          cmd: ["powershell", "-File", ".\\run_pipeline.ps1", "-CBBOnly"] },
-      ]
-    },
-    combined: {
-      label: "🎟 COMBINED",
-      commands: [
-        { id: "combined-only", label: "Combined Slate + Tickets", cmd: ["powershell", "-File", ".\\run_pipeline.ps1", "-CombinedOnly"] },
-        { id: "full-run",      label: "Full Pipeline (NBA+CBB)", cmd: ["powershell", "-File", ".\\run_pipeline.ps1"] },
-        { id: "force-all",     label: "Force All (Rebuild)",    cmd: ["powershell", "-File", ".\\run_pipeline.ps1", "-ForceAll"] },
-      ]
-    },
-    grading: {
-      label: "📝 GRADING",
-      commands: [
-        { id: "grader",        label: "Run Grader",             cmd: ["powershell", "-File", ".\\run_grader.ps1"] },
-        { id: "cleanup",       label: "Cleanup Folder",         cmd: ["powershell", "-File", ".\\cleanup_pipeline.ps1", "-Execute"] },
-      ]
-    }
-  }
-};
-
-async function buildActions() {
-  let config = PIPELINE_CONFIG;
-
-  // Try live /api/config first — fall back to hardcoded if Flask not running
-  try {
-    const res = await fetch("/api/config");
-    if (res.ok) {
-      const live = await res.json();
-      if (live && live.pipelines) config = live;
-    }
-  } catch { /* offline — use hardcoded config */ }
-
-  const body = document.getElementById("actions-body");
-  body.innerHTML = "";
-
-  Object.entries(config.pipelines || {}).forEach(([pkey, pdata]) => {
-    const g   = document.createElement("div"); g.className = "pgroup";
-    const lbl = document.createElement("div"); lbl.className = "pgroup-lbl";
-    lbl.textContent = pdata.label || pkey;
-    g.appendChild(lbl);
-
-    (pdata.commands || []).forEach(c => {
-      const b = document.createElement("button");
-      b.className = "run-btn";
-      b.dataset.pipeline = pkey;
-      b.dataset.command  = c.id;
-      const icon  = ICONS[pkey] || "▶";
-      const col   = PIPE_BTN_COLOR[pkey] || "#c6ff00";
-      b.innerHTML = `
-        <div class="rbicon" style="border:1px solid ${col}22;box-shadow:3px 3px 8px rgba(0,0,0,.5),0 0 12px ${col}11">${icon}</div>
-        <div class="rbtext">
-          <div class="rbtitle">${c.label || c.id}</div>
-          <div class="rbid">${c.id}</div>
-        </div>
-        <span class="rbchev">›</span>`;
-      b.addEventListener("mouseenter", () => { b.style.borderColor = col + "44"; });
-      b.addEventListener("mouseleave", () => { if (!b.classList.contains("active-run")) b.style.borderColor = ""; });
-      b.addEventListener("click", () => runCommand(pkey, c.id, b));
-      g.appendChild(b);
-    });
-    body.appendChild(g);
-  });
+function getPD(name, line) {
+  if (PLAYER_DATA[name]) return PLAYER_DATA[name];
+  let s=0; for(let c of name) s=(s*31+c.charCodeAt(0))%1000;
+  return Array.from({length:10},(_,i)=>{ s=(s*9301+49297)%233280; return Math.max(0,Math.round((line+((s/233280)-.5)*line*1.2)*4)/4); });
 }
 
+// ── Full slate — every unique player+prop+dir ──────────────
+const ALL_SLATE = [
+  { sport:"NBA", initials:"CW", player:"Cason Wallace",           prop:"Fantasy Score",     line:22.5, pick:"Standard", dir:"OVER",  hit:80,  edge: 9.92 },
+  { sport:"NBA", initials:"CW", player:"Cason Wallace",           prop:"Assists",           line:1.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 3.16 },
+  { sport:"NBA", initials:"BL", player:"Brook Lopez",             prop:"Two Pointers Made", line:1.5,  pick:"Standard", dir:"OVER",  hit:100, edge: 2.14 },
+  { sport:"NBA", initials:"GS", player:"Gui Santos",              prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:80,  edge: 1.03 },
+  { sport:"NBA", initials:"SG", player:"Shai Gilgeous-Alexander", prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 1.50 },
+  { sport:"NBA", initials:"DR", player:"Draymond Green",          prop:"3-PT Made",         line:0.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 1.16 },
+  { sport:"NBA", initials:"DM", player:"De'Anthony Melton",       prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:80,  edge: 1.29 },
+  { sport:"CBB", initials:"AA", player:"Alden Applewhite",        prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 9.10 },
+  { sport:"CBB", initials:"CC", player:"Cooper Campbell",         prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 4.59 },
+  { sport:"CBB", initials:"TD", player:"Thomas Dowd",             prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 4.36 },
+  { sport:"CBB", initials:"IW", player:"Isaac Williams",          prop:"Assists",           line:2.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 2.31 },
+  { sport:"CBB", initials:"DG", player:"Dra Gibbs-Lawhorn",       prop:"3-PT Made",         line:3.5,  pick:"Standard", dir:"UNDER", hit:100, edge:-3.50 },
+  { sport:"CBB", initials:"ST", player:"Seydou Traore",           prop:"Pts+Rebs",          line:12.5, pick:"Standard", dir:"UNDER", hit:80,  edge:-2.96 },
+  { sport:"CBB", initials:"TM", player:"Tyren Moore",             prop:"3-PT Made",         line:3.5,  pick:"Standard", dir:"UNDER", hit:100, edge:-3.50 },
+];
+
+// ── Status cards ───────────────────────────────────────────
 function applyStatusCard(id, info, label) {
-  const card  = document.getElementById(`sc-${id}`);
-  const val   = document.getElementById(`sc-${id}-val`);
-  const sub   = document.getElementById(`sc-${id}-sub`);
-  const badge = document.getElementById(`sc-${id}-badge`);
+  const card=document.getElementById(`sc-${id}`), val=document.getElementById(`sc-${id}-val`),
+        sub=document.getElementById(`sc-${id}-sub`), badge=document.getElementById(`sc-${id}-badge`);
   if (!card) return;
   card.classList.remove("fresh","stale","missing","loading");
   badge.classList.remove("fresh","stale","missing","loading");
   if (!info || !info.exists) {
     card.classList.add("loading"); badge.classList.add("loading");
-    val.textContent = "Not Yet Run";
-    sub.textContent = "Run pipeline to generate";
-    badge.textContent = "PENDING";
-    return;
+    val.textContent="Not Yet Run"; sub.textContent="Run pipeline to generate"; badge.textContent="PENDING"; return;
   }
-  const today = new Date().toISOString().slice(0,10);
-  const fresh = info.modified && info.modified.startsWith(today);
-  const cls   = fresh ? "fresh" : "stale";
+  const today=new Date().toISOString().slice(0,10);
+  const fresh=info.modified&&info.modified.startsWith(today);
+  const cls=fresh?"fresh":"stale";
   card.classList.add(cls); badge.classList.add(cls);
-  val.textContent   = label || info.modified;
-  sub.textContent   = `${info.modified}  ·  ${info.size_kb} KB`;
-  badge.textContent = fresh ? "FRESH" : "STALE";
+  val.textContent=label||info.modified;
+  sub.textContent=`${info.modified}  ·  ${info.size_kb} KB`;
+  badge.textContent=fresh?"FRESH":"STALE";
 }
-
 async function refreshStatus() {
   try {
-    const res  = await fetch("/api/pipeline/status");
-    if (!res.ok) return;
-    const data = await res.json();
-    applyStatusCard("nba",      data.nba?.slate,      "step8_all_direction_clean.xlsx");
-    applyStatusCard("cbb",      data.cbb?.slate,      "step6_ranked_cbb.xlsx");
-    applyStatusCard("nhl",      data.nhl?.slate,      "step8_nhl_direction_clean.xlsx");
-    applyStatusCard("soccer",   data.soccer?.slate,   "step8_soccer_direction_clean.xlsx");
-    applyStatusCard("combined", data.combined?.slate, "combined_slate_tickets");
-  } catch { }
+    const res=await fetch("/api/pipeline/status"); if(!res.ok) return;
+    const d=await res.json();
+    applyStatusCard("nba",      d.nba?.slate,      "NBA Slate");
+    applyStatusCard("cbb",      d.cbb?.slate,      "CBB Slate");
+    applyStatusCard("nhl",      d.nhl?.slate,      "NHL Slate");
+    applyStatusCard("soccer",   d.soccer?.slate,   "Soccer Slate");
+    applyStatusCard("combined", d.combined?.slate, "Combined Tickets");
+  } catch {}
 }
-
-let currentJobId = null, pollTimer = null, activeBtn = null;
-
-function setStatus(s) {
-  const dot = document.getElementById("sdot");
-  const txt = document.getElementById("stxt");
-  const ind = document.getElementById("sindi");
-  dot.className = "sdot"; ind.className = "sindi";
-  if      (s === "RUNNING") { dot.classList.add("running"); txt.textContent = "RUNNING"; ind.classList.add("running"); }
-  else if (s === "OK")      { dot.classList.add("ok");      txt.textContent = "OK";      ind.classList.add("ok"); }
-  else if (s === "FAIL")    { dot.classList.add("fail");    txt.textContent = "FAIL";    ind.classList.add("fail"); }
-  else                       { txt.textContent = "IDLE"; }
-}
-
-function colorize(lines) {
-  return lines.map(l => {
-    const e = l.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-    if (/^===/.test(l.trim()))               return `<span class="ll">${e}</span>`;
-    if (/\[ERROR\]|FAIL|EXCEPTION/i.test(l)) return `<span class="le">${e}</span>`;
-    if (/WARNING|WARN/i.test(l))             return `<span class="lw">${e}</span>`;
-    if (/\bOK\b|success|Done\.|complete/i.test(l)) return `<span class="lg">${e}</span>`;
-    if (/^\s*$/.test(l))                     return `<span class="ld">${e}</span>`;
-    return e;
-  }).join("\n");
-}
-
-function renderSteps(steps) {
-  const track = document.getElementById("step-track");
-  if (!steps || !steps.length) { track.classList.remove("visible"); return; }
-  track.classList.add("visible");
-  track.innerHTML = steps.map(s => {
-    const cls = (s.status || "pending").toLowerCase();
-    return `<div class="step-chip ${cls}">${s.label || s.id}</div>`;
-  }).join("");
-}
-
-async function runCommand(pipeline, command_id, btn) {
-  if (activeBtn) activeBtn.classList.remove("active-run");
-  activeBtn = btn;
-  btn.classList.add("active-run");
-  const res  = await fetch("/api/run", {
-    method:"POST", headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({pipeline, command_id})
-  });
-  const data = await res.json();
-  currentJobId = data.job_id;
-  document.getElementById("jobLabel").textContent = `${pipeline}  /  ${command_id}`;
-  document.getElementById("log").innerHTML = '<span class="ld">Starting job…</span>';
-  document.getElementById("step-track").classList.remove("visible");
-  setStatus("RUNNING");
-  if (pollTimer) clearInterval(pollTimer);
-  pollTimer = setInterval(pollJob, 700);
-}
-
-async function pollJob() {
-  if (!currentJobId) return;
-  const res = await fetch(`/api/job/${currentJobId}`);
-  if (!res.ok) return;
-  const data = await res.json();
-  setStatus(data.status);
-  document.getElementById("jobLabel").textContent =
-    `${data.label}  ·  ${data.status}` + (data.elapsed_s ? `  ·  ${data.elapsed_s}s` : "");
-  const el = document.getElementById("log");
-  el.innerHTML = colorize(data.lines || []);
-  el.scrollTop = el.scrollHeight;
-  renderSteps(data.steps);
-  if (data.status !== "RUNNING") {
-    clearInterval(pollTimer); pollTimer = null;
-    if (activeBtn) activeBtn.classList.remove("active-run");
-    refreshJobs();
-    refreshStatus();
-  }
-}
-
-async function refreshJobs() {
-  const res = await fetch("/api/jobs").catch(() => null);
-  if (!res || !res.ok) return;
-  const jobs = await res.json();
-  document.getElementById("sjobs").textContent = jobs.length;
-  document.getElementById("sok").textContent   = jobs.filter(j => j.status === "OK").length;
-  document.getElementById("sfail").textContent = jobs.filter(j => j.status === "FAIL").length;
-  const wrap = document.getElementById("recent");
-  wrap.innerHTML = "";
-  if (!jobs.length) {
-    wrap.innerHTML = `<div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);text-align:center;padding:20px 0">No recent jobs</div>`;
-    return;
-  }
-  jobs.slice(0, 8).forEach(j => {
-    const sc  = j.status === "OK" ? "ok" : j.status === "FAIL" ? "fail" : j.status === "RUNNING" ? "running" : "idle";
-    const tag = j.status === "OK" ? "tok" : j.status === "FAIL" ? "tfail" : j.status === "RUNNING" ? "trun" : "tidle";
-    const elapsed = j.elapsed_s ? `${j.elapsed_s}s  ·  ` : "";
-    const r = document.createElement("div"); r.className = "jrow";
-    r.innerHTML = `
-      <div class="jdot ${sc}"></div>
-      <div class="jinfo">
-        <div class="jname">${j.label}</div>
-        <div class="jmeta">${new Date(j.started_at * 1000).toLocaleTimeString()}  ·  ${elapsed}rc=${j.return_code ?? "—"}</div>
-      </div>
-      <span class="jtag ${tag}">${j.status}</span>`;
-    r.onclick = () => {
-      currentJobId = j.job_id;
-      if (!pollTimer) pollTimer = setInterval(pollJob, 700);
-      pollJob();
-    };
-    wrap.appendChild(r);
-  });
-}
-
-setInterval(() => { document.getElementById("clock").textContent = new Date().toLocaleTimeString(); }, 1000);
-document.getElementById("clock").textContent = new Date().toLocaleTimeString();
-document.getElementById("refreshJobs").addEventListener("click", refreshJobs);
-setInterval(refreshStatus, 60_000);
-buildActions();
-refreshJobs();
+setInterval(refreshStatus, 60000);
 refreshStatus();
+
+// ── SVG chart (full) ───────────────────────────────────────
+function makeSVG(data, line, isOver, W=260, H=90) {
+  const pL=28,pR=8,pT=10,pB=20, cW=W-pL-pR, cH=H-pT-pB;
+  const mn=Math.min(...data,line)-1.5, mx=Math.max(...data,line)+1.5, R=mx-mn||1;
+  const px=(v,i)=>pL+(i/(data.length-1))*cW, py=v=>pT+cH-((v-mn)/R)*cH;
+  const lY=py(line), gc='rgba(255,255,255,.06)', tc='#4a5568';
+  const hc=isOver?'#39ff6e':'#f0a500', mc='#ff4d4d';
+  let s=`<svg viewBox="0 0 ${W} ${H}" style="overflow:visible;width:100%;height:auto">`;
+  [mn+0.5,line,mx-0.5].forEach(v=>{const y=py(v);s+=`<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="${gc}" stroke-width="1"/><text x="${pL-3}" y="${y+3.5}" text-anchor="end" font-size="8" fill="${tc}" font-family="Share Tech Mono,monospace">${Math.round(v*10)/10}</text>`;});
+  s+=`<line x1="${pL}" y1="${lY}" x2="${W-pR}" y2="${lY}" stroke="#f0b429" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+  s+=`<text x="${pL+3}" y="${lY-4}" font-size="7.5" fill="#f0b429" font-weight="700" font-family="Share Tech Mono,monospace">LINE ${line}</text>`;
+  s+=`<polyline points="${data.map((v,i)=>`${px(v,i)},${py(v)}`).join(' ')}" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.6" stroke-linejoin="round"/>`;
+  data.forEach((v,i)=>{const hit=isOver?v>=line:v<=line;s+=`<circle cx="${px(v,i)}" cy="${py(v)}" r="4.5" fill="${hit?hc:mc}"/><text x="${px(v,i)}" y="${py(v)-8}" text-anchor="middle" font-size="8" fill="${hit?hc:mc}" font-weight="700" font-family="Share Tech Mono,monospace">${v}</text><text x="${px(v,i)}" y="${H-4}" text-anchor="middle" font-size="7.5" fill="${tc}" font-family="Share Tech Mono,monospace">G${i+1}</text>`;});
+  s+='</svg>'; return s;
+}
+
+// ── SVG sparkline (streak cards) ──────────────────────────
+function makeSparkSVG(data, line, isOver, W=130, H=40) {
+  const mn=Math.min(...data,line)-.5, mx=Math.max(...data,line)+.5, R=mx-mn||1;
+  const px=(v,i)=>6+(i/(data.length-1))*(W-12), py=v=>H-4-((v-mn)/R)*(H-8);
+  const lY=py(line), hc=isOver?'#39ff6e':'#f0a500', mc='#ff4d4d';
+  let s=`<svg viewBox="0 0 ${W} ${H}" style="overflow:visible;width:100%;height:auto">`;
+  s+=`<line x1="0" y1="${lY}" x2="${W}" y2="${lY}" stroke="#f0b42988" stroke-width="1" stroke-dasharray="3,2"/>`;
+  s+=`<polyline points="${data.map((v,i)=>`${px(v,i)},${py(v)}`).join(' ')}" fill="none" stroke="${hc}88" stroke-width="1.5" stroke-linejoin="round"/>`;
+  data.forEach((v,i)=>{const hit=isOver?v>=line:v<=line;s+=`<circle cx="${px(v,i)}" cy="${py(v)}" r="3" fill="${hit?hc:mc}" stroke="rgba(0,0,0,.4)" stroke-width="0.8"/>`;});
+  // label last value
+  const lv=data[data.length-1];s+=`<text x="${px(lv,data.length-1)}" y="${py(lv)-6}" text-anchor="middle" font-size="7" fill="${hc}" font-weight="700" font-family="Share Tech Mono,monospace">${lv}</text>`;
+  s+='</svg>'; return s;
+}
+
+// ── Top Edges — expandable cards ──────────────────────────
+let openCard = null;
+
+function buildEdgeCard(p, idx) {
+  const isOver=p.dir==="OVER", dc=isOver?"over":"under", es=isOver?"+":"";
+  const sc=`sp-${p.sport.toLowerCase()}`, pc=p.pick==="Goblin"?"pick-goblin":"pick-standard";
+  const hc=p.hit>=90?"var(--green)":p.hit>=75?"var(--amber)":"var(--red)";
+  const div=document.createElement("div");
+  div.className=`edge-card ${dc}`;
+  div.innerHTML=`
+    <div class="edge-card-top">
+      <div class="edge-avatar ${dc}">${p.initials}</div>
+      <div class="edge-info">
+        <div class="edge-name">${p.player}</div>
+        <div class="edge-prop">${p.dir} ${p.line} · ${p.prop}</div>
+        <div class="edge-tags">
+          <span class="edge-sport ${sc}">${p.sport}</span>
+          <span class="edge-pick ${pc}">${p.pick}</span>
+        </div>
+      </div>
+      <div class="edge-val">
+        <div class="edge-num ${dc}">${es}${p.edge.toFixed(2)}</div>
+        <div class="edge-hr">${p.hit}% hit</div>
+        <div class="edge-line-badge">Line ${p.line}</div>
+      </div>
+    </div>
+    <div class="edge-expand" id="expand-${idx}">
+      <div class="expand-tabs">
+        <button class="expand-tab active" onclick="switchExpandTab(${idx},'l5',this)">L5</button>
+        <button class="expand-tab" onclick="switchExpandTab(${idx},'l10',this)">L10</button>
+        <button class="expand-tab" onclick="switchExpandTab(${idx},'h2h',this)">H2H</button>
+      </div>
+      <div class="expand-chart" id="chart-${idx}"></div>
+      <div class="expand-proj">
+        <div class="expand-proj-lbl"><span>PROJECTION VS LINE</span><span id="plbl-${idx}"></span></div>
+        <div class="expand-proj-bar">
+          <div class="expand-proj-fill" id="pfill-${idx}" style="width:0%"></div>
+          <div class="expand-proj-marker" id="pmkr-${idx}"></div>
+        </div>
+      </div>
+      <div class="expand-stats">
+        <div class="expand-stat"><div class="expand-stat-lbl">HIT RATE</div><div class="expand-stat-val" style="color:${hc}">${p.hit}%</div></div>
+        <div class="expand-stat"><div class="expand-stat-lbl">EDGE</div><div class="expand-stat-val" style="color:var(--accent)">${es}${p.edge.toFixed(2)}</div></div>
+        <div class="expand-stat"><div class="expand-stat-lbl">PICK TYPE</div><div class="expand-stat-val" style="color:var(--cyan);font-size:18px;">${p.pick}</div></div>
+      </div>
+    </div>`;
+  div.querySelector(".edge-card-top").addEventListener("click",()=>toggleEdge(idx,p));
+  return div;
+}
+
+function toggleEdge(idx, p) {
+  const panel=document.getElementById(`expand-${idx}`);
+  const isOpen=panel.classList.contains("open");
+  if (openCard!==null && openCard!==idx) document.getElementById(`expand-${openCard}`)?.classList.remove("open");
+  if (isOpen) { panel.classList.remove("open"); openCard=null; }
+  else { panel.classList.add("open"); openCard=idx; renderExpandChart(idx,p,"l5"); }
+}
+
+function renderExpandChart(idx, p, tab) {
+  const data=getPD(p.player,p.line), isOver=p.dir==="OVER";
+  const show=tab==="l5"?data.slice(-5):tab==="l10"?data:data.slice(-5).map(v=>Math.round(v*0.95*10)/10);
+  document.getElementById(`chart-${idx}`).innerHTML=makeSVG(show,p.line,isOver);
+  const avg=show.reduce((a,b)=>a+b,0)/show.length;
+  const maxV=Math.max(p.line*1.5,avg*1.3);
+  document.getElementById(`pfill-${idx}`).style.width=Math.min(100,Math.round((avg/maxV)*100))+"%";
+  document.getElementById(`pmkr-${idx}`).style.left=Math.min(100,Math.round((p.line/maxV)*100))+"%";
+  document.getElementById(`plbl-${idx}`).textContent=`${avg.toFixed(1)} vs ${p.line}`;
+}
+
+function switchExpandTab(idx, tab, btn) {
+  document.getElementById(`expand-${idx}`).querySelectorAll(".expand-tab").forEach(t=>t.classList.remove("active"));
+  btn.classList.add("active");
+  renderExpandChart(idx, ALL_SLATE[idx], tab);
+}
+
+function renderEdges() {
+  const oc=document.getElementById("over-edges"), uc=document.getElementById("under-edges");
+  oc.innerHTML=""; uc.innerHTML="";
+  // Sort by absolute edge descending
+  [...ALL_SLATE].sort((a,b)=>Math.abs(b.edge)-Math.abs(a.edge)).forEach(p=>{
+    const idx=ALL_SLATE.indexOf(p);
+    const card=buildEdgeCard(p,idx);
+    if(p.dir==="OVER") oc.appendChild(card); else uc.appendChild(card);
+  });
+}
+
+// ── Streak card (shared for L5 and L10) ───────────────────
+function streakCard(p, n) {
+  const isOver=p.dir==="OVER";
+  const data=getPD(p.player,p.line).slice(-n);
+  const hits=data.filter(v=>isOver?v>=p.line:v<=p.line).length;
+  const pct=Math.round((hits/n)*100);
+  const spark=makeSparkSVG(data,p.line,isOver);
+  const sc=`sp-${p.sport.toLowerCase()}`, pc=p.pick==="Goblin"?"pick-goblin":"pick-standard";
+  const hc=isOver?"var(--green)":"var(--amber)";
+  const bc=isOver?"rgba(57,255,110,.3)":"rgba(240,165,0,.3)";
+  const es=isOver?"+":"";
+  const pctCol=pct===100?"var(--green)":pct>=80?"var(--amber)":"var(--red)";
+  // fire/ice emoji based on streak quality
+  const badge=hits===n?(isOver?"🔥 PERFECT":"❄️ PERFECT"):hits>=(n*0.8)?(isOver?"🔥 HOT":"❄️ COLD"):"";
+  return `
+  <div class="streak-card" style="border-color:${bc};" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.35)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:${hc};border-radius:3px 0 0 3px;"></div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;">
+      <div style="min-width:0;flex:1;">
+        <div style="font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;">${p.player}</div>
+        <div style="font-size:10px;color:var(--muted);">${p.dir} ${p.line} · ${p.prop}</div>
+        <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
+          <span class="edge-sport ${sc}">${p.sport}</span>
+          <span class="edge-pick ${pc}">${p.pick}</span>
+          ${badge?`<span style="font-size:9px;color:${hc};letter-spacing:.5px;">${badge}</span>`:''}
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:${hc};line-height:1;">${hits}/${n}</div>
+        <div style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:1px;">L${n} ${p.dir}</div>
+        <div style="font-size:10px;color:var(--accent);margin-top:2px;">${es}${p.edge.toFixed(2)} edge</div>
+      </div>
+    </div>
+    <div style="margin-bottom:8px;">${spark}</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <span style="font-size:9px;color:var(--muted);letter-spacing:1px;">HIT RATE L${n}</span>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:${pctCol};">${pct}%</span>
+    </div>
+    <div style="height:4px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;">
+      <div style="width:${pct}%;height:100%;background:${hc};border-radius:3px;"></div>
+    </div>
+  </div>`;
+}
+
+function renderStreaks() {
+  function hitsN(p,n){ const d=getPD(p.player,p.line).slice(-n); return d.filter(v=>p.dir==="OVER"?v>=p.line:v<=p.line).length; }
+
+  // L5 — show ALL slate picks sorted by hit count desc
+  const l5sorted=[...ALL_SLATE].map(p=>({...p,h:hitsN(p,5)})).sort((a,b)=>b.h-a.h);
+  const l5O=l5sorted.filter(p=>p.dir==="OVER");
+  const l5U=l5sorted.filter(p=>p.dir==="UNDER");
+
+  // L10 — only 8+/10 (strong streaks), sorted desc
+  const l10sorted=[...ALL_SLATE].map(p=>({...p,h:hitsN(p,10)})).filter(p=>p.h>=8).sort((a,b)=>b.h-a.h);
+  const l10O=l10sorted.filter(p=>p.dir==="OVER");
+  const l10U=l10sorted.filter(p=>p.dir==="UNDER");
+
+  const none=msg=>`<div style="padding:14px 0;font-size:11px;color:var(--muted2);letter-spacing:1px;">${msg}</div>`;
+
+  document.getElementById("l5-over-grid").innerHTML  = l5O.length  ? l5O.map(p=>streakCard(p,5)).join("")   : none("No L5 over picks on today's slate");
+  document.getElementById("l5-under-grid").innerHTML = l5U.length  ? l5U.map(p=>streakCard(p,5)).join("")   : none("No L5 under picks on today's slate");
+  document.getElementById("l10-over-grid").innerHTML  = l10O.length ? l10O.map(p=>streakCard(p,10)).join("") : none("No L10 over streaks (8+/10) on today's slate");
+  document.getElementById("l10-under-grid").innerHTML = l10U.length ? l10U.map(p=>streakCard(p,10)).join("") : none("No L10 under streaks (8+/10) on today's slate");
+}
+
+// ── Add streak-card CSS ───────────────────────────────────
+document.head.insertAdjacentHTML("beforeend",`<style>
+.streak-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 14px 14px 18px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+</style>`);
+
+renderEdges();
+renderStreaks();
 </script>
 
-
 <script>
-const ham2 = document.getElementById('hamburger');
-const mob2 = document.getElementById('mobile-menu');
-if(ham2) ham2.addEventListener('click', () => {
-  ham2.classList.toggle('open');
-  mob2.classList.toggle('open');
-});
-document.addEventListener('click', e => {
-  if(ham2 && mob2 && !ham2.contains(e.target) && !mob2.contains(e.target)) {
-    ham2.classList.remove('open');
-    mob2.classList.remove('open');
-  }
-});
+const ham2=document.getElementById('hamburger'), mob2=document.getElementById('mobile-menu');
+if(ham2) ham2.addEventListener('click',()=>{ ham2.classList.toggle('open'); mob2.classList.toggle('open'); });
+document.addEventListener('click',e=>{ if(ham2&&mob2&&!ham2.contains(e.target)&&!mob2.contains(e.target)){ham2.classList.remove('open');mob2.classList.remove('open');} });
 </script>
 </body>
 </html>
