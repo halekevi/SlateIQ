@@ -281,6 +281,18 @@ def main() -> None:
     df["pick_type"] = df["pick_type"].astype(str).apply(norm_pick_type)
     df["prop_norm"] = df["prop_type"].astype(str).apply(norm_prop)
 
+    # ── Drop prop types with no stat backing or that are ungradeable ──
+    EXCLUDE_PROPS = {
+        "Points - 1st 3 Minutes",   # 1st-quarter prop, drop per design
+        "Dunks",                     # not tracked in ESPN API
+        "3-PT Made (Combo)",         # combo prop, ungradeable per-player
+    }
+    before = len(df)
+    df = df[~df["prop_type"].isin(EXCLUDE_PROPS)].reset_index(drop=True)
+    dropped = before - len(df)
+    if dropped:
+        print(f"  🗑️  Dropped {dropped} rows with excluded prop types")
+
     # Combo marker (vectorized)
     df["is_combo_player"] = df["player"].astype(str).str.contains(r"\+", na=False).astype(int)
 
@@ -302,6 +314,14 @@ def main() -> None:
     # Build opp_team (singles only)
     df["opp_team"] = build_opp_team_from_gameid(df)
 
+    # tqdm progress
+    try:
+        from tqdm import tqdm as _tqdm
+    except ImportError:
+        import subprocess as _sp, sys as _sys
+        _sp.check_call([_sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+        from tqdm import tqdm as _tqdm
+
     # NBA ID resolution — build lookup dict once, map vectorially
     pldf = build_nba_directory()
     df["nba_player_id"] = ""
@@ -312,7 +332,7 @@ def main() -> None:
     unique_singles = df.loc[singles, "player"].unique()
     single_id_map: dict = {}
     single_status_map: dict = {}
-    for name in unique_singles:
+    for name in _tqdm(unique_singles, desc="Resolving NBA IDs", unit="player"):
         pid, _, _ = resolve_nba_id_by_name(pldf, name)
         single_id_map[name]    = str(int(pid)) if pid is not None else ""
         single_status_map[name] = "OK" if pid is not None else "UNRESOLVED_SINGLE"
