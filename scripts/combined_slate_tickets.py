@@ -1189,6 +1189,14 @@ def load_nba(path: str) -> pd.DataFrame:
         )
         df = df[keep_mask]
 
+    # Drop "1st 3 Minutes" props — no historical data, not bettable on PrizePicks standard
+    if "prop_type" in df.columns:
+        before = len(df)
+        df = df[~df["prop_type"].astype(str).str.contains("1st 3 Min", case=False, na=False)].copy()
+        dropped = before - len(df)
+        if dropped:
+            print(f"  [load_nba] Dropped {dropped} '1st 3 Min' props")
+
     # Clean ID if present
     if "nba_player_id" in df.columns:
         df["nba_player_id"] = df["nba_player_id"].apply(_clean_id)

@@ -229,16 +229,24 @@ def _query_vals(con: sqlite3.Connection, table: str, where_clause: str,
 
 
 def get_vals_nba(con: sqlite3.Connection, espn_id: str,
-                  prop_norm: str, n: int = 10) -> List[float]:
+                  prop_norm: str, n: int = 10,
+                  player_name: str = "") -> List[float]:
     expr = _resolve_prop(prop_norm, "nba")
     if not expr:
         return []
-    return _query_vals(con, "nba",
+    # Primary: lookup by ESPN athlete ID
+    vals = _query_vals(con, "nba",
                        "ESPN_ATHLETE_ID = ?", expr, (str(espn_id),), n)
+    # Fallback: name-based lookup (when slate uses nba_player_id instead of ESPN ID)
+    if not vals and player_name:
+        norm = player_name.strip().lower()
+        vals = _query_vals(con, "nba",
+                           "lower(player) = ?", expr, (norm,), n)
+    return vals
 
 
 def get_vals_cbb(con: sqlite3.Connection, espn_id: str,
-                  prop_norm: str, n: int = 10) -> List[float]:
+                  prop_norm: str, n: int = 10, player_name: str = "") -> List[float]:
     expr = _resolve_prop(prop_norm, "cbb")
     if not expr:
         return []
@@ -432,7 +440,12 @@ def attach_stats(
             ids = [p.strip() for p in raw_id.split(combo_sep) if p.strip()]
             vals = get_vals_combo(get_fn, con, ids, prop, n)
         else:
-            vals = get_fn(con, raw_id, prop, n)
+            # Pass player_name for NBA name-based fallback when ESPN ID is missing
+            player_name = str(row.get("player", "")).strip()
+            if sport in ("nba", "cbb") and player_name:
+                vals = get_fn(con, raw_id, prop, n, player_name=player_name)
+            else:
+                vals = get_fn(con, raw_id, prop, n)
 
         if not vals:
             slate.at[idx, "stat_status"] = "NO_DATA"

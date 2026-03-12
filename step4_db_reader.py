@@ -229,16 +229,24 @@ def _query_vals(con: sqlite3.Connection, table: str, where_clause: str,
 
 
 def get_vals_nba(con: sqlite3.Connection, espn_id: str,
-                  prop_norm: str, n: int = 10) -> List[float]:
+                  prop_norm: str, n: int = 10,
+                  player_name: str = "") -> List[float]:
     expr = _resolve_prop(prop_norm, "nba")
     if not expr:
         return []
-    return _query_vals(con, "nba",
+    # Primary: lookup by ESPN athlete ID
+    vals = _query_vals(con, "nba",
                        "ESPN_ATHLETE_ID = ?", expr, (str(espn_id),), n)
+    # Fallback: name-based lookup (when slate uses nba_player_id instead of ESPN ID)
+    if not vals and player_name:
+        norm = player_name.strip().lower()
+        vals = _query_vals(con, "nba",
+                           "lower(player) = ?", expr, (norm,), n)
+    return vals
 
 
 def get_vals_cbb(con: sqlite3.Connection, espn_id: str,
-                  prop_norm: str, n: int = 10) -> List[float]:
+                  prop_norm: str, n: int = 10, player_name: str = "") -> List[float]:
     expr = _resolve_prop(prop_norm, "cbb")
     if not expr:
         return []
@@ -264,31 +272,46 @@ def get_vals_nhl(con: sqlite3.Connection, player: str,
 
 
 def get_vals_soccer(con: sqlite3.Connection, espn_player_id: str,
-                     prop_norm: str, n: int = 10) -> List[float]:
+                     prop_norm: str, n: int = 10,
+                     player_name: str = "") -> List[float]:
     expr = _resolve_prop(prop_norm, "soccer")
     if not expr:
         return []
-    return _query_vals(con, "soccer",
+    # Primary: lookup by ESPN player ID
+    vals = _query_vals(con, "soccer",
                        "espn_player_id = ?", expr, (str(espn_player_id),), n)
+    # Fallback: name-based lookup for FBref-sourced rows
+    if not vals and player_name:
+        norm = player_name.strip().lower()
+        vals = _query_vals(con, "soccer",
+                           "lower(player) = ? AND espn_player_id LIKE 'fbref_%'",
+                           expr, (norm,), n)
+    return vals
 
 
 # ── Minutes / passes lookups (soccer context columns) ─────────────────────────
 def get_avg_minutes_soccer(con: sqlite3.Connection, espn_player_id: str,
-                            n: int = 5) -> Optional[float]:
-    vals = get_vals_soccer(con, espn_player_id, "minutes", n)
+                            n: int = 5, player_name: str = "") -> Optional[float]:
+    vals = get_vals_soccer(con, espn_player_id, "minutes", n, player_name=player_name)
     return float(np.mean(vals)) if vals else None
 
 
 def get_avg_passes_soccer(con: sqlite3.Connection, espn_player_id: str,
-                           n: int = 5) -> Optional[float]:
-    vals = get_vals_soccer(con, espn_player_id, "passes", n)
+                           n: int = 5, player_name: str = "") -> Optional[float]:
+    vals = get_vals_soccer(con, espn_player_id, "passes", n, player_name=player_name)
     return float(np.mean(vals)) if vals else None
 
 
 def get_avg_minutes_nba(con: sqlite3.Connection, espn_id: str,
-                         n: int = 5, table: str = "nba") -> Optional[float]:
+                         n: int = 5, table: str = "nba",
+                         player_name: str = "") -> Optional[float]:
     vals = _query_vals(con, table, "ESPN_ATHLETE_ID = ?",
                        "minutes", (str(espn_id),), n)
+    # Fallback: name-based lookup (when slate passes nba_player_id instead of ESPN ID)
+    if not vals and player_name:
+        norm = player_name.strip().lower()
+        vals = _query_vals(con, table, "lower(player) = ?",
+                           "minutes", (norm,), n)
     return float(np.mean(vals)) if vals else None
 
 
@@ -423,7 +446,12 @@ def attach_stats(
             ids = [p.strip() for p in raw_id.split(combo_sep) if p.strip()]
             vals = get_vals_combo(get_fn, con, ids, prop, n)
         else:
-            vals = get_fn(con, raw_id, prop, n)
+            # Pass player_name for NBA name-based fallback when ESPN ID is missing
+            player_name = str(row.get("player", "")).strip()
+            if sport in ("nba", "cbb") and player_name:
+                vals = get_fn(con, raw_id, prop, n, player_name=player_name)
+            else:
+                vals = get_fn(con, raw_id, prop, n)
 
         if not vals:
             slate.at[idx, "stat_status"] = "NO_DATA"
@@ -464,7 +492,8 @@ def attach_stats(
 
         # ── Sport-specific context columns ─────────────────────────────────
         if sport in ("nba", "cbb") and not is_combo:
-            min_avg = get_avg_minutes_nba(con, raw_id, n=5, table=sport)
+            player_name = str(row.get("player", "")).strip()
+            min_avg = get_avg_minutes_nba(con, raw_id, n=5, table=sport, player_name=player_name)
             if min_avg is not None:
                 slate.at[idx, "min_last5_avg"] = fmt_num(min_avg)
 
