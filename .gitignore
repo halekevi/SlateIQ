@@ -3,3 +3,7 @@
 __pycache__/
 *.pyc
 *.pyo
+
+# Daily pipeline caches
+game_context_cache_*.csv
+schedule_cache_*.csv
