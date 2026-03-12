@@ -23,7 +23,7 @@
 # ============================================================
 param(
     [string]$Date = "",                           # explicit date parameter (e.g., "2026-03-02")
-    [string]$OddsApiKey = "",                     # The Odds API key (free at the-odds-api.com)
+    [string]$OddsApiKey = "10b3aa326aaec16be06e0fd074ed4ed9",  # The Odds API key (free at the-odds-api.com)
     [switch]$NBAOnly,
     [switch]$CBBOnly,
     [switch]$NHLOnly,
