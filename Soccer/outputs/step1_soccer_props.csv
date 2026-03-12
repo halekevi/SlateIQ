@@ -1,11 +1,9 @@
 ﻿projection_id,pp_projection_id,player_id,pp_game_id,league,start_time,player,image_url,pos,team,opp_team,pp_home_team,pp_away_team,prop_type,line,pick_type
-10444640,10444640,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Shots,4.5,Demon
 10444651,10444651,295758,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ronaldo Martínez,,Attacker,TALLERES,,,,Shots,4.5,Demon
 10444529,10444529,274079,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Alex Luna,,Midfielder,INSTITUTO,,,,Shots,3.5,Demon
 10444547,10444547,219890,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ulises Ortegoza,https://static.prizepicks.com/images/manual/Ulises Ortegoza.png,Midfielder,TALLERES,,,,Shots,3.5,Demon
 10444579,10444579,247666,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Giovanni Baroni,,Midfielder,TALLERES,,,,Shots,3.5,Demon
 10444631,10444631,246222,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Fonseca,https://static.prizepicks.com/images/manual/Matías_Fonseca.png,Attacker,INSTITUTO,,,,Shots,3.5,Demon
-10444639,10444639,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Shots,3.5,Demon
 10444650,10444650,295758,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ronaldo Martínez,,Attacker,TALLERES,,,,Shots,3.5,Demon
 10444528,10444528,274079,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Alex Luna,,Midfielder,INSTITUTO,,,,Shots,2.5,Demon
 10444546,10444546,219890,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ulises Ortegoza,https://static.prizepicks.com/images/manual/Ulises Ortegoza.png,Midfielder,TALLERES,,,,Shots,2.5,Demon
@@ -15,8 +13,6 @@
 10444593,10444593,246310,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jhon Córdoba,https://static.prizepicks.com/images/manual/Jhon_Emerson_Córdoba_Mosquera.png,Midfielder,INSTITUTO,,,,Shots,2.5,Demon
 10444618,10444618,249010,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Mateo Cáceres,,Midfielder,TALLERES,,,,Shots,2.5,Demon
 10444630,10444630,246222,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Fonseca,https://static.prizepicks.com/images/manual/Matías_Fonseca.png,Attacker,INSTITUTO,,,,Shots,2.5,Demon
-10444638,10444638,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Shots,2.5,Goblin
-10444642,10444642,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Shots On Target,2.5,Demon
 10444654,10444654,295758,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ronaldo Martínez,,Attacker,TALLERES,,,,Shots On Target,2.5,Demon
 10444527,10444527,274079,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Alex Luna,,Midfielder,INSTITUTO,,,,Shots,1.5,Goblin
 10444530,10444530,274079,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Alex Luna,,Midfielder,INSTITUTO,,,,Shots On Target,1.5,Demon
@@ -39,8 +35,6 @@
 10444622,10444622,277610,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Galarza,,Midfielder,TALLERES,,,,Shots,1.5,Demon
 10444625,10444625,205303,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Catalán,https://static.prizepicks.com/images/manual/Matías Catalán.png,Defender,TALLERES,,,,Shots,1.5,Demon
 10444632,10444632,246222,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Fonseca,https://static.prizepicks.com/images/manual/Matías_Fonseca.png,Attacker,INSTITUTO,,,,Shots On Target,1.5,Demon
-10444637,10444637,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Shots,1.5,Goblin
-10444643,10444643,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Shots On Target,1.5,Demon
 10444649,10444649,295758,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ronaldo Martínez,,Attacker,TALLERES,,,,Shots,1.5,Goblin
 10444653,10444653,295758,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ronaldo Martínez,,Attacker,TALLERES,,,,Shots On Target,1.5,Demon
 10444656,10444656,275182,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Santiago Fernández,,Defender,TALLERES,,,,Shots,1.5,Demon
@@ -49,8 +43,6 @@
 10444665,10444665,274880,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Valentín Depietri,,Attacker,TALLERES,,,,Shots On Target,1.5,Demon
 10472339,10472339,245947,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Emiliano Chiavassa,https://static.prizepicks.com/images/manual/EmilianoMiguelChiavassa.png,Attacker,TALLERES,,,,Shots,1.5,Demon
 10497311,10497311,246222,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Fonseca,https://static.prizepicks.com/images/manual/Matías_Fonseca.png,Attacker,INSTITUTO,,,,Shots,1.5,Goblin
-10444522,10444522,275142,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Agustín Bravo,,Defender,INSTITUTO,,,,Shots,0.5,Demon
-10444523,10444523,275142,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Agustín Bravo,,Defender,INSTITUTO,,,,Shots On Target,0.5,Demon
 10444524,10444524,274079,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Alex Luna,,Midfielder,INSTITUTO,,,,Assists,0.5,Demon
 10444525,10444525,274079,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Alex Luna,,Midfielder,INSTITUTO,,,,Goal + Assist,0.5,Demon
 10444526,10444526,274079,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Alex Luna,,Midfielder,INSTITUTO,,,,Goals,0.5,Demon
@@ -59,7 +51,6 @@
 10444535,10444535,274865,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Augusto Schott,,Defender,TALLERES,,,,Shots On Target,0.5,Demon
 10444536,10444536,295337,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Bruno Barticciotto,,Attacker,TALLERES,,,,Goals,0.5,Demon
 10444537,10444537,295036,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Diego Sosa,,Defender,INSTITUTO,,,,Shots On Target,0.5,Demon
-10444538,10444538,295450,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Diego Valoyes,,Attacker,TALLERES,,,,Assists,0.5,Demon
 10444539,10444539,295450,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Diego Valoyes,,Attacker,TALLERES,,,,Goal + Assist,0.5,Demon
 10444540,10444540,295450,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Diego Valoyes,,Attacker,TALLERES,,,,Goals,0.5,Demon
 10444541,10444541,295450,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Diego Valoyes,,Attacker,TALLERES,,,,Shots On Target,0.5,Demon
@@ -67,16 +58,12 @@
 10444543,10444543,219890,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ulises Ortegoza,https://static.prizepicks.com/images/manual/Ulises Ortegoza.png,Midfielder,TALLERES,,,,Goal + Assist,0.5,Demon
 10444544,10444544,219890,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ulises Ortegoza,https://static.prizepicks.com/images/manual/Ulises Ortegoza.png,Midfielder,TALLERES,,,,Goals,0.5,Demon
 10444550,10444550,245947,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Emiliano Chiavassa,https://static.prizepicks.com/images/manual/EmilianoMiguelChiavassa.png,Attacker,TALLERES,,,,Assists,0.5,Demon
-10444553,10444553,192289,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Facundo Suárez,https://static.prizepicks.com/images/manual/Facundo Suárez .png,Attacker,INSTITUTO,,,,Assists,0.5,Demon
-10444554,10444554,192289,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Facundo Suárez,https://static.prizepicks.com/images/manual/Facundo Suárez .png,Attacker,INSTITUTO,,,,Goal + Assist,0.5,Demon
 10444555,10444555,192289,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Facundo Suárez,https://static.prizepicks.com/images/manual/Facundo Suárez .png,Attacker,INSTITUTO,,,,Goals,0.5,Demon
-10444556,10444556,192289,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Facundo Suárez,https://static.prizepicks.com/images/manual/Facundo Suárez .png,Attacker,INSTITUTO,,,,Shots On Target,0.5,Demon
 10444557,10444557,192297,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Fernando Alarcón,https://static.prizepicks.com/images/manual/Fernando Alarcón.png,Defender,INSTITUTO,,,,Shots,0.5,Demon
 10444558,10444558,192297,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Fernando Alarcón,https://static.prizepicks.com/images/manual/Fernando Alarcón.png,Defender,INSTITUTO,,,,Shots On Target,0.5,Demon
 10444559,10444559,295037,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Jara,,Attacker,INSTITUTO,,,,Assists,0.5,Demon
 10444560,10444560,295037,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Jara,,Attacker,INSTITUTO,,,,Goal + Assist,0.5,Demon
 10444561,10444561,295037,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Jara,,Attacker,INSTITUTO,,,,Goals,0.5,Demon
-10444563,10444563,295038,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Moyano,,Midfielder,INSTITUTO,,,,Shots On Target,0.5,Demon
 10444564,10444564,251019,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Báez,,Defender,TALLERES,,,,Assists,0.5,Demon
 10444565,10444565,251019,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Báez,,Defender,TALLERES,,,,Shots,0.5,Goblin
 10444567,10444567,251019,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Báez,,Defender,TALLERES,,,,Shots On Target,0.5,Demon
@@ -87,18 +74,12 @@
 10444574,10444574,192294,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Gastón Lodico,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,INSTITUTO,,,,Shots On Target,0.5,Demon
 10444575,10444575,247666,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Giovanni Baroni,,Midfielder,TALLERES,,,,Assists,0.5,Demon
 10444576,10444576,247666,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Giovanni Baroni,,Midfielder,TALLERES,,,,Goals,0.5,Demon
-10444581,10444581,296526,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Hernán Fuente,,Defender,INSTITUTO,,,,Shots On Target,0.5,Demon
-10444582,10444582,204667,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jonás Acevedo,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,INSTITUTO,,,,Goal + Assist,0.5,Demon
-10444583,10444583,204667,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jonás Acevedo,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,INSTITUTO,,,,Shots On Target,0.5,Demon
 10444584,10444584,253966,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ignacio Alastra,,Attacker,TALLERES,,,,Goals,0.5,Demon
 10444585,10444585,299075,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ignacio Rossi,,Midfielder,INSTITUTO,,,,Goals,0.5,Demon
-10444587,10444587,274082,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jeremías Lázaro,,Midfielder,INSTITUTO,,,,Goal + Assist,0.5,Demon
-10444588,10444588,274082,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jeremías Lázaro,,Midfielder,INSTITUTO,,,,Shots On Target,0.5,Demon
 10444589,10444589,246310,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jhon Córdoba,https://static.prizepicks.com/images/manual/Jhon_Emerson_Córdoba_Mosquera.png,Midfielder,INSTITUTO,,,,Assists,0.5,Demon
 10444590,10444590,246310,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jhon Córdoba,https://static.prizepicks.com/images/manual/Jhon_Emerson_Córdoba_Mosquera.png,Midfielder,INSTITUTO,,,,Goals,0.5,Demon
 10444591,10444591,246310,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jhon Córdoba,https://static.prizepicks.com/images/manual/Jhon_Emerson_Córdoba_Mosquera.png,Midfielder,INSTITUTO,,,,Shots,0.5,Goblin
 10444595,10444595,246088,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Joaquín Medina,https://static.prizepicks.com/images/manual/Joaquín_Medina.png,Midfielder,INSTITUTO,,,,Goals,0.5,Demon
-10444596,10444596,295040,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jonathan Galván,,Defender,INSTITUTO,,,,Shots On Target,0.5,Demon
 10444597,10444597,247903,135156,SOCCER,2026-03-12T18:15:00.000-04:00,José Palomino,,Defender,TALLERES,,,,Goal + Assist,0.5,Demon
 10444598,10444598,247903,135156,SOCCER,2026-03-12T18:15:00.000-04:00,José Palomino,,Defender,TALLERES,,,,Shots,0.5,Demon
 10444600,10444600,247903,135156,SOCCER,2026-03-12T18:15:00.000-04:00,José Palomino,,Defender,TALLERES,,,,Shots On Target,0.5,Demon
@@ -110,7 +91,6 @@
 10444608,10444608,296218,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Juan Sforza,,Midfielder,TALLERES,,,,Shots On Target,0.5,Demon
 10444609,10444609,275149,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Leonel Mosevich,,Defender,INSTITUTO,,,,Shots,0.5,Demon
 10444610,10444610,246089,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Lorenzo Albarracín,https://static.prizepicks.com/images/manual/Lorenzo_Albarracín.png,Attacker,INSTITUTO,,,,Goals,0.5,Demon
-10444611,10444611,297995,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Luca Rafaelli,,Attacker,INSTITUTO,,,,Goals,0.5,Demon
 10444612,10444612,297089,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Martín Río,,Midfielder,TALLERES,,,,Goal + Assist,0.5,Demon
 10444613,10444613,297089,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Martín Río,,Midfielder,TALLERES,,,,Goals,0.5,Demon
 10444614,10444614,297089,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Martín Río,,Midfielder,TALLERES,,,,Shots On Target,0.5,Demon
@@ -124,11 +104,6 @@
 10444627,10444627,275180,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Gómez,,Midfielder,TALLERES,,,,Goals,0.5,Demon
 10444628,10444628,246222,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Fonseca,https://static.prizepicks.com/images/manual/Matías_Fonseca.png,Attacker,INSTITUTO,,,,Assists,0.5,Demon
 10444629,10444629,246222,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Fonseca,https://static.prizepicks.com/images/manual/Matías_Fonseca.png,Attacker,INSTITUTO,,,,Goals,0.5,Demon
-10444633,10444633,274088,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Gallardo,,Midfielder,INSTITUTO,,,,Goal + Assist,0.5,Demon
-10444634,10444634,274088,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Gallardo,,Midfielder,INSTITUTO,,,,Shots On Target,0.5,Demon
-10444635,10444635,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Assists,0.5,Demon
-10444636,10444636,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Goals,0.5,Demon
-10444641,10444641,295214,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Guerra,,Attacker,INSTITUTO,,,,Shots On Target,0.5,Goblin
 10444644,10444644,251683,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Rodrigo Guth,https://static.prizepicks.com/images/manual/Rodrigo Guth.png,Defender,TALLERES,,,,Goal + Assist,0.5,Demon
 10444645,10444645,251683,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Rodrigo Guth,https://static.prizepicks.com/images/manual/Rodrigo Guth.png,Defender,TALLERES,,,,Shots On Target,0.5,Demon
 10444646,10444646,295758,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Ronaldo Martínez,,Attacker,TALLERES,,,,Assists,0.5,Demon
@@ -144,7 +119,6 @@
 10444664,10444664,274880,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Valentín Depietri,,Attacker,TALLERES,,,,Goals,0.5,Demon
 10444666,10444666,296163,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Valentín Dávila,,Attacker,TALLERES,,,,Goals,0.5,Demon
 10445374,10445374,245947,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Emiliano Chiavassa,https://static.prizepicks.com/images/manual/EmilianoMiguelChiavassa.png,Attacker,TALLERES,,,,Shots,0.5,Goblin
-10458450,10458450,204667,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Jonás Acevedo,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,INSTITUTO,,,,Goals,0.5,Demon
 10461865,10461865,251019,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Báez,,Defender,TALLERES,,,,Goal + Assist,0.5,Demon
 10472186,10472186,245947,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Emiliano Chiavassa,https://static.prizepicks.com/images/manual/EmilianoMiguelChiavassa.png,Attacker,TALLERES,,,,Goals,0.5,Demon
 10472187,10472187,277610,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Galarza,,Midfielder,TALLERES,,,,Goals,0.5,Demon
@@ -153,23 +127,16 @@
 10472341,10472341,205303,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Catalán,https://static.prizepicks.com/images/manual/Matías Catalán.png,Defender,TALLERES,,,,Shots,0.5,Demon
 10472583,10472583,300655,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Gustavo Abregú,,Defender,INSTITUTO,,,,Goals,0.5,Demon
 10472584,10472584,249010,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Mateo Cáceres,,Midfielder,TALLERES,,,,Goals,0.5,Demon
-10473288,10473288,274088,135156,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Gallardo,,Midfielder,INSTITUTO,,,,Goals,0.5,Demon
 10444454,10444454,295781,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Martín Garnerone,,Attacker,ESTUDIANTES RC,,,,Shots,4.5,Demon
 10444378,10444378,297085,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Vázquez,,Midfielder,BELGRANO,,,,Shots,3.5,Demon
-10444383,10444383,295776,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Alanís,,Midfielder,ESTUDIANTES RC,,,,Shots,3.5,Demon
-10444397,10444397,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Shots,3.5,Demon
 10444422,10444422,296633,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lautaro Gutierrez,,Attacker,BELGRANO,,,,Shots,3.5,Demon
 10444431,10444431,170924,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lucas Passerini,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90051922.png,Attacker,BELGRANO,,,,Shots,3.5,Demon
 10444453,10444453,295781,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Martín Garnerone,,Attacker,ESTUDIANTES RC,,,,Shots,3.5,Demon
 10444461,10444461,295782,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mateo Bajamich,,Attacker,ESTUDIANTES RC,,,,Shots,3.5,Demon
 10444475,10444475,295784,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauro Valiente,,Attacker,ESTUDIANTES RC,,,,Shots,3.5,Demon
-10444488,10444488,297067,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Talpone,,Midfielder,ESTUDIANTES RC,,,,Shots,3.5,Demon
 10444355,10444355,295542,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Emiliano Rigoni,,Midfielder,BELGRANO,,,,Shots,2.5,Demon
 10444368,10444368,206009,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Metilli,https://imgur.com/KAFxQa4.png,Midfielder,BELGRANO,,,,Shots,2.5,Demon
 10444377,10444377,297085,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Vázquez,,Midfielder,BELGRANO,,,,Shots,2.5,Demon
-10444382,10444382,295776,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Alanís,,Midfielder,ESTUDIANTES RC,,,,Shots,2.5,Demon
-10444396,10444396,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Shots,2.5,Demon
-10444399,10444399,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Shots On Target,2.5,Demon
 10444416,10444416,275880,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Julián Mavilla,,Midfielder,BELGRANO,,,,Shots,2.5,Demon
 10444421,10444421,296633,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lautaro Gutierrez,,Attacker,BELGRANO,,,,Shots,2.5,Demon
 10444432,10444432,170924,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lucas Passerini,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90051922.png,Attacker,BELGRANO,,,,Shots,2.5,Demon
@@ -177,9 +144,6 @@
 10444452,10444452,295781,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Martín Garnerone,,Attacker,ESTUDIANTES RC,,,,Shots,2.5,Goblin
 10444460,10444460,295782,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mateo Bajamich,,Attacker,ESTUDIANTES RC,,,,Shots,2.5,Demon
 10444474,10444474,295784,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauro Valiente,,Attacker,ESTUDIANTES RC,,,,Shots,2.5,Demon
-10444483,10444483,219874,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Fernández,https://static.prizepicks.com/images/manual/Nicolás Fernández.png,Attacker,BELGRANO,,,,Shots On Target,2.5,Demon
-10444487,10444487,297067,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Talpone,,Midfielder,ESTUDIANTES RC,,,,Shots,2.5,Demon
-10444514,10444514,295791,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tobías Ostchega,,Defender,ESTUDIANTES RC,,,,Shots,2.5,Demon
 10444335,10444335,296645,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Romero,,Midfielder,ESTUDIANTES RC,,,,Shots,1.5,Demon
 10444341,10444341,275865,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Adrián Spörle,,Defender,BELGRANO,,,,Shots,1.5,Demon
 10444357,10444357,295542,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Emiliano Rigoni,,Midfielder,BELGRANO,,,,Shots On Target,1.5,Demon
@@ -187,11 +151,7 @@
 10444370,10444370,206009,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Metilli,https://imgur.com/KAFxQa4.png,Midfielder,BELGRANO,,,,Shots On Target,1.5,Demon
 10444376,10444376,297085,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Vázquez,,Midfielder,BELGRANO,,,,Shots,1.5,Goblin
 10444379,10444379,297085,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Vázquez,,Midfielder,BELGRANO,,,,Shots On Target,1.5,Demon
-10444385,10444385,295776,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Alanís,,Midfielder,ESTUDIANTES RC,,,,Shots On Target,1.5,Demon
 10444387,10444387,296001,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gonzalo Maffini,,Defender,ESTUDIANTES RC,,,,Shots,1.5,Demon
-10444395,10444395,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Shots,1.5,Goblin
-10444398,10444398,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Shots On Target,1.5,Demon
-10444408,10444408,295892,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Juan Antonini,,Defender,ESTUDIANTES RC,,,,Shots,1.5,Demon
 10444415,10444415,275880,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Julián Mavilla,,Midfielder,BELGRANO,,,,Shots,1.5,Demon
 10444420,10444420,296633,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lautaro Gutierrez,,Attacker,BELGRANO,,,,Shots,1.5,Goblin
 10444424,10444424,296633,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lautaro Gutierrez,,Attacker,BELGRANO,,,,Shots On Target,1.5,Demon
@@ -203,10 +163,7 @@
 10444473,10444473,295784,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauro Valiente,,Attacker,ESTUDIANTES RC,,,,Shots,1.5,Goblin
 10444476,10444476,295784,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauro Valiente,,Attacker,ESTUDIANTES RC,,,,Shots On Target,1.5,Demon
 10444482,10444482,219874,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Fernández,https://static.prizepicks.com/images/manual/Nicolás Fernández.png,Attacker,BELGRANO,,,,Shots On Target,1.5,Demon
-10444486,10444486,297067,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Talpone,,Midfielder,ESTUDIANTES RC,,,,Shots,1.5,Goblin
-10444490,10444490,297067,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Talpone,,Midfielder,ESTUDIANTES RC,,,,Shots On Target,1.5,Demon
 10444504,10444504,170929,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Santiago Longo,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,BELGRANO,,,,Shots,1.5,Demon
-10444513,10444513,295791,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tobías Ostchega,,Defender,ESTUDIANTES RC,,,,Shots,1.5,Demon
 10469068,10469068,206009,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Metilli,https://imgur.com/KAFxQa4.png,Midfielder,BELGRANO,,,,Shots,1.5,Demon
 10482969,10482969,295803,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tomás Olmos,,Defender,ESTUDIANTES RC,,,,Shots,1.5,Demon
 10444333,10444333,296645,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Romero,,Midfielder,ESTUDIANTES RC,,,,Assists,0.5,Demon
@@ -217,9 +174,6 @@
 10444339,10444339,275865,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Adrián Spörle,,Defender,BELGRANO,,,,Assists,0.5,Demon
 10444340,10444340,275865,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Adrián Spörle,,Defender,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444342,10444342,275865,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Adrián Spörle,,Defender,BELGRANO,,,,Shots On Target,0.5,Demon
-10444344,10444344,295774,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Agustín Morales,,Attacker,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
-10444345,10444345,295774,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Agustín Morales,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
-10444346,10444346,295774,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Agustín Morales,,Attacker,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
 10444348,10444348,295541,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Alcides Benítez,,Defender,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444349,10444349,295541,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Alcides Benítez,,Defender,BELGRANO,,,,Shots On Target,0.5,Demon
 10444350,10444350,295812,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Alejandro Cabrera,,Defender,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
@@ -237,29 +191,20 @@
 10444366,10444366,206009,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Metilli,https://imgur.com/KAFxQa4.png,Midfielder,BELGRANO,,,,Goals,0.5,Demon
 10444367,10444367,206009,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Metilli,https://imgur.com/KAFxQa4.png,Midfielder,BELGRANO,,,,Shots,0.5,Goblin
 10444369,10444369,206009,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Metilli,https://imgur.com/KAFxQa4.png,Midfielder,BELGRANO,,,,Shots On Target,0.5,Demon
-10444371,10444371,295775,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Galván,,Attacker,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
 10444372,10444372,295775,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Francisco Galván,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
 10444373,10444373,297085,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Vázquez,,Midfielder,BELGRANO,,,,Assists,0.5,Demon
 10444374,10444374,297085,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Vázquez,,Midfielder,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444375,10444375,297085,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Vázquez,,Midfielder,BELGRANO,,,,Goals,0.5,Demon
-10444380,10444380,295776,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Alanís,,Midfielder,ESTUDIANTES RC,,,,Assists,0.5,Demon
-10444381,10444381,295776,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Alanís,,Midfielder,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
 10444386,10444386,296001,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gonzalo Maffini,,Defender,ESTUDIANTES RC,,,,Shots,0.5,Demon
 10444388,10444388,296001,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gonzalo Maffini,,Defender,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
 10444389,10444389,275875,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gonzalo Zelarayán,,Attacker,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444390,10444390,275875,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gonzalo Zelarayán,,Attacker,BELGRANO,,,,Goals,0.5,Demon
 10444391,10444391,275875,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gonzalo Zelarayán,,Attacker,BELGRANO,,,,Shots On Target,0.5,Demon
-10444392,10444392,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Assists,0.5,Demon
-10444393,10444393,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
-10444394,10444394,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
+10444400,10444400,194473,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Jeremías Lucco,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Assists,0.5,Demon
 10444401,10444401,194473,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Jeremías Lucco,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444402,10444402,194473,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Jeremías Lucco,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Goals,0.5,Demon
 10444403,10444403,194473,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Jeremías Lucco,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Shots On Target,0.5,Demon
-10444404,10444404,295779,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Ezequiel Forclaz,,Midfielder,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
 10444405,10444405,295779,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Ezequiel Forclaz,,Midfielder,ESTUDIANTES RC,,,,Goals,0.5,Demon
-10444406,10444406,295779,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Ezequiel Forclaz,,Midfielder,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
-10444407,10444407,295892,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Juan Antonini,,Defender,ESTUDIANTES RC,,,,Shots,0.5,Demon
-10444409,10444409,295892,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Juan Antonini,,Defender,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
 10444410,10444410,206012,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Juan Velázquez,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444411,10444411,206012,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Juan Velázquez,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Shots On Target,0.5,Demon
 10444412,10444412,275880,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Julián Mavilla,,Midfielder,BELGRANO,,,,Assists,0.5,Demon
@@ -273,7 +218,6 @@
 10444428,10444428,170924,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lucas Passerini,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90051922.png,Attacker,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444429,10444429,170924,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lucas Passerini,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90051922.png,Attacker,BELGRANO,,,,Goals,0.5,Demon
 10444433,10444433,170924,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lucas Passerini,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90051922.png,Attacker,BELGRANO,,,,Shots On Target,0.5,Goblin
-10444436,10444436,295780,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lucas González,,Attacker,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
 10444437,10444437,295780,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lucas González,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
 10444439,10444439,275882,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Lucas Zelarayán,https://static.prizepicks.com/images/players/soccer/d8htrjr6ponlb7rlw9fywp045.webp,Midfielder,BELGRANO,,,,Goals,0.5,Demon
 10444445,10444445,275883,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Alexis Maldonado,https://static.prizepicks.com/images/players/placeholder.png,Defender,BELGRANO,,,,Goal + Assist,0.5,Demon
@@ -286,25 +230,17 @@
 10444459,10444459,295782,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mateo Bajamich,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
 10444464,10444464,296647,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Valenti,,Defender,ESTUDIANTES RC,,,,Shots,0.5,Demon
 10444466,10444466,296647,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Matías Valenti,,Defender,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
-10444467,10444467,295783,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauricio Tévez,,Attacker,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
 10444468,10444468,295783,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauricio Tévez,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
-10444469,10444469,295783,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauricio Tévez,,Attacker,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
 10444470,10444470,295784,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauro Valiente,,Attacker,ESTUDIANTES RC,,,,Assists,0.5,Demon
 10444471,10444471,295784,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauro Valiente,,Attacker,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
 10444472,10444472,295784,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauro Valiente,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
-10444477,10444477,302619,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Mauro Molina,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
 10444478,10444478,219874,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Fernández,https://static.prizepicks.com/images/manual/Nicolás Fernández.png,Attacker,BELGRANO,,,,Assists,0.5,Demon
 10444479,10444479,219874,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Fernández,https://static.prizepicks.com/images/manual/Nicolás Fernández.png,Attacker,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444480,10444480,219874,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Fernández,https://static.prizepicks.com/images/manual/Nicolás Fernández.png,Attacker,BELGRANO,,,,Goals,0.5,Demon
 10444481,10444481,219874,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Fernández,https://static.prizepicks.com/images/manual/Nicolás Fernández.png,Attacker,BELGRANO,,,,Shots On Target,0.5,Goblin
-10444484,10444484,297067,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Talpone,,Midfielder,ESTUDIANTES RC,,,,Assists,0.5,Demon
-10444485,10444485,297067,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Talpone,,Midfielder,ESTUDIANTES RC,,,,Goals,0.5,Demon
-10444489,10444489,297067,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Nicolás Talpone,,Midfielder,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
-10444491,10444491,275885,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Ramiro Hernandes,,Midfielder,BELGRANO,,,,Assists,0.5,Demon
 10444492,10444492,275885,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Ramiro Hernandes,,Midfielder,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444493,10444493,275885,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Ramiro Hernandes,,Midfielder,BELGRANO,,,,Goals,0.5,Demon
 10444494,10444494,275885,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Ramiro Hernandes,,Midfielder,BELGRANO,,,,Shots On Target,0.5,Demon
-10444495,10444495,300399,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Ramón Ábila,,Attacker,ESTUDIANTES RC,,,,Goals,0.5,Demon
 10444496,10444496,191757,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Bryan Reyna,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Assists,0.5,Demon
 10444497,10444497,191757,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Bryan Reyna,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444498,10444498,191757,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Bryan Reyna,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Goals,0.5,Demon
@@ -314,170 +250,68 @@
 10444502,10444502,275887,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Leonardo Morales,,Defender,BELGRANO,,,,Shots On Target,0.5,Demon
 10444503,10444503,170929,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Santiago Longo,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,BELGRANO,,,,Goal + Assist,0.5,Demon
 10444505,10444505,170929,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Santiago Longo,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,BELGRANO,,,,Shots On Target,0.5,Demon
-10444506,10444506,296389,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Sergio Ojeda,,Defender,ESTUDIANTES RC,,,,Shots,0.5,Demon
-10444507,10444507,295788,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Siro Rosané,,Midfielder,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
-10444508,10444508,295788,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Siro Rosané,,Midfielder,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
-10444509,10444509,295790,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tobías Leiva,,Midfielder,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
-10444510,10444510,295791,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tobías Ostchega,,Defender,ESTUDIANTES RC,,,,Assists,0.5,Demon
-10444511,10444511,295791,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tobías Ostchega,,Defender,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
-10444512,10444512,295791,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tobías Ostchega,,Defender,ESTUDIANTES RC,,,,Shots,0.5,Goblin
-10444515,10444515,295791,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tobías Ostchega,,Defender,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
 10444516,10444516,295792,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tomás González,,Midfielder,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
 10444517,10444517,295792,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tomás González,,Midfielder,ESTUDIANTES RC,,,,Goals,0.5,Demon
 10444518,10444518,295792,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tomás González,,Midfielder,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
-10444519,10444519,295803,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tomás Olmos,,Defender,ESTUDIANTES RC,,,,Goal + Assist,0.5,Demon
 10444520,10444520,295803,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tomás Olmos,,Defender,ESTUDIANTES RC,,,,Shots,0.5,Demon
 10444521,10444521,295803,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tomás Olmos,,Defender,ESTUDIANTES RC,,,,Shots On Target,0.5,Demon
 10446148,10446148,296169,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Adrián Sánchez,,Midfielder,BELGRANO,,,,Goals,0.5,Demon
-10446149,10446149,295776,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Gabriel Alanís,,Midfielder,ESTUDIANTES RC,,,,Goals,0.5,Demon
 10446150,10446150,206012,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Juan Velázquez,https://static.prizepicks.com/images/players/placeholder.png,Attacker,BELGRANO,,,,Goals,0.5,Demon
-10458446,10458446,295777,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Javier Ferreira,,Attacker,ESTUDIANTES RC,,,,Shots On Target,0.5,Goblin
-10458447,10458447,295788,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Siro Rosané,,Midfielder,ESTUDIANTES RC,,,,Goals,0.5,Demon
-10458448,10458448,295790,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Tobías Leiva,,Midfielder,ESTUDIANTES RC,,,,Goals,0.5,Demon
 10473720,10473720,297085,135157,SOCCER,2026-03-12T18:15:00.000-04:00,Franco Vázquez,,Midfielder,BELGRANO,,,,Shots On Target,0.5,Demon
-10444839,10444839,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Shots,4.5,Demon
-10444944,10444944,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Shots,4.5,Demon
 10444957,10444957,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Shots,4.5,Demon
-10445054,10445054,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Shots,4.5,Demon
-10444797,10444797,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Shots,3.5,Demon
 10444828,10444828,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Shots,3.5,Demon
-10444838,10444838,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Shots,3.5,Demon
 10444855,10444855,255255,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andrés Gómez,https://static.prizepicks.com/images/players/soccer/82w5p305rf5dw31qndxj81rmc.webp,Attacker,VASCO,,,,Shots,3.5,Demon
-10444880,10444880,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Shots,3.5,Demon
 10444925,10444925,299917,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Jhon Arias,,Midfielder,PALMEIRAS,,,,Shots,3.5,Demon
-10444943,10444943,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Shots,3.5,Demon
 10444956,10444956,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Shots,3.5,Demon
-10445009,10445009,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Shots,3.5,Demon
 10445035,10445035,247097,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Ramón Sosa,https://static.prizepicks.com/images/manual/Ramón_Sosa_Acosta.png,Attacker,PALMEIRAS,,,,Shots,3.5,Demon
-10445053,10445053,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Shots,3.5,Demon
-10444796,10444796,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Shots,2.5,Demon
-10444805,10444805,241612,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Agustín Giay,https://static.prizepicks.com/images/manual/Agustín Giay.png,Defender,PALMEIRAS,,,,Tackles,2.5,Goblin
-10444816,10444816,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Shots,2.5,Demon
-10444821,10444821,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Tackles,2.5,Demon
 10444827,10444827,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Shots,2.5,Demon
-10444842,10444842,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Shots On Target,2.5,Demon
 10444850,10444850,244915,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Bruno Fuchs,https://static.prizepicks.com/images/manual/Bruno_Fuchs.png,Defender,PALMEIRAS,,,,Tackles,2.5,Demon
 10444860,10444860,255255,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andrés Gómez,https://static.prizepicks.com/images/players/soccer/82w5p305rf5dw31qndxj81rmc.webp,Attacker,VASCO,,,,Tackles,2.5,Demon
-10444872,10444872,254463,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cauan Barros,https://static.prizepicks.com/images/manual/Cauan Lucas Barros da Luz .png,Midfielder,VASCO,,,,Shots,2.5,Demon
-10444884,10444884,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Shots On Target,2.5,Demon
 10444893,10444893,239792,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Tchê Tchê,https://static.prizepicks.com/images/manual/Tchê Tchê.png,Midfielder,VASCO,,,,Tackles,2.5,Demon
-10444899,10444899,241611,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Emiliano Martínez,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,PALMEIRAS,,,,Tackles,2.5,Demon
 10444905,10444905,204459,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Felipe Anderson,https://static.prizepicks.com/images/players/soccer/bj2ymzuyq3zxbfjs3xrt3ss7p.webp,Midfielder,PALMEIRAS,,,,Shots,2.5,Demon
 10444908,10444908,204459,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Felipe Anderson,https://static.prizepicks.com/images/players/soccer/bj2ymzuyq3zxbfjs3xrt3ss7p.webp,Midfielder,PALMEIRAS,,,,Tackles,2.5,Demon
 10444918,10444918,203305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Hugo Moura,https://static.prizepicks.com/images/manual/Hugo_Moura.png,Midfielder,VASCO,,,,Tackles,2.5,Demon
 10444926,10444926,299917,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Jhon Arias,,Midfielder,PALMEIRAS,,,,Shots,2.5,Demon
 10444929,10444929,299917,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Jhon Arias,,Midfielder,PALMEIRAS,,,,Shots On Target,2.5,Demon
 10444930,10444930,299917,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Jhon Arias,,Midfielder,PALMEIRAS,,,,Tackles,2.5,Demon
-10444936,10444936,147331,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Joaquín Piquerez,https://static.prizepicks.com/images/manual/Joaquín Piquerez.png,Defender,PALMEIRAS,,,,Shots,2.5,Demon
-10444938,10444938,147331,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Joaquín Piquerez,https://static.prizepicks.com/images/manual/Joaquín Piquerez.png,Defender,PALMEIRAS,,,,Tackles,2.5,Demon
 10444959,10444959,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Shots,2.5,Goblin
 10444961,10444961,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Shots On Target,2.5,Demon
-10444967,10444967,201962,135162,SOCCER,2026-03-12T18:30:00.000-04:00,João Pedro,https://static.prizepicks.com/images/manual/João Pedro.png,Midfielder,VASCO,,,,Shots,2.5,Demon
 10444976,10444976,275386,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Khellven,https://static.prizepicks.com/images/manual/Khellven.png,Defender,PALMEIRAS,,,,Tackles,2.5,Demon
-10444983,10444983,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Shots,2.5,Demon
-10444985,10444985,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Tackles,2.5,Demon
-10445002,10445002,247305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Benedetti,https://static.prizepicks.com/images/manual/Luis_Gustavo_Roncholeta_Benedetti.png,Defender,PALMEIRAS,,,,Tackles,2.5,Demon
-10445008,10445008,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Shots,2.5,Demon
 10445034,10445034,247097,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Ramón Sosa,https://static.prizepicks.com/images/manual/Ramón_Sosa_Acosta.png,Attacker,PALMEIRAS,,,,Shots,2.5,Demon
 10445049,10445049,275440,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Thiago Mendes,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90039586.png,Midfielder,VASCO,,,,Tackles,2.5,Demon
-10445055,10445055,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Shots,2.5,Goblin
-10445057,10445057,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Shots On Target,2.5,Demon
-10444793,10444793,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Fouls,1.5,Demon
-10444798,10444798,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Shots,1.5,Goblin
-10444799,10444799,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Shots On Target,1.5,Demon
-10444800,10444800,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Tackles,1.5,Demon
-10444803,10444803,241612,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Agustín Giay,https://static.prizepicks.com/images/manual/Agustín Giay.png,Defender,PALMEIRAS,,,,Shots,1.5,Demon
 10444806,10444806,296635,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Alan Saldivia,,Defender,VASCO,,,,Fouls,1.5,Demon
 10444810,10444810,296635,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Alan Saldivia,,Defender,VASCO,,,,Tackles,1.5,Demon
-10444812,10444812,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Fouls,1.5,Demon
-10444819,10444819,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Shots On Target,1.5,Demon
 10444823,10444823,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Fouls,1.5,Goblin
 10444831,10444831,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Shots On Target,1.5,Demon
 10444832,10444832,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Tackles,1.5,Demon
-10444835,10444835,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Fouls,1.5,Demon
-10444840,10444840,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Shots,1.5,Goblin
-10444841,10444841,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Shots On Target,1.5,Demon
-10444844,10444844,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Tackles,1.5,Demon
 10444845,10444845,244915,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Bruno Fuchs,https://static.prizepicks.com/images/manual/Bruno_Fuchs.png,Defender,PALMEIRAS,,,,Fouls,1.5,Demon
 10444857,10444857,255255,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andrés Gómez,https://static.prizepicks.com/images/players/soccer/82w5p305rf5dw31qndxj81rmc.webp,Attacker,VASCO,,,,Shots,1.5,Goblin
 10444858,10444858,255255,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andrés Gómez,https://static.prizepicks.com/images/players/soccer/82w5p305rf5dw31qndxj81rmc.webp,Attacker,VASCO,,,,Shots On Target,1.5,Demon
-10444865,10444865,263683,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Carlos Cuesta,https://static.prizepicks.com/images/players/placeholder.png,Defender,VASCO,,,,Shots,1.5,Demon
-10444867,10444867,263683,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Carlos Cuesta,https://static.prizepicks.com/images/players/placeholder.png,Defender,VASCO,,,,Tackles,1.5,Demon
-10444868,10444868,254463,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cauan Barros,https://static.prizepicks.com/images/manual/Cauan Lucas Barros da Luz .png,Midfielder,VASCO,,,,Fouls,1.5,Goblin
-10444871,10444871,254463,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cauan Barros,https://static.prizepicks.com/images/manual/Cauan Lucas Barros da Luz .png,Midfielder,VASCO,,,,Shots,1.5,Demon
-10444876,10444876,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Fouls,1.5,Demon
-10444882,10444882,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Shots,1.5,Goblin
-10444883,10444883,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Shots On Target,1.5,Demon
-10444886,10444886,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Tackles,1.5,Demon
 10444890,10444890,239792,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Tchê Tchê,https://static.prizepicks.com/images/manual/Tchê Tchê.png,Midfielder,VASCO,,,,Shots,1.5,Demon
-10444895,10444895,241611,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Emiliano Martínez,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,PALMEIRAS,,,,Fouls,1.5,Goblin
-10444896,10444896,241611,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Emiliano Martínez,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,PALMEIRAS,,,,Shots,1.5,Demon
 10444901,10444901,204459,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Felipe Anderson,https://static.prizepicks.com/images/players/soccer/bj2ymzuyq3zxbfjs3xrt3ss7p.webp,Midfielder,PALMEIRAS,,,,Fouls,1.5,Demon
 10444907,10444907,204459,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Felipe Anderson,https://static.prizepicks.com/images/players/soccer/bj2ymzuyq3zxbfjs3xrt3ss7p.webp,Midfielder,PALMEIRAS,,,,Shots On Target,1.5,Demon
 10444913,10444913,147321,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Gustavo Gómez,https://static.prizepicks.com/images/manual/Gustavo Gómez.png,Defender,PALMEIRAS,,,,Shots,1.5,Demon
 10444916,10444916,203305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Hugo Moura,https://static.prizepicks.com/images/manual/Hugo_Moura.png,Midfielder,VASCO,,,,Shots,1.5,Demon
 10444928,10444928,299917,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Jhon Arias,,Midfielder,PALMEIRAS,,,,Shots On Target,1.5,Demon
-10444932,10444932,147331,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Joaquín Piquerez,https://static.prizepicks.com/images/manual/Joaquín Piquerez.png,Defender,PALMEIRAS,,,,Fouls,1.5,Demon
-10444935,10444935,147331,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Joaquín Piquerez,https://static.prizepicks.com/images/manual/Joaquín Piquerez.png,Defender,PALMEIRAS,,,,Shots,1.5,Demon
-10444945,10444945,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Shots,1.5,Goblin
-10444947,10444947,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Shots On Target,1.5,Demon
-10444948,10444948,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Tackles,1.5,Demon
-10444951,10444951,162298,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José Rodríguez,https://static.prizepicks.com/images/manual/José__Rodríguez.png,Defender,VASCO,,,,Shots,1.5,Demon
 10444954,10444954,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Fouls,1.5,Goblin
 10444958,10444958,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Shots,1.5,Goblin
 10444960,10444960,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Shots On Target,1.5,Demon
 10444963,10444963,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Tackles,1.5,Demon
-10444970,10444970,201962,135162,SOCCER,2026-03-12T18:30:00.000-04:00,João Pedro,https://static.prizepicks.com/images/manual/João Pedro.png,Midfielder,VASCO,,,,Shots On Target,1.5,Demon
-10444982,10444982,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Shots,1.5,Demon
 10444987,10444987,162297,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Piton,https://static.prizepicks.com/images/manual/Lucas_Piton.png,Defender,VASCO,,,,Shots,1.5,Demon
-10444992,10444992,249933,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Luighi Hanri,https://static.prizepicks.com/images/manual/Luighi Hanri.png,Attacker,PALMEIRAS,,,,Shots,1.5,Demon
-10444996,10444996,299944,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cuiabano,,Defender,VASCO,,,,Shots,1.5,Demon
-10444998,10444998,247305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Benedetti,https://static.prizepicks.com/images/manual/Luis_Gustavo_Roncholeta_Benedetti.png,Defender,PALMEIRAS,,,,Fouls,1.5,Demon
-10445004,10445004,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Fouls,1.5,Demon
-10445012,10445012,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Shots On Target,1.5,Demon
-10445013,10445013,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Tackles,1.5,Demon
-10445017,10445017,204460,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Maurício,https://static.prizepicks.com/images/manual/Maurício.png,Midfielder,PALMEIRAS,,,,Shots,1.5,Demon
-10445022,10445022,147326,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Murilo,https://static.prizepicks.com/images/players/placeholder.png,Defender,PALMEIRAS,,,,Fouls,1.5,Demon
-10445026,10445026,147326,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Murilo,https://static.prizepicks.com/images/players/placeholder.png,Defender,PALMEIRAS,,,,Shots,1.5,Demon
-10445028,10445028,147326,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Murilo,https://static.prizepicks.com/images/players/placeholder.png,Defender,PALMEIRAS,,,,Tackles,1.5,Demon
 10445037,10445037,247097,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Ramón Sosa,https://static.prizepicks.com/images/manual/Ramón_Sosa_Acosta.png,Attacker,PALMEIRAS,,,,Shots On Target,1.5,Demon
 10445038,10445038,247097,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Ramón Sosa,https://static.prizepicks.com/images/manual/Ramón_Sosa_Acosta.png,Attacker,PALMEIRAS,,,,Tackles,1.5,Demon
 10445039,10445039,282767,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Robert Renan,,Defender,VASCO,,,,Fouls,1.5,Demon
 10445044,10445044,282767,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Robert Renan,,Defender,VASCO,,,,Tackles,1.5,Demon
 10445047,10445047,275440,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Thiago Mendes,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90039586.png,Midfielder,VASCO,,,,Shots,1.5,Demon
-10445056,10445056,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Shots On Target,1.5,Demon
-10445059,10445059,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Tackles,1.5,Demon
-10462367,10462367,241612,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Agustín Giay,https://static.prizepicks.com/images/manual/Agustín Giay.png,Defender,PALMEIRAS,,,,Fouls,1.5,Goblin
-10462368,10462368,203305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Hugo Moura,https://static.prizepicks.com/images/manual/Hugo_Moura.png,Midfielder,VASCO,,,,Fouls,1.5,Goblin
-10462369,10462369,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Fouls,1.5,Demon
-10462370,10462370,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Fouls,1.5,Goblin
-10462401,10462401,162298,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José Rodríguez,https://static.prizepicks.com/images/manual/José__Rodríguez.png,Defender,VASCO,,,,Fouls,1.5,Goblin
-10505903,10505903,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Shots On Target,1.5,Demon
-10444792,10444792,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Assists,0.5,Demon
-10444794,10444794,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Fouls,0.5,Goblin
-10444795,10444795,199605,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Adson,https://static.prizepicks.com/images/players/soccer/19py7tmt65op9pdheo1tdz21g.webp,Attacker,VASCO,,,,Goals,0.5,Demon
-10444801,10444801,241612,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Agustín Giay,https://static.prizepicks.com/images/manual/Agustín Giay.png,Defender,PALMEIRAS,,,,Assists,0.5,Demon
-10444802,10444802,241612,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Agustín Giay,https://static.prizepicks.com/images/manual/Agustín Giay.png,Defender,PALMEIRAS,,,,Goal + Assist,0.5,Demon
-10444804,10444804,241612,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Agustín Giay,https://static.prizepicks.com/images/manual/Agustín Giay.png,Defender,PALMEIRAS,,,,Shots On Target,0.5,Demon
 10444807,10444807,296635,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Alan Saldivia,,Defender,VASCO,,,,Fouls,0.5,Goblin
 10444808,10444808,296635,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Alan Saldivia,,Defender,VASCO,,,,Shots,0.5,Demon
 10444809,10444809,296635,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Alan Saldivia,,Defender,VASCO,,,,Shots On Target,0.5,Demon
-10444811,10444811,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Assists,0.5,Demon
-10444813,10444813,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Fouls,0.5,Goblin
-10444814,10444814,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Goal + Assist,0.5,Demon
-10444815,10444815,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Goals,0.5,Demon
-10444818,10444818,244098,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Allan,https://static.prizepicks.com/images/manual/Allan_Andrade_Elias.png,Attacker,PALMEIRAS,,,,Shots,0.5,Goblin
 10444822,10444822,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Assists,0.5,Demon
 10444824,10444824,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Fouls,0.5,Goblin
 10444825,10444825,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Goal + Assist,0.5,Demon
 10444826,10444826,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Goals,0.5,Demon
 10444829,10444829,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Shots,0.5,Goblin
 10444830,10444830,262162,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andreas Pereira,https://static.prizepicks.com/images/manual/Andreas_Hugo_Hoelgebaum_Pereira.png,Midfielder,PALMEIRAS,,,,Shots On Target,0.5,Demon
-10444833,10444833,275383,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Arthur,https://static.prizepicks.com/images/manual/Arthur Gabriel.png,Defender,PALMEIRAS,,,,Goals,0.5,Demon
-10444834,10444834,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Assists,0.5,Demon
-10444836,10444836,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Goal + Assist,0.5,Demon
-10444837,10444837,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Goals,0.5,Demon
-10444843,10444843,298138,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Brenner,,Attacker,VASCO,,,,Shots On Target,0.5,Goblin
 10444846,10444846,244915,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Bruno Fuchs,https://static.prizepicks.com/images/manual/Bruno_Fuchs.png,Defender,PALMEIRAS,,,,Fouls,0.5,Goblin
 10444847,10444847,244915,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Bruno Fuchs,https://static.prizepicks.com/images/manual/Bruno_Fuchs.png,Defender,PALMEIRAS,,,,Goal + Assist,0.5,Demon
 10444848,10444848,244915,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Bruno Fuchs,https://static.prizepicks.com/images/manual/Bruno_Fuchs.png,Defender,PALMEIRAS,,,,Shots,0.5,Demon
@@ -486,26 +320,11 @@
 10444853,10444853,255255,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andrés Gómez,https://static.prizepicks.com/images/players/soccer/82w5p305rf5dw31qndxj81rmc.webp,Attacker,VASCO,,,,Fouls,0.5,Goblin
 10444854,10444854,255255,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andrés Gómez,https://static.prizepicks.com/images/players/soccer/82w5p305rf5dw31qndxj81rmc.webp,Attacker,VASCO,,,,Goals,0.5,Demon
 10444859,10444859,255255,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Andrés Gómez,https://static.prizepicks.com/images/players/soccer/82w5p305rf5dw31qndxj81rmc.webp,Attacker,VASCO,,,,Shots On Target,0.5,Goblin
-10444861,10444861,263683,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Carlos Cuesta,https://static.prizepicks.com/images/players/placeholder.png,Defender,VASCO,,,,Assists,0.5,Demon
-10444863,10444863,263683,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Carlos Cuesta,https://static.prizepicks.com/images/players/placeholder.png,Defender,VASCO,,,,Fouls,0.5,Goblin
-10444864,10444864,263683,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Carlos Cuesta,https://static.prizepicks.com/images/players/placeholder.png,Defender,VASCO,,,,Shots,0.5,Demon
-10444866,10444866,263683,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Carlos Cuesta,https://static.prizepicks.com/images/players/placeholder.png,Defender,VASCO,,,,Shots On Target,0.5,Demon
-10444869,10444869,254463,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cauan Barros,https://static.prizepicks.com/images/manual/Cauan Lucas Barros da Luz .png,Midfielder,VASCO,,,,Goal + Assist,0.5,Demon
-10444870,10444870,254463,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cauan Barros,https://static.prizepicks.com/images/manual/Cauan Lucas Barros da Luz .png,Midfielder,VASCO,,,,Goals,0.5,Demon
-10444873,10444873,254463,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cauan Barros,https://static.prizepicks.com/images/manual/Cauan Lucas Barros da Luz .png,Midfielder,VASCO,,,,Shots,0.5,Goblin
-10444874,10444874,254463,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cauan Barros,https://static.prizepicks.com/images/manual/Cauan Lucas Barros da Luz .png,Midfielder,VASCO,,,,Shots On Target,0.5,Demon
-10444875,10444875,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Assists,0.5,Demon
-10444877,10444877,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Fouls,0.5,Goblin
-10444878,10444878,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Goal + Assist,0.5,Demon
-10444879,10444879,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Goals,0.5,Demon
-10444885,10444885,302598,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Claudio Spinelli,,Attacker,VASCO,,,,Shots On Target,0.5,Goblin
 10444887,10444887,239792,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Tchê Tchê,https://static.prizepicks.com/images/manual/Tchê Tchê.png,Midfielder,VASCO,,,,Assists,0.5,Demon
 10444889,10444889,239792,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Tchê Tchê,https://static.prizepicks.com/images/manual/Tchê Tchê.png,Midfielder,VASCO,,,,Fouls,0.5,Goblin
 10444891,10444891,239792,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Tchê Tchê,https://static.prizepicks.com/images/manual/Tchê Tchê.png,Midfielder,VASCO,,,,Shots,0.5,Goblin
 10444892,10444892,239792,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Tchê Tchê,https://static.prizepicks.com/images/manual/Tchê Tchê.png,Midfielder,VASCO,,,,Shots On Target,0.5,Demon
 10444894,10444894,203304,135162,SOCCER,2026-03-12T18:30:00.000-04:00,David,https://static.prizepicks.com/images/players/placeholder.png,Attacker,VASCO,,,,Goals,0.5,Demon
-10444897,10444897,241611,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Emiliano Martínez,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,PALMEIRAS,,,,Shots,0.5,Goblin
-10444898,10444898,241611,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Emiliano Martínez,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,PALMEIRAS,,,,Shots On Target,0.5,Demon
 10444900,10444900,204459,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Felipe Anderson,https://static.prizepicks.com/images/players/soccer/bj2ymzuyq3zxbfjs3xrt3ss7p.webp,Midfielder,PALMEIRAS,,,,Assists,0.5,Demon
 10444902,10444902,204459,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Felipe Anderson,https://static.prizepicks.com/images/players/soccer/bj2ymzuyq3zxbfjs3xrt3ss7p.webp,Midfielder,PALMEIRAS,,,,Fouls,0.5,Goblin
 10444903,10444903,204459,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Felipe Anderson,https://static.prizepicks.com/images/players/soccer/bj2ymzuyq3zxbfjs3xrt3ss7p.webp,Midfielder,PALMEIRAS,,,,Goal + Assist,0.5,Demon
@@ -523,63 +342,15 @@
 10444923,10444923,299917,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Jhon Arias,,Midfielder,PALMEIRAS,,,,Goal + Assist,0.5,Demon
 10444924,10444924,299917,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Jhon Arias,,Midfielder,PALMEIRAS,,,,Goals,0.5,Demon
 10444927,10444927,299917,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Jhon Arias,,Midfielder,PALMEIRAS,,,,Shots,0.5,Goblin
-10444931,10444931,147331,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Joaquín Piquerez,https://static.prizepicks.com/images/manual/Joaquín Piquerez.png,Defender,PALMEIRAS,,,,Assists,0.5,Demon
-10444933,10444933,147331,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Joaquín Piquerez,https://static.prizepicks.com/images/manual/Joaquín Piquerez.png,Defender,PALMEIRAS,,,,Fouls,0.5,Goblin
-10444934,10444934,147331,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Joaquín Piquerez,https://static.prizepicks.com/images/manual/Joaquín Piquerez.png,Defender,PALMEIRAS,,,,Goal + Assist,0.5,Demon
-10444937,10444937,147331,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Joaquín Piquerez,https://static.prizepicks.com/images/manual/Joaquín Piquerez.png,Defender,PALMEIRAS,,,,Shots On Target,0.5,Demon
-10444939,10444939,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Assists,0.5,Demon
-10444940,10444940,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Fouls,0.5,Goblin
-10444941,10444941,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Goal + Assist,0.5,Demon
-10444942,10444942,296641,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Johan Rojas,,Attacker,VASCO,,,,Goals,0.5,Demon
-10444949,10444949,162298,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José Rodríguez,https://static.prizepicks.com/images/manual/José__Rodríguez.png,Defender,VASCO,,,,Goal + Assist,0.5,Demon
-10444950,10444950,162298,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José Rodríguez,https://static.prizepicks.com/images/manual/José__Rodríguez.png,Defender,VASCO,,,,Goals,0.5,Demon
-10444952,10444952,162298,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José Rodríguez,https://static.prizepicks.com/images/manual/José__Rodríguez.png,Defender,VASCO,,,,Shots On Target,0.5,Demon
 10444953,10444953,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Assists,0.5,Demon
 10444955,10444955,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Goals,0.5,Demon
 10444962,10444962,201969,135162,SOCCER,2026-03-12T18:30:00.000-04:00,José López,https://static.prizepicks.com/images/manual/josé lópez.png,Attacker,PALMEIRAS,,,,Shots On Target,0.5,Goblin
-10444964,10444964,201962,135162,SOCCER,2026-03-12T18:30:00.000-04:00,João Pedro,https://static.prizepicks.com/images/manual/João Pedro.png,Midfielder,VASCO,,,,Assists,0.5,Demon
-10444965,10444965,201962,135162,SOCCER,2026-03-12T18:30:00.000-04:00,João Pedro,https://static.prizepicks.com/images/manual/João Pedro.png,Midfielder,VASCO,,,,Goal + Assist,0.5,Demon
-10444966,10444966,201962,135162,SOCCER,2026-03-12T18:30:00.000-04:00,João Pedro,https://static.prizepicks.com/images/manual/João Pedro.png,Midfielder,VASCO,,,,Goals,0.5,Demon
-10444968,10444968,201962,135162,SOCCER,2026-03-12T18:30:00.000-04:00,João Pedro,https://static.prizepicks.com/images/manual/João Pedro.png,Midfielder,VASCO,,,,Shots,0.5,Demon
-10444969,10444969,201962,135162,SOCCER,2026-03-12T18:30:00.000-04:00,João Pedro,https://static.prizepicks.com/images/manual/João Pedro.png,Midfielder,VASCO,,,,Shots On Target,0.5,Demon
-10444971,10444971,300017,135162,SOCCER,2026-03-12T18:30:00.000-04:00,João Vitor,,Attacker,VASCO,,,,Goals,0.5,Demon
 10444972,10444972,275386,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Khellven,https://static.prizepicks.com/images/manual/Khellven.png,Defender,PALMEIRAS,,,,Assists,0.5,Demon
 10444973,10444973,275386,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Khellven,https://static.prizepicks.com/images/manual/Khellven.png,Defender,PALMEIRAS,,,,Goal + Assist,0.5,Demon
 10444974,10444974,275386,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Khellven,https://static.prizepicks.com/images/manual/Khellven.png,Defender,PALMEIRAS,,,,Shots,0.5,Demon
 10444975,10444975,275386,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Khellven,https://static.prizepicks.com/images/manual/Khellven.png,Defender,PALMEIRAS,,,,Shots On Target,0.5,Demon
-10444977,10444977,298002,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Larson,,Midfielder,PALMEIRAS,,,,Goals,0.5,Demon
-10444978,10444978,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Assists,0.5,Demon
-10444979,10444979,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Fouls,0.5,Goblin
-10444980,10444980,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Goal + Assist,0.5,Demon
-10444981,10444981,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Goals,0.5,Demon
-10444984,10444984,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Shots On Target,0.5,Demon
 10444986,10444986,162297,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Piton,https://static.prizepicks.com/images/manual/Lucas_Piton.png,Defender,VASCO,,,,Assists,0.5,Demon
 10444988,10444988,162297,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Piton,https://static.prizepicks.com/images/manual/Lucas_Piton.png,Defender,VASCO,,,,Shots On Target,0.5,Demon
-10444989,10444989,249933,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Luighi Hanri,https://static.prizepicks.com/images/manual/Luighi Hanri.png,Attacker,PALMEIRAS,,,,Assists,0.5,Demon
-10444990,10444990,249933,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Luighi Hanri,https://static.prizepicks.com/images/manual/Luighi Hanri.png,Attacker,PALMEIRAS,,,,Goal + Assist,0.5,Demon
-10444991,10444991,249933,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Luighi Hanri,https://static.prizepicks.com/images/manual/Luighi Hanri.png,Attacker,PALMEIRAS,,,,Goals,0.5,Demon
-10444993,10444993,249933,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Luighi Hanri,https://static.prizepicks.com/images/manual/Luighi Hanri.png,Attacker,PALMEIRAS,,,,Shots,0.5,Goblin
-10444994,10444994,249933,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Luighi Hanri,https://static.prizepicks.com/images/manual/Luighi Hanri.png,Attacker,PALMEIRAS,,,,Shots On Target,0.5,Demon
-10444995,10444995,299944,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cuiabano,,Defender,VASCO,,,,Goal + Assist,0.5,Demon
-10444997,10444997,299944,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cuiabano,,Defender,VASCO,,,,Shots On Target,0.5,Demon
-10444999,10444999,247305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Benedetti,https://static.prizepicks.com/images/manual/Luis_Gustavo_Roncholeta_Benedetti.png,Defender,PALMEIRAS,,,,Fouls,0.5,Goblin
-10445000,10445000,247305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Benedetti,https://static.prizepicks.com/images/manual/Luis_Gustavo_Roncholeta_Benedetti.png,Defender,PALMEIRAS,,,,Shots,0.5,Demon
-10445001,10445001,247305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Benedetti,https://static.prizepicks.com/images/manual/Luis_Gustavo_Roncholeta_Benedetti.png,Defender,PALMEIRAS,,,,Shots On Target,0.5,Demon
-10445003,10445003,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Assists,0.5,Demon
-10445005,10445005,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Fouls,0.5,Goblin
-10445006,10445006,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Goal + Assist,0.5,Demon
-10445007,10445007,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Goals,0.5,Demon
-10445010,10445010,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Shots,0.5,Goblin
-10445011,10445011,298141,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Marino Hinestroza,,Attacker,VASCO,,,,Shots On Target,0.5,Demon
-10445014,10445014,204460,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Maurício,https://static.prizepicks.com/images/manual/Maurício.png,Midfielder,PALMEIRAS,,,,Assists,0.5,Demon
-10445015,10445015,204460,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Maurício,https://static.prizepicks.com/images/manual/Maurício.png,Midfielder,PALMEIRAS,,,,Goal + Assist,0.5,Demon
-10445016,10445016,204460,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Maurício,https://static.prizepicks.com/images/manual/Maurício.png,Midfielder,PALMEIRAS,,,,Goals,0.5,Demon
-10445019,10445019,204460,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Maurício,https://static.prizepicks.com/images/manual/Maurício.png,Midfielder,PALMEIRAS,,,,Shots,0.5,Goblin
-10445020,10445020,204460,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Maurício,https://static.prizepicks.com/images/manual/Maurício.png,Midfielder,PALMEIRAS,,,,Shots On Target,0.5,Demon
-10445023,10445023,147326,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Murilo,https://static.prizepicks.com/images/players/placeholder.png,Defender,PALMEIRAS,,,,Fouls,0.5,Goblin
-10445024,10445024,147326,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Murilo,https://static.prizepicks.com/images/players/placeholder.png,Defender,PALMEIRAS,,,,Goal + Assist,0.5,Demon
-10445025,10445025,147326,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Murilo,https://static.prizepicks.com/images/players/placeholder.png,Defender,PALMEIRAS,,,,Shots,0.5,Demon
-10445027,10445027,147326,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Murilo,https://static.prizepicks.com/images/players/placeholder.png,Defender,PALMEIRAS,,,,Shots On Target,0.5,Demon
 10445029,10445029,247097,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Ramón Sosa,https://static.prizepicks.com/images/manual/Ramón_Sosa_Acosta.png,Attacker,PALMEIRAS,,,,Assists,0.5,Demon
 10445031,10445031,247097,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Ramón Sosa,https://static.prizepicks.com/images/manual/Ramón_Sosa_Acosta.png,Attacker,PALMEIRAS,,,,Fouls,0.5,Goblin
 10445032,10445032,247097,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Ramón Sosa,https://static.prizepicks.com/images/manual/Ramón_Sosa_Acosta.png,Attacker,PALMEIRAS,,,,Goal + Assist,0.5,Demon
@@ -591,17 +362,8 @@
 10445043,10445043,282767,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Robert Renan,,Defender,VASCO,,,,Shots On Target,0.5,Demon
 10445046,10445046,275440,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Thiago Mendes,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90039586.png,Midfielder,VASCO,,,,Fouls,0.5,Goblin
 10445048,10445048,275440,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Thiago Mendes,https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/soc/low-res/90039586.png,Midfielder,VASCO,,,,Shots On Target,0.5,Demon
-10445050,10445050,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Assists,0.5,Demon
-10445051,10445051,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Goal + Assist,0.5,Demon
-10445052,10445052,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Goals,0.5,Demon
-10445058,10445058,241609,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Vitor Roque,https://static.prizepicks.com/images/players/soccer/74z66mnnh5ipu13ihlqtun40k.webp,Attacker,PALMEIRAS,,,,Shots On Target,0.5,Goblin
-10446648,10446648,299944,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cuiabano,,Defender,VASCO,,,,Assists,0.5,Demon
-10456086,10456086,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Shots,0.5,Goblin
-10456087,10456087,299944,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cuiabano,,Defender,VASCO,,,,Goals,0.5,Demon
-10462452,10462452,241612,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Agustín Giay,https://static.prizepicks.com/images/manual/Agustín Giay.png,Defender,PALMEIRAS,,,,Shots,0.5,Demon
 10462661,10462661,203305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Hugo Moura,https://static.prizepicks.com/images/manual/Hugo_Moura.png,Midfielder,VASCO,,,,Shots,0.5,Goblin
 10473721,10473721,239792,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Tchê Tchê,https://static.prizepicks.com/images/manual/Tchê Tchê.png,Midfielder,VASCO,,,,Goals,0.5,Demon
-10498478,10498478,241611,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Emiliano Martínez,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,PALMEIRAS,,,,Goal + Assist,0.5,Demon
 10448458,10448458,199405,135384,SOCCER,2026-03-12T20:30:00.000-04:00,Facundo Colidio,https://static.prizepicks.com/images/manual/Facundo_Colidio.png,Attacker,RIVER,,,,Shots,3.5,Demon
 10448468,10448468,295518,135384,SOCCER,2026-03-12T20:30:00.000-04:00,Fausto Vera,https://static.prizepicks.com/images/manual/Fausto Vera.png,Midfielder,RIVER,,,,Shots,3.5,Demon
 10448477,10448477,241794,135384,SOCCER,2026-03-12T20:30:00.000-04:00,Giuliano Galoppo,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,RIVER,,,,Shots,3.5,Demon
@@ -1009,7 +771,344 @@
 10469352,10469352,228028,135379,SOCCER,2026-03-13T15:00:00.000-04:00,Galeno,https://static.prizepicks.com/images/players/soccer/2j8v4lkqeg1bcqp77ezseo8vd.webp,Attacker,AHLI,,,,Goals,0.5,Demon
 10488117,10488117,212576,135379,SOCCER,2026-03-13T15:00:00.000-04:00,Ivan Toney,https://static.prizepicks.com/images/players/soccer/b36foqukxn8obd969q6sea7yt.webp,Attacker,AHLI,,,,Shots On Target,0.5,Goblin
 10505575,10505575,160145,135381,SOCCER,2026-03-13T15:30:00.000-04:00,Moritz Nicolas,https://static.prizepicks.com/images/players/soccer/1ljgis575ujto4361ed15w0r9.webp,Goalkeeper,M'GLADBACH,,,,Goals Allowed,0.5,Goblin
+10542523,10542523,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Passes Attempted,50.5,Standard
+10542522,10542522,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Passes Attempted,42.5,Standard
+10542520,10542520,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Passes Attempted,41.5,Standard
+10542521,10542521,254961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Danny Namaso,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Passes Attempted,23.5,Standard
+10482517,10482517,218192,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gerónimo Rulli + Donovan Léon,https://static.prizepicks.com/images/manual/Gerónimo Rulli + Donovan Léon.png,Goalkeeper,MARSEILLE/AUXERRE,,,,Goalie Saves (Combo),6.0,Standard
+10471075,10471075,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Shots,5.5,Demon
+10471098,10471098,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Shots,5.5,Demon
+10541526,10541526,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Crosses,5.5,Standard
+10470880,10470880,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Shots,4.5,Demon
+10470959,10470959,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Shots,4.5,Demon
+10471011,10471011,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Shots,4.5,Demon
+10471097,10471097,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Shots,4.5,Demon
+10471161,10471161,223857,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Théo Percin,https://static.prizepicks.com/images/manual/Théo De Percin.png,Goalkeeper,AUXERRE,,,,Goalie Saves,4.5,Demon
+10471170,10471170,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Shots,4.5,Demon
+10485914,10485914,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Shots,4.5,Demon
+10541007,10541007,207182,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Donovan Léon,https://static.prizepicks.com/images/manual/Donovan Léon.png,Goalkeeper,AUXERRE,,,,Goalie Saves,4.0,Standard
+10470881,10470881,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Shots,3.5,Demon
+10470909,10470909,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Shots,3.5,Demon
+10470935,10470935,254961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Danny Namaso,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,3.5,Demon
+10470940,10470940,207182,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Donovan Léon,https://static.prizepicks.com/images/manual/Donovan Léon.png,Goalkeeper,AUXERRE,,,,Goalie Saves,3.5,Goblin
+10470958,10470958,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Shots,3.5,Demon
+10470992,10470992,206814,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gerónimo Rulli,https://static.prizepicks.com/images/players/soccer/1lgrnaje6y7un5dzzll84p91.webp,Goalkeeper,MARSEILLE,,,,Goalie Saves,3.5,Demon
+10471004,10471004,299018,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Himad Abdelli,,Midfielder,MARSEILLE,,,,Shots,3.5,Demon
+10471012,10471012,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Shots,3.5,Demon
+10471018,10471018,252974,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Jeffrey Lange,https://static.prizepicks.com/images/players/soccer/4odeml6s5vm38m9u7tnh6n8id.webp,Goalkeeper,MARSEILLE,,,,Goalie Saves,3.5,Demon
+10471077,10471077,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Shots,3.5,Goblin
+10471079,10471079,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Shots On Target,3.5,Demon
+10471163,10471163,223857,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Théo Percin,https://static.prizepicks.com/images/manual/Théo De Percin.png,Goalkeeper,AUXERRE,,,,Goalie Saves,3.5,Goblin
+10471169,10471169,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Shots,3.5,Demon
+10484438,10484438,210279,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lassine Sinayoko,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,3.5,Demon
+10485913,10485913,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Shots,3.5,Demon
+10485923,10485923,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,3.5,Demon
+10541523,10541523,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Attempted Dribbles,3.5,Standard
+10470882,10470882,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Shots,2.5,Goblin
+10470884,10470884,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Shots On Target,2.5,Demon
+10470893,10470893,260885,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Arthur Vermeeren,https://static.prizepicks.com/images/players/soccer/a7ip51ik4rkqcvgdsh64ln09g.webp,Midfielder,MARSEILLE,,,,Tackles,2.5,Demon
+10470899,10470899,252478,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Assane Dioussé,,Midfielder,AUXERRE,,,,Tackles,2.5,Demon
+10470905,10470905,260886,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Benjamin Pavard,https://static.prizepicks.com/images/players/soccer/yq0cm7vwr0tkv7nvt9vo77bp.webp,Defender,MARSEILLE,,,,Tackles,2.5,Demon
+10470910,10470910,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Shots,2.5,Demon
+10470914,10470914,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Tackles,2.5,Demon
+10470919,10470919,297639,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bryan Okoh,,Defender,AUXERRE,,,,Tackles,2.5,Demon
+10470924,10470924,214502,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Clément Akpa,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Tackles,2.5,Demon
+10470930,10470930,252187,135719,SOCCER,2026-03-13T15:45:00.000-04:00,CJ Egan-Riley,https://static.prizepicks.com/images/players/soccer/1xofhzib5lyqx285j8x36xg8a.webp,Defender,MARSEILLE,,,,Tackles,2.5,Demon
+10470934,10470934,254961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Danny Namaso,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,2.5,Demon
+10470937,10470937,254961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Danny Namaso,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Tackles,2.5,Demon
+10470939,10470939,207182,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Donovan Léon,https://static.prizepicks.com/images/manual/Donovan Léon.png,Goalkeeper,AUXERRE,,,,Goalie Saves,2.5,Goblin
+10470945,10470945,210280,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Elisha Owusu,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Tackles,2.5,Demon
+10470951,10470951,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Tackles,2.5,Demon
+10470962,10470962,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Shots On Target,2.5,Demon
+10470970,10470970,252189,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Facundo Medina,https://static.prizepicks.com/images/players/soccer/br7zigajqee6fms35zhm1sb8p.webp,Defender,MARSEILLE,,,,Tackles,2.5,Demon
+10470975,10470975,252481,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Francisco Sierralta,,Defender,AUXERRE,,,,Tackles,2.5,Demon
+10470984,10470984,252482,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Fredrik Oppegård,https://static.prizepicks.com/images/players/soccer/cm78w42nflwgvshpnok680mlm.webp,Defender,AUXERRE,,,,Tackles,2.5,Demon
+10470991,10470991,148407,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Geoffrey Kondogbia,https://static.prizepicks.com/images/players/soccer/58qeglyxdi7y8ttg8sddv8set.webp,Midfielder,MARSEILLE,,,,Tackles,2.5,Demon
+10470999,10470999,218727,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gideon Mensah,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Tackles,2.5,Demon
+10471003,10471003,299018,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Himad Abdelli,,Midfielder,MARSEILLE,,,,Shots,2.5,Demon
+10471013,10471013,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Shots,2.5,Goblin
+10471015,10471015,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Shots On Target,2.5,Demon
+10471019,10471019,252974,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Jeffrey Lange,https://static.prizepicks.com/images/players/soccer/4odeml6s5vm38m9u7tnh6n8id.webp,Goalkeeper,MARSEILLE,,,,Goalie Saves,2.5,Demon
+10471027,10471027,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Shots,2.5,Demon
+10471031,10471031,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Tackles,2.5,Demon
+10471038,10471038,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Tackles,2.5,Demon
+10471045,10471045,252487,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lamine Sy,,Defender,AUXERRE,,,,Tackles,2.5,Demon
+10471053,10471053,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Shots,2.5,Demon
+10471057,10471057,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Tackles,2.5,Demon
+10471063,10471063,151203,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Leonardo Balerdi,https://static.prizepicks.com/images/players/soccer/74edqcuzfzy7nswqzn0v3pe22.webp,Defender,MARSEILLE,,,,Tackles,2.5,Demon
+10471078,10471078,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Shots On Target,2.5,Demon
+10471086,10471086,292555,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Naouirou Ahamada,,Midfielder,AUXERRE,,,,Tackles,2.5,Demon
+10471099,10471099,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Shots,2.5,Goblin
+10471100,10471100,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Shots On Target,2.5,Demon
+10471110,10471110,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Shots,2.5,Demon
+10471113,10471113,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Tackles,2.5,Demon
+10471120,10471120,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Shots,2.5,Demon
+10471124,10471124,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Tackles,2.5,Demon
+10471132,10471132,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Shots,2.5,Demon
+10471141,10471141,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,2.5,Demon
+10471149,10471149,212961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sinaly Diomandé,https://static.prizepicks.com/images/players/soccer/e9mtpmkb4qj2gqyv966g9ulpm.webp,Defender,AUXERRE,,,,Tackles,2.5,Demon
+10471155,10471155,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,2.5,Demon
+10471162,10471162,223857,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Théo Percin,https://static.prizepicks.com/images/manual/Théo De Percin.png,Goalkeeper,AUXERRE,,,,Goalie Saves,2.5,Goblin
+10471174,10471174,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Tackles,2.5,Demon
+10471181,10471181,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Tackles,2.5,Demon
+10484434,10484434,148407,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Geoffrey Kondogbia,https://static.prizepicks.com/images/players/soccer/58qeglyxdi7y8ttg8sddv8set.webp,Midfielder,MARSEILLE,,,,Shots,2.5,Demon
+10484437,10484437,210279,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lassine Sinayoko,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,2.5,Demon
+10485912,10485912,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Shots,2.5,Goblin
+10485917,10485917,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Shots On Target,2.5,Demon
+10485927,10485927,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Shots,2.5,Demon
+10523349,10523349,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Shots,2.5,Goblin
+10541008,10541008,206814,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gerónimo Rulli,https://static.prizepicks.com/images/players/soccer/1lgrnaje6y7un5dzzll84p91.webp,Goalkeeper,MARSEILLE,,,,Goalie Saves,2.0,Standard
+10470876,10470876,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Fouls,1.5,Demon
+10470879,10470879,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Goals,1.5,Demon
+10470883,10470883,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Shots On Target,1.5,Demon
+10470886,10470886,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Tackles,1.5,Demon
+10470891,10470891,260885,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Arthur Vermeeren,https://static.prizepicks.com/images/players/soccer/a7ip51ik4rkqcvgdsh64ln09g.webp,Midfielder,MARSEILLE,,,,Shots,1.5,Demon
+10470897,10470897,252478,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Assane Dioussé,,Midfielder,AUXERRE,,,,Shots,1.5,Demon
+10470900,10470900,260886,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Benjamin Pavard,https://static.prizepicks.com/images/players/soccer/yq0cm7vwr0tkv7nvt9vo77bp.webp,Defender,MARSEILLE,,,,Fouls,1.5,Demon
+10470903,10470903,260886,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Benjamin Pavard,https://static.prizepicks.com/images/players/soccer/yq0cm7vwr0tkv7nvt9vo77bp.webp,Defender,MARSEILLE,,,,Shots,1.5,Demon
+10470911,10470911,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Shots,1.5,Goblin
+10470912,10470912,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Shots On Target,1.5,Demon
+10470915,10470915,297639,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bryan Okoh,,Defender,AUXERRE,,,,Fouls,1.5,Demon
+10470920,10470920,214502,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Clément Akpa,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Fouls,1.5,Demon
+10470925,10470925,252187,135719,SOCCER,2026-03-13T15:45:00.000-04:00,CJ Egan-Riley,https://static.prizepicks.com/images/players/soccer/1xofhzib5lyqx285j8x36xg8a.webp,Defender,MARSEILLE,,,,Fouls,1.5,Demon
+10470928,10470928,252187,135719,SOCCER,2026-03-13T15:45:00.000-04:00,CJ Egan-Riley,https://static.prizepicks.com/images/players/soccer/1xofhzib5lyqx285j8x36xg8a.webp,Defender,MARSEILLE,,,,Shots,1.5,Demon
+10470936,10470936,254961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Danny Namaso,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots On Target,1.5,Demon
+10470948,10470948,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Shots,1.5,Demon
+10470954,10470954,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Fouls,1.5,Demon
+10470960,10470960,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Shots,1.5,Goblin
+10470961,10470961,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Shots On Target,1.5,Demon
+10470963,10470963,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Tackles,1.5,Demon
+10470965,10470965,252189,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Facundo Medina,https://static.prizepicks.com/images/players/soccer/br7zigajqee6fms35zhm1sb8p.webp,Defender,MARSEILLE,,,,Fouls,1.5,Demon
+10470968,10470968,252189,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Facundo Medina,https://static.prizepicks.com/images/players/soccer/br7zigajqee6fms35zhm1sb8p.webp,Defender,MARSEILLE,,,,Shots,1.5,Demon
+10470971,10470971,252481,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Francisco Sierralta,,Defender,AUXERRE,,,,Fouls,1.5,Demon
+10470976,10470976,252482,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Fredrik Oppegård,https://static.prizepicks.com/images/players/soccer/cm78w42nflwgvshpnok680mlm.webp,Defender,AUXERRE,,,,Fouls,1.5,Demon
+10470982,10470982,252482,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Fredrik Oppegård,https://static.prizepicks.com/images/players/soccer/cm78w42nflwgvshpnok680mlm.webp,Defender,AUXERRE,,,,Shots,1.5,Demon
+10470988,10470988,148407,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Geoffrey Kondogbia,https://static.prizepicks.com/images/players/soccer/58qeglyxdi7y8ttg8sddv8set.webp,Midfielder,MARSEILLE,,,,Shots,1.5,Demon
+10470994,10470994,206814,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gerónimo Rulli,https://static.prizepicks.com/images/players/soccer/1lgrnaje6y7un5dzzll84p91.webp,Goalkeeper,MARSEILLE,,,,Goalie Saves,1.5,Goblin
+10470995,10470995,218727,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gideon Mensah,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Fouls,1.5,Demon
+10471005,10471005,299018,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Himad Abdelli,,Midfielder,MARSEILLE,,,,Shots On Target,1.5,Demon
+10471007,10471007,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Fouls,1.5,Demon
+10471014,10471014,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Shots On Target,1.5,Demon
+10471017,10471017,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Tackles,1.5,Demon
+10471020,10471020,252974,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Jeffrey Lange,https://static.prizepicks.com/images/players/soccer/4odeml6s5vm38m9u7tnh6n8id.webp,Goalkeeper,MARSEILLE,,,,Goalie Saves,1.5,Goblin
+10471026,10471026,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Shots,1.5,Demon
+10471030,10471030,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Shots On Target,1.5,Demon
+10471033,10471033,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Fouls,1.5,Demon
+10471036,10471036,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Shots,1.5,Demon
+10471040,10471040,252487,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lamine Sy,,Defender,AUXERRE,,,,Fouls,1.5,Demon
+10471042,10471042,252487,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lamine Sy,,Defender,AUXERRE,,,,Shots,1.5,Demon
+10471048,10471048,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Fouls,1.5,Demon
+10471052,10471052,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Shots,1.5,Demon
+10471056,10471056,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Shots On Target,1.5,Demon
+10471058,10471058,151203,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Leonardo Balerdi,https://static.prizepicks.com/images/players/soccer/74edqcuzfzy7nswqzn0v3pe22.webp,Defender,MARSEILLE,,,,Fouls,1.5,Demon
+10471061,10471061,151203,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Leonardo Balerdi,https://static.prizepicks.com/images/players/soccer/74edqcuzfzy7nswqzn0v3pe22.webp,Defender,MARSEILLE,,,,Shots,1.5,Demon
+10471065,10471065,252490,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Marvin Senaya,https://static.prizepicks.com/images/players/soccer/1ho9nox6j8s5cxd1kxjspsrca.webp,Defender,AUXERRE,,,,Fouls,1.5,Demon
+10471071,10471071,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Fouls,1.5,Demon
+10471074,10471074,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Goals,1.5,Demon
+10471080,10471080,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Tackles,1.5,Demon
+10471082,10471082,292555,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Naouirou Ahamada,,Midfielder,AUXERRE,,,,Fouls,1.5,Demon
+10471084,10471084,292555,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Naouirou Ahamada,,Midfielder,AUXERRE,,,,Shots,1.5,Demon
+10471093,10471093,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Fouls,1.5,Demon
+10471096,10471096,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Goals,1.5,Demon
+10471105,10471105,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Fouls,1.5,Demon
+10471109,10471109,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Shots,1.5,Demon
+10471119,10471119,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Shots,1.5,Demon
+10471123,10471123,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Shots On Target,1.5,Demon
+10471125,10471125,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Fouls,1.5,Demon
+10471131,10471131,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Shots,1.5,Demon
+10471135,10471135,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Shots On Target,1.5,Demon
+10471136,10471136,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Tackles,1.5,Demon
+10471137,10471137,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Fouls,1.5,Demon
+10471143,10471143,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots On Target,1.5,Demon
+10471144,10471144,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Tackles,1.5,Demon
+10471145,10471145,212961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sinaly Diomandé,https://static.prizepicks.com/images/players/soccer/e9mtpmkb4qj2gqyv966g9ulpm.webp,Defender,AUXERRE,,,,Fouls,1.5,Demon
+10471151,10471151,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Fouls,1.5,Goblin
+10471158,10471158,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots On Target,1.5,Demon
+10471159,10471159,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Tackles,1.5,Demon
+10471171,10471171,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Shots,1.5,Goblin
+10471173,10471173,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Shots On Target,1.5,Demon
+10471175,10471175,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Fouls,1.5,Goblin
+10471178,10471178,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Shots,1.5,Demon
+10477755,10477755,275569,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tadjidine Mmadi,,Midfielder,MARSEILLE,,,,Goals,1.5,Demon
+10484436,10484436,210279,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lassine Sinayoko,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,1.5,Goblin
+10484440,10484440,210279,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lassine Sinayoko,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots On Target,1.5,Demon
+10485910,10485910,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Fouls,1.5,Demon
+10485911,10485911,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Shots,1.5,Goblin
+10485916,10485916,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Shots On Target,1.5,Demon
+10485920,10485920,252490,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Marvin Senaya,https://static.prizepicks.com/images/players/soccer/1ho9nox6j8s5cxd1kxjspsrca.webp,Defender,AUXERRE,,,,Shots,1.5,Demon
+10485922,10485922,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Shots On Target,1.5,Demon
+10485925,10485925,262160,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tidiane Devernois,,Midfielder,AUXERRE,,,,Shots,1.5,Demon
+10487761,10487761,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Shots On Target,1.5,Demon
 10505577,10505577,207182,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Donovan Léon,https://static.prizepicks.com/images/manual/Donovan Léon.png,Goalkeeper,AUXERRE,,,,Goals Allowed,1.5,Goblin
+10541521,10541521,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Shots Assisted,1.5,Standard
+10541522,10541522,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Shots Assisted,1.5,Standard
+10541524,10541524,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Attempted Dribbles,1.5,Standard
+10542469,10542469,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Shots On Target,1.5,Goblin
+10470875,10470875,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Assists,0.5,Demon
+10470877,10470877,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Fouls,0.5,Goblin
+10470878,10470878,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Goals,0.5,Demon
+10470885,10470885,230698,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Amine Gouiri,https://static.prizepicks.com/images/players/soccer/6u2ob6fv950r1qve8uejkq2uh.webp,Attacker,MARSEILLE,,,,Shots On Target,0.5,Goblin
+10470887,10470887,295967,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Anis Doubal,,Defender,MARSEILLE,,,,Goals,0.5,Demon
+10470888,10470888,260885,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Arthur Vermeeren,https://static.prizepicks.com/images/players/soccer/a7ip51ik4rkqcvgdsh64ln09g.webp,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10470889,10470889,260885,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Arthur Vermeeren,https://static.prizepicks.com/images/players/soccer/a7ip51ik4rkqcvgdsh64ln09g.webp,Midfielder,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10470890,10470890,260885,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Arthur Vermeeren,https://static.prizepicks.com/images/players/soccer/a7ip51ik4rkqcvgdsh64ln09g.webp,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10470892,10470892,260885,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Arthur Vermeeren,https://static.prizepicks.com/images/players/soccer/a7ip51ik4rkqcvgdsh64ln09g.webp,Midfielder,MARSEILLE,,,,Shots On Target,0.5,Demon
+10470894,10470894,252478,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Assane Dioussé,,Midfielder,AUXERRE,,,,Fouls,0.5,Goblin
+10470895,10470895,252478,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Assane Dioussé,,Midfielder,AUXERRE,,,,Goal + Assist,0.5,Demon
+10470898,10470898,252478,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Assane Dioussé,,Midfielder,AUXERRE,,,,Shots On Target,0.5,Demon
+10470901,10470901,260886,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Benjamin Pavard,https://static.prizepicks.com/images/players/soccer/yq0cm7vwr0tkv7nvt9vo77bp.webp,Defender,MARSEILLE,,,,Fouls,0.5,Goblin
+10470902,10470902,260886,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Benjamin Pavard,https://static.prizepicks.com/images/players/soccer/yq0cm7vwr0tkv7nvt9vo77bp.webp,Defender,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10470904,10470904,260886,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Benjamin Pavard,https://static.prizepicks.com/images/players/soccer/yq0cm7vwr0tkv7nvt9vo77bp.webp,Defender,MARSEILLE,,,,Shots On Target,0.5,Demon
+10470906,10470906,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10470907,10470907,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10470908,10470908,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10470913,10470913,176950,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bilal Nadir,https://static.prizepicks.com/images/players/soccer/bsdr4bp6qt4qpy303u7l11250.webp,Midfielder,MARSEILLE,,,,Shots On Target,0.5,Goblin
+10470916,10470916,297639,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bryan Okoh,,Defender,AUXERRE,,,,Fouls,0.5,Goblin
+10470917,10470917,297639,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bryan Okoh,,Defender,AUXERRE,,,,Shots,0.5,Demon
+10470918,10470918,297639,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Bryan Okoh,,Defender,AUXERRE,,,,Shots On Target,0.5,Demon
+10470921,10470921,214502,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Clément Akpa,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Fouls,0.5,Goblin
+10470922,10470922,214502,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Clément Akpa,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Shots,0.5,Demon
+10470923,10470923,214502,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Clément Akpa,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Shots On Target,0.5,Demon
+10470926,10470926,252187,135719,SOCCER,2026-03-13T15:45:00.000-04:00,CJ Egan-Riley,https://static.prizepicks.com/images/players/soccer/1xofhzib5lyqx285j8x36xg8a.webp,Defender,MARSEILLE,,,,Fouls,0.5,Goblin
+10470927,10470927,252187,135719,SOCCER,2026-03-13T15:45:00.000-04:00,CJ Egan-Riley,https://static.prizepicks.com/images/players/soccer/1xofhzib5lyqx285j8x36xg8a.webp,Defender,MARSEILLE,,,,Shots,0.5,Demon
+10470929,10470929,252187,135719,SOCCER,2026-03-13T15:45:00.000-04:00,CJ Egan-Riley,https://static.prizepicks.com/images/players/soccer/1xofhzib5lyqx285j8x36xg8a.webp,Defender,MARSEILLE,,,,Shots On Target,0.5,Demon
+10470931,10470931,254961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Danny Namaso,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Assists,0.5,Demon
+10470932,10470932,254961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Danny Namaso,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Goal + Assist,0.5,Demon
+10470933,10470933,254961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Danny Namaso,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Goals,0.5,Demon
+10470942,10470942,210280,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Elisha Owusu,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Fouls,0.5,Goblin
+10470943,10470943,210280,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Elisha Owusu,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Shots,0.5,Demon
+10470944,10470944,210280,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Elisha Owusu,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Shots On Target,0.5,Demon
+10470946,10470946,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Assists,0.5,Demon
+10470947,10470947,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10470949,10470949,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Shots,0.5,Goblin
+10470950,10470950,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Shots On Target,0.5,Demon
+10470952,10470952,277987,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ange Lago,,Attacker,MARSEILLE,,,,Goals,0.5,Demon
+10470953,10470953,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10470955,10470955,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Fouls,0.5,Goblin
+10470956,10470956,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10470957,10470957,296135,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ethan Nwaneri,,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10470964,10470964,252189,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Facundo Medina,https://static.prizepicks.com/images/players/soccer/br7zigajqee6fms35zhm1sb8p.webp,Defender,MARSEILLE,,,,Assists,0.5,Demon
+10470966,10470966,252189,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Facundo Medina,https://static.prizepicks.com/images/players/soccer/br7zigajqee6fms35zhm1sb8p.webp,Defender,MARSEILLE,,,,Fouls,0.5,Goblin
+10470967,10470967,252189,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Facundo Medina,https://static.prizepicks.com/images/players/soccer/br7zigajqee6fms35zhm1sb8p.webp,Defender,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10470969,10470969,252189,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Facundo Medina,https://static.prizepicks.com/images/players/soccer/br7zigajqee6fms35zhm1sb8p.webp,Defender,MARSEILLE,,,,Shots On Target,0.5,Demon
+10470972,10470972,252481,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Francisco Sierralta,,Defender,AUXERRE,,,,Fouls,0.5,Goblin
+10470973,10470973,252481,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Francisco Sierralta,,Defender,AUXERRE,,,,Shots,0.5,Demon
+10470974,10470974,252481,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Francisco Sierralta,,Defender,AUXERRE,,,,Shots On Target,0.5,Demon
+10470977,10470977,252482,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Fredrik Oppegård,https://static.prizepicks.com/images/players/soccer/cm78w42nflwgvshpnok680mlm.webp,Defender,AUXERRE,,,,Fouls,0.5,Goblin
+10470978,10470978,252482,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Fredrik Oppegård,https://static.prizepicks.com/images/players/soccer/cm78w42nflwgvshpnok680mlm.webp,Defender,AUXERRE,,,,Goal + Assist,0.5,Demon
+10470981,10470981,252482,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Fredrik Oppegård,https://static.prizepicks.com/images/players/soccer/cm78w42nflwgvshpnok680mlm.webp,Defender,AUXERRE,,,,Shots,0.5,Demon
+10470983,10470983,252482,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Fredrik Oppegård,https://static.prizepicks.com/images/players/soccer/cm78w42nflwgvshpnok680mlm.webp,Defender,AUXERRE,,,,Shots On Target,0.5,Demon
+10470985,10470985,148407,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Geoffrey Kondogbia,https://static.prizepicks.com/images/players/soccer/58qeglyxdi7y8ttg8sddv8set.webp,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10470987,10470987,148407,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Geoffrey Kondogbia,https://static.prizepicks.com/images/players/soccer/58qeglyxdi7y8ttg8sddv8set.webp,Midfielder,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10470989,10470989,148407,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Geoffrey Kondogbia,https://static.prizepicks.com/images/players/soccer/58qeglyxdi7y8ttg8sddv8set.webp,Midfielder,MARSEILLE,,,,Shots,0.5,Goblin
+10470990,10470990,148407,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Geoffrey Kondogbia,https://static.prizepicks.com/images/players/soccer/58qeglyxdi7y8ttg8sddv8set.webp,Midfielder,MARSEILLE,,,,Shots On Target,0.5,Demon
+10470996,10470996,218727,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gideon Mensah,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Fouls,0.5,Goblin
+10470997,10470997,218727,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gideon Mensah,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Shots,0.5,Demon
+10470998,10470998,218727,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Gideon Mensah,https://static.prizepicks.com/images/players/placeholder.png,Defender,AUXERRE,,,,Shots On Target,0.5,Demon
+10471000,10471000,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10471001,10471001,299018,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Himad Abdelli,,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10471002,10471002,299018,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Himad Abdelli,,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10471006,10471006,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Assists,0.5,Demon
+10471008,10471008,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Fouls,0.5,Goblin
+10471009,10471009,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10471010,10471010,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Goals,0.5,Demon
+10471021,10471021,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Assists,0.5,Demon
+10471023,10471023,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Fouls,0.5,Goblin
+10471024,10471024,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Goal + Assist,0.5,Demon
+10471025,10471025,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Goals,0.5,Demon
+10471028,10471028,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Shots,0.5,Goblin
+10471029,10471029,252486,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Josué Casimir,https://static.prizepicks.com/images/players/soccer/1i1kglybnprrm3qliag8citm2.webp,Attacker,AUXERRE,,,,Shots On Target,0.5,Demon
+10471032,10471032,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Assists,0.5,Demon
+10471034,10471034,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Fouls,0.5,Goblin
+10471035,10471035,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Goal + Assist,0.5,Demon
+10471037,10471037,211125,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Kévin Danois,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,AUXERRE,,,,Shots On Target,0.5,Demon
+10471039,10471039,290354,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lamfia Dioubaté,,Midfielder,AUXERRE,,,,Goals,0.5,Demon
+10471041,10471041,252487,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lamine Sy,,Defender,AUXERRE,,,,Fouls,0.5,Goblin
+10471043,10471043,252487,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lamine Sy,,Defender,AUXERRE,,,,Shots,0.5,Demon
+10471044,10471044,252487,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lamine Sy,,Defender,AUXERRE,,,,Shots On Target,0.5,Demon
+10471046,10471046,210279,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lassine Sinayoko,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Goals,0.5,Demon
+10471047,10471047,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Assists,0.5,Demon
+10471049,10471049,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Fouls,0.5,Goblin
+10471050,10471050,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Goal + Assist,0.5,Demon
+10471051,10471051,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Goals,0.5,Demon
+10471054,10471054,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Shots,0.5,Goblin
+10471055,10471055,252488,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lasso Coulibaly,,Midfielder,AUXERRE,,,,Shots On Target,0.5,Demon
+10471059,10471059,151203,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Leonardo Balerdi,https://static.prizepicks.com/images/players/soccer/74edqcuzfzy7nswqzn0v3pe22.webp,Defender,MARSEILLE,,,,Fouls,0.5,Goblin
+10471060,10471060,151203,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Leonardo Balerdi,https://static.prizepicks.com/images/players/soccer/74edqcuzfzy7nswqzn0v3pe22.webp,Defender,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10471062,10471062,151203,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Leonardo Balerdi,https://static.prizepicks.com/images/players/soccer/74edqcuzfzy7nswqzn0v3pe22.webp,Defender,MARSEILLE,,,,Shots On Target,0.5,Demon
+10471064,10471064,286150,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mamoudou Cissokho,,Attacker,AUXERRE,,,,Goals,0.5,Demon
+10471066,10471066,252490,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Marvin Senaya,https://static.prizepicks.com/images/players/soccer/1ho9nox6j8s5cxd1kxjspsrca.webp,Defender,AUXERRE,,,,Fouls,0.5,Goblin
+10471067,10471067,252490,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Marvin Senaya,https://static.prizepicks.com/images/players/soccer/1ho9nox6j8s5cxd1kxjspsrca.webp,Defender,AUXERRE,,,,Goal + Assist,0.5,Demon
+10471068,10471068,252490,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Marvin Senaya,https://static.prizepicks.com/images/players/soccer/1ho9nox6j8s5cxd1kxjspsrca.webp,Defender,AUXERRE,,,,Shots,0.5,Demon
+10471069,10471069,252490,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Marvin Senaya,https://static.prizepicks.com/images/players/soccer/1ho9nox6j8s5cxd1kxjspsrca.webp,Defender,AUXERRE,,,,Shots On Target,0.5,Demon
+10471070,10471070,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Assists,0.5,Demon
+10471072,10471072,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Fouls,0.5,Goblin
+10471073,10471073,206817,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mason Greenwood,https://static.prizepicks.com/images/players/soccer/6kicom9a3lzp49urle78bevl6.webp,Attacker,MARSEILLE,,,,Goal + Assist,0.5,Goblin
+10471081,10471081,278032,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Mathis Clement,,Defender,MARSEILLE,,,,Goals,0.5,Demon
+10471083,10471083,292555,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Naouirou Ahamada,,Midfielder,AUXERRE,,,,Fouls,0.5,Goblin
+10471085,10471085,292555,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Naouirou Ahamada,,Midfielder,AUXERRE,,,,Shots On Target,0.5,Demon
+10471092,10471092,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Assists,0.5,Demon
+10471094,10471094,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Fouls,0.5,Goblin
+10471095,10471095,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Goals,0.5,Demon
+10471102,10471102,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Shots On Target,0.5,Goblin
+10471103,10471103,148411,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emerick Aubameyang,https://static.prizepicks.com/images/players/soccer/actvnm36s31zf8wh8hjikzlqt.webp,Attacker,MARSEILLE,,,,Tackles,0.5,Demon
+10471104,10471104,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10471106,10471106,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Fouls,0.5,Goblin
+10471107,10471107,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10471108,10471108,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10471111,10471111,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Shots,0.5,Goblin
+10471112,10471112,217492,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Pierre-Emile Højbjerg,https://static.prizepicks.com/images/players/soccer/4zxrdmwphkxvkvo6bt30uanrp.webp,Midfielder,MARSEILLE,,,,Shots On Target,0.5,Demon
+10471114,10471114,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10471116,10471116,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Fouls,0.5,Goblin
+10471117,10471117,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10471118,10471118,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10471121,10471121,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Shots,0.5,Goblin
+10471122,10471122,296136,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Quinten Timber,,Midfielder,MARSEILLE,,,,Shots On Target,0.5,Demon
+10471126,10471126,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Fouls,0.5,Goblin
+10471127,10471127,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Goal + Assist,0.5,Demon
+10471130,10471130,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Goals,0.5,Demon
+10471133,10471133,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Shots,0.5,Goblin
+10471134,10471134,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Shots On Target,0.5,Demon
+10471138,10471138,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Fouls,0.5,Goblin
+10471139,10471139,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Goal + Assist,0.5,Demon
+10471140,10471140,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Goals,0.5,Demon
+10471142,10471142,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,0.5,Goblin
+10471146,10471146,212961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sinaly Diomandé,https://static.prizepicks.com/images/players/soccer/e9mtpmkb4qj2gqyv966g9ulpm.webp,Defender,AUXERRE,,,,Fouls,0.5,Goblin
+10471147,10471147,212961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sinaly Diomandé,https://static.prizepicks.com/images/players/soccer/e9mtpmkb4qj2gqyv966g9ulpm.webp,Defender,AUXERRE,,,,Shots,0.5,Demon
+10471148,10471148,212961,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sinaly Diomandé,https://static.prizepicks.com/images/players/soccer/e9mtpmkb4qj2gqyv966g9ulpm.webp,Defender,AUXERRE,,,,Shots On Target,0.5,Demon
+10471150,10471150,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Assists,0.5,Demon
+10471152,10471152,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Fouls,0.5,Goblin
+10471153,10471153,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Goal + Assist,0.5,Demon
+10471154,10471154,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Goals,0.5,Demon
+10471156,10471156,261315,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Sékou Mara,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots,0.5,Goblin
+10471160,10471160,275569,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tadjidine Mmadi,,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10471164,10471164,262160,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tidiane Devernois,,Midfielder,AUXERRE,,,,Goals,0.5,Demon
+10471165,10471165,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Assists,0.5,Demon
+10471166,10471166,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Fouls,0.5,Goblin
+10471167,10471167,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10471168,10471168,252196,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Timothy Weah,https://static.prizepicks.com/images/manual/Timothy_Tarpeh_Weah.png,Attacker,MARSEILLE,,,,Goals,0.5,Demon
+10471176,10471176,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10471177,10471177,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Goals,0.5,Demon
+10471179,10471179,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Shots,0.5,Goblin
+10471180,10471180,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Shots On Target,0.5,Demon
+10471182,10471182,275570,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Yvan Zaddy,,Attacker,AUXERRE,,,,Goals,0.5,Demon
+10484433,10484433,260886,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Benjamin Pavard,https://static.prizepicks.com/images/players/soccer/yq0cm7vwr0tkv7nvt9vo77bp.webp,Defender,MARSEILLE,,,,Shots,0.5,Demon
+10484435,10484435,210279,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lassine Sinayoko,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Assists,0.5,Demon
+10484439,10484439,210279,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Lassine Sinayoko,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots On Target,0.5,Goblin
+10484441,10484441,292555,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Naouirou Ahamada,,Midfielder,AUXERRE,,,,Shots,0.5,Goblin
+10484443,10484443,299019,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tochukwu Nnadi,,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10485786,10485786,252187,135719,SOCCER,2026-03-13T15:45:00.000-04:00,CJ Egan-Riley,https://static.prizepicks.com/images/players/soccer/1xofhzib5lyqx285j8x36xg8a.webp,Defender,MARSEILLE,,,,Goal + Assist,0.5,Demon
+10485787,10485787,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Assists,0.5,Demon
+10485788,10485788,292555,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Naouirou Ahamada,,Midfielder,AUXERRE,,,,Goal + Assist,0.5,Demon
+10485789,10485789,294079,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Romain Faivre,,Midfielder,AUXERRE,,,,Assists,0.5,Demon
+10485907,10485907,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Fouls,0.5,Goblin
+10485909,10485909,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Fouls,0.5,Goblin
+10485915,10485915,259248,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Hamed Traoré,https://static.prizepicks.com/images/manual/Hamed Junior Traoré.png,Midfielder,MARSEILLE,,,,Shots On Target,0.5,Goblin
+10485924,10485924,262160,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tidiane Devernois,,Midfielder,AUXERRE,,,,Shots,0.5,Goblin
+10485926,10485926,262160,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Tidiane Devernois,,Midfielder,AUXERRE,,,,Shots On Target,0.5,Demon
+10486249,10486249,260887,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Emerson,https://static.prizepicks.com/images/players/soccer/8qezzr83ofw7htqufohg2fwlx.webp,Defender,MARSEILLE,,,,Goals,0.5,Demon
+10541429,10541429,252191,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Igor Paixão,https://static.prizepicks.com/images/manual/Igor Guilherme Barbosa da Paixão.webp,Attacker,MARSEILLE,,,,Shots On Target,0.5,Standard
+10541430,10541430,262159,135719,SOCCER,2026-03-13T15:45:00.000-04:00,Ryan Rodin,https://static.prizepicks.com/images/players/placeholder.png,Attacker,AUXERRE,,,,Shots On Target,0.5,Standard
 10536257,10536257,262144,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Dominic Hyam,https://static.prizepicks.com/images/manual/Dominic John Hyam.png,Defender,WREXHAM,,,,Clearances,8.5,Standard
 10536296,10536296,147822,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Ben Cabango,https://static.prizepicks.com/images/players/placeholder.png,Defender,SWANSEA,,,,Clearances,7.5,Standard
 10526432,10526432,205964,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Lawrence Vigouroux,https://static.prizepicks.com/images/players/soccer/519wvkcdietyvez20d6qiy4et.webp,Goalkeeper,SWANSEA,,,,Goalie Saves,3.0,Standard

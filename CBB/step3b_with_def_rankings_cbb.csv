@@ -1,205 +1,4 @@
 proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_team,pp_opp_team,pos,prop_type,prop_norm,pick_type,line,start_time,pp_game_id,league_id,team,stat_type,odds_type,opp_def_rank,opp_def_ppg,opp_def_tier,def_tier,OVERALL_DEF_RANK
-10511137,282440,tyler cochran|URI,Tyler Cochran,tyler cochran,URI,DUQ,URI,DUQ,G,Fantasy Score,fantasy,Demon,42.0,2026-03-12T17:05:00.000-04:00,142199,20,URI,Fantasy Score,demon,240,75.93,,,240
-10511144,280166,tarence guinyard|DUQ,Tarence Guinyard,tarence guinyard,DUQ,URI,DUQ,URI,G,Fantasy Score,fantasy,Demon,34.5,2026-03-12T17:05:00.000-04:00,142199,20,DUQ,Fantasy Score,demon,,,,,
-10511143,282440,tyler cochran|URI,Tyler Cochran,tyler cochran,URI,DUQ,URI,DUQ,G,Fantasy Score,fantasy,Goblin,30.0,2026-03-12T17:05:00.000-04:00,142199,20,URI,Fantasy Score,goblin,240,75.93,,,240
-10511141,280166,tarence guinyard|DUQ,Tarence Guinyard,tarence guinyard,DUQ,URI,DUQ,URI,G,Fantasy Score,fantasy,Goblin,23.5,2026-03-12T17:05:00.000-04:00,142199,20,DUQ,Fantasy Score,goblin,,,,,
-10526533,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Demon,32.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10522595,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Fantasy Score,fantasy,Standard,30.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Fantasy Score,standard,126,71.96,,,126
-10526532,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Demon,30.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10522596,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Fantasy Score,fantasy,Standard,28.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Fantasy Score,standard,54,68.59,,,54
-10522601,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Fantasy Score,fantasy,Standard,28.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Fantasy Score,standard,54,68.59,,,54
-10526534,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Demon,28.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10526516,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Pts+Rebs+Asts,pra,Demon,27.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,demon,54,68.59,,,54
-10517871,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Standard,26.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,standard,126,71.96,,,126
-10526514,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Pts+Rebs+Asts,pra,Demon,25.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,demon,54,68.59,,,54
-10526553,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Demon,25.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10526535,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Goblin,24.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,goblin,126,71.96,,,126
-10526572,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Pts+Rebs+Asts,pra,Demon,24.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10517870,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Pts+Rebs,pr,Standard,23.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs,standard,126,71.96,,,126
-10526515,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Pts+Rebs+Asts,pra,Demon,23.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,demon,54,68.59,,,54
-10526551,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Demon,23.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10517857,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Standard,22.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,standard,54,68.59,,,54
-10526530,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Points,pts,Demon,22.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526570,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Pts+Rebs+Asts,pra,Demon,22.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10517864,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Pts+Rebs+Asts,pra,Standard,21.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,standard,54,68.59,,,54
-10526552,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Demon,21.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10517856,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Pts+Rebs,pr,Standard,20.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs,standard,54,68.59,,,54
-10517863,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Pts+Rebs,pr,Standard,20.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs,standard,54,68.59,,,54
-10526528,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Points,pts,Demon,20.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526571,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Pts+Rebs+Asts,pra,Demon,20.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,demon,126,71.96,,,126
-10517869,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Pts+Asts,pa,Standard,19.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Asts,standard,126,71.96,,,126
-10517881,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Standard,19.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,standard,126,71.96,,,126
-10526492,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Points,pts,Demon,19.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10526517,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Pts+Rebs+Asts,pra,Goblin,19.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,goblin,54,68.59,,,54
-10526549,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Points,pts,Demon,19.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526589,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Demon,19.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,demon,54,68.59,,,54
-10517890,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Pts+Rebs+Asts,pra,Standard,18.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,standard,126,71.96,,,126
-10526512,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Points,pts,Demon,18.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10526529,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Points,pts,Demon,18.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526602,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Demon,18.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,demon,54,68.59,,,54
-10517855,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Pts+Asts,pa,Standard,17.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Asts,standard,54,68.59,,,54
-10526493,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Points,pts,Demon,17.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10526547,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Points,pts,Demon,17.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526554,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Pts+Rebs+Asts,pra,Goblin,17.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,goblin,126,71.96,,,126
-10526588,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Demon,17.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,demon,54,68.59,,,54
-10517868,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Points,pts,Standard,16.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,standard,126,71.96,,,126
-10517879,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Pts+Asts,pa,Standard,16.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Asts,standard,126,71.96,,,126
-10517880,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Pts+Rebs,pr,Standard,16.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs,standard,126,71.96,,,126
-10517889,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Pts+Rebs,pr,Standard,16.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs,standard,126,71.96,,,126
-10526511,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Points,pts,Demon,16.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10526573,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Pts+Rebs+Asts,pra,Goblin,16.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Pts+Rebs+Asts,goblin,126,71.96,,,126
-10526601,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Demon,16.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,demon,54,68.59,,,54
-10517854,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Points,pts,Standard,15.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,standard,54,68.59,,,54
-10526548,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Points,pts,Demon,15.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526587,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Demon,15.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,demon,54,68.59,,,54
-10526510,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Points,pts,Demon,14.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10526531,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Points,pts,Goblin,14.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,goblin,126,71.96,,,126
-10531950,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Points,pts,Goblin,14.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,goblin,54,68.59,,,54
-10521692,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Standard,14.0,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,standard,54,68.59,,,54
-10517862,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Pts+Asts,pa,Standard,13.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Asts,standard,54,68.59,,,54
-10517878,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Points,pts,Standard,13.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,standard,126,71.96,,,126
-10517899,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Standard,13.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,standard,54,68.59,,,54
-10526287,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Pts+Rebs,pr,Standard,13.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs,standard,54,68.59,,,54
-10526495,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Points,pts,Goblin,13.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,goblin,54,68.59,,,54
-10517861,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Points,pts,Standard,12.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,standard,54,68.59,,,54
-10526568,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Points,pts,Demon,12.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526598,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Points,pts,Demon,12.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10526605,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Goblin,12.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,goblin,54,68.59,,,54
-10531949,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Points,pts,Goblin,12.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,goblin,54,68.59,,,54
-10517897,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Pts+Asts,pa,Standard,11.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Asts,standard,54,68.59,,,54
-10526550,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Points,pts,Goblin,11.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,goblin,126,71.96,,,126
-10526567,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Points,pts,Demon,11.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526576,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Rebounds,reb,Demon,11.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526584,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Points,pts,Demon,11.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10526590,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Goblin,11.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,goblin,54,68.59,,,54
-10526597,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Points,pts,Demon,11.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10532995,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Pts+Rebs+Asts,pra,Goblin,11.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs+Asts,goblin,54,68.59,,,54
-10517898,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Pts+Rebs,pr,Standard,10.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Rebs,standard,54,68.59,,,54
-10526504,287591,efe demirel|GC,Efe Demirel,efe demirel,GC,NEV,GC,NEV,C,Points,pts,Demon,10.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526513,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Points,pts,Goblin,10.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,goblin,54,68.59,,,54
-10526519,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Rebounds,reb,Demon,10.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10526566,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Points,pts,Demon,10.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526574,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Rebounds,reb,Demon,10.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526583,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Points,pts,Demon,10.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10526599,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Points,pts,Demon,10.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10517873,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Rebs+Asts,ra,Standard,9.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebs+Asts,standard,126,71.96,,,126
-10517904,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Pts+Asts,pa,Standard,9.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Pts+Asts,standard,54,68.59,,,54
-10526502,287591,efe demirel|GC,Efe Demirel,efe demirel,GC,NEV,GC,NEV,C,Points,pts,Demon,9.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526518,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Rebounds,reb,Demon,9.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10526538,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Rebounds,reb,Demon,9.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526575,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Rebounds,reb,Demon,9.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526585,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Points,pts,Demon,9.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,demon,54,68.59,,,54
-10520936,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Points,pts,Standard,9.0,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,standard,54,68.59,,,54
-10517887,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Points,pts,Standard,8.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,standard,126,71.96,,,126
-10517891,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Rebounds,reb,Standard,8.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,standard,126,71.96,,,126
-10517896,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Points,pts,Standard,8.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,standard,54,68.59,,,54
-10526284,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Rebs+Asts,ra,Standard,8.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebs+Asts,standard,54,68.59,,,54
-10526503,287591,efe demirel|GC,Efe Demirel,efe demirel,GC,NEV,GC,NEV,C,Points,pts,Demon,8.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,demon,126,71.96,,,126
-10526520,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Rebounds,reb,Demon,8.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10526536,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Rebounds,reb,Demon,8.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526498,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,7.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10526537,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Rebounds,reb,Demon,7.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526569,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Points,pts,Goblin,7.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,goblin,126,71.96,,,126
-10526577,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Rebounds,reb,Goblin,7.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,goblin,126,71.96,,,126
-10526586,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Points,pts,Goblin,7.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,goblin,54,68.59,,,54
-10526600,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Points,pts,Goblin,7.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Points,goblin,54,68.59,,,54
-10534069,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Rebounds,reb,Goblin,7.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,goblin,54,68.59,,,54
-10520935,287591,efe demirel|GC,Efe Demirel,efe demirel,GC,NEV,GC,NEV,C,Points,pts,Standard,7.0,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,standard,126,71.96,,,126
-10517872,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Rebounds,reb,Standard,6.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,standard,126,71.96,,,126
-10526497,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,6.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10526521,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Rebounds,reb,Goblin,6.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,goblin,54,68.59,,,54
-10526557,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Rebounds,reb,Demon,6.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526607,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,6.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10528643,287591,efe demirel|GC,Efe Demirel,efe demirel,GC,NEV,GC,NEV,C,Points,pts,Goblin,6.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,goblin,126,71.96,,,126
-10526286,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Rebs+Asts,ra,Demon,5.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebs+Asts,demon,54,68.59,,,54
-10526496,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,5.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10526505,287591,efe demirel|GC,Efe Demirel,efe demirel,GC,NEV,GC,NEV,C,Points,pts,Goblin,5.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Points,goblin,126,71.96,,,126
-10526539,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Rebounds,reb,Goblin,5.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,goblin,126,71.96,,,126
-10526556,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Rebounds,reb,Demon,5.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526606,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,5.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10537864,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Rebs+Asts,ra,Goblin,5.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebs+Asts,goblin,126,71.96,,,126
-10517858,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Rebounds,reb,Standard,4.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,standard,54,68.59,,,54
-10517905,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,4.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10517906,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Rebs+Asts,ra,Goblin,4.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebs+Asts,goblin,54,68.59,,,54
-10526526,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Assists,ast,Demon,4.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,demon,126,71.96,,,126
-10526545,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Assists,ast,Demon,4.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,demon,126,71.96,,,126
-10526555,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Rebounds,reb,Demon,4.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,demon,126,71.96,,,126
-10526582,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Assists,ast,Demon,4.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Assists,demon,54,68.59,,,54
-10526592,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,4.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10517867,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Assists,ast,Demon,3.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,demon,126,71.96,,,126
-10526491,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,3-PT Made,3pm,Demon,3.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,demon,54,68.59,,,54
-10526499,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Rebounds,reb,Goblin,3.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,goblin,54,68.59,,,54
-10526543,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,3-PT Made,3pm,Demon,3.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,demon,126,71.96,,,126
-10526544,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Assists,ast,Demon,3.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,demon,126,71.96,,,126
-10526563,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Assists,ast,Demon,3.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,demon,126,71.96,,,126
-10526581,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Assists,ast,Demon,3.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Assists,demon,54,68.59,,,54
-10526591,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,3.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10526608,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Rebounds,reb,Goblin,3.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,goblin,54,68.59,,,54
-10517875,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Turnovers,tov,Standard,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Turnovers,standard,126,71.96,,,126
-10517877,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Assists,ast,Standard,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,standard,126,71.96,,,126
-10517895,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Assists,ast,Goblin,2.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Assists,goblin,54,68.59,,,54
-10517900,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Rebounds,reb,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,demon,54,68.59,,,54
-10526490,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,3-PT Made,3pm,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,demon,54,68.59,,,54
-10526500,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Steals,stl,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,demon,54,68.59,,,54
-10526508,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Blocked Shots,blk,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Blocked Shots,demon,54,68.59,,,54
-10526523,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Steals,stl,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,demon,54,68.59,,,54
-10526524,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,3-PT Made,3pm,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,demon,126,71.96,,,126
-10526527,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Assists,ast,Goblin,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,goblin,126,71.96,,,126
-10526540,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Steals,stl,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Steals,demon,126,71.96,,,126
-10526542,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,3-PT Made,3pm,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,demon,126,71.96,,,126
-10526558,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Rebounds,reb,Goblin,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Rebounds,goblin,126,71.96,,,126
-10526560,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,3-PT Made,3pm,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,demon,126,71.96,,,126
-10526562,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Assists,ast,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,demon,126,71.96,,,126
-10526578,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Steals,stl,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Steals,demon,126,71.96,,,126
-10528868,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,3-PT Made,3pm,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,demon,54,68.59,,,54
-10537364,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Steals,stl,Demon,2.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,demon,54,68.59,,,54
-10517852,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,3-PT Made,3pm,Standard,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,standard,54,68.59,,,54
-10517853,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Assists,ast,Goblin,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Assists,goblin,54,68.59,,,54
-10517859,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Steals,stl,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,demon,54,68.59,,,54
-10517866,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,3-PT Made,3pm,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,demon,126,71.96,,,126
-10517874,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Steals,stl,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Steals,demon,126,71.96,,,126
-10517876,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,3-PT Made,3pm,Goblin,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,goblin,126,71.96,,,126
-10517883,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Turnovers,tov,Goblin,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Turnovers,goblin,126,71.96,,,126
-10517884,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,3-PT Made,3pm,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,demon,126,71.96,,,126
-10517885,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Assists,ast,Standard,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,standard,126,71.96,,,126
-10517892,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Steals,stl,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Steals,demon,126,71.96,,,126
-10517893,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Turnovers,tov,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Turnovers,demon,126,71.96,,,126
-10517902,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Turnovers,tov,Standard,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Turnovers,standard,54,68.59,,,54
-10517908,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Turnovers,tov,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Turnovers,demon,54,68.59,,,54
-10526507,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Assists,ast,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Assists,demon,54,68.59,,,54
-10526522,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Steals,stl,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,demon,54,68.59,,,54
-10526546,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Assists,ast,Goblin,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Assists,goblin,126,71.96,,,126
-10526559,282724,makaih williams|GC,Makaih Williams,makaih williams,GC,NEV,GC,NEV,G,Steals,stl,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Steals,demon,126,71.96,,,126
-10526564,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Blks+Stls,stocks,Goblin,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Blks+Stls,goblin,126,71.96,,,126
-10526565,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Blocked Shots,blk,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Blocked Shots,demon,126,71.96,,,126
-10526580,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,3-PT Made,3pm,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,demon,54,68.59,,,54
-10526593,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Rebounds,reb,Goblin,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Rebounds,goblin,54,68.59,,,54
-10526594,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Steals,stl,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,demon,54,68.59,,,54
-10526595,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,3-PT Made,3pm,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,demon,54,68.59,,,54
-10526596,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Assists,ast,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Assists,demon,54,68.59,,,54
-10526609,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Steals,stl,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,demon,54,68.59,,,54
-10528644,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Blocked Shots,blk,Demon,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Blocked Shots,demon,54,68.59,,,54
-10534947,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Assists,ast,Goblin,1.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Assists,goblin,54,68.59,,,54
-10517860,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Assists,ast,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Assists,goblin,54,68.59,,,54
-10517865,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Steals,stl,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,goblin,54,68.59,,,54
-10517886,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Blocked Shots,blk,Standard,0.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Blocked Shots,standard,126,71.96,,,126
-10517894,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,3-PT Made,3pm,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,goblin,54,68.59,,,54
-10517901,283248,tayshawn comer|NEV,Tayshawn Comer,tayshawn comer,NEV,GC,NEV,GC,G,Steals,stl,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,goblin,54,68.59,,,54
-10517903,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,3-PT Made,3pm,Standard,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,standard,54,68.59,,,54
-10517907,295086,vaughn weems|NEV,Vaughn Weems,vaughn weems,NEV,GC,NEV,GC,G,Steals,stl,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,goblin,54,68.59,,,54
-10526501,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Steals,stl,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Steals,goblin,54,68.59,,,54
-10526506,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,3-PT Made,3pm,Demon,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,3-PT Made,demon,54,68.59,,,54
-10526509,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Blocked Shots,blk,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,NEV,Blocked Shots,goblin,54,68.59,,,54
-10526525,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,3-PT Made,3pm,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,goblin,126,71.96,,,126
-10526541,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Steals,stl,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Steals,goblin,126,71.96,,,126
-10526561,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,3-PT Made,3pm,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,3-PT Made,goblin,126,71.96,,,126
-10526579,282748,nana owusu anane|GC,Nana Owusu-Anane,nana owusu anane,GC,NEV,GC,NEV,F,Steals,stl,Goblin,0.5,2026-03-12T17:30:00.000-04:00,143345,20,GC,Steals,goblin,126,71.96,,,126
-10522607,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Fantasy Score,fantasy,Demon,36.5,2026-03-12T17:35:00.000-04:00,143345,20,GC,Fantasy Score,demon,126,71.96,,,126
-10522611,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Fantasy Score,fantasy,Demon,34.5,2026-03-12T17:35:00.000-04:00,143345,20,NEV,Fantasy Score,demon,54,68.59,,,54
-10522612,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Fantasy Score,fantasy,Demon,34.5,2026-03-12T17:35:00.000-04:00,143345,20,NEV,Fantasy Score,demon,54,68.59,,,54
-10522600,282718,jaden henley|GC,Jaden Henley,jaden henley,GC,NEV,GC,NEV,G,Fantasy Score,fantasy,Goblin,25.5,2026-03-12T17:35:00.000-04:00,143345,20,GC,Fantasy Score,goblin,126,71.96,,,126
-10522603,283244,corey camper|NEV,Corey Camper,corey camper,NEV,GC,NEV,GC,G,Fantasy Score,fantasy,Goblin,23.5,2026-03-12T17:35:00.000-04:00,143345,20,NEV,Fantasy Score,goblin,54,68.59,,,54
-10522617,283245,elijah price|NEV,Elijah Price,elijah price,NEV,GC,NEV,GC,F,Fantasy Score,fantasy,Goblin,23.5,2026-03-12T17:35:00.000-04:00,143345,20,NEV,Fantasy Score,goblin,54,68.59,,,54
 10515182,188686,nick martinelli|NW,Nick Martinelli,nick martinelli,NW,PUR,NW,PUR,F,Fantasy Score,fantasy,Standard,36.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Fantasy Score,standard,65,69.26,,,65
 10515184,91710,braden smith|PUR,Braden Smith,braden smith,PUR,NW,PUR,NW,G,Fantasy Score,fantasy,Standard,35.0,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Fantasy Score,standard,154,73.04,,,154
 10533263,178699,trey kaufman renn|PUR,Trey Kaufman-Renn,trey kaufman renn,PUR,NW,PUR,NW,F,Pts+Rebs,pr,Demon,34.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Pts+Rebs,demon,154,73.04,,,154
@@ -210,7 +9,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10513150,188686,nick martinelli|NW,Nick Martinelli,nick martinelli,NW,PUR,NW,PUR,F,Pts+Rebs,pr,Standard,29.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Pts+Rebs,standard,65,69.26,,,65
 10533262,178699,trey kaufman renn|PUR,Trey Kaufman-Renn,trey kaufman renn,PUR,NW,PUR,NW,F,Pts+Rebs,pr,Demon,29.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Pts+Rebs,demon,154,73.04,,,154
 10542393,188686,nick martinelli|NW,Nick Martinelli,nick martinelli,NW,PUR,NW,PUR,F,Pts+Rebs+Asts,pra,Goblin,29.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Pts+Rebs+Asts,goblin,65,69.26,,,65
-10512945,91710,braden smith|PUR,Braden Smith,braden smith,PUR,NW,PUR,NW,G,Pts+Rebs+Asts,pra,Standard,27.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Pts+Rebs+Asts,standard,154,73.04,,,154
+10512945,91710,braden smith|PUR,Braden Smith,braden smith,PUR,NW,PUR,NW,G,Pts+Rebs+Asts,pra,Standard,28.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Pts+Rebs+Asts,standard,154,73.04,,,154
 10512999,178699,trey kaufman renn|PUR,Trey Kaufman-Renn,trey kaufman renn,PUR,NW,PUR,NW,F,Pts+Rebs+Asts,pra,Standard,26.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Pts+Rebs+Asts,standard,154,73.04,,,154
 10526694,188686,nick martinelli|NW,Nick Martinelli,nick martinelli,NW,PUR,NW,PUR,F,Points,pts,Demon,26.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Points,demon,65,69.26,,,65
 10512998,178699,trey kaufman renn|PUR,Trey Kaufman-Renn,trey kaufman renn,PUR,NW,PUR,NW,F,Pts+Rebs,pr,Standard,24.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Pts+Rebs,standard,154,73.04,,,154
@@ -288,7 +87,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10528204,300069,jake west|NW,Jake West,jake west,NW,PUR,NW,PUR,G,Points,pts,Demon,9.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Points,demon,65,69.26,,,65
 10529662,88238,fletcher loyer|PUR,Fletcher Loyer,fletcher loyer,PUR,NW,PUR,NW,G,Points,pts,Goblin,9.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Points,goblin,154,73.04,,,154
 10537866,178699,trey kaufman renn|PUR,Trey Kaufman-Renn,trey kaufman renn,PUR,NW,PUR,NW,F,Points,pts,Goblin,9.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Points,goblin,154,73.04,,,154
-10512970,300069,jake west|NW,Jake West,jake west,NW,PUR,NW,PUR,G,Points,pts,Standard,8.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Points,standard,65,69.26,,,65
 10512989,279548,oscar cluff|PUR,Oscar Cluff,oscar cluff,PUR,NW,PUR,NW,C,Points,pts,Standard,8.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Points,standard,154,73.04,,,154
 10512994,279548,oscar cluff|PUR,Oscar Cluff,oscar cluff,PUR,NW,PUR,NW,C,Rebs+Asts,ra,Standard,8.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Rebs+Asts,standard,154,73.04,,,154
 10513152,188686,nick martinelli|NW,Nick Martinelli,nick martinelli,NW,PUR,NW,PUR,F,Rebs+Asts,ra,Standard,8.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Rebs+Asts,standard,65,69.26,,,65
@@ -302,7 +100,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10526699,188686,nick martinelli|NW,Nick Martinelli,nick martinelli,NW,PUR,NW,PUR,F,Rebounds,reb,Demon,7.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Rebounds,demon,65,69.26,,,65
 10533264,178699,trey kaufman renn|PUR,Trey Kaufman-Renn,trey kaufman renn,PUR,NW,PUR,NW,F,Rebounds,reb,Goblin,7.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Rebounds,goblin,154,73.04,,,154
 10534533,304346,jack benter|PUR,Jack Benter,jack benter,PUR,NW,PUR,NW,G,Points,pts,Demon,7.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Points,demon,154,73.04,,,154
-10540822,279548,oscar cluff|PUR,Oscar Cluff,oscar cluff,PUR,NW,PUR,NW,C,Rebounds,reb,Goblin,7.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Rebounds,goblin,154,73.04,,,154
 10514899,278934,jayden reid|NW,Jayden Reid,jayden reid,NW,PUR,NW,PUR,G,Rebs+Asts,ra,Standard,7.0,2026-03-12T18:30:00.000-04:00,143394,20,NW,Rebs+Asts,standard,65,69.26,,,65
 10514715,188686,nick martinelli|NW,Nick Martinelli,nick martinelli,NW,PUR,NW,PUR,F,Rebounds,reb,Standard,6.5,2026-03-12T18:30:00.000-04:00,143394,20,NW,Rebounds,standard,65,69.26,,,65
 10526288,304346,jack benter|PUR,Jack Benter,jack benter,PUR,NW,PUR,NW,G,Pts+Rebs,pr,Standard,6.5,2026-03-12T18:30:00.000-04:00,143394,20,PUR,Pts+Rebs,standard,154,73.04,,,154
@@ -509,7 +306,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10515469,278364,kingston flemings|HOU,Kingston Flemings,kingston flemings,HOU,BYU,HOU,BYU,G,Assists,ast,Demon,6.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Assists,demon,202,74.33,,,202
 10515481,218833,milos uzan|HOU,Milos Uzan,milos uzan,HOU,BYU,HOU,BYU,G,Rebs+Asts,ra,Standard,6.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebs+Asts,standard,202,74.33,,,202
 10515979,274117,aj dybantsa|BYU,AJ Dybantsa,aj dybantsa,BYU,HOU,BYU,HOU,F,Rebounds,reb,Goblin,6.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,Rebounds,goblin,2,62.04,,,2
-10516957,221839,keba keita|BYU,Keba Keita,keba keita,BYU,HOU,BYU,HOU,C,Rebounds,reb,Standard,6.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,Rebounds,standard,2,62.04,,,2
 10526767,225269,joseph tugler|HOU,Joseph Tugler,joseph tugler,HOU,BYU,HOU,BYU,F,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebounds,demon,202,74.33,,,202
 10526786,278364,kingston flemings|HOU,Kingston Flemings,kingston flemings,HOU,BYU,HOU,BYU,G,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebounds,demon,202,74.33,,,202
 10526810,275686,robert wright|BYU,Robert Wright,robert wright,BYU,HOU,BYU,HOU,G,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,Rebounds,demon,2,62.04,,,2
@@ -522,7 +318,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10526777,221839,keba keita|BYU,Keba Keita,keba keita,BYU,HOU,BYU,HOU,C,Rebounds,reb,Goblin,5.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,Rebounds,goblin,2,62.04,,,2
 10526785,278364,kingston flemings|HOU,Kingston Flemings,kingston flemings,HOU,BYU,HOU,BYU,G,Rebounds,reb,Demon,5.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebounds,demon,202,74.33,,,202
 10526809,275686,robert wright|BYU,Robert Wright,robert wright,BYU,HOU,BYU,HOU,G,Rebounds,reb,Demon,5.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,Rebounds,demon,2,62.04,,,2
-10531979,278364,kingston flemings|HOU,Kingston Flemings,kingston flemings,HOU,BYU,HOU,BYU,G,Assists,ast,Goblin,5.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Assists,goblin,202,74.33,,,202
 10534960,182904,emanuel sharp|HOU,Emanuel Sharp,emanuel sharp,HOU,BYU,HOU,BYU,G,3-PT Made,3pm,Demon,5.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,3-PT Made,demon,202,74.33,,,202
 10541558,225269,joseph tugler|HOU,Joseph Tugler,joseph tugler,HOU,BYU,HOU,BYU,F,Points,pts,Goblin,5.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Points,goblin,202,74.33,,,202
 10515473,278364,kingston flemings|HOU,Kingston Flemings,kingston flemings,HOU,BYU,HOU,BYU,G,Rebounds,reb,Standard,4.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebounds,standard,202,74.33,,,202
@@ -546,10 +341,8 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10526788,278364,kingston flemings|HOU,Kingston Flemings,kingston flemings,HOU,BYU,HOU,BYU,G,Rebounds,reb,Goblin,3.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebounds,goblin,202,74.33,,,202
 10526792,218833,milos uzan|HOU,Milos Uzan,milos uzan,HOU,BYU,HOU,BYU,G,3-PT Made,3pm,Demon,3.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,3-PT Made,demon,202,74.33,,,202
 10526798,218833,milos uzan|HOU,Milos Uzan,milos uzan,HOU,BYU,HOU,BYU,G,Rebounds,reb,Demon,3.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebounds,demon,202,74.33,,,202
-10531974,274120,kennard davis|BYU,Kennard Davis,kennard davis,BYU,HOU,BYU,HOU,G,3-PT Made,3pm,Demon,3.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,3-PT Made,demon,2,62.04,,,2
 10533272,275686,robert wright|BYU,Robert Wright,robert wright,BYU,HOU,BYU,HOU,G,3-PT Made,3pm,Demon,3.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,3-PT Made,demon,2,62.04,,,2
 10515460,274120,kennard davis|BYU,Kennard Davis,kennard davis,BYU,HOU,BYU,HOU,G,3-PT Made,3pm,Demon,2.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,3-PT Made,demon,2,62.04,,,2
-10515480,218833,milos uzan|HOU,Milos Uzan,milos uzan,HOU,BYU,HOU,BYU,G,Rebounds,reb,Demon,2.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebounds,demon,202,74.33,,,202
 10526721,274117,aj dybantsa|BYU,AJ Dybantsa,aj dybantsa,BYU,HOU,BYU,HOU,F,3-PT Made,3pm,Demon,2.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,3-PT Made,demon,2,62.04,,,2
 10526731,274117,aj dybantsa|BYU,AJ Dybantsa,aj dybantsa,BYU,HOU,BYU,HOU,F,Steals,stl,Demon,2.5,2026-03-12T19:00:00.000-04:00,143415,20,BYU,Steals,demon,2,62.04,,,2
 10526756,182904,emanuel sharp|HOU,Emanuel Sharp,emanuel sharp,HOU,BYU,HOU,BYU,G,Rebounds,reb,Goblin,2.5,2026-03-12T19:00:00.000-04:00,143415,20,HOU,Rebounds,goblin,202,74.33,,,202
@@ -625,6 +418,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10534989,230288,tarris reed|CONN,Tarris Reed,tarris reed,CONN,XAV,CONN,XAV,C,Pts+Rebs+Asts,pra,Goblin,25.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Pts+Rebs+Asts,goblin,316,79.07,,,316
 10513296,278814,tre carroll|XAV,Tre Carroll,tre carroll,XAV,CONN,XAV,CONN,F,Pts+Rebs+Asts,pra,Standard,24.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Pts+Rebs+Asts,standard,19,66.0,,,19
 10534574,230288,tarris reed|CONN,Tarris Reed,tarris reed,CONN,XAV,CONN,XAV,C,Pts+Rebs,pr,Goblin,24.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Pts+Rebs,goblin,316,79.07,,,316
+10542583,278814,tre carroll|XAV,Tre Carroll,tre carroll,XAV,CONN,XAV,CONN,F,Pts+Rebs,pr,Demon,24.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Pts+Rebs,demon,19,66.0,,,19
 10527099,281637,filip borovicanin|XAV,Filip Borovicanin,filip borovicanin,XAV,CONN,XAV,CONN,F,Pts+Rebs+Asts,pra,Demon,23.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Pts+Rebs+Asts,demon,19,66.0,,,19
 10527158,278814,tre carroll|XAV,Tre Carroll,tre carroll,XAV,CONN,XAV,CONN,F,Points,pts,Demon,23.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Points,demon,19,66.0,,,19
 10527163,278814,tre carroll|XAV,Tre Carroll,tre carroll,XAV,CONN,XAV,CONN,F,Pts+Rebs+Asts,pra,Goblin,23.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Pts+Rebs+Asts,goblin,19,66.0,,,19
@@ -702,6 +496,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527105,281637,filip borovicanin|XAV,Filip Borovicanin,filip borovicanin,XAV,CONN,XAV,CONN,F,Rebounds,reb,Demon,9.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Rebounds,demon,19,66.0,,,19
 10527118,277947,silas demary|CONN,Silas Demary,silas demary,CONN,XAV,CONN,XAV,G,Assists,ast,Demon,9.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Assists,demon,316,79.07,,,316
 10529715,277947,silas demary|CONN,Silas Demary,silas demary,CONN,XAV,CONN,XAV,G,Points,pts,Goblin,9.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Points,goblin,316,79.07,,,316
+10529717,277947,silas demary|CONN,Silas Demary,silas demary,CONN,XAV,CONN,XAV,G,Rebounds,reb,Demon,9.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,demon,316,79.07,,,316
 10532018,178261,solo ball|CONN,Solo Ball,solo ball,CONN,XAV,CONN,XAV,G,Points,pts,Goblin,9.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Points,goblin,316,79.07,,,316
 10534805,281638,jovan milicevic|XAV,Jovan Milicevic,jovan milicevic,XAV,CONN,XAV,CONN,F,Points,pts,Goblin,9.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Points,goblin,19,66.0,,,19
 10536433,286915,braylon mullins|CONN,Braylon Mullins,braylon mullins,CONN,XAV,CONN,XAV,G,Points,pts,Goblin,9.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Points,goblin,316,79.07,,,316
@@ -716,11 +511,14 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527120,277947,silas demary|CONN,Silas Demary,silas demary,CONN,XAV,CONN,XAV,G,Assists,ast,Goblin,7.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Assists,goblin,316,79.07,,,316
 10527164,278814,tre carroll|XAV,Tre Carroll,tre carroll,XAV,CONN,XAV,CONN,F,Rebounds,reb,Demon,7.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Rebounds,demon,19,66.0,,,19
 10538409,281637,filip borovicanin|XAV,Filip Borovicanin,filip borovicanin,XAV,CONN,XAV,CONN,F,Points,pts,Goblin,7.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Points,goblin,19,66.0,,,19
+10542582,230288,tarris reed|CONN,Tarris Reed,tarris reed,CONN,XAV,CONN,XAV,C,Rebounds,reb,Goblin,7.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,goblin,316,79.07,,,316
 10513263,281637,filip borovicanin|XAV,Filip Borovicanin,filip borovicanin,XAV,CONN,XAV,CONN,F,Rebounds,reb,Standard,6.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Rebounds,standard,19,66.0,,,19
+10527076,92177,alex karaban|CONN,Alex Karaban,alex karaban,CONN,XAV,CONN,XAV,F,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,demon,316,79.07,,,316
 10527090,286915,braylon mullins|CONN,Braylon Mullins,braylon mullins,CONN,XAV,CONN,XAV,G,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,demon,316,79.07,,,316
 10527134,178261,solo ball|CONN,Solo Ball,solo ball,CONN,XAV,CONN,XAV,G,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,demon,316,79.07,,,316
 10527165,278814,tre carroll|XAV,Tre Carroll,tre carroll,XAV,CONN,XAV,CONN,F,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Rebounds,demon,19,66.0,,,19
 10529714,277947,silas demary|CONN,Silas Demary,silas demary,CONN,XAV,CONN,XAV,G,Assists,ast,Goblin,6.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Assists,goblin,316,79.07,,,316
+10529716,277947,silas demary|CONN,Silas Demary,silas demary,CONN,XAV,CONN,XAV,G,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,demon,316,79.07,,,316
 10514722,278814,tre carroll|XAV,Tre Carroll,tre carroll,XAV,CONN,XAV,CONN,F,Rebounds,reb,Standard,6.0,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Rebounds,standard,19,66.0,,,19
 10513282,178261,solo ball|CONN,Solo Ball,solo ball,CONN,XAV,CONN,XAV,G,Rebs+Asts,ra,Standard,5.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebs+Asts,standard,316,79.07,,,316
 10514719,92177,alex karaban|CONN,Alex Karaban,alex karaban,CONN,XAV,CONN,XAV,F,Rebounds,reb,Standard,5.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,standard,316,79.07,,,316
@@ -728,6 +526,9 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527093,281637,filip borovicanin|XAV,Filip Borovicanin,filip borovicanin,XAV,CONN,XAV,CONN,F,Assists,ast,Demon,5.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Assists,demon,19,66.0,,,19
 10527106,281637,filip borovicanin|XAV,Filip Borovicanin,filip borovicanin,XAV,CONN,XAV,CONN,F,Rebounds,reb,Goblin,5.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Rebounds,goblin,19,66.0,,,19
 10527133,178261,solo ball|CONN,Solo Ball,solo ball,CONN,XAV,CONN,XAV,G,Rebounds,reb,Demon,5.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,demon,316,79.07,,,316
+10529718,277947,silas demary|CONN,Silas Demary,silas demary,CONN,XAV,CONN,XAV,G,Rebounds,reb,Standard,5.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,standard,316,79.07,,,316
+10527064,92177,alex karaban|CONN,Alex Karaban,alex karaban,CONN,XAV,CONN,XAV,F,Assists,ast,Demon,4.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Assists,demon,316,79.07,,,316
+10527078,92177,alex karaban|CONN,Alex Karaban,alex karaban,CONN,XAV,CONN,XAV,F,Rebounds,reb,Goblin,4.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,goblin,316,79.07,,,316
 10527082,286915,braylon mullins|CONN,Braylon Mullins,braylon mullins,CONN,XAV,CONN,XAV,G,3-PT Made,3pm,Demon,4.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,3-PT Made,demon,316,79.07,,,316
 10527089,286915,braylon mullins|CONN,Braylon Mullins,braylon mullins,CONN,XAV,CONN,XAV,G,Rebounds,reb,Demon,4.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,demon,316,79.07,,,316
 10527092,281637,filip borovicanin|XAV,Filip Borovicanin,filip borovicanin,XAV,CONN,XAV,CONN,F,Assists,ast,Demon,4.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Assists,demon,19,66.0,,,19
@@ -735,6 +536,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527137,230288,tarris reed|CONN,Tarris Reed,tarris reed,CONN,XAV,CONN,XAV,C,Assists,ast,Demon,4.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Assists,demon,316,79.07,,,316
 10527167,278814,tre carroll|XAV,Tre Carroll,tre carroll,XAV,CONN,XAV,CONN,F,Rebounds,reb,Goblin,4.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Rebounds,goblin,19,66.0,,,19
 10529712,281637,filip borovicanin|XAV,Filip Borovicanin,filip borovicanin,XAV,CONN,XAV,CONN,F,Rebounds,reb,Goblin,4.5,2026-03-12T19:00:00.000-04:00,143395,20,XAV,Rebounds,goblin,19,66.0,,,19
+10529719,277947,silas demary|CONN,Silas Demary,silas demary,CONN,XAV,CONN,XAV,G,Rebounds,reb,Goblin,4.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,goblin,316,79.07,,,316
 10514720,286915,braylon mullins|CONN,Braylon Mullins,braylon mullins,CONN,XAV,CONN,XAV,G,Rebounds,reb,Standard,4.0,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,standard,316,79.07,,,316
 10513256,286915,braylon mullins|CONN,Braylon Mullins,braylon mullins,CONN,XAV,CONN,XAV,G,Rebounds,reb,Goblin,3.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,goblin,316,79.07,,,316
 10513281,178261,solo ball|CONN,Solo Ball,solo ball,CONN,XAV,CONN,XAV,G,Rebounds,reb,Standard,3.5,2026-03-12T19:00:00.000-04:00,143395,20,CONN,Rebounds,standard,316,79.07,,,316
@@ -806,14 +608,13 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10526992,278600,jeremiah wilkinson|UGA,Jeremiah Wilkinson,jeremiah wilkinson,UGA,MISS,UGA,MISS,G,Pts+Rebs+Asts,pra,Demon,24.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Pts+Rebs+Asts,demon,211,74.67,,,211
 10527011,280076,kanon catchings|UGA,Kanon Catchings,kanon catchings,UGA,MISS,UGA,MISS,F,Pts+Rebs+Asts,pra,Demon,24.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Pts+Rebs+Asts,demon,211,74.67,,,211
 10515497,282716,aj storr|MISS,AJ Storr,aj storr,MISS,UGA,MISS,UGA,G,Pts+Rebs+Asts,pra,Standard,23.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,standard,304,78.41,,,304
-10515501,220154,blue cain|UGA,Blue Cain,blue cain,UGA,MISS,UGA,MISS,G,Pts+Rebs+Asts,pra,Standard,23.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Pts+Rebs+Asts,standard,211,74.67,,,211
 10515519,224168,malik dia|MISS,Malik Dia,malik dia,MISS,UGA,MISS,UGA,F,Pts+Rebs,pr,Standard,23.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs,standard,304,78.41,,,304
 10515520,224168,malik dia|MISS,Malik Dia,malik dia,MISS,UGA,MISS,UGA,F,Pts+Rebs+Asts,pra,Standard,23.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,standard,304,78.41,,,304
 10526927,282716,aj storr|MISS,AJ Storr,aj storr,MISS,UGA,MISS,UGA,G,Points,pts,Demon,23.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,demon,304,78.41,,,304
 10526973,282717,ilias kamardine|MISS,Ilias Kamardine,ilias kamardine,MISS,UGA,MISS,UGA,G,Pts+Rebs+Asts,pra,Demon,23.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,demon,304,78.41,,,304
 10515290,280076,kanon catchings|UGA,Kanon Catchings,kanon catchings,UGA,MISS,UGA,MISS,F,Pts+Rebs+Asts,pra,Standard,22.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Pts+Rebs+Asts,standard,211,74.67,,,211
+10515501,220154,blue cain|UGA,Blue Cain,blue cain,UGA,MISS,UGA,MISS,G,Pts+Rebs+Asts,pra,Standard,22.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Pts+Rebs+Asts,standard,211,74.67,,,211
 10526934,282716,aj storr|MISS,AJ Storr,aj storr,MISS,UGA,MISS,UGA,G,Pts+Rebs+Asts,pra,Goblin,22.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,goblin,304,78.41,,,304
-10526955,220154,blue cain|UGA,Blue Cain,blue cain,UGA,MISS,UGA,MISS,G,Pts+Rebs+Asts,pra,Goblin,22.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Pts+Rebs+Asts,goblin,211,74.67,,,211
 10526993,278600,jeremiah wilkinson|UGA,Jeremiah Wilkinson,jeremiah wilkinson,UGA,MISS,UGA,MISS,G,Pts+Rebs+Asts,pra,Demon,22.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Pts+Rebs+Asts,demon,211,74.67,,,211
 10527025,224168,malik dia|MISS,Malik Dia,malik dia,MISS,UGA,MISS,UGA,F,Points,pts,Demon,22.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,demon,304,78.41,,,304
 10515496,282716,aj storr|MISS,AJ Storr,aj storr,MISS,UGA,MISS,UGA,G,Pts+Rebs,pr,Standard,21.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs,standard,304,78.41,,,304
@@ -863,25 +664,24 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527052,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Pts+Rebs+Asts,pra,Demon,16.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,demon,304,78.41,,,304
 10521701,282717,ilias kamardine|MISS,Ilias Kamardine,ilias kamardine,MISS,UGA,MISS,UGA,G,Pts+Rebs,pr,Standard,16.0,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs,standard,304,78.41,,,304
 10515280,278600,jeremiah wilkinson|UGA,Jeremiah Wilkinson,jeremiah wilkinson,UGA,MISS,UGA,MISS,G,Points,pts,Standard,15.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,standard,211,74.67,,,211
+10515288,280076,kanon catchings|UGA,Kanon Catchings,kanon catchings,UGA,MISS,UGA,MISS,F,Points,pts,Standard,15.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,standard,211,74.67,,,211
 10515505,282717,ilias kamardine|MISS,Ilias Kamardine,ilias kamardine,MISS,UGA,MISS,UGA,G,Pts+Asts,pa,Standard,15.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Asts,standard,304,78.41,,,304
 10515524,290740,marcus millender|UGA,Marcus Millender,marcus millender,UGA,MISS,UGA,MISS,G,Pts+Rebs,pr,Standard,15.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Pts+Rebs,standard,211,74.67,,,211
 10526928,282716,aj storr|MISS,AJ Storr,aj storr,MISS,UGA,MISS,UGA,G,Points,pts,Goblin,15.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,goblin,304,78.41,,,304
 10526968,282717,ilias kamardine|MISS,Ilias Kamardine,ilias kamardine,MISS,UGA,MISS,UGA,G,Points,pts,Demon,15.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,demon,304,78.41,,,304
-10515288,280076,kanon catchings|UGA,Kanon Catchings,kanon catchings,UGA,MISS,UGA,MISS,F,Points,pts,Standard,14.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,standard,211,74.67,,,211
 10526969,282717,ilias kamardine|MISS,Ilias Kamardine,ilias kamardine,MISS,UGA,MISS,UGA,G,Points,pts,Demon,14.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,demon,304,78.41,,,304
 10527026,224168,malik dia|MISS,Malik Dia,malik dia,MISS,UGA,MISS,UGA,F,Points,pts,Goblin,14.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,goblin,304,78.41,,,304
 10527053,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Pts+Rebs+Asts,pra,Demon,14.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,demon,304,78.41,,,304
 10533366,278600,jeremiah wilkinson|UGA,Jeremiah Wilkinson,jeremiah wilkinson,UGA,MISS,UGA,MISS,G,Points,pts,Goblin,14.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,goblin,211,74.67,,,211
 10533371,290740,marcus millender|UGA,Marcus Millender,marcus millender,UGA,MISS,UGA,MISS,G,Points,pts,Demon,14.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,demon,211,74.67,,,211
-10515530,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Pts+Rebs+Asts,pra,Standard,13.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,standard,304,78.41,,,304
 10521439,220154,blue cain|UGA,Blue Cain,blue cain,UGA,MISS,UGA,MISS,G,Points,pts,Standard,13.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,standard,211,74.67,,,211
 10526991,278600,jeremiah wilkinson|UGA,Jeremiah Wilkinson,jeremiah wilkinson,UGA,MISS,UGA,MISS,G,Points,pts,Goblin,13.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,goblin,211,74.67,,,211
 10527008,280076,kanon catchings|UGA,Kanon Catchings,kanon catchings,UGA,MISS,UGA,MISS,F,Points,pts,Goblin,13.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,goblin,211,74.67,,,211
+10515530,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Pts+Rebs+Asts,pra,Standard,12.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,standard,304,78.41,,,304
 10526948,220154,blue cain|UGA,Blue Cain,blue cain,UGA,MISS,UGA,MISS,G,Points,pts,Goblin,12.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,goblin,211,74.67,,,211
 10527049,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Points,pts,Demon,12.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,demon,304,78.41,,,304
 10515504,282717,ilias kamardine|MISS,Ilias Kamardine,ilias kamardine,MISS,UGA,MISS,UGA,G,Points,pts,Standard,12.0,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,standard,304,78.41,,,304
 10515294,290740,marcus millender|UGA,Marcus Millender,marcus millender,UGA,MISS,UGA,MISS,G,Points,pts,Standard,11.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,standard,211,74.67,,,211
-10515529,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Pts+Rebs,pr,Standard,11.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs,standard,304,78.41,,,304
 10526947,220154,blue cain|UGA,Blue Cain,blue cain,UGA,MISS,UGA,MISS,G,Points,pts,Goblin,11.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,goblin,211,74.67,,,211
 10527048,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Points,pts,Demon,11.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,demon,304,78.41,,,304
 10528649,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Pts+Rebs+Asts,pra,Goblin,11.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Pts+Rebs+Asts,goblin,304,78.41,,,304
@@ -896,6 +696,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10533367,280076,kanon catchings|UGA,Kanon Catchings,kanon catchings,UGA,MISS,UGA,MISS,F,Points,pts,Goblin,9.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,goblin,211,74.67,,,211
 10533370,290740,marcus millender|UGA,Marcus Millender,marcus millender,UGA,MISS,UGA,MISS,G,Points,pts,Goblin,9.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Points,goblin,211,74.67,,,211
 10515527,295221,patton pinkins|MISS,Patton Pinkins,patton pinkins,MISS,UGA,MISS,UGA,G,Points,pts,Standard,9.0,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Points,standard,304,78.41,,,304
+10515275,220154,blue cain|UGA,Blue Cain,blue cain,UGA,MISS,UGA,MISS,G,Rebs+Asts,ra,Standard,8.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Rebs+Asts,standard,211,74.67,,,211
 10526958,220154,blue cain|UGA,Blue Cain,blue cain,UGA,MISS,UGA,MISS,G,Rebounds,reb,Demon,8.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Rebounds,demon,211,74.67,,,211
 10527014,280076,kanon catchings|UGA,Kanon Catchings,kanon catchings,UGA,MISS,UGA,MISS,F,Rebounds,reb,Demon,8.5,2026-03-12T19:00:00.000-04:00,143416,20,UGA,Rebounds,demon,211,74.67,,,211
 10527032,224168,malik dia|MISS,Malik Dia,malik dia,MISS,UGA,MISS,UGA,F,Rebounds,reb,Demon,8.5,2026-03-12T19:00:00.000-04:00,143416,20,MISS,Rebounds,demon,304,78.41,,,304
@@ -1035,44 +836,48 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10529514,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Pts+Rebs+Asts,pra,Demon,22.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,demon,175,73.59,,,175
 10514253,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Pts+Rebs,pr,Standard,21.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs,standard,,,,,
 10515977,299637,dezayne mingo|CHAR,Dezayne Mingo,dezayne mingo,CHAR,TULN,CHAR,TULN,G,Pts+Rebs+Asts,pra,Standard,21.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs+Asts,standard,,,,,
-10515978,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,Points,pts,Standard,21.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,standard,175,73.59,,,175
 10529427,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Pts+Rebs+Asts,pra,Goblin,21.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs+Asts,goblin,,,,,
 10529451,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Pts+Rebs+Asts,pra,Demon,21.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,demon,175,73.59,,,175
 10529473,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Rebs+Asts,pra,Demon,21.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs+Asts,demon,,,,,
+10514259,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Rebs+Asts,pra,Standard,20.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs+Asts,standard,,,,,
+10515978,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,Points,pts,Standard,20.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,standard,175,73.59,,,175
 10529512,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Pts+Rebs+Asts,pra,Demon,20.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,demon,175,73.59,,,175
-10514259,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Rebs+Asts,pra,Standard,19.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs+Asts,standard,,,,,
 10529452,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Pts+Rebs+Asts,pra,Demon,19.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,demon,175,73.59,,,175
 10529469,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Points,pts,Demon,19.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,demon,,,,,
+10542777,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Rebs+Asts,pra,Goblin,19.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs+Asts,goblin,,,,,
+10542778,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,Points,pts,Goblin,19.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,goblin,175,73.59,,,175
 10529425,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Points,pts,Demon,18.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,demon,,,,,
+10529470,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Rebs,pr,Standard,18.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs,standard,,,,,
 10529486,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,Points,pts,Goblin,18.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,goblin,175,73.59,,,175
 10529513,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Pts+Rebs+Asts,pra,Demon,18.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,demon,175,73.59,,,175
+10542776,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Rebs+Asts,pra,Goblin,18.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs+Asts,goblin,,,,,
 10514838,299637,dezayne mingo|CHAR,Dezayne Mingo,dezayne mingo,CHAR,TULN,CHAR,TULN,G,Pts+Asts,pa,Standard,18.0,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Asts,standard,,,,,
 10514255,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Pts+Rebs+Asts,pra,Standard,17.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,standard,175,73.59,,,175
 10529448,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Points,pts,Demon,17.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,demon,175,73.59,,,175
 10529467,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Points,pts,Demon,17.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,demon,,,,,
-10529470,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Rebs,pr,Standard,17.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs,standard,,,,,
 10529471,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Rebs+Asts,pra,Goblin,17.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs+Asts,goblin,,,,,
 10529508,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Points,pts,Demon,17.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,demon,175,73.59,,,175
+10514258,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Asts,pa,Standard,16.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Asts,standard,,,,,
 10514264,299637,dezayne mingo|CHAR,Dezayne Mingo,dezayne mingo,CHAR,TULN,CHAR,TULN,G,Pts+Rebs,pr,Standard,16.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Rebs,standard,,,,,
 10514271,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Pts+Rebs+Asts,pra,Standard,16.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,standard,175,73.59,,,175
 10529423,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Points,pts,Demon,16.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,demon,,,,,
 10514254,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Pts+Rebs,pr,Standard,15.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs,standard,175,73.59,,,175
-10514258,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Pts+Asts,pa,Standard,15.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Asts,standard,,,,,
 10529446,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Points,pts,Demon,15.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,demon,175,73.59,,,175
 10529450,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Pts+Rebs+Asts,pra,Goblin,15.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,goblin,175,73.59,,,175
 10529468,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Points,pts,Demon,15.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,demon,,,,,
 10529507,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Points,pts,Demon,15.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,demon,175,73.59,,,175
 10529510,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Pts+Rebs,pr,Standard,15.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs,standard,175,73.59,,,175
+10515976,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Points,pts,Standard,14.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,standard,,,,,
 10529424,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Points,pts,Demon,14.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,demon,,,,,
-10529449,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Pts+Asts,pa,Standard,14.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Asts,standard,175,73.59,,,175
 10529511,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Pts+Rebs+Asts,pra,Goblin,14.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Rebs+Asts,goblin,175,73.59,,,175
 10514837,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Pts+Asts,pa,Standard,14.0,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Pts+Asts,standard,,,,,
-10515976,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Points,pts,Standard,13.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,standard,,,,,
 10529447,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Points,pts,Demon,13.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,demon,175,73.59,,,175
+10529449,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Pts+Asts,pa,Standard,13.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Asts,standard,175,73.59,,,175
 10529506,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Points,pts,Demon,13.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,demon,175,73.59,,,175
+10542775,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Points,pts,Goblin,13.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,goblin,,,,,
 10514841,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Pts+Asts,pa,Standard,13.0,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Pts+Asts,standard,175,73.59,,,175
 10514263,299637,dezayne mingo|CHAR,Dezayne Mingo,dezayne mingo,CHAR,TULN,CHAR,TULN,G,Points,pts,Standard,12.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,standard,,,,,
-10529670,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Points,pts,Standard,12.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,standard,,,,,
+10542774,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Points,pts,Goblin,12.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,goblin,,,,,
 10514707,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Points,pts,Standard,12.0,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,standard,175,73.59,,,175
 10514270,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Points,pts,Standard,11.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,standard,175,73.59,,,175
 10529433,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Rebounds,reb,Demon,11.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebounds,demon,,,,,
@@ -1080,6 +885,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10532429,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Points,pts,Goblin,11.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,goblin,,,,,
 10529422,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Points,pts,Goblin,10.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Points,goblin,,,,,
 10529432,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Rebounds,reb,Demon,10.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebounds,demon,,,,,
+10542773,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Points,pts,Goblin,10.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Points,goblin,175,73.59,,,175
 10514901,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Rebs+Asts,ra,Standard,10.0,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebs+Asts,standard,,,,,
 10529434,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Rebounds,reb,Demon,9.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebounds,demon,,,,,
 10529435,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Rebs+Asts,ra,Goblin,9.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebs+Asts,goblin,,,,,
@@ -1095,8 +901,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10529478,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebounds,demon,,,,,
 10529491,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,demon,175,73.59,,,175
 10529518,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Rebounds,reb,Demon,6.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,demon,175,73.59,,,175
-10514260,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Rebs+Asts,ra,Standard,5.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebs+Asts,standard,,,,,
-10516953,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,Rebounds,reb,Standard,5.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,standard,175,73.59,,,175
 10529457,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Rebounds,reb,Demon,5.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,demon,175,73.59,,,175
 10529476,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Rebounds,reb,Demon,5.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebounds,demon,,,,,
 10529517,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Rebounds,reb,Demon,5.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,demon,175,73.59,,,175
@@ -1104,10 +908,10 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10514730,299637,dezayne mingo|CHAR,Dezayne Mingo,dezayne mingo,CHAR,TULN,CHAR,TULN,G,Assists,ast,Standard,5.0,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Assists,standard,,,,,
 10529455,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Rebounds,reb,Demon,4.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,demon,175,73.59,,,175
 10529477,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Rebounds,reb,Demon,4.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebounds,demon,,,,,
-10529480,299637,dezayne mingo|CHAR,Dezayne Mingo,dezayne mingo,CHAR,TULN,CHAR,TULN,G,Assists,ast,Goblin,4.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Assists,goblin,,,,,
 10529490,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,Rebounds,reb,Goblin,4.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,goblin,175,73.59,,,175
 10529516,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Rebounds,reb,Demon,4.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,demon,175,73.59,,,175
 10514267,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,Assists,ast,Standard,3.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Assists,standard,175,73.59,,,175
+10514272,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Rebounds,reb,Standard,3.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,standard,175,73.59,,,175
 10529443,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Assists,ast,Demon,3.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Assists,demon,175,73.59,,,175
 10529456,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Rebounds,reb,Demon,3.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,demon,175,73.59,,,175
 10529475,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Rebounds,reb,Goblin,3.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Rebounds,goblin,,,,,
@@ -1127,7 +931,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10529515,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Rebounds,reb,Goblin,2.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Rebounds,goblin,175,73.59,,,175
 10529522,306694,tyler ringgold|TULN,Tyler Ringgold,tyler ringgold,TULN,CHAR,TULN,CHAR,F,Steals,stl,Demon,2.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Steals,demon,175,73.59,,,175
 10514256,231616,asher woods|TULN,Asher Woods,asher woods,TULN,CHAR,TULN,CHAR,G,Turnovers,tov,Standard,1.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,Turnovers,standard,175,73.59,,,175
-10514262,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Turnovers,tov,Standard,1.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Turnovers,standard,,,,,
+10514257,306693,ben bradford|CHAR,Ben Bradford,ben bradford,CHAR,TULN,CHAR,TULN,G,Assists,ast,Standard,1.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Assists,standard,,,,,
 10514266,231617,rowan brumbaugh|TULN,Rowan Brumbaugh,rowan brumbaugh,TULN,CHAR,TULN,CHAR,G,3-PT Made,3pm,Standard,1.5,2026-03-12T19:00:00.000-04:00,143417,20,TULN,3-PT Made,standard,175,73.59,,,175
 10529417,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Assists,ast,Demon,1.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Assists,demon,,,,,
 10529420,306692,anton bonke|CHAR,Anton Bonke,anton bonke,CHAR,TULN,CHAR,TULN,C,Blocked Shots,blk,Demon,1.5,2026-03-12T19:00:00.000-04:00,143417,20,CHAR,Blocked Shots,demon,,,,,
@@ -1164,7 +968,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10533005,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Pts+Rebs,pr,Demon,44.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs,demon,,,,,
 10515992,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Pts+Rebs+Asts,pra,Standard,42.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs+Asts,standard,,,,,
 10533006,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Pts+Rebs,pr,Demon,39.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs,demon,,,,,
-10515991,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Pts+Rebs,pr,Standard,38.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs,standard,,,,,
+10515991,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Pts+Rebs,pr,Standard,37.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs,standard,,,,,
 10533008,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Pts+Rebs,pr,Goblin,34.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs,goblin,,,,,
 10522626,277082,robert mccray|FSU,Robert McCray,robert mccray,FSU,DUKE,FSU,DUKE,G,Fantasy Score,fantasy,Standard,32.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Fantasy Score,standard,3,63.15,,,3
 10526829,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Points,pts,Demon,31.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Points,demon,,,,,
@@ -1198,12 +1002,12 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10526899,278002,lajae jones|FSU,Lajae Jones,lajae jones,FSU,DUKE,FSU,DUKE,G,Points,pts,Demon,17.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Points,demon,3,63.15,,,3
 10516006,277081,chauncey wiggins|FSU,Chauncey Wiggins,chauncey wiggins,FSU,DUKE,FSU,DUKE,F,Pts+Rebs+Asts,pra,Standard,16.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Pts+Rebs+Asts,standard,3,63.15,,,3
 10516019,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,FSU,DUKE,FSU,G-F,Points,pts,Standard,16.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Points,standard,,,,,
-10516039,277082,robert mccray|FSU,Robert McCray,robert mccray,FSU,DUKE,FSU,DUKE,G,Points,pts,Standard,16.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Points,standard,3,63.15,,,3
 10516969,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Rebs+Asts,ra,Standard,16.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Rebs+Asts,standard,,,,,
 10516971,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,FSU,DUKE,FSU,G,Pts+Rebs+Asts,pra,Standard,16.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs+Asts,standard,,,,,
 10539204,306900,maliq brown|DUKE,Maliq Brown,maliq brown,DUKE,FSU,DUKE,FSU,F,Pts+Rebs,pr,Standard,16.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs,standard,,,,,
 10516005,277081,chauncey wiggins|FSU,Chauncey Wiggins,chauncey wiggins,FSU,DUKE,FSU,DUKE,F,Pts+Rebs,pr,Standard,15.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Pts+Rebs,standard,3,63.15,,,3
 10516013,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,FSU,DUKE,FSU,G-F,Pts+Rebs+Asts,pra,Standard,15.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Pts+Rebs+Asts,standard,,,,,
+10516039,277082,robert mccray|FSU,Robert McCray,robert mccray,FSU,DUKE,FSU,DUKE,G,Points,pts,Standard,15.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Points,standard,3,63.15,,,3
 10526833,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Rebounds,reb,Demon,15.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Rebounds,demon,,,,,
 10526848,277081,chauncey wiggins|FSU,Chauncey Wiggins,chauncey wiggins,FSU,DUKE,FSU,DUKE,F,Points,pts,Demon,15.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Points,demon,3,63.15,,,3
 10526897,278002,lajae jones|FSU,Lajae Jones,lajae jones,FSU,DUKE,FSU,DUKE,G,Points,pts,Demon,15.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Points,demon,3,63.15,,,3
@@ -1221,9 +1025,9 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10516030,278002,lajae jones|FSU,Lajae Jones,lajae jones,FSU,DUKE,FSU,DUKE,G,Pts+Asts,pa,Standard,12.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Pts+Asts,standard,3,63.15,,,3
 10526840,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,FSU,DUKE,FSU,G,Points,pts,Demon,12.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Points,demon,,,,,
 10526867,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,FSU,DUKE,FSU,G-F,Points,pts,Demon,12.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Points,demon,,,,,
+10526834,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Rebounds,reb,Standard,12.0,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Rebounds,standard,,,,,
 10516003,277081,chauncey wiggins|FSU,Chauncey Wiggins,chauncey wiggins,FSU,DUKE,FSU,DUKE,F,Points,pts,Standard,11.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Points,standard,3,63.15,,,3
 10516029,278002,lajae jones|FSU,Lajae Jones,lajae jones,FSU,DUKE,FSU,DUKE,G,Points,pts,Standard,11.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Points,standard,3,63.15,,,3
-10526834,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Rebounds,reb,Standard,11.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Rebounds,standard,,,,,
 10526839,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,FSU,DUKE,FSU,G,Points,pts,Demon,11.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Points,demon,,,,,
 10526866,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,FSU,DUKE,FSU,G-F,Points,pts,Demon,11.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Points,demon,,,,,
 10537236,221498,isaiah evans|DUKE,Isaiah Evans,isaiah evans,DUKE,FSU,DUKE,FSU,G-F,Points,pts,Goblin,11.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Points,goblin,,,,,
@@ -1321,7 +1125,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10516037,277082,robert mccray|FSU,Robert McCray,robert mccray,FSU,DUKE,FSU,DUKE,G,3-PT Made,3pm,Standard,1.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,3-PT Made,standard,3,63.15,,,3
 10516045,277082,robert mccray|FSU,Robert McCray,robert mccray,FSU,DUKE,FSU,DUKE,G,Steals,stl,Demon,1.5,2026-03-12T19:00:00.000-04:00,143418,20,FSU,Steals,demon,3,63.15,,,3
 10520348,278361,dame sarr|DUKE,Dame Sarr,dame sarr,DUKE,FSU,DUKE,FSU,G-F,Turnovers,tov,Goblin,1.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Turnovers,goblin,,,,,
-10526307,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,FSU,DUKE,FSU,G,Turnovers,tov,Standard,1.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Turnovers,standard,,,,,
 10526825,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Blks+Stls,stocks,Goblin,1.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Blks+Stls,goblin,,,,,
 10526826,274122,cameron boozer|DUKE,Cameron Boozer,cameron boozer,DUKE,FSU,DUKE,FSU,F,Blocked Shots,blk,Demon,1.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,Blocked Shots,demon,,,,,
 10526838,300001,cayden boozer|DUKE,Cayden Boozer,cayden boozer,DUKE,FSU,DUKE,FSU,G,3-PT Made,3pm,Demon,1.5,2026-03-12T19:00:00.000-04:00,143418,20,DUKE,3-PT Made,demon,,,,,
@@ -1401,6 +1204,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10520367,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Points,pts,Demon,17.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Points,demon,45,68.26,,,45
 10520378,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Points,pts,Demon,17.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,demon,,,,,
 10520414,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Pts+Rebs+Asts,pra,Demon,17.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs+Asts,demon,,,,,
+10542538,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Pts+Rebs+Asts,pra,Goblin,17.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs+Asts,goblin,,,,,
 10509809,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Pts+Rebs,pr,Standard,16.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs,standard,,,,,
 10520385,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Pts+Rebs+Asts,pra,Goblin,16.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs+Asts,goblin,,,,,
 10509808,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Pts+Asts,pa,Standard,15.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Asts,standard,,,,,
@@ -1414,32 +1218,38 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10509782,280514,deywilk tavarez|L-IL,Deywilk Tavarez,deywilk tavarez,L-IL,DAV,L-IL,DAV,G,Pts+Rebs+Asts,pra,Standard,13.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Pts+Rebs+Asts,standard,45,68.26,,,45
 10509807,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Points,pts,Standard,13.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,standard,,,,,
 10520365,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Points,pts,Demon,13.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Points,demon,45,68.26,,,45
+10542540,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Pts+Rebs+Asts,pra,Goblin,13.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs+Asts,goblin,,,,,
 10509791,306657,joshua ola joseph|L-IL,Joshua Ola-Joseph,joshua ola joseph,L-IL,DAV,L-IL,DAV,F,Pts+Rebs,pr,Standard,12.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Pts+Rebs,standard,45,68.26,,,45
 10509821,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Pts+Asts,pa,Standard,12.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Asts,standard,,,,,
 10509822,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Pts+Rebs,pr,Standard,12.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs,standard,,,,,
 10520411,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Points,pts,Demon,12.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,demon,,,,,
 10523117,285513,devin brown|DAV,Devin Brown,devin brown,DAV,L-IL,DAV,L-IL,G,Pts+Rebs+Asts,pra,Standard,12.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs+Asts,standard,,,,,
+10542588,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Pts+Rebs+Asts,pra,Goblin,12.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs+Asts,goblin,,,,,
 10509780,280514,deywilk tavarez|L-IL,Deywilk Tavarez,deywilk tavarez,L-IL,DAV,L-IL,DAV,G,Pts+Asts,pa,Standard,11.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Pts+Asts,standard,45,68.26,,,45
 10509781,280514,deywilk tavarez|L-IL,Deywilk Tavarez,deywilk tavarez,L-IL,DAV,L-IL,DAV,G,Pts+Rebs,pr,Standard,11.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Pts+Rebs,standard,45,68.26,,,45
 10509799,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Points,pts,Standard,11.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Points,standard,45,68.26,,,45
 10520381,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Points,pts,Goblin,11.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,goblin,,,,,
 10520409,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Points,pts,Demon,11.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,demon,,,,,
 10520416,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Pts+Rebs+Asts,pra,Goblin,11.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Rebs+Asts,goblin,,,,,
+10509820,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Points,pts,Standard,10.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,standard,,,,,
 10509826,300724,xavier amos|L-IL,Xavier Amos,xavier amos,L-IL,DAV,L-IL,DAV,F,Points,pts,Standard,10.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Points,standard,45,68.26,,,45
 10540115,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Points,pts,Goblin,10.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Points,goblin,45,68.26,,,45
 10509804,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Rebs+Asts,ra,Standard,9.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebs+Asts,standard,45,68.26,,,45
-10509820,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Points,pts,Standard,9.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,standard,,,,,
 10520368,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Points,pts,Goblin,9.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Points,goblin,45,68.26,,,45
 10520371,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Rebounds,reb,Demon,9.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebounds,demon,45,68.26,,,45
+10542587,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Points,pts,Goblin,9.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,goblin,,,,,
 10513157,280514,deywilk tavarez|L-IL,Deywilk Tavarez,deywilk tavarez,L-IL,DAV,L-IL,DAV,G,Points,pts,Standard,8.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Points,standard,45,68.26,,,45
 10516238,285513,devin brown|DAV,Devin Brown,devin brown,DAV,L-IL,DAV,L-IL,G,Pts+Asts,pa,Standard,8.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Asts,standard,,,,,
 10520369,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Rebounds,reb,Demon,8.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebounds,demon,45,68.26,,,45
+10542539,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Points,pts,Goblin,8.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,goblin,,,,,
 10509790,306657,joshua ola joseph|L-IL,Joshua Ola-Joseph,joshua ola joseph,L-IL,DAV,L-IL,DAV,F,Points,pts,Standard,7.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Points,standard,45,68.26,,,45
 10520370,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Rebounds,reb,Demon,7.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebounds,demon,45,68.26,,,45
 10520412,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Points,pts,Goblin,7.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Points,goblin,,,,,
 10509803,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Rebounds,reb,Goblin,6.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebounds,goblin,45,68.26,,,45
+10542537,290182,kayde dotson|L-IL,Kayde Dotson,kayde dotson,L-IL,DAV,L-IL,DAV,G,Rebs+Asts,ra,Demon,6.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebs+Asts,demon,45,68.26,,,45
 10513158,306656,ian platteeuw|DAV,Ian Platteeuw,ian platteeuw,DAV,L-IL,DAV,L-IL,F-C,Pts+Asts,pa,Standard,5.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Pts+Asts,standard,,,,,
 10520372,183315,miles rubin|L-IL,Miles Rubin,miles rubin,L-IL,DAV,L-IL,DAV,C,Rebounds,reb,Goblin,5.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebounds,goblin,45,68.26,,,45
+10542541,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,Rebs+Asts,ra,Demon,5.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Rebs+Asts,demon,,,,,
 10521015,306657,joshua ola joseph|L-IL,Joshua Ola-Joseph,joshua ola joseph,L-IL,DAV,L-IL,DAV,F,Rebounds,reb,Standard,5.0,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebounds,standard,45,68.26,,,45
 10521016,300724,xavier amos|L-IL,Xavier Amos,xavier amos,L-IL,DAV,L-IL,DAV,F,Rebounds,reb,Standard,5.0,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Rebounds,standard,45,68.26,,,45
 10509789,306656,ian platteeuw|DAV,Ian Platteeuw,ian platteeuw,DAV,L-IL,DAV,L-IL,F-C,Rebs+Asts,ra,Goblin,4.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Rebs+Asts,goblin,,,,,
@@ -1466,6 +1276,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10513162,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Rebounds,reb,Goblin,2.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Rebounds,goblin,,,,,
 10520376,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Assists,ast,Demon,2.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Assists,demon,,,,,
 10520404,281610,sam brown|DAV,Sam Brown,sam brown,DAV,L-IL,DAV,L-IL,G,3-PT Made,3pm,Demon,2.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,3-PT Made,demon,,,,,
+10542536,280514,deywilk tavarez|L-IL,Deywilk Tavarez,deywilk tavarez,L-IL,DAV,L-IL,DAV,G,Assists,ast,Demon,2.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,Assists,demon,45,68.26,,,45
 10509785,306656,ian platteeuw|DAV,Ian Platteeuw,ian platteeuw,DAV,L-IL,DAV,L-IL,F-C,Assists,ast,Standard,1.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Assists,standard,,,,,
 10509793,290182,kayde dotson|L-IL,Kayde Dotson,kayde dotson,L-IL,DAV,L-IL,DAV,G,3-PT Made,3pm,Goblin,1.5,2026-03-12T19:30:00.000-04:00,143294,20,L-IL,3-PT Made,goblin,45,68.26,,,45
 10509806,281609,parker friedrichsen|DAV,Parker Friedrichsen,parker friedrichsen,DAV,L-IL,DAV,L-IL,G,Assists,ast,Standard,1.5,2026-03-12T19:30:00.000-04:00,143294,20,DAV,Assists,standard,,,,,
@@ -1885,7 +1696,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10539287,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Pts+Rebs+Asts,pra,Demon,19.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,demon,17,65.61,,,17
 10527484,279193,rj godfrey|CLEM,RJ Godfrey,rj godfrey,CLEM,UNC,CLEM,UNC,F,Pts+Rebs+Asts,pra,Goblin,18.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Rebs+Asts,goblin,92,70.63,,,92
 10517387,281625,ace buckner|CLEM,Ace Buckner,ace buckner,CLEM,UNC,CLEM,UNC,G,Pts+Rebs+Asts,pra,Standard,17.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Rebs+Asts,standard,92,70.63,,,92
-10517394,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Pts+Asts,pa,Standard,17.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Asts,standard,17,65.61,,,17
 10517405,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Pts+Rebs+Asts,pra,Standard,17.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,standard,17,65.61,,,17
 10517434,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,Pts+Rebs,pr,Standard,17.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs,standard,17,65.61,,,17
 10527406,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Points,pts,Demon,17.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,demon,17,65.61,,,17
@@ -1893,10 +1703,12 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527493,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,Points,pts,Demon,17.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,demon,17,65.61,,,17
 10527500,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,Pts+Rebs+Asts,pra,Goblin,17.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,goblin,17,65.61,,,17
 10539285,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Pts+Rebs+Asts,pra,Demon,17.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,demon,17,65.61,,,17
+10517394,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Pts+Asts,pa,Standard,16.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Asts,standard,17,65.61,,,17
 10517404,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Pts+Rebs,pr,Standard,16.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs,standard,17,65.61,,,17
 10527434,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Pts+Rebs+Asts,pra,Goblin,16.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,goblin,17,65.61,,,17
 10527461,280068,luka bogavac|UNC,Luka Bogavac,luka bogavac,UNC,CLEM,UNC,CLEM,G,Points,pts,Demon,16.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,demon,17,65.61,,,17
 10527476,279193,rj godfrey|CLEM,RJ Godfrey,rj godfrey,CLEM,UNC,CLEM,UNC,F,Points,pts,Demon,16.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Points,demon,92,70.63,,,92
+10517386,281625,ace buckner|CLEM,Ace Buckner,ace buckner,CLEM,UNC,CLEM,UNC,G,Pts+Rebs,pr,Standard,15.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Rebs,standard,92,70.63,,,92
 10517393,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Points,pts,Standard,15.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,standard,17,65.61,,,17
 10517433,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,Pts+Asts,pa,Standard,15.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Asts,standard,17,65.61,,,17
 10527433,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Pts+Rebs+Asts,pra,Goblin,15.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,goblin,17,65.61,,,17
@@ -1904,7 +1716,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527475,279193,rj godfrey|CLEM,RJ Godfrey,rj godfrey,CLEM,UNC,CLEM,UNC,F,Points,pts,Demon,15.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Points,demon,92,70.63,,,92
 10527494,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,Points,pts,Demon,15.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,demon,17,65.61,,,17
 10539286,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Pts+Rebs+Asts,pra,Demon,15.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,demon,17,65.61,,,17
-10517386,281625,ace buckner|CLEM,Ace Buckner,ace buckner,CLEM,UNC,CLEM,UNC,G,Pts+Rebs,pr,Standard,14.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Rebs,standard,92,70.63,,,92
+10542830,281625,ace buckner|CLEM,Ace Buckner,ace buckner,CLEM,UNC,CLEM,UNC,G,Pts+Rebs+Asts,pra,Goblin,15.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Rebs+Asts,goblin,92,70.63,,,92
 10517421,280068,luka bogavac|UNC,Luka Bogavac,luka bogavac,UNC,CLEM,UNC,CLEM,G,Pts+Rebs+Asts,pra,Standard,14.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,standard,17,65.61,,,17
 10517424,279193,rj godfrey|CLEM,RJ Godfrey,rj godfrey,CLEM,UNC,CLEM,UNC,F,Pts+Asts,pa,Standard,14.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Asts,standard,92,70.63,,,92
 10527432,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Pts+Rebs+Asts,pra,Goblin,14.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,goblin,17,65.61,,,17
@@ -1934,7 +1746,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10539281,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Points,pts,Demon,11.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,demon,17,65.61,,,17
 10539284,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Pts+Rebs+Asts,pra,Goblin,11.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs+Asts,goblin,17,65.61,,,17
 10541587,281625,ace buckner|CLEM,Ace Buckner,ace buckner,CLEM,UNC,CLEM,UNC,G,Points,pts,Standard,11.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Points,standard,92,70.63,,,92
-10541589,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Pts+Asts,pa,Standard,11.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Asts,standard,17,65.61,,,17
 10517418,280068,luka bogavac|UNC,Luka Bogavac,luka bogavac,UNC,CLEM,UNC,CLEM,G,Points,pts,Standard,10.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,standard,17,65.61,,,17
 10527416,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Rebounds,reb,Demon,10.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Rebounds,demon,17,65.61,,,17
 10527426,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Points,pts,Demon,10.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,demon,17,65.61,,,17
@@ -1944,6 +1755,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10539283,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Pts+Rebs,pr,Standard,10.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Pts+Rebs,standard,17,65.61,,,17
 10517397,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Rebs+Asts,ra,Standard,9.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Rebs+Asts,standard,17,65.61,,,17
 10517410,279191,jestin porter|CLEM,Jestin Porter,jestin porter,CLEM,UNC,CLEM,UNC,G,Pts+Asts,pa,Standard,9.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Asts,standard,92,70.63,,,92
+10524074,279191,jestin porter|CLEM,Jestin Porter,jestin porter,CLEM,UNC,CLEM,UNC,G,Pts+Rebs,pr,Standard,9.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Rebs,standard,92,70.63,,,92
 10527415,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Rebounds,reb,Demon,9.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Rebounds,demon,17,65.61,,,17
 10527436,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Rebounds,reb,Demon,9.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Rebounds,demon,17,65.61,,,17
 10527450,279191,jestin porter|CLEM,Jestin Porter,jestin porter,CLEM,UNC,CLEM,UNC,G,Pts+Rebs+Asts,pra,Goblin,9.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Rebs+Asts,goblin,92,70.63,,,92
@@ -1960,7 +1772,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527485,279193,rj godfrey|CLEM,RJ Godfrey,rj godfrey,CLEM,UNC,CLEM,UNC,F,Rebounds,reb,Demon,8.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Rebounds,demon,92,70.63,,,92
 10537314,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Rebs+Asts,ra,Demon,8.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Rebs+Asts,demon,17,65.61,,,17
 10537316,279191,jestin porter|CLEM,Jestin Porter,jestin porter,CLEM,UNC,CLEM,UNC,G,Pts+Rebs+Asts,pra,Goblin,8.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Pts+Rebs+Asts,goblin,92,70.63,,,92
-10542441,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Points,pts,Standard,8.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,standard,17,65.61,,,17
 10520937,279191,jestin porter|CLEM,Jestin Porter,jestin porter,CLEM,UNC,CLEM,UNC,G,Points,pts,Standard,8.0,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Points,standard,92,70.63,,,92
 10527427,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Points,pts,Goblin,7.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,goblin,17,65.61,,,17
 10536499,280068,luka bogavac|UNC,Luka Bogavac,luka bogavac,UNC,CLEM,UNC,CLEM,G,Points,pts,Goblin,7.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Points,goblin,17,65.61,,,17
@@ -2048,13 +1859,13 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527490,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,3-PT Made,3pm,Demon,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,3-PT Made,demon,17,65.61,,,17
 10527492,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,Assists,ast,Goblin,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Assists,goblin,17,65.61,,,17
 10527505,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,Steals,stl,Demon,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Steals,demon,17,65.61,,,17
-10539275,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,3-PT Made,3pm,Standard,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,3-PT Made,standard,17,65.61,,,17
 10539289,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Rebounds,reb,Goblin,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Rebounds,goblin,17,65.61,,,17
 10539294,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Steals,stl,Demon,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Steals,demon,17,65.61,,,17
 10540128,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Turnovers,tov,Demon,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Turnovers,demon,17,65.61,,,17
 10540130,280068,luka bogavac|UNC,Luka Bogavac,luka bogavac,UNC,CLEM,UNC,CLEM,G,Rebounds,reb,Goblin,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Rebounds,goblin,17,65.61,,,17
 10540131,218644,seth trimble|UNC,Seth Trimble,seth trimble,UNC,CLEM,UNC,CLEM,G,Turnovers,tov,Goblin,1.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Turnovers,goblin,17,65.61,,,17
 10517383,281625,ace buckner|CLEM,Ace Buckner,ace buckner,CLEM,UNC,CLEM,UNC,G,3-PT Made,3pm,Goblin,0.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,3-PT Made,goblin,92,70.63,,,92
+10517398,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Steals,stl,Standard,0.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Steals,standard,17,65.61,,,17
 10517400,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,3-PT Made,3pm,Goblin,0.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,3-PT Made,goblin,17,65.61,,,17
 10517401,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Assists,ast,Goblin,0.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Assists,goblin,17,65.61,,,17
 10517402,283074,jarin stevenson|UNC,Jarin Stevenson,jarin stevenson,UNC,CLEM,UNC,CLEM,F,Blocked Shots,blk,Goblin,0.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Blocked Shots,goblin,17,65.61,,,17
@@ -2070,6 +1881,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527404,276521,henri veesaar|UNC,Henri Veesaar,henri veesaar,UNC,CLEM,UNC,CLEM,C,Blocked Shots,blk,Goblin,0.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Blocked Shots,goblin,17,65.61,,,17
 10527469,279193,rj godfrey|CLEM,RJ Godfrey,rj godfrey,CLEM,UNC,CLEM,UNC,F,3-PT Made,3pm,Demon,0.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,3-PT Made,demon,92,70.63,,,92
 10527471,279193,rj godfrey|CLEM,RJ Godfrey,rj godfrey,CLEM,UNC,CLEM,UNC,F,Assists,ast,Goblin,0.5,2026-03-12T21:30:00.000-04:00,143524,20,CLEM,Assists,goblin,92,70.63,,,92
+10539295,298688,derek dixon|UNC,Derek Dixon,derek dixon,UNC,CLEM,UNC,CLEM,G,Steals,stl,Standard,0.5,2026-03-12T21:30:00.000-04:00,143524,20,UNC,Steals,standard,17,65.61,,,17
 10522671,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Fantasy Score,fantasy,Standard,34.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Fantasy Score,standard,122,71.78,,,122
 10527679,276687,darryn peterson|KU,Darryn Peterson,darryn peterson,KU,TCU,KU,TCU,G,Pts+Rebs+Asts,pra,Demon,31.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Rebs+Asts,demon,122,71.78,,,122
 10522676,220667,david punch|TCU,David Punch,david punch,TCU,KU,TCU,KU,F,Fantasy Score,fantasy,Standard,31.0,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Fantasy Score,standard,55,68.63,,,55
@@ -2083,10 +1895,10 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527714,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Pts+Rebs+Asts,pra,Demon,28.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Rebs+Asts,demon,122,71.78,,,122
 10527757,277427,melvin council|KU,Melvin Council,melvin council,KU,TCU,KU,TCU,G,Pts+Rebs+Asts,pra,Demon,28.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Rebs+Asts,demon,122,71.78,,,122
 10527810,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Pts+Rebs+Asts,pra,Demon,28.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Pts+Rebs+Asts,demon,55,68.63,,,55
+10520448,276687,darryn peterson|KU,Darryn Peterson,darryn peterson,KU,TCU,KU,TCU,G,Pts+Rebs+Asts,pra,Standard,27.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Rebs+Asts,standard,122,71.78,,,122
 10527695,220667,david punch|TCU,David Punch,david punch,TCU,KU,TCU,KU,F,Pts+Rebs+Asts,pra,Demon,27.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Pts+Rebs+Asts,demon,55,68.63,,,55
 10527809,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Pts+Rebs+Asts,pra,Demon,27.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Pts+Rebs+Asts,demon,55,68.63,,,55
 10522674,277427,melvin council|KU,Melvin Council,melvin council,KU,TCU,KU,TCU,G,Fantasy Score,fantasy,Standard,27.0,2026-03-12T21:30:00.000-04:00,143525,20,KU,Fantasy Score,standard,122,71.78,,,122
-10520448,276687,darryn peterson|KU,Darryn Peterson,darryn peterson,KU,TCU,KU,TCU,G,Pts+Rebs+Asts,pra,Standard,26.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Rebs+Asts,standard,122,71.78,,,122
 10527715,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Pts+Rebs+Asts,pra,Demon,26.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Rebs+Asts,demon,122,71.78,,,122
 10527755,277427,melvin council|KU,Melvin Council,melvin council,KU,TCU,KU,TCU,G,Pts+Rebs+Asts,pra,Demon,26.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Rebs+Asts,demon,122,71.78,,,122
 10527811,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Pts+Rebs+Asts,pra,Demon,26.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Pts+Rebs+Asts,demon,55,68.63,,,55
@@ -2149,12 +1961,12 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527771,290562,micah robinson|TCU,Micah Robinson,micah robinson,TCU,KU,TCU,KU,F,Points,pts,Demon,16.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Points,demon,55,68.63,,,55
 10527786,276735,tre white|KU,Tre White,tre white,KU,TCU,KU,TCU,G,Points,pts,Demon,16.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Points,demon,122,71.78,,,122
 10527805,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Points,pts,Demon,16.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Points,demon,55,68.63,,,55
+10520455,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Pts+Asts,pa,Standard,15.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Asts,standard,122,71.78,,,122
 10520461,280064,jayden pierre|TCU,Jayden Pierre,jayden pierre,TCU,KU,TCU,KU,G,Pts+Rebs+Asts,pra,Standard,15.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Pts+Rebs+Asts,standard,55,68.63,,,55
 10527710,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Points,pts,Demon,15.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Points,demon,122,71.78,,,122
 10527750,277427,melvin council|KU,Melvin Council,melvin council,KU,TCU,KU,TCU,G,Points,pts,Demon,15.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Points,demon,122,71.78,,,122
 10517464,290562,micah robinson|TCU,Micah Robinson,micah robinson,TCU,KU,TCU,KU,F,Pts+Rebs,pr,Standard,14.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Pts+Rebs,standard,55,68.63,,,55
 10517467,276735,tre white|KU,Tre White,tre white,KU,TCU,KU,TCU,G,Pts+Asts,pa,Standard,14.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Asts,standard,122,71.78,,,122
-10520455,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Pts+Asts,pa,Standard,14.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Pts+Asts,standard,122,71.78,,,122
 10520479,276735,tre white|KU,Tre White,tre white,KU,TCU,KU,TCU,G,Points,pts,Standard,14.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Points,standard,122,71.78,,,122
 10520486,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Pts+Asts,pa,Standard,14.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Pts+Asts,standard,55,68.63,,,55
 10527731,280064,jayden pierre|TCU,Jayden Pierre,jayden pierre,TCU,KU,TCU,KU,G,Points,pts,Demon,14.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Points,demon,55,68.63,,,55
@@ -2179,6 +1991,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10520474,290562,micah robinson|TCU,Micah Robinson,micah robinson,TCU,KU,TCU,KU,F,Pts+Asts,pa,Standard,11.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Pts+Asts,standard,55,68.63,,,55
 10527713,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Points,pts,Goblin,11.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Points,goblin,122,71.78,,,122
 10527718,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Rebounds,reb,Demon,11.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Rebounds,demon,122,71.78,,,122
+10527722,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Rebs+Asts,ra,Standard,11.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Rebs+Asts,standard,122,71.78,,,122
 10527814,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Rebounds,reb,Demon,11.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Rebounds,demon,55,68.63,,,55
 10534595,220667,david punch|TCU,David Punch,david punch,TCU,KU,TCU,KU,F,Points,pts,Goblin,11.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Points,goblin,55,68.63,,,55
 10534604,276735,tre white|KU,Tre White,tre white,KU,TCU,KU,TCU,G,Points,pts,Goblin,11.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Points,goblin,122,71.78,,,122
@@ -2190,6 +2003,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527789,276735,tre white|KU,Tre White,tre white,KU,TCU,KU,TCU,G,Points,pts,Goblin,10.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Points,goblin,122,71.78,,,122
 10527808,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Points,pts,Goblin,10.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Points,goblin,55,68.63,,,55
 10535026,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Points,pts,Goblin,10.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Points,goblin,122,71.78,,,122
+10542450,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Rebs+Asts,ra,Standard,10.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Rebs+Asts,standard,55,68.63,,,55
 10517455,226450,flory bidunga|KU,Flory Bidunga,flory bidunga,KU,TCU,KU,TCU,F,Rebounds,reb,Standard,9.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Rebounds,standard,122,71.78,,,122
 10520460,280064,jayden pierre|TCU,Jayden Pierre,jayden pierre,TCU,KU,TCU,KU,G,Points,pts,Standard,9.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Points,standard,55,68.63,,,55
 10527701,220667,david punch|TCU,David Punch,david punch,TCU,KU,TCU,KU,F,Rebounds,reb,Demon,9.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Rebounds,demon,55,68.63,,,55
@@ -2296,6 +2110,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10520473,290562,micah robinson|TCU,Micah Robinson,micah robinson,TCU,KU,TCU,KU,F,Assists,ast,Demon,1.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Assists,demon,55,68.63,,,55
 10520482,276735,tre white|KU,Tre White,tre white,KU,TCU,KU,TCU,G,Turnovers,tov,Standard,1.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Turnovers,standard,122,71.78,,,122
 10520484,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Assists,ast,Demon,1.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Assists,demon,55,68.63,,,55
+10520490,280069,xavier edmonds|TCU,Xavier Edmonds,xavier edmonds,TCU,KU,TCU,KU,F,Turnovers,tov,Goblin,1.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Turnovers,goblin,55,68.63,,,55
 10521689,276687,darryn peterson|KU,Darryn Peterson,darryn peterson,KU,TCU,KU,TCU,G,Steals,stl,Demon,1.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,Steals,demon,122,71.78,,,122
 10521690,276735,tre white|KU,Tre White,tre white,KU,TCU,KU,TCU,G,3-PT Made,3pm,Goblin,1.5,2026-03-12T21:30:00.000-04:00,143525,20,KU,3-PT Made,goblin,122,71.78,,,122
 10526190,220667,david punch|TCU,David Punch,david punch,TCU,KU,TCU,KU,F,Assists,ast,Goblin,1.5,2026-03-12T21:30:00.000-04:00,143525,20,TCU,Assists,goblin,55,68.63,,,55
@@ -2340,6 +2155,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527570,274119,duke brennan|VILL,Duke Brennan,duke brennan,VILL,GTWN,VILL,GTWN,F,Pts+Rebs+Asts,pra,Demon,26.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Pts+Rebs+Asts,demon,156,73.11,,,156
 10527617,274121,tyler perkins|VILL,Tyler Perkins,tyler perkins,VILL,GTWN,VILL,GTWN,G,Pts+Rebs+Asts,pra,Demon,26.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Pts+Rebs+Asts,demon,156,73.11,,,156
 10527527,274118,acaden lewis|VILL,Acaden Lewis,acaden lewis,VILL,GTWN,VILL,GTWN,G,Pts+Rebs+Asts,pra,Demon,25.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Pts+Rebs+Asts,demon,156,73.11,,,156
+10527572,274119,duke brennan|VILL,Duke Brennan,duke brennan,VILL,GTWN,VILL,GTWN,F,Pts+Rebs+Asts,pra,Standard,25.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Pts+Rebs+Asts,standard,156,73.11,,,156
 10526379,274121,tyler perkins|VILL,Tyler Perkins,tyler perkins,VILL,GTWN,VILL,GTWN,G,Pts+Rebs+Asts,pra,Standard,24.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Pts+Rebs+Asts,standard,156,73.11,,,156
 10527528,274118,acaden lewis|VILL,Acaden Lewis,acaden lewis,VILL,GTWN,VILL,GTWN,G,Pts+Rebs+Asts,pra,Demon,24.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Pts+Rebs+Asts,demon,156,73.11,,,156
 10526349,274119,duke brennan|VILL,Duke Brennan,duke brennan,VILL,GTWN,VILL,GTWN,F,Pts+Rebs,pr,Standard,23.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Pts+Rebs,standard,156,73.11,,,156
@@ -2378,8 +2194,8 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10527614,274121,tyler perkins|VILL,Tyler Perkins,tyler perkins,VILL,GTWN,VILL,GTWN,G,Points,pts,Goblin,14.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Points,goblin,156,73.11,,,156
 10533032,306048,jeremiah williams|GTWN,Jeremiah Williams,jeremiah williams,GTWN,VILL,GTWN,VILL,G,Points,pts,Demon,14.5,2026-03-12T21:30:00.000-04:00,143497,20,GTWN,Points,demon,77,70.0,,,77
 10527564,274119,duke brennan|VILL,Duke Brennan,duke brennan,VILL,GTWN,VILL,GTWN,F,Points,pts,Demon,13.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Points,demon,156,73.11,,,156
-10527568,274119,duke brennan|VILL,Duke Brennan,duke brennan,VILL,GTWN,VILL,GTWN,F,Pts+Asts,pa,Standard,13.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Pts+Asts,standard,156,73.11,,,156
 10532479,274119,duke brennan|VILL,Duke Brennan,duke brennan,VILL,GTWN,VILL,GTWN,F,Rebounds,reb,Demon,13.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Rebounds,demon,156,73.11,,,156
+10532483,274119,duke brennan|VILL,Duke Brennan,duke brennan,VILL,GTWN,VILL,GTWN,F,Rebs+Asts,ra,Standard,13.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Rebs+Asts,standard,156,73.11,,,156
 10534239,274121,tyler perkins|VILL,Tyler Perkins,tyler perkins,VILL,GTWN,VILL,GTWN,G,Points,pts,Goblin,13.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Points,goblin,156,73.11,,,156
 10526337,274118,acaden lewis|VILL,Acaden Lewis,acaden lewis,VILL,GTWN,VILL,GTWN,G,Points,pts,Standard,12.5,2026-03-12T21:30:00.000-04:00,143497,20,VILL,Points,standard,156,73.11,,,156
 10527552,224625,caleb williams|GTWN,Caleb Williams,caleb williams,GTWN,VILL,GTWN,VILL,F,Pts+Rebs+Asts,pra,Goblin,12.5,2026-03-12T21:30:00.000-04:00,143497,20,GTWN,Pts+Rebs+Asts,goblin,77,70.0,,,77
@@ -2673,12 +2489,12 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10532166,278080,xzayvier brown|OKLA,Xzayvier Brown,xzayvier brown,OKLA,TXAM,OKLA,TXAM,G,Points,pts,Standard,15.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Points,standard,297,78.22,,,297
 10533502,292374,pop isaacs|TXAM,Pop Isaacs,pop isaacs,TXAM,OKLA,TXAM,OKLA,G,Points,pts,Demon,15.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Points,demon,,,,,
 10533506,292374,pop isaacs|TXAM,Pop Isaacs,pop isaacs,TXAM,OKLA,TXAM,OKLA,G,Pts+Rebs,pr,Standard,15.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Pts+Rebs,standard,,,,,
+10533556,291741,rylan griffen|TXAM,Rylan Griffen,rylan griffen,TXAM,OKLA,TXAM,OKLA,G,Pts+Asts,pa,Standard,15.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Pts+Asts,standard,,,,,
 10534269,276513,rashaun agee|TXAM,Rashaun Agee,rashaun agee,TXAM,OKLA,TXAM,OKLA,F,Points,pts,Standard,15.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Points,standard,,,,,
 10532118,278077,nijel pack|OKLA,Nijel Pack,nijel pack,OKLA,TXAM,OKLA,TXAM,G,Points,pts,Goblin,14.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Points,goblin,297,78.22,,,297
 10532137,278078,tae davis|OKLA,Tae Davis,tae davis,OKLA,TXAM,OKLA,TXAM,F,Points,pts,Demon,14.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Points,demon,297,78.22,,,297
 10533505,292374,pop isaacs|TXAM,Pop Isaacs,pop isaacs,TXAM,OKLA,TXAM,OKLA,G,Pts+Asts,pa,Standard,14.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Pts+Asts,standard,,,,,
 10533554,291741,rylan griffen|TXAM,Rylan Griffen,rylan griffen,TXAM,OKLA,TXAM,OKLA,G,Points,pts,Demon,14.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Points,demon,,,,,
-10533556,291741,rylan griffen|TXAM,Rylan Griffen,rylan griffen,TXAM,OKLA,TXAM,OKLA,G,Pts+Asts,pa,Standard,14.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Pts+Asts,standard,,,,,
 10534251,306868,jadon jones|OKLA,Jadon Jones,jadon jones,OKLA,TXAM,OKLA,TXAM,G,Pts+Rebs+Asts,pra,Demon,14.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Pts+Rebs+Asts,demon,297,78.22,,,297
 10534267,289923,marcus hill|TXAM,Marcus Hill,marcus hill,TXAM,OKLA,TXAM,OKLA,G,Pts+Rebs,pr,Standard,14.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Pts+Rebs,standard,,,,,
 10536507,289923,marcus hill|TXAM,Marcus Hill,marcus hill,TXAM,OKLA,TXAM,OKLA,G,Points,pts,Demon,14.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Points,demon,,,,,
@@ -2733,6 +2549,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10533516,292374,pop isaacs|TXAM,Pop Isaacs,pop isaacs,TXAM,OKLA,TXAM,OKLA,G,Rebs+Asts,ra,Demon,7.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Rebs+Asts,demon,,,,,
 10533539,276513,rashaun agee|TXAM,Rashaun Agee,rashaun agee,TXAM,OKLA,TXAM,OKLA,F,Rebounds,reb,Goblin,7.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Rebounds,goblin,,,,,
 10534247,306868,jadon jones|OKLA,Jadon Jones,jadon jones,OKLA,TXAM,OKLA,TXAM,G,Points,pts,Demon,7.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Points,demon,297,78.22,,,297
+10534249,306868,jadon jones|OKLA,Jadon Jones,jadon jones,OKLA,TXAM,OKLA,TXAM,G,Pts+Asts,pa,Standard,7.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Pts+Asts,standard,297,78.22,,,297
 10534258,306868,jadon jones|OKLA,Jadon Jones,jadon jones,OKLA,TXAM,OKLA,TXAM,G,Rebounds,reb,Demon,7.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Rebounds,demon,297,78.22,,,297
 10534282,305165,zach clemence|TXAM,Zach Clemence,zach clemence,TXAM,OKLA,TXAM,OKLA,F,Rebounds,reb,Demon,7.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Rebounds,demon,,,,,
 10536515,305165,zach clemence|TXAM,Zach Clemence,zach clemence,TXAM,OKLA,TXAM,OKLA,F,Points,pts,Goblin,7.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Points,goblin,,,,,
@@ -2745,7 +2562,6 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10532149,278078,tae davis|OKLA,Tae Davis,tae davis,OKLA,TXAM,OKLA,TXAM,F,Rebounds,reb,Demon,6.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Rebounds,demon,297,78.22,,,297
 10533515,292374,pop isaacs|TXAM,Pop Isaacs,pop isaacs,TXAM,OKLA,TXAM,OKLA,G,Rebounds,reb,Demon,6.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Rebounds,demon,,,,,
 10533567,291741,rylan griffen|TXAM,Rylan Griffen,rylan griffen,TXAM,OKLA,TXAM,OKLA,G,Rebounds,reb,Demon,6.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Rebounds,demon,,,,,
-10534249,306868,jadon jones|OKLA,Jadon Jones,jadon jones,OKLA,TXAM,OKLA,TXAM,G,Pts+Asts,pa,Standard,6.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Pts+Asts,standard,297,78.22,,,297
 10534256,306868,jadon jones|OKLA,Jadon Jones,jadon jones,OKLA,TXAM,OKLA,TXAM,G,Rebounds,reb,Demon,6.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Rebounds,demon,297,78.22,,,297
 10534280,305165,zach clemence|TXAM,Zach Clemence,zach clemence,TXAM,OKLA,TXAM,OKLA,F,Rebounds,reb,Demon,6.5,2026-03-12T21:30:00.000-04:00,143527,20,TXAM,Rebounds,demon,,,,,
 10536505,306868,jadon jones|OKLA,Jadon Jones,jadon jones,OKLA,TXAM,OKLA,TXAM,G,Points,pts,Standard,6.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Points,standard,297,78.22,,,297
@@ -2803,6 +2619,7 @@ proj_id,player_id,cbb_player_key,player,player_norm,team_abbr,opp_team_abbr,pp_t
 10532083,278076,mohamed wague|OKLA,Mohamed Wague,mohamed wague,OKLA,TXAM,OKLA,TXAM,F-C,Blocked Shots,blk,Demon,2.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Blocked Shots,demon,297,78.22,,,297
 10532107,278077,nijel pack|OKLA,Nijel Pack,nijel pack,OKLA,TXAM,OKLA,TXAM,G,3-PT Made,3pm,Goblin,2.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,3-PT Made,goblin,297,78.22,,,297
 10532113,278077,nijel pack|OKLA,Nijel Pack,nijel pack,OKLA,TXAM,OKLA,TXAM,G,Assists,ast,Goblin,2.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Assists,goblin,297,78.22,,,297
+10532128,278077,nijel pack|OKLA,Nijel Pack,nijel pack,OKLA,TXAM,OKLA,TXAM,G,Rebounds,reb,Goblin,2.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Rebounds,goblin,297,78.22,,,297
 10532132,278077,nijel pack|OKLA,Nijel Pack,nijel pack,OKLA,TXAM,OKLA,TXAM,G,Turnovers,tov,Demon,2.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Turnovers,demon,297,78.22,,,297
 10532133,278078,tae davis|OKLA,Tae Davis,tae davis,OKLA,TXAM,OKLA,TXAM,F,Assists,ast,Demon,2.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Assists,demon,297,78.22,,,297
 10532156,278078,tae davis|OKLA,Tae Davis,tae davis,OKLA,TXAM,OKLA,TXAM,F,Turnovers,tov,Demon,2.5,2026-03-12T21:30:00.000-04:00,143527,20,OKLA,Turnovers,demon,297,78.22,,,297
