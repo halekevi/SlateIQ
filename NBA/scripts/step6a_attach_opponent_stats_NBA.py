@@ -355,20 +355,19 @@ Examples:
         cache = pd.read_csv(args.cache, encoding="utf-8", low_memory=False)
     except FileNotFoundError:
         print(f"⚠️  Cache not found. Filling with NaN.")
-        # Just add empty columns and return
         for col in OPP_COLS:
             df[col] = np.nan
         df.to_csv(args.output, index=False, encoding="utf-8-sig")
         print(f"✅ {args.output} (without opponent stats)")
-        sys.exit(0)
-    
+        return
+
     if len(cache) == 0:
         print(f"⚠️  Cache is empty. Filling with NaN.")
         for col in OPP_COLS:
             df[col] = np.nan
         df.to_csv(args.output, index=False, encoding="utf-8-sig")
         print(f"✅ {args.output} (without opponent stats)")
-        sys.exit(0)
+        return
     
     print(f"  Rows: {len(cache)}")
     

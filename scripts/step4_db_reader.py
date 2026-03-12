@@ -303,9 +303,15 @@ def get_avg_passes_soccer(con: sqlite3.Connection, espn_player_id: str,
 
 
 def get_avg_minutes_nba(con: sqlite3.Connection, espn_id: str,
-                         n: int = 5, table: str = "nba") -> Optional[float]:
+                         n: int = 5, table: str = "nba",
+                         player_name: str = "") -> Optional[float]:
     vals = _query_vals(con, table, "ESPN_ATHLETE_ID = ?",
                        "minutes", (str(espn_id),), n)
+    # Fallback: name-based lookup (when slate passes nba_player_id instead of ESPN ID)
+    if not vals and player_name:
+        norm = player_name.strip().lower()
+        vals = _query_vals(con, table, "lower(player) = ?",
+                           "minutes", (norm,), n)
     return float(np.mean(vals)) if vals else None
 
 
@@ -486,7 +492,8 @@ def attach_stats(
 
         # ── Sport-specific context columns ─────────────────────────────────
         if sport in ("nba", "cbb") and not is_combo:
-            min_avg = get_avg_minutes_nba(con, raw_id, n=5, table=sport)
+            player_name = str(row.get("player", "")).strip()
+            min_avg = get_avg_minutes_nba(con, raw_id, n=5, table=sport, player_name=player_name)
             if min_avg is not None:
                 slate.at[idx, "min_last5_avg"] = fmt_num(min_avg)
 

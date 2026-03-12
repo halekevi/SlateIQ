@@ -132,21 +132,43 @@ def get_last_game_vs_opponent(
 def main():
     parser = argparse.ArgumentParser(description="Attach last game vs opponent stats")
     parser.add_argument("--input", required=True)
-    parser.add_argument("--cache", required=True)
+    parser.add_argument("--cache", default="", help="ESPN boxscore cache CSV (optional — fills NaN if missing)")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
-    
+
+    H2H_COLS = ["h2h_last_stat", "h2h_last_date", "h2h_games_vs_opp", "h2h_avg", "h2h_over_rate"]
+
     print("╔════════════════════════════════════════════════════════════════════════════╗")
     print("║        SlateIQ-NBA-S6d: Last Game vs Opponent (Opponent Normalized)        ║")
     print("╚════════════════════════════════════════════════════════════════════════════╝")
     print()
-    
+
     print(f"[S6d] Loading: {args.input}")
     df = pd.read_csv(args.input, dtype={'nba_player_id': str}, low_memory=False)
     print(f"  {len(df)} rows")
-    
-    print(f"[S6d] Loading: {args.cache}")
-    cache = pd.read_csv(args.cache, dtype={'ESPN_ATHLETE_ID': str}, low_memory=False)
+
+    # ── Load cache (graceful fallback if missing or empty) ─────────────────────
+    cache = None
+    if args.cache:
+        try:
+            cache = pd.read_csv(args.cache, dtype={'ESPN_ATHLETE_ID': str}, low_memory=False)
+            print(f"[S6d] Loading cache: {args.cache}  ({len(cache)} rows)")
+            if len(cache) == 0:
+                print("  ⚠️  Cache is empty — filling H2H columns with NaN")
+                cache = None
+        except FileNotFoundError:
+            print(f"  ⚠️  Cache not found: {args.cache} — filling H2H columns with NaN")
+            cache = None
+    else:
+        print("  ⚠️  No --cache supplied — filling H2H columns with NaN")
+
+    if cache is None:
+        for col in H2H_COLS:
+            df[col] = np.nan
+        df.to_csv(args.output, index=False)
+        print(f"[S6d] ✅ Saved (without H2H stats) → {args.output}")
+        return
+
     print(f"  {len(cache)} rows")
     
     print("[S6d] Building opponent lookup with normalized teams...")

@@ -68,6 +68,25 @@ def main():
         else:
             raise SystemExit(f"No ID column found. Columns: {list(slate.columns)}")
 
+    # ── Bridge nba_player_id → ESPN_ATHLETE_ID via DB ─────────────────────────
+    # The DB nba table stores espn_athlete_id per row. Build a name→espn_id map
+    # so attach_stats uses ESPN IDs (primary key) instead of nba_player_ids.
+    if id_col == "nba_player_id" and "ESPN_ATHLETE_ID" not in slate.columns:
+        print("→ Building ESPN ID bridge from DB (player name lookup)...")
+        rows = con.execute(
+            "SELECT player, espn_athlete_id FROM nba "
+            "WHERE espn_athlete_id IS NOT NULL "
+            "GROUP BY player, espn_athlete_id"
+        ).fetchall()
+        name_to_espn = {r[0].strip().lower(): r[1] for r in rows if r[0] and r[1]}
+
+        slate["ESPN_ATHLETE_ID"] = slate["player"].str.strip().str.lower().map(
+            lambda n: name_to_espn.get(n, "")
+        )
+        bridged = (slate["ESPN_ATHLETE_ID"] != "").sum()
+        print(f"  Bridged {bridged}/{len(slate)} rows to ESPN IDs")
+        id_col = "ESPN_ATHLETE_ID"
+
     print(f"\n→ Attaching NBA stats from DB (id_col={id_col}, n={args.n})...")
     slate, counts = attach_stats(slate, "nba", con, id_col=id_col, n=args.n)
 

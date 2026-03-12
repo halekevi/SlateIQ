@@ -494,7 +494,13 @@ def _parse_bball_boxscore(box: dict, event_id: str, game_date: str,
                     try:
                         sm[label] = float(val)
                     except (ValueError, TypeError):
-                        pass
+                        # Handle MM:SS format (ESPN minutes like "32:45")
+                        if label == "MIN" and isinstance(val, str) and ":" in val:
+                            try:
+                                parts = val.strip().split(":")
+                                sm[label] = int(parts[0]) + int(parts[1]) / 60.0
+                            except Exception:
+                                pass
 
                 # Parse made-attempt fields
                 for src_keys, made_key, att_key in [
