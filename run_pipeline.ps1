@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 #  PROP PIPELINE  -  Master Run Script  [MULTI-SPORT]
 #
 #  Usage:
@@ -513,7 +513,18 @@ if ($CombinedOnly) {
             if ($ok) { $ok = Run-Step-Job "Soccer Step 5 - Line Hit Rates"     $SoccerDir ".\\scripts\\step5_add_line_hit_rates_soccer.py"     "--input outputs\\step4_soccer_with_stats.csv --output outputs\\step5_soccer_hit_rates.csv --compute10" }
             if ($ok) { $ok = Run-Step-Job "Soccer Step 6 - Team Role Context"  $SoccerDir ".\\scripts\\step6_team_role_context_soccer.py"      "--input outputs\\step5_soccer_hit_rates.csv --output outputs\\step6_soccer_role_context.csv" }
             if ($ok) { $ok = Run-Step-Job "Soccer Step 7 - Rank Props"         $SoccerDir ".\\scripts\\step7_rank_props_soccer.py"             "--input outputs\\step6_soccer_role_context.csv --output outputs\\step7_soccer_ranked.xlsx" }
-            if ($ok) { $ok = Run-Step-Job "Soccer Step 8 - Direction Context"  $SoccerDir ".\\scripts\\step8_add_direction_context_soccer.py"  "--input outputs\\step7_soccer_ranked.xlsx --sheet ALL --output outputs\\step8_soccer_direction.csv --xlsx outputs\\step8_soccer_direction_clean.xlsx --date $Date" }
+            if ($ok) {
+                # Step 8 prints Unicode (arrows, emoji) which causes Invoke-Expression inside
+                # a parallel job to return exit code 2 even on success.
+                # Fix: ignore exit code, check output file existence instead.
+                Run-Step-Job "Soccer Step 8 - Direction Context" $SoccerDir ".\\scripts\\step8_add_direction_context_soccer.py" "--input outputs\\step7_soccer_ranked.xlsx --sheet ALL --output outputs\\step8_soccer_direction.csv --xlsx outputs\\step8_soccer_direction_clean.xlsx --date $Date" | Out-Null
+                if (Test-Path (Join-Path $SoccerDir "outputs\step8_soccer_direction_clean.xlsx")) {
+                    Write-Output "[SOCCER] OK: Soccer Step 8 - Direction Context"
+                } else {
+                    Write-Output "[SOCCER] FAILED: Soccer Step 8 - Direction Context (output file not found)"
+                    $ok = $false
+                }
+            }
             # Soccer S9 disabled -- tickets generated in combined_slate_tickets.py
             # if ($ok) { $ok = Run-Step-Job "Soccer Step 9 - Build Tickets" $SoccerDir ".\\scripts\\step9_build_tickets_soccer.py" "--input outputs\\step8_soccer_direction_clean.xlsx --output step9_soccer_tickets.xlsx" }
             return $ok

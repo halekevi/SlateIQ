@@ -365,7 +365,7 @@
 10463738,10463738,253945,139762,SOCCER,2026-03-12T13:45:00.000-04:00,Wesley,https://static.prizepicks.com/images/manual/Wesley_Vinícius_França_Lima.png,Defender,ROMA,,,,Shots,0.5,Goblin
 10472370,10472370,207203,139762,SOCCER,2026-03-12T13:45:00.000-04:00,Juan Miranda,https://static.prizepicks.com/images/players/soccer/emvmn561wgd62zj0s3qi5j5rd.webp,Defender,BOLOGNA,,,,Assists,0.5,Demon
 10505475,10505475,176407,139762,SOCCER,2026-03-12T13:45:00.000-04:00,Mile Svilar,https://static.prizepicks.com/images/players/soccer/el58uxf7oaqu95yx1vbgmr7it.webp,Goalkeeper,ROMA,,,,Goals Allowed,0.5,Goblin
-10511146,10511146,264129,139767,SOCCER,2026-03-12T13:45:00.000-04:00,Jakub Kiwior,https://static.prizepicks.com/images/players/soccer/8585juruxxi6z8ih6kfqvrj6x.webp,Defender,PORTO,,,,Passes Attempted,64.5,Standard
+10511146,10511146,264129,139767,SOCCER,2026-03-12T13:45:00.000-04:00,Jakub Kiwior,https://static.prizepicks.com/images/players/soccer/8585juruxxi6z8ih6kfqvrj6x.webp,Defender,PORTO,,,,Passes Attempted,60.5,Standard
 10436352,10436352,170576,139767,SOCCER,2026-03-12T13:45:00.000-04:00,Deniz Undav,https://static.prizepicks.com/images/players/soccer/6rutvrgco8li4nyz7tfayxb6x.webp,Attacker,STUTTGART,,,,Shots,5.5,Demon
 10510869,10510869,209961,139767,SOCCER,2026-03-12T13:45:00.000-04:00,Jeff Chabot,https://static.prizepicks.com/images/players/soccer/mgwgcv336wb93xvv0pfr6dih.webp,Defender,STUTTGART,,,,Clearances,5.5,Standard
 10510870,10510870,264130,139767,SOCCER,2026-03-12T13:45:00.000-04:00,Jan Bednarek,https://static.prizepicks.com/images/manual/Jan Kacper Bednarek.webp,Defender,PORTO,,,,Clearances,5.5,Standard
@@ -1800,8 +1800,44 @@
 10475654,10475654,149769,139784,SOCCER,2026-03-12T16:00:00.000-04:00,Rolando Mandragora,https://static.prizepicks.com/images/players/soccer/dpnp9rguhhs04of6vmlw5spg5.webp,Midfielder,FIORENTINA,,,,Fouls,0.5,Goblin
 10478628,10478628,291662,139784,SOCCER,2026-03-12T16:00:00.000-04:00,Marco Brescianini,https://static.prizepicks.com/images/players/placeholder.png,Midfielder,FIORENTINA,,,,Shots On Target,0.5,Goblin
 10487609,10487609,230763,139784,SOCCER,2026-03-12T16:00:00.000-04:00,Nicolò Fagioli,https://static.prizepicks.com/images/players/soccer/418gw0hpjoy8dt0ywaxjgm5pm.webp,Midfielder,FIORENTINA,,,,Shots,0.5,Goblin
+10442079,10442079,249150,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Juan Gutiérrez,https://static.prizepicks.com/images/manual/Juan_Manuel_Gutiérrez_Freire.png,Attacker,DEF Y JUSTICIA,,,,Shots,4.5,Demon
+10442047,10442047,205391,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Aarón Molinas,https://static.prizepicks.com/images/manual/Aarón Molinas .png,Midfielder,DEF Y JUSTICIA,,,,Shots,3.5,Demon
+10442050,10442050,275767,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Agustín Hausch,https://static.prizepicks.com/images/manual/Agustín Hausch.png,Attacker,DEF Y JUSTICIA,,,,Shots,3.5,Demon
+10442073,10442073,297599,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Facundo Altamira,,Attacker,DEF Y JUSTICIA,,,,Shots,3.5,Demon
+10442078,10442078,249150,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Juan Gutiérrez,https://static.prizepicks.com/images/manual/Juan_Manuel_Gutiérrez_Freire.png,Attacker,DEF Y JUSTICIA,,,,Shots,3.5,Demon
+10442091,10442091,247803,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Mateo Aguiar,https://static.prizepicks.com/images/manual/Mateo Adrián Aguiar .webp,Midfielder,DEF Y JUSTICIA,,,,Shots,3.5,Demon
+10442046,10442046,205391,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Aarón Molinas,https://static.prizepicks.com/images/manual/Aarón Molinas .png,Midfielder,DEF Y JUSTICIA,,,,Shots,2.5,Demon
+10442051,10442051,275767,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Agustín Hausch,https://static.prizepicks.com/images/manual/Agustín Hausch.png,Attacker,DEF Y JUSTICIA,,,,Shots,2.5,Demon
+10442061,10442061,275820,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Diego Barrera,https://static.prizepicks.com/images/manual/Diego Barrera.png,Attacker,CÓRDOBA SDE,,,,Shots,2.5,Demon
+10442069,10442069,295043,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Ezequiel Naya,,Attacker,CÓRDOBA SDE,,,,Shots,2.5,Demon
+10442072,10442072,297599,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Facundo Altamira,,Attacker,DEF Y JUSTICIA,,,,Shots,2.5,Demon
+10442090,10442090,247803,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Mateo Aguiar,https://static.prizepicks.com/images/manual/Mateo Adrián Aguiar .webp,Midfielder,DEF Y JUSTICIA,,,,Shots,2.5,Demon
+10442094,10442094,247803,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Mateo Aguiar,https://static.prizepicks.com/images/manual/Mateo Adrián Aguiar .webp,Midfielder,DEF Y JUSTICIA,,,,Shots On Target,2.5,Demon
+10442100,10442100,275785,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Santiago Sosa,,Midfielder,DEF Y JUSTICIA,,,,Shots,2.5,Demon
+10481903,10481903,295043,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Ezequiel Naya,,Attacker,CÓRDOBA SDE,,,,Shots On Target,2.5,Demon
 10441236,10441236,247986,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Abiel Osorio,https://static.prizepicks.com/images/manual/Abiel Osorio .webp,Attacker,DEF Y JUSTICIA,,,,Shots On Target,1.5,Demon
 10441263,10441263,295043,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Ezequiel Naya,,Attacker,CÓRDOBA SDE,,,,Shots On Target,1.5,Demon
+10442045,10442045,205391,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Aarón Molinas,https://static.prizepicks.com/images/manual/Aarón Molinas .png,Midfielder,DEF Y JUSTICIA,,,,Shots,1.5,Goblin
+10442048,10442048,205391,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Aarón Molinas,https://static.prizepicks.com/images/manual/Aarón Molinas .png,Midfielder,DEF Y JUSTICIA,,,,Shots On Target,1.5,Demon
+10442049,10442049,275767,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Agustín Hausch,https://static.prizepicks.com/images/manual/Agustín Hausch.png,Attacker,DEF Y JUSTICIA,,,,Shots,1.5,Goblin
+10442052,10442052,275767,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Agustín Hausch,https://static.prizepicks.com/images/manual/Agustín Hausch.png,Attacker,DEF Y JUSTICIA,,,,Shots On Target,1.5,Demon
+10442055,10442055,275816,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Santiago Moyano,https://static.prizepicks.com/images/manual/Santiago Moyano.png,Defender,CÓRDOBA SDE,,,,Shots,1.5,Demon
+10442058,10442058,251967,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Damián Fernández,https://static.prizepicks.com/images/manual/Damián Fernández.png,Defender,DEF Y JUSTICIA,,,,Shots,1.5,Demon
+10442062,10442062,275820,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Diego Barrera,https://static.prizepicks.com/images/manual/Diego Barrera.png,Attacker,CÓRDOBA SDE,,,,Shots,1.5,Demon
+10442063,10442063,275820,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Diego Barrera,https://static.prizepicks.com/images/manual/Diego Barrera.png,Attacker,CÓRDOBA SDE,,,,Shots On Target,1.5,Demon
+10442065,10442065,296611,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Emiliano Amor,,Defender,DEF Y JUSTICIA,,,,Shots,1.5,Demon
+10442066,10442066,296611,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Emiliano Amor,,Defender,DEF Y JUSTICIA,,,,Shots On Target,1.5,Demon
+10442068,10442068,295043,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Ezequiel Naya,,Attacker,CÓRDOBA SDE,,,,Shots,1.5,Demon
+10442071,10442071,297599,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Facundo Altamira,,Attacker,DEF Y JUSTICIA,,,,Shots,1.5,Goblin
+10442074,10442074,297599,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Facundo Altamira,,Attacker,DEF Y JUSTICIA,,,,Shots On Target,1.5,Demon
+10442075,10442075,275824,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Fernando Martínez,https://static.prizepicks.com/images/manual/Fernando Martínez.png,Defender,CÓRDOBA SDE,,,,Shots,1.5,Demon
+10442077,10442077,249150,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Juan Gutiérrez,https://static.prizepicks.com/images/manual/Juan_Manuel_Gutiérrez_Freire.png,Attacker,DEF Y JUSTICIA,,,,Shots,1.5,Goblin
+10442081,10442081,249150,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Juan Gutiérrez,https://static.prizepicks.com/images/manual/Juan_Manuel_Gutiérrez_Freire.png,Attacker,DEF Y JUSTICIA,,,,Shots On Target,1.5,Demon
+10442085,10442085,275835,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Leonardo Marchi,https://static.prizepicks.com/images/manual/Leonardo Marchi.png,Defender,CÓRDOBA SDE,,,,Shots,1.5,Demon
+10442087,10442087,275776,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Lucas Souto,,Defender,DEF Y JUSTICIA,,,,Shots,1.5,Demon
+10442093,10442093,247803,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Mateo Aguiar,https://static.prizepicks.com/images/manual/Mateo Adrián Aguiar .webp,Midfielder,DEF Y JUSTICIA,,,,Shots On Target,1.5,Demon
+10442096,10442096,246057,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Matías Vera,https://static.prizepicks.com/images/manual/Matías Gabriel Vera.png,Midfielder,CÓRDOBA SDE,,,,Shots,1.5,Demon
+10442099,10442099,275785,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Santiago Sosa,,Midfielder,DEF Y JUSTICIA,,,,Shots,1.5,Demon
 10441229,10441229,205391,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Aarón Molinas,https://static.prizepicks.com/images/manual/Aarón Molinas .png,Midfielder,DEF Y JUSTICIA,,,,Assists,0.5,Demon
 10441230,10441230,205391,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Aarón Molinas,https://static.prizepicks.com/images/manual/Aarón Molinas .png,Midfielder,DEF Y JUSTICIA,,,,Goal + Assist,0.5,Demon
 10441231,10441231,205391,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Aarón Molinas,https://static.prizepicks.com/images/manual/Aarón Molinas .png,Midfielder,DEF Y JUSTICIA,,,,Goals,0.5,Demon
@@ -1867,11 +1903,33 @@
 10441295,10441295,295206,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Éver Banega,,Midfielder,DEF Y JUSTICIA,,,,Goal + Assist,0.5,Demon
 10441296,10441296,295206,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Éver Banega,,Midfielder,DEF Y JUSTICIA,,,,Goals,0.5,Demon
 10441297,10441297,295206,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Éver Banega,,Midfielder,DEF Y JUSTICIA,,,,Shots On Target,0.5,Demon
+10442053,10442053,296871,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Alejandro Maciel,,Defender,CÓRDOBA SDE,,,,Shots,0.5,Demon
+10442054,10442054,275816,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Santiago Moyano,https://static.prizepicks.com/images/manual/Santiago Moyano.png,Defender,CÓRDOBA SDE,,,,Shots,0.5,Demon
+10442056,10442056,275816,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Santiago Moyano,https://static.prizepicks.com/images/manual/Santiago Moyano.png,Defender,CÓRDOBA SDE,,,,Shots On Target,0.5,Demon
+10442057,10442057,251967,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Damián Fernández,https://static.prizepicks.com/images/manual/Damián Fernández.png,Defender,DEF Y JUSTICIA,,,,Shots,0.5,Demon
+10442059,10442059,275820,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Diego Barrera,https://static.prizepicks.com/images/manual/Diego Barrera.png,Attacker,CÓRDOBA SDE,,,,Assists,0.5,Demon
+10442060,10442060,275820,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Diego Barrera,https://static.prizepicks.com/images/manual/Diego Barrera.png,Attacker,CÓRDOBA SDE,,,,Shots,0.5,Goblin
+10442064,10442064,296611,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Emiliano Amor,,Defender,DEF Y JUSTICIA,,,,Shots,0.5,Demon
 10442067,10442067,295043,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Ezequiel Naya,,Attacker,CÓRDOBA SDE,,,,Shots,0.5,Goblin
+10442076,10442076,249150,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Juan Gutiérrez,https://static.prizepicks.com/images/manual/Juan_Manuel_Gutiérrez_Freire.png,Attacker,DEF Y JUSTICIA,,,,Assists,0.5,Demon
+10442080,10442080,249150,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Juan Gutiérrez,https://static.prizepicks.com/images/manual/Juan_Manuel_Gutiérrez_Freire.png,Attacker,DEF Y JUSTICIA,,,,Shots On Target,0.5,Goblin
+10442082,10442082,275834,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Juan Pignani,https://static.prizepicks.com/images/manual/Juan Pignani.png,Defender,CÓRDOBA SDE,,,,Shots,0.5,Demon
+10442083,10442083,275835,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Leonardo Marchi,https://static.prizepicks.com/images/manual/Leonardo Marchi.png,Defender,CÓRDOBA SDE,,,,Assists,0.5,Demon
+10442084,10442084,275835,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Leonardo Marchi,https://static.prizepicks.com/images/manual/Leonardo Marchi.png,Defender,CÓRDOBA SDE,,,,Shots,0.5,Demon
+10442086,10442086,275776,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Lucas Souto,,Defender,DEF Y JUSTICIA,,,,Shots,0.5,Goblin
+10442088,10442088,275776,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Lucas Souto,,Defender,DEF Y JUSTICIA,,,,Shots On Target,0.5,Demon
+10442089,10442089,247803,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Mateo Aguiar,https://static.prizepicks.com/images/manual/Mateo Adrián Aguiar .webp,Midfielder,DEF Y JUSTICIA,,,,Assists,0.5,Demon
+10442092,10442092,247803,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Mateo Aguiar,https://static.prizepicks.com/images/manual/Mateo Adrián Aguiar .webp,Midfielder,DEF Y JUSTICIA,,,,Shots On Target,0.5,Goblin
+10442097,10442097,246057,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Matías Vera,https://static.prizepicks.com/images/manual/Matías Gabriel Vera.png,Midfielder,CÓRDOBA SDE,,,,Shots On Target,0.5,Demon
+10442098,10442098,275785,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Santiago Sosa,,Midfielder,DEF Y JUSTICIA,,,,Shots,0.5,Goblin
+10442101,10442101,275850,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Facundo Mansilla,,Defender,CÓRDOBA SDE,,,,Shots,0.5,Demon
+10442102,10442102,275850,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Facundo Mansilla,,Defender,CÓRDOBA SDE,,,,Shots On Target,0.5,Demon
 10458293,10458293,275820,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Diego Barrera,https://static.prizepicks.com/images/manual/Diego Barrera.png,Attacker,CÓRDOBA SDE,,,,Goals,0.5,Demon
 10458294,10458294,275785,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Santiago Sosa,,Midfielder,DEF Y JUSTICIA,,,,Goals,0.5,Demon
 10472184,10472184,249149,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Facundo Noguera,https://static.prizepicks.com/images/manual/Facundo_Máximo_Noguera.png,Attacker,DEF Y JUSTICIA,,,,Goals,0.5,Demon
 10472185,10472185,296621,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Bautista Gerez,,Attacker,CÓRDOBA SDE,,,,Goals,0.5,Demon
+10472696,10472696,296611,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Emiliano Amor,,Defender,DEF Y JUSTICIA,,,,Shots On Target,0.5,Demon
+10487613,10487613,247803,135160,SOCCER,2026-03-12T16:00:00.000-04:00,Mateo Aguiar,https://static.prizepicks.com/images/manual/Mateo Adrián Aguiar .webp,Midfielder,DEF Y JUSTICIA,,,,Shots,0.5,Goblin
 10465746,10465746,150493,139783,SOCCER,2026-03-12T16:00:00.000-04:00,Jean-Philippe Mateta,https://static.prizepicks.com/images/players/soccer/djgqihf08sxqh0zt2xe2xzv1l.webp,Attacker,CRYSTAL PALACE,,,,Shots,5.5,Demon
 10465750,10465750,298983,139783,SOCCER,2026-03-12T16:00:00.000-04:00,Jørgen Larsen,https://static.prizepicks.com/images/players/placeholder.png,Attacker,CRYSTAL PALACE,,,,Shots,5.5,Demon
 10465355,10465355,290152,139783,SOCCER,2026-03-12T16:00:00.000-04:00,Brennan Johnson,,Attacker,CRYSTAL PALACE,,,,Shots,4.5,Demon
@@ -2485,7 +2543,7 @@
 10485196,10485196,253795,139761,SOCCER,2026-03-12T16:00:00.000-04:00,Zakaria Ouahdi,https://static.prizepicks.com/images/players/soccer/cxs294yvxtp9qxbgosgdb7ris.webp,Defender,GENK,,,,Shots,0.5,Goblin
 10487646,10487646,256110,139761,SOCCER,2026-03-12T16:00:00.000-04:00,Adrian Palacios,https://static.prizepicks.com/images/players/soccer/lbmfn35gv1736jtzrc54df6c.webp,Defender,GENK,,,,Goal + Assist,0.5,Demon
 10508607,10508607,213021,139771,SOCCER,2026-03-12T16:00:00.000-04:00,Moussa Niakhaté,https://static.prizepicks.com/images/players/soccer/9rf5uk6c2wce30b9wkmu3iuad.webp,Defender,LYON,,,,Passes Attempted,80.5,Standard
-10508608,10508608,252465,139771,SOCCER,2026-03-12T16:00:00.000-04:00,Javi Rodríguez,https://static.prizepicks.com/images/players/soccer/79n0dyjagmleor1fpwl25qql0.webp,Defender,CELTA,,,,Passes Attempted,57.5,Standard
+10508608,10508608,252465,139771,SOCCER,2026-03-12T16:00:00.000-04:00,Javi Rodríguez,https://static.prizepicks.com/images/players/soccer/79n0dyjagmleor1fpwl25qql0.webp,Defender,CELTA,,,,Passes Attempted,60.5,Standard
 10507666,10507666,252454,139771,SOCCER,2026-03-12T16:00:00.000-04:00,Carl Starfelt,https://static.prizepicks.com/images/players/soccer/cksi669gcnskpytzh70a43it.webp,Defender,CELTA,,,,Clearances,5.5,Standard
 10441593,10441593,253148,139771,SOCCER,2026-03-12T16:00:00.000-04:00,Borja Iglesias,https://static.prizepicks.com/images/manual/Borja_Iglesias_Quintás.png,Attacker,CELTA,,,,Shots,4.5,Demon
 10441625,10441625,256611,139771,SOCCER,2026-03-12T16:00:00.000-04:00,Dominik Greif,https://static.prizepicks.com/images/players/soccer/4sz26vstr6b7b110eri7f42jt.webp,Goalkeeper,LYON,,,,Goalie Saves,4.5,Demon
@@ -4017,7 +4075,6 @@
 10446648,10446648,299944,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cuiabano,,Defender,VASCO,,,,Assists,0.5,Demon
 10456086,10456086,242159,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Lucas Evangelista,https://static.prizepicks.com/images/manual/Lucas_Evangelist.png,Midfielder,PALMEIRAS,,,,Shots,0.5,Goblin
 10456087,10456087,299944,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Cuiabano,,Defender,VASCO,,,,Goals,0.5,Demon
-10458089,10458089,204459,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Felipe Anderson,https://static.prizepicks.com/images/players/soccer/bj2ymzuyq3zxbfjs3xrt3ss7p.webp,Midfielder,PALMEIRAS,,,,Shots,0.5,Goblin
 10462452,10462452,241612,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Agustín Giay,https://static.prizepicks.com/images/manual/Agustín Giay.png,Defender,PALMEIRAS,,,,Shots,0.5,Demon
 10462661,10462661,203305,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Hugo Moura,https://static.prizepicks.com/images/manual/Hugo_Moura.png,Midfielder,VASCO,,,,Shots,0.5,Goblin
 10473721,10473721,239792,135162,SOCCER,2026-03-12T18:30:00.000-04:00,Tchê Tchê,https://static.prizepicks.com/images/manual/Tchê Tchê.png,Midfielder,VASCO,,,,Goals,0.5,Demon
@@ -4530,7 +4587,6 @@
 10484590,10484590,251100,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Max Cleworth,https://static.prizepicks.com/images/manual/Max George Cleworth.png,Defender,WREXHAM,,,,Shots,1.5,Demon
 10484595,10484595,253512,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Nathan Broadhead,https://static.prizepicks.com/images/manual/Nathan Paul Broadhead.png,Attacker,WREXHAM,,,,Shots,1.5,Goblin
 10484596,10484596,253512,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Nathan Broadhead,https://static.prizepicks.com/images/manual/Nathan Paul Broadhead.png,Attacker,WREXHAM,,,,Shots On Target,1.5,Demon
-10484599,10484599,251103,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Oliver Rathbone,https://static.prizepicks.com/images/manual/Oliver Michael Rathbone .png,Midfielder,WREXHAM,,,,Shots,1.5,Goblin
 10484600,10484600,251103,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Oliver Rathbone,https://static.prizepicks.com/images/manual/Oliver Michael Rathbone .png,Midfielder,WREXHAM,,,,Shots On Target,1.5,Demon
 10484602,10484602,251109,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Ryan Longman,https://static.prizepicks.com/images/manual/Ryan James Longman.png,Midfielder,WREXHAM,,,,Shots On Target,1.5,Demon
 10484605,10484605,251110,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Sam Smith,https://static.prizepicks.com/images/manual/Samuel Toby Smith.png,Attacker,WREXHAM,,,,Shots,1.5,Goblin
@@ -4766,7 +4822,6 @@
 10485852,10485852,298565,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Zak Vyner,,Defender,WREXHAM,,,,Assists,0.5,Demon
 10485853,10485853,298565,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Zak Vyner,,Defender,WREXHAM,,,,Fouls,0.5,Goblin
 10485855,10485855,251293,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Zan Vipotnik,https://static.prizepicks.com/images/manual/Žan Vipotnik.png,Attacker,SWANSEA,,,,Fouls,0.5,Goblin
-10485930,10485930,185783,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Josh Tymon,https://static.prizepicks.com/images/manual/Josh Tymon.png,Defender,SWANSEA,,,,Shots,0.5,Demon
 10485931,10485931,251096,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Lewis O'Brien,https://static.prizepicks.com/images/manual/Lewis John O'Brien.png,Midfielder,WREXHAM,,,,Shots On Target,0.5,Demon
 10485932,10485932,251109,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Ryan Longman,https://static.prizepicks.com/images/manual/Ryan James Longman.png,Midfielder,WREXHAM,,,,Shots,0.5,Goblin
 10486081,10486081,295961,135718,SOCCER,2026-03-13T16:00:00.000-04:00,Gustavo Nunes,,Attacker,SWANSEA,,,,Fouls,0.5,Goblin
