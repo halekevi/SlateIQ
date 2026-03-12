@@ -218,12 +218,15 @@ def main() -> None:
     out["bet_direction"] = bet_dir
 
     # ── ELIGIBILITY ───────────────────────────────────────────────────────────
-    miss        = line_num.isna() | proj.isna()
-    neg_forced  = forced.eq(1) & (_to_num(out["edge"]) < 0)
-    eligible    = (~miss & ~neg_forced).astype(int)
+    miss       = line_num.isna() | proj.isna()
+    # Goblin/Demon with negative edge: drop to audit sheet, exclude from scoring
+    neg_forced = forced.eq(1) & (_to_num(out["edge"]) < 0)
+    drop_mask  = neg_forced  # rows that go to DROPPED tab only
+
+    eligible    = (~miss & ~drop_mask).astype(int)
     void_reason = pd.Series("", index=out.index)
-    void_reason = void_reason.where(~miss,       "NO_PROJECTION_OR_LINE")
-    void_reason = void_reason.where(~neg_forced,  "FORCED_OVER_NEG_EDGE")
+    void_reason = void_reason.where(~miss,      "NO_PROJECTION_OR_LINE")
+    void_reason = void_reason.where(~drop_mask, "DROPPED_NEG_EDGE_GOBDEM")
     out["eligible"]    = eligible
     out["void_reason"] = void_reason
 
@@ -406,35 +409,59 @@ def main() -> None:
     )
     out.loc[~elig_mask, "tier"] = "D"
 
+    # Split here — after all scoring/tier columns are populated
+    dropped_df = out.loc[drop_mask].copy()
+    out_active = out.loc[~drop_mask].copy()
+
     # ── WRITE XLSX (with explicit UTF-8 handling) ──────────────────────────────
+    # Sheets:
+    #   ALL        — all active rows (neg-edge Gob/Dem excluded)
+    #   STANDARD   — Standard pick type only
+    #   GOB_DEM    — Goblin + Demon (positive-edge only)
+    #   ELIGIBLE   — active rows that passed scoring
+    #   DROPPED    — neg-edge Goblin/Demon, for hit/miss audit only
+
+    std_mask_active  = out_active["pick_type"].astype(str).str.strip().str.lower().str.contains("standard")
+    gobdem_mask      = ~std_mask_active
+    elig_mask_active = out_active["eligible"].eq(1)
+
+    def _safe_excel_write(writer, df, sheet_name):
+        if df.empty:
+            pd.DataFrame(columns=df.columns).to_excel(writer, sheet_name=sheet_name, index=False)
+        else:
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
+
     if HAS_XLSXWRITER:
         try:
-            with pd.ExcelWriter(args.output, engine="xlsxwriter", 
+            with pd.ExcelWriter(args.output, engine="xlsxwriter",
                                engine_kwargs={'options': {'strings_to_urls': False}}) as w:
-                out.to_excel(w, sheet_name="ALL", index=False)
-                out.loc[elig_mask].to_excel(w, sheet_name="ELIGIBLE", index=False)
+                _safe_excel_write(w, out_active,                        "ALL")
+                _safe_excel_write(w, out_active.loc[std_mask_active],   "STANDARD")
+                _safe_excel_write(w, out_active.loc[gobdem_mask],       "GOB_DEM")
+                _safe_excel_write(w, out_active.loc[elig_mask_active],  "ELIGIBLE")
+                _safe_excel_write(w, dropped_df,                        "DROPPED")
             print(f"✅ Saved → {args.output} (xlsxwriter, UTF-8 encoded)")
         except Exception as e:
-            print(f"⚠️  xlsxwriter failed: {e}")
-            _write_xlsx_openpyxl(args.output, out, elig_mask)
+            print(f"⚠️  xlsxwriter failed: {e}, falling back to openpyxl")
+            _write_xlsx_openpyxl(args.output, out_active, elig_mask_active)
     else:
-        _write_xlsx_openpyxl(args.output, out, elig_mask)
+        _write_xlsx_openpyxl(args.output, out_active, elig_mask_active)
 
     print(f"✅ Saved → {args.output}")
-    print(f"ALL rows      : {len(out)}")
-    std = pick_type_s.eq("Standard")
-    print(f"STANDARD rows : {int(std.sum())}")
-    print(f"GOB_DEM rows  : {int((~std).sum())}")
+    print(f"ALL rows (active) : {len(out_active)}")
+    print(f"STANDARD rows     : {int(std_mask_active.sum())}")
+    print(f"GOB_DEM rows      : {int(gobdem_mask.sum())}")
+    print(f"DROPPED rows      : {len(dropped_df)}  (neg-edge Gob/Dem, audit only)")
     print()
-    print("Tier counts (ALL):")
-    print(out["tier"].value_counts().to_string())
+    print("Tier counts (ALL active):")
+    print(out_active["tier"].value_counts().to_string())
     print()
-    print("Ineligible reason breakdown:")
-    vr = out.loc[~elig_mask, "void_reason"].value_counts()
+    print("Ineligible reason breakdown (active):")
+    vr = out_active.loc[~elig_mask_active, "void_reason"].value_counts()
     print(vr.to_string() if len(vr) else "(none)")
     print()
     print("Score percentiles (eligible):")
-    rs = _to_num(out.loc[elig_mask, "rank_score"])
+    rs = _to_num(out_active.loc[elig_mask_active, "rank_score"])
     print(rs.quantile([0.50, 0.70, 0.80, 0.85, 0.90, 0.95]).round(3).to_string())
 
 

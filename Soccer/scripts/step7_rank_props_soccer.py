@@ -40,6 +40,111 @@ def _forced_over_only(pick_type: str) -> int:
 # ── Soccer prop weights ───────────────────────────────────────────────────────
 # Higher = more predictable/valuable prop type
 
+# ── Head-to-Head (H2H) utility ────────────────────────────────────────────────
+def _attach_h2h(df: "pd.DataFrame", cache_path: str, sport: str,
+                player_col: str, opp_col: str, prop_col: str, line_col: str) -> "pd.DataFrame":
+    """
+    Attach H2H stats per row: how did this player perform vs this opponent
+    historically in the boxscore cache?
+
+    Adds columns:
+      h2h_games      – number of H2H games found
+      h2h_avg        – player's average stat value vs this opp
+      h2h_over_rate  – fraction of those games where they hit OVER the current line
+      h2h_last        – most recent game value vs this opp
+    """
+    import os, pandas as pd, numpy as np
+
+    if not cache_path or not os.path.exists(cache_path):
+        df["h2h_games"]     = 0
+        df["h2h_avg"]       = np.nan
+        df["h2h_over_rate"] = np.nan
+        df["h2h_last"]      = np.nan
+        return df
+
+    try:
+        cache = pd.read_csv(cache_path, low_memory=False)
+    except Exception:
+        df["h2h_games"]     = 0
+        df["h2h_avg"]       = np.nan
+        df["h2h_over_rate"] = np.nan
+        df["h2h_last"]      = np.nan
+        return df
+
+    # Normalise cache columns: need player, opponent, stat_type, value, date
+    cache.columns = [c.lower().strip() for c in cache.columns]
+
+    # Detect player col in cache
+    p_col  = next((c for c in ["player_norm","player_name","player","name"] if c in cache.columns), None)
+    o_col  = next((c for c in ["opp_team","opp","opponent","opp_team_abbr"] if c in cache.columns), None)
+    s_col  = next((c for c in ["stat_type","stat","prop_type","stat_norm"]   if c in cache.columns), None)
+    v_col  = next((c for c in ["value","stat_value","actual","val"]          if c in cache.columns), None)
+    d_col  = next((c for c in ["date","game_date","event_date"]              if c in cache.columns), None)
+
+    if not all([p_col, o_col, v_col]):
+        df["h2h_games"]     = 0
+        df["h2h_avg"]       = np.nan
+        df["h2h_over_rate"] = np.nan
+        df["h2h_last"]      = np.nan
+        return df
+
+    cache[v_col] = pd.to_numeric(cache[v_col], errors="coerce")
+
+    def _norm(x):
+        return str(x).strip().lower() if x and str(x).strip() else ""
+
+    # Build lookup: (player_norm, opp_norm) -> list of (value, date)
+    lookup: dict = {}
+    for row in cache.itertuples(index=False):
+        pk = (_norm(getattr(row, p_col)), _norm(getattr(row, o_col)))
+        v  = getattr(row, v_col)
+        dt = getattr(row, d_col, "") if d_col else ""
+        if pk not in lookup:
+            lookup[pk] = []
+        lookup[pk].append((v, str(dt)))
+
+    h2h_games, h2h_avg, h2h_over, h2h_last = [], [], [], []
+
+    for _, r in df.iterrows():
+        player = _norm(r.get(player_col, ""))
+        opp    = _norm(r.get(opp_col, ""))
+        line   = r.get(line_col, None)
+        try:
+            line_f = float(line)
+        except (TypeError, ValueError):
+            line_f = None
+
+        entries = lookup.get((player, opp), [])
+        # sort by date desc, take up to 10
+        try:
+            entries_sorted = sorted(entries, key=lambda x: x[1], reverse=True)[:10]
+        except Exception:
+            entries_sorted = entries[:10]
+
+        vals = [v for v, _ in entries_sorted if v is not None and not (isinstance(v, float) and v != v)]
+
+        if not vals:
+            h2h_games.append(0)
+            h2h_avg.append(np.nan)
+            h2h_over.append(np.nan)
+            h2h_last.append(np.nan)
+        else:
+            avg = round(float(np.mean(vals)), 2)
+            last = vals[0]
+            over_rate = round(sum(1 for v in vals if line_f is not None and v > line_f) / len(vals), 3) if line_f else np.nan
+            h2h_games.append(len(vals))
+            h2h_avg.append(avg)
+            h2h_over.append(over_rate)
+            h2h_last.append(round(float(last), 2))
+
+    df["h2h_games"]     = h2h_games
+    df["h2h_avg"]       = h2h_avg
+    df["h2h_over_rate"] = h2h_over
+    df["h2h_last"]      = h2h_last
+    return df
+# ─────────────────────────────────────────────────────────────────────────────
+
+
 _PROP_WEIGHTS = {
     "passes":          1.08,   # most stable, high volume
     "saves":           1.06,   # GK saves fairly predictable
@@ -53,6 +158,9 @@ _PROP_WEIGHTS = {
     "fouls":           0.98,
     "goals_allowed":   0.96,
     "shots_assisted":  1.00,
+    "crosses":         1.02,
+    "attempted_dribbles": 1.01,
+    "goals_allowed_first30": 0.94,
 }
 
 def _prop_weight(prop_norm: str) -> float:
@@ -75,6 +183,9 @@ _PROP_HIT_RATE_PRIOR = {
     "fouls":           0.520,
     "goals_allowed":   0.510,
     "goals":           0.490,   # goals are low-frequency, slight under bias
+    "crosses":         0.545,
+    "attempted_dribbles": 0.550,
+    "goals_allowed_first30": 0.505,
 }
 
 def _prop_hit_rate_prior(prop_norm: str, direction: str, pick_type: str = "Standard", deviation_level: float = 0.0) -> float:
@@ -260,6 +371,7 @@ def main() -> None:
     ap.add_argument("--input",  required=True)
     ap.add_argument("--output", required=True)
     ap.add_argument("--n_teams", type=int, default=15, help="Number of teams in defense file")
+    ap.add_argument("--cache", default="", help="Path to Soccer boxscore cache CSV")
     args = ap.parse_args()
 
     print(f"→ Loading: {args.input}")
@@ -285,6 +397,11 @@ def main() -> None:
         "goalassist":        "goal_assist",
         "shots assisted":    "shots_assisted",
         "shotsassisted":     "shots_assisted",
+        "attempted dribbles": "attempted_dribbles",
+        "attempteddribbles": "attempted_dribbles",
+        "crosses":           "crosses",
+        "goals allowed in first 30 minutes": "goals_allowed_first30",
+        "goalsallowedinfirst30minutes": "goals_allowed_first30",
     }
     out["prop_norm"] = out["prop_norm"].astype(str).str.lower().str.strip().map(
         lambda x: _PROP_NORM_MAP.get(x, x)
@@ -428,6 +545,16 @@ def main() -> None:
         * out["prop_weight"].astype(float).fillna(1.0)
         * out["reliability_mult"].astype(float).fillna(1.0)
     )
+
+    # Penalty for rows with no real player stats (no hit rate AND no stat averages).
+    # These are scored purely on priors/defense — reduce score so they max out at Tier B.
+    has_real_stats = (
+        pd.to_numeric(out.get("line_hit_rate", pd.Series(dtype=float)), errors="coerce").notna()
+        | pd.to_numeric(out.get("stat_last5_avg", pd.Series(dtype=float)), errors="coerce").notna()
+    )
+    score = score.where(has_real_stats, score * 0.60)
+    out["has_real_stats"] = has_real_stats.astype(int)
+
     score = score.where(elig_mask, np.nan)
 
     out["rank_score"] = score
@@ -437,6 +564,14 @@ def main() -> None:
     )
 
     # ── Tier A / B sheets so step8/step9 always have a usable sheet ──
+    # ── Head-to-Head stats ───────────────────────────────────────────────────
+    player_col = next((c for c in ["player_norm","player","pp_player","player_name"] if c in out.columns), "")
+    opp_col    = next((c for c in ["pp_opp_team","opp_team_abbr","opp_team","opp"] if c in out.columns), "")
+    prop_col   = next((c for c in ["prop_norm","prop_type"] if c in out.columns), "prop_norm")
+    if player_col and opp_col and args.cache:
+        out = _attach_h2h(out, args.cache, "soccer", player_col, opp_col, prop_col, "line")
+        print(f"  H2H: {(out['h2h_games'] > 0).sum()}/{len(out)} rows matched")
+
     with pd.ExcelWriter(args.output, engine="openpyxl") as w:
         out.to_excel(w, sheet_name="ALL",      index=False)
         out.loc[elig_mask].to_excel(w, sheet_name="ELIGIBLE", index=False)

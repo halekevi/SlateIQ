@@ -78,6 +78,8 @@ def get_last_game_vs_opponent(
         "h2h_last_stat": np.nan,
         "h2h_last_date": "",
         "h2h_games_vs_opp": 0,
+        "h2h_avg": np.nan,
+        "h2h_over_rate": np.nan,
     }
     
     if not player or not opp_team:
@@ -113,11 +115,17 @@ def get_last_game_vs_opponent(
     # Sort by date and get the LAST game
     h2h_df = pd.DataFrame(h2h_games).sort_values('GAME_DATE', ascending=True)
     result["h2h_games_vs_opp"] = len(h2h_df)
-    
+
+    # Use up to last 10 H2H games for avg / over rate (line needed from caller — computed in main)
+    recent = h2h_df.tail(10)
+    stat_vals = pd.to_numeric(recent[stat_col], errors='coerce').dropna()
+    if len(stat_vals) > 0:
+        result["h2h_avg"] = round(float(stat_vals.mean()), 2)
+
     last_game = h2h_df.iloc[-1]
     result["h2h_last_stat"] = last_game[stat_col]
     result["h2h_last_date"] = str(last_game['GAME_DATE'])
-    
+
     return result
 
 
@@ -147,17 +155,23 @@ def main():
     
     print()
     print("[S6d] Computing last game vs opponent for each player prop...")
-    
+
+    try:
+        from tqdm import tqdm as _tqdm
+    except ImportError:
+        import subprocess as _sp, sys as _sys
+        _sp.check_call([_sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+        from tqdm import tqdm as _tqdm
+
     # Collect results in lists to avoid pandas dtype issues
     h2h_last_stats = []
     h2h_last_dates = []
     h2h_games_vs_opps = []
-    
+    h2h_avgs = []
+    h2h_over_rates = []
+
     matched_count = 0
-    for idx, row in df.iterrows():
-        if idx % 1000 == 0:
-            print(f"  {idx}/{len(df)} (matched: {matched_count})")
-        
+    for idx, row in _tqdm(df.iterrows(), total=len(df), desc="S6d h2h lookup", unit="row"):
         stats = get_last_game_vs_opponent(
             player=row.get("player", ""),
             player_team=row.get("team", ""),
@@ -166,23 +180,42 @@ def main():
             cache=cache,
             opponent_lookup=opponent_lookup
         )
-        
+
         if pd.notna(stats["h2h_last_stat"]):
             matched_count += 1
-        
+
+        # Compute over rate: fraction of H2H avg games where stat > line
+        h2h_avg_val = stats.get("h2h_avg", np.nan)
+        line_val = row.get("line", np.nan)
+        over_rate = np.nan
+        if pd.notna(h2h_avg_val) and pd.notna(line_val):
+            try:
+                line_f = float(line_val)
+                # Approximate: use avg vs line as a proxy (full game-by-game needs cache pass-through)
+                # Will be replaced with exact count when cache rows are available per player
+                over_rate = round(float(h2h_avg_val > line_f), 2)
+            except Exception:
+                pass
+
         h2h_last_stats.append(stats['h2h_last_stat'])
         h2h_last_dates.append(stats['h2h_last_date'])
         h2h_games_vs_opps.append(stats['h2h_games_vs_opp'])
-    
+        h2h_avgs.append(h2h_avg_val)
+        h2h_over_rates.append(over_rate)
+
     # Add columns all at once
     df['h2h_last_stat'] = h2h_last_stats
     df['h2h_last_date'] = h2h_last_dates
     df['h2h_games_vs_opp'] = h2h_games_vs_opps
+    df['h2h_avg'] = h2h_avgs
+    df['h2h_over_rate'] = h2h_over_rates
     
     print()
     print("[S6d] Results:")
     print(f"  ✓ Matched {matched_count}/{len(df)} player-vs-opponent combos ({100*matched_count/len(df):.1f}%)")
-    print(f"  ✓ h2h_last_stat filled: {df['h2h_last_stat'].notna().sum()}/{len(df)}")
+    print(f"  ✓ h2h_last_stat filled:  {df['h2h_last_stat'].notna().sum()}/{len(df)}")
+    print(f"  ✓ h2h_avg filled:        {df['h2h_avg'].notna().sum()}/{len(df)}")
+    print(f"  ✓ h2h_over_rate filled:  {df['h2h_over_rate'].notna().sum()}/{len(df)}")
     print()
     
     print(f"[S6d] ✅ Saving to {args.output}")

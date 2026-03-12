@@ -261,7 +261,13 @@ def build_player_histories(
     all_events: List[Tuple[str, str, str, str]] = []
     seen_eids: set = set()
     print(f"-> Scanning {days + 1} days of CBB scoreboards...")
-    for d in date_range(dt.date.today(), days):
+    try:
+        from tqdm import tqdm as _tqdm
+    except ImportError:
+        import subprocess as _sp, sys as _sys
+        _sp.check_call([_sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+        from tqdm import tqdm as _tqdm
+    for d in _tqdm(date_range(dt.date.today(), days), desc="Scanning scoreboards", unit="day"):
         sb = pull_scoreboard(d)
         for eid, t1, t2, date_str in extract_events(sb):
             if eid not in seen_eids:
@@ -288,11 +294,13 @@ def build_player_histories(
                 for eid, t1, t2, ds in pending
             }
             fetched = 0
-            for future in _ac(futures):
-                eid, rows = future.result()
-                if rows:
-                    fetched += 1
-                    new_rows.extend(rows)
+            with _tqdm(total=len(pending), desc="Fetching games", unit="game") as pbar:
+                for future in _ac(futures):
+                    eid, rows = future.result()
+                    if rows:
+                        fetched += 1
+                        new_rows.extend(rows)
+                    pbar.update(1)
         print(f"  [FETCH] Got {fetched} new games with player data")
 
     # Phase 3: update cache
@@ -332,6 +340,13 @@ def build_player_histories(
 
 
 def main():
+    try:
+        from tqdm import tqdm as _tqdm
+    except ImportError:
+        import subprocess as _sp, sys as _sys
+        _sp.check_call([_sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+        from tqdm import tqdm as _tqdm
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--input",    required=True)
     ap.add_argument("--output",   default="step5b_with_stats_cbb.csv")
@@ -376,7 +391,7 @@ def main():
 
     out_rows, stat_status = [], []
 
-    for _, row in df.iterrows():
+    for _, row in _tqdm(df.iterrows(), total=len(df), desc="Attaching stats", unit="prop"):
         tid  = str(row.get("team_id",       "")).strip()
         pn   = str(row.get("player_norm",   "")).strip()
         aid  = str(row.get("espn_athlete_id","")).strip()

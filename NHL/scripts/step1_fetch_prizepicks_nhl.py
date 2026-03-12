@@ -18,6 +18,12 @@ import time
 import random
 import requests
 from datetime import datetime, timezone
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:
+    import subprocess
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+    from tqdm import tqdm as _tqdm
 
 NHL_LEAGUE_ID = 8
 PER_PAGE = 250
@@ -67,36 +73,37 @@ def parse_rows(data: list, included: list) -> list:
 
     rows = []
     seen_ids = set()
-    for proj in data:
-        proj_id = proj.get("id")
-        if proj_id in seen_ids:
-            continue
-        seen_ids.add(proj_id)
+    with _tqdm(data, desc="  Parsing props", unit="prop", leave=False) as pbar:
+        for proj in pbar:
+            proj_id = proj.get("id")
+            if proj_id in seen_ids:
+                continue
+            seen_ids.add(proj_id)
 
-        attrs = proj.get("attributes", {})
-        rels = proj.get("relationships", {})
-        player_id = rels.get("new_player", {}).get("data", {}).get("id", "")
-        game_id = (rels.get("game") or rels.get("new_game") or {}).get("data", {}).get("id", "")
-        player_info = players_map.get(player_id, {})
-        game_info = games_map.get(game_id, {})
+            attrs = proj.get("attributes", {})
+            rels = proj.get("relationships", {})
+            player_id = rels.get("new_player", {}).get("data", {}).get("id", "")
+            game_id = (rels.get("game") or rels.get("new_game") or {}).get("data", {}).get("id", "")
+            player_info = players_map.get(player_id, {})
+            game_info = games_map.get(game_id, {})
 
-        rows.append({
-            "projection_id": proj_id,
-            "player_id": player_id,
-            "player_name": player_info.get("player_name", ""),
-            "team": player_info.get("team", ""),
-            "position": player_info.get("position", ""),
-            "stat_type": attrs.get("stat_type", ""),
-            "line_score": attrs.get("line_score", ""),
-            "pick_type": attrs.get("pick_type", attrs.get("odds_type", "")),
-            "is_promo": attrs.get("is_promo", False),
-            "description": attrs.get("description", ""),
-            "away_team": game_info.get("away_team", ""),
-            "home_team": game_info.get("home_team", ""),
-            "game_start": game_info.get("game_start", ""),
-            "game_id": game_id,
-            "fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        })
+            rows.append({
+                "projection_id": proj_id,
+                "player_id": player_id,
+                "player_name": player_info.get("player_name", ""),
+                "team": player_info.get("team", ""),
+                "position": player_info.get("position", ""),
+                "stat_type": attrs.get("stat_type", ""),
+                "line_score": attrs.get("line_score", ""),
+                "pick_type": attrs.get("pick_type", attrs.get("odds_type", "")),
+                "is_promo": attrs.get("is_promo", False),
+                "description": attrs.get("description", ""),
+                "away_team": game_info.get("away_team", ""),
+                "home_team": game_info.get("home_team", ""),
+                "game_start": game_info.get("game_start", ""),
+                "game_id": game_id,
+                "fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            })
     return rows
 
 
@@ -109,7 +116,8 @@ def fetch_via_requests(game_mode: str) -> list:
     all_data, all_included = [], []
     seen_ids = set()
 
-    for page in range(1, 20):
+    page_bar = _tqdm(range(1, 20), desc=f"  Fetching pages ({game_mode})", unit="page", leave=True)
+    for page in page_bar:
         params = {
             "league_id": NHL_LEAGUE_ID,
             "game_mode": game_mode,
@@ -135,6 +143,7 @@ def fetch_via_requests(game_mode: str) -> list:
                 seen_ids.add(d.get("id"))
             all_data.extend(new)
             all_included.extend(j.get("included") or [])
+            page_bar.set_postfix(total=len(all_data))
             print(f"  ✓ Page {page}: +{len(new)} props (total {len(all_data)})")
             time.sleep(random.uniform(0.5, 1.2))
         except Exception as e:

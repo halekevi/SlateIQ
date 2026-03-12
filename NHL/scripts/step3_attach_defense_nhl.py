@@ -18,6 +18,12 @@ import json
 import time
 import urllib.request
 from datetime import datetime
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:
+    import subprocess, sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+    from tqdm import tqdm as _tqdm
 
 HEADERS = {"User-Agent": "Mozilla/5.0", "Accept": "application/json"}
 
@@ -162,10 +168,40 @@ def main():
 
     rows = read_csv(args.input)
 
-    if args.defense:
-        teams = load_defense_csv(args.defense)
-    else:
-        teams = fetch_team_defense_stats()
+    # ── Load defense: DB first, CSV fallback, live API last resort ────────────
+    teams = None
+    try:
+        import sys as _sys
+        from pathlib import Path as _Path
+        _here = _Path(__file__).resolve().parent
+        for _ in range(6):
+            if (_here / "scripts" / "defense_db.py").exists():
+                _sys.path.insert(0, str(_here / "scripts"))
+                break
+            _here = _here.parent
+        from defense_db import load_defense_from_db, defense_freshness
+        df_db = load_defense_from_db("nhl")
+        if df_db is not None and len(df_db) >= 5:
+            fresh = defense_freshness("nhl")
+            print(f"→ Defense loaded from DB ({len(df_db)} teams, updated {fresh})")
+            # Convert DataFrame back to the dict-of-dicts format this script expects
+            teams = {}
+            for _, row in df_db.iterrows():
+                abbrev = str(row.get("team", "")).strip().upper()
+                if abbrev:
+                    teams[abbrev] = {k: row[k] for k in row.index if k != "team" and str(row[k]) not in ("nan", "None", "")}
+        else:
+            print("→ Defense DB empty for NHL — falling back")
+    except Exception as _e:
+        print(f"→ defense_db unavailable ({_e})")
+
+    if teams is None:
+        if args.defense:
+            print(f"→ Loading defense CSV: {args.defense}")
+            teams = load_defense_csv(args.defense)
+        else:
+            print("→ Fetching live NHL defense stats...")
+            teams = fetch_team_defense_stats()
 
     tiers = build_defense_tier(teams)
 
@@ -183,7 +219,7 @@ def main():
 
     results = []
     not_found = set()
-    for row in rows:
+    for row in _tqdm(rows, desc="  Attaching defense", unit="prop"):
         opp = row.get("opponent", "").upper()
         opp_stats = teams.get(opp, {})
         tier_info = tiers.get(opp, {})

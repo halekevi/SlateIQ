@@ -64,7 +64,7 @@ def derive_combo_opps(row: pd.Series) -> Tuple[str, str]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--input",   required=True)
-    ap.add_argument("--defense", required=True)
+    ap.add_argument("--defense", default="", help="Path to defense CSV (optional if DB is populated)")
     ap.add_argument("--output",  required=True)
     args = ap.parse_args()
 
@@ -75,14 +75,38 @@ def main() -> None:
         print("❌ [SlateIQ-Soccer-S3] Empty input from S2 — aborting.")
         sys.exit(1)
 
-    print(f"→ Loading defense: {args.defense}")
-    d  = pd.read_csv(args.defense, dtype=str, encoding="utf-8-sig").fillna("")
+    # ── Load defense: DB first, CSV fallback ─────────────────────────────────
+    from pathlib import Path as _Path
+    d = None
+    try:
+        import sys as _sys
+        _here = _Path(__file__).resolve().parent
+        for _ in range(6):
+            if (_here / "scripts" / "defense_db.py").exists():
+                _sys.path.insert(0, str(_here / "scripts"))
+                break
+            _here = _here.parent
+        from defense_db import load_defense_from_db, defense_freshness
+        d = load_defense_from_db("soccer")
+        if d is not None:
+            fresh = defense_freshness("soccer")
+            print(f"→ Defense loaded from DB ({len(d)} teams, updated {fresh})")
+        else:
+            print("→ Defense DB empty — falling back to CSV")
+    except Exception as _e:
+        print(f"→ defense_db unavailable ({_e}) — falling back to CSV")
+
+    if d is None:
+        if not args.defense:
+            raise RuntimeError("❌ No defense data in DB and --defense not provided")
+        print(f"→ Loading defense CSV: {args.defense}")
+        d = pd.read_csv(args.defense, dtype=str, encoding="utf-8-sig").fillna("")
 
     # Prefer pp_name (PrizePicks-style short name) as merge key
     # Fall back to old column names for backward compatibility
     key = _col(d, ["pp_name", "TEAM_ABBREVIATION", "team_abbr", "abbr", "TEAM_ABBR", "team"])
     if not key:
-        raise RuntimeError(f"❌ Defense file missing team key. Columns: {list(d.columns)}")
+        raise RuntimeError(f"❌ Defense data missing team key. Columns: {list(d.columns)}")
 
     print(f"  Merging on column: '{key}'")
 

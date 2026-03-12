@@ -18,6 +18,11 @@ import subprocess
 import sys
 from datetime import datetime
 from itertools import combinations
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+    from tqdm import tqdm as _tqdm
 
 MIN_HIT_RATE = 0.65      # minimum composite hit rate for any leg
 MIN_TIER = {"A", "B"}    # only A and B tier props
@@ -117,7 +122,7 @@ def build_tickets(valid_legs: list[dict]) -> dict:
 
     # Power Play (2-pick): top A-tier combos
     a_only = [l for l in valid_legs if str(l.get("Tier", l.get("tier", ""))).strip() == "A"]
-    for combo in combinations(a_only[:20], 2):
+    for combo in _tqdm(list(combinations(a_only[:20], 2)), desc="  Building 2-pick tickets", unit="combo", leave=False):
         legs = list(combo)
         if ticket_diversity(legs):
             conf = ticket_confidence(legs)
@@ -126,7 +131,7 @@ def build_tickets(valid_legs: list[dict]) -> dict:
     tickets["power_play_2"] = tickets["power_play_2"][:5]
 
     # Flex 3
-    for combo in combinations(valid_legs[:25], 3):
+    for combo in _tqdm(list(combinations(valid_legs[:25], 3)), desc="  Building 3-pick tickets", unit="combo", leave=False):
         legs = list(combo)
         if ticket_diversity(legs):
             conf = ticket_confidence(legs)
@@ -135,7 +140,7 @@ def build_tickets(valid_legs: list[dict]) -> dict:
     tickets["flex_3"] = tickets["flex_3"][:5]
 
     # Flex 4
-    for combo in combinations(valid_legs[:20], 4):
+    for combo in _tqdm(list(combinations(valid_legs[:20], 4)), desc="  Building 4-pick tickets", unit="combo", leave=False):
         legs = list(combo)
         if ticket_diversity(legs):
             conf = ticket_confidence(legs)
@@ -144,7 +149,7 @@ def build_tickets(valid_legs: list[dict]) -> dict:
     tickets["flex_4"] = tickets["flex_4"][:5]
 
     # Goblin 5 (5-pick flex)
-    for combo in combinations(valid_legs[:18], 5):
+    for combo in _tqdm(list(combinations(valid_legs[:18], 5)), desc="  Building 5-pick tickets", unit="combo", leave=False):
         legs = list(combo)
         if ticket_diversity(legs):
             conf = ticket_confidence(legs)

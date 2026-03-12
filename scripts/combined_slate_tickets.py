@@ -168,13 +168,43 @@ def side(color: str = "CCCCCC") -> Border:
     return Border(left=s, right=s, top=s, bottom=s)
 
 
+# ── Style object caches (avoid recreating identical objects per cell) ──────────
+_font_cache: dict = {}
+_fill_cache: dict = {}
+_align_cache: dict = {}
+_border_obj = None
+
+def _side_obj():
+    global _border_obj
+    if _border_obj is None:
+        _border_obj = side()
+    return _border_obj
+
+def _font(bold=False, color="000000", sz=9):
+    key = (bold, color, sz)
+    if key not in _font_cache:
+        _font_cache[key] = Font(bold=bold, name="Arial", size=sz, color=color)
+    return _font_cache[key]
+
+def _fill(bg):
+    if bg not in _fill_cache:
+        _fill_cache[bg] = PatternFill("solid", start_color=bg)
+    return _fill_cache[bg]
+
+def _align(horizontal="center", wrap=False):
+    key = (horizontal, wrap)
+    if key not in _align_cache:
+        _align_cache[key] = Alignment(horizontal=horizontal, vertical="center", wrap_text=wrap)
+    return _align_cache[key]
+
+
 def hc(ws, r, c, v, bg=None, fc="FFFFFF", bold=True, sz=9, align="center"):
     cell = ws.cell(row=r, column=c, value=v)
-    cell.font = Font(bold=bold, color=fc, name="Arial", size=sz)
+    cell.font = _font(bold=bold, color=fc, sz=sz)
     if bg:
-        cell.fill = PatternFill("solid", start_color=bg)
-    cell.alignment = Alignment(horizontal=align, vertical="center", wrap_text=True)
-    cell.border = side()
+        cell.fill = _fill(bg)
+    cell.alignment = _align(horizontal=align, wrap=True)
+    cell.border = _side_obj()
     return cell
 
 
@@ -182,10 +212,10 @@ def dc(ws, r, c, v, bg=None, bold=False, sz=9, align="center", fc="000000", fmt=
     if v is pd.NA or (isinstance(v, float) and np.isnan(v)) or v is None:
         v = ""
     cell = ws.cell(row=r, column=c, value=v)
-    cell.font = Font(bold=bold, name="Arial", size=sz, color=fc)
-    cell.fill = PatternFill("solid", start_color=bg or C["white"])
-    cell.alignment = Alignment(horizontal=align, vertical="center")
-    cell.border = side()
+    cell.font = _font(bold=bold, color=fc, sz=sz)
+    cell.fill = _fill(bg or C["white"])
+    cell.alignment = _align(horizontal=align)
+    cell.border = _side_obj()
     if fmt:
         cell.number_format = fmt
     return cell
@@ -222,7 +252,7 @@ def pct_cell(ws, r, c, val):
     cell = dc(ws, r, c, val if not nan else "", bg=bg, bold=True)
     if not nan:
         cell.number_format = "0%"
-        cell.font = Font(bold=True, name="Arial", size=9, color="FFFFFF")
+        cell.font = _font(bold=True, color="FFFFFF", sz=9)
     return cell
 
 
@@ -485,6 +515,12 @@ def ticket_groups_to_payload(all_ticket_groups, date_str, thresholds):
                     "min_tier": str(gv("min_tier") or gv("minutes_tier") or gv("Min Tier") or ""),
                     "shot_role": str(gv("shot_role") or gv("Shot Role") or ""),
                     "usage_role": str(gv("usage_role") or gv("Usage Role") or ""),
+                    "l5_avg": _safe_float(gv("l5_avg") or gv("Last 5 Avg") or gv("last_5_avg")),
+                    "season_avg": _safe_float(gv("season_avg") or gv("Season Avg") or gv("avg_season")),
+                    "l5_over": _safe_float(gv("l5_over") or gv("L5 Over") or gv("line_hits_over_5")),
+                    "l5_under": _safe_float(gv("l5_under") or gv("L5 Under") or gv("line_hits_under_5")),
+                    "l10_over": _safe_float(gv("l10_over") or gv("L10 Over") or gv("hit_rate_over_L10") or gv("over_L10")),
+                    "l10_under": _safe_float(gv("l10_under") or gv("L10 Under") or gv("hit_rate_under_L10") or gv("under_L10")),
                 }
                 leg["image_url"] = compute_image_url(leg)
                 leg["initials"] = player_initials(leg.get("player", ""))
@@ -663,6 +699,19 @@ nav{display:flex;align-items:center;gap:16px;padding:12px 0 24px;border-bottom:1
 .nav-links a{color:#aaa;text-decoration:none;font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid transparent;transition:all .2s;}
 .nav-links a:hover{color:var(--text);border-color:var(--border);}
 .nav-links a.active{color:var(--accent);border-color:var(--accent);background:rgba(200,255,0,.06);}
+/* player graph expand */
+.leg-row{cursor:pointer;transition:background .15s;}
+.leg-row:hover{background:rgba(200,255,0,.04);}
+.leg-graph-row{display:none;}
+.leg-graph-row.open{display:table-row;}
+.leg-graph-cell{padding:12px 16px 16px;background:#0d1117;border-bottom:1px solid var(--border);}
+.graph-wrap{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;}
+.graph-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+.gstat{background:#1a1f2e;border:1px solid var(--border);border-radius:6px;padding:6px 12px;min-width:80px;text-align:center;}
+.gstat-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;}
+.gstat-val{font-size:15px;font-weight:700;color:var(--accent);margin-top:2px;}
+.graph-canvas-wrap{flex:1;min-width:260px;max-width:480px;}
+canvas.leg-chart{width:100%!important;height:140px!important;}
 
 /* hero */
 .hero{margin:28px 0 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;}
@@ -724,12 +773,14 @@ tr:hover td{background:rgba(200,255,0,.03);}
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>SlateIQ — Tickets</title>
 <style>{CSS}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
 </head>
 <body>
 <div id="app">
 
 <nav>
-  <a class="nav-logo" href="index.html">
+  <a class="nav-logo" href="/">
     <div class="brain-wrap">
       <div class="brain-slate"></div>
       <div class="brain-pulse-ring"></div>
@@ -810,10 +861,10 @@ tr:hover td{background:rgba(200,255,0,.03);}
     <div><div class="brand">Slate<span>IQ</span></div></div>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="indexGrades.html">Grades</a>
-    <a href="tickets_latest.html" class="active">Tickets</a>
-    <a href="payout_calculator.html">Payouts</a>
+    <a href="/">Home</a>
+    <a href="/grades">Grades</a>
+    <a href="/tickets" class="active">Tickets</a>
+    <a href="/payout">Payouts</a>
   </div>
 </nav>
 
@@ -913,8 +964,120 @@ tr:hover td{background:rgba(200,255,0,.03);}
                 shot_role = badge(leg.get("shot_role"), "#00e5ff")
                 usg_role  = badge(leg.get("usage_role"), "#888")
 
+                # build graph data for expand panel
+                l5_avg     = leg.get("l5_avg")
+                season_avg = leg.get("season_avg")
+                l5_over    = leg.get("l5_over")
+                l5_under   = leg.get("l5_under")
+                l10_over   = leg.get("l10_over")
+                l10_under  = leg.get("l10_under")
+                line_val   = leg.get("line")
+                row_id     = f"lgr-{id(leg)}-{i}"
+
+                # stat pills
+                def _pill(label, val, fmt=None):
+                    if val is None: return ""
+                    v = fmt(val) if fmt else str(val)
+                    return f'<div class="gstat"><div class="gstat-label">{label}</div><div class="gstat-val">{v}</div></div>'
+
+                pills = "".join([
+                    _pill("L5 Avg",     l5_avg,     lambda x: f"{x:.1f}"),
+                    _pill("Season Avg", season_avg, lambda x: f"{x:.1f}"),
+                    _pill("L5 Over",    l5_over,    lambda x: f"{int(round(x*5)) if x<=1 else int(x)}/5"),
+                    _pill("L10 Over",   l10_over,   lambda x: f"{int(round(x*10)) if x<=1 else int(x)}/10"),
+                    _pill("Hit Rate",   hr_val,     lambda x: f"{x*100:.0f}%"),
+                ])
+
+                # chart data — reconstruct bar-level data from l5 over/under counts
+                def _hits(over_rate, n):
+                    if over_rate is None: return "null"
+                    cnt = int(round(over_rate * n)) if over_rate <= 1 else int(over_rate)
+                    cnt = min(cnt, n)
+                    vals = [1]*cnt + [0]*(n-cnt)
+                    return str(vals)
+
+                chart_data = f"""{{
+                  line: {line_val if line_val is not None else 'null'},
+                  l5hits: {_hits(l5_over, 5)},
+                  l10hits: {_hits(l10_over, 10)},
+                  l5avg: {l5_avg if l5_avg is not None else 'null'},
+                  seasonAvg: {season_avg if season_avg is not None else 'null'},
+                  player: {repr(leg.get('player',''))},
+                  prop: {repr(leg.get('prop_type',''))},
+                  direction: {repr(leg.get('direction',''))}
+                }}"""
+
+                graph_row = f"""
+<tr class="leg-graph-row" id="{row_id}">
+  <td class="leg-graph-cell" colspan="13">
+    <div class="graph-wrap">
+      <div style="flex:1;min-width:200px;">
+        <div style="font-size:11px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">{leg.get('player','')} · {leg.get('prop_type','')} · Line {fmt_line(line_val)}</div>
+        <div class="graph-stats">{pills}</div>
+      </div>
+      <div class="graph-canvas-wrap">
+        <canvas class="leg-chart" id="c-{row_id}"></canvas>
+      </div>
+    </div>
+    <script>
+    (function(){{
+      var d = {chart_data};
+      var ctx = document.getElementById('c-{row_id}');
+      if(!ctx||!window.Chart) return;
+      var hits10 = d.l10hits || d.l5hits || [];
+      var labels = hits10.map((_,i)=>'G'+(i+1));
+      var vals = hits10.map(()=>null); // placeholder — show avg lines only
+      // We'll just render a bar chart of recent hits vs line
+      var barVals = hits10.map((h,i)=>{{ return d.l5avg || (h ? (d.line||0)*1.15 : (d.line||0)*0.85); }});
+      var colors = hits10.map(h=> h ? '#c8ff00' : '#ff4d6d');
+      new Chart(ctx, {{
+        type:'bar',
+        data:{{
+          labels: labels,
+          datasets:[{{
+            label:'Est. Value',
+            data: barVals,
+            backgroundColor: colors,
+            borderRadius:3,
+            borderSkipped:false
+          }}]
+        }},
+        options:{{
+          responsive:true,
+          maintainAspectRatio:false,
+          plugins:{{
+            legend:{{display:false}},
+            tooltip:{{callbacks:{{label:function(c){{return hits10[c.dataIndex]?'OVER ✅':'UNDER ❌';}}}}}}
+          }},
+          scales:{{
+            x:{{ticks:{{color:'#888',font:{{size:10}}}},grid:{{color:'#1a1f2e'}}}},
+            y:{{
+              ticks:{{color:'#888',font:{{size:10}}}},
+              grid:{{color:'#1a1f2e'}},
+              min: d.line ? d.line*0.5 : 0,
+              afterDataLimits(scale){{
+                if(d.line) scale.max = Math.max(scale.max, d.line*1.6);
+              }}
+            }}
+          }},
+          annotation:{{
+            annotations:{{
+              line1:{{
+                type:'line', yMin:d.line, yMax:d.line,
+                borderColor:'#c8ff00', borderWidth:2, borderDash:[6,3],
+                label:{{content:'Line '+d.line, enabled:true, color:'#c8ff00', font:{{size:10}}}}
+              }}
+            }}
+          }}
+        }}
+      }});
+    }})();
+    </script>
+  </td>
+</tr>"""
+
                 html_parts.append(
-                    f"<tr>"
+                    f"<tr class='leg-row' onclick=\"var r=document.getElementById('{row_id}');r.classList.toggle('open');\">"
                     f"<td>{i}</td>"
                     f"<td>{sport_badge(leg.get('sport',''))}</td>"
                     f"<td>{player_cell}</td>"
@@ -930,6 +1093,7 @@ tr:hover td{background:rgba(200,255,0,.03);}
                     f"<td>{fmt_2(leg.get('rank_score')) if leg.get('rank_score') is not None else '—'}</td>"
                     f"</tr>"
                 )
+                html_parts.append(graph_row)
 
             html_parts.append("""
           </tbody>
@@ -1173,6 +1337,15 @@ def load_nhl(path: str) -> pd.DataFrame:
     else:
         df["tier"] = "C"
 
+    # Extra fallback: NHL step8 may still have line_score if rename didn't catch it
+    if "line" not in df.columns:
+        for alt in ("line_score", "Line", "line_value", "prop_line"):
+            if alt in df.columns:
+                df["line"] = df[alt]
+                break
+    if "line" not in df.columns:
+        df["line"] = np.nan
+
     for col in ["rank_score", "hit_rate", "line"]:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
@@ -1218,6 +1391,10 @@ def load_soccer(path: str) -> pd.DataFrame:
         "Def Rank":         "def_rank",
         "Def Tier":         "def_tier",
         "Min Tier":         "min_tier",
+        "Shot Role":        "shot_role",
+        "Usage Role":       "usage_role",
+        "League":           "league",
+        "Pos Group":        "position_group",
         "Void Reason":      "void_reason",
         # snake_case fallbacks
         "player_name":        "player",
@@ -1299,6 +1476,8 @@ def build_combined_slate(nba: pd.DataFrame, cbb: pd.DataFrame, nhl: pd.DataFrame
         "usage_role",
         "nba_player_id",
         "espn_player_id",
+        "league",
+        "position_group",
     ]
 
     def safe_keep(df, cols):
@@ -1593,6 +1772,7 @@ def build_mixed_picktype_tickets(pool_df: pd.DataFrame, n_legs: int, max_tickets
 
 
 def build_final_web_ticket_groups(nba_pool: pd.DataFrame, cbb_pool: pd.DataFrame,
+                                   nhl_pool: pd.DataFrame = None, soccer_pool: pd.DataFrame = None,
                                    min_hit_rate=0.70, min_edge=2.0, min_rank=5.0):
     def apply_filters(df):
         mask = pd.Series(True, index=df.index)
@@ -1691,6 +1871,94 @@ def build_final_web_ticket_groups(nba_pool: pd.DataFrame, cbb_pool: pd.DataFrame
             t3 = build_mixed_picktype_tickets(combo, 3, max_tickets=2, min_standard=1)
             if t3:
                 groups.append(("FINAL 3-Leg SPORT MIX (NBA+CBB)", t3, None))
+
+    # ── NHL groups ─────────────────────────────────────────────────────────────
+    if nhl_pool is not None and len(nhl_pool):
+        nhl_f = apply_filters(nhl_pool)
+        nhl_mix = nhl_f[nhl_f["pick_type"].isin(["Standard", "Goblin"])].copy() \
+            if "pick_type" in nhl_f.columns else nhl_f.copy()
+        nhl_std = nhl_f[nhl_f["pick_type"] == "Standard"].copy() \
+            if "pick_type" in nhl_f.columns else nhl_f.copy()
+
+        if len(nhl_mix) >= 6:
+            t6 = build_mixed_picktype_tickets(nhl_mix, 6, max_tickets=1, min_standard=2)
+            if t6:
+                groups.append(("FINAL 6-Leg (NHL Std+Gob)", t6, None))
+        if len(nhl_mix) >= 5:
+            t5 = build_mixed_picktype_tickets(nhl_mix, 5, max_tickets=1, min_standard=2)
+            if t5:
+                groups.append(("FINAL 5-Leg (NHL Std+Gob)", t5, None))
+        if len(nhl_mix) >= 4:
+            t4 = build_mixed_picktype_tickets(nhl_mix, 4, max_tickets=1, min_standard=2)
+            if t4:
+                groups.append(("FINAL 4-Leg (NHL Std+Gob)", t4, None))
+        if len(nhl_mix) >= 3:
+            t3 = build_mixed_picktype_tickets(nhl_mix, 3, max_tickets=2, min_standard=1)
+            if t3:
+                groups.append(("FINAL 3-Leg MIX (NHL Std+Gob)", t3, None))
+        if len(nhl_std) >= 3:
+            groups.append(("FINAL 3-Leg STANDARD ONLY (NHL)", build_tickets(nhl_std, 3, max_tickets=1), None))
+
+    # ── Soccer groups ──────────────────────────────────────────────────────────
+    if soccer_pool is not None and len(soccer_pool):
+        soc_f = apply_filters(soccer_pool)
+        soc_mix = soc_f[soc_f["pick_type"].isin(["Standard", "Goblin"])].copy() \
+            if "pick_type" in soc_f.columns else soc_f.copy()
+        soc_std = soc_f[soc_f["pick_type"] == "Standard"].copy() \
+            if "pick_type" in soc_f.columns else soc_f.copy()
+
+        if len(soc_mix) >= 6:
+            t6 = build_mixed_picktype_tickets(soc_mix, 6, max_tickets=1, min_standard=2)
+            if t6:
+                groups.append(("FINAL 6-Leg (Soccer Std+Gob)", t6, None))
+        if len(soc_mix) >= 5:
+            t5 = build_mixed_picktype_tickets(soc_mix, 5, max_tickets=1, min_standard=2)
+            if t5:
+                groups.append(("FINAL 5-Leg (Soccer Std+Gob)", t5, None))
+        if len(soc_mix) >= 4:
+            t4 = build_mixed_picktype_tickets(soc_mix, 4, max_tickets=1, min_standard=2)
+            if t4:
+                groups.append(("FINAL 4-Leg (Soccer Std+Gob)", t4, None))
+        if len(soc_mix) >= 3:
+            t3 = build_mixed_picktype_tickets(soc_mix, 3, max_tickets=2, min_standard=1)
+            if t3:
+                groups.append(("FINAL 3-Leg MIX (Soccer Std+Gob)", t3, None))
+        if len(soc_std) >= 3:
+            groups.append(("FINAL 3-Leg STANDARD ONLY (Soccer)", build_tickets(soc_std, 3, max_tickets=1), None))
+
+    # ── All-sport cross-sport MIX ──────────────────────────────────────────────
+    extra_frames = []
+    if nhl_pool is not None and len(nhl_pool):
+        nhl_f2 = apply_filters(nhl_pool)
+        extra_frames.append(nhl_f2[nhl_f2["pick_type"].isin(["Standard", "Goblin"])].copy()
+                            if "pick_type" in nhl_f2.columns else nhl_f2.copy())
+    if soccer_pool is not None and len(soccer_pool):
+        soc_f2 = apply_filters(soccer_pool)
+        extra_frames.append(soc_f2[soc_f2["pick_type"].isin(["Standard", "Goblin"])].copy()
+                            if "pick_type" in soc_f2.columns else soc_f2.copy())
+
+    if extra_frames and cbb_pool is not None and len(cbb_pool):
+        cbb_f3 = apply_filters(cbb_pool)
+        cbb_m3 = cbb_f3[cbb_f3["pick_type"].isin(["Standard", "Goblin"])].copy() \
+            if "pick_type" in cbb_f3.columns else cbb_f3.copy()
+        all_sport_combo = pd.concat([nba_mix, cbb_m3] + extra_frames, ignore_index=True)
+
+        if len(all_sport_combo) >= 6:
+            t6 = build_mixed_picktype_tickets(all_sport_combo, 6, max_tickets=1, min_standard=2)
+            if t6:
+                groups.append(("FINAL 6-Leg ALL-SPORT MIX", t6, None))
+        if len(all_sport_combo) >= 5:
+            t5 = build_mixed_picktype_tickets(all_sport_combo, 5, max_tickets=1, min_standard=2)
+            if t5:
+                groups.append(("FINAL 5-Leg ALL-SPORT MIX", t5, None))
+        if len(all_sport_combo) >= 4:
+            t4 = build_mixed_picktype_tickets(all_sport_combo, 4, max_tickets=1, min_standard=2)
+            if t4:
+                groups.append(("FINAL 4-Leg ALL-SPORT MIX", t4, None))
+        if len(all_sport_combo) >= 3:
+            t3 = build_mixed_picktype_tickets(all_sport_combo, 3, max_tickets=2, min_standard=1)
+            if t3:
+                groups.append(("FINAL 3-Leg ALL-SPORT MIX", t3, None))
 
     return groups
 
@@ -2245,8 +2513,12 @@ def main():
     # Web output (FINAL only)
     if args.write_web:
         print("\nWriting GitHub Pages web outputs (FINAL tickets only)...")
+        nhl_pool_web   = pool(nhl)    if nhl    is not None and len(nhl)    > 0 else None
+        soccer_pool_web= pool(soccer) if soccer is not None and len(soccer) > 0 else None
         final_groups = build_final_web_ticket_groups(
             nba_pool, cbb_pool,
+            nhl_pool=nhl_pool_web,
+            soccer_pool=soccer_pool_web,
             min_hit_rate=thresholds.get("min_hit_rate", 0.70),
             min_edge=thresholds.get("min_edge", 2.0),
             min_rank=thresholds.get("min_rank", 5.0),

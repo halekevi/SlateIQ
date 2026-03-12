@@ -319,6 +319,16 @@ def main():
     print("\nDEF_TIER breakdown:")
     print(df["DEF_TIER"].value_counts().to_string())
 
+    # ── Write to slateiq_ref.db ───────────────────────────────────────────────
+    try:
+        import sys as _sys
+        from pathlib import Path as _Path
+        _sys.path.insert(0, str(_Path(__file__).resolve().parent.parent.parent / "scripts"))
+        from defense_db import write_defense_to_db
+        write_defense_to_db(df, sport="nhl")
+    except Exception as _e:
+        print(f"  ⚠️  Could not write to DB: {_e}")
+
 
 if __name__ == "__main__":
     main()

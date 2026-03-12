@@ -434,8 +434,11 @@ def main():
     out["diff"] = out["actual_value"] - out["line_num"]
     out.drop(columns=["_dir"], inplace=True, errors="ignore")
 
-    # Console summary
-    decided = out[out["result"].isin(["HIT", "MISS"])]
+    # Console summary — exclude Demons from hit rate (data only)
+    if pick_type_col:
+        decided = out[(out["result"].isin(["HIT", "MISS"])) & (out[pick_type_col].astype(str) != "Demon")]
+    else:
+        decided = out[out["result"].isin(["HIT", "MISS"])]
     print("\n" + "="*55)
     print(" CBB GRADED SUMMARY (ROBUST)")
     print("="*55)
@@ -467,9 +470,28 @@ def main():
 
     # Build Excel sheets
     def build_summary_block(df: pd.DataFrame, label_col: str, label_vals: list, title: str) -> pd.DataFrame:
-        decided2 = df[df["result"].isin(["HIT", "MISS"])]
+        # Exclude Demons from grading — data only, hard-to-hit by design
+        if pick_type_col and label_col != pick_type_col:
+            df_grade = df[df[pick_type_col].astype(str) != "Demon"]
+        else:
+            df_grade = df
+        decided2 = df_grade[df_grade["result"].isin(["HIT", "MISS"])]
         rows = []
         for val in label_vals:
+            if title == "Pick Type" and str(val) == "Demon":
+                # Demon row: show total counts but no hit rate
+                demon_sub = df[df[label_col].astype(str) == "Demon"]
+                voids = int(demon_sub["result"].isin(["VOID", "PUSH"]).sum())
+                rows.append({
+                    "Group": title,
+                    "Label": "Demon",
+                    "Hits": "—",
+                    "Misses": "—",
+                    "Voids": voids,
+                    "Decided": "—",
+                    "Hit Rate": "EXCL",
+                })
+                continue
             sub = decided2[decided2[label_col].astype(str) == str(val)]
             hits   = (sub["result"] == "HIT").sum()
             misses = (sub["result"] == "MISS").sum()
@@ -690,12 +712,13 @@ def main():
     ws_sum.row_dimensions[1].height = 22
 
     HDR8 = ["LABEL","Direction","Total Props","Decided","Hits","Misses","Voids","Hit Rate"]
-    hits_ov   = int((out["result"] == "HIT").sum())
-    misses_ov = int((out["result"] == "MISS").sum())
-    voids_ov  = int((out["result"] == "VOID").sum())
-    pushes_ov = int((out["result"] == "PUSH").sum())
+    # Exclude Demons from overall hit rate — data only
+    _out_grade = out[out[pick_type_col].astype(str) != "Demon"] if pick_type_col else out
+    hits_ov   = int((_out_grade["result"] == "HIT").sum())
+    misses_ov = int((_out_grade["result"] == "MISS").sum())
+    voids_ov  = int((out["result"].isin(["VOID","PUSH"])).sum())  # voids from full slate
     dec_ov    = hits_ov + misses_ov
-    total_ov  = hits_ov + misses_ov + voids_ov + pushes_ov
+    total_ov  = len(out)
     hr_ov     = hits_ov / dec_ov if dec_ov > 0 else 0.0
 
     r = 2

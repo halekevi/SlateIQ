@@ -140,12 +140,39 @@ def rank_to_tier(rank) -> str:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--input",   required=True)
-    ap.add_argument("--defense", required=True)
+    ap.add_argument("--defense", default="", help="Path to CBB defense rankings CSV (optional if DB is populated)")
     ap.add_argument("--output",  required=True)
     args = ap.parse_args()
 
-    df     = pd.read_csv(args.input,   dtype=str).fillna("")
-    def_df = pd.read_csv(args.defense, dtype=str).fillna("")
+    df = pd.read_csv(args.input, dtype=str).fillna("")
+
+    # ── Load defense: DB first, CSV fallback ─────────────────────────────────
+    import sys as _sys
+    from pathlib import Path as _Path
+    def_df = None
+    try:
+        _here = _Path(__file__).resolve().parent
+        for _ in range(6):
+            if (_here / "scripts" / "defense_db.py").exists():
+                _sys.path.insert(0, str(_here / "scripts"))
+                break
+            _here = _here.parent
+        from defense_db import load_defense_from_db, defense_freshness
+        db_df = load_defense_from_db("cbb")
+        if db_df is not None and len(db_df) >= 20:
+            fresh = defense_freshness("cbb")
+            print(f"→ CBB defense loaded from DB ({len(db_df)} teams, updated {fresh})")
+            def_df = db_df
+        else:
+            print("→ CBB defense DB empty — falling back to CSV")
+    except Exception as _e:
+        print(f"→ defense_db unavailable ({_e}) — falling back to CSV")
+
+    if def_df is None:
+        if not args.defense:
+            raise SystemExit("❌ No CBB defense data in DB and --defense not provided")
+        print(f"→ Loading defense CSV: {args.defense}")
+        def_df = pd.read_csv(args.defense, dtype=str).fillna("")
 
     # Detect columns in defense file
     rank_col = next((c for c in ["overall_rank","OVERALL_DEF_RANK","def_rank","rank"] if c in def_df.columns), None)

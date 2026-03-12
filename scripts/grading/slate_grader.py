@@ -85,9 +85,15 @@ def pct_cell(ws,r,c,val):
     return cell
 
 def hit_rate(sub):
-    dec=sub[sub['result'].isin(['HIT','MISS'])]
-    h=(dec['result']=='HIT').sum()
-    return (h/len(dec) if len(dec) else np.nan),int(h),int(len(dec)-h),int(sub['result'].isin(['VOID','PUSH']).sum()),int(len(dec))
+    # Demons are excluded from hit-rate grading (data-collection only).
+    # They still appear in Box Raw but are NOT counted in any hit-rate summary.
+    graded = sub[sub['pick_type'] != 'Demon'] if 'pick_type' in sub.columns else sub
+    dec = graded[graded['result'].isin(['HIT', 'MISS'])]
+    h = (dec['result'] == 'HIT').sum()
+    # Voids = non-decided graded rows + all Demon rows (they don't count toward the rate)
+    demon_count = int((sub['pick_type'] == 'Demon').sum()) if 'pick_type' in sub.columns else 0
+    v = int(graded['result'].isin(['VOID', 'PUSH']).sum()) + demon_count
+    return (h / len(dec) if len(dec) else np.nan), int(h), int(len(dec) - h), v, int(len(dec))
 
 def drc(df):
     return 'bet_direction' if 'bet_direction' in df.columns else 'final_bet_direction'

@@ -168,6 +168,7 @@ def main() -> None:
     ap.add_argument("--sheet",  default="ALL")
     ap.add_argument("--output", default="step8_soccer_direction.csv")
     ap.add_argument("--xlsx",   default="step8_soccer_direction_clean.xlsx")
+    ap.add_argument("--date",   default="", help="YYYY-MM-DD target date (default: today ET)")
     args = ap.parse_args()
 
     print(f"→ Loading: {args.input} (sheet={args.sheet})")
@@ -176,6 +177,29 @@ def main() -> None:
     if df.empty:
         print("❌ [SlateIQ-Soccer-S8] Empty input from S7 — aborting.")
         sys.exit(1)
+
+    # ── Date filter: keep only target date's games ───────────────────────────
+    import datetime, zoneinfo
+    eastern = zoneinfo.ZoneInfo("America/New_York")
+    target_str = (args.date.strip()[:10] if args.date
+                  else datetime.datetime.now(tz=eastern).date().isoformat())
+    if "start_time" in df.columns:
+        before_filter = len(df)
+        def _to_et_date(val):
+            try:
+                dt = pd.to_datetime(val)          # handles -04:00 offset natively
+                if dt.tzinfo is None:
+                    dt = dt.tz_localize("UTC")
+                return dt.tz_convert(eastern).date().isoformat()
+            except Exception:
+                return ""
+        df["_et_date"] = df["start_time"].apply(_to_et_date)
+        df = df[df["_et_date"] == target_str].drop(columns="_et_date")
+        dropped = before_filter - len(df)
+        print(f"[DateFilter] Kept {len(df)}/{before_filter} rows for {target_str} ET (dropped {dropped} rows)")
+    else:
+        print("[DateFilter] WARNING: no start_time column — skipping date filter")
+
     out = df.copy()
 
     if "edge" not in out.columns:

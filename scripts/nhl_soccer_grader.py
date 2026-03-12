@@ -405,69 +405,361 @@ def grade(slate: pd.DataFrame, actuals: pd.DataFrame, sport: str) -> pd.DataFram
     return slate
 
 def save_graded(df: pd.DataFrame, out_path: Path, sport: str, date_str: str):
-    """Save in the same multi-sheet format build_grade_report.py reads from Box Raw."""
-    with pd.ExcelWriter(out_path, engine="openpyxl") as writer:
-        # Sheet 1: Box Raw (this is what build_grade_report.py reads)
-        df.to_excel(writer, sheet_name="Box Raw", index=False)
+    """Save NBA-style multi-sheet graded Excel with full formatting and Demon exclusion."""
+    from openpyxl import Workbook
+    from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+    from openpyxl.utils import get_column_letter
+    import numpy as np
 
-        # Sheet 2: Summary
-        hi  = int((df["result"]=="HIT").sum())
-        mi  = int((df["result"]=="MISS").sum())
-        vo  = int((df["result"]=="VOID").sum())
-        dec = hi + mi
-        rate = hi/dec if dec else 0
-        summary = pd.DataFrame([
-            [f"{sport} SLATE GRADE  |  {date_str}  |  Generated {datetime.now():%Y-%m-%d %H:%M}",
-             "Direction","Total Props","Decided","Hits","Misses","Voids","Hit Rate"],
-            ["OVERALL","ALL", len(df), dec, hi, mi, vo, f"{rate*100:.1f}%"],
-        ])
-        summary.to_excel(writer, sheet_name="Summary", index=False, header=False)
+    # ── Colour palette (matches NBA graded file) ─────────────────────────────
+    C = {
+        'hit':'27AE60','miss':'E74C3C','push':'F39C12','void':'95A5A6',
+        'hdr':'1C1C1C','hdr2':'1A5276','hdr3':'1E8449','hdr4':'7D6608',
+        'hdr5':'922B21','hdr6':'6C3483','hdr7':'117A65','hdr8':'1A5276',
+        'alt':'F2F3F4','white':'FFFFFF',
+        'tier_a':'D5F5E3','tier_b':'D6EAF8','tier_c':'FEF9E7','tier_d':'FDEDEC',
+        'over':'D6EAF8','under':'FDEBD0',
+        'goblin':'E8D5F5','demon':'FDEDEC','standard':'F2F3F4',
+    }
+    DEF_TIER_ORDER     = ['Elite','Above Avg','Avg','Weak']
+    MINUTES_TIER_ORDER = ['HIGH','MEDIUM','LOW','UNKNOWN']
+    TIER_ORDER         = ['A','B','C','D']
 
-        # Sheet 3: By Pick Type
-        rows = []
-        for pt, g in df.groupby("pick_type", dropna=True):
-            phi = int((g["result"]=="HIT").sum())
-            pmi = int((g["result"]=="MISS").sum())
-            pvo = int((g["result"]=="VOID").sum())
-            pdec = phi+pmi
-            rows.append({"Pick Type":pt,"Hits":phi,"Misses":pmi,"Voids":pvo,
-                         "Decided":pdec,"Hit Rate":f"{phi/pdec*100:.1f}%" if pdec else "—"})
-        if rows:
-            pd.DataFrame(rows).to_excel(writer, sheet_name="By Pick Type", index=False)
+    def _bdr(color='CCCCCC'):
+        s = Side(style='thin', color=color)
+        return Border(left=s, right=s, top=s, bottom=s)
 
-        # Sheet 4: By Tier
-        rows = []
-        if "tier" in df.columns:
-            for t, g in df.groupby("tier", dropna=True):
-                thi = int((g["result"]=="HIT").sum())
-                tmi = int((g["result"]=="MISS").sum())
-                tvo = int((g["result"]=="VOID").sum())
-                tdec = thi+tmi
-                rows.append({"Tier":f"Tier {t}","Hits":thi,"Misses":tmi,"Voids":tvo,
-                             "Decided":tdec,"Hit Rate":f"{thi/tdec*100:.1f}%" if tdec else "—"})
-        if rows:
-            pd.DataFrame(rows).to_excel(writer, sheet_name="By Tier", index=False)
+    def _hc(ws, r, c, v, bg=None, fc='FFFFFF', bold=True, sz=9, align='center'):
+        cell = ws.cell(row=r, column=c, value=v)
+        cell.font = Font(bold=bold, color=fc, name='Arial', size=sz)
+        if bg: cell.fill = PatternFill('solid', start_color=bg)
+        cell.alignment = Alignment(horizontal=align, vertical='center')
+        cell.border = _bdr()
+        return cell
 
-        # Sheet 5: By Def Tier
-        rows = []
-        if "def_tier" in df.columns:
-            for dt, g in df.groupby("def_tier", dropna=True):
-                dhi = int((g["result"]=="HIT").sum())
-                dmi = int((g["result"]=="MISS").sum())
-                dvo = int((g["result"]=="VOID").sum())
-                ddec = dhi+dmi
-                rows.append({"Def Tier":dt,"Hits":dhi,"Misses":dmi,"Voids":dvo,
-                             "Decided":ddec,"Hit Rate":f"{dhi/ddec*100:.1f}%" if ddec else "—"})
-        if rows:
-            pd.DataFrame(rows).to_excel(writer, sheet_name="By Def Tier", index=False)
+    def _dc(ws, r, c, v, bg=None, bold=False, sz=9, align='center', fmt=None, fc='000000'):
+        cell = ws.cell(row=r, column=c, value=v)
+        cell.font = Font(bold=bold, name='Arial', size=sz, color=fc)
+        cell.fill = PatternFill('solid', start_color=bg or C['white'])
+        cell.alignment = Alignment(horizontal=align, vertical='center')
+        cell.border = _bdr()
+        if fmt: cell.number_format = fmt
+        return cell
 
-        # Sheet 6: Void Reasons
-        vr = df[df["void_reason_grade"].astype(str).str.len()>0].groupby("void_reason_grade").size()
-        if not vr.empty:
-            pd.DataFrame({"Void Reason":vr.index,"Count":vr.values}).to_excel(
-                writer, sheet_name="Void Reasons", index=False)
+    def _res_bg(r):
+        return {'HIT':C['hit'],'MISS':C['miss'],'PUSH':C['push'],'VOID':C['void']}.get(str(r).upper(),'DDDDDD')
 
+    def _hr_bg(v):
+        if v is None or (isinstance(v, float) and np.isnan(v)): return 'DDDDDD'
+        if v >= 0.65: return C['hit']
+        if v >= 0.50: return C['push']
+        return C['miss']
+
+    def _tier_bg(t):
+        return {'A':C['tier_a'],'B':C['tier_b'],'C':C['tier_c'],'D':C['tier_d']}.get(str(t).upper(), C['white'])
+
+    def _pct_cell(ws, r, c, val):
+        nan = val is None or (isinstance(val, float) and np.isnan(val))
+        bg = _hr_bg(val) if not nan else 'DDDDDD'
+        cell = _dc(ws, r, c, val if not nan else '', bg=bg, bold=True)
+        if not nan:
+            cell.number_format = '0.0%'
+            cell.font = Font(bold=True, name='Arial', size=9, color='FFFFFF')
+        return cell
+
+    def _sw(ws, widths):
+        for ci, w in enumerate(widths, 1):
+            ws.column_dimensions[get_column_letter(ci)].width = w
+
+    def _hit_rate(sub):
+        """Exclude Demons from hit-rate. They appear in Box Raw but not in grading stats."""
+        graded = sub[sub['pick_type'] != 'Demon'] if 'pick_type' in sub.columns else sub
+        dec = graded[graded['result'].isin(['HIT', 'MISS'])]
+        h = (dec['result'] == 'HIT').sum()
+        demon_count = int((sub['pick_type'] == 'Demon').sum()) if 'pick_type' in sub.columns else 0
+        v = int(graded['result'].isin(['VOID', 'PUSH']).sum()) + demon_count
+        return (h / len(dec) if len(dec) else np.nan), int(h), int(len(dec) - h), v, int(len(dec))
+
+    def _drc(d):
+        return 'bet_direction' if 'bet_direction' in d.columns else 'final_bet_direction'
+
+    def _sheet_hdr8(ws, col1, bg, widths=None):
+        _sw(ws, widths or [24,10,8,10,8,8,8,12])
+        for ci, h in enumerate([col1,'Direction','Total','Decided','Hits','Misses','Voids','Hit Rate'], 1):
+            _hc(ws, 1, ci, h, bg=bg)
+        ws.row_dimensions[1].height = 20
+        ws.freeze_panes = 'A2'
+
+    def _dir_subrows(ws, ri, sub, label, bg):
+        d = _drc(sub)
+        hr_a, h_a, m_a, v_a, dec_a = _hit_rate(sub)
+        row_bg = bg or (C['alt'] if ri % 2 == 0 else C['white'])
+        _dc(ws,ri,1,label,bg=row_bg,bold=True,align='left')
+        _dc(ws,ri,2,'ALL',bg=row_bg,bold=True)
+        _dc(ws,ri,3,len(sub),bg=row_bg); _dc(ws,ri,4,dec_a,bg=row_bg)
+        _dc(ws,ri,5,h_a,bg=row_bg); _dc(ws,ri,6,m_a,bg=row_bg); _dc(ws,ri,7,v_a,bg=row_bg)
+        _pct_cell(ws,ri,8,hr_a); ri += 1
+        for direction in ['OVER','UNDER']:
+            dsub = sub[sub[d].str.upper() == direction] if d in sub.columns else pd.DataFrame()
+            if len(dsub) == 0: continue
+            hr_d, h_d, m_d, v_d, dec_d = _hit_rate(dsub)
+            dbg = C['over'] if direction == 'OVER' else C['under']
+            _dc(ws,ri,1,'',bg=dbg); _dc(ws,ri,2,direction,bg=dbg,bold=True)
+            _dc(ws,ri,3,len(dsub),bg=dbg); _dc(ws,ri,4,dec_d,bg=dbg)
+            _dc(ws,ri,5,h_d,bg=dbg); _dc(ws,ri,6,m_d,bg=dbg); _dc(ws,ri,7,v_d,bg=dbg)
+            _pct_cell(ws,ri,8,hr_d); ri += 1
+        return ri
+
+    wb = Workbook()
+    wb.remove(wb.active)
+
+    # ── Summary sheet ─────────────────────────────────────────────────────────
+    ws_sum = wb.create_sheet('Summary', 0)
+    ws_sum.column_dimensions['A'].width = 22
+    ws_sum.column_dimensions['B'].width = 12
+    for ci in range(3, 10):
+        ws_sum.column_dimensions[get_column_letter(ci)].width = 11
+    ws_sum.merge_cells('A1:I1')
+    c = ws_sum['A1']
+    c.value = f"{sport} SLATE GRADE  |  {date_str}  |  Generated {datetime.now():%Y-%m-%d %H:%M}"
+    c.font = Font(bold=True, name='Arial', size=12, color='FFFFFF')
+    c.fill = PatternFill('solid', start_color=C['hdr'])
+    c.alignment = Alignment(horizontal='center', vertical='center')
+    ws_sum.row_dimensions[1].height = 28
+
+    d_col = _drc(df)
+
+    def _sec_hdr(ws, row, label, color):
+        _hc(ws, row, 1, label, bg=color)
+        for ci, h in enumerate(['Direction','Total','Decided','Hits','Misses','Voids','Hit Rate'], 2):
+            _hc(ws, row, ci, h, bg=color)
+        ws.row_dimensions[row].height = 20
+        return row + 1
+
+    def _simple_row(ws, row, label, sub, bg=None, bold=True):
+        hr2, h2, m2, v2, dec2 = _hit_rate(sub)
+        bg = bg or (C['alt'] if row % 2 == 0 else C['white'])
+        _dc(ws, row, 1, label, bold=bold, align='left')
+        _dc(ws, row, 2, 'ALL', bg=bg, bold=True); _dc(ws, row, 3, len(sub), bg=bg)
+        _dc(ws, row, 4, dec2, bg=bg); _dc(ws, row, 5, int(h2), bg=bg)
+        _dc(ws, row, 6, int(m2), bg=bg); _dc(ws, row, 7, int(v2), bg=bg)
+        _pct_cell(ws, row, 8, hr2)
+        return row + 1
+
+    def _dir_rows(ws, row, sub):
+        if d_col not in sub.columns: return row
+        for direction in ['OVER', 'UNDER']:
+            dsub = sub[sub[d_col].str.upper() == direction]
+            if len(dsub) == 0: continue
+            hr_d, h_d, m_d, v_d, dec_d = _hit_rate(dsub)
+            dbg = C['over'] if direction == 'OVER' else C['under']
+            _dc(ws,row,1,'',bg=dbg); _dc(ws,row,2,direction,bg=dbg,bold=True)
+            _dc(ws,row,3,len(dsub),bg=dbg); _dc(ws,row,4,dec_d,bg=dbg)
+            _dc(ws,row,5,int(h_d),bg=dbg); _dc(ws,row,6,int(m_d),bg=dbg)
+            _dc(ws,row,7,int(v_d),bg=dbg); _pct_cell(ws,row,8,hr_d); row += 1
+        return row
+
+    # OVERALL
+    row = 2
+    _hc(ws_sum, row, 1, 'OVERALL', bg=C['hdr2'])
+    for ci, h in enumerate(['Direction','Total Props','Decided','Hits','Misses','Voids','Hit Rate'], 2):
+        _hc(ws_sum, row, ci, h, bg=C['hdr2'])
+    row += 1
+    hr_ov, h_ov, m_ov, v_ov, dec_ov = _hit_rate(df)
+    _dc(ws_sum,row,1,'Full Slate',bold=True,align='left'); _dc(ws_sum,row,2,'ALL')
+    _dc(ws_sum,row,3,len(df)); _dc(ws_sum,row,4,dec_ov)
+    _dc(ws_sum,row,5,int(h_ov)); _dc(ws_sum,row,6,int(m_ov)); _dc(ws_sum,row,7,int(v_ov))
+    _pct_cell(ws_sum,row,8,hr_ov); row += 1
+
+    # BY PICK TYPE
+    if 'pick_type' in df.columns:
+        row += 1; row = _sec_hdr(ws_sum, row, 'BY PICK TYPE', C['hdr3'])
+        for pt in ['Goblin', 'Demon', 'Standard']:
+            sub = df[df['pick_type'] == pt]
+            if len(sub) == 0: continue
+            pt_bg = {'Goblin':C['goblin'],'Demon':C['demon'],'Standard':C['standard']}.get(pt)
+            if pt == 'Demon':
+                # Demon: show total count but mark as excluded from grading
+                _dc(ws_sum,row,1,f"{pt} (excl. from grading)",bold=True,align='left')
+                _dc(ws_sum,row,2,'OVER',bg=pt_bg,bold=True)
+                _dc(ws_sum,row,3,len(sub),bg=pt_bg); _dc(ws_sum,row,4,'—',bg=pt_bg)
+                _dc(ws_sum,row,5,'—',bg=pt_bg); _dc(ws_sum,row,6,'—',bg=pt_bg)
+                _dc(ws_sum,row,7,len(sub),bg=pt_bg)
+                _dc(ws_sum,row,8,'EXCL',bg='DDDDDD',bold=True); row += 1
+            elif pt == 'Standard':
+                row = _simple_row(ws_sum, row, pt, sub, bg=pt_bg)
+                row = _dir_rows(ws_sum, row, sub)
+            else:  # Goblin
+                hr_g, h_g, m_g, v_g, dec_g = _hit_rate(sub)
+                _dc(ws_sum,row,1,pt,bold=True,align='left'); _dc(ws_sum,row,2,'OVER',bg=pt_bg,bold=True)
+                _dc(ws_sum,row,3,len(sub),bg=pt_bg); _dc(ws_sum,row,4,dec_g,bg=pt_bg)
+                _dc(ws_sum,row,5,h_g,bg=pt_bg); _dc(ws_sum,row,6,m_g,bg=pt_bg); _dc(ws_sum,row,7,v_g,bg=pt_bg)
+                _pct_cell(ws_sum,row,8,hr_g); row += 1
+
+    # BY TIER
+    if 'tier' in df.columns:
+        row += 1; row = _sec_hdr(ws_sum, row, 'BY TIER', C['hdr4'])
+        for t in TIER_ORDER:
+            sub = df[df['tier'].astype(str).str.upper() == t]
+            if len(sub) == 0: continue
+            row = _simple_row(ws_sum, row, f'Tier {t}', sub, bg=_tier_bg(t))
+            row = _dir_rows(ws_sum, row, sub)
+
+    # BY DEF TIER
+    if 'def_tier' in df.columns:
+        row += 1; row = _sec_hdr(ws_sum, row, 'BY OPP DEF TIER', C['hdr5'])
+        for dt in [t for t in DEF_TIER_ORDER if t in df['def_tier'].dropna().unique()]:
+            sub = df[df['def_tier'] == dt]
+            row = _simple_row(ws_sum, row, dt, sub)
+            row = _dir_rows(ws_sum, row, sub)
+
+    # BY MINUTES TIER (Soccer / NHL)
+    if 'minutes_tier' in df.columns:
+        row += 1; row = _sec_hdr(ws_sum, row, 'BY MINUTES TIER', C['hdr6'])
+        for mt in [t for t in MINUTES_TIER_ORDER if t in df['minutes_tier'].dropna().unique()]:
+            sub = df[df['minutes_tier'] == mt]
+            row = _simple_row(ws_sum, row, mt, sub)
+            row = _dir_rows(ws_sum, row, sub)
+
+    # ── Box Raw ───────────────────────────────────────────────────────────────
+    ws_raw = wb.create_sheet('Box Raw')
+    desired = ['player','team','opp_team','prop_type_norm','pick_type','line',
+               'bet_direction','tier','def_tier','minutes_tier','position_group',
+               'edge','hit_rate','projection','rank_score',
+               'actual','result','margin','void_reason_grade']
+    cols = [c for c in desired if c in df.columns]
+    widths_map = {'player':22,'team':6,'opp_team':6,'prop_type_norm':20,'pick_type':10,
+                  'line':7,'bet_direction':10,'tier':5,'def_tier':10,'minutes_tier':12,
+                  'position_group':14,'edge':8,'hit_rate':10,'projection':12,'rank_score':12,
+                  'actual':9,'result':8,'margin':8,'void_reason_grade':22}
+    for ci, col in enumerate(cols, 1):
+        ws_raw.column_dimensions[get_column_letter(ci)].width = widths_map.get(col, 12)
+        _hc(ws_raw, 1, ci, col, bg=C['hdr'])
+    ws_raw.row_dimensions[1].height = 20
+    ws_raw.freeze_panes = 'A2'
+    for ri, row_data in enumerate(df[cols].itertuples(), 2):
+        bg = C['alt'] if ri % 2 == 0 else C['white']
+        res = str(getattr(row_data, 'result', '')).upper()
+        for ci, col in enumerate(cols, 1):
+            val = getattr(row_data, col, '')
+            c_bg = _res_bg(res) if col == 'result' else (_tier_bg(val) if col == 'tier' else bg)
+            cell = _dc(ws_raw, ri, ci, val, bg=c_bg, align='left' if col == 'player' else 'center')
+            if col == 'result' and res in ('HIT','MISS','PUSH','VOID'):
+                cell.font = Font(bold=True, name='Arial', size=9, color='FFFFFF')
+    ws_raw.auto_filter.ref = f"A1:{get_column_letter(len(cols))}1"
+
+    # ── By Pick Type ──────────────────────────────────────────────────────────
+    ws_pt = wb.create_sheet('By Pick Type')
+    _sheet_hdr8(ws_pt, 'Pick Type', C['hdr3'], [20,10,8,10,8,8,8,12])
+    ri = 2
+    for pt in ['Goblin', 'Demon', 'Standard']:
+        sub = df[df['pick_type'] == pt] if 'pick_type' in df.columns else pd.DataFrame()
+        if len(sub) == 0: continue
+        pt_bg = {'Goblin':C['goblin'],'Demon':C['demon'],'Standard':C['standard']}.get(pt, C['white'])
+        if pt == 'Demon':
+            _dc(ws_pt,ri,1,f"{pt} (excl.)",bg=pt_bg,bold=True,align='left')
+            _dc(ws_pt,ri,2,'OVER',bg=pt_bg,bold=True)
+            _dc(ws_pt,ri,3,len(sub),bg=pt_bg); _dc(ws_pt,ri,4,'—',bg=pt_bg)
+            _dc(ws_pt,ri,5,'—',bg=pt_bg); _dc(ws_pt,ri,6,'—',bg=pt_bg)
+            _dc(ws_pt,ri,7,len(sub),bg=pt_bg)
+            _dc(ws_pt,ri,8,'EXCL',bg='DDDDDD',bold=True); ri += 1
+        elif pt == 'Standard':
+            ri = _dir_subrows(ws_pt, ri, sub, pt, pt_bg)
+        else:
+            hr_g, h_g, m_g, v_g, dec_g = _hit_rate(sub)
+            _dc(ws_pt,ri,1,pt,bg=pt_bg,bold=True,align='left'); _dc(ws_pt,ri,2,'OVER',bg=pt_bg,bold=True)
+            _dc(ws_pt,ri,3,len(sub),bg=pt_bg); _dc(ws_pt,ri,4,dec_g,bg=pt_bg)
+            _dc(ws_pt,ri,5,h_g,bg=pt_bg); _dc(ws_pt,ri,6,m_g,bg=pt_bg); _dc(ws_pt,ri,7,v_g,bg=pt_bg)
+            _pct_cell(ws_pt,ri,8,hr_g); ri += 1
+
+    # ── By Tier ───────────────────────────────────────────────────────────────
+    if 'tier' in df.columns:
+        ws_tier = wb.create_sheet('By Tier')
+        _sheet_hdr8(ws_tier, 'Tier', C['hdr4'])
+        ri = 2
+        for t in TIER_ORDER:
+            sub = df[df['tier'].astype(str).str.upper() == t]
+            if len(sub) == 0: continue
+            ri = _dir_subrows(ws_tier, ri, sub, f'Tier {t}', _tier_bg(t))
+
+    # ── Prop Type x Direction ─────────────────────────────────────────────────
+    pt_col = 'prop_type_norm' if 'prop_type_norm' in df.columns else None
+    if pt_col:
+        ws_prop = wb.create_sheet('Prop Type x Direction')
+        _sheet_hdr8(ws_prop, 'Prop Type', C['hdr2'], [28,10,8,10,8,8,8,12])
+        prop_order = (df[df['result'].isin(['HIT','MISS'])].groupby(pt_col).size()
+                      .sort_values(ascending=False).index.tolist())
+        prop_order += [p for p in df[pt_col].unique() if p not in prop_order]
+        ri = 2
+        for prop in prop_order:
+            psub = df[df[pt_col] == prop]
+            ri = _dir_subrows(ws_prop, ri, psub, prop, C['alt'] if ri % 2 == 0 else C['white'])
+
+    # ── By Direction ──────────────────────────────────────────────────────────
+    ws_dir = wb.create_sheet('By Direction')
+    _sheet_hdr8(ws_dir, 'Direction', C['hdr5'])
+    ri = 2
+    if d_col in df.columns:
+        for direction in ['OVER', 'UNDER']:
+            dsub = df[df[d_col].str.upper() == direction]
+            if len(dsub) == 0: continue
+            hr_d, h_d, m_d, v_d, dec_d = _hit_rate(dsub)
+            dbg = C['over'] if direction == 'OVER' else C['under']
+            _dc(ws_dir,ri,1,direction,bg=dbg,bold=True,align='left'); _dc(ws_dir,ri,2,direction,bg=dbg,bold=True)
+            _dc(ws_dir,ri,3,len(dsub),bg=dbg); _dc(ws_dir,ri,4,dec_d,bg=dbg)
+            _dc(ws_dir,ri,5,h_d,bg=dbg); _dc(ws_dir,ri,6,m_d,bg=dbg); _dc(ws_dir,ri,7,v_d,bg=dbg)
+            _pct_cell(ws_dir,ri,8,hr_d); ri += 1
+
+    # ── By Def Tier ───────────────────────────────────────────────────────────
+    if 'def_tier' in df.columns:
+        ws_def = wb.create_sheet('By Def Tier')
+        _sheet_hdr8(ws_def, 'Def Tier', C['hdr5'])
+        ri = 2
+        for dt in [t for t in DEF_TIER_ORDER if t in df['def_tier'].dropna().unique()]:
+            sub = df[df['def_tier'] == dt]
+            ri = _dir_subrows(ws_def, ri, sub, dt, C['alt'] if ri % 2 == 0 else C['white'])
+
+    # ── By Minutes Tier ───────────────────────────────────────────────────────
+    if 'minutes_tier' in df.columns:
+        ws_mt = wb.create_sheet('By Minutes Tier')
+        _sheet_hdr8(ws_mt, 'Minutes Tier', C['hdr6'])
+        ri = 2
+        for mt in [t for t in MINUTES_TIER_ORDER if t in df['minutes_tier'].dropna().unique()]:
+            sub = df[df['minutes_tier'] == mt]
+            ri = _dir_subrows(ws_mt, ri, sub, mt, C['alt'] if ri % 2 == 0 else C['white'])
+
+    # ── By Position Group (Soccer) / Player Role (NHL) ────────────────────────
+    for role_col, sheet_name, hdr_bg in [
+        ('position_group', 'By Position', C['hdr7']),
+        ('player_role',    'By Player Role', C['hdr7']),
+    ]:
+        if role_col in df.columns:
+            ws_role = wb.create_sheet(sheet_name)
+            _sheet_hdr8(ws_role, sheet_name.replace('By ',''), hdr_bg)
+            ri = 2
+            for role in sorted(df[role_col].dropna().unique()):
+                sub = df[df[role_col] == role]
+                ri = _dir_subrows(ws_role, ri, sub, str(role), C['alt'] if ri % 2 == 0 else C['white'])
+
+    # ── Void Reasons ──────────────────────────────────────────────────────────
+    vr_col = 'void_reason_grade' if 'void_reason_grade' in df.columns else None
+    if vr_col:
+        vr_df = df[df[vr_col].astype(str).str.strip().str.len() > 0]
+        if len(vr_df) > 0:
+            ws_vr = wb.create_sheet('Void Reasons')
+            _sw(ws_vr, [28, 10])
+            _hc(ws_vr, 1, 1, 'Void Reason', bg=C['hdr'])
+            _hc(ws_vr, 1, 2, 'Count', bg=C['hdr'])
+            ws_vr.freeze_panes = 'A2'
+            vr_counts = vr_df[vr_col].value_counts()
+            for ri, (reason, cnt) in enumerate(vr_counts.items(), 2):
+                bg = C['alt'] if ri % 2 == 0 else C['white']
+                _dc(ws_vr, ri, 1, str(reason), bg=bg, align='left')
+                _dc(ws_vr, ri, 2, int(cnt), bg=bg)
+
+    wb.save(out_path)
     print(f"  Saved → {out_path}  ({out_path.stat().st_size:,} bytes)")
+    print(f"  Sheets: {wb.sheetnames}")
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
 def main():

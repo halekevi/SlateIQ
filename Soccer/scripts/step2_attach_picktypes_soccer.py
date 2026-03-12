@@ -65,6 +65,11 @@ PROP_NORM_MAP = {
     "goals allowed (combo)": "goals_allowed",
     "goal + assist": "goal_assist",
     "shots assisted": "shots_assisted",
+    "attempted dribbles": "attempted_dribbles",
+    "attempteddribbles": "attempted_dribbles",
+    "crosses": "crosses",
+    "goals allowed in first 30 minutes": "goals_allowed_first30",
+    "goalsallowedinfirst30minutes": "goals_allowed_first30",
 }
 
 # ── normalizers ──────────────────────────────────────────────────────────────
@@ -199,20 +204,28 @@ def build_roster_id_map(leagues: List[str], workers: int = 20, roster_cache_path
     print(f"  Fetching rosters for {len(all_teams)} teams (workers={workers})...")
     combined: Dict[str, str] = {}
 
+    try:
+        from tqdm import tqdm as _tqdm
+    except ImportError:
+        import subprocess as _sp, sys as _sys
+        _sp.check_call([_sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+        from tqdm import tqdm as _tqdm
+
     def _fetch_one(args):
         league, team_id, _ = args
         return _fetch_roster(league, team_id)
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
         futures = {pool.submit(_fetch_one, t): t for t in all_teams}
-        for i, fut in enumerate(as_completed(futures), 1):
-            try:
-                roster = fut.result()
-                combined.update(roster)
-            except Exception:
-                pass
-            if i % 25 == 0 or i == len(all_teams):
-                print(f"    {i}/{len(all_teams)} rosters done  players_mapped={len(combined)}")
+        with _tqdm(total=len(all_teams), desc="Fetching rosters", unit="team") as pbar:
+            for i, fut in enumerate(as_completed(futures), 1):
+                try:
+                    roster = fut.result()
+                    combined.update(roster)
+                except Exception:
+                    pass
+                pbar.set_postfix(players=len(combined))
+                pbar.update(1)
 
     if roster_cache_path and combined:
         pd.DataFrame([{"player_norm": k, "espn_athlete_id": v} for k, v in combined.items()]) \

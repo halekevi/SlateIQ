@@ -125,6 +125,49 @@ $NHLRecommendations = "$DateDir\nhl_pick_recommendations_$Date.csv"
 $SoccerRecommendations = "$DateDir\soccer_pick_recommendations_$Date.csv"
 
 # =============================================================================
+#  STEP 0 — APPEND YESTERDAY'S BOXSCORES TO REFERENCE DB
+#  Runs first, always. Keeps slateiq_ref.db current so pipeline reads
+#  fresh stats without any live ESPN calls during pipeline runs.
+# =============================================================================
+Write-Host "[ STEP 0: BOXSCORE REFERENCE DB ]" -ForegroundColor Magenta
+Write-Host ""
+
+$BuildBoxscoreRef = "$ScriptsDir\build_boxscore_ref.py"
+if (Test-Path $BuildBoxscoreRef) {
+    # Determine which sports to append based on flags
+    $RefSports = @()
+    if (-not $CBBOnly -and -not $NHLOnly -and -not $SoccerOnly) { $RefSports += "nba" }
+    if (-not $NBAOnly -and -not $NHLOnly -and -not $SoccerOnly) { $RefSports += "cbb" }
+    if ($NHLOnly -or (-not $NBAOnly -and -not $CBBOnly -and -not $SoccerOnly)) { $RefSports += "nhl" }
+    if ($SoccerOnly -or (-not $NBAOnly -and -not $CBBOnly -and -not $NHLOnly)) { $RefSports += "soccer" }
+
+    if ($RefSports.Count -gt 0) {
+        $refArgs = @("--date", $Date, "--sports") + $RefSports
+        Run-Py "Append boxscores to DB ($($RefSports -join ', '))" $Root $BuildBoxscoreRef $refArgs | Out-Null
+        # Print DB summary after append
+        & py -3.14 $BuildBoxscoreRef "--summary" 2>&1 | ForEach-Object { Write-Host "      | $_" -ForegroundColor DarkGray }
+    }
+
+    # ── Seed player IDs from CSV maps if they haven't been seeded yet ──
+    $NBAIdMap = "$ScriptsDir\nba_to_espn_id_map.csv"
+    if (Test-Path $NBAIdMap) {
+        & py -3.14 $BuildBoxscoreRef "--seed-ids" "nba=$NBAIdMap" 2>&1 | ForEach-Object { Write-Host "      | $_" -ForegroundColor DarkGray }
+    }
+
+    # ── Upsert defense reports if they were generated recently ──
+    $NBADef    = "$NBADir\scripts\nba_defense_summary.csv"
+    $NHLDef    = "$NHLDir\nhl_defense_summary.csv"
+    $SoccerDef = "$SoccerDir\outputs\soccer_defense_summary.csv"
+    if (Test-Path $NBADef)    { & py -3.14 $BuildBoxscoreRef "--upsert-defense" "nba=$NBADef"       2>&1 | Out-Null }
+    if (Test-Path $NHLDef)    { & py -3.14 $BuildBoxscoreRef "--upsert-defense" "nhl=$NHLDef"       2>&1 | Out-Null }
+    if (Test-Path $SoccerDef) { & py -3.14 $BuildBoxscoreRef "--upsert-defense" "soccer=$SoccerDef" 2>&1 | Out-Null }
+} else {
+    Write-Host "  WARNING: build_boxscore_ref.py not found at $BuildBoxscoreRef" -ForegroundColor Yellow
+    Write-Host "  Drop build_boxscore_ref.py into scripts\ to enable automatic DB updates." -ForegroundColor Yellow
+}
+Write-Host ""
+
+# =============================================================================
 #  NBA GRADING (ADVANCED)
 # =============================================================================
 if (-not $CBBOnly -and -not $NHLOnly -and -not $SoccerOnly) {

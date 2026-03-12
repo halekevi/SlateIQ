@@ -17,6 +17,12 @@ import json
 import time
 import urllib.request
 from datetime import datetime
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:
+    import subprocess, sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+    from tqdm import tqdm as _tqdm
 
 HEADERS = {"User-Agent": "Mozilla/5.0", "Accept": "application/json"}
 NHL_WEB = "https://api-web.nhle.com/v1"
@@ -150,15 +156,13 @@ def main():
     print(f"Fetching player summaries for {len(unique_ids)} unique players...")
 
     if not args.skip_api:
-        for i, nhl_id in enumerate(unique_ids):
-            print(f"  [{i+1}/{len(unique_ids)}] {nhl_id}...", end=" ", flush=True)
+        for i, nhl_id in enumerate(_tqdm(unique_ids, desc="  Fetching player summaries", unit="player")):
             summary = get_player_summary(nhl_id)
             player_summaries[nhl_id] = summary
-            print("ok" if summary else "not found")
             time.sleep(0.2)
 
     results = []
-    for row in rows:
+    for row in _tqdm(rows, desc="  Attaching role context", unit="prop"):
         nhl_id = row.get("nhl_player_id", "")
         role = row.get("player_role", "SKATER")
         pp_pos = row.get("position", "")

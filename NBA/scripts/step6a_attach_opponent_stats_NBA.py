@@ -159,10 +159,13 @@ class OpponentIndex:
         
         # Phase 2: Build player → opponent → games index
         player_count = cache_df["PLAYER_NORM"].nunique()
-        for player_idx, player_norm in enumerate(cache_df["PLAYER_NORM"].unique()):
-            if (player_idx + 1) % 100 == 0:
-                print(f"    Indexed {player_idx + 1}/{player_count} players...")
-            
+        try:
+            from tqdm import tqdm as _tqdm2
+        except ImportError:
+            import subprocess as _sp2, sys as _sys2
+            _sp2.check_call([_sys2.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+            from tqdm import tqdm as _tqdm2
+        for player_idx, player_norm in enumerate(_tqdm2(cache_df["PLAYER_NORM"].unique(), desc="Indexing players", unit="player")):
             player_games = cache_df[cache_df["PLAYER_NORM"] == player_norm]
             
             for _, game in player_games.iterrows():
@@ -386,10 +389,14 @@ Examples:
     print(f"[S6a] Computing opponent stats for {len(df)} rows...")
     results_list = []
 
-    for row_idx, (_, row) in enumerate(df.iterrows()):
-        if (row_idx + 1) % 1000 == 0:
-            print(f"  {row_idx + 1}/{len(df)}")
+    try:
+        from tqdm import tqdm as _tqdm
+    except ImportError:
+        import subprocess as _sp, sys as _sys
+        _sp.check_call([_sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+        from tqdm import tqdm as _tqdm
 
+    for row_idx, (_, row) in enumerate(_tqdm(df.iterrows(), total=len(df), desc="S6a opp stats", unit="row")):
         player        = row.get("player", "")
         opp_team      = row.get("opp_team", "")
         game_date_str = row.get("start_time", "")

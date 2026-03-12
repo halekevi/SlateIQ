@@ -264,24 +264,33 @@ def get_vals_nhl(con: sqlite3.Connection, player: str,
 
 
 def get_vals_soccer(con: sqlite3.Connection, espn_player_id: str,
-                     prop_norm: str, n: int = 10) -> List[float]:
+                     prop_norm: str, n: int = 10,
+                     player_name: str = "") -> List[float]:
     expr = _resolve_prop(prop_norm, "soccer")
     if not expr:
         return []
-    return _query_vals(con, "soccer",
+    # Primary: lookup by ESPN player ID
+    vals = _query_vals(con, "soccer",
                        "espn_player_id = ?", expr, (str(espn_player_id),), n)
+    # Fallback: name-based lookup for FBref-sourced rows
+    if not vals and player_name:
+        norm = player_name.strip().lower()
+        vals = _query_vals(con, "soccer",
+                           "lower(player) = ? AND espn_player_id LIKE 'fbref_%'",
+                           expr, (norm,), n)
+    return vals
 
 
 # ── Minutes / passes lookups (soccer context columns) ─────────────────────────
 def get_avg_minutes_soccer(con: sqlite3.Connection, espn_player_id: str,
-                            n: int = 5) -> Optional[float]:
-    vals = get_vals_soccer(con, espn_player_id, "minutes", n)
+                            n: int = 5, player_name: str = "") -> Optional[float]:
+    vals = get_vals_soccer(con, espn_player_id, "minutes", n, player_name=player_name)
     return float(np.mean(vals)) if vals else None
 
 
 def get_avg_passes_soccer(con: sqlite3.Connection, espn_player_id: str,
-                           n: int = 5) -> Optional[float]:
-    vals = get_vals_soccer(con, espn_player_id, "passes", n)
+                           n: int = 5, player_name: str = "") -> Optional[float]:
+    vals = get_vals_soccer(con, espn_player_id, "passes", n, player_name=player_name)
     return float(np.mean(vals)) if vals else None
 
 

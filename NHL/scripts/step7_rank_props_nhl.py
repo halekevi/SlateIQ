@@ -19,6 +19,116 @@ import argparse
 import csv
 import subprocess
 import sys
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+    from tqdm import tqdm as _tqdm
+
+# ── Head-to-Head (H2H) utility ────────────────────────────────────────────────
+def _attach_h2h(df: "pd.DataFrame", cache_path: str, sport: str,
+                player_col: str, opp_col: str, prop_col: str, line_col: str) -> "pd.DataFrame":
+    """
+    Attach H2H stats per row: how did this player perform vs this opponent
+    historically in the boxscore cache?
+
+    Adds columns:
+      h2h_games      – number of H2H games found
+      h2h_avg        – player's average stat value vs this opp
+      h2h_over_rate  – fraction of those games where they hit OVER the current line
+      h2h_last        – most recent game value vs this opp
+    """
+    import os, pandas as pd, numpy as np
+
+    if not cache_path or not os.path.exists(cache_path):
+        df["h2h_games"]     = 0
+        df["h2h_avg"]       = np.nan
+        df["h2h_over_rate"] = np.nan
+        df["h2h_last"]      = np.nan
+        return df
+
+    try:
+        cache = pd.read_csv(cache_path, low_memory=False)
+    except Exception:
+        df["h2h_games"]     = 0
+        df["h2h_avg"]       = np.nan
+        df["h2h_over_rate"] = np.nan
+        df["h2h_last"]      = np.nan
+        return df
+
+    # Normalise cache columns: need player, opponent, stat_type, value, date
+    cache.columns = [c.lower().strip() for c in cache.columns]
+
+    # Detect player col in cache
+    p_col  = next((c for c in ["player_norm","player_name","player","name"] if c in cache.columns), None)
+    o_col  = next((c for c in ["opp_team","opp","opponent","opp_team_abbr"] if c in cache.columns), None)
+    s_col  = next((c for c in ["stat_type","stat","prop_type","stat_norm"]   if c in cache.columns), None)
+    v_col  = next((c for c in ["value","stat_value","actual","val"]          if c in cache.columns), None)
+    d_col  = next((c for c in ["date","game_date","event_date"]              if c in cache.columns), None)
+
+    if not all([p_col, o_col, v_col]):
+        df["h2h_games"]     = 0
+        df["h2h_avg"]       = np.nan
+        df["h2h_over_rate"] = np.nan
+        df["h2h_last"]      = np.nan
+        return df
+
+    cache[v_col] = pd.to_numeric(cache[v_col], errors="coerce")
+
+    def _norm(x):
+        return str(x).strip().lower() if x and str(x).strip() else ""
+
+    # Build lookup: (player_norm, opp_norm) -> list of (value, date)
+    lookup: dict = {}
+    for row in cache.itertuples(index=False):
+        pk = (_norm(getattr(row, p_col)), _norm(getattr(row, o_col)))
+        v  = getattr(row, v_col)
+        dt = getattr(row, d_col, "") if d_col else ""
+        if pk not in lookup:
+            lookup[pk] = []
+        lookup[pk].append((v, str(dt)))
+
+    h2h_games, h2h_avg, h2h_over, h2h_last = [], [], [], []
+
+    for _, r in df.iterrows():
+        player = _norm(r.get(player_col, ""))
+        opp    = _norm(r.get(opp_col, ""))
+        line   = r.get(line_col, None)
+        try:
+            line_f = float(line)
+        except (TypeError, ValueError):
+            line_f = None
+
+        entries = lookup.get((player, opp), [])
+        # sort by date desc, take up to 10
+        try:
+            entries_sorted = sorted(entries, key=lambda x: x[1], reverse=True)[:10]
+        except Exception:
+            entries_sorted = entries[:10]
+
+        vals = [v for v, _ in entries_sorted if v is not None and not (isinstance(v, float) and v != v)]
+
+        if not vals:
+            h2h_games.append(0)
+            h2h_avg.append(np.nan)
+            h2h_over.append(np.nan)
+            h2h_last.append(np.nan)
+        else:
+            avg = round(float(np.mean(vals)), 2)
+            last = vals[0]
+            over_rate = round(sum(1 for v in vals if line_f is not None and v > line_f) / len(vals), 3) if line_f else np.nan
+            h2h_games.append(len(vals))
+            h2h_avg.append(avg)
+            h2h_over.append(over_rate)
+            h2h_last.append(round(float(last), 2))
+
+    df["h2h_games"]     = h2h_games
+    df["h2h_avg"]       = h2h_avg
+    df["h2h_over_rate"] = h2h_over
+    df["h2h_last"]      = h2h_last
+    return df
+# ─────────────────────────────────────────────────────────────────────────────
+
 
 # Stat stability weights (higher = more predictable/trackable)
 STAT_STABILITY = {
@@ -138,6 +248,7 @@ def main():
     parser.add_argument("--input", default="step6_nhl_role_context.csv")
     parser.add_argument("--output", default="step7_nhl_ranked.xlsx")
     parser.add_argument("--min-sample", type=int, default=MIN_SAMPLE)
+    parser.add_argument("--cache", default="", help="Path to NHL boxscore cache CSV")
     args = parser.parse_args()
 
     try:
@@ -149,7 +260,7 @@ def main():
     rows = read_csv(args.input)
 
     scored = []
-    for row in rows:
+    for row in _tqdm(rows, desc="  Scoring props", unit="prop"):
         prop_score = score_prop(row)
         sample = safe_float(row.get("sample_L10", 0))
         tier = assign_tier(prop_score, sample)
@@ -159,9 +270,45 @@ def main():
 
     scored.sort(key=lambda x: -safe_float(x.get("prop_score", 0)))
 
-    # Add rank
-    for i, row in enumerate(scored):
+    # ── Pass Demons through; only drop neg-edge Goblins to audit sheet ──────────
+    def _norm_pt(x: str) -> str:
+        t = (x or "").strip().lower()
+        if "gob" in t: return "Goblin"
+        if "dem" in t: return "Demon"
+        return "Standard"
+
+    active  = []
+    dropped = []
+    for row in scored:
+        pt    = _norm_pt(row.get("pick_type", ""))
+        edge  = safe_float(row.get("edge", 0))
+        if pt == "Goblin" and edge < 0:
+            row["void_reason"] = "DROPPED_NEG_EDGE_GOBLIN"
+            dropped.append(row)
+        else:
+            # Demons pass through for data/tracking — excluded from tickets in combined_slate
+            active.append(row)
+
+    # Add rank only on active rows
+    for i, row in enumerate(active):
         row["rank"] = i + 1
+    for row in dropped:
+        row["rank"] = ""
+
+    print(f"  Active: {len(active)} | Dropped (neg-edge Goblin only): {len(dropped)}")
+
+    # ── Head-to-Head stats ────────────────────────────────────────────────────
+    if args.cache:
+        import pandas as _pd
+        df_h2h = _pd.DataFrame(active)
+        player_col = next((c for c in ["player_name","player_norm","player"] if c in df_h2h.columns), "")
+        opp_col    = next((c for c in ["opp_team","opp","pp_opp_team","opp_team_abbr"] if c in df_h2h.columns), "")
+        line_col   = next((c for c in ["line_score","line"] if c in df_h2h.columns), "line_score")
+        prop_col   = next((c for c in ["stat_norm","prop_type"] if c in df_h2h.columns), "stat_norm")
+        if player_col and opp_col:
+            df_h2h = _attach_h2h(df_h2h, args.cache, "nhl", player_col, opp_col, prop_col, line_col)
+            active = df_h2h.to_dict("records")
+            print(f"  H2H: {sum(1 for r in active if r.get('h2h_games',0) > 0)}/{len(active)} rows matched")
 
     # Write XLSX with multiple tabs
     wb = openpyxl.Workbook()
@@ -170,15 +317,14 @@ def main():
     ws_all = wb.active
     ws_all.title = "All Props"
 
-    headers = list(scored[0].keys()) if scored else []
+    headers = list(active[0].keys()) if active else (list(dropped[0].keys()) if dropped else [])
     for col, h in enumerate(headers, 1):
         cell = ws_all.cell(row=1, column=col, value=h)
-        cell.font = openpyxl.styles.Font(bold=True)
         cell.fill = openpyxl.styles.PatternFill("solid", fgColor="1F4E79")
         cell.font = openpyxl.styles.Font(bold=True, color="FFFFFF")
 
     TIER_COLORS = {"A": "C6EFCE", "B": "FFEB9C", "C": "FFCCCC", "D": "E0E0E0"}
-    for row in scored:
+    for row in _tqdm(active, desc="  Writing All Props sheet", unit="row"):
         ws_all.append([row.get(h, "") for h in headers])
         last_row = ws_all.max_row
         tier_color = TIER_COLORS.get(row.get("tier", "D"), "FFFFFF")
@@ -187,7 +333,7 @@ def main():
 
     # ── Skaters tab ────────────────────────────────────────────────────────────
     ws_sk = wb.create_sheet("Skaters")
-    skaters = [r for r in scored if r.get("player_role") == "SKATER"]
+    skaters = [r for r in active if r.get("player_role") == "SKATER"]
     if skaters:
         sk_headers = list(skaters[0].keys())
         for col, h in enumerate(sk_headers, 1):
@@ -203,7 +349,7 @@ def main():
 
     # ── Goalies tab ────────────────────────────────────────────────────────────
     ws_g = wb.create_sheet("Goalies")
-    goalies = [r for r in scored if r.get("player_role") == "GOALIE"]
+    goalies = [r for r in active if r.get("player_role") == "GOALIE"]
     if goalies:
         g_headers = list(goalies[0].keys())
         for col, h in enumerate(g_headers, 1):
@@ -219,7 +365,7 @@ def main():
 
     # ── A-Tier only ────────────────────────────────────────────────────────────
     ws_a = wb.create_sheet("A-Tier Best")
-    a_props = [r for r in scored if r.get("tier") == "A"]
+    a_props = [r for r in active if r.get("tier") == "A"]
     if a_props:
         a_headers = list(a_props[0].keys())
         for col, h in enumerate(a_headers, 1):
@@ -232,8 +378,22 @@ def main():
             for col in range(1, len(a_headers) + 1):
                 ws_a.cell(last_row, col).fill = openpyxl.styles.PatternFill("solid", fgColor="C6EFCE")
 
+    # ── DROPPED tab (neg-edge Goblin audit) ───────────────────────────────────
+    ws_drop = wb.create_sheet("DROPPED")
+    if dropped:
+        d_headers = list(dropped[0].keys())
+        for col, h in enumerate(d_headers, 1):
+            cell = ws_drop.cell(row=1, column=col, value=h)
+            cell.fill = openpyxl.styles.PatternFill("solid", fgColor="7B241C")
+            cell.font = openpyxl.styles.Font(bold=True, color="FFFFFF")
+        for row in dropped:
+            ws_drop.append([row.get(h, "") for h in d_headers])
+            last_row = ws_drop.max_row
+            for col in range(1, len(d_headers) + 1):
+                ws_drop.cell(last_row, col).fill = openpyxl.styles.PatternFill("solid", fgColor="FADBD8")
+
     # Autofit columns (approximate)
-    for ws in [ws_all, ws_sk, ws_g, ws_a]:
+    for ws in [ws_all, ws_sk, ws_g, ws_a, ws_drop]:
         for col in ws.columns:
             max_len = max((len(str(c.value or "")) for c in col), default=10)
             ws.column_dimensions[col[0].column_letter].width = min(max_len + 2, 35)
@@ -243,12 +403,13 @@ def main():
 
     # Summary
     tier_counts = {}
-    for r in scored:
+    for r in active:
         t = r.get("tier", "?")
         tier_counts[t] = tier_counts.get(t, 0) + 1
     print(f"Tier breakdown: {tier_counts}")
+    print(f"Dropped (neg-edge Goblin only): {len(dropped)}")
     print(f"\nTop 10 props:")
-    for r in scored[:10]:
+    for r in active[:10]:
         print(f"  #{r['rank']} [{r['tier']}] {r['player_name']} {r['stat_norm']} "
               f"{r['line_score']} {r['recommended_side']} | score={r['prop_score']:.4f}")
 

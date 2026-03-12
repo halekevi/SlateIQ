@@ -397,6 +397,19 @@ def main():
     print(f"\n✅ Saved → {args.out}  ({len(df)} teams, {df['league'].nunique()} leagues)")
     print(f"Sample pp_names: {df['pp_name'].head(10).tolist()}")
 
+    # ── Write to slateiq_ref.db ───────────────────────────────────────────────
+    try:
+        import sys as _sys
+        from pathlib import Path as _Path
+        _sys.path.insert(0, str(_Path(__file__).resolve().parent.parent.parent / "scripts"))
+        from defense_db import write_defense_to_db
+        # Soccer uses pp_name as team key — normalize to uppercase for DB
+        df_db = df.copy()
+        df_db["team"] = df_db["pp_name"].astype(str).str.strip().str.upper()
+        write_defense_to_db(df_db, sport="soccer")
+    except Exception as _e:
+        print(f"  ⚠️  Could not write to DB: {_e}")
+
 
 if __name__ == "__main__":
     main()

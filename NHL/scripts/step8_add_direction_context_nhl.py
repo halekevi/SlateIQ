@@ -31,6 +31,13 @@ Usage:
 import argparse
 import csv
 import openpyxl
+from datetime import date, datetime, timezone
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:
+    import subprocess, sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+    from tqdm import tqdm as _tqdm
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 
@@ -101,15 +108,16 @@ COLUMN_ALIASES = {
     "opp_saa":          ["opp_saa"],
     "opp_pk_pct":       ["opp_pk_pct"],
     "def_rank":         ["def_rank"],
-    "avg_L5":           ["avg_L5"],
-    "avg_L10":          ["avg_L10"],
+    "avg_L5":           ["avg_L5", "stat_last5_avg"],
+    "avg_L10":          ["avg_L10", "stat_last10_avg"],
     "avg_L20":          ["avg_L20"],
-    "avg_season":       ["avg_season"],
+    "avg_season":       ["avg_season", "stat_season_avg"],
     "games_played":     ["games_played"],
     "pts_per_game":     ["pts_per_game"],
     "pp_pts_per_game":  ["pp_pts_per_game"],
     "toi_avg_L10":      ["toi_avg_L10"],
     "toi_per_game_api": ["toi_per_game_api"],
+    "game_start":       ["game_start"],
 }
 
 
@@ -231,6 +239,8 @@ def build_display_row(raw: dict, available_cols: set) -> dict:
         "avg_season":       fmt_num(r("avg_season"), 2),
         "gap_vs_line_L5":   gap_L5,
         "gap_vs_line_L10":  gap_L10,
+        # Projection: best available rolling avg (used by combined_slate_tickets as "Proj")
+        "projection":       fmt_num(r("avg_L5"), 2) or fmt_num(r("avg_L10"), 2) or "",
         # Last 3 raw game values (from Step 4 fix)
         "last1_raw":        get_last_n_raw(raw, available_cols, 1),
         "last2_raw":        get_last_n_raw(raw, available_cols, 2),
@@ -252,6 +262,8 @@ def build_display_row(raw: dict, available_cols: set) -> dict:
         "prop_score":       fmt_num(r("prop_score"), 5),
         "edge":             fmt_num(r("edge"), 4),
         "pick_type":        r("pick_type"),
+        # Game info
+        "game_start":       r("game_start"),
     }
 
 
@@ -358,7 +370,56 @@ def main():
     print(f"Loaded {len(raw_rows)} props from {args.input}")
     print(f"Upstream columns ({len(available_cols)}): {sorted(available_cols)}\n")
 
-    display_rows = [build_display_row(r, available_cols) for r in raw_rows]
+    display_rows = [build_display_row(r, available_cols) for r in _tqdm(raw_rows, desc="  Building display rows", unit="prop")]
+
+    # ── Date filter: keep only today's games ──────────────────────────────────
+    today_local = date.today()
+    today_str   = today_local.isoformat()  # e.g. "2026-03-12"
+    before_filter = len(display_rows)
+
+    def _is_today(gs) -> bool:
+        """
+        Accept game_start as a datetime object, a timezone-aware string, or a
+        plain date string.  Always compare against the *local* calendar date so
+        that UTC-midnight NHL games (e.g. 2026-03-13T00:00:00+00:00 = March 12
+        ET) are not accidentally dropped.
+        """
+        if gs is None or gs == "":
+            return False
+        try:
+            # openpyxl may hand back a datetime object directly
+            if isinstance(gs, datetime):
+                if gs.tzinfo is not None:
+                    local_date = gs.astimezone().date()
+                else:
+                    local_date = gs.date()
+                return local_date == today_local
+            # String path
+            gs_str = str(gs).strip()
+            if not gs_str:
+                return False
+            # Try full ISO parse (handles "+00:00" / "Z" suffixes)
+            for fmt in (
+                "%Y-%m-%dT%H:%M:%S%z",
+                "%Y-%m-%d %H:%M:%S%z",
+                "%Y-%m-%dT%H:%M:%S",
+                "%Y-%m-%d %H:%M:%S",
+            ):
+                try:
+                    dt = datetime.strptime(gs_str[:25], fmt)
+                    if dt.tzinfo is not None:
+                        return dt.astimezone().date() == today_local
+                    return dt.date() == today_local
+                except ValueError:
+                    continue
+            # Fallback: plain date prefix comparison
+            return gs_str[:10] == today_str
+        except Exception:
+            return False
+
+    display_rows = [r for r in display_rows if _is_today(r.get("game_start", ""))]
+    dropped = before_filter - len(display_rows)
+    print(f"[DateFilter] Kept {len(display_rows)}/{before_filter} rows for {today_str} (dropped {dropped} future/past rows)")
 
     display_rows.sort(
         key=lambda r: int(r.get("rank") or 9999)

@@ -17,6 +17,12 @@ import os
 import time
 import urllib.request
 from datetime import datetime
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:
+    import subprocess, sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+    from tqdm import tqdm as _tqdm
 
 
 def current_nhl_season() -> str:
@@ -179,7 +185,8 @@ def main():
     results = []
     fetched = 0
 
-    for i, row in enumerate(rows):
+    bar = _tqdm(enumerate(rows), total=len(rows), desc="  Computing hit rates", unit="prop")
+    for i, row in bar:
         nhl_id = row.get("nhl_player_id", "")
         stat_norm = row.get("stat_norm", "")
         role = row.get("player_role", "SKATER")
@@ -202,12 +209,12 @@ def main():
         cache_key = f"{nhl_id}:{stat_norm}:{args.season}"
         if cache_key in gamelog_cache:
             values = gamelog_cache[cache_key]
+            bar.set_postfix(cached=True, fetched=fetched)
         else:
-            print(f"  [{i+1}/{len(rows)}] {row.get('player_name','')} {stat_norm} ...", end=" ", flush=True)
+            bar.set_postfix(fetching=row.get('player_name','')[:15], fetched=fetched)
             values = get_game_log_values(nhl_id, stat_norm, role, args.season, args.max_games)
             gamelog_cache[cache_key] = values
             fetched += 1
-            print(f"{len(values)} games")
             time.sleep(0.2)
 
         hr_L5, s5, over_L5 = compute_hit_rate(values, line, 5)
@@ -243,8 +250,15 @@ def main():
         row["hit_rate_over_season"] = hr_season
         row["sample_season"] = s_all
         row["composite_hit_rate"] = composite
-        row["edge"] = edge
-        row["recommended_side"] = "OVER" if composite >= 0.5 else "UNDER"
+
+        # Demons and Goblins are always OVER-only picks — force direction regardless of hit rate
+        pick_type_raw = str(row.get("pick_type", "")).strip().lower()
+        if "dem" in pick_type_raw or "gob" in pick_type_raw:
+            row["recommended_side"] = "OVER"
+            row["edge"] = round(composite - 0.5, 4)  # edge relative to OVER direction
+        else:
+            row["recommended_side"] = "OVER" if composite >= 0.5 else "UNDER"
+            row["edge"] = edge
 
         results.append(row)
 

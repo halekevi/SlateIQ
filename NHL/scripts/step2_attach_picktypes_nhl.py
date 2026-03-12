@@ -23,6 +23,12 @@ import time
 import urllib.request
 import urllib.parse
 import urllib.error
+try:
+    from tqdm import tqdm as _tqdm
+except ImportError:
+    import subprocess, sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "tqdm", "--break-system-packages", "-q"])
+    from tqdm import tqdm as _tqdm
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0",
@@ -286,7 +292,7 @@ def main():
     new_lookups = 0
     results = []
 
-    for row in rows:
+    for row in _tqdm(rows, desc="  Processing players", unit="player"):
         stat_raw = row.get("stat_type", "") or ""
         stat_norm = STAT_NORM.get(stat_raw, stat_raw.lower().replace(" ", "_"))
         row["stat_norm"] = stat_norm
