@@ -555,7 +555,87 @@ def api_slate():
         return jsonify({"error": str(e), "picks": []}), 500
 
 
-# /api/slate-picks removed — frontend now uses /api/slate via buildSlateDataFromAllSlate()
+# ──────────────────────────────────────────────────────────────────────────────
+# API: Full per-sport slate from combined Excel (openpyxl, no pandas needed)
+# ──────────────────────────────────────────────────────────────────────────────
+@app.get("/api/slate-sport")
+def api_slate_sport():
+    from openpyxl import load_workbook
+    from datetime import timedelta
+
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    def find_combined(date_str):
+        patterns = [
+            BASE_DIR / f"combined_slate_tickets_{date_str}.xlsx",
+            *sorted(BASE_DIR.glob(f"combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+            *sorted(BASE_DIR.glob(f"outputs/{date_str}/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+            *sorted(BASE_DIR.glob(f"outputs/*/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+        ]
+        for p in patterns:
+            if p.exists():
+                return p
+        return None
+
+    path = find_combined(today)
+    if path is None:
+        for delta in range(1, 4):
+            d = (datetime.now() - timedelta(days=delta)).strftime("%Y-%m-%d")
+            path = find_combined(d)
+            if path:
+                break
+
+    if path is None:
+        return jsonify({"error": "No combined slate found", "sports": {}}), 404
+
+    SHEETS = {"nba": "NBA Slate", "cbb": "CBB Slate", "nhl": "NHL Slate", "soccer": "Soccer Slate"}
+    COLS   = ["Sport","Tier","Rank Score","Player","Team","Opp","Prop","Pick Type",
+              "Line","Dir","Edge","Proj","Hit Rate","L5 Avg","Szn Avg","L5 Over","L5 Under","Game Time"]
+
+    def cell(v):
+        if v is None: return None
+        if isinstance(v, float):
+            import math
+            return None if math.isnan(v) else v
+        return v
+
+    try:
+        wb = load_workbook(path, read_only=True, data_only=True)
+        result = {}
+        for sport_key, sheet_name in SHEETS.items():
+            if sheet_name not in wb.sheetnames:
+                result[sport_key] = []
+                continue
+            ws = wb[sheet_name]
+            headers = [c.value for c in next(ws.iter_rows(min_row=1, max_row=1))]
+            idx = {h: i for i, h in enumerate(headers) if h}
+            rows = []
+            for row in ws.iter_rows(min_row=2, values_only=True):
+                def g(col):
+                    i = idx.get(col)
+                    return cell(row[i]) if i is not None and i < len(row) else None
+                rows.append({
+                    "tier":      g("Tier"),
+                    "rank_score":g("Rank Score"),
+                    "player":    g("Player") or "",
+                    "team":      g("Team") or "",
+                    "opp":       g("Opp") or "",
+                    "prop":      g("Prop") or "",
+                    "pick_type": g("Pick Type") or "",
+                    "line":      g("Line"),
+                    "dir":       g("Dir") or "",
+                    "edge":      g("Edge"),
+                    "hit_rate":  g("Hit Rate"),
+                    "l5_avg":    g("L5 Avg"),
+                    "l5_over":   g("L5 Over"),
+                    "l5_under":  g("L5 Under"),
+                    "game_time": str(g("Game Time") or ""),
+                })
+            result[sport_key] = rows
+        wb.close()
+        return jsonify({"sports": result, "date": today, "file": path.name})
+    except Exception as e:
+        return jsonify({"error": str(e), "sports": {}}), 500
 
 
 if __name__ == "__main__":
