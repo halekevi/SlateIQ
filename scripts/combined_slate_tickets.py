@@ -281,15 +281,30 @@ def _norm_path(p: str) -> str:
     return os.path.abspath(p)
 
 
-def _find_first_by_filename(root_dir: str, filename: str) -> Optional[str]:
+def _find_most_recent_by_filename(root_dir: str, filename: str) -> Optional[str]:
+    """
+    Recursively search root_dir for files matching filename (case-insensitive).
+    Returns the most recently modified match so stale archive copies never win.
+    Skips archive and old_* directories entirely.
+    """
+    SKIP_DIRS = {"archive", "old_outputs", "old_csv", "old_runs", "old_scripts", "__pycache__"}
+    matches = []
     try:
-        for base, _dirs, files in os.walk(root_dir):
+        for base, dirs, files in os.walk(root_dir):
+            dirs[:] = [d for d in dirs if d.lower() not in SKIP_DIRS]
             for f in files:
                 if f.lower() == filename.lower():
-                    return os.path.join(base, f)
+                    full = os.path.join(base, f)
+                    try:
+                        matches.append((os.path.getmtime(full), full))
+                    except OSError:
+                        pass
     except Exception:
         return None
-    return None
+    if not matches:
+        return None
+    matches.sort(key=lambda x: x[0], reverse=True)
+    return matches[0][1]
 
 
 def resolve_input_path(path: str, fallback_filename: Optional[str] = None) -> str:
@@ -297,7 +312,7 @@ def resolve_input_path(path: str, fallback_filename: Optional[str] = None) -> st
     Tries:
     1) exact path as provided
     2) relative to script directory
-    3) recursive search from script directory by filename (case-insensitive)
+    3) recursive search — picks most recently modified, skips archive/old_* dirs
     """
     if not path:
         raise FileNotFoundError("Empty input path.")
@@ -313,8 +328,9 @@ def resolve_input_path(path: str, fallback_filename: Optional[str] = None) -> st
         return p2
 
     filename = fallback_filename or os.path.basename(raw)
-    found = _find_first_by_filename(script_dir, filename)
+    found = _find_most_recent_by_filename(script_dir, filename)
     if found and os.path.exists(found):
+        print(f"  [resolve] Fallback found (most recent): {found}")
         return os.path.abspath(found)
 
     raise FileNotFoundError(
@@ -532,6 +548,67 @@ def ticket_groups_to_payload(all_ticket_groups, date_str, thresholds):
         payload["groups"].append(group)
 
     return payload
+
+
+def write_slate_json(nba, cbb, nhl, soccer, date_str, outdir: str):
+    """Write full per-sport ranked slate to slate_latest.json for the web UI."""
+    import math
+
+    def safe(v):
+        if v is None:
+            return None
+        try:
+            if isinstance(v, float) and math.isnan(v):
+                return None
+        except Exception:
+            pass
+        if hasattr(v, 'item'):  # numpy scalar
+            return v.item()
+        return v
+
+    def df_to_rows(df, sport_key):
+        if df is None or len(df) == 0:
+            return []
+        col = lambda c: df[c] if c in df.columns else None
+        rows = []
+        for _, r in df.iterrows():
+            def g(c):
+                return safe(r[c]) if c in df.columns else None
+            rows.append({
+                "tier":       g("tier"),
+                "rank_score": g("rank_score"),
+                "player":     g("player") or "",
+                "team":       g("team") or "",
+                "opp":        g("opp") or "",
+                "prop":       g("prop_type") or g("prop") or "",
+                "pick_type":  g("pick_type") or "",
+                "line":       g("line"),
+                "dir":        g("direction") or g("dir") or "",
+                "edge":       g("edge"),
+                "hit_rate":   g("hit_rate"),
+                "l5_avg":     g("l5_avg"),
+                "l5_over":    g("l5_over"),
+                "l5_under":   g("l5_under"),
+                "game_time":  str(g("game_time") or ""),
+            })
+        return rows
+
+    payload = {
+        "date": date_str,
+        "sports": {
+            "nba":    df_to_rows(nba,    "nba"),
+            "cbb":    df_to_rows(cbb,    "cbb"),
+            "nhl":    df_to_rows(nhl,    "nhl"),
+            "soccer": df_to_rows(soccer, "soccer"),
+        }
+    }
+
+    os.makedirs(outdir, exist_ok=True)
+    out_path = os.path.join(outdir, "slate_latest.json")
+    with open(out_path, "w", encoding="utf-8") as f:
+        import json as _json
+        _json.dump(payload, f, ensure_ascii=False, default=str)
+    print(f"  slate_latest.json -> {out_path}  ({sum(len(v) for v in payload['sports'].values())} props)")
 
 
 def write_web_outputs(payload, outdir: str):
@@ -2533,6 +2610,7 @@ def main():
         )
         payload = ticket_groups_to_payload(final_groups, args.date, thresholds)
         write_web_outputs(payload, args.web_outdir)
+        write_slate_json(nba, cbb, nhl, soccer, args.date, args.web_outdir)
         if args.also_root:
             write_web_outputs(payload, outdir=".")
         print("✅ Web outputs complete (FINAL only).")

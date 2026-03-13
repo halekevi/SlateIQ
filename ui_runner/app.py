@@ -558,112 +558,18 @@ def api_slate():
 # ──────────────────────────────────────────────────────────────────────────────
 # API: Full per-sport slate from combined Excel (openpyxl, no pandas needed)
 # ──────────────────────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────────────
+# API: Full per-sport slate from slate_latest.json (written by pipeline)
+# ──────────────────────────────────────────────────────────────────────────────
 @app.get("/api/slate-sport")
 def api_slate_sport():
-    from openpyxl import load_workbook
-    from datetime import timedelta
-
-    today = datetime.now().strftime("%Y-%m-%d")
-
-    def find_combined(date_str):
-        # Try multiple possible repo roots
-        file_path = Path(__file__).resolve()
-        possible_roots = [
-            file_path.parent.parent,        # ui_runner/app.py -> repo root
-            file_path.parent.parent.parent, # ui_runner/ui_runner/app.py -> repo root
-            Path("/app"),                   # Railway standard deploy path
-        ]
-        for root in possible_roots:
-            if not root.exists():
-                continue
-            candidates = [
-                root / f"combined_slate_tickets_{date_str}.xlsx",
-                *sorted(root.glob(f"combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
-                *sorted(root.glob(f"outputs/{date_str}/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
-                *sorted(root.glob(f"outputs/*/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
-            ]
-            for p in candidates:
-                if p.exists():
-                    return p
-        return None
-
-    path = find_combined(today)
-    if path is None:
-        for delta in range(1, 4):
-            d = (datetime.now() - timedelta(days=delta)).strftime("%Y-%m-%d")
-            path = find_combined(d)
-            if path:
-                break
-
-    # Last resort: find the most recent combined slate anywhere under /app
-    if path is None:
-        app_root = Path("/app")
-        if app_root.exists():
-            all_combined = sorted(app_root.glob("outputs/**/combined_slate_tickets_*.xlsx"), reverse=True)
-            if not all_combined:
-                all_combined = sorted(app_root.glob("**/combined_slate_tickets_*.xlsx"), reverse=True)
-            if all_combined:
-                path = all_combined[0]
-
-    if path is None:
-        app_root = Path("/app")
-        outputs_dir = app_root / "outputs"
-        return jsonify({
-            "error": "No combined slate found",
-            "app_root_exists": app_root.exists(),
-            "app_contents": [p.name for p in app_root.iterdir()][:30] if app_root.exists() else [],
-            "outputs_exists": outputs_dir.exists(),
-            "outputs_contents": [str(p) for p in outputs_dir.iterdir()][:20] if outputs_dir.exists() else [],
-            "file_path": str(Path(__file__).resolve()),
-            "sports": {}
-        }), 404
-
-    SHEETS = {"nba": "NBA Slate", "cbb": "CBB Slate", "nhl": "NHL Slate", "soccer": "Soccer Slate"}
-    COLS   = ["Sport","Tier","Rank Score","Player","Team","Opp","Prop","Pick Type",
-              "Line","Dir","Edge","Proj","Hit Rate","L5 Avg","Szn Avg","L5 Over","L5 Under","Game Time"]
-
-    def cell(v):
-        if v is None: return None
-        if isinstance(v, float):
-            import math
-            return None if math.isnan(v) else v
-        return v
-
+    import json as _json
+    slate_path = TEMPLATES_DIR / "slate_latest.json"
+    if not slate_path.exists():
+        return jsonify({"error": "slate_latest.json not found — run pipeline first", "sports": {}}), 404
     try:
-        wb = load_workbook(path, read_only=True, data_only=True)
-        result = {}
-        for sport_key, sheet_name in SHEETS.items():
-            if sheet_name not in wb.sheetnames:
-                result[sport_key] = []
-                continue
-            ws = wb[sheet_name]
-            headers = [c.value for c in next(ws.iter_rows(min_row=1, max_row=1))]
-            idx = {h: i for i, h in enumerate(headers) if h}
-            rows = []
-            for row in ws.iter_rows(min_row=2, values_only=True):
-                def g(col):
-                    i = idx.get(col)
-                    return cell(row[i]) if i is not None and i < len(row) else None
-                rows.append({
-                    "tier":      g("Tier"),
-                    "rank_score":g("Rank Score"),
-                    "player":    g("Player") or "",
-                    "team":      g("Team") or "",
-                    "opp":       g("Opp") or "",
-                    "prop":      g("Prop") or "",
-                    "pick_type": g("Pick Type") or "",
-                    "line":      g("Line"),
-                    "dir":       g("Dir") or "",
-                    "edge":      g("Edge"),
-                    "hit_rate":  g("Hit Rate"),
-                    "l5_avg":    g("L5 Avg"),
-                    "l5_over":   g("L5 Over"),
-                    "l5_under":  g("L5 Under"),
-                    "game_time": str(g("Game Time") or ""),
-                })
-            result[sport_key] = rows
-        wb.close()
-        return jsonify({"sports": result, "date": today, "file": path.name})
+        data = _json.loads(slate_path.read_text(encoding="utf-8-sig"))
+        return jsonify(data)
     except Exception as e:
         return jsonify({"error": str(e), "sports": {}}), 500
 
