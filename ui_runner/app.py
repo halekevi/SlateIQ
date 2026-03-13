@@ -585,8 +585,25 @@ def api_slate_sport():
             if path:
                 break
 
+    # Last resort: find the most recent combined slate anywhere under outputs/
     if path is None:
-        return jsonify({"error": "No combined slate found", "sports": {}}), 404
+        all_combined = sorted(BASE_DIR.glob("outputs/**/combined_slate_tickets_*.xlsx"), reverse=True)
+        if all_combined:
+            path = all_combined[0]
+
+    if path is None:
+        # Return debug info to help diagnose
+        base_contents = [str(p) for p in BASE_DIR.iterdir() if not p.name.startswith('.')]
+        outputs_exists = (BASE_DIR / "outputs").exists()
+        outputs_contents = [str(p) for p in (BASE_DIR / "outputs").iterdir()] if outputs_exists else []
+        return jsonify({
+            "error": "No combined slate found",
+            "base_dir": str(BASE_DIR),
+            "base_contents": base_contents[:20],
+            "outputs_exists": outputs_exists,
+            "outputs_contents": outputs_contents[:20],
+            "sports": {}
+        }), 404
 
     SHEETS = {"nba": "NBA Slate", "cbb": "CBB Slate", "nhl": "NHL Slate", "soccer": "Soccer Slate"}
     COLS   = ["Sport","Tier","Rank Score","Player","Team","Opp","Prop","Pick Type",
