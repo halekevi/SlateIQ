@@ -514,17 +514,14 @@ def api_jobs():
 # Main
 # ──────────────────────────────────────────────────────────────────────────────
 
-# ──────────────────────────────────────────────────────────────────────────────
-# API: Slate picks — deduped unique picks from tickets_latest.json
-# Powers home page Top Edges + Streaks dynamically (no more hardcoded data)
-# ──────────────────────────────────────────────────────────────────────────────
+# API: Slate picks - deduped unique picks from tickets_latest.json
 @app.get("/api/slate")
 def api_slate():
+    import json as _json
     json_path = TEMPLATES_DIR / "tickets_latest.json"
     if not json_path.exists():
         return jsonify({"picks": [], "generated_at": None, "date": None})
     try:
-        import json as _json
         data = _json.loads(json_path.read_text(encoding="utf-8-sig"))
         seen = set()
         picks = []
@@ -553,11 +550,7 @@ def api_slate():
                         "season_avg": leg.get("season_avg"),
                     })
         picks.sort(key=lambda p: abs(p["edge"]), reverse=True)
-        return jsonify({
-            "picks":        picks,
-            "generated_at": data.get("generated_at"),
-            "date":         data.get("date"),
-        })
+        return jsonify({"picks": picks, "generated_at": data.get("generated_at"), "date": data.get("date")})
     except Exception as e:
         return jsonify({"error": str(e), "picks": []}), 500
 
