@@ -281,84 +281,255 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   </div>
 
   <!-- SLATE STATUS CARDS -->
-  <div class="status-row" style="grid-template-columns:repeat(5,1fr);">
+  <style>
+  /* ── Slate card expandable panel ── */
+  .slate-panel-wrap{background:var(--bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:28px;}
+  .slate-panel-header-row{display:grid;gap:14px;grid-template-columns:repeat(5,1fr);padding:0;}
+  .scard{cursor:pointer;user-select:none;transition:border-color .2s,background .2s;}
+  .scard.active{border-color:var(--bd2);background:rgba(255,255,255,.02);}
+  .scard-toggle{font-size:14px;margin-left:auto;color:var(--muted);transition:transform .25s;flex-shrink:0;}
+  .scard.active .scard-toggle{transform:rotate(180deg);}
+  /* expand area */
+  .slate-expand{display:none;border-top:1px solid var(--border);background:rgba(6,6,18,.7);}
+  .slate-expand.open{display:block;}
+  /* filter/sort bar */
+  .slate-toolbar{display:flex;align-items:center;gap:10px;padding:14px 18px 10px;flex-wrap:wrap;}
+  .slate-filter-input{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:11px;padding:6px 12px;outline:none;width:160px;transition:border-color .15s;}
+  .slate-filter-input:focus{border-color:var(--bd2);}
+  .slate-filter-btn{font-family:'Inter',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all .15s;}
+  .slate-filter-btn.on{background:rgba(200,255,0,.1);border-color:rgba(200,255,0,.3);color:var(--accent);}
+  .slate-sort-sel{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:10px;padding:5px 10px;outline:none;cursor:pointer;}
+  .slate-row-count{font-size:10px;color:var(--muted);letter-spacing:1px;margin-left:auto;}
+  /* table */
+  .slate-table-wrap{overflow-x:auto;max-height:420px;overflow-y:auto;padding:0 18px 18px;}
+  .slate-table{width:100%;border-collapse:collapse;font-size:11px;font-family:'Inter',sans-serif;}
+  .slate-table th{position:sticky;top:0;z-index:2;background:#0a0a1e;padding:8px 10px;font-size:9px;letter-spacing:1.5px;color:var(--muted);font-weight:700;text-align:left;white-space:nowrap;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;transition:color .15s;}
+  .slate-table th:hover{color:var(--text);}
+  .slate-table th.sort-asc::after{content:' ▲';}
+  .slate-table th.sort-desc::after{content:' ▼';}
+  .slate-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.04);white-space:nowrap;vertical-align:middle;}
+  .slate-table tr:hover td{background:rgba(255,255,255,.025);}
+  .tier-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:8px;letter-spacing:.5px;}
+  .tier-A{background:rgba(200,255,0,.12);color:var(--accent);border:1px solid rgba(200,255,0,.25);}
+  .tier-B{background:rgba(0,229,255,.1);color:var(--cyan);border:1px solid rgba(0,229,255,.2);}
+  .tier-C{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.2);}
+  .tier-D{background:rgba(255,77,77,.1);color:var(--red);border:1px solid rgba(255,77,77,.2);}
+  .dir-over{color:var(--green);font-weight:700;}
+  .dir-under{color:var(--amber);font-weight:700;}
+  .pick-goblin-cell{color:var(--purple);}
+  .pick-standard-cell{color:var(--cyan);}
+  .edge-pos{color:var(--green);}
+  .edge-neg{color:var(--amber);}
+  @media(max-width:768px){.slate-panel-header-row{grid-template-columns:repeat(2,1fr)!important;}}
+  @media(max-width:480px){.slate-panel-header-row{grid-template-columns:1fr!important;}}
+  </style>
 
-    <div class="scard loading" id="sc-nba">
-      <div class="scard-icon nba">
-        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#f0a500" stroke-width="1.5">
-          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-        </svg>
+  <div class="slate-panel-wrap">
+    <div class="slate-panel-header-row" id="slate-panel-header-row">
+
+      <div class="scard loading" id="sc-nba" onclick="toggleSlatePanel('nba')">
+        <div class="scard-icon nba">
+          <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#f0a500" stroke-width="1.5">
+            <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+            <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">NBA SLATE</div>
+          <div class="scard-val" id="sc-nba-val">Checking...</div>
+          <div class="scard-sub" id="sc-nba-sub"></div>
+        </div>
+        <span class="sbadge loading" id="sc-nba-badge">—</span>
+        <span class="scard-toggle">▾</span>
       </div>
-      <div class="scard-body">
-        <div class="scard-title">NBA SLATE</div>
-        <div class="scard-val" id="sc-nba-val">Checking...</div>
-        <div class="scard-sub" id="sc-nba-sub"></div>
+
+      <div class="scard loading" id="sc-cbb" onclick="toggleSlatePanel('cbb')">
+        <div class="scard-icon cbb">
+          <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
+            <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+            <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">CBB SLATE</div>
+          <div class="scard-val" id="sc-cbb-val">Checking...</div>
+          <div class="scard-sub" id="sc-cbb-sub"></div>
+        </div>
+        <span class="sbadge loading" id="sc-cbb-badge">—</span>
+        <span class="scard-toggle">▾</span>
       </div>
-      <span class="sbadge loading" id="sc-nba-badge">—</span>
+
+      <div class="scard loading" id="sc-nhl" onclick="toggleSlatePanel('nhl')">
+        <div class="scard-icon nhl">
+          <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5">
+            <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+            <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">NHL SLATE</div>
+          <div class="scard-val" id="sc-nhl-val">Checking...</div>
+          <div class="scard-sub" id="sc-nhl-sub"></div>
+        </div>
+        <span class="sbadge loading" id="sc-nhl-badge">—</span>
+        <span class="scard-toggle">▾</span>
+      </div>
+
+      <div class="scard loading" id="sc-soccer" onclick="toggleSlatePanel('soccer')">
+        <div class="scard-icon soccer">
+          <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#39ff6e" stroke-width="1.5">
+            <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+            <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">SOCCER SLATE</div>
+          <div class="scard-val" id="sc-soccer-val">Checking...</div>
+          <div class="scard-sub" id="sc-soccer-sub"></div>
+        </div>
+        <span class="sbadge loading" id="sc-soccer-badge">—</span>
+        <span class="scard-toggle">▾</span>
+      </div>
+
+      <div class="scard loading" id="sc-combined">
+        <div class="scard-icon combined">
+          <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#c8ff00" stroke-width="1.5">
+            <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+            <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">COMBINED</div>
+          <div class="scard-val" id="sc-combined-val">Checking...</div>
+          <div class="scard-sub" id="sc-combined-sub"></div>
+        </div>
+        <span class="sbadge loading" id="sc-combined-badge">—</span>
+      </div>
+
+    </div><!-- /header-row -->
+
+    <!-- EXPAND PANELS — one per sport -->
+    <div class="slate-expand" id="sp-nba">
+      <div class="slate-toolbar">
+        <input class="slate-filter-input" type="text" placeholder="Filter player / prop…" oninput="filterSlate('nba',this.value)" id="sf-nba"/>
+        <button class="slate-filter-btn" id="sfb-nba-over" onclick="toggleDirFilter('nba','OVER',this)">▲ OVER</button>
+        <button class="slate-filter-btn" id="sfb-nba-under" onclick="toggleDirFilter('nba','UNDER',this)">▼ UNDER</button>
+        <button class="slate-filter-btn" id="sfb-nba-goblin" onclick="togglePickFilter('nba','Goblin',this)">Goblin</button>
+        <button class="slate-filter-btn" id="sfb-nba-standard" onclick="togglePickFilter('nba','Standard',this)">Standard</button>
+        <span class="slate-row-count" id="src-nba"></span>
+      </div>
+      <div class="slate-table-wrap"><table class="slate-table" id="st-nba">
+        <thead><tr>
+          <th onclick="sortSlate('nba','tier')">TIER</th>
+          <th onclick="sortSlate('nba','rank_score')">RANK</th>
+          <th onclick="sortSlate('nba','player')">PLAYER</th>
+          <th onclick="sortSlate('nba','team')">TEAM</th>
+          <th onclick="sortSlate('nba','opp')">OPP</th>
+          <th onclick="sortSlate('nba','prop')">PROP</th>
+          <th onclick="sortSlate('nba','pick_type')">TYPE</th>
+          <th onclick="sortSlate('nba','line')">LINE</th>
+          <th onclick="sortSlate('nba','dir')">DIR</th>
+          <th onclick="sortSlate('nba','edge')">EDGE</th>
+          <th onclick="sortSlate('nba','hit_rate')">HIT%</th>
+          <th onclick="sortSlate('nba','l5_over')">L5 O</th>
+          <th onclick="sortSlate('nba','l5_under')">L5 U</th>
+          <th onclick="sortSlate('nba','game_time')">TIME</th>
+        </tr></thead>
+        <tbody id="stb-nba"></tbody>
+      </table></div>
     </div>
 
-    <div class="scard loading" id="sc-cbb">
-      <div class="scard-icon cbb">
-        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5">
-          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-        </svg>
+    <div class="slate-expand" id="sp-cbb">
+      <div class="slate-toolbar">
+        <input class="slate-filter-input" type="text" placeholder="Filter player / prop…" oninput="filterSlate('cbb',this.value)" id="sf-cbb"/>
+        <button class="slate-filter-btn" id="sfb-cbb-over" onclick="toggleDirFilter('cbb','OVER',this)">▲ OVER</button>
+        <button class="slate-filter-btn" id="sfb-cbb-under" onclick="toggleDirFilter('cbb','UNDER',this)">▼ UNDER</button>
+        <button class="slate-filter-btn" id="sfb-cbb-goblin" onclick="togglePickFilter('cbb','Goblin',this)">Goblin</button>
+        <button class="slate-filter-btn" id="sfb-cbb-standard" onclick="togglePickFilter('cbb','Standard',this)">Standard</button>
+        <span class="slate-row-count" id="src-cbb"></span>
       </div>
-      <div class="scard-body">
-        <div class="scard-title">CBB SLATE</div>
-        <div class="scard-val" id="sc-cbb-val">Checking...</div>
-        <div class="scard-sub" id="sc-cbb-sub"></div>
-      </div>
-      <span class="sbadge loading" id="sc-cbb-badge">—</span>
+      <div class="slate-table-wrap"><table class="slate-table" id="st-cbb">
+        <thead><tr>
+          <th onclick="sortSlate('cbb','tier')">TIER</th>
+          <th onclick="sortSlate('cbb','rank_score')">RANK</th>
+          <th onclick="sortSlate('cbb','player')">PLAYER</th>
+          <th onclick="sortSlate('cbb','team')">TEAM</th>
+          <th onclick="sortSlate('cbb','opp')">OPP</th>
+          <th onclick="sortSlate('cbb','prop')">PROP</th>
+          <th onclick="sortSlate('cbb','pick_type')">TYPE</th>
+          <th onclick="sortSlate('cbb','line')">LINE</th>
+          <th onclick="sortSlate('cbb','dir')">DIR</th>
+          <th onclick="sortSlate('cbb','edge')">EDGE</th>
+          <th onclick="sortSlate('cbb','hit_rate')">HIT%</th>
+          <th onclick="sortSlate('cbb','l5_over')">L5 O</th>
+          <th onclick="sortSlate('cbb','l5_under')">L5 U</th>
+          <th onclick="sortSlate('cbb','game_time')">TIME</th>
+        </tr></thead>
+        <tbody id="stb-cbb"></tbody>
+      </table></div>
     </div>
 
-    <div class="scard loading" id="sc-nhl">
-      <div class="scard-icon nhl">
-        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5">
-          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-        </svg>
+    <div class="slate-expand" id="sp-nhl">
+      <div class="slate-toolbar">
+        <input class="slate-filter-input" type="text" placeholder="Filter player / prop…" oninput="filterSlate('nhl',this.value)" id="sf-nhl"/>
+        <button class="slate-filter-btn" id="sfb-nhl-over" onclick="toggleDirFilter('nhl','OVER',this)">▲ OVER</button>
+        <button class="slate-filter-btn" id="sfb-nhl-under" onclick="toggleDirFilter('nhl','UNDER',this)">▼ UNDER</button>
+        <button class="slate-filter-btn" id="sfb-nhl-goblin" onclick="togglePickFilter('nhl','Goblin',this)">Goblin</button>
+        <button class="slate-filter-btn" id="sfb-nhl-standard" onclick="togglePickFilter('nhl','Standard',this)">Standard</button>
+        <span class="slate-row-count" id="src-nhl"></span>
       </div>
-      <div class="scard-body">
-        <div class="scard-title">NHL SLATE</div>
-        <div class="scard-val" id="sc-nhl-val">Checking...</div>
-        <div class="scard-sub" id="sc-nhl-sub"></div>
-      </div>
-      <span class="sbadge loading" id="sc-nhl-badge">—</span>
+      <div class="slate-table-wrap"><table class="slate-table" id="st-nhl">
+        <thead><tr>
+          <th onclick="sortSlate('nhl','tier')">TIER</th>
+          <th onclick="sortSlate('nhl','rank_score')">RANK</th>
+          <th onclick="sortSlate('nhl','player')">PLAYER</th>
+          <th onclick="sortSlate('nhl','team')">TEAM</th>
+          <th onclick="sortSlate('nhl','opp')">OPP</th>
+          <th onclick="sortSlate('nhl','prop')">PROP</th>
+          <th onclick="sortSlate('nhl','pick_type')">TYPE</th>
+          <th onclick="sortSlate('nhl','line')">LINE</th>
+          <th onclick="sortSlate('nhl','dir')">DIR</th>
+          <th onclick="sortSlate('nhl','edge')">EDGE</th>
+          <th onclick="sortSlate('nhl','hit_rate')">HIT%</th>
+          <th onclick="sortSlate('nhl','l5_over')">L5 O</th>
+          <th onclick="sortSlate('nhl','l5_under')">L5 U</th>
+          <th onclick="sortSlate('nhl','game_time')">TIME</th>
+        </tr></thead>
+        <tbody id="stb-nhl"></tbody>
+      </table></div>
     </div>
 
-    <div class="scard loading" id="sc-soccer">
-      <div class="scard-icon soccer">
-        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#39ff6e" stroke-width="1.5">
-          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-        </svg>
+    <div class="slate-expand" id="sp-soccer">
+      <div class="slate-toolbar">
+        <input class="slate-filter-input" type="text" placeholder="Filter player / prop…" oninput="filterSlate('soccer',this.value)" id="sf-soccer"/>
+        <button class="slate-filter-btn" id="sfb-soccer-over" onclick="toggleDirFilter('soccer','OVER',this)">▲ OVER</button>
+        <button class="slate-filter-btn" id="sfb-soccer-under" onclick="toggleDirFilter('soccer','UNDER',this)">▼ UNDER</button>
+        <button class="slate-filter-btn" id="sfb-soccer-goblin" onclick="togglePickFilter('soccer','Goblin',this)">Goblin</button>
+        <button class="slate-filter-btn" id="sfb-soccer-standard" onclick="togglePickFilter('soccer','Standard',this)">Standard</button>
+        <span class="slate-row-count" id="src-soccer"></span>
       </div>
-      <div class="scard-body">
-        <div class="scard-title">SOCCER SLATE</div>
-        <div class="scard-val" id="sc-soccer-val">Checking...</div>
-        <div class="scard-sub" id="sc-soccer-sub"></div>
-      </div>
-      <span class="sbadge loading" id="sc-soccer-badge">—</span>
+      <div class="slate-table-wrap"><table class="slate-table" id="st-soccer">
+        <thead><tr>
+          <th onclick="sortSlate('soccer','tier')">TIER</th>
+          <th onclick="sortSlate('soccer','rank_score')">RANK</th>
+          <th onclick="sortSlate('soccer','player')">PLAYER</th>
+          <th onclick="sortSlate('soccer','team')">TEAM</th>
+          <th onclick="sortSlate('soccer','opp')">OPP</th>
+          <th onclick="sortSlate('soccer','prop')">PROP</th>
+          <th onclick="sortSlate('soccer','pick_type')">TYPE</th>
+          <th onclick="sortSlate('soccer','line')">LINE</th>
+          <th onclick="sortSlate('soccer','dir')">DIR</th>
+          <th onclick="sortSlate('soccer','edge')">EDGE</th>
+          <th onclick="sortSlate('soccer','hit_rate')">HIT%</th>
+          <th onclick="sortSlate('soccer','l5_over')">L5 O</th>
+          <th onclick="sortSlate('soccer','l5_under')">L5 U</th>
+          <th onclick="sortSlate('soccer','game_time')">TIME</th>
+        </tr></thead>
+        <tbody id="stb-soccer"></tbody>
+      </table></div>
     </div>
 
-    <div class="scard loading" id="sc-combined">
-      <div class="scard-icon combined">
-        <svg class="db-icon" viewBox="0 0 24 24" fill="none" stroke="#c8ff00" stroke-width="1.5">
-          <ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v4c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 10v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-          <path d="M3 14v4c0 1.66 4.03 3 9 3s9-1.34 9-3v-4"/>
-        </svg>
-      </div>
-      <div class="scard-body">
-        <div class="scard-title">COMBINED</div>
-        <div class="scard-val" id="sc-combined-val">Checking...</div>
-        <div class="scard-sub" id="sc-combined-sub"></div>
-      </div>
-      <span class="sbadge loading" id="sc-combined-badge">—</span>
-    </div>
-
-  </div>
+  </div><!-- /slate-panel-wrap -->
 
   <!-- QUICK NAV CARDS -->
   <div class="quick-grid">
@@ -811,8 +982,181 @@ document.head.insertAdjacentHTML("beforeend",`<style>
 .streak-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 14px 14px 18px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
 </style>`);
 
-// Data loaded dynamically
-loadSlateData();
+// ── Slate Panel expand / sort / filter ───────────────────
+const SLATE_DATA  = {};   // raw rows per sport
+const SLATE_STATE = {};   // sort + filter state per sport
+
+const SPORTS = ['nba','cbb','nhl','soccer'];
+SPORTS.forEach(s => {
+  SLATE_STATE[s] = { sortKey: 'rank_score', sortDir: -1, search: '', dir: null, pick: null };
+});
+
+let openSlatePanel = null;
+
+function toggleSlatePanel(sport) {
+  const panel = document.getElementById(`sp-${sport}`);
+  const card  = document.getElementById(`sc-${sport}`);
+  if (!panel) return;
+  const isOpen = panel.classList.contains('open');
+
+  // close any open panel
+  if (openSlatePanel && openSlatePanel !== sport) {
+    document.getElementById(`sp-${openSlatePanel}`)?.classList.remove('open');
+    document.getElementById(`sc-${openSlatePanel}`)?.classList.remove('active');
+  }
+
+  if (isOpen) {
+    panel.classList.remove('open');
+    card.classList.remove('active');
+    openSlatePanel = null;
+  } else {
+    panel.classList.add('open');
+    card.classList.add('active');
+    openSlatePanel = sport;
+    if (!SLATE_DATA[sport]) loadSlateSport(sport);
+    else renderSlateTable(sport);
+  }
+}
+
+async function loadSlatePicks() {
+  try {
+    const res = await fetch('/api/slate-picks');
+    if (!res.ok) return;
+    const d = await res.json();
+    SPORTS.forEach(s => { if (d.sports && d.sports[s]) SLATE_DATA[s] = d.sports[s]; });
+    // update count badges
+    SPORTS.forEach(s => {
+      const sub = document.getElementById(`sc-${s}-sub`);
+      if (sub && SLATE_DATA[s]) {
+        const n = SLATE_DATA[s].length;
+        if (sub.textContent) sub.textContent += `  ·  ${n} props`;
+        else sub.textContent = `${n} props`;
+      }
+    });
+    if (openSlatePanel) renderSlateTable(openSlatePanel);
+  } catch(e) { console.warn('loadSlatePicks failed:', e); }
+}
+
+function loadSlateSport(sport) {
+  if (SLATE_DATA[sport]) { renderSlateTable(sport); return; }
+  const tbody = document.getElementById(`stb-${sport}`);
+  if (tbody) tbody.innerHTML = `<tr><td colspan="14" style="text-align:center;padding:20px;color:var(--muted);letter-spacing:1px;font-size:10px;">LOADING…</td></tr>`;
+  loadSlatePicks().then(() => renderSlateTable(sport));
+}
+
+function renderSlateTable(sport) {
+  const rows  = SLATE_DATA[sport] || [];
+  const state = SLATE_STATE[sport];
+  const tbody = document.getElementById(`stb-${sport}`);
+  const countEl = document.getElementById(`src-${sport}`);
+  if (!tbody) return;
+
+  let filtered = rows.filter(r => {
+    if (state.search) {
+      const q = state.search.toLowerCase();
+      if (!((r.player||'').toLowerCase().includes(q) || (r.prop||'').toLowerCase().includes(q) || (r.team||'').toLowerCase().includes(q))) return false;
+    }
+    if (state.dir  && r.dir       !== state.dir)  return false;
+    if (state.pick && r.pick_type !== state.pick) return false;
+    return true;
+  });
+
+  filtered.sort((a, b) => {
+    let av = a[state.sortKey], bv = b[state.sortKey];
+    if (av == null) av = state.sortDir < 0 ? -Infinity : Infinity;
+    if (bv == null) bv = state.sortDir < 0 ? -Infinity : Infinity;
+    if (typeof av === 'string') return state.sortDir * av.localeCompare(bv);
+    return state.sortDir * (av - bv);
+  });
+
+  // update sort header classes
+  const table = document.getElementById(`st-${sport}`);
+  table?.querySelectorAll('th').forEach(th => { th.classList.remove('sort-asc','sort-desc'); });
+  const ths = table?.querySelectorAll('th');
+  const keyMap = ['tier','rank_score','player','team','opp','prop','pick_type','line','dir','edge','hit_rate','l5_over','l5_under','game_time'];
+  if (ths) {
+    const ci = keyMap.indexOf(state.sortKey);
+    if (ci >= 0) ths[ci].classList.add(state.sortDir > 0 ? 'sort-asc' : 'sort-desc');
+  }
+
+  if (countEl) countEl.textContent = `${filtered.length} / ${rows.length} PROPS`;
+
+  if (!filtered.length) {
+    tbody.innerHTML = `<tr><td colspan="14" style="text-align:center;padding:20px;color:var(--muted2);font-size:10px;letter-spacing:1px;">NO MATCHING PROPS</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(r => {
+    const isOver = r.dir === 'OVER';
+    const dirCls = isOver ? 'dir-over' : 'dir-under';
+    const dirSym = isOver ? '▲' : '▼';
+    const edgeCls = (r.edge || 0) >= 0 ? 'edge-pos' : 'edge-neg';
+    const edgeStr = r.edge != null ? (r.edge >= 0 ? '+' : '') + r.edge.toFixed(2) : '—';
+    const hitStr  = r.hit_rate != null ? Math.round(r.hit_rate * 100) + '%' : '—';
+    const tierCls = `tier-${r.tier || 'D'}`;
+    const pickCls = r.pick_type === 'Goblin' ? 'pick-goblin-cell' : 'pick-standard-cell';
+    const l5o = r.l5_over  != null ? r.l5_over  : '—';
+    const l5u = r.l5_under != null ? r.l5_under : '—';
+    const rankStr = r.rank_score != null ? r.rank_score.toFixed(2) : '—';
+    const timeStr = (r.game_time || '').replace('03/13 ','') || '—';
+    return `<tr>
+      <td><span class="tier-badge ${tierCls}">${r.tier || '?'}</span></td>
+      <td style="color:var(--accent);font-family:'Share Tech Mono',monospace;">${rankStr}</td>
+      <td style="color:var(--text);font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;">${r.player || '—'}</td>
+      <td style="color:var(--muted);">${r.team || '—'}</td>
+      <td style="color:var(--muted);">${r.opp  || '—'}</td>
+      <td style="color:var(--text);">${r.prop || '—'}</td>
+      <td class="${pickCls}" style="font-family:'Share Tech Mono',monospace;font-size:10px;">${r.pick_type || '—'}</td>
+      <td style="font-family:'Share Tech Mono',monospace;">${r.line != null ? r.line : '—'}</td>
+      <td class="${dirCls}">${dirSym} ${r.dir || '—'}</td>
+      <td class="${edgeCls}" style="font-family:'Share Tech Mono',monospace;font-weight:700;">${edgeStr}</td>
+      <td style="color:var(--cyan);font-family:'Share Tech Mono',monospace;">${hitStr}</td>
+      <td style="color:var(--green);font-family:'Share Tech Mono',monospace;">${l5o}</td>
+      <td style="color:var(--amber);font-family:'Share Tech Mono',monospace;">${l5u}</td>
+      <td style="color:var(--muted2);font-size:10px;">${timeStr}</td>
+    </tr>`;
+  }).join('');
+}
+
+function sortSlate(sport, key) {
+  const s = SLATE_STATE[sport];
+  if (s.sortKey === key) s.sortDir *= -1;
+  else { s.sortKey = key; s.sortDir = -1; }
+  renderSlateTable(sport);
+}
+
+function filterSlate(sport, val) {
+  SLATE_STATE[sport].search = val;
+  renderSlateTable(sport);
+}
+
+function toggleDirFilter(sport, dir, btn) {
+  const s = SLATE_STATE[sport];
+  if (s.dir === dir) { s.dir = null; btn.classList.remove('on'); }
+  else {
+    s.dir = dir;
+    document.getElementById(`sfb-${sport}-over`)?.classList.remove('on');
+    document.getElementById(`sfb-${sport}-under`)?.classList.remove('on');
+    btn.classList.add('on');
+  }
+  renderSlateTable(sport);
+}
+
+function togglePickFilter(sport, pick, btn) {
+  const s = SLATE_STATE[sport];
+  if (s.pick === pick) { s.pick = null; btn.classList.remove('on'); }
+  else {
+    s.pick = pick;
+    document.getElementById(`sfb-${sport}-goblin`)?.classList.remove('on');
+    document.getElementById(`sfb-${sport}-standard`)?.classList.remove('on');
+    btn.classList.add('on');
+  }
+  renderSlateTable(sport);
+}
+
+// Pre-fetch all slate picks on page load
+loadSlatePicks();
+
 </script>
 
 <script>

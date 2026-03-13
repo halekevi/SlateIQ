@@ -554,5 +554,75 @@ def api_slate():
     except Exception as e:
         return jsonify({"error": str(e), "picks": []}), 500
 
+
+# ──────────────────────────────────────────────────────────────────────────────
+# API: Per-sport slate picks from the combined Excel file
+# ──────────────────────────────────────────────────────────────────────────────
+@app.get("/api/slate-picks")
+def api_slate_picks():
+    import pandas as pd, math
+
+    today = datetime.now().strftime("%Y-%m-%d")
+    combined_path = next(
+        iter(sorted(BASE_DIR.glob(f"combined_slate_tickets_{today}*.xlsx"), reverse=True)),
+        None,
+    )
+    if combined_path is None:
+        return jsonify({"error": "No combined slate for today", "sports": {}}), 404
+
+    SPORT_SHEETS = {
+        "nba":    "NBA Slate",
+        "cbb":    "CBB Slate",
+        "nhl":    "NHL Slate",
+        "soccer": "Soccer Slate",
+    }
+
+    def safe(v):
+        if v is None:
+            return None
+        try:
+            if math.isnan(float(v)):
+                return None
+        except (TypeError, ValueError):
+            pass
+        return v
+
+    result = {}
+    try:
+        xf = pd.ExcelFile(combined_path)
+        for sport_key, sheet_name in SPORT_SHEETS.items():
+            if sheet_name not in xf.sheet_names:
+                result[sport_key] = []
+                continue
+            df = pd.read_excel(xf, sheet_name=sheet_name)
+            rows = []
+            for _, r in df.iterrows():
+                rows.append({
+                    "tier":       safe(r.get("Tier")),
+                    "rank_score": safe(r.get("Rank Score")),
+                    "player":     safe(r.get("Player")) or "",
+                    "team":       safe(r.get("Team")) or "",
+                    "opp":        safe(r.get("Opp")) or "",
+                    "prop":       safe(r.get("Prop")) or "",
+                    "pick_type":  safe(r.get("Pick Type")) or "",
+                    "line":       safe(r.get("Line")),
+                    "dir":        safe(r.get("Dir")) or "",
+                    "edge":       safe(r.get("Edge")),
+                    "proj":       safe(r.get("Proj")),
+                    "hit_rate":   safe(r.get("Hit Rate")),
+                    "l5_avg":     safe(r.get("L5 Avg")),
+                    "szn_avg":    safe(r.get("Szn Avg")),
+                    "l5_over":    safe(r.get("L5 Over")),
+                    "l5_under":   safe(r.get("L5 Under")),
+                    "def_tier":   safe(r.get("Def Tier")),
+                    "game_time":  str(r.get("Game Time") or ""),
+                })
+            result[sport_key] = rows
+    except Exception as e:
+        return jsonify({"error": str(e), "sports": {}}), 500
+
+    return jsonify({"sports": result, "date": today})
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8787, debug=False)
