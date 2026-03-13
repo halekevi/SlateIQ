@@ -561,14 +561,30 @@ def api_slate():
 @app.get("/api/slate-picks")
 def api_slate_picks():
     import pandas as pd, math
+    from datetime import timedelta
 
     today = datetime.now().strftime("%Y-%m-%d")
-    combined_path = next(
-        iter(sorted(BASE_DIR.glob(f"combined_slate_tickets_{today}*.xlsx"), reverse=True)),
-        None,
-    )
+
+    def find_combined(date_str):
+        candidates = [
+            *sorted(BASE_DIR.glob(f"combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+            *sorted(BASE_DIR.glob(f"outputs/{date_str}/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+            *sorted(BASE_DIR.glob(f"outputs/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+            *sorted(BASE_DIR.glob(f"outputs/*/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+        ]
+        return candidates[0] if candidates else None
+
+    combined_path = find_combined(today)
+    # Fallback: check previous 3 days if today's isn't present
     if combined_path is None:
-        return jsonify({"error": "No combined slate for today", "sports": {}}), 404
+        for delta in range(1, 4):
+            d = (datetime.now() - timedelta(days=delta)).strftime("%Y-%m-%d")
+            combined_path = find_combined(d)
+            if combined_path:
+                break
+
+    if combined_path is None:
+        return jsonify({"error": "No combined slate found", "sports": {}}), 404
 
     SPORT_SHEETS = {
         "nba":    "NBA Slate",
