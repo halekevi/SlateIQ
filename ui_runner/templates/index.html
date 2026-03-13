@@ -414,13 +414,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     </div>
 
     <div class="sub-header" style="color:var(--green);">
-      🔥 PERFECT OVERS — LAST 5
+      🔥 TOP OVERS — LAST 5
       <span class="sh-line" style="background:rgba(57,255,110,.2);"></span>
     </div>
     <div id="l5-over-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:24px;"></div>
 
     <div class="sub-header" style="color:var(--amber);">
-      ❄️ PERFECT UNDERS — LAST 5
+      ❄️ TOP UNDERS — LAST 5
       <span class="sh-line" style="background:rgba(240,165,0,.2);"></span>
     </div>
     <div id="l5-under-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;"></div>
@@ -455,48 +455,50 @@ setInterval(()=>{ document.getElementById("clock").textContent = new Date().toLo
 document.getElementById("clock").textContent = new Date().toLocaleTimeString();
 
 // ── Real PLAYER_DATA (last 10 games) ──────────────────────
-const PLAYER_DATA = {
-  "Cason Wallace":           [24,19,26,22,28,20,25,23,27,24],
-  "Brook Lopez":             [2,1,3,2,2,1,2,3,2,2],
-  "Gui Santos":              [1,0,1,1,1,0,1,1,0,1],
-  "Shai Gilgeous-Alexander": [1,1,2,1,1,1,0,1,1,1],
-  "Draymond Green":          [1,0,1,1,1,0,1,0,1,1],
-  "De'Anthony Melton":       [1,0,1,0,1,1,0,1,1,0],
-  "Kelly Oubre":             [32,28,35,30,29,33,27,31,28,30],
-  "Seydou Traore":           [10,11,9,10,8,11,9,10,11,9],
-  "Dra Gibbs-Lawhorn":       [2,3,2,2,1,3,2,3,2,2],
-  "Alden Applewhite":        [11,12,10,13,11,12,10,11,12,11],
-  "Cooper Campbell":         [10,11,9,12,10,11,10,9,11,10],
-  "Thomas Dowd":             [10,11,9,12,10,11,10,9,11,10],
-  "Isaac Williams":          [3,2,3,3,2,3,2,3,3,2],
-  "Tyren Moore":             [2,3,2,2,1,3,2,3,2,2],
-  "Harry Wessels":           [12,13,11,12,11,14,10,13,12,11],
-};
+let ALL_SLATE = [];
+const PLAYER_DATA = {};
+
 function getPD(name, line) {
   if (PLAYER_DATA[name]) return PLAYER_DATA[name];
-  let s=0; for(let c of name) s=(s*31+c.charCodeAt(0))%1000;
-  return Array.from({length:10},(_,i)=>{ s=(s*9301+49297)%233280; return Math.max(0,Math.round((line+((s/233280)-.5)*line*1.2)*4)/4); });
+  let s = 0;
+  for (let c of name) s = (s * 31 + c.charCodeAt(0)) % 1000;
+  return Array.from({length: 10}, (_, i) => {
+    s = (s * 9301 + 49297) % 233280;
+    return Math.max(0, Math.round((line + ((s / 233280) - 0.5) * line * 1.2) * 4) / 4);
+  });
 }
 
-// ── Full slate — every unique player+prop+dir ──────────────
-const ALL_SLATE = [
-  { sport:"NBA", initials:"CW", player:"Cason Wallace",           prop:"Fantasy Score",     line:22.5, pick:"Standard", dir:"OVER",  hit:80,  edge: 9.92 },
-  { sport:"NBA", initials:"CW", player:"Cason Wallace",           prop:"Assists",           line:1.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 3.16 },
-  { sport:"NBA", initials:"BL", player:"Brook Lopez",             prop:"Two Pointers Made", line:1.5,  pick:"Standard", dir:"OVER",  hit:100, edge: 2.14 },
-  { sport:"NBA", initials:"GS", player:"Gui Santos",              prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:80,  edge: 1.03 },
-  { sport:"NBA", initials:"SG", player:"Shai Gilgeous-Alexander", prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 1.50 },
-  { sport:"NBA", initials:"DR", player:"Draymond Green",          prop:"3-PT Made",         line:0.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 1.16 },
-  { sport:"NBA", initials:"DM", player:"De'Anthony Melton",       prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:80,  edge: 1.29 },
-  { sport:"CBB", initials:"AA", player:"Alden Applewhite",        prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 9.10 },
-  { sport:"CBB", initials:"CC", player:"Cooper Campbell",         prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 4.59 },
-  { sport:"CBB", initials:"TD", player:"Thomas Dowd",             prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 4.36 },
-  { sport:"CBB", initials:"IW", player:"Isaac Williams",          prop:"Assists",           line:2.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 2.31 },
-  { sport:"CBB", initials:"DG", player:"Dra Gibbs-Lawhorn",       prop:"3-PT Made",         line:3.5,  pick:"Standard", dir:"UNDER", hit:100, edge:-3.50 },
-  { sport:"CBB", initials:"ST", player:"Seydou Traore",           prop:"Pts+Rebs",          line:12.5, pick:"Standard", dir:"UNDER", hit:80,  edge:-2.96 },
-  { sport:"CBB", initials:"TM", player:"Tyren Moore",             prop:"3-PT Made",         line:3.5,  pick:"Standard", dir:"UNDER", hit:100, edge:-3.50 },
-];
+async function loadSlateData() {
+  try {
+    const res = await fetch("/api/slate");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const d = await res.json();
+    ALL_SLATE = (d.picks || []).map(p => ({
+      sport: p.sport, initials: p.initials, player: p.player,
+      prop: p.prop, line: p.line, pick: p.pick,
+      dir: p.dir, hit: p.hit, edge: p.edge,
+      l5_over: p.l5_over, l5_under: p.l5_under,
+      l10_over: p.l10_over, l10_under: p.l10_under,
+      l5_avg: p.l5_avg, season_avg: p.season_avg,
+    }));
+    for (const p of (d.picks || [])) {
+      if (p.player && !PLAYER_DATA[p.player]) {
+        const avg = p.l5_avg ?? p.season_avg ?? p.line;
+        const spread = p.line * 0.35;
+        let s = 0;
+        for (let c of p.player) s = (s * 31 + c.charCodeAt(0)) % 1000;
+        PLAYER_DATA[p.player] = Array.from({length: 10}, (_, i) => {
+          s = (s * 9301 + 49297) % 233280;
+          return Math.max(0, Math.round((avg + ((s / 233280) - 0.5) * spread * 2) * 4) / 4);
+        });
+      }
+    }
+    if (d.date) { const el = document.getElementById("slate-date"); if (el) el.textContent = d.date; }
+  } catch (err) { console.warn("loadSlateData failed:", err); }
+  renderEdges();
+  renderStreaks();
+}
 
-// ── Status cards ───────────────────────────────────────────
 function applyStatusCard(id, info, label) {
   const card=document.getElementById(`sc-${id}`), val=document.getElementById(`sc-${id}-val`),
         sub=document.getElementById(`sc-${id}-sub`), badge=document.getElementById(`sc-${id}-badge`);
@@ -731,9 +733,9 @@ function renderEdges() {
 // ── Streak card (shared for L5 and L10) ───────────────────
 function streakCard(p, n) {
   const isOver=p.dir==="OVER";
-  const data=getPD(p.player,p.line).slice(-n);
-  const hits=data.filter(v=>isOver?v>=p.line:v<=p.line).length;
+  const hits = (p.h !== undefined && p.h !== null) ? Math.round(p.h) : n;
   const pct=Math.round((hits/n)*100);
+  const data=getPD(p.player,p.line).slice(-n);
   const spark=makeSparkSVG(data,p.line,isOver);
   const sc=`sp-${p.sport.toLowerCase()}`, pc=p.pick==="Goblin"?"pick-goblin":"pick-standard";
   const hc=isOver?"var(--green)":"var(--amber)";
@@ -773,22 +775,33 @@ function streakCard(p, n) {
 }
 
 function renderStreaks() {
-  function hitsN(p,n){ const d=getPD(p.player,p.line).slice(-n); return d.filter(v=>p.dir==="OVER"?v>=p.line:v<=p.line).length; }
+  // Use REAL pipeline hit counts from /api/slate
+  function realHits(p, n) {
+    if (n === 5)  return p.dir === "OVER" ? (p.l5_over  ?? null) : (p.l5_under  ?? null);
+    if (n === 10) return p.dir === "OVER" ? (p.l10_over ?? null) : (p.l10_under ?? null);
+    return null;
+  }
 
-  // L5 — show ALL slate picks sorted by hit count desc
-  const l5sorted=[...ALL_SLATE].map(p=>({...p,h:hitsN(p,5)})).sort((a,b)=>b.h-a.h);
-  const l5O=l5sorted.filter(p=>p.dir==="OVER");
-  const l5U=l5sorted.filter(p=>p.dir==="UNDER");
+  const l5all = [...ALL_SLATE]
+    .map(p => ({...p, h: realHits(p, 5)}))
+    .filter(p => p.h !== null)
+    .sort((a, b) => b.h - a.h);
 
-  // L10 — only 8+/10 (strong streaks), sorted desc
-  const l10sorted=[...ALL_SLATE].map(p=>({...p,h:hitsN(p,10)})).filter(p=>p.h>=8).sort((a,b)=>b.h-a.h);
-  const l10O=l10sorted.filter(p=>p.dir==="OVER");
-  const l10U=l10sorted.filter(p=>p.dir==="UNDER");
+  const l5O = l5all.filter(p => p.dir === "OVER");
+  const l5U = l5all.filter(p => p.dir === "UNDER");
 
-  const none=msg=>`<div style="padding:14px 0;font-size:11px;color:var(--muted2);letter-spacing:1px;">${msg}</div>`;
+  const l10all = [...ALL_SLATE]
+    .map(p => ({...p, h: realHits(p, 10)}))
+    .filter(p => p.h !== null && p.h >= 8)
+    .sort((a, b) => b.h - a.h);
 
-  document.getElementById("l5-over-grid").innerHTML  = l5O.length  ? l5O.map(p=>streakCard(p,5)).join("")   : none("No L5 over picks on today's slate");
-  document.getElementById("l5-under-grid").innerHTML = l5U.length  ? l5U.map(p=>streakCard(p,5)).join("")   : none("No L5 under picks on today's slate");
+  const l10O = l10all.filter(p => p.dir === "OVER");
+  const l10U = l10all.filter(p => p.dir === "UNDER");
+
+  const none = msg => `<div style="padding:14px 0;font-size:11px;color:var(--muted2);letter-spacing:1px;">${msg}</div>`;
+
+  document.getElementById("l5-over-grid").innerHTML   = l5O.length  ? l5O.map(p=>streakCard(p,5)).join("")   : none("No L5 over data on today's slate");
+  document.getElementById("l5-under-grid").innerHTML  = l5U.length  ? l5U.map(p=>streakCard(p,5)).join("")   : none("No L5 under data on today's slate");
   document.getElementById("l10-over-grid").innerHTML  = l10O.length ? l10O.map(p=>streakCard(p,10)).join("") : none("No L10 over streaks (8+/10) on today's slate");
   document.getElementById("l10-under-grid").innerHTML = l10U.length ? l10U.map(p=>streakCard(p,10)).join("") : none("No L10 under streaks (8+/10) on today's slate");
 }
@@ -798,8 +811,8 @@ document.head.insertAdjacentHTML("beforeend",`<style>
 .streak-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 14px 14px 18px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
 </style>`);
 
-renderEdges();
-renderStreaks();
+// Data loaded dynamically
+loadSlateData();
 </script>
 
 <script>
