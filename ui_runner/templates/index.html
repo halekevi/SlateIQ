@@ -668,7 +668,7 @@ async function loadSlateData() {
   } catch (err) { console.warn("loadSlateData failed:", err); }
   renderEdges();
   renderStreaks();
-  buildSlateDataFromAllSlate();
+  await buildSlateDataFromAllSlate();
 }
 
 function applyStatusCard(id, info, label) {
@@ -1019,42 +1019,57 @@ function toggleSlatePanel(sport) {
   }
 }
 
-// ── Populate SLATE_DATA from ALL_SLATE (loaded via /api/slate) ───────────────
-function buildSlateDataFromAllSlate() {
-  SPORTS.forEach(s => { SLATE_DATA[s] = []; });
-  ALL_SLATE.forEach(p => {
-    const s = (p.sport || '').toLowerCase();
-    if (!SLATE_DATA[s]) return;
-    SLATE_DATA[s].push({
-      tier:       null,
-      rank_score: p.edge != null ? Math.abs(p.edge) : null,
-      player:     p.player || '',
-      team:       p.team   || '',
-      opp:        p.opp    || '',
-      prop:       p.prop   || '',
-      pick_type:  p.pick   || '',
-      line:       p.line,
-      dir:        p.dir    || '',
-      edge:       p.edge,
-      proj:       null,
-      hit_rate:   p.hit != null ? p.hit / 100 : null,
-      l5_avg:     p.l5_avg,
-      szn_avg:    p.season_avg,
-      l5_over:    p.l5_over,
-      l5_under:   p.l5_under,
-      def_tier:   null,
-      game_time:  '',
-    });
-  });
-  // sort each sport by edge descending
-  SPORTS.forEach(s => SLATE_DATA[s].sort((a,b) => (Math.abs(b.edge||0)) - (Math.abs(a.edge||0))));
-  // update count badges
+// ── Populate SLATE_DATA — tries full Excel endpoint, falls back to tickets ────
+async function buildSlateDataFromAllSlate() {
+  // Try full slate endpoint first
+  try {
+    const res = await fetch('/api/slate-sport');
+    if (res.ok) {
+      const d = await res.json();
+      if (d.sports) {
+        SPORTS.forEach(s => {
+          if (d.sports[s] && d.sports[s].length) {
+            SLATE_DATA[s] = d.sports[s]; // always overwrite with full slate
+          }
+        });
+        // re-render open panel now that full data is loaded
+        if (openSlatePanel && SLATE_DATA[openSlatePanel]) renderSlateTable(openSlatePanel);
+      }
+    }
+  } catch(e) { console.warn('slate-sport failed, using tickets data:', e); }
+
+  // Fall back to ALL_SLATE (tickets data) for any sport not populated above
   SPORTS.forEach(s => {
+    if (SLATE_DATA[s] && SLATE_DATA[s].length) return;
+    SLATE_DATA[s] = ALL_SLATE
+      .filter(p => (p.sport || '').toLowerCase() === s)
+      .map(p => ({
+        tier:      null,
+        rank_score: p.edge != null ? Math.abs(p.edge) : null,
+        player:    p.player || '',
+        team:      p.team   || '',
+        opp:       p.opp    || '',
+        prop:      p.prop   || '',
+        pick_type: p.pick   || '',
+        line:      p.line,
+        dir:       p.dir    || '',
+        edge:      p.edge,
+        hit_rate:  p.hit != null ? p.hit / 100 : null,
+        l5_avg:    p.l5_avg,
+        l5_over:   p.l5_over,
+        l5_under:  p.l5_under,
+        game_time: '',
+      }));
+  });
+
+  // Sort each sport by edge desc, update count badges
+  SPORTS.forEach(s => {
+    SLATE_DATA[s].sort((a,b) => Math.abs(b.edge||0) - Math.abs(a.edge||0));
     const sub = document.getElementById(`sc-${s}-sub`);
-    if (sub && SLATE_DATA[s] && SLATE_DATA[s].length) {
+    if (sub && SLATE_DATA[s].length) {
       const n = SLATE_DATA[s].length;
       const cur = sub.textContent || '';
-      if (!cur.includes('props')) sub.textContent = cur + (cur ? '  ·  ' : '') + `${n} props`;
+      if (!cur.includes('props')) sub.textContent = (cur ? cur + '  ·  ' : '') + `${n} props`;
     }
   });
   if (openSlatePanel) renderSlateTable(openSlatePanel);
