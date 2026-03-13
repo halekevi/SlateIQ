@@ -157,7 +157,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .edge-line-badge{font-size:11px;color:var(--muted);font-family:"Inter",sans-serif;font-weight:500;}
 
 /* expand panel */
-.edge-expand{display:none;border-top:1px solid var(--border);padding:16px;background:var(--bg3);}
+.edge-expand{display:none;border-top:1px solid rgba(255,255,255,.06);padding:16px 18px;background:rgba(8,8,22,.6);}
 .edge-expand.open{display:block;}
 .expand-tabs{display:flex;gap:0;margin-bottom:12px;border-bottom:1px solid var(--border);}
 .expand-tab{flex:1;background:none;border:none;border-bottom:2px solid transparent;padding:8px;font-family:"Inter",sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;color:var(--muted);cursor:pointer;transition:all .15s;text-transform:uppercase;}
@@ -166,8 +166,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .expand-chart{margin-bottom:12px;}
 .expand-proj{margin-top:10px;}
 .expand-proj-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:6px;}
-.expand-proj-bar{height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;position:relative;}
-.expand-proj-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--accent));transition:width .5s ease;}
+.expand-proj-bar{height:6px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;position:relative;}
+.expand-proj-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#2ecc71,#c8ff00);transition:width .6s ease;}
 .expand-proj-marker{position:absolute;top:0;bottom:0;width:2px;background:rgba(255,255,255,.3);}
 .expand-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;}
 .expand-stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;}
@@ -529,33 +529,108 @@ async function refreshStatus() {
 setInterval(refreshStatus, 60000);
 refreshStatus();
 
-// ── SVG chart (full) ───────────────────────────────────────
-function makeSVG(data, line, isOver, W=260, H=90) {
-  const pL=28,pR=8,pT=10,pB=20, cW=W-pL-pR, cH=H-pT-pB;
-  const mn=Math.min(...data,line)-1.5, mx=Math.max(...data,line)+1.5, R=mx-mn||1;
-  const px=(v,i)=>pL+(i/(data.length-1))*cW, py=v=>pT+cH-((v-mn)/R)*cH;
-  const lY=py(line), gc='rgba(255,255,255,.06)', tc='#4a5568';
-  const hc=isOver?'#39ff6e':'#f0a500', mc='#ff4d4d';
+// ── SVG chart (full) — premium area chart ──────────────────
+function makeSVG(data, line, isOver, W=260, H=100) {
+  const pL=32,pR=10,pT=14,pB=22, cW=W-pL-pR, cH=H-pT-pB;
+  const pad=Math.max((Math.max(...data)-Math.min(...data))*0.18, line*0.08);
+  const mn=Math.min(...data,line)-pad, mx=Math.max(...data,line)+pad, R=mx-mn||1;
+  const px=(v,i)=>pL+(i/(data.length-1))*cW;
+  const py=v=>pT+cH-((v-mn)/R)*cH;
+  const hc=isOver?'#2ecc71':'#f39c12', mc='#e74c3c';
+  const hcGlow=isOver?'rgba(46,204,113,':'rgba(243,156,18,';
+  const uid='ch'+Math.random().toString(36).slice(2,7);
+  const pts=data.map((v,i)=>({x:px(v,i),y:py(v)}));
+  // bezier control points
+  function cpx(p1,p2,t){return p1.x+(p2.x-p1.x)*t;}
+  function cpy(p1,p2,t){return p1.y+(p2.y-p1.y)*t;}
+  let pathD='M'+pts[0].x+','+pts[0].y;
+  for(let i=1;i<pts.length;i++){
+    const prev=pts[i-1],curr=pts[i];
+    const cp1x=prev.x+(curr.x-prev.x)*0.5, cp1y=prev.y;
+    const cp2x=prev.x+(curr.x-prev.x)*0.5, cp2y=curr.y;
+    pathD+=` C${cp1x},${cp1y} ${cp2x},${cp2y} ${curr.x},${curr.y}`;
+  }
+  const areaD=pathD+` L${pts[pts.length-1].x},${pT+cH} L${pts[0].x},${pT+cH} Z`;
+  const lY=py(line);
   let s=`<svg viewBox="0 0 ${W} ${H}" style="overflow:visible;width:100%;height:auto">`;
-  [mn+0.5,line,mx-0.5].forEach(v=>{const y=py(v);s+=`<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="${gc}" stroke-width="1"/><text x="${pL-3}" y="${y+3.5}" text-anchor="end" font-size="8" fill="${tc}" font-family="Share Tech Mono,monospace">${Math.round(v*10)/10}</text>`;});
-  s+=`<line x1="${pL}" y1="${lY}" x2="${W-pR}" y2="${lY}" stroke="#f0b429" stroke-width="1.5" stroke-dasharray="4,3"/>`;
-  s+=`<text x="${pL+3}" y="${lY-4}" font-size="7.5" fill="#f0b429" font-weight="700" font-family="Share Tech Mono,monospace">LINE ${line}</text>`;
-  s+=`<polyline points="${data.map((v,i)=>`${px(v,i)},${py(v)}`).join(' ')}" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.6" stroke-linejoin="round"/>`;
-  data.forEach((v,i)=>{const hit=isOver?v>=line:v<=line;s+=`<circle cx="${px(v,i)}" cy="${py(v)}" r="4.5" fill="${hit?hc:mc}"/><text x="${px(v,i)}" y="${py(v)-8}" text-anchor="middle" font-size="8" fill="${hit?hc:mc}" font-weight="700" font-family="Share Tech Mono,monospace">${v}</text><text x="${px(v,i)}" y="${H-4}" text-anchor="middle" font-size="7.5" fill="${tc}" font-family="Share Tech Mono,monospace">G${i+1}</text>`;});
+  s+=`<defs>
+    <linearGradient id="ag${uid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${hc}" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="${hc}" stop-opacity="0.01"/>
+    </linearGradient>
+    <filter id="glow${uid}" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip${uid}"><rect x="${pL}" y="${pT}" width="${cW}" height="${cH}"/></clipPath>
+  </defs>`;
+  // subtle horizontal grid lines
+  [0,0.25,0.5,0.75,1].forEach(t=>{
+    const y=pT+cH*t;
+    s+=`<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="rgba(255,255,255,.04)" stroke-width="1"/>`;
+  });
+  // axis labels
+  [mn,line,mx].forEach(v=>{
+    const y=py(v);
+    s+=`<text x="${pL-4}" y="${y+3.5}" text-anchor="end" font-size="8" fill="#555575" font-family="Inter,sans-serif" font-weight="500">${Math.round(v*10)/10}</text>`;
+  });
+  // area fill
+  s+=`<path d="${areaD}" fill="url(#ag${uid})" clip-path="url(#clip${uid})"/>`;
+  // line label zone tint
+  s+=`<rect x="${pL}" y="${lY-0.5}" width="${cW}" height="1" fill="#f39c12" opacity="0.8"/>`;
+  s+=`<rect x="${pL}" y="${lY}" width="${cW}" height="${pT+cH-lY}" fill="${isOver?'rgba(46,204,113,.04)':'rgba(243,156,18,.04)'}" clip-path="url(#clip${uid})"/>`;
+  // dashed line
+  s+=`<line x1="${pL}" y1="${lY}" x2="${W-pR}" y2="${lY}" stroke="#f39c12" stroke-width="1.2" stroke-dasharray="5,3" opacity="0.7"/>`;
+  s+=`<text x="${W-pR-2}" y="${lY-4}" text-anchor="end" font-size="8" fill="#f39c12" font-weight="700" font-family="Inter,sans-serif">${line}</text>`;
+  // main curve
+  s+=`<path d="${pathD}" fill="none" stroke="${hcGlow}0.6)" stroke-width="2" stroke-linecap="round" filter="url(#glow${uid})" clip-path="url(#clip${uid})"/>`;
+  s+=`<path d="${pathD}" fill="none" stroke="${hc}" stroke-width="1.5" stroke-linecap="round" clip-path="url(#clip${uid})"/>`;
+  // dots + labels
+  data.forEach((v,i)=>{
+    const hit=isOver?v>=line:v<=line;
+    const cx=px(v,i), cy=py(v);
+    const dc=hit?hc:mc;
+    s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="${hcGlow}0.12)" stroke="none"/>`;
+    s+=`<circle cx="${cx}" cy="${cy}" r="3.5" fill="${dc}" stroke="rgba(0,0,0,.5)" stroke-width="1"/>`;
+    s+=`<text x="${cx}" y="${cy-9}" text-anchor="middle" font-size="8.5" fill="${dc}" font-weight="700" font-family="Inter,sans-serif">${v}</text>`;
+    s+=`<text x="${cx}" y="${H-5}" text-anchor="middle" font-size="7" fill="#44446a" font-family="Inter,sans-serif">G${i+1}</text>`;
+  });
   s+='</svg>'; return s;
 }
 
-// ── SVG sparkline (streak cards) ──────────────────────────
-function makeSparkSVG(data, line, isOver, W=130, H=40) {
-  const mn=Math.min(...data,line)-.5, mx=Math.max(...data,line)+.5, R=mx-mn||1;
-  const px=(v,i)=>6+(i/(data.length-1))*(W-12), py=v=>H-4-((v-mn)/R)*(H-8);
-  const lY=py(line), hc=isOver?'#39ff6e':'#f0a500', mc='#ff4d4d';
+// ── SVG sparkline (streak cards) — premium ────────────────
+function makeSparkSVG(data, line, isOver, W=150, H=48) {
+  const pad=(Math.max(...data)-Math.min(...data))*0.2||line*0.1;
+  const mn=Math.min(...data,line)-pad, mx=Math.max(...data,line)+pad, R=mx-mn||1;
+  const px=(v,i)=>4+(i/(data.length-1))*(W-8);
+  const py=v=>H-4-((v-mn)/R)*(H-10);
+  const hc=isOver?'#2ecc71':'#f39c12', mc='#e74c3c';
+  const uid='sp'+Math.random().toString(36).slice(2,7);
+  const pts=data.map((v,i)=>({x:px(v,i),y:py(v)}));
+  let pathD='M'+pts[0].x+','+pts[0].y;
+  for(let i=1;i<pts.length;i++){
+    const p=pts[i-1],c=pts[i];
+    pathD+=` C${p.x+(c.x-p.x)*.5},${p.y} ${p.x+(c.x-p.x)*.5},${c.y} ${c.x},${c.y}`;
+  }
+  const areaD=pathD+` L${pts[pts.length-1].x},${H} L${pts[0].x},${H} Z`;
+  const lY=py(line);
   let s=`<svg viewBox="0 0 ${W} ${H}" style="overflow:visible;width:100%;height:auto">`;
-  s+=`<line x1="0" y1="${lY}" x2="${W}" y2="${lY}" stroke="#f0b42988" stroke-width="1" stroke-dasharray="3,2"/>`;
-  s+=`<polyline points="${data.map((v,i)=>`${px(v,i)},${py(v)}`).join(' ')}" fill="none" stroke="${hc}88" stroke-width="1.5" stroke-linejoin="round"/>`;
-  data.forEach((v,i)=>{const hit=isOver?v>=line:v<=line;s+=`<circle cx="${px(v,i)}" cy="${py(v)}" r="3" fill="${hit?hc:mc}" stroke="rgba(0,0,0,.4)" stroke-width="0.8"/>`;});
-  // label last value
-  const lv=data[data.length-1];s+=`<text x="${px(lv,data.length-1)}" y="${py(lv)-6}" text-anchor="middle" font-size="7" fill="${hc}" font-weight="700" font-family="Share Tech Mono,monospace">${lv}</text>`;
+  s+=`<defs>
+    <linearGradient id="sg${uid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${hc}" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="${hc}" stop-opacity="0"/>
+    </linearGradient>
+  </defs>`;
+  s+=`<path d="${areaD}" fill="url(#sg${uid})"/>`;
+  s+=`<line x1="0" y1="${lY}" x2="${W}" y2="${lY}" stroke="#f39c12" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>`;
+  s+=`<path d="${pathD}" fill="none" stroke="${hc}55" stroke-width="2.5" stroke-linecap="round"/>`;
+  s+=`<path d="${pathD}" fill="none" stroke="${hc}" stroke-width="1.5" stroke-linecap="round"/>`;
+  data.forEach((v,i)=>{
+    const hit=isOver?v>=line:v<=line, dc=hit?hc:mc;
+    const cx=px(v,i), cy=py(v);
+    s+=`<circle cx="${cx}" cy="${cy}" r="4.5" fill="${hc}18" stroke="none"/>`;
+    s+=`<circle cx="${cx}" cy="${cy}" r="2.5" fill="${dc}" stroke="rgba(0,0,0,.6)" stroke-width="0.8"/>`;
+  });
   s+='</svg>'; return s;
 }
 
@@ -568,6 +643,8 @@ function buildEdgeCard(p, idx) {
   const hc=p.hit>=90?"var(--green)":p.hit>=75?"var(--amber)":"var(--red)";
   const div=document.createElement("div");
   div.className=`edge-card ${dc}`;
+  const hitBar=Math.min(100,p.hit);
+  const hitColor=p.hit>=90?'var(--green)':p.hit>=75?'var(--amber)':'var(--red)';
   div.innerHTML=`
     <div class="edge-card-top">
       <div class="edge-avatar ${dc}">${p.initials}</div>
@@ -585,6 +662,12 @@ function buildEdgeCard(p, idx) {
         <div class="edge-line-badge">Line ${p.line}</div>
       </div>
     </div>
+    <div style="padding:0 18px 14px;display:flex;align-items:center;gap:10px;">
+      <div style="flex:1;height:3px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;">
+        <div style="width:${hitBar}%;height:100%;background:${hitColor};border-radius:3px;transition:width .6s ease;"></div>
+      </div>
+      <span style="font-size:10px;font-weight:700;color:${hitColor};font-family:'Inter',sans-serif;min-width:32px;text-align:right;">${p.hit}%</span>
+    </div>
     <div class="edge-expand" id="expand-${idx}">
       <div class="expand-tabs">
         <button class="expand-tab active" onclick="switchExpandTab(${idx},'l5',this)">L5</button>
@@ -600,7 +683,7 @@ function buildEdgeCard(p, idx) {
         </div>
       </div>
       <div class="expand-stats">
-        <div class="expand-stat"><div class="expand-stat-lbl">HIT RATE</div><div class="expand-stat-val" style="color:${hc}">${p.hit}%</div></div>
+        <div class="expand-stat"><div class="expand-stat-lbl">HIT RATE</div><div class="expand-stat-val" style="color:${hitColor}">${p.hit}%</div></div>
         <div class="expand-stat"><div class="expand-stat-lbl">EDGE</div><div class="expand-stat-val" style="color:var(--accent)">${es}${p.edge.toFixed(2)}</div></div>
         <div class="expand-stat"><div class="expand-stat-lbl">PICK TYPE</div><div class="expand-stat-val" style="color:var(--cyan);font-size:18px;">${p.pick}</div></div>
       </div>
@@ -678,7 +761,7 @@ function streakCard(p, n) {
         <div style="font-size:10px;color:var(--accent);margin-top:2px;">${es}${p.edge.toFixed(2)} edge</div>
       </div>
     </div>
-    <div style="margin-bottom:8px;">${spark}</div>
+    <div style="margin:8px 0 10px;">${spark}</div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
       <span style="font-size:9px;color:var(--muted);letter-spacing:1px;">HIT RATE L${n}</span>
       <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:${pctCol};">${pct}%</span>
