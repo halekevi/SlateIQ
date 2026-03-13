@@ -456,47 +456,63 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 setInterval(()=>{ document.getElementById("clock").textContent = new Date().toLocaleTimeString(); }, 1000);
 document.getElementById("clock").textContent = new Date().toLocaleTimeString();
 
-// ── Real PLAYER_DATA (last 10 games) ──────────────────────
-const PLAYER_DATA = {
-  "Cason Wallace":           [24,19,26,22,28,20,25,23,27,24],
-  "Brook Lopez":             [2,1,3,2,2,1,2,3,2,2],
-  "Gui Santos":              [1,0,1,1,1,0,1,1,0,1],
-  "Shai Gilgeous-Alexander": [1,1,2,1,1,1,0,1,1,1],
-  "Draymond Green":          [1,0,1,1,1,0,1,0,1,1],
-  "De'Anthony Melton":       [1,0,1,0,1,1,0,1,1,0],
-  "Kelly Oubre":             [32,28,35,30,29,33,27,31,28,30],
-  "Seydou Traore":           [10,11,9,10,8,11,9,10,11,9],
-  "Dra Gibbs-Lawhorn":       [2,3,2,2,1,3,2,3,2,2],
-  "Alden Applewhite":        [11,12,10,13,11,12,10,11,12,11],
-  "Cooper Campbell":         [10,11,9,12,10,11,10,9,11,10],
-  "Thomas Dowd":             [10,11,9,12,10,11,10,9,11,10],
-  "Isaac Williams":          [3,2,3,3,2,3,2,3,3,2],
-  "Tyren Moore":             [2,3,2,2,1,3,2,3,2,2],
-  "Harry Wessels":           [12,13,11,12,11,14,10,13,12,11],
-};
+// ── Slate data — loaded dynamically from /api/slate ──────────
+let ALL_SLATE = [];
+const PLAYER_DATA = {};   // populated from l5_avg / season_avg when available
+
 function getPD(name, line) {
   if (PLAYER_DATA[name]) return PLAYER_DATA[name];
-  let s=0; for(let c of name) s=(s*31+c.charCodeAt(0))%1000;
-  return Array.from({length:10},(_,i)=>{ s=(s*9301+49297)%233280; return Math.max(0,Math.round((line+((s/233280)-.5)*line*1.2)*4)/4); });
+  // deterministic fallback using player name seed (no real data available)
+  let s = 0;
+  for (let c of name) s = (s * 31 + c.charCodeAt(0)) % 1000;
+  return Array.from({length: 10}, (_, i) => {
+    s = (s * 9301 + 49297) % 233280;
+    return Math.max(0, Math.round((line + ((s / 233280) - 0.5) * line * 1.2) * 4) / 4);
+  });
 }
 
-// ── Full slate — every unique player+prop+dir ──────────────
-const ALL_SLATE = [
-  { sport:"NBA", initials:"CW", player:"Cason Wallace",           prop:"Fantasy Score",     line:22.5, pick:"Standard", dir:"OVER",  hit:80,  edge: 9.92 },
-  { sport:"NBA", initials:"CW", player:"Cason Wallace",           prop:"Assists",           line:1.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 3.16 },
-  { sport:"NBA", initials:"BL", player:"Brook Lopez",             prop:"Two Pointers Made", line:1.5,  pick:"Standard", dir:"OVER",  hit:100, edge: 2.14 },
-  { sport:"NBA", initials:"GS", player:"Gui Santos",              prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:80,  edge: 1.03 },
-  { sport:"NBA", initials:"SG", player:"Shai Gilgeous-Alexander", prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 1.50 },
-  { sport:"NBA", initials:"DR", player:"Draymond Green",          prop:"3-PT Made",         line:0.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 1.16 },
-  { sport:"NBA", initials:"DM", player:"De'Anthony Melton",       prop:"Steals",            line:0.5,  pick:"Goblin",   dir:"OVER",  hit:80,  edge: 1.29 },
-  { sport:"CBB", initials:"AA", player:"Alden Applewhite",        prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:100, edge: 9.10 },
-  { sport:"CBB", initials:"CC", player:"Cooper Campbell",         prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 4.59 },
-  { sport:"CBB", initials:"TD", player:"Thomas Dowd",             prop:"Points",            line:9.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 4.36 },
-  { sport:"CBB", initials:"IW", player:"Isaac Williams",          prop:"Assists",           line:2.5,  pick:"Goblin",   dir:"OVER",  hit:90,  edge: 2.31 },
-  { sport:"CBB", initials:"DG", player:"Dra Gibbs-Lawhorn",       prop:"3-PT Made",         line:3.5,  pick:"Standard", dir:"UNDER", hit:100, edge:-3.50 },
-  { sport:"CBB", initials:"ST", player:"Seydou Traore",           prop:"Pts+Rebs",          line:12.5, pick:"Standard", dir:"UNDER", hit:80,  edge:-2.96 },
-  { sport:"CBB", initials:"TM", player:"Tyren Moore",             prop:"3-PT Made",         line:3.5,  pick:"Standard", dir:"UNDER", hit:100, edge:-3.50 },
-];
+async function loadSlateData() {
+  try {
+    const res = await fetch("/api/slate");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const d = await res.json();
+    ALL_SLATE = (d.picks || []).map(p => ({
+      sport:    p.sport,
+      initials: p.initials,
+      player:   p.player,
+      prop:     p.prop,
+      line:     p.line,
+      pick:     p.pick,
+      dir:      p.dir,
+      hit:      p.hit,
+      edge:     p.edge,
+    }));
+    // Populate PLAYER_DATA from l5 game values where available
+    for (const p of (d.picks || [])) {
+      if (p.player && !PLAYER_DATA[p.player]) {
+        // Build synthetic last-10 from l5_avg/season_avg if no raw games
+        const avg = p.l5_avg ?? p.season_avg ?? p.line;
+        const spread = p.line * 0.35;
+        let s = 0;
+        for (let c of p.player) s = (s * 31 + c.charCodeAt(0)) % 1000;
+        PLAYER_DATA[p.player] = Array.from({length: 10}, (_, i) => {
+          s = (s * 9301 + 49297) % 233280;
+          const jitter = ((s / 233280) - 0.5) * spread * 2;
+          return Math.max(0, Math.round((avg + jitter) * 4) / 4);
+        });
+      }
+    }
+    // Show slate date in UI if element exists
+    if (d.date) {
+      const el = document.getElementById("slate-date");
+      if (el) el.textContent = d.date;
+    }
+  } catch (err) {
+    console.warn("loadSlateData failed:", err);
+  }
+  renderEdges();
+  renderStreaks();
+}
 
 // ── Status cards ───────────────────────────────────────────
 function applyStatusCard(id, info, label) {
@@ -717,8 +733,8 @@ document.head.insertAdjacentHTML("beforeend",`<style>
 .streak-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 14px 14px 18px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;}
 </style>`);
 
-renderEdges();
-renderStreaks();
+// renderEdges + renderStreaks called inside loadSlateData()
+loadSlateData();
 </script>
 
 <script>

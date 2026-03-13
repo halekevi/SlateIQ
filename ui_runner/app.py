@@ -513,5 +513,53 @@ def api_jobs():
 # ──────────────────────────────────────────────────────────────────────────────
 # Main
 # ──────────────────────────────────────────────────────────────────────────────
+
+# ──────────────────────────────────────────────────────────────────────────────
+# API: Slate picks — deduped unique picks from tickets_latest.json
+# Powers home page Top Edges + Streaks dynamically (no more hardcoded data)
+# ──────────────────────────────────────────────────────────────────────────────
+@app.get("/api/slate")
+def api_slate():
+    json_path = TEMPLATES_DIR / "tickets_latest.json"
+    if not json_path.exists():
+        return jsonify({"picks": [], "generated_at": None, "date": None})
+    try:
+        import json as _json
+        data = _json.loads(json_path.read_text(encoding="utf-8-sig"))
+        seen = set()
+        picks = []
+        for group in (data.get("groups") or []):
+            for ticket in (group.get("tickets") or []):
+                for leg in (ticket.get("legs") or []):
+                    key = (leg.get("player"), leg.get("prop_type"), leg.get("direction"), leg.get("line"))
+                    if key in seen:
+                        continue
+                    seen.add(key)
+                    picks.append({
+                        "sport":      leg.get("sport", ""),
+                        "initials":   leg.get("initials", ""),
+                        "player":     leg.get("player", ""),
+                        "prop":       leg.get("prop_type", ""),
+                        "line":       leg.get("line", 0),
+                        "pick":       leg.get("pick_type", "Standard"),
+                        "dir":        leg.get("direction", "OVER"),
+                        "hit":        round((leg.get("hit_rate") or 0) * 100),
+                        "edge":       leg.get("edge") or 0,
+                        "l5_over":    leg.get("l5_over"),
+                        "l5_under":   leg.get("l5_under"),
+                        "l10_over":   leg.get("l10_over"),
+                        "l10_under":  leg.get("l10_under"),
+                        "l5_avg":     leg.get("l5_avg"),
+                        "season_avg": leg.get("season_avg"),
+                    })
+        picks.sort(key=lambda p: abs(p["edge"]), reverse=True)
+        return jsonify({
+            "picks":        picks,
+            "generated_at": data.get("generated_at"),
+            "date":         data.get("date"),
+        })
+    except Exception as e:
+        return jsonify({"error": str(e), "picks": []}), 500
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8787, debug=False)
