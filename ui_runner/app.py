@@ -566,15 +566,25 @@ def api_slate_sport():
     today = datetime.now().strftime("%Y-%m-%d")
 
     def find_combined(date_str):
-        patterns = [
-            BASE_DIR / f"combined_slate_tickets_{date_str}.xlsx",
-            *sorted(BASE_DIR.glob(f"combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
-            *sorted(BASE_DIR.glob(f"outputs/{date_str}/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
-            *sorted(BASE_DIR.glob(f"outputs/*/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+        # Try multiple possible repo roots
+        file_path = Path(__file__).resolve()
+        possible_roots = [
+            file_path.parent.parent,        # ui_runner/app.py -> repo root
+            file_path.parent.parent.parent, # ui_runner/ui_runner/app.py -> repo root
+            Path("/app"),                   # Railway standard deploy path
         ]
-        for p in patterns:
-            if p.exists():
-                return p
+        for root in possible_roots:
+            if not root.exists():
+                continue
+            candidates = [
+                root / f"combined_slate_tickets_{date_str}.xlsx",
+                *sorted(root.glob(f"combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+                *sorted(root.glob(f"outputs/{date_str}/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+                *sorted(root.glob(f"outputs/*/combined_slate_tickets_{date_str}*.xlsx"), reverse=True),
+            ]
+            for p in candidates:
+                if p.exists():
+                    return p
         return None
 
     path = find_combined(today)
@@ -585,23 +595,26 @@ def api_slate_sport():
             if path:
                 break
 
-    # Last resort: find the most recent combined slate anywhere under outputs/
+    # Last resort: find the most recent combined slate anywhere under /app
     if path is None:
-        all_combined = sorted(BASE_DIR.glob("outputs/**/combined_slate_tickets_*.xlsx"), reverse=True)
-        if all_combined:
-            path = all_combined[0]
+        app_root = Path("/app")
+        if app_root.exists():
+            all_combined = sorted(app_root.glob("outputs/**/combined_slate_tickets_*.xlsx"), reverse=True)
+            if not all_combined:
+                all_combined = sorted(app_root.glob("**/combined_slate_tickets_*.xlsx"), reverse=True)
+            if all_combined:
+                path = all_combined[0]
 
     if path is None:
-        # Return debug info to help diagnose
-        base_contents = [str(p) for p in BASE_DIR.iterdir() if not p.name.startswith('.')]
-        outputs_exists = (BASE_DIR / "outputs").exists()
-        outputs_contents = [str(p) for p in (BASE_DIR / "outputs").iterdir()] if outputs_exists else []
+        app_root = Path("/app")
+        outputs_dir = app_root / "outputs"
         return jsonify({
             "error": "No combined slate found",
-            "base_dir": str(BASE_DIR),
-            "base_contents": base_contents[:20],
-            "outputs_exists": outputs_exists,
-            "outputs_contents": outputs_contents[:20],
+            "app_root_exists": app_root.exists(),
+            "app_contents": [p.name for p in app_root.iterdir()][:30] if app_root.exists() else [],
+            "outputs_exists": outputs_dir.exists(),
+            "outputs_contents": [str(p) for p in outputs_dir.iterdir()][:20] if outputs_dir.exists() else [],
+            "file_path": str(Path(__file__).resolve()),
             "sports": {}
         }), 404
 
