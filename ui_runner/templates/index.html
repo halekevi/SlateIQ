@@ -668,6 +668,7 @@ async function loadSlateData() {
   } catch (err) { console.warn("loadSlateData failed:", err); }
   renderEdges();
   renderStreaks();
+  buildSlateDataFromAllSlate();
 }
 
 function applyStatusCard(id, info, label) {
@@ -1018,30 +1019,58 @@ function toggleSlatePanel(sport) {
   }
 }
 
-async function loadSlatePicks() {
-  try {
-    const res = await fetch('/api/slate-picks');
-    if (!res.ok) return;
-    const d = await res.json();
-    SPORTS.forEach(s => { if (d.sports && d.sports[s]) SLATE_DATA[s] = d.sports[s]; });
-    // update count badges
-    SPORTS.forEach(s => {
-      const sub = document.getElementById(`sc-${s}-sub`);
-      if (sub && SLATE_DATA[s]) {
-        const n = SLATE_DATA[s].length;
-        if (sub.textContent) sub.textContent += `  ·  ${n} props`;
-        else sub.textContent = `${n} props`;
-      }
+// ── Populate SLATE_DATA from ALL_SLATE (loaded via /api/slate) ───────────────
+function buildSlateDataFromAllSlate() {
+  SPORTS.forEach(s => { SLATE_DATA[s] = []; });
+  ALL_SLATE.forEach(p => {
+    const s = (p.sport || '').toLowerCase();
+    if (!SLATE_DATA[s]) return;
+    SLATE_DATA[s].push({
+      tier:       null,
+      rank_score: p.edge != null ? Math.abs(p.edge) : null,
+      player:     p.player || '',
+      team:       p.team   || '',
+      opp:        p.opp    || '',
+      prop:       p.prop   || '',
+      pick_type:  p.pick   || '',
+      line:       p.line,
+      dir:        p.dir    || '',
+      edge:       p.edge,
+      proj:       null,
+      hit_rate:   p.hit != null ? p.hit / 100 : null,
+      l5_avg:     p.l5_avg,
+      szn_avg:    p.season_avg,
+      l5_over:    p.l5_over,
+      l5_under:   p.l5_under,
+      def_tier:   null,
+      game_time:  '',
     });
-    if (openSlatePanel) renderSlateTable(openSlatePanel);
-  } catch(e) { console.warn('loadSlatePicks failed:', e); }
+  });
+  // sort each sport by edge descending
+  SPORTS.forEach(s => SLATE_DATA[s].sort((a,b) => (Math.abs(b.edge||0)) - (Math.abs(a.edge||0))));
+  // update count badges
+  SPORTS.forEach(s => {
+    const sub = document.getElementById(`sc-${s}-sub`);
+    if (sub && SLATE_DATA[s] && SLATE_DATA[s].length) {
+      const n = SLATE_DATA[s].length;
+      const cur = sub.textContent || '';
+      if (!cur.includes('props')) sub.textContent = cur + (cur ? '  ·  ' : '') + `${n} props`;
+    }
+  });
+  if (openSlatePanel) renderSlateTable(openSlatePanel);
+}
+
+async function loadSlatePicks() {
+  // No-op: data comes from buildSlateDataFromAllSlate() after loadSlateData()
+  if (openSlatePanel && SLATE_DATA[openSlatePanel]) renderSlateTable(openSlatePanel);
 }
 
 function loadSlateSport(sport) {
-  if (SLATE_DATA[sport]) { renderSlateTable(sport); return; }
+  if (SLATE_DATA[sport] && SLATE_DATA[sport].length) { renderSlateTable(sport); return; }
   const tbody = document.getElementById(`stb-${sport}`);
   if (tbody) tbody.innerHTML = `<tr><td colspan="14" style="text-align:center;padding:20px;color:var(--muted);letter-spacing:1px;font-size:10px;">LOADING…</td></tr>`;
-  loadSlatePicks().then(() => renderSlateTable(sport));
+  // wait for loadSlateData to finish then re-render
+  loadSlateData().then(() => renderSlateTable(sport));
 }
 
 function renderSlateTable(sport) {
@@ -1154,9 +1183,8 @@ function togglePickFilter(sport, pick, btn) {
   renderSlateTable(sport);
 }
 
-// Pre-fetch all slate picks on page load
-loadSlatePicks();
-
+// Data loaded dynamically — loadSlateData() populates ALL_SLATE then calls buildSlateDataFromAllSlate()
+loadSlateData();
 </script>
 
 <script>
