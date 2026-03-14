@@ -201,6 +201,79 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   .hero-title{font-size:42px;}
   .status-row{grid-template-columns:1fr!important;}
 }
+
+/* ==== 2026 UI refresh ==== */
+:root{
+  --glass:rgba(10,14,28,.68);
+  --glass-2:rgba(8,10,22,.86);
+  --line-soft:rgba(255,255,255,.07);
+  --shadow-xl:0 30px 80px rgba(0,0,0,.45);
+  --shadow-md:0 14px 40px rgba(0,0,0,.28);
+}
+body{
+  background:
+    radial-gradient(circle at top left, rgba(0,229,255,.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(200,255,0,.09), transparent 30%),
+    linear-gradient(180deg,#05070f 0%, #060812 35%, #05060d 100%);
+}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 50% 0%, rgba(255,255,255,.04), transparent 45%);mix-blend-mode:screen;opacity:.55;}
+.snav,.mobile-menu,.hero,.slate-panel-wrap,.qcard,.edge-card{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+.snav{position:sticky;top:0;z-index:120;background:rgba(5,8,16,.72);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:0 10px 30px rgba(0,0,0,.22);}
+.snav-links a,.mobile-menu a{border-color:transparent!important;}
+.snav-links a.active{background:linear-gradient(180deg, rgba(200,255,0,.16), rgba(200,255,0,.05)); box-shadow:inset 0 0 0 1px rgba(200,255,0,.18), 0 0 0 1px rgba(200,255,0,.06), 0 8px 24px rgba(200,255,0,.08);}
+.live-pill{background:linear-gradient(180deg, rgba(10,20,15,.95), rgba(5,10,8,.82)); border:1px solid rgba(57,255,110,.18); box-shadow:0 0 0 1px rgba(57,255,110,.06), inset 0 0 28px rgba(57,255,110,.05);}
+.shell{max-width:1460px;padding-top:28px;position:relative;z-index:2;}
+.hero{padding:34px 34px 30px;border-radius:28px;background:linear-gradient(135deg, rgba(13,16,34,.90), rgba(7,10,22,.82));border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow-xl);overflow:hidden;isolation:isolate;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 82% 24%, rgba(0,229,255,.20), transparent 24%), radial-gradient(circle at 18% 88%, rgba(200,255,0,.10), transparent 26%);opacity:.9;z-index:-1;}
+.hero-title{font-size:92px;letter-spacing:4px;text-shadow:0 0 30px rgba(200,255,0,.10);}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:10px;}
+.hero-meta{gap:10px;flex-wrap:wrap;margin-top:18px;}
+.hero-meta span{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.065);font-size:11px;color:#c7cade;}
+.hero-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,.7fr);gap:22px;align-items:stretch;width:100%;}
+.hero-copy{display:flex;flex-direction:column;justify-content:center;min-width:0;}
+.hero-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-self:stretch;}
+.hero-stat{padding:16px 16px 14px;border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.075);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+.hero-stat-label{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
+.hero-stat-value{font-family:'Bebas Neue',sans-serif;font-size:34px;line-height:1;letter-spacing:1.5px;color:var(--text);}
+.hero-stat-sub{margin-top:8px;font-size:11px;color:#b2b7cc;line-height:1.5;}
+.hero-stat.live .hero-stat-value{color:var(--accent);}
+.hero-stat.market .hero-stat-value{color:var(--cyan);}
+.hero-stat.model .hero-stat-value{color:#fff;}
+.hero-stat.edge .hero-stat-value{color:#7dffb4;}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px;}
+.section-title h2{font-size:36px;}
+.section-title small{font-size:11px;letter-spacing:2px;color:#9ea3ba;text-transform:uppercase;}
+.slate-panel-wrap,.qcard,.edge-card{background:linear-gradient(180deg, rgba(12,15,29,.83), rgba(7,10,20,.92));border:1px solid rgba(255,255,255,.07);box-shadow:var(--shadow-md);}
+.scard,.qcard,.edge-card{border-radius:24px;}
+.scard{padding:18px 18px 16px;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.06);}
+.scard:hover,.qcard:hover,.edge-card:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.03);}
+.scard-title{letter-spacing:2.3px;color:#96a0bd;}
+.scard-val{font-size:40px;line-height:.95;}
+.sbadge{border-radius:999px;padding:6px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.quick-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+.qcard{padding:24px 22px;min-height:136px;justify-content:flex-end;}
+.qcard::before{content:'';position:absolute;inset:auto 18px 0 18px;height:1px;background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);}
+.qcard-name{font-size:28px;}
+.qcard-desc{color:#adb3ca;font-size:12px;}
+.edge-section{margin-top:10px;}
+.edge-card-top{padding:18px 18px 14px;}
+.edge-avatar{width:46px;height:46px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);}
+.edge-name{font-size:15px;font-weight:700;letter-spacing:.2px;}
+.edge-prop{font-size:11px;color:#b3b9cf;}
+.edge-num{font-size:42px;text-shadow:0 0 18px rgba(57,255,110,.08);}
+.edge-tags{gap:6px;}
+.edge-pick,.edge-sport,.edge-line-badge{border-radius:999px;padding:4px 10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);}
+.edge-hr{height:5px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden;}
+.edge-expand{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.015));border-top:1px solid rgba(255,255,255,.05);}
+.expand-chart{height:130px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));}
+.slate-toolbar,.slate-table-wrap{background:transparent;}
+.slate-filter-input,.slate-sort-sel{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);border-radius:12px;}
+.slate-filter-btn{border-radius:999px;background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.07);}
+.slate-table th{background:rgba(8,10,22,.95);}
+@media (max-width:1080px){.hero-layout{grid-template-columns:1fr}.hero-panel{grid-template-columns:repeat(2,minmax(0,1fr));}.hero-title{font-size:70px;}}
+@media (max-width:720px){.hero{padding:24px 18px 22px;border-radius:22px}.hero-title{font-size:54px;letter-spacing:2px}.hero-panel{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr}.section-title{align-items:flex-start;flex-direction:column;}}
+@media (max-width:520px){.hero-panel{grid-template-columns:1fr}.hero-meta span{width:100%;}.scard-val{font-size:30px;}}
+
 </style>
 </head>
 <body>
@@ -267,15 +340,40 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
   <!-- HERO -->
   <div class="hero">
-    <div>
-      <div class="hero-eyebrow">NBA · CBB · NHL · SOCCER · Prop Intelligence</div>
-      <h1 class="hero-title">
-        <span class="ht1">Slate</span>
-        <span class="ht2">IQ</span>
-      </h1>
-      <div class="hero-meta">
-        <span>Prop Intelligence</span>
-        <span id="clock">--:--:--</span>
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <div class="hero-eyebrow">NBA · CBB · NHL · SOCCER · Prop Intelligence</div>
+        <h1 class="hero-title">
+          <span class="ht1">Slate</span>
+          <span class="ht2">IQ</span>
+        </h1>
+        <div class="hero-meta">
+          <span>Real-time prop board</span>
+          <span>Multi-sport intelligence</span>
+          <span id="clock">--:--:--</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="hero-stat live">
+          <div class="hero-stat-label">Command Center</div>
+          <div class="hero-stat-value">LIVE</div>
+          <div class="hero-stat-sub">Sharper system framing, cleaner hierarchy, and a more premium first impression.</div>
+        </div>
+        <div class="hero-stat market">
+          <div class="hero-stat-label">Coverage</div>
+          <div class="hero-stat-value">4 Sports</div>
+          <div class="hero-stat-sub">NBA, CBB, NHL, and Soccer surfaced from one unified home layer.</div>
+        </div>
+        <div class="hero-stat model">
+          <div class="hero-stat-label">Workflow</div>
+          <div class="hero-stat-value">Fast Scan</div>
+          <div class="hero-stat-sub">Status cards, quick actions, and edge boards now read more like a product and less like a debug screen.</div>
+        </div>
+        <div class="hero-stat edge">
+          <div class="hero-stat-label">Goal</div>
+          <div class="hero-stat-value">Sharper UX</div>
+          <div class="hero-stat-sub">Higher trust, stronger readability, and a more modern betting-dashboard aesthetic.</div>
+        </div>
       </div>
     </div>
   </div>
