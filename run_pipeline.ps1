@@ -287,12 +287,6 @@ if ($SoccerOnly) {
     if ($ok) { $ok = Run-Step "Soccer Step 6 - Team Role Context"  $SoccerDir ".\scripts\step6_team_role_context_soccer.py"      "--input outputs\step5_soccer_hit_rates.csv --output outputs\step6_soccer_role_context.csv" }
     if ($ok) { $ok = Run-Step "Soccer Step 7 - Rank Props"         $SoccerDir ".\scripts\step7_rank_props_soccer.py"             "--input outputs\step6_soccer_role_context.csv --output outputs\step7_soccer_ranked.xlsx" }
     if ($ok) { $ok = Run-Step "Soccer Step 8 - Direction Context"  $SoccerDir ".\scripts\step8_add_direction_context_soccer.py"  "--input outputs\step7_soccer_ranked.xlsx --sheet ALL --output outputs\step8_soccer_direction.csv --xlsx outputs\step8_soccer_direction_clean.xlsx --date $Date" }
-    # Archive dated copy so grader always has yesterday's slate
-    if ($ok -and (Test-Path "$SoccerDir\outputs\step8_soccer_direction_clean.xlsx")) {
-        if (-not (Test-Path $OutDir)) { New-Item -ItemType Directory -Force -Path $OutDir | Out-Null }
-        Copy-Item "$SoccerDir\outputs\step8_soccer_direction_clean.xlsx" "$OutDir\step8_soccer_direction_clean_$Date.xlsx" -Force
-        Write-Host "  Archived soccer slate -> $OutDir\step8_soccer_direction_clean_$Date.xlsx" -ForegroundColor DarkGray
-    }
     Write-Host ""
     if ($ok) { Write-Host "  Soccer complete." -ForegroundColor Green } else { Write-Host "  Soccer FAILED." -ForegroundColor Red }
     if ($ok) { Run-Combined "after Soccer" }
@@ -357,13 +351,6 @@ if ($NBAOnly) {
     if ($ok) { $ok = Run-Step "NBA Step 6e - Intel Layer"            $NBADir ".\scripts\step6e_attach_intel.py"                 "--input data\outputs\step6d_with_h2h.csv --output data\outputs\step6e_with_intel.csv" }
     if ($ok) { $ok = Run-Step "NBA Step 7 - Rank Props"              $NBADir ".\scripts\step7_rank_props.py"                    "--input data\outputs\step6e_with_intel.csv --output data\outputs\step7_ranked_props.xlsx" }
     if ($ok) { $ok = Run-Step "NBA Step 8 - Direction Context"       $NBADir ".\scripts\step8_add_direction_context.py"         "--input data\outputs\step7_ranked_props.xlsx --sheet ALL --output data\outputs\step8_all_direction.csv" }
-    if ($ok) { Run-Step "NBA Intel Dashboard" $NBADir ".\scripts\generate_intel_dashboard.py" "--prop points --out data\outputs\intel_dashboard.html" | Out-Null }
-    # Archive dated copy so grader always has yesterday's slate
-    if ($ok -and (Test-Path "$NBADir\data\outputs\step8_all_direction_clean.xlsx")) {
-        if (-not (Test-Path $OutDir)) { New-Item -ItemType Directory -Force -Path $OutDir | Out-Null }
-        Copy-Item "$NBADir\data\outputs\step8_all_direction_clean.xlsx" "$OutDir\step8_nba_direction_clean_$Date.xlsx" -Force
-        Write-Host "  Archived NBA slate -> $OutDir\step8_nba_direction_clean_$Date.xlsx" -ForegroundColor DarkGray
-    }
 
     if ($ok) { New-Item -ItemType File -Force -Path (Join-Path $NBADir "RUN_COMPLETE.flag") | Out-Null }
     Write-Host ""
@@ -429,12 +416,6 @@ $NBAJob = Start-Job -ScriptBlock {
     if ($ok) { $ok = Run-Step-Job "NBA Step 6e - Intel Layer"            $NBADir ".\scripts\step6e_attach_intel.py"                 "--input data\outputs\step6d_with_h2h.csv --output data\outputs\step6e_with_intel.csv" }
     if ($ok) { $ok = Run-Step-Job "NBA Step 7 - Rank Props"              $NBADir ".\scripts\step7_rank_props.py"                    "--input data\outputs\step6e_with_intel.csv --output data\outputs\step7_ranked_props.xlsx" }
     if ($ok) { $ok = Run-Step-Job "NBA Step 8 - Direction Context"       $NBADir ".\scripts\step8_add_direction_context.py"         "--input data\outputs\step7_ranked_props.xlsx --sheet ALL --output data\outputs\step8_all_direction.csv" }
-    if ($ok) { Run-Step-Job "NBA Intel Dashboard" $NBADir ".\scripts\generate_intel_dashboard.py" "--prop points --out data\outputs\intel_dashboard.html" | Out-Null }
-    if ($ok -and (Test-Path "$NBADir\data\outputs\step8_all_direction_clean.xlsx")) {
-        $archDir = "$Root\outputs\$Date"
-        if (-not (Test-Path $archDir)) { New-Item -ItemType Directory -Force -Path $archDir | Out-Null }
-        Copy-Item "$NBADir\data\outputs\step8_all_direction_clean.xlsx" "$archDir\step8_nba_direction_clean_$Date.xlsx" -Force
-    }
     return $ok
 } -ArgumentList $NBADir, $Date, $OddsApiKey, $SkipFetch
 
@@ -524,11 +505,6 @@ $SoccerJob = Start-Job -ScriptBlock {
     if ($ok) { $ok = Run-Step-Job "Soccer Step 6 - Team Role Context"  $SoccerDir ".\scripts\step6_team_role_context_soccer.py"      "--input outputs\step5_soccer_hit_rates.csv --output outputs\step6_soccer_role_context.csv" }
     if ($ok) { $ok = Run-Step-Job "Soccer Step 7 - Rank Props"         $SoccerDir ".\scripts\step7_rank_props_soccer.py"             "--input outputs\step6_soccer_role_context.csv --output outputs\step7_soccer_ranked.xlsx" }
     if ($ok) { $ok = Run-Step-Job "Soccer Step 8 - Direction Context"  $SoccerDir ".\scripts\step8_add_direction_context_soccer.py"  "--input outputs\step7_soccer_ranked.xlsx --sheet ALL --output outputs\step8_soccer_direction.csv --xlsx outputs\step8_soccer_direction_clean.xlsx --date $Date" }
-    if ($ok -and (Test-Path "$SoccerDir\outputs\step8_soccer_direction_clean.xlsx")) {
-        $archDir = "$Root\outputs\$Date"
-        if (-not (Test-Path $archDir)) { New-Item -ItemType Directory -Force -Path $archDir | Out-Null }
-        Copy-Item "$SoccerDir\outputs\step8_soccer_direction_clean.xlsx" "$archDir\step8_soccer_direction_clean_$Date.xlsx" -Force
-    }
     return $ok
 } -ArgumentList $SoccerDir, $Date, $SkipFetch
 
@@ -552,6 +528,17 @@ $SoccerSuccess = Test-Path (Join-Path $SoccerDir "outputs\step8_soccer_direction
 
 Remove-Job $allJobs -Force -ErrorAction SilentlyContinue
 if ($NBASuccess) { New-Item -ItemType File -Force -Path (Join-Path $NBADir "RUN_COMPLETE.flag") | Out-Null }
+
+# ── Archive dated slate copies for grader (must happen after jobs complete) ──
+if (-not (Test-Path $OutDir)) { New-Item -ItemType Directory -Force -Path $OutDir | Out-Null }
+if ($NBASuccess) {
+    Copy-Item "$NBADir\data\outputs\step8_all_direction_clean.xlsx" "$OutDir\step8_nba_direction_clean_$Date.xlsx" -Force
+    Write-Host "  Archived NBA slate -> $OutDir\step8_nba_direction_clean_$Date.xlsx" -ForegroundColor DarkGray
+}
+if ($SoccerSuccess) {
+    Copy-Item "$SoccerDir\outputs\step8_soccer_direction_clean.xlsx" "$OutDir\step8_soccer_direction_clean_$Date.xlsx" -Force
+    Write-Host "  Archived Soccer slate -> $OutDir\step8_soccer_direction_clean_$Date.xlsx" -ForegroundColor DarkGray
+}
 
 Write-Host ""
 @(
