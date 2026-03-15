@@ -50,6 +50,9 @@ $SoccerAdvGrader = "$GraderDir\soccer_grader_advanced.py"
 # ── Legacy graders (backward compat) ──
 $LegacySlateGrader = "$Root\scripts\grading\slate_grader.py"
 
+# ── Soccer-specific grader ──
+$SoccerGraderScript = "$SoccerDir\scripts\soccer_grader.py"
+
 if (-not $Date) { $Date = (Get-Date).AddDays(-1).ToString("yyyy-MM-dd") }
 
 # Force legacy mode if advanced graders don't exist
@@ -311,14 +314,23 @@ try:
     xf = pd.ExcelFile(r'$SoccerSlate')
     sheet = next((s for s in xf.sheet_names if 'all' in s.lower()), xf.sheet_names[0])
     df = pd.read_excel(r'$SoccerSlate', sheet_name=sheet)
-    gt_col = next((c for c in df.columns if c.lower() in ('game time','game_time','gametime','kickoff')), None)
+    gt_col = next((c for c in df.columns if c.lower() in ('game time','game_time','gametime','kickoff','start_time','starttime','start time')), None)
     if gt_col:
-        dates = sorted(set(pd.to_datetime(df[gt_col], utc=True, errors='coerce').dropna().dt.date.astype(str).tolist()))
-        # Only dates <= today (already played)
-        from datetime import date
-        today = str(date.today())
-        dates = [d for d in dates if d <= today]
-        print('\n'.join(dates) if dates else '$Date')
+        sample = str(df[gt_col].dropna().iloc[0]) if len(df[gt_col].dropna()) > 0 else ''
+        # Check if the column has date info or just time
+        has_date = any(c.isdigit() and len(sample) > 8 for c in [sample]) and ('/' in sample or '-' in sample)
+        if has_date:
+            # Full datetime — convert to ET using UTC-4 offset
+            ts = pd.to_datetime(df[gt_col], utc=True, errors='coerce').dropna()
+            et_offset = pd.Timedelta(hours=-4)
+            dates = sorted(set((ts + et_offset).dt.date.astype(str).tolist()))
+            from datetime import date
+            today = str(date.today())
+            dates = [d for d in dates if d <= today]
+            print('\n'.join(dates) if dates else '$Date')
+        else:
+            # Time-only column — all games belong to the grading date
+            print('$Date')
     else:
         print('$Date')
 except Exception as e:
@@ -353,9 +365,22 @@ print(f'Merged {len(files)} actuals files -> $SoccerActuals')
             Copy-Item $allSoccerActuals[0] $SoccerActuals -Force
         }
 
+        # Run Soccer-specific DB grader first (uses dated archive slate)
+        $SoccerGradedOut = "$SoccerDir\outputs\graded\soccer_graded_$Date.xlsx"
+        $SoccerSlateForGrading = "$DateDir\step8_soccer_direction_clean_$Date.xlsx"
+        if (-not (Test-Path $SoccerSlateForGrading)) { $SoccerSlateForGrading = $SoccerSlate }
+        if (Test-Path $SoccerGraderScript) {
+            Run-Py "Soccer Grade (DB)" $Root $SoccerGraderScript @("--date", $Date, "--slate", $SoccerSlateForGrading, "--out", "$SoccerDir\outputs\graded")
+            if (Test-Path $SoccerGradedOut) {
+                Copy-Item $SoccerGradedOut "$DateDir\soccer_graded_$Date.xlsx" -Force
+                Write-Host "  Soccer graded -> $SoccerGradedOut" -ForegroundColor Green
+            }
+        } else {
+            Write-Host "  WARNING: soccer_grader.py not found at $SoccerGraderScript" -ForegroundColor Yellow
+        }
+
         if ($ok -or (Test-Path $SoccerActuals)) {
             if ($AdvancedMode -and -not $LegacyMode -and (Test-Path $SoccerAdvGrader)) {
-                # Use advanced soccer grader with multi-league & position analysis
                 $OppCache = "$SoccerDir\cache\s6a_soccer_opp_stats_cache.csv"
                 if (Test-Path $OppCache) {
                     Run-Py "Soccer Advanced Grade (with opponent analysis)" $Root $SoccerAdvGrader @("--date", $Date, "--actuals", $SoccerActuals, "--slate", $SoccerSlate, "--opp-cache", $OppCache, "--output-dir", $DateDir)
@@ -363,20 +388,15 @@ print(f'Merged {len(files)} actuals files -> $SoccerActuals')
                     Run-Py "Soccer Advanced Grade (no opponent cache)" $Root $SoccerAdvGrader @("--date", $Date, "--actuals", $SoccerActuals, "--slate", $SoccerSlate, "--output-dir", $DateDir)
                 }
                 if (Test-Path $SoccerGraded) { Write-Host "  Soccer advanced graded -> $SoccerGraded" -ForegroundColor Green }
-                if (Test-Path $SoccerRecommendations) { Write-Host "  Recommendations -> $SoccerRecommendations" -ForegroundColor Green }
             } else {
-                # Sport-specific grader (handles NHL/Soccer step8 format)
                 $NHLSoccerGrader = "$ScriptsDir\nhl_soccer_grader.py"
                 if (Test-Path $NHLSoccerGrader) {
-                    Run-Py "Soccer Grade" $Root $NHLSoccerGrader @("--sport", "Soccer", "--date", $Date, "--slate", $SoccerSlate, "--actuals", $SoccerActuals, "--output-dir", $DateDir)
+                    Run-Py "Soccer Grade (legacy)" $Root $NHLSoccerGrader @("--sport", "Soccer", "--date", $Date, "--slate", $SoccerSlate, "--actuals", $SoccerActuals, "--output-dir", $DateDir)
                     if (Test-Path $SoccerGraded) { Write-Host "  Soccer graded -> $SoccerGraded" -ForegroundColor Green }
-                } else {
-                    Write-Host "  WARNING: nhl_soccer_grader.py not found at $NHLSoccerGrader" -ForegroundColor Red
-                    Write-Host "  nhl_soccer_grader.py should be in $ScriptsDir" -ForegroundColor Yellow
                 }
             }
         } else {
-            Write-Host "  Skipping Soccer - actuals fetch failed" -ForegroundColor Yellow
+            Write-Host "  Skipping Soccer legacy grade - actuals fetch failed" -ForegroundColor Yellow
         }
     } else {
         if ($SoccerOnly) { Write-Host "  WARNING: Soccer slate not found at $SoccerSlate" -ForegroundColor Yellow }
