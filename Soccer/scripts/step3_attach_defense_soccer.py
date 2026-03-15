@@ -87,8 +87,14 @@ def main() -> None:
                 break
             _here = _here.parent
         from defense_db import load_defense_from_db, defense_freshness
-        d = load_defense_from_db("soccer")
-        if d is not None:
+        _raw = load_defense_from_db("soccer")
+        # Validate: must be a non-empty DataFrame with a usable team key column
+        if (
+            isinstance(_raw, pd.DataFrame)
+            and not _raw.empty
+            and any(c in _raw.columns for c in ["pp_name", "team", "TEAM_ABBREVIATION"])
+        ):
+            d = _raw
             fresh = defense_freshness("soccer")
             print(f"→ Defense loaded from DB ({len(d)} teams, updated {fresh})")
         else:
@@ -127,42 +133,109 @@ def main() -> None:
     # Maps the short/variant names PrizePicks uses → full pp_name in defense CSV
     OPP_TEAM_ALIASES: dict = {
         # La Liga
-        "ATLÉTICO":        "ATLÉTICO MADRID",
-        "ATHLETIC":        "ATHLETIC BILBAO",
-        # Ligue 1
-        "PARIS SG":        "PSG",
-        "PARIS FC":        "PARIS",
+        "ATLÉTICO":             "ATLÉTICO MADRID",
+        "ATHLETIC":             "ATHLETIC BILBAO",
+        "BETIS":                "REAL BETIS",
+        "REAL MADRID":          "REAL MADRID",
+        "VALENCIA":             "VALENCIA",
+        "OVIEDO":               "REAL OVIEDO",
+        "ELCHE":                "ELCHE",
+        "SAN LUIS":             "ATLÉTICO DE SAN LUIS",
         # Bundesliga
-        "HEIDENHEIM":      "1. FC HEIDENHEIM 1846",
-        "MAINZ 05":        "MAINZ",
-        "WOLFSBURG":       "VFL WOLFSBURG",
-        "KÖLN":            "KOLN",
-        # EFL Championship
-        "COVENTRY":        "COVENTRY CITY",
-        "OXFORD":          "OXFORD UNITED",
-        "PRESTON":         "PRESTON NORTH END",
-        "MANSFIELD TOWN":  "MANSFIELD TOWN",   # may not be in defense file — kept for future
-        # MLS
-        "SOUNDERS":        "SEATTLE",
-        "GALAXY":          "LA GALAXY",
-        "WHITECAPS":       "VANCOUVER WHITECAPS",
-        "SALT LAKE":       "REAL SALT LAKE",
-        "MEL VICTORY":     "MELBOURNE VICTORY",
+        "HEIDENHEIM":           "1. FC HEIDENHEIM 1846",
+        "MAINZ 05":             "MAINZ",
+        "BAY":                  "BAYER LEVERKUSEN",
+        "BREMEN":               "WERDER BREMEN",
+        "WOLFSBURG":            "VFL WOLFSBURG",
+        "KÖLN":                 "KOLN",
         # Ligue 1 / French
-        "AUXERRE":         "AJ AUXERRE",
-        # Scottish
-        "FALKIRK":         "FALKIRK",
-        # Saudi Pro League — not yet in defense, aliases future-proof
-        "FATEH":           "FATEH",
-        "AHLI":            "AHLI",
-        "ITTIHAD":         "ITTIHAD",
-        "TAAWOUN":         "TAAWOUN",
-        "NEOM":            "NEOM",
-        "NASSR":           "NASSR",
-        "HAZEM":           "HAZEM",
-        "KHALEEJ":         "KHALEEJ",
-        # Australian
-        "SYDNEY":          "SYDNEY",
+        "PARIS SG":             "PSG",
+        "PARIS FC":             "PARIS",
+        "AUXERRE":              "AJ AUXERRE",
+        "LENS":                 "LENS",
+        "LORIENT":              "LORIENT",
+        "RENNES":               "RENNES",
+        "TOULOUSE":             "TOULOUSE",
+        "MONACO":               "MONACO",
+        "NICE":                 "NICE",
+        "RACING LOU":           "RACING CLUB DE LENS",
+        # Serie A
+        "MILAN":                "MILAN",
+        "COMO":                 "COMO",
+        "VERONA":               "VERONA",
+        "GENOA":                "GENOA",
+        "CAGLIARI":             "CAGLIARI",
+        "ROMA":                 "ROMA",
+        # EPL
+        "CHELSEA":              "CHELSEA",
+        "ARSENAL":              "ARSENAL",
+        "MAN CITY":             "MAN CITY",
+        "MAN UTD":              "MANCHESTER UNITED",
+        "NEWCASTLE":            "NEWCASTLE",
+        "SPURS":                "SPURS",
+        "LIVERPOOL":            "LIVERPOOL",
+        "ASTON VILLA":          "ASTON VILLA",
+        "WEST HAM":             "WEST HAM",
+        "CRYSTAL PALACE":       "CRYSTAL PALACE",
+        "LEEDS":                "LEEDS",
+        # EFL Championship
+        "COVENTRY":             "COVENTRY CITY",
+        "OXFORD":               "OXFORD UNITED",
+        "PRESTON":              "PRESTON NORTH END",
+        # MLS
+        "SOUNDERS":             "SEATTLE",
+        "GALAXY":               "LA GALAXY",
+        "WHITECAPS":            "VANCOUVER WHITECAPS",
+        "SALT LAKE":            "REAL SALT LAKE",
+        "NEW YORK":             "RED BULL NEW YORK",
+        "TORONTO":              "TORONTO",
+        "DALLAS":               "FC DALLAS",
+        "INTER MIAMI":          "INTER MIAMI",
+        "ORLANDO":              "ORLANDO",
+        "MONTREAL":             "MONTREAL",
+        "MONTRÉAL":             "MONTREAL",
+        "CHARLOTTE":            "CHARLOTTE",
+        "CINCINNATI":           "CINCINNATI",
+        "NASHVILLE":            "NASHVILLE",
+        "COLUMBUS":             "COLUMBUS",
+        "NEW ENGLAND":          "NEW ENGLAND",
+        "AUSTIN":               "AUSTIN",
+        "LAFC":                 "LAFC",
+        "NYCFC":                "NYCFC",
+        "CHICAGO":              "CHICAGO",
+        "SPORTING KC":          "SPORTING KC",
+        "DENVER":               "DENVER SUMMIT",
+        "SAN DIEGO":            "SAN DIEGO",
+        # NWSL
+        "COURAGE":              "NC COURAGE",
+        "DASH":                 "HOUSTON DASH",
+        "GOTHAM FC":            "GOTHAM FC",
+        "KC CURRENT":           "KC CURRENT",
+        "SAN DIEGO WAVE":       "SAN DIEGO WAVE",
+        "ROYALS":               "KC CURRENT",
+        # A-League
+        "MEL VICTORY":          "MELBOURNE VICTORY",
+        "SYDNEY":               "SYDNEY",
+        # Liga MX
+        "CLUB AMÉRICA":         "AMERICA",
+        "TIJUANA":              "TIJUANA",
+        "TIGRES":               "TIGRES",
+        "PACHUCA":              "PACHUCA",
+        "TOLUCA":               "TOLUCA",
+        "ATLAS":                "ATLAS",
+        "MONTERREY":            "MONTERREY",
+        "LEAN":                 "LEAN",
+        "LÉON":                 "LEAN",
+        # Saudi Pro League
+        "FATEH":                "FATEH",
+        "AHLI":                 "AHLI",
+        "ITTIHAD":              "ITTIHAD",
+        "TAAWOUN":              "TAAWOUN",
+        "NASSR":                "NASSR",
+        "HILAL":                "HILAL",
+        "OKHDOOD":              "OKHDOOD",
+        "SHABAB":               "SHABAB",
+        "KHALEEJ":              "KHALEEJ",
     }
     df["opp_team"] = df["opp_team"].map(lambda x: OPP_TEAM_ALIASES.get(x, x))
 

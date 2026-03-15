@@ -159,36 +159,48 @@ _NHL_PROP_MAP = {
 }
 
 # ── Soccer prop → DB column ────────────────────────────────────────────────────
+# ESPN soccer boxscores provide: sh, sog, g, a, fc, yc reliably (100% fill).
+# sv (saves) is 10% — goalkeepers only.
+# pa (passes), kp (key passes), tk (tackles) are 0% — ESPN does not provide them.
+# Props that ESPN does not supply are intentionally excluded so they get
+# UNSUPPORTED_PROP status rather than NO_DATA, making the void reason accurate.
 _SOCCER_PROP_MAP = {
+    # Reliably available from ESPN (100% fill)
     "shots on target":         "sog",
     "shots_on_target":         "sog",
     "sog":                     "sog",
     "sot":                     "sog",
+    "shots on target (combo)": "sog",
     "shots":                   "sh",
     "sh":                      "sh",
+    "shots (combo)":           "sh",
     "goals":                   "g",
     "g":                       "g",
     "assists":                 "a",
     "a":                       "a",
-    "goalkeeper saves":        "sv",
-    "goalie saves":            "sv",
-    "saves":                   "sv",
-    "sv":                      "sv",
-    "passes":                  "pa",
-    "pa":                      "pa",
-    "key passes":              "kp",
-    "kp":                      "kp",
-    "tackles":                 "tk",
-    "tk":                      "tk",
     "fouls":                   "fc",
     "fc":                      "fc",
     "yellow cards":            "yc",
     "yc":                      "yc",
     "goal+assist":             "g + a",
     "goal_assist":             "g + a",
-    "shots assisted":          "kp",
+    "goals allowed":           "g",    # used for GK — goals scored against their team
+    "goals allowed (combo)":   "g",
+    "goals allowed in first 30 minutes": "g",
+    # Goalkeeper only (10% fill — only valid for sv > 0 rows)
+    "goalkeeper saves":        "sv",
+    "goalie saves":            "sv",
+    "goalie saves (combo)":    "sv",
+    "saves":                   "sv",
+    "sv":                      "sv",
+    # Minutes
     "minutes":                 "minutes_played",
     "minutes played":          "minutes_played",
+    # NOT SUPPORTED — ESPN does not provide these stats in boxscores.
+    # Intentionally omitted so they receive UNSUPPORTED_PROP status:
+    # "passes", "passes attempted", "pa", "kp", "key passes",
+    # "tackles", "tk", "shots assisted", "attempted dribbles", "clearances",
+    # "crosses", "passes attempted (combo)"
 }
 
 

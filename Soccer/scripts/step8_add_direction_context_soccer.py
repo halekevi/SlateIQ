@@ -81,7 +81,8 @@ def write_sheet(wb, name: str, data: pd.DataFrame) -> None:
 
     col_widths = {
         "Tier": 6, "Rank Score": 10, "Player": 20, "Pos": 6, "Pos Group": 9,
-        "Team": 12, "Opp": 12, "League": 12, "Game Time": 10,
+        "Team": 12, "Opp": 12, "League": 12, "Game Time": 16,
+        "ESPN ID": 10,
         "Prop": 18, "Pick Type": 10, "Line": 7,
         "Direction": 9, "Edge": 7, "Projection": 10,
         "Hit Rate (5g)": 12, "Hit Rate (10g)": 12, "Last 5 Avg": 10, "Season Avg": 10,
@@ -99,11 +100,17 @@ def write_sheet(wb, name: str, data: pd.DataFrame) -> None:
 
 def build_clean_xlsx(df: pd.DataFrame, xlsx_path: str) -> None:
     df2 = df.copy()
-    df2["game_time"] = pd.to_datetime(df2.get("start_time", ""), errors="coerce").dt.strftime("%-I:%M %p")
+    try:
+        import platform
+        _time_fmt = "%m/%d %#I:%M %p" if platform.system() == "Windows" else "%m/%d %-I:%M %p"
+        df2["game_time"] = pd.to_datetime(df2.get("start_time", ""), errors="coerce").dt.strftime(_time_fmt)
+    except Exception:
+        df2["game_time"] = pd.to_datetime(df2.get("start_time", ""), errors="coerce").dt.strftime("%m/%d %H:%M")
 
     keep = [
         "tier", "rank_score",
         "player", "pos", "position_group", "team", "opp_team", "league", "game_time",
+        "espn_player_id",
         "prop_type", "pick_type", "line",
         "final_bet_direction",
         "edge", "projection",
@@ -114,6 +121,12 @@ def build_clean_xlsx(df: pd.DataFrame, xlsx_path: str) -> None:
         "OVERALL_DEF_RANK", "DEF_TIER",
         "minutes_tier", "shot_role", "usage_role",
         "void_reason",
+        # ── Game log ─────────────────────────────────────────────────────────
+        "stat_g1", "stat_g2", "stat_g3", "stat_g4", "stat_g5",
+        "stat_g6", "stat_g7", "stat_g8", "stat_g9", "stat_g10",
+        "stat_last10_avg",
+        # ── Schedule / context ───────────────────────────────────────────────
+        "avg_minutes",
     ]
     keep  = [c for c in keep if c in df2.columns]
     clean = df2[keep].copy()
@@ -129,6 +142,7 @@ def build_clean_xlsx(df: pd.DataFrame, xlsx_path: str) -> None:
             clean[col] = pd.to_numeric(clean[col], errors="coerce").astype("Int64")
 
     tier_order = {"A": 0, "B": 1, "C": 2, "D": 3}
+
     clean["_tier_sort"] = clean["tier"].map(tier_order)
     clean = clean.sort_values(["_tier_sort", "rank_score"], ascending=[True, False]).drop(columns="_tier_sort")
 
@@ -136,6 +150,7 @@ def build_clean_xlsx(df: pd.DataFrame, xlsx_path: str) -> None:
         "tier": "Tier", "rank_score": "Rank Score",
         "player": "Player", "pos": "Pos", "position_group": "Pos Group",
         "team": "Team", "opp_team": "Opp", "league": "League", "game_time": "Game Time",
+        "espn_player_id": "ESPN ID",
         "prop_type": "Prop", "pick_type": "Pick Type", "line": "Line",
         "final_bet_direction": "Direction",
         "edge": "Edge", "projection": "Projection",
@@ -146,17 +161,31 @@ def build_clean_xlsx(df: pd.DataFrame, xlsx_path: str) -> None:
         "OVERALL_DEF_RANK": "Def Rank", "DEF_TIER": "Def Tier",
         "minutes_tier": "Min Tier", "shot_role": "Shot Role", "usage_role": "Usage Role",
         "void_reason": "Void Reason",
+        # Game log
+        "stat_last10_avg": "Last 10 Avg",
+        "stat_g1": "G1", "stat_g2": "G2", "stat_g3": "G3",
+        "stat_g4": "G4", "stat_g5": "G5", "stat_g6": "G6",
+        "stat_g7": "G7", "stat_g8": "G8", "stat_g9": "G9", "stat_g10": "G10",
+        # Context
+        "avg_minutes": "Avg Min",
     }
     clean = clean.rename(columns=rename)
+
+    # Exclude voided rows from Tier sheets (after rename, void col is "Void Reason")
+    void_col = "Void Reason" if "Void Reason" in clean.columns else None
+    if void_col:
+        clean_eligible = clean[clean[void_col].isna() | (clean[void_col] == "")].copy()
+    else:
+        clean_eligible = clean.copy()
 
     wb = Workbook()
     wb.remove(wb.active)
     write_sheet(wb, "ALL", clean)
     for tier in ["A", "B", "C", "D"]:
-        subset = clean[clean["Tier"] == tier].copy()
+        subset = clean_eligible[clean_eligible["Tier"] == tier].copy()
         # Always write every Tier sheet (even if empty) so step9 never crashes
         # on a missing sheet_name
-        write_sheet(wb, f"Tier {tier}", subset if len(subset) else clean.head(0))
+        write_sheet(wb, f"Tier {tier}", subset if len(subset) else clean_eligible.head(0))
 
     wb.save(xlsx_path)
     print(f"📊 Clean XLSX saved → {xlsx_path}")
@@ -249,7 +278,22 @@ def main() -> None:
 
     # Always use explicit --xlsx path (default: step8_soccer_direction_clean.xlsx)
     xlsx_path = args.xlsx if args.xlsx else "step8_soccer_direction_clean.xlsx"
-    build_clean_xlsx(out, xlsx_path)
+    try:
+        build_clean_xlsx(out, xlsx_path)
+    except Exception as e:
+        print(f"⚠️  build_clean_xlsx failed: {e}")
+        print("   Writing raw fallback xlsx so combined pipeline can proceed...")
+        try:
+            with pd.ExcelWriter(xlsx_path, engine="openpyxl") as w:
+                out.to_excel(w, sheet_name="ALL", index=False)
+                for _tier in ["A", "B", "C", "D"]:
+                    _mask = out.get("tier", pd.Series(dtype=str)) == _tier
+                    _void = out.get("void_reason", pd.Series("", index=out.index)).fillna("")
+                    _elig = out[_mask & (_void == "")].copy() if _mask.any() else out.head(0)
+                    _elig.to_excel(w, sheet_name=f"Tier {_tier}", index=False)
+            print(f"✅ Fallback xlsx saved → {xlsx_path}")
+        except Exception as e2:
+            print(f"❌ Fallback xlsx also failed: {e2}")
 
 
 if __name__ == "__main__":
