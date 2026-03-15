@@ -130,25 +130,76 @@ function Run-GitPush {
     Write-Host "[ GIT ] Pushing updated templates to GitHub..." -ForegroundColor Cyan
     Push-Location $Root
     try {
-        git add "ui_runner/templates/tickets_latest.html" `
-                "ui_runner/templates/tickets_latest.json" `
-                "ui_runner/templates/slate_latest.json" `
-                "ui_runner/templates/slate_eval_$Date.html" `
-                "ui_runner/templates/ticket_eval_$Date.html" 2>&1 | Out-Null
+        # Always add the 3 core "latest" files (always rewritten by pipeline)
+        $filesToAdd = @(
+            "ui_runner/templates/tickets_latest.html",
+            "ui_runner/templates/tickets_latest.json",
+            "ui_runner/templates/slate_latest.json"
+        )
+
+        # Add dated eval files only if they actually exist (may not exist on every run mode)
+        $slateEval  = "ui_runner/templates/slate_eval_$Date.html"
+        $ticketEval = "ui_runner/templates/ticket_eval_$Date.html"
+        if (Test-Path (Join-Path $Root $slateEval.Replace("/","\")))  { $filesToAdd += $slateEval  }
+        if (Test-Path (Join-Path $Root $ticketEval.Replace("/","\"))) { $filesToAdd += $ticketEval }
+
+        # Verify the core files actually exist before trying to push
+        $missing = $filesToAdd | Where-Object {
+            -not (Test-Path (Join-Path $Root $_.Replace("/","\")))
+        }
+        if ($missing) {
+            Write-Host "  WARNING: Missing template files, skipping push:" -ForegroundColor Yellow
+            $missing | ForEach-Object { Write-Host "    - $_" -ForegroundColor Yellow }
+            "$Date $(Get-Date -Format 'HH:mm:ss') - SKIPPED (missing files: $($missing -join ', '))" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+            return
+        }
+
+        # Stage all files
+        foreach ($f in $filesToAdd) {
+            git add $f 2>&1 | Out-Null
+            Write-Host "    staged: $f" -ForegroundColor DarkGray
+        }
+
         $msg       = "chore: pipeline update $Date $(Get-Date -Format 'HH:mm')"
         $commitOut = git commit -m $msg 2>&1
-        if ($LASTEXITCODE -eq 0) {
+        $commitExit = $LASTEXITCODE
+
+        if ($commitExit -eq 0) {
+            Write-Host "  Committed. Pushing to origin/main..." -ForegroundColor DarkGray
             $pushOut = git push origin main 2>&1
+            $pushExit = $LASTEXITCODE
             foreach ($line in $pushOut) { Write-Host "    $line" -ForegroundColor DarkGray }
-            Write-Host "  OK - Pushed to GitHub" -ForegroundColor Green
-            "$Date $(Get-Date -Format 'HH:mm:ss') - PUSHED: $msg" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+            if ($pushExit -eq 0) {
+                Write-Host "  OK - Pushed to GitHub -> Railway will redeploy" -ForegroundColor Green
+                "$Date $(Get-Date -Format 'HH:mm:ss') - PUSHED: $msg" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+            } else {
+                Write-Host "  PUSH FAILED (exit $pushExit) -- check git credentials" -ForegroundColor Red
+                "$Date $(Get-Date -Format 'HH:mm:ss') - PUSH FAILED (exit $pushExit): $($pushOut -join ' | ')" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+            }
         } else {
-            Write-Host "  (no changes to push)" -ForegroundColor DarkGray
-            "$Date $(Get-Date -Format 'HH:mm:ss') - NO CHANGES" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+            # Nothing new to commit -- but still push in case a prior commit wasn't pushed
+            Write-Host "  No new changes to commit. Checking if unpushed commits exist..." -ForegroundColor DarkGray
+            $unpushed = git log origin/main..HEAD --oneline 2>&1
+            if ($unpushed) {
+                Write-Host "  Found unpushed commits -- pushing now..." -ForegroundColor Yellow
+                $pushOut = git push origin main 2>&1
+                $pushExit = $LASTEXITCODE
+                foreach ($line in $pushOut) { Write-Host "    $line" -ForegroundColor DarkGray }
+                if ($pushExit -eq 0) {
+                    Write-Host "  OK - Flushed pending commits to GitHub" -ForegroundColor Green
+                    "$Date $(Get-Date -Format 'HH:mm:ss') - PUSHED PENDING: $($unpushed -join '; ')" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+                } else {
+                    Write-Host "  PUSH FAILED (exit $pushExit)" -ForegroundColor Red
+                    "$Date $(Get-Date -Format 'HH:mm:ss') - PUSH FAILED on pending (exit $pushExit)" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+                }
+            } else {
+                Write-Host "  Already up to date on origin/main." -ForegroundColor DarkGray
+                "$Date $(Get-Date -Format 'HH:mm:ss') - NO CHANGES (already up to date)" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+            }
         }
     } catch {
-        Write-Host "  Git push failed: $_" -ForegroundColor Yellow
-        "$Date $(Get-Date -Format 'HH:mm:ss') - PUSH FAILED: $_" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
+        Write-Host "  Git push exception: $_" -ForegroundColor Red
+        "$Date $(Get-Date -Format 'HH:mm:ss') - EXCEPTION: $_" | Out-File -FilePath (Join-Path $Root "git_push_log.txt") -Append -Encoding utf8
     } finally {
         Pop-Location
     }
