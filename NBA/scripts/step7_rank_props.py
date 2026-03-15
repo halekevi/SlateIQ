@@ -377,6 +377,19 @@ def main() -> None:
     out["avg_vs_line_z"] = zcol(out["avg_vs_line"],      direction_aware=True)
     out["prop_hr_z"]     = zcol(out["prop_hr_prior"],    direction_aware=True)
 
+    # ── Intel signals (from step6e) ───────────────────────────────────────────
+    # intel_season_hit_rate: % of season games OVER this line (0-100 scale → normalise)
+    intel_shr_raw  = _to_num(out.get("intel_season_hit_rate", "")).fillna(50.0) / 100.0
+    # intel_opp_vs_league_pct: how generous/tight this opponent is (+= give up more)
+    intel_def_raw  = _to_num(out.get("intel_opp_vs_league_pct", "")).fillna(0.0) / 100.0
+    # intel_cv_pct: consistency — lower = better. Invert so high = consistent
+    intel_cv_raw   = _to_num(out.get("intel_cv_pct", "")).fillna(50.0)
+    intel_cons_raw = (100.0 - intel_cv_raw.clip(0, 100)) / 100.0  # 0-1, higher=consistent
+
+    out["intel_shr_z"]  = zcol(pd.Series(intel_shr_raw,  index=out.index), direction_aware=True)
+    out["intel_def_z"]  = zcol(pd.Series(intel_def_raw,  index=out.index), direction_aware=True)
+    out["intel_cons_z"] = zcol(pd.Series(intel_cons_raw, index=out.index))
+
     # ── FINAL SCORE ───────────────────────────────────────────────────────────
     # ctx_adj and rest_adj already baked into projection_adj/edge_adj_dr.
     # We also apply a small direct score bonus/penalty so B2B and blowout risk
@@ -392,6 +405,10 @@ def main() -> None:
         + _to_num(out["def_rank_z"]).fillna(0.0)     * 0.80
         + _to_num(out["prop_hr_z"]).fillna(0.0)      * 0.50
         + _to_num(out["min_z"]).fillna(0.0)          * 0.25
+        # ── Intel layer (step6e) ──────────────────────────────────────────────
+        + _to_num(out["intel_shr_z"]).fillna(0.0)   * 0.70  # season hit rate at this line
+        + _to_num(out["intel_def_z"]).fillna(0.0)   * 0.45  # opponent defense generosity
+        + _to_num(out["intel_cons_z"]).fillna(0.0)  * 0.20  # player consistency bonus
         + pd.Series(b2b_penalty,     index=out.index)  # B2B fatigue
         + pd.Series(blowout_penalty, index=out.index)  # blowout bench risk
         + pd.Series(low_total_pen,   index=out.index)  # low O/U game

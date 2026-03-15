@@ -110,6 +110,17 @@ def build_clean_xlsx(df: pd.DataFrame, xlsx_path: str):
         'OVERALL_DEF_RANK', 'DEF_TIER',
         'minutes_tier', 'shot_role', 'usage_role',
         'void_reason',
+        # ── Intel layer (step6e) ──────────────────────────────────────────
+        'intel_season_avg', 'intel_l5_avg', 'intel_l10_avg',
+        'intel_season_hit_rate', 'intel_cushion', 'intel_cv_pct',
+        'intel_opp_vs_league_pct', 'intel_l5_vs_season',
+        'intel_season_games',
+        # ── Full game log (g1-g10) and H2H ───────────────────────────────
+        'stat_g1', 'stat_g2', 'stat_g3', 'stat_g4', 'stat_g5',
+        'stat_g6', 'stat_g7', 'stat_g8', 'stat_g9', 'stat_g10',
+        'stat_last10_avg',
+        'h2h_avg', 'h2h_over_rate', 'h2h_games_vs_opp', 'h2h_last_stat',
+        'b2b_flag', 'days_rest', 'game_total', 'spread',
     ]
     # only keep cols that exist
     keep = [c for c in keep if c in df2.columns]
@@ -141,6 +152,31 @@ def build_clean_xlsx(df: pd.DataFrame, xlsx_path: str):
         'OVERALL_DEF_RANK': 'Def Rank', 'DEF_TIER': 'Def Tier',
         'minutes_tier': 'Min Tier', 'shot_role': 'Shot Role', 'usage_role': 'Usage Role',
         'void_reason': 'Void Reason',
+        # Intel columns
+        'intel_season_avg':        'Intel Season Avg',
+        'intel_l5_avg':            'Intel L5 Avg',
+        'intel_l10_avg':           'Intel L10 Avg',
+        'intel_season_hit_rate':   'Season Hit%',
+        'intel_cushion':           'Cushion',
+        'intel_cv_pct':            'CV%',
+        'intel_opp_vs_league_pct': 'Opp vs Avg%',
+        'intel_l5_vs_season':      'L5 vs Season',
+        'intel_season_games':      'Season GP',
+        # Game log
+        'stat_last10_avg':         'Last 10 Avg',
+        'stat_g1': 'G1', 'stat_g2': 'G2', 'stat_g3': 'G3',
+        'stat_g4': 'G4', 'stat_g5': 'G5', 'stat_g6': 'G6',
+        'stat_g7': 'G7', 'stat_g8': 'G8', 'stat_g9': 'G9', 'stat_g10': 'G10',
+        # H2H
+        'h2h_avg':          'H2H Avg',
+        'h2h_over_rate':    'H2H Over%',
+        'h2h_games_vs_opp': 'H2H Games',
+        'h2h_last_stat':    'H2H Last',
+        # Schedule
+        'b2b_flag':  'B2B',
+        'days_rest': 'Days Rest',
+        'game_total':'Game Total',
+        'spread':    'Spread',
     }
     clean = clean.rename(columns=rename)
 
